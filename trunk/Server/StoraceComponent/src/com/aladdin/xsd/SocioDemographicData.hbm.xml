@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="SocioDemographicData">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">SocioDemographicData_id_seq</param></generator></id>
+<property name="Age" type="int"><column name="Age"/></property>
+<property name="Gender" type="int"><column name="Gender"/></property>
+<property name="MaritalStatus" type="int"><column name="MaritalStatus"/></property>
+<property name="Children" type="int"><column name="Children"/></property>
+<property name="LivingWith" type="int"><column name="LivingWith"/></property>
+<many-to-one name="m_GenderT" class="GenderT" ><column name="Gender" not-null="false" /></many-to-one>
+<many-to-one name="m_MaritalStatusT" class="MaritalStatusT" ><column name="MaritalStatus" not-null="false" /></many-to-one>
+<many-to-one name="m_LivingWithT" class="LivingWithT" ><column name="LivingWith" not-null="false" /></many-to-one>
+<set name="Carers" inverse="true" cascade="none"><key><column name="sd" not-null="true" /></key><one-to-many class="Carer"/></set>
+<set name="Patients" inverse="true" cascade="none"><key><column name="sd" not-null="true" /></key><one-to-many class="Patient"/></set>
+</class>
+</hibernate-mapping>
+

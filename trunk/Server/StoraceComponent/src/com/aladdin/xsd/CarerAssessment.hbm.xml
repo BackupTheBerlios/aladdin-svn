@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="CarerAssessment">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">CarerAssessment_id_seq</param></generator></id>
+<property name="carer" type="int"><column name="carer"/></property>
+<property name="DateOfAssessment" type="java.sql.Timestamp"><column name="DateOfAssessment"/></property>
+<property name="RelevantHealthProblem" type="String"><column name="RelevantHealthProblem"/></property>
+<property name="SeverityOfBurden" type="int"><column name="SeverityOfBurden"/></property>
+<property name="EmotionalOrMentalDisorder" type="String"><column name="EmotionalOrMentalDisorder"/></property>
+<property name="PsychoactiveDrugs" type="String"><column name="PsychoactiveDrugs"/></property>
+<property name="QualityOfLife" type="int"><column name="QualityOfLife"/></property>
+<many-to-one name="m_Carer" class="Carer" ><column name="carer" not-null="false" /></many-to-one>
+</class>
+</hibernate-mapping>
+

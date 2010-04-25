@@ -1,0 +1,79 @@
+<project basedir="." default="generate.service">
+
+    <property environment="env"/>
+    <property name="AXIS2_HOME" value="${env.AXIS2_HOME}"/>
+    <property name="build.dir" value="build"/>
+
+    <path id="classpath">
+        <fileset dir="${AXIS2_HOME}/lib">
+            <include name="*.jar"/>
+        </fileset>
+	<fileset dir="jar">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="generate-hbm">
+    	<mkdir dir="src/com/aladdin/xsd"/>
+    	<exec executable="create-hbm"/>
+    </target>
+
+    <target name="generate-sql">
+    	<exec executable="xsd2sql" output="data/am.sql">
+            <arg value="-x"/>
+            <arg value="src/am.xsd"/>
+            <arg value="-i"/>
+            <arg value="SystemParameter"/>
+    	</exec>
+    </target>
+
+    <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath" />
+    <target name="hbm2java" depends="generate-hbm">
+    	<hibernatetool destdir="src/com/aladdin/xsd">
+    		<configuration configurationfile="src/hibernate.cfg.xml">
+	    		<fileset dir="src/com/aladdin/xsd">
+    				<include name="**/*.hbm.xml"/>
+    			</fileset>
+    		</configuration>
+    		<hbm2java/>
+    	</hibernatetool>
+    </target>
+
+    <target name="update-java" depends="hbm2java">
+    	<exec executable="update-java"/>
+    </target>
+
+    <target name="compile.service"><!-- depends="update-java" -->
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/classes"/>
+
+        <!--First let's compile the classes-->
+        <javac debug="on" 
+               fork="true"
+               destdir="${build.dir}/classes" 
+               srcdir="${basedir}/src"
+               classpathref="classpath">
+        </javac>
+    </target>
+
+    <target name="generate.service" depends="compile.service">
+        <!--aar them up -->
+        <copy toDir="${build.dir}/classes" failonerror="false">
+            <fileset dir="${basedir}/resources">
+                <include name="**/*.xml"/>
+            </fileset>
+            <!-- fileset dir="${basedir}/src">
+                <include name="**/*.xml"/>
+            </fileset -->
+        </copy>
+        <jar destfile="${build.dir}/StorageComponent.aar">
+            <fileset excludes="**/Test.class" dir="${build.dir}/classes"/>
+            <!-- fileset includes="**/*.jar" dir="jar"/ -->
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="src/com/aladdin/xsd"/>
+    </target>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="Note">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Note_id_seq</param></generator></id>
+<property name="DateTimeOfNote" type="java.sql.Timestamp"><column name="DateTimeOfNote"/></property>
+<property name="text" type="String"><column name="text"/></property>
+</class>
+</hibernate-mapping>
+

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# $1 - package name
+# $2 - file name
+
+update ()
+{
+echo "update " $1 $2
+echo "package $1;" > "$2.tmp"
+#echo "import java.sql.Timestamp;"  > "$2.tmp"
+cat $2 >> "$2.tmp"
+mv "$2.tmp" $2
+}
+
+for i in `ls src/com/aladdin/xsd/*.java`; do update "com.aladdin.xsd" $i; done

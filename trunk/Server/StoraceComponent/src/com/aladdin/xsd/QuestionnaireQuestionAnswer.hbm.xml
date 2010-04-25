@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="QuestionnaireQuestionAnswer">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">QuestionnaireQuestionAnswer_id_seq</param></generator></id>
+<property name="value" type="int"><column name="value"/></property>
+<property name="description" type="String"><column name="description"/></property>
+<property name="question" type="int"><column name="question"/></property>
+<many-to-one name="m_QuestionnaireQuestion" class="QuestionnaireQuestion" ><column name="question" not-null="false" /></many-to-one>
+</class>
+</hibernate-mapping>
+

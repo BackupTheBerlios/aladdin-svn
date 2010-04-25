@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="PatientAssessment">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">PatientAssessment_id_seq</param></generator></id>
+<property name="patient" type="int"><column name="patient"/></property>
+<property name="DateOfAssessment" type="java.sql.Timestamp"><column name="DateOfAssessment"/></property>
+<property name="Aetology" type="int"><column name="Aetology"/></property>
+<property name="TimeElapsedSinceDiagnose" type="int"><column name="TimeElapsedSinceDiagnose"/></property>
+<property name="Severity" type="int"><column name="Severity"/></property>
+<property name="RelevantPathologyAntecedents" type="String"><column name="RelevantPathologyAntecedents"/></property>
+<property name="Comorbidity" type="String"><column name="Comorbidity"/></property>
+<property name="CharlsonComobodityIndex" type="int"><column name="CharlsonComobodityIndex"/></property>
+<property name="BarthelIndex" type="int"><column name="BarthelIndex"/></property>
+<property name="LawtonIndex" type="int"><column name="LawtonIndex"/></property>
+<property name="MMSE" type="int"><column name="MMSE"/></property>
+<property name="MDRS" type="int"><column name="MDRS"/></property>
+<property name="BlessedScalePart1" type="java.math.BigDecimal"><column name="BlessedScalePart1"/></property>
+<property name="BlessedScalePart2" type="int"><column name="BlessedScalePart2"/></property>
+<property name="BlessedScalePart3" type="int"><column name="BlessedScalePart3"/></property>
+<property name="ChecklistMBPC" type="int"><column name="ChecklistMBPC"/></property>
+<property name="NPQISeverity" type="int"><column name="NPQISeverity"/></property>
+<property name="NPQIStress" type="int"><column name="NPQIStress"/></property>
+<property name="GDS" type="int"><column name="GDS"/></property>
+<property name="Falls" type="boolean"><column name="Falls"/></property>
+<property name="Incontinence" type="boolean"><column name="Incontinence"/></property>
+<property name="Delirium" type="boolean"><column name="Delirium"/></property>
+<property name="Immobility" type="boolean"><column name="Immobility"/></property>
+<property name="SensorialDeficits" type="boolean"><column name="SensorialDeficits"/></property>
+<property name="PharmacologyTreatment" type="String"><column name="PharmacologyTreatment"/></property>
+<many-to-one name="m_Patient" class="Patient" ><column name="patient" not-null="false" /></many-to-one>
+<many-to-one name="m_AetologyT" class="AetologyT" ><column name="Aetology" not-null="false" /></many-to-one>
+<set name="Measurments" inverse="true" cascade="none"><key><column name="pa" not-null="true" /></key><one-to-many class="Measurment"/></set>
+</class>
+</hibernate-mapping>
+

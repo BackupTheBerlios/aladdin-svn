@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="group" />
+	<table-filter match-name="user" />
+	<table name="user">
+		<column name="id" jdbc-type=''></column>
+		<column name="name" jdbc-type=''></column>
+		<column name="password" jdbc-type=''></column>
+		<column name="grp" jdbc-type=''></column>
+	</table>
+	<table name="group">
+		<column name="id" jdbc-type=''></column>
+		<column name="name" jdbc-type=''></column>
+		<column name="rights" jdbc-type=''></column>
+	</table>
+</hibernate-reverse-engineering>

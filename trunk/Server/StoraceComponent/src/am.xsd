@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/am" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified">
+    <complexType name="SystemParameter">
+    	<sequence>
+    		<element name="Code" type="int"></element>
+    		<element name="Description" type="string"></element>
+    	</sequence>
+    </complexType>
+    <complexType name="User">
+    	<sequence>
+    		<element name="login" type="string"></element>
+    		<element name="password" type="string"></element>
+    		<element name="type" type="tns:SystemParameter"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Service">
+    	<sequence>
+    		<element name="name" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Right">
+    	<sequence>
+    		<element name="srv" type="tns:Service"></element>
+    		<element name="usr" type="tns:User"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="Identifier">
+    	<sequence>
+    		<element name="Type" type="string"></element>
+    		<element name="Number" type="string"></element>
+    		<element name="IssueDate" type="string"></element>
+    		<element name="IssueAuthority" type="string"></element>
+    		<element name="persondata" type="tns:PersonData"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="Address">
+    	<sequence>
+    		<element name="Street" type="string"></element>
+    		<element name="StreetNo" type="string"></element>
+    		<element name="City" type="string"></element>
+    		<element name="County" type="string"></element>
+    		<element name="Country" type="string"></element>
+    		<element name="ZipCode" type="string"></element>
+    		<element name="Notes" type="string"></element>
+    		<element name="IsPrimary" type="boolean"></element>
+    		<element name="persondata" type="tns:PersonData"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Communication">
+    	<sequence>
+    		<element name="Type" type="string"></element>
+    		<element name="Value" type="string"></element>
+    		<element name="Notes" type="string"></element>
+    		<element name="IsPrimary" type="boolean"></element>
+    		<element name="persondata" type="tns:PersonData"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="SocioDemographicData">
+    	<sequence>
+    		<element name="Age" type="int"></element>
+    		<element name="Gender" type="tns:SystemParameter"></element>
+    		<element name="MaritalStatus" type="tns:SystemParameter"></element>
+    		<element name="Children" type="int"></element>
+    		<element name="LivingWith" type="tns:SystemParameter"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="PersonData">
+    	<sequence>
+    		<element name="Surname" type="string"></element>
+    		<element name="Name" type="string"></element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="Clinician">
+    	<sequence>
+    		<element name="persondata" type="tns:PersonData"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Carer">
+    	<sequence>
+    		<element name="persondata" type="tns:PersonData"></element>
+    		<element name="sd" type="tns:SocioDemographicData"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Questionnaire">
+    	<sequence>
+    		<element name="version" type="decimal"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="QuestionnaireQuestion">
+    	<sequence>
+    		<element name="type" type="string"></element>
+    		<element name="isPrimary" type="boolean"></element>
+    		<element name="subquetsions" type="boolean"></element>
+    		<element name="parentid" type="tns:QuestionnaireQuestion"></element>
+    		<element name="title" type="string"></element>
+    		<element name="quest" type="tns:Questionnaire"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="QuestionnaireQuestionAnswer">
+    	<sequence>
+    		<element name="value" type="unsignedByte"></element>
+    		<element name="description" type="string"></element>
+    		<element name="question" type="tns:QuestionnaireQuestion"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="QuestionnaireAnswer">
+    	<sequence>
+    		<element name="question" type="tns:QuestionnaireQuestion"></element>
+    		<element name="value" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Note">
+    	<sequence>
+    		<element name="DateTimeOfNote" type="dateTime"></element>
+    		<element name="text" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Task">
+    	<sequence>
+    		<element name="TaskType" type="tns:SystemParameter"></element>
+    		<element name="DateTimeAssigned" type="dateTime"></element>
+    		<element name="DateTimeFulfilled" type="dateTime"></element>
+    		<element name="TaskStatus" type="tns:SystemParameter"></element>
+    		<element name="url" type="string"></element>
+    		<element name="questionnaire" type="tns:Questionnaire"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CarerAssessment">
+    	<sequence>
+    		<element name="carer" type="tns:Carer"></element>
+    		<element name="DateOfAssessment" type="dateTime"></element>
+    		<element name="RelevantHealthProblem" type="string"></element>
+    		<element name="SeverityOfBurden" type="unsignedByte"></element>
+    		<element name="EmotionalOrMentalDisorder" type="string"></element>
+    		<element name="PsychoactiveDrugs" type="string"></element>
+    		<element name="QualityOfLife" type="unsignedByte"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PatientAssessment">
+    	<sequence>
+    		<element name="patient" type="tns:Patient"></element>
+    		<element name="DateOfAssessment" type="dateTime"></element>
+    		<element name="Aetology" type="tns:SystemParameter"></element>
+    		<element name="TimeElapsedSinceDiagnose"
+    			type="unsignedByte">
+    		</element>
+    		<element name="Severity" type="unsignedByte"></element>
+    		<element name="RelevantPathologyAntecedents"
+    			type="string">
+    		</element>
+    		<element name="Comorbidity" type="string"></element>
+    		<element name="CharlsonComobodityIndex"
+    			type="unsignedByte">
+    		</element>
+    		<element name="BarthelIndex" type="unsignedByte"></element>
+    		<element name="LawtonIndex" type="unsignedByte"></element>
+    		<element name="MMSE" type="unsignedByte"></element>
+    		<element name="MDRS" type="unsignedByte"></element>
+    		<element name="BlessedScalePart1" type="decimal"></element>
+    		<element name="BlessedScalePart2" type="unsignedByte"></element>
+    		<element name="BlessedScalePart3" type="unsignedByte"></element>
+    		<element name="ChecklistMBPC" type="unsignedByte"></element>
+    		<element name="NPQISeverity" type="unsignedByte"></element>
+    		<element name="NPQIStress" type="unsignedByte"></element>
+    		<element name="GDS" type="unsignedByte"></element>
+    		<element name="Falls" type="boolean"></element>
+    		<element name="Incontinence" type="boolean"></element>
+    		<element name="Delirium" type="boolean"></element>
+    		<element name="Immobility" type="boolean"></element>
+    		<element name="SensorialDeficits" type="boolean"></element>
+    		<element name="PharmacologyTreatment" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Patient">
+    	<sequence>
+    		<element name="persondata" type="tns:PersonData"></element>
+    		<element name="sd" type="tns:SocioDemographicData"></element>
+    		<element name="clinician" type="tns:Clinician"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PatientCarer">
+    	<sequence>
+    		<element name="patient" type="tns:Patient"></element>
+    		<element name="carer" type="tns:Carer"></element>
+    		<element name="isprimary" type="boolean"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Measurment">
+    	<sequence>
+    		<element name="type" type="string"></element>
+    		<element name="value" type="decimal"></element>
+    		<element name="datetime" type="dateTime"></element>
+    		<element name="units" type="string"></element>
+    		<element name="lowerlimit" type="decimal"></element>
+    		<element name="upperlimit" type="decimal"></element>
+    		<element name="pa" type="tns:PatientAssessment"></element>
+    	</sequence>
+    </complexType>
+</schema>
