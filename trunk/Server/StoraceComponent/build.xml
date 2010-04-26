@@ -74,6 +74,6 @@
 
     <target name="clean">
         <delete dir="${build.dir}"/>
-        <delete dir="src/com/aladdin/xsd"/>
+        <!-- delete dir="src/com/aladdin/xsd"/ -->
     </target>
 </project>
