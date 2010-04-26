@@ -19,9 +19,9 @@
     </target>
 
     <target name="generate-sql">
-    	<exec executable="xsd2sql" output="data/am.sql">
+    	<exec executable="xsd2sql" output="data/sc.sql">
             <arg value="-x"/>
-            <arg value="src/am.xsd"/>
+            <arg value="src/schemata.xsd"/>
             <arg value="-i"/>
             <arg value="SystemParameter"/>
     	</exec>
