@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="Task">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Task_id_seq</param></generator></id>
+<property name="TaskType" type="int"><column name="TaskType"/></property>
+<property name="DateTimeAssigned" type="java.sql.Timestamp"><column name="DateTimeAssigned"/></property>
+<property name="DateTimeFulfilled" type="java.sql.Timestamp"><column name="DateTimeFulfilled"/></property>
+<property name="TaskStatus" type="int"><column name="TaskStatus"/></property>
+<property name="url" type="java.lang.String"><column name="url"/></property>
+<property name="questionnaire" type="int"><column name="questionnaire"/></property>
+<many-to-one name="m_TaskTypeT" class="TaskTypeT" ><column name="TaskType" not-null="false" /></many-to-one>
+<many-to-one name="m_TaskStatusT" class="TaskStatusT" ><column name="TaskStatus" not-null="false" /></many-to-one>
+<many-to-one name="m_Questionnaire" class="Questionnaire" ><column name="questionnaire" not-null="false" /></many-to-one>
+</class>
+</hibernate-mapping>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="Identifier">
+<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Identifier_id_seq</param></generator></id>
+<property name="Type" type="java.lang.String"><column name="Type"/></property>
+<property name="Number" type="java.lang.String"><column name="Number"/></property>
+<property name="IssueDate" type="java.lang.String"><column name="IssueDate"/></property>
+<property name="IssueAuthority" type="java.lang.String"><column name="IssueAuthority"/></property>
+<property name="persondata" type="int"><column name="persondata"/></property>
+<many-to-one name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
+</class>
+</hibernate-mapping>
+

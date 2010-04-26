@@ -24,7 +24,9 @@ public class StorageComponent {
       return 0;
   }
   
-  public int CreateS (SystemParameter p) {
+  public int mtest (int a) { return a * 2; }
+  
+  public int CreateS (com.aladdin.xsd.SystemParameter p) {
      Session s = HibernateUtil.getSessionFactory ().openSession ();
      s.beginTransaction ();
      
