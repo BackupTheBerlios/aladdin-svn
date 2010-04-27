@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,7 +11,7 @@ import java.util.Set;
 public class PersonData  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String Surname;
      private String Name;
      private Set Identifiers = new HashSet(0);
@@ -36,11 +35,11 @@ public class PersonData  implements java.io.Serializable {
        this.Patients = Patients;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getSurname() {

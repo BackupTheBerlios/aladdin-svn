@@ -3,16 +3,16 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="Patient">
-<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Patient_id_seq</param></generator></id>
-<property name="persondata" type="int"><column name="persondata"/></property>
-<property name="sd" type="int"><column name="sd"/></property>
-<property name="clinician" type="int"><column name="clinician"/></property>
-<set name="PatientAssessments" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="PatientAssessment"/></set>
-<many-to-one name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
-<many-to-one name="m_SocioDemographicData" class="SocioDemographicData" ><column name="sd" not-null="false" /></many-to-one>
-<many-to-one name="m_Clinician" class="Clinician" ><column name="clinician" not-null="false" /></many-to-one>
-<set name="PatientCarers" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="PatientCarer"/></set>
+<hibernate-mapping><class name="com.aladdin.xsd.Patient">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Patient_id_seq</param></generator></id>
+<property name="persondata" type="java.lang.Integer"><column name="persondata"/></property>
+<property name="sd" type="java.lang.Integer"><column name="sd"/></property>
+<property name="clinician" type="java.lang.Integer"><column name="clinician"/></property>
+<set name="PatientAssessments" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.xsd.PatientAssessment"/></set>
+<many-to-one name="m_PersonData" class="com.aladdin.xsd.PersonData" insert="false" update="false"><column name="persondata" not-null="false" /></many-to-one>
+<many-to-one name="m_SocioDemographicData" class="com.aladdin.xsd.SocioDemographicData" insert="false" update="false"><column name="sd" not-null="false" /></many-to-one>
+<many-to-one name="m_Clinician" class="com.aladdin.xsd.Clinician" insert="false" update="false"><column name="clinician" not-null="false" /></many-to-one>
+<set name="PatientCarers" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.xsd.PatientCarer"/></set>
 </class>
 </hibernate-mapping>
 

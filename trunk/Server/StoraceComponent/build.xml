@@ -13,25 +13,34 @@
         </fileset>
     </path>
 
-    <target name="generate-hbm">
-    	<mkdir dir="src/com/aladdin/xsd"/>
+    <target name="generate.hbm">
     	<exec executable="create-hbm"/>
     </target>
 
-    <target name="generate-sql">
-    	<exec executable="xsd2sql" output="data/sc.sql">
-            <arg value="-x"/>
-            <arg value="src/schemata.xsd"/>
-            <arg value="-i"/>
-            <arg value="SystemParameter"/>
-    	</exec>
-    </target>
+<target name="schemaexport">
+    <taskdef name="schemaexport"
+        classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+        classpathref="classpath"/>
+    
+    <schemaexport
+        properties="src/hibernate.properties"
+        quiet="no"
+        text="no"
+        drop="no"
+        delimiter=";"
+        output="data/sc.sql">
+        <fileset dir="generated">
+            <include name="**/*.hbm.xml"/>
+        </fileset>
+    </schemaexport>
+</target>
+
 
     <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath" />
-    <target name="hbm2java" depends="generate-hbm">
-    	<hibernatetool destdir="src/com/aladdin/xsd">
-    		<configuration configurationfile="src/hibernate.cfg.xml">
-	    		<fileset dir="src/com/aladdin/xsd">
+    <target name="hbm2java" depends="generate.hbm">
+    	<hibernatetool destdir="generated">
+    		<configuration configurationfile="src/hibernate-aladdin-sc.cfg.xml">
+	    		<fileset dir="generated/com/aladdin/xsd">
     				<include name="**/*.hbm.xml"/>
     			</fileset>
     		</configuration>
@@ -39,15 +48,10 @@
     	</hibernatetool>
     </target>
 
-    <target name="update-java" depends="hbm2java">
-    	<exec executable="update-java"/>
-    </target>
-
-    <target name="compile.service"><!-- depends="update-java" -->
+    <target name="compile.service">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${build.dir}/classes"/>
 
-        <!--First let's compile the classes-->
         <javac debug="on" 
                fork="true"
                destdir="${build.dir}/classes" 
@@ -57,23 +61,35 @@
     </target>
 
     <target name="generate.service" depends="compile.service">
-        <!--aar them up -->
         <copy toDir="${build.dir}/classes" failonerror="false">
             <fileset dir="${basedir}/resources">
                 <include name="**/*.xml"/>
             </fileset>
-            <!-- fileset dir="${basedir}/src">
-                <include name="**/*.xml"/>
-            </fileset -->
         </copy>
         <jar destfile="${build.dir}/StorageComponent.aar">
             <fileset excludes="**/Test.class" dir="${build.dir}/classes"/>
-            <!-- fileset includes="**/*.jar" dir="jar"/ -->
         </jar>
     </target>
 
+    <target name="compile.hibernate.jar" depends="hbm2java">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/g_classes"/>
+        <javac debug="on" 
+               fork="true"
+               destdir="${build.dir}/g_classes" 
+               srcdir="${basedir}/generated"
+               classpathref="classpath">
+        </javac>
+    </target>
+
+    <target name="generate.hibernate.jar" depends="compile.hibernate.jar">
+        <jar destfile="${build.dir}/StorageComponentHibernate.jar">
+            <fileset includes="**/*.class" dir="${build.dir}/g_classes"/>
+        </jar>
+    </target>
+
+
     <target name="clean">
         <delete dir="${build.dir}"/>
-        <!-- delete dir="src/com/aladdin/xsd"/ -->
     </target>
 </project>

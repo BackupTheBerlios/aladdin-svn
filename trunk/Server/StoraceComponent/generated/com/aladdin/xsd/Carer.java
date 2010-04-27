@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,9 +11,9 @@ import java.util.Set;
 public class Carer  implements java.io.Serializable {
 
 
-     private int id;
-     private int persondata;
-     private int sd;
+     private Integer id;
+     private Integer persondata;
+     private Integer sd;
      private PersonData m_PersonData;
      private SocioDemographicData m_SocioDemographicData;
      private Set CarerAssessments = new HashSet(0);
@@ -23,7 +22,7 @@ public class Carer  implements java.io.Serializable {
     public Carer() {
     }
 
-    public Carer(int persondata, int sd, PersonData m_PersonData, SocioDemographicData m_SocioDemographicData, Set CarerAssessments, Set PatientCarers) {
+    public Carer(Integer persondata, Integer sd, PersonData m_PersonData, SocioDemographicData m_SocioDemographicData, Set CarerAssessments, Set PatientCarers) {
        this.persondata = persondata;
        this.sd = sd;
        this.m_PersonData = m_PersonData;
@@ -32,25 +31,25 @@ public class Carer  implements java.io.Serializable {
        this.PatientCarers = PatientCarers;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getPersondata() {
+    public Integer getPersondata() {
         return this.persondata;
     }
     
-    public void setPersondata(int persondata) {
+    public void setPersondata(Integer persondata) {
         this.persondata = persondata;
     }
-    public int getSd() {
+    public Integer getSd() {
         return this.sd;
     }
     
-    public void setSd(int sd) {
+    public void setSd(Integer sd) {
         this.sd = sd;
     }
     public PersonData getM_PersonData() {

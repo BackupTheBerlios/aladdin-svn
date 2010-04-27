@@ -3,16 +3,16 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="PersonData">
-<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">PersonData_id_seq</param></generator></id>
+<hibernate-mapping><class name="com.aladdin.xsd.PersonData">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">PersonData_id_seq</param></generator></id>
 <property name="Surname" type="java.lang.String"><column name="Surname"/></property>
 <property name="Name" type="java.lang.String"><column name="Name"/></property>
-<set name="Identifiers" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="Identifier"/></set>
-<set name="Addresss" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="Address"/></set>
-<set name="Communications" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="Communication"/></set>
-<set name="Clinicians" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="Clinician"/></set>
-<set name="Carers" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="Carer"/></set>
-<set name="Patients" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="Patient"/></set>
+<set name="Identifiers" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Identifier"/></set>
+<set name="Addresss" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Address"/></set>
+<set name="Communications" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Communication"/></set>
+<set name="Clinicians" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Clinician"/></set>
+<set name="Carers" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Carer"/></set>
+<set name="Patients" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Patient"/></set>
 </class>
 </hibernate-mapping>
 

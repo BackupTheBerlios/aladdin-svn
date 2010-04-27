@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -10,34 +9,34 @@ package com.aladdin.xsd;
 public class QuestionnaireQuestionAnswer  implements java.io.Serializable {
 
 
-     private int id;
-     private int value;
+     private Integer id;
+     private Integer value;
      private String description;
-     private int question;
+     private Integer question;
      private QuestionnaireQuestion m_QuestionnaireQuestion;
 
     public QuestionnaireQuestionAnswer() {
     }
 
-    public QuestionnaireQuestionAnswer(int value, String description, int question, QuestionnaireQuestion m_QuestionnaireQuestion) {
+    public QuestionnaireQuestionAnswer(Integer value, String description, Integer question, QuestionnaireQuestion m_QuestionnaireQuestion) {
        this.value = value;
        this.description = description;
        this.question = question;
        this.m_QuestionnaireQuestion = m_QuestionnaireQuestion;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getValue() {
+    public Integer getValue() {
         return this.value;
     }
     
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
     public String getDescription() {
@@ -47,11 +46,11 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public int getQuestion() {
+    public Integer getQuestion() {
         return this.question;
     }
     
-    public void setQuestion(int question) {
+    public void setQuestion(Integer question) {
         this.question = question;
     }
     public QuestionnaireQuestion getM_QuestionnaireQuestion() {

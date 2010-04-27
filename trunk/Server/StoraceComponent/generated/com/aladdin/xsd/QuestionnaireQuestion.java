@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,13 +11,13 @@ import java.util.Set;
 public class QuestionnaireQuestion  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String type;
-     private boolean isPrimary;
-     private boolean subquetsions;
-     private int parentid;
+     private Boolean isPrimary;
+     private Boolean subquetsions;
+     private Integer parentid;
      private String title;
-     private int quest;
+     private Integer quest;
      private QuestionnaireQuestion m_QuestionnaireQuestion;
      private Questionnaire m_Questionnaire;
      private Set QuestionnaireQuestionAnswers = new HashSet(0);
@@ -27,7 +26,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
     public QuestionnaireQuestion() {
     }
 
-    public QuestionnaireQuestion(String type, boolean isPrimary, boolean subquetsions, int parentid, String title, int quest, QuestionnaireQuestion m_QuestionnaireQuestion, Questionnaire m_Questionnaire, Set QuestionnaireQuestionAnswers, Set QuestionnaireAnswers) {
+    public QuestionnaireQuestion(String type, Boolean isPrimary, Boolean subquetsions, Integer parentid, String title, Integer quest, QuestionnaireQuestion m_QuestionnaireQuestion, Questionnaire m_Questionnaire, Set QuestionnaireQuestionAnswers, Set QuestionnaireAnswers) {
        this.type = type;
        this.isPrimary = isPrimary;
        this.subquetsions = subquetsions;
@@ -40,11 +39,11 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
        this.QuestionnaireAnswers = QuestionnaireAnswers;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getType() {
@@ -54,25 +53,25 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
     public void setType(String type) {
         this.type = type;
     }
-    public boolean isIsPrimary() {
+    public Boolean getIsPrimary() {
         return this.isPrimary;
     }
     
-    public void setIsPrimary(boolean isPrimary) {
+    public void setIsPrimary(Boolean isPrimary) {
         this.isPrimary = isPrimary;
     }
-    public boolean isSubquetsions() {
+    public Boolean getSubquetsions() {
         return this.subquetsions;
     }
     
-    public void setSubquetsions(boolean subquetsions) {
+    public void setSubquetsions(Boolean subquetsions) {
         this.subquetsions = subquetsions;
     }
-    public int getParentid() {
+    public Integer getParentid() {
         return this.parentid;
     }
     
-    public void setParentid(int parentid) {
+    public void setParentid(Integer parentid) {
         this.parentid = parentid;
     }
     public String getTitle() {
@@ -82,11 +81,11 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-    public int getQuest() {
+    public Integer getQuest() {
         return this.quest;
     }
     
-    public void setQuest(int quest) {
+    public void setQuest(Integer quest) {
         this.quest = quest;
     }
     public QuestionnaireQuestion getM_QuestionnaireQuestion() {

@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,10 +11,10 @@ import java.util.Set;
 public class Patient  implements java.io.Serializable {
 
 
-     private int id;
-     private int persondata;
-     private int sd;
-     private int clinician;
+     private Integer id;
+     private Integer persondata;
+     private Integer sd;
+     private Integer clinician;
      private Set PatientAssessments = new HashSet(0);
      private PersonData m_PersonData;
      private SocioDemographicData m_SocioDemographicData;
@@ -25,7 +24,7 @@ public class Patient  implements java.io.Serializable {
     public Patient() {
     }
 
-    public Patient(int persondata, int sd, int clinician, Set PatientAssessments, PersonData m_PersonData, SocioDemographicData m_SocioDemographicData, Clinician m_Clinician, Set PatientCarers) {
+    public Patient(Integer persondata, Integer sd, Integer clinician, Set PatientAssessments, PersonData m_PersonData, SocioDemographicData m_SocioDemographicData, Clinician m_Clinician, Set PatientCarers) {
        this.persondata = persondata;
        this.sd = sd;
        this.clinician = clinician;
@@ -36,32 +35,32 @@ public class Patient  implements java.io.Serializable {
        this.PatientCarers = PatientCarers;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getPersondata() {
+    public Integer getPersondata() {
         return this.persondata;
     }
     
-    public void setPersondata(int persondata) {
+    public void setPersondata(Integer persondata) {
         this.persondata = persondata;
     }
-    public int getSd() {
+    public Integer getSd() {
         return this.sd;
     }
     
-    public void setSd(int sd) {
+    public void setSd(Integer sd) {
         this.sd = sd;
     }
-    public int getClinician() {
+    public Integer getClinician() {
         return this.clinician;
     }
     
-    public void setClinician(int clinician) {
+    public void setClinician(Integer clinician) {
         this.clinician = clinician;
     }
     public Set getPatientAssessments() {

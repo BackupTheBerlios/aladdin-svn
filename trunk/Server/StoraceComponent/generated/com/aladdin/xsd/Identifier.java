@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -10,18 +9,18 @@ package com.aladdin.xsd;
 public class Identifier  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String Type;
      private String Number;
      private String IssueDate;
      private String IssueAuthority;
-     private int persondata;
+     private Integer persondata;
      private PersonData m_PersonData;
 
     public Identifier() {
     }
 
-    public Identifier(String Type, String Number, String IssueDate, String IssueAuthority, int persondata, PersonData m_PersonData) {
+    public Identifier(String Type, String Number, String IssueDate, String IssueAuthority, Integer persondata, PersonData m_PersonData) {
        this.Type = Type;
        this.Number = Number;
        this.IssueDate = IssueDate;
@@ -30,11 +29,11 @@ public class Identifier  implements java.io.Serializable {
        this.m_PersonData = m_PersonData;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getType() {
@@ -65,11 +64,11 @@ public class Identifier  implements java.io.Serializable {
     public void setIssueAuthority(String IssueAuthority) {
         this.IssueAuthority = IssueAuthority;
     }
-    public int getPersondata() {
+    public Integer getPersondata() {
         return this.persondata;
     }
     
-    public void setPersondata(int persondata) {
+    public void setPersondata(Integer persondata) {
         this.persondata = persondata;
     }
     public PersonData getM_PersonData() {

@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,12 +11,12 @@ import java.util.Set;
 public class SocioDemographicData  implements java.io.Serializable {
 
 
-     private int id;
-     private int Age;
-     private int Gender;
-     private int MaritalStatus;
-     private int Children;
-     private int LivingWith;
+     private Integer id;
+     private Integer Age;
+     private Integer Gender;
+     private Integer MaritalStatus;
+     private Integer Children;
+     private Integer LivingWith;
      private GenderT m_GenderT;
      private MaritalStatusT m_MaritalStatusT;
      private LivingWithT m_LivingWithT;
@@ -27,7 +26,7 @@ public class SocioDemographicData  implements java.io.Serializable {
     public SocioDemographicData() {
     }
 
-    public SocioDemographicData(int Age, int Gender, int MaritalStatus, int Children, int LivingWith, GenderT m_GenderT, MaritalStatusT m_MaritalStatusT, LivingWithT m_LivingWithT, Set Carers, Set Patients) {
+    public SocioDemographicData(Integer Age, Integer Gender, Integer MaritalStatus, Integer Children, Integer LivingWith, GenderT m_GenderT, MaritalStatusT m_MaritalStatusT, LivingWithT m_LivingWithT, Set Carers, Set Patients) {
        this.Age = Age;
        this.Gender = Gender;
        this.MaritalStatus = MaritalStatus;
@@ -40,46 +39,46 @@ public class SocioDemographicData  implements java.io.Serializable {
        this.Patients = Patients;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getAge() {
+    public Integer getAge() {
         return this.Age;
     }
     
-    public void setAge(int Age) {
+    public void setAge(Integer Age) {
         this.Age = Age;
     }
-    public int getGender() {
+    public Integer getGender() {
         return this.Gender;
     }
     
-    public void setGender(int Gender) {
+    public void setGender(Integer Gender) {
         this.Gender = Gender;
     }
-    public int getMaritalStatus() {
+    public Integer getMaritalStatus() {
         return this.MaritalStatus;
     }
     
-    public void setMaritalStatus(int MaritalStatus) {
+    public void setMaritalStatus(Integer MaritalStatus) {
         this.MaritalStatus = MaritalStatus;
     }
-    public int getChildren() {
+    public Integer getChildren() {
         return this.Children;
     }
     
-    public void setChildren(int Children) {
+    public void setChildren(Integer Children) {
         this.Children = Children;
     }
-    public int getLivingWith() {
+    public Integer getLivingWith() {
         return this.LivingWith;
     }
     
-    public void setLivingWith(int LivingWith) {
+    public void setLivingWith(Integer LivingWith) {
         this.LivingWith = LivingWith;
     }
     public GenderT getM_GenderT() {

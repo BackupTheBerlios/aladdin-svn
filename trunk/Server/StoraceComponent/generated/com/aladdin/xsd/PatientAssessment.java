@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.math.BigDecimal;
@@ -14,31 +13,31 @@ import java.util.Set;
 public class PatientAssessment  implements java.io.Serializable {
 
 
-     private int id;
-     private int patient;
+     private Integer id;
+     private Integer patient;
      private Timestamp DateOfAssessment;
-     private int Aetology;
-     private int TimeElapsedSinceDiagnose;
-     private int Severity;
+     private Integer Aetology;
+     private Integer TimeElapsedSinceDiagnose;
+     private Integer Severity;
      private String RelevantPathologyAntecedents;
      private String Comorbidity;
-     private int CharlsonComobodityIndex;
-     private int BarthelIndex;
-     private int LawtonIndex;
-     private int MMSE;
-     private int MDRS;
+     private Integer CharlsonComobodityIndex;
+     private Integer BarthelIndex;
+     private Integer LawtonIndex;
+     private Integer MMSE;
+     private Integer MDRS;
      private BigDecimal BlessedScalePart1;
-     private int BlessedScalePart2;
-     private int BlessedScalePart3;
-     private int ChecklistMBPC;
-     private int NPQISeverity;
-     private int NPQIStress;
-     private int GDS;
-     private boolean Falls;
-     private boolean Incontinence;
-     private boolean Delirium;
-     private boolean Immobility;
-     private boolean SensorialDeficits;
+     private Integer BlessedScalePart2;
+     private Integer BlessedScalePart3;
+     private Integer ChecklistMBPC;
+     private Integer NPQISeverity;
+     private Integer NPQIStress;
+     private Integer GDS;
+     private Boolean Falls;
+     private Boolean Incontinence;
+     private Boolean Delirium;
+     private Boolean Immobility;
+     private Boolean SensorialDeficits;
      private String PharmacologyTreatment;
      private Patient m_Patient;
      private AetologyT m_AetologyT;
@@ -47,7 +46,7 @@ public class PatientAssessment  implements java.io.Serializable {
     public PatientAssessment() {
     }
 
-    public PatientAssessment(int patient, Timestamp DateOfAssessment, int Aetology, int TimeElapsedSinceDiagnose, int Severity, String RelevantPathologyAntecedents, String Comorbidity, int CharlsonComobodityIndex, int BarthelIndex, int LawtonIndex, int MMSE, int MDRS, BigDecimal BlessedScalePart1, int BlessedScalePart2, int BlessedScalePart3, int ChecklistMBPC, int NPQISeverity, int NPQIStress, int GDS, boolean Falls, boolean Incontinence, boolean Delirium, boolean Immobility, boolean SensorialDeficits, String PharmacologyTreatment, Patient m_Patient, AetologyT m_AetologyT, Set Measurments) {
+    public PatientAssessment(Integer patient, Timestamp DateOfAssessment, Integer Aetology, Integer TimeElapsedSinceDiagnose, Integer Severity, String RelevantPathologyAntecedents, String Comorbidity, Integer CharlsonComobodityIndex, Integer BarthelIndex, Integer LawtonIndex, Integer MMSE, Integer MDRS, BigDecimal BlessedScalePart1, Integer BlessedScalePart2, Integer BlessedScalePart3, Integer ChecklistMBPC, Integer NPQISeverity, Integer NPQIStress, Integer GDS, Boolean Falls, Boolean Incontinence, Boolean Delirium, Boolean Immobility, Boolean SensorialDeficits, String PharmacologyTreatment, Patient m_Patient, AetologyT m_AetologyT, Set Measurments) {
        this.patient = patient;
        this.DateOfAssessment = DateOfAssessment;
        this.Aetology = Aetology;
@@ -78,18 +77,18 @@ public class PatientAssessment  implements java.io.Serializable {
        this.Measurments = Measurments;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getPatient() {
+    public Integer getPatient() {
         return this.patient;
     }
     
-    public void setPatient(int patient) {
+    public void setPatient(Integer patient) {
         this.patient = patient;
     }
     public Timestamp getDateOfAssessment() {
@@ -99,25 +98,25 @@ public class PatientAssessment  implements java.io.Serializable {
     public void setDateOfAssessment(Timestamp DateOfAssessment) {
         this.DateOfAssessment = DateOfAssessment;
     }
-    public int getAetology() {
+    public Integer getAetology() {
         return this.Aetology;
     }
     
-    public void setAetology(int Aetology) {
+    public void setAetology(Integer Aetology) {
         this.Aetology = Aetology;
     }
-    public int getTimeElapsedSinceDiagnose() {
+    public Integer getTimeElapsedSinceDiagnose() {
         return this.TimeElapsedSinceDiagnose;
     }
     
-    public void setTimeElapsedSinceDiagnose(int TimeElapsedSinceDiagnose) {
+    public void setTimeElapsedSinceDiagnose(Integer TimeElapsedSinceDiagnose) {
         this.TimeElapsedSinceDiagnose = TimeElapsedSinceDiagnose;
     }
-    public int getSeverity() {
+    public Integer getSeverity() {
         return this.Severity;
     }
     
-    public void setSeverity(int Severity) {
+    public void setSeverity(Integer Severity) {
         this.Severity = Severity;
     }
     public String getRelevantPathologyAntecedents() {
@@ -134,39 +133,39 @@ public class PatientAssessment  implements java.io.Serializable {
     public void setComorbidity(String Comorbidity) {
         this.Comorbidity = Comorbidity;
     }
-    public int getCharlsonComobodityIndex() {
+    public Integer getCharlsonComobodityIndex() {
         return this.CharlsonComobodityIndex;
     }
     
-    public void setCharlsonComobodityIndex(int CharlsonComobodityIndex) {
+    public void setCharlsonComobodityIndex(Integer CharlsonComobodityIndex) {
         this.CharlsonComobodityIndex = CharlsonComobodityIndex;
     }
-    public int getBarthelIndex() {
+    public Integer getBarthelIndex() {
         return this.BarthelIndex;
     }
     
-    public void setBarthelIndex(int BarthelIndex) {
+    public void setBarthelIndex(Integer BarthelIndex) {
         this.BarthelIndex = BarthelIndex;
     }
-    public int getLawtonIndex() {
+    public Integer getLawtonIndex() {
         return this.LawtonIndex;
     }
     
-    public void setLawtonIndex(int LawtonIndex) {
+    public void setLawtonIndex(Integer LawtonIndex) {
         this.LawtonIndex = LawtonIndex;
     }
-    public int getMMSE() {
+    public Integer getMMSE() {
         return this.MMSE;
     }
     
-    public void setMMSE(int MMSE) {
+    public void setMMSE(Integer MMSE) {
         this.MMSE = MMSE;
     }
-    public int getMDRS() {
+    public Integer getMDRS() {
         return this.MDRS;
     }
     
-    public void setMDRS(int MDRS) {
+    public void setMDRS(Integer MDRS) {
         this.MDRS = MDRS;
     }
     public BigDecimal getBlessedScalePart1() {
@@ -176,81 +175,81 @@ public class PatientAssessment  implements java.io.Serializable {
     public void setBlessedScalePart1(BigDecimal BlessedScalePart1) {
         this.BlessedScalePart1 = BlessedScalePart1;
     }
-    public int getBlessedScalePart2() {
+    public Integer getBlessedScalePart2() {
         return this.BlessedScalePart2;
     }
     
-    public void setBlessedScalePart2(int BlessedScalePart2) {
+    public void setBlessedScalePart2(Integer BlessedScalePart2) {
         this.BlessedScalePart2 = BlessedScalePart2;
     }
-    public int getBlessedScalePart3() {
+    public Integer getBlessedScalePart3() {
         return this.BlessedScalePart3;
     }
     
-    public void setBlessedScalePart3(int BlessedScalePart3) {
+    public void setBlessedScalePart3(Integer BlessedScalePart3) {
         this.BlessedScalePart3 = BlessedScalePart3;
     }
-    public int getChecklistMBPC() {
+    public Integer getChecklistMBPC() {
         return this.ChecklistMBPC;
     }
     
-    public void setChecklistMBPC(int ChecklistMBPC) {
+    public void setChecklistMBPC(Integer ChecklistMBPC) {
         this.ChecklistMBPC = ChecklistMBPC;
     }
-    public int getNPQISeverity() {
+    public Integer getNPQISeverity() {
         return this.NPQISeverity;
     }
     
-    public void setNPQISeverity(int NPQISeverity) {
+    public void setNPQISeverity(Integer NPQISeverity) {
         this.NPQISeverity = NPQISeverity;
     }
-    public int getNPQIStress() {
+    public Integer getNPQIStress() {
         return this.NPQIStress;
     }
     
-    public void setNPQIStress(int NPQIStress) {
+    public void setNPQIStress(Integer NPQIStress) {
         this.NPQIStress = NPQIStress;
     }
-    public int getGDS() {
+    public Integer getGDS() {
         return this.GDS;
     }
     
-    public void setGDS(int GDS) {
+    public void setGDS(Integer GDS) {
         this.GDS = GDS;
     }
-    public boolean isFalls() {
+    public Boolean getFalls() {
         return this.Falls;
     }
     
-    public void setFalls(boolean Falls) {
+    public void setFalls(Boolean Falls) {
         this.Falls = Falls;
     }
-    public boolean isIncontinence() {
+    public Boolean getIncontinence() {
         return this.Incontinence;
     }
     
-    public void setIncontinence(boolean Incontinence) {
+    public void setIncontinence(Boolean Incontinence) {
         this.Incontinence = Incontinence;
     }
-    public boolean isDelirium() {
+    public Boolean getDelirium() {
         return this.Delirium;
     }
     
-    public void setDelirium(boolean Delirium) {
+    public void setDelirium(Boolean Delirium) {
         this.Delirium = Delirium;
     }
-    public boolean isImmobility() {
+    public Boolean getImmobility() {
         return this.Immobility;
     }
     
-    public void setImmobility(boolean Immobility) {
+    public void setImmobility(Boolean Immobility) {
         this.Immobility = Immobility;
     }
-    public boolean isSensorialDeficits() {
+    public Boolean getSensorialDeficits() {
         return this.SensorialDeficits;
     }
     
-    public void setSensorialDeficits(boolean SensorialDeficits) {
+    public void setSensorialDeficits(Boolean SensorialDeficits) {
         this.SensorialDeficits = SensorialDeficits;
     }
     public String getPharmacologyTreatment() {

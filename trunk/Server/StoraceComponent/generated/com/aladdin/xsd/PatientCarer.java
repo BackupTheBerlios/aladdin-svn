@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -10,17 +9,17 @@ package com.aladdin.xsd;
 public class PatientCarer  implements java.io.Serializable {
 
 
-     private int id;
-     private int patient;
-     private int carer;
-     private boolean isprimary;
+     private Integer id;
+     private Integer patient;
+     private Integer carer;
+     private Boolean isprimary;
      private Patient m_Patient;
      private Carer m_Carer;
 
     public PatientCarer() {
     }
 
-    public PatientCarer(int patient, int carer, boolean isprimary, Patient m_Patient, Carer m_Carer) {
+    public PatientCarer(Integer patient, Integer carer, Boolean isprimary, Patient m_Patient, Carer m_Carer) {
        this.patient = patient;
        this.carer = carer;
        this.isprimary = isprimary;
@@ -28,32 +27,32 @@ public class PatientCarer  implements java.io.Serializable {
        this.m_Carer = m_Carer;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getPatient() {
+    public Integer getPatient() {
         return this.patient;
     }
     
-    public void setPatient(int patient) {
+    public void setPatient(Integer patient) {
         this.patient = patient;
     }
-    public int getCarer() {
+    public Integer getCarer() {
         return this.carer;
     }
     
-    public void setCarer(int carer) {
+    public void setCarer(Integer carer) {
         this.carer = carer;
     }
-    public boolean isIsprimary() {
+    public Boolean getIsprimary() {
         return this.isprimary;
     }
     
-    public void setIsprimary(boolean isprimary) {
+    public void setIsprimary(Boolean isprimary) {
         this.isprimary = isprimary;
     }
     public Patient getM_Patient() {

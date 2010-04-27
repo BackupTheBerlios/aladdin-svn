@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;
@@ -11,13 +10,13 @@ import java.sql.Timestamp;
 public class Task  implements java.io.Serializable {
 
 
-     private int id;
-     private int TaskType;
+     private Integer id;
+     private Integer TaskType;
      private Timestamp DateTimeAssigned;
      private Timestamp DateTimeFulfilled;
-     private int TaskStatus;
+     private Integer TaskStatus;
      private String url;
-     private int questionnaire;
+     private Integer questionnaire;
      private TaskTypeT m_TaskTypeT;
      private TaskStatusT m_TaskStatusT;
      private Questionnaire m_Questionnaire;
@@ -25,7 +24,7 @@ public class Task  implements java.io.Serializable {
     public Task() {
     }
 
-    public Task(int TaskType, Timestamp DateTimeAssigned, Timestamp DateTimeFulfilled, int TaskStatus, String url, int questionnaire, TaskTypeT m_TaskTypeT, TaskStatusT m_TaskStatusT, Questionnaire m_Questionnaire) {
+    public Task(Integer TaskType, Timestamp DateTimeAssigned, Timestamp DateTimeFulfilled, Integer TaskStatus, String url, Integer questionnaire, TaskTypeT m_TaskTypeT, TaskStatusT m_TaskStatusT, Questionnaire m_Questionnaire) {
        this.TaskType = TaskType;
        this.DateTimeAssigned = DateTimeAssigned;
        this.DateTimeFulfilled = DateTimeFulfilled;
@@ -37,18 +36,18 @@ public class Task  implements java.io.Serializable {
        this.m_Questionnaire = m_Questionnaire;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getTaskType() {
+    public Integer getTaskType() {
         return this.TaskType;
     }
     
-    public void setTaskType(int TaskType) {
+    public void setTaskType(Integer TaskType) {
         this.TaskType = TaskType;
     }
     public Timestamp getDateTimeAssigned() {
@@ -65,11 +64,11 @@ public class Task  implements java.io.Serializable {
     public void setDateTimeFulfilled(Timestamp DateTimeFulfilled) {
         this.DateTimeFulfilled = DateTimeFulfilled;
     }
-    public int getTaskStatus() {
+    public Integer getTaskStatus() {
         return this.TaskStatus;
     }
     
-    public void setTaskStatus(int TaskStatus) {
+    public void setTaskStatus(Integer TaskStatus) {
         this.TaskStatus = TaskStatus;
     }
     public String getUrl() {
@@ -79,11 +78,11 @@ public class Task  implements java.io.Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
-    public int getQuestionnaire() {
+    public Integer getQuestionnaire() {
         return this.questionnaire;
     }
     
-    public void setQuestionnaire(int questionnaire) {
+    public void setQuestionnaire(Integer questionnaire) {
         this.questionnaire = questionnaire;
     }
     public TaskTypeT getM_TaskTypeT() {

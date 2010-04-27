@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,23 +11,23 @@ import java.util.Set;
 public class Service  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String name;
-     private Set Rights = new HashSet(0);
+     private Set Rightss = new HashSet(0);
 
     public Service() {
     }
 
-    public Service(String name, Set Rights) {
+    public Service(String name, Set Rightss) {
        this.name = name;
-       this.Rights = Rights;
+       this.Rightss = Rightss;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getName() {
@@ -38,12 +37,12 @@ public class Service  implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Set getRights() {
-        return this.Rights;
+    public Set getRightss() {
+        return this.Rightss;
     }
     
-    public void setRights(Set Rights) {
-        this.Rights = Rights;
+    public void setRightss(Set Rightss) {
+        this.Rightss = Rightss;
     }
 
 

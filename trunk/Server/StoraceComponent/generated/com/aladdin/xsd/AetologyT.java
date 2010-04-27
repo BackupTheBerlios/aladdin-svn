@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,32 +11,32 @@ import java.util.Set;
 public class AetologyT  implements java.io.Serializable {
 
 
-     private int id;
-     private int Code;
+     private Integer id;
+     private Integer Code;
      private String Description;
      private Set PatientAssessments = new HashSet(0);
 
     public AetologyT() {
     }
 
-    public AetologyT(int Code, String Description, Set PatientAssessments) {
+    public AetologyT(Integer Code, String Description, Set PatientAssessments) {
        this.Code = Code;
        this.Description = Description;
        this.PatientAssessments = PatientAssessments;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getCode() {
+    public Integer getCode() {
         return this.Code;
     }
     
-    public void setCode(int Code) {
+    public void setCode(Integer Code) {
         this.Code = Code;
     }
     public String getDescription() {

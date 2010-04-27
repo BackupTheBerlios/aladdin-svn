@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.math.BigDecimal;
@@ -13,7 +12,7 @@ import java.util.Set;
 public class Questionnaire  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private BigDecimal version;
      private Set QuestionnaireQuestions = new HashSet(0);
      private Set Tasks = new HashSet(0);
@@ -27,11 +26,11 @@ public class Questionnaire  implements java.io.Serializable {
        this.Tasks = Tasks;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public BigDecimal getVersion() {

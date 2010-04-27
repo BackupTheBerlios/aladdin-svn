@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="com.aladdin.xsd.Users">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Users_id_seq</param></generator></id>
+<property name="login" type="java.lang.String"><column name="login"/></property>
+<property name="password" type="java.lang.String"><column name="password"/></property>
+<property name="type" type="java.lang.Integer"><column name="type"/></property>
+<many-to-one name="m_typeT" class="com.aladdin.xsd.typeT" insert="false" update="false"><column name="type" not-null="false" /></many-to-one>
+<set name="Rightss" inverse="true" cascade="none"><key><column name="usr" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Rights"/></set>
+</class>
+</hibernate-mapping>
+

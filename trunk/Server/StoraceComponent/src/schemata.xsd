@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/am" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified">
     <complexType name="SystemParameter">
     	<sequence>
     		<element name="Code" type="int"></element>
     		<element name="Description" type="string"></element>
     	</sequence>
     </complexType>
-    <complexType name="User">
+    <complexType name="Users">
     	<sequence>
     		<element name="login" type="string"></element>
     		<element name="password" type="string"></element>
@@ -20,10 +20,10 @@
     	</sequence>
     </complexType>
 
-    <complexType name="Right">
+    <complexType name="Rights">
     	<sequence>
     		<element name="srv" type="tns:Service"></element>
-    		<element name="usr" type="tns:User"></element>
+    		<element name="usr" type="tns:Users"></element>
     	</sequence>
     </complexType>
     

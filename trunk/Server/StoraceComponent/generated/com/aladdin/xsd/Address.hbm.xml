@@ -3,8 +3,8 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="Address">
-<id name="id" type="int" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Address_id_seq</param></generator></id>
+<hibernate-mapping><class name="com.aladdin.xsd.Address">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Address_id_seq</param></generator></id>
 <property name="Street" type="java.lang.String"><column name="Street"/></property>
 <property name="StreetNo" type="java.lang.String"><column name="StreetNo"/></property>
 <property name="City" type="java.lang.String"><column name="City"/></property>
@@ -12,9 +12,9 @@
 <property name="Country" type="java.lang.String"><column name="Country"/></property>
 <property name="ZipCode" type="java.lang.String"><column name="ZipCode"/></property>
 <property name="Notes" type="java.lang.String"><column name="Notes"/></property>
-<property name="IsPrimary" type="boolean"><column name="IsPrimary"/></property>
-<property name="persondata" type="int"><column name="persondata"/></property>
-<many-to-one name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
+<property name="IsPrimary" type="java.lang.Boolean"><column name="IsPrimary"/></property>
+<property name="persondata" type="java.lang.Integer"><column name="persondata"/></property>
+<many-to-one name="m_PersonData" class="com.aladdin.xsd.PersonData" insert="false" update="false"><column name="persondata" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

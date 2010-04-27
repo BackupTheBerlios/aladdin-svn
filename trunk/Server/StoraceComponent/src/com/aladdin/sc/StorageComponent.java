@@ -12,23 +12,38 @@ import com.aladdin.xsd.*;
 //import org.apache.axis2.context.MessageContext;
 //import java.net.URL;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
+
+
 public class StorageComponent {
-  public int CreatePatient (Patient patient) {
+
+static Logger logger = Logger.getLogger(StorageComponent.class);
+
+  public java.lang.Integer CreatePatient (Patient patient) {
       Session s = HibernateUtil.getSessionFactory ().openSession ();
       s.beginTransaction ();
       
-      s.save (patient);
+     BasicConfigurator.configure();
+     logger.warn (patient.getM_SocioDemographicData().getAge());
+
+//      s.save (patient);
 
       s.flush ();
       s.getTransaction ().commit ();
       return 0;
   }
   
-  public int mtest (int a) { return a * 2; }
+  public java.lang.Integer mtest (java.lang.Integer a) { return a * 2; }
   
   public int CreateS (com.aladdin.xsd.SystemParameter p) {
      Session s = HibernateUtil.getSessionFactory ().openSession ();
      s.beginTransaction ();
+     
+     BasicConfigurator.configure();
+     logger.warn (p.getCode());
+     logger.warn (p.getDescription().toString ());
+     
      
      s.save (p);
      

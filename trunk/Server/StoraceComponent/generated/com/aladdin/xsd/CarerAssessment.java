@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;
@@ -11,20 +10,20 @@ import java.sql.Timestamp;
 public class CarerAssessment  implements java.io.Serializable {
 
 
-     private int id;
-     private int carer;
+     private Integer id;
+     private Integer carer;
      private Timestamp DateOfAssessment;
      private String RelevantHealthProblem;
-     private int SeverityOfBurden;
+     private Integer SeverityOfBurden;
      private String EmotionalOrMentalDisorder;
      private String PsychoactiveDrugs;
-     private int QualityOfLife;
+     private Integer QualityOfLife;
      private Carer m_Carer;
 
     public CarerAssessment() {
     }
 
-    public CarerAssessment(int carer, Timestamp DateOfAssessment, String RelevantHealthProblem, int SeverityOfBurden, String EmotionalOrMentalDisorder, String PsychoactiveDrugs, int QualityOfLife, Carer m_Carer) {
+    public CarerAssessment(Integer carer, Timestamp DateOfAssessment, String RelevantHealthProblem, Integer SeverityOfBurden, String EmotionalOrMentalDisorder, String PsychoactiveDrugs, Integer QualityOfLife, Carer m_Carer) {
        this.carer = carer;
        this.DateOfAssessment = DateOfAssessment;
        this.RelevantHealthProblem = RelevantHealthProblem;
@@ -35,18 +34,18 @@ public class CarerAssessment  implements java.io.Serializable {
        this.m_Carer = m_Carer;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getCarer() {
+    public Integer getCarer() {
         return this.carer;
     }
     
-    public void setCarer(int carer) {
+    public void setCarer(Integer carer) {
         this.carer = carer;
     }
     public Timestamp getDateOfAssessment() {
@@ -63,11 +62,11 @@ public class CarerAssessment  implements java.io.Serializable {
     public void setRelevantHealthProblem(String RelevantHealthProblem) {
         this.RelevantHealthProblem = RelevantHealthProblem;
     }
-    public int getSeverityOfBurden() {
+    public Integer getSeverityOfBurden() {
         return this.SeverityOfBurden;
     }
     
-    public void setSeverityOfBurden(int SeverityOfBurden) {
+    public void setSeverityOfBurden(Integer SeverityOfBurden) {
         this.SeverityOfBurden = SeverityOfBurden;
     }
     public String getEmotionalOrMentalDisorder() {
@@ -84,11 +83,11 @@ public class CarerAssessment  implements java.io.Serializable {
     public void setPsychoactiveDrugs(String PsychoactiveDrugs) {
         this.PsychoactiveDrugs = PsychoactiveDrugs;
     }
-    public int getQualityOfLife() {
+    public Integer getQualityOfLife() {
         return this.QualityOfLife;
     }
     
-    public void setQualityOfLife(int QualityOfLife) {
+    public void setQualityOfLife(Integer QualityOfLife) {
         this.QualityOfLife = QualityOfLife;
     }
     public Carer getM_Carer() {

@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -10,18 +9,18 @@ package com.aladdin.xsd;
 public class Communication  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String Type;
      private String Value;
      private String Notes;
-     private boolean IsPrimary;
-     private int persondata;
+     private Boolean IsPrimary;
+     private Integer persondata;
      private PersonData m_PersonData;
 
     public Communication() {
     }
 
-    public Communication(String Type, String Value, String Notes, boolean IsPrimary, int persondata, PersonData m_PersonData) {
+    public Communication(String Type, String Value, String Notes, Boolean IsPrimary, Integer persondata, PersonData m_PersonData) {
        this.Type = Type;
        this.Value = Value;
        this.Notes = Notes;
@@ -30,11 +29,11 @@ public class Communication  implements java.io.Serializable {
        this.m_PersonData = m_PersonData;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getType() {
@@ -58,18 +57,18 @@ public class Communication  implements java.io.Serializable {
     public void setNotes(String Notes) {
         this.Notes = Notes;
     }
-    public boolean isIsPrimary() {
+    public Boolean getIsPrimary() {
         return this.IsPrimary;
     }
     
-    public void setIsPrimary(boolean IsPrimary) {
+    public void setIsPrimary(Boolean IsPrimary) {
         this.IsPrimary = IsPrimary;
     }
-    public int getPersondata() {
+    public Integer getPersondata() {
         return this.persondata;
     }
     
-    public void setPersondata(int persondata) {
+    public void setPersondata(Integer persondata) {
         this.persondata = persondata;
     }
     public PersonData getM_PersonData() {

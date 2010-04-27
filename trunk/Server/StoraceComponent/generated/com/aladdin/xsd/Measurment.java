@@ -1,6 +1,5 @@
 package com.aladdin.xsd;
-// default package
-// Generated Apr 26, 2010 2:06:16 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.math.BigDecimal;
@@ -12,20 +11,20 @@ import java.sql.Timestamp;
 public class Measurment  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String type;
      private BigDecimal value;
      private Timestamp datetime;
      private String units;
      private BigDecimal lowerlimit;
      private BigDecimal upperlimit;
-     private int pa;
+     private Integer pa;
      private PatientAssessment m_PatientAssessment;
 
     public Measurment() {
     }
 
-    public Measurment(String type, BigDecimal value, Timestamp datetime, String units, BigDecimal lowerlimit, BigDecimal upperlimit, int pa, PatientAssessment m_PatientAssessment) {
+    public Measurment(String type, BigDecimal value, Timestamp datetime, String units, BigDecimal lowerlimit, BigDecimal upperlimit, Integer pa, PatientAssessment m_PatientAssessment) {
        this.type = type;
        this.value = value;
        this.datetime = datetime;
@@ -36,11 +35,11 @@ public class Measurment  implements java.io.Serializable {
        this.m_PatientAssessment = m_PatientAssessment;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getType() {
@@ -85,11 +84,11 @@ public class Measurment  implements java.io.Serializable {
     public void setUpperlimit(BigDecimal upperlimit) {
         this.upperlimit = upperlimit;
     }
-    public int getPa() {
+    public Integer getPa() {
         return this.pa;
     }
     
-    public void setPa(int pa) {
+    public void setPa(Integer pa) {
         this.pa = pa;
     }
     public PatientAssessment getM_PatientAssessment() {

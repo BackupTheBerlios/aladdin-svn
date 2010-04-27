@@ -1,6 +1,6 @@
 <service name="StorageComponent" scope="application" targetNamespace="http://fokus.fraunhofer.de/">
     <description>
-        AccessManager
+        StorageComponent
     </description>
     <messageReceivers>
         <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
@@ -8,6 +8,6 @@
         <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
                          class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
-    <schema schemaNamespace="http://fokus.fraunhofer.de/xsd"/>
+    <schema schemaNamespace="http://xsd.aladdin.xsd/xsd"/>
     <parameter name="ServiceClass">com.aladdin.sc.StorageComponent</parameter>
 </service>
