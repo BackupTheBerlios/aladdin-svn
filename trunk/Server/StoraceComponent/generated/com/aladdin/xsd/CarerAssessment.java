@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;

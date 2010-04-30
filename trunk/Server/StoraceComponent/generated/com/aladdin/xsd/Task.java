@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;
@@ -17,6 +17,8 @@ public class Task  implements java.io.Serializable {
      private Integer TaskStatus;
      private String url;
      private Integer questionnaire;
+     private String UserType;
+     private Integer UserId;
      private TaskTypeT m_TaskTypeT;
      private TaskStatusT m_TaskStatusT;
      private Questionnaire m_Questionnaire;
@@ -24,13 +26,15 @@ public class Task  implements java.io.Serializable {
     public Task() {
     }
 
-    public Task(Integer TaskType, Timestamp DateTimeAssigned, Timestamp DateTimeFulfilled, Integer TaskStatus, String url, Integer questionnaire, TaskTypeT m_TaskTypeT, TaskStatusT m_TaskStatusT, Questionnaire m_Questionnaire) {
+    public Task(Integer TaskType, Timestamp DateTimeAssigned, Timestamp DateTimeFulfilled, Integer TaskStatus, String url, Integer questionnaire, String UserType, Integer UserId, TaskTypeT m_TaskTypeT, TaskStatusT m_TaskStatusT, Questionnaire m_Questionnaire) {
        this.TaskType = TaskType;
        this.DateTimeAssigned = DateTimeAssigned;
        this.DateTimeFulfilled = DateTimeFulfilled;
        this.TaskStatus = TaskStatus;
        this.url = url;
        this.questionnaire = questionnaire;
+       this.UserType = UserType;
+       this.UserId = UserId;
        this.m_TaskTypeT = m_TaskTypeT;
        this.m_TaskStatusT = m_TaskStatusT;
        this.m_Questionnaire = m_Questionnaire;
@@ -84,6 +88,20 @@ public class Task  implements java.io.Serializable {
     
     public void setQuestionnaire(Integer questionnaire) {
         this.questionnaire = questionnaire;
+    }
+    public String getUserType() {
+        return this.UserType;
+    }
+    
+    public void setUserType(String UserType) {
+        this.UserType = UserType;
+    }
+    public Integer getUserId() {
+        return this.UserId;
+    }
+    
+    public void setUserId(Integer UserId) {
+        this.UserId = UserId;
     }
     public TaskTypeT getM_TaskTypeT() {
         return this.m_TaskTypeT;

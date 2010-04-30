@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 26, 2010 11:04:41 PM by Hibernate Tools 3.2.4.GA
+// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;
@@ -13,13 +13,17 @@ public class Note  implements java.io.Serializable {
      private Integer id;
      private Timestamp DateTimeOfNote;
      private String text;
+     private String UserType;
+     private String UserId;
 
     public Note() {
     }
 
-    public Note(Timestamp DateTimeOfNote, String text) {
+    public Note(Timestamp DateTimeOfNote, String text, String UserType, String UserId) {
        this.DateTimeOfNote = DateTimeOfNote;
        this.text = text;
+       this.UserType = UserType;
+       this.UserId = UserId;
     }
    
     public Integer getId() {
@@ -42,6 +46,20 @@ public class Note  implements java.io.Serializable {
     
     public void setText(String text) {
         this.text = text;
+    }
+    public String getUserType() {
+        return this.UserType;
+    }
+    
+    public void setUserType(String UserType) {
+        this.UserType = UserType;
+    }
+    public String getUserId() {
+        return this.UserId;
+    }
+    
+    public void setUserId(String UserId) {
+        this.UserId = UserId;
     }
 
 

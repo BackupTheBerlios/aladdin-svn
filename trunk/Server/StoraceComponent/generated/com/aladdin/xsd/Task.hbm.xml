@@ -11,6 +11,8 @@
 <property name="TaskStatus" type="java.lang.Integer"><column name="TaskStatus"/></property>
 <property name="url" type="java.lang.String"><column name="url"/></property>
 <property name="questionnaire" type="java.lang.Integer"><column name="questionnaire"/></property>
+<property name="UserType" type="java.lang.String"><column name="UserType"/></property>
+<property name="UserId" type="java.lang.Integer"><column name="UserId"/></property>
 <many-to-one name="m_TaskTypeT" class="com.aladdin.xsd.TaskTypeT" insert="false" update="false"><column name="TaskType" not-null="false" /></many-to-one>
 <many-to-one name="m_TaskStatusT" class="com.aladdin.xsd.TaskStatusT" insert="false" update="false"><column name="TaskStatus" not-null="false" /></many-to-one>
 <many-to-one name="m_Questionnaire" class="com.aladdin.xsd.Questionnaire" insert="false" update="false"><column name="questionnaire" not-null="false" /></many-to-one>
