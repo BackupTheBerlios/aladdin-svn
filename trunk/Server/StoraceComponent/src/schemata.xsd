@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified" xmlns:Q1="http://aladdin.com/xsd">
     <complexType name="SystemParameter">
     	<sequence>
     		<element name="Code" type="int"></element>
@@ -121,6 +121,7 @@
     	<sequence>
     		<element name="question" type="tns:QuestionnaireQuestion"></element>
     		<element name="value" type="string"></element>
+    		<element name="UserId" type="int"></element>
     	</sequence>
     </complexType>
 
@@ -128,6 +129,8 @@
     	<sequence>
     		<element name="DateTimeOfNote" type="dateTime"></element>
     		<element name="text" type="string"></element>
+    		<element name="UserType" type="string"></element>
+    		<element name="UserId" type="string"></element>
     	</sequence>
     </complexType>
 
@@ -139,6 +142,8 @@
     		<element name="TaskStatus" type="tns:SystemParameter"></element>
     		<element name="url" type="string"></element>
     		<element name="questionnaire" type="tns:Questionnaire"></element>
+    		<element name="UserType" type="string"></element>
+    		<element name="UserId" type="int"></element>
     	</sequence>
     </complexType>
 
@@ -206,7 +211,7 @@
     	</sequence>
     </complexType>
 
-    <complexType name="Measurment">
+    <complexType name="Measurement">
     	<sequence>
     		<element name="type" type="string"></element>
     		<element name="value" type="decimal"></element>
@@ -214,7 +219,8 @@
     		<element name="units" type="string"></element>
     		<element name="lowerlimit" type="decimal"></element>
     		<element name="upperlimit" type="decimal"></element>
-    		<element name="pa" type="tns:PatientAssessment"></element>
+    		<element name="patient" type="tns:PatientAssessment"></element>
     	</sequence>
     </complexType>
+
 </schema>
