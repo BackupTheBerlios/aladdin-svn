@@ -15,9 +15,24 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Content="My tasks" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MyTasksPage" />
+        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MyTasksPage">
+            <StackPanel>
+                <TextBlock>My tasks</TextBlock>
+                <Image Source="../Resources/Images/Tasks.png" Height="64" />
+            </StackPanel>
+        </Button>
         <Button Grid.Row="0" Grid.Column="1" Content="Social network" Style="{StaticResource LargeButton}" />
-        <Button Grid.Row="1" Grid.Column="0" Content="Contact us" Style="{StaticResource LargeButton}" />
-        <Button Grid.Row="1" Grid.Column="1" Content="Aladdin TV" Style="{StaticResource LargeButton}" />
+        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource LargeButton}">
+            <StackPanel>
+                <TextBlock>Contact us</TextBlock>
+                <Image Source="../Resources/Images/ContactUs.png" Height="64" />
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource LargeButton}">
+            <StackPanel>
+                <TextBlock>Aladdin TV</TextBlock>
+                <Image Source="../Resources/Images/TV.png" Height="64" />
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>
