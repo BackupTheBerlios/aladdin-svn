@@ -80,6 +80,28 @@ namespace Aladdin.ClientApplication.ViewModels
             }
         }
 
+        VideoPage _VideoPage;
+        VideoPage VideoPage
+        {
+            get
+            {
+                if (_VideoPage == null)
+                    _VideoPage = new VideoPage();
+                return _VideoPage;
+            }
+        }
+
+        ContactUsPage _ContactUsPage;
+        ContactUsPage ContactUsPage
+        {
+            get
+            {
+                if (_ContactUsPage == null)
+                    _ContactUsPage = new ContactUsPage();
+                return _ContactUsPage;
+            }
+        }
+
         public MainWindowViewModel()
         {
             this.ActivePage = this.StartPage;
@@ -104,6 +126,12 @@ namespace Aladdin.ClientApplication.ViewModels
                         break;
                     case "MeasureWeightBloodPage":
                         page = this.MeasureWeightBloodPage;
+                        break;
+                    case "VideoPage":
+                        page = this.VideoPage;
+                        break;
+                    case "ContactUsPage":
+                        page = this.ContactUsPage;
                         break;
                     default:
                         break;

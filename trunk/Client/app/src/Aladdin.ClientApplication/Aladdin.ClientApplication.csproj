@@ -44,6 +44,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WpfYoutubePlayer">
+      <HintPath>..\..\libs\WpfYoutubePlayer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -51,6 +54,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppCommands.cs" />
+    <Compile Include="Controls\ContactUsPage.xaml.cs">
+      <DependentUpon>ContactUsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LastWizardPage.xaml.cs">
       <DependentUpon>LastWizardPage.xaml</DependentUpon>
     </Compile>
@@ -63,6 +69,9 @@
     <Compile Include="Controls\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VideoPage.xaml.cs">
+      <DependentUpon>VideoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QuestionnaireWizard.cs" />
     <Page Include="Controls\ChooseOneAnswerFrom2Control.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +80,10 @@
     <Page Include="Controls\ChooseOneAnswerFromManyControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ContactUsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LastWizardPage.xaml">
       <SubType>Designer</SubType>
@@ -88,6 +101,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\VideoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\WizardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +114,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DefaultStyle\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DefaultStyle\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DefaultStyle\ComboBoxItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,14 +199,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\clock.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\ContactUs.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\TV.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Tasks.png" />
+    <Resource Include="Resources\Images\TV.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
