@@ -64,6 +64,11 @@ namespace Aladdin.ClientApplication
             QuestionnaireAnswer answer = this.Answers.GetAnswer(this.ActiveQuestion.ID);
             if (answer != null)
             {
+                //remove all subquestions
+                this.Questions.RemoveAll(qq => this.ActiveQuestion.ID.Equals(qq.ParentQuestionnaireQuestionID));
+
+                //and then add them if the condition is met
+                
                 int added = 0;
                 foreach (QuestionnaireQuestion question in this.ActiveQuestion.Questions)
                 {
@@ -95,8 +100,7 @@ namespace Aladdin.ClientApplication
 
         public bool CanMoveBack()
         {
-            return false;//προς το παρόν το απενεργοποιούμε
-            //return this.ActiveQuestionIndex > 0;
+            return this.ActiveQuestionIndex > 0;
         }
 
         public bool IsQuestionnaireFinished

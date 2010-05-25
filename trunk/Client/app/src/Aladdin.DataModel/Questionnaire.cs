@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace Aladdin.DataModel
 {
-    [System.Serializable()]
+    [Serializable()]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "questionnaire", Namespace = "", IsNullable = false)]
     public partial class Questionnaire
@@ -26,16 +27,22 @@ namespace Aladdin.DataModel
             {
                 q = ser.Deserialize(stream) as Questionnaire;
             }
+            foreach (QuestionnaireQuestion qq in q.Questions)
+                qq.FixChildrenParentID();
+
             return q;
         }
     }
 
-    [System.Serializable()]
+    [Serializable()]
     [XmlType(AnonymousType = true)]
     public partial class QuestionnaireQuestion
     {
         [XmlAttribute(AttributeName = "id")]
         public string ID { get; set; }
+
+        [XmlIgnore]
+        public string ParentQuestionnaireQuestionID { get; private set; }
 
         [XmlAttribute(AttributeName = "type")]
         public QuestionnaireQuestionAnswerType QuestionType { get; set; }
@@ -66,6 +73,15 @@ namespace Aladdin.DataModel
             this.ID = id;
             this.Title = title;
             this.QuestionType = type;
+        }
+
+        internal void FixChildrenParentID()
+        {
+            foreach (QuestionnaireQuestion qq in this.Questions)
+            {
+                qq.ParentQuestionnaireQuestionID = this.ID;
+                qq.FixChildrenParentID();
+            }
         }
     }
 
