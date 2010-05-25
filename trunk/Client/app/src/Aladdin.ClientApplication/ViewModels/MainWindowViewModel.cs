@@ -69,6 +69,17 @@ namespace Aladdin.ClientApplication.ViewModels
             }
         }
 
+        MeasureWeightBloodPage _MeasureWeightBloodPage;
+        MeasureWeightBloodPage MeasureWeightBloodPage
+        {
+            get
+            {
+                if (_MeasureWeightBloodPage == null)
+                    _MeasureWeightBloodPage = new MeasureWeightBloodPage();
+                return _MeasureWeightBloodPage;
+            }
+        }
+
         public MainWindowViewModel()
         {
             this.ActivePage = this.StartPage;
@@ -90,6 +101,9 @@ namespace Aladdin.ClientApplication.ViewModels
                         break;
                     case "StartPage":
                         page = this.StartPage;
+                        break;
+                    case "MeasureWeightBloodPage":
+                        page = this.MeasureWeightBloodPage;
                         break;
                     default:
                         break;

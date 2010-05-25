@@ -32,7 +32,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Style="{StaticResource QuestionnaireButton}" HorizontalAlignment="Left" Content="Back" Command="local:AppCommands.QuetionnaireMoveBackCommand" />
-            <Button Grid.Column="1" Style="{StaticResource QuestionnaireButton}" HorizontalAlignment="Right" Content="Next" Command="local:AppCommands.QuetionnaireMoveNextCommand" Visibility="{Binding QuestionSummaryVisibility}" />
+            <Button Grid.Column="1" Style="{StaticResource QuestionnaireButton}" HorizontalAlignment="Right" Content="Next" IsDefault="True" Command="local:AppCommands.QuetionnaireMoveNextCommand" Visibility="{Binding QuestionSummaryVisibility}" />
         </Grid>
     </Grid>
 </UserControl>

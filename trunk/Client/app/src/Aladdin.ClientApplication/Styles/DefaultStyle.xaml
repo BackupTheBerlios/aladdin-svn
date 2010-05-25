@@ -4,6 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DefaultStyle/Button.xaml"/>
         <ResourceDictionary Source="DefaultStyle/TextBlock.xaml"/>
+        <ResourceDictionary Source="DefaultStyle/TextBox.xaml"/>
         <ResourceDictionary Source="DefaultStyle/Menu.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 

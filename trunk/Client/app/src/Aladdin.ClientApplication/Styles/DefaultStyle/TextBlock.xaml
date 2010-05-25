@@ -17,6 +17,13 @@
         <Setter Property="TextAlignment" Value="Center"/>
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{x:Null}" x:Key="Title">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+    </Style>
+
     <Style TargetType="{x:Type TextBlock}" BasedOn="{x:Null}" x:Key="QuetionnaireQuestionNumber">
         <Setter Property="FontSize" Value="24"/>
     </Style>

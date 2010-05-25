@@ -1,0 +1,38 @@
+﻿<UserControl 
+    x:Class="Aladdin.ClientApplication.Controls.MeasureWeightBloodPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" MaxWidth="800">
+    <Grid HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource Heading1}" MaxWidth="800" TextWrapping="Wrap">Please, measure patient's weight and blood preasure, and type here the results:</TextBlock>
+        
+        <TextBlock Grid.Row="1" Style="{StaticResource Title}">Weight:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" />
+
+        <TextBlock Grid.Row="2" Style="{StaticResource Title}">Blood pressure:</TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock MinWidth="150" Style="{StaticResource Title}">Min:</TextBlock>
+            <TextBox MinWidth="200" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock MinWidth="150" Style="{StaticResource Title}">Max:</TextBlock>
+            <TextBox MinWidth="200" />
+        </StackPanel>
+
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource LargeButton}" IsDefault="True">Submit</Button>
+    </Grid>
+</UserControl>

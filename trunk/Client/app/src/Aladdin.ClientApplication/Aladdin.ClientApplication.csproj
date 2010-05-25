@@ -54,6 +54,9 @@
     <Compile Include="Controls\LastWizardPage.xaml.cs">
       <DependentUpon>LastWizardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MeasureWeightBloodPage.xaml.cs">
+      <DependentUpon>MeasureWeightBloodPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MyTasksPage.xaml.cs">
       <DependentUpon>MyTasksPage.xaml</DependentUpon>
     </Compile>
@@ -70,6 +73,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\LastWizardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MeasureWeightBloodPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\DefaultStyle\TextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DefaultStyle\TextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

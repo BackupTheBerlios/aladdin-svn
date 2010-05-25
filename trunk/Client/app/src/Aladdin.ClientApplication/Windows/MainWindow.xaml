@@ -24,10 +24,8 @@
                 <CommandBinding Command="{x:Static local:AppCommands.MoveToPageCommand}" Executed="MoveToPage_Executed" />
                 <CommandBinding Command="{x:Static local:AppCommands.ExitApplicationCommand}" Executed="CommandBinding_Executed" />
             </Menu.CommandBindings>
-            <MenuItem Header="File">
-                <MenuItem Header="Home" Command="local:AppCommands.MoveToPageCommand" CommandParameter="StartPage" />
-                <MenuItem Header="Exit" x:Name="ExitMenu" Command="local:AppCommands.ExitApplicationCommand" />
-            </MenuItem>
+            <MenuItem Header="Home" Command="local:AppCommands.MoveToPageCommand" CommandParameter="StartPage" />
+            <MenuItem Header="Exit" x:Name="ExitMenu" Command="local:AppCommands.ExitApplicationCommand" />
         </Menu>
         <ContentPresenter Grid.Row="1" Content="{Binding ActivePage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <Grid Grid.Row="2">
