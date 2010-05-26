@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.math.BigDecimal;
@@ -39,14 +39,14 @@ public class PatientAssessment  implements java.io.Serializable {
      private Boolean Immobility;
      private Boolean SensorialDeficits;
      private String PharmacologyTreatment;
-     private Patient m_Patient;
-     private AetologyT m_AetologyT;
+     private Patient m_Patientpatient;
+     private AetologyT m_AetologyTAetology;
      private Set Measurements = new HashSet(0);
 
     public PatientAssessment() {
     }
 
-    public PatientAssessment(Integer patient, Timestamp DateOfAssessment, Integer Aetology, Integer TimeElapsedSinceDiagnose, Integer Severity, String RelevantPathologyAntecedents, String Comorbidity, Integer CharlsonComobodityIndex, Integer BarthelIndex, Integer LawtonIndex, Integer MMSE, Integer MDRS, BigDecimal BlessedScalePart1, Integer BlessedScalePart2, Integer BlessedScalePart3, Integer ChecklistMBPC, Integer NPQISeverity, Integer NPQIStress, Integer GDS, Boolean Falls, Boolean Incontinence, Boolean Delirium, Boolean Immobility, Boolean SensorialDeficits, String PharmacologyTreatment, Patient m_Patient, AetologyT m_AetologyT, Set Measurements) {
+    public PatientAssessment(Integer patient, Timestamp DateOfAssessment, Integer Aetology, Integer TimeElapsedSinceDiagnose, Integer Severity, String RelevantPathologyAntecedents, String Comorbidity, Integer CharlsonComobodityIndex, Integer BarthelIndex, Integer LawtonIndex, Integer MMSE, Integer MDRS, BigDecimal BlessedScalePart1, Integer BlessedScalePart2, Integer BlessedScalePart3, Integer ChecklistMBPC, Integer NPQISeverity, Integer NPQIStress, Integer GDS, Boolean Falls, Boolean Incontinence, Boolean Delirium, Boolean Immobility, Boolean SensorialDeficits, String PharmacologyTreatment, Patient m_Patientpatient, AetologyT m_AetologyTAetology, Set Measurements) {
        this.patient = patient;
        this.DateOfAssessment = DateOfAssessment;
        this.Aetology = Aetology;
@@ -72,8 +72,8 @@ public class PatientAssessment  implements java.io.Serializable {
        this.Immobility = Immobility;
        this.SensorialDeficits = SensorialDeficits;
        this.PharmacologyTreatment = PharmacologyTreatment;
-       this.m_Patient = m_Patient;
-       this.m_AetologyT = m_AetologyT;
+       this.m_Patientpatient = m_Patientpatient;
+       this.m_AetologyTAetology = m_AetologyTAetology;
        this.Measurements = Measurements;
     }
    
@@ -259,19 +259,19 @@ public class PatientAssessment  implements java.io.Serializable {
     public void setPharmacologyTreatment(String PharmacologyTreatment) {
         this.PharmacologyTreatment = PharmacologyTreatment;
     }
-    public Patient getM_Patient() {
-        return this.m_Patient;
+    public Patient getM_Patientpatient() {
+        return this.m_Patientpatient;
     }
     
-    public void setM_Patient(Patient m_Patient) {
-        this.m_Patient = m_Patient;
+    public void setM_Patientpatient(Patient m_Patientpatient) {
+        this.m_Patientpatient = m_Patientpatient;
     }
-    public AetologyT getM_AetologyT() {
-        return this.m_AetologyT;
+    public AetologyT getM_AetologyTAetology() {
+        return this.m_AetologyTAetology;
     }
     
-    public void setM_AetologyT(AetologyT m_AetologyT) {
-        this.m_AetologyT = m_AetologyT;
+    public void setM_AetologyTAetology(AetologyT m_AetologyTAetology) {
+        this.m_AetologyTAetology = m_AetologyTAetology;
     }
     public Set getMeasurements() {
         return this.Measurements;

@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -12,14 +12,14 @@ public class TaskStatusT  implements java.io.Serializable {
 
 
      private Integer id;
-     private Integer Code;
+     private String Code;
      private String Description;
      private Set Tasks = new HashSet(0);
 
     public TaskStatusT() {
     }
 
-    public TaskStatusT(Integer Code, String Description, Set Tasks) {
+    public TaskStatusT(String Code, String Description, Set Tasks) {
        this.Code = Code;
        this.Description = Description;
        this.Tasks = Tasks;
@@ -32,11 +32,11 @@ public class TaskStatusT  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getCode() {
+    public String getCode() {
         return this.Code;
     }
     
-    public void setCode(Integer Code) {
+    public void setCode(String Code) {
         this.Code = Code;
     }
     public String getDescription() {

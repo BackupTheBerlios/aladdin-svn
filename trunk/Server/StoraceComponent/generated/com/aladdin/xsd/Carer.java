@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -14,21 +14,23 @@ public class Carer  implements java.io.Serializable {
      private Integer id;
      private Integer persondata;
      private Integer sd;
-     private PersonData m_PersonData;
-     private SocioDemographicData m_SocioDemographicData;
-     private Set CarerAssessments = new HashSet(0);
-     private Set PatientCarers = new HashSet(0);
+     private PersonData m_PersonDatapersondata;
+     private SocioDemographicData m_SocioDemographicDatasd;
+     private Set Notes = new HashSet(0);
+     private Set CarerAssessments1 = new HashSet(0);
+     private Set PatientCarers11 = new HashSet(0);
 
     public Carer() {
     }
 
-    public Carer(Integer persondata, Integer sd, PersonData m_PersonData, SocioDemographicData m_SocioDemographicData, Set CarerAssessments, Set PatientCarers) {
+    public Carer(Integer persondata, Integer sd, PersonData m_PersonDatapersondata, SocioDemographicData m_SocioDemographicDatasd, Set Notes, Set CarerAssessments1, Set PatientCarers11) {
        this.persondata = persondata;
        this.sd = sd;
-       this.m_PersonData = m_PersonData;
-       this.m_SocioDemographicData = m_SocioDemographicData;
-       this.CarerAssessments = CarerAssessments;
-       this.PatientCarers = PatientCarers;
+       this.m_PersonDatapersondata = m_PersonDatapersondata;
+       this.m_SocioDemographicDatasd = m_SocioDemographicDatasd;
+       this.Notes = Notes;
+       this.CarerAssessments1 = CarerAssessments1;
+       this.PatientCarers11 = PatientCarers11;
     }
    
     public Integer getId() {
@@ -52,33 +54,40 @@ public class Carer  implements java.io.Serializable {
     public void setSd(Integer sd) {
         this.sd = sd;
     }
-    public PersonData getM_PersonData() {
-        return this.m_PersonData;
+    public PersonData getM_PersonDatapersondata() {
+        return this.m_PersonDatapersondata;
     }
     
-    public void setM_PersonData(PersonData m_PersonData) {
-        this.m_PersonData = m_PersonData;
+    public void setM_PersonDatapersondata(PersonData m_PersonDatapersondata) {
+        this.m_PersonDatapersondata = m_PersonDatapersondata;
     }
-    public SocioDemographicData getM_SocioDemographicData() {
-        return this.m_SocioDemographicData;
-    }
-    
-    public void setM_SocioDemographicData(SocioDemographicData m_SocioDemographicData) {
-        this.m_SocioDemographicData = m_SocioDemographicData;
-    }
-    public Set getCarerAssessments() {
-        return this.CarerAssessments;
+    public SocioDemographicData getM_SocioDemographicDatasd() {
+        return this.m_SocioDemographicDatasd;
     }
     
-    public void setCarerAssessments(Set CarerAssessments) {
-        this.CarerAssessments = CarerAssessments;
+    public void setM_SocioDemographicDatasd(SocioDemographicData m_SocioDemographicDatasd) {
+        this.m_SocioDemographicDatasd = m_SocioDemographicDatasd;
     }
-    public Set getPatientCarers() {
-        return this.PatientCarers;
+    public Set getNotes() {
+        return this.Notes;
     }
     
-    public void setPatientCarers(Set PatientCarers) {
-        this.PatientCarers = PatientCarers;
+    public void setNotes(Set Notes) {
+        this.Notes = Notes;
+    }
+    public Set getCarerAssessments1() {
+        return this.CarerAssessments1;
+    }
+    
+    public void setCarerAssessments1(Set CarerAssessments1) {
+        this.CarerAssessments1 = CarerAssessments1;
+    }
+    public Set getPatientCarers11() {
+        return this.PatientCarers11;
+    }
+    
+    public void setPatientCarers11(Set PatientCarers11) {
+        this.PatientCarers11 = PatientCarers11;
     }
 
 

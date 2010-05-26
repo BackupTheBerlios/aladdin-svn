@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -13,18 +13,18 @@ public class PatientCarer  implements java.io.Serializable {
      private Integer patient;
      private Integer carer;
      private Boolean isprimary;
-     private Patient m_Patient;
-     private Carer m_Carer;
+     private Patient m_Patientpatient;
+     private Carer m_Carercarer;
 
     public PatientCarer() {
     }
 
-    public PatientCarer(Integer patient, Integer carer, Boolean isprimary, Patient m_Patient, Carer m_Carer) {
+    public PatientCarer(Integer patient, Integer carer, Boolean isprimary, Patient m_Patientpatient, Carer m_Carercarer) {
        this.patient = patient;
        this.carer = carer;
        this.isprimary = isprimary;
-       this.m_Patient = m_Patient;
-       this.m_Carer = m_Carer;
+       this.m_Patientpatient = m_Patientpatient;
+       this.m_Carercarer = m_Carercarer;
     }
    
     public Integer getId() {
@@ -55,19 +55,19 @@ public class PatientCarer  implements java.io.Serializable {
     public void setIsprimary(Boolean isprimary) {
         this.isprimary = isprimary;
     }
-    public Patient getM_Patient() {
-        return this.m_Patient;
+    public Patient getM_Patientpatient() {
+        return this.m_Patientpatient;
     }
     
-    public void setM_Patient(Patient m_Patient) {
-        this.m_Patient = m_Patient;
+    public void setM_Patientpatient(Patient m_Patientpatient) {
+        this.m_Patientpatient = m_Patientpatient;
     }
-    public Carer getM_Carer() {
-        return this.m_Carer;
+    public Carer getM_Carercarer() {
+        return this.m_Carercarer;
     }
     
-    public void setM_Carer(Carer m_Carer) {
-        this.m_Carer = m_Carer;
+    public void setM_Carercarer(Carer m_Carercarer) {
+        this.m_Carercarer = m_Carercarer;
     }
 
 

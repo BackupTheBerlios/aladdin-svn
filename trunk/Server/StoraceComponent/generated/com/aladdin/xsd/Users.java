@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -15,18 +15,22 @@ public class Users  implements java.io.Serializable {
      private String login;
      private String password;
      private Integer type;
-     private typeT m_typeT;
-     private Set Rightss = new HashSet(0);
+     private String personId;
+     private typeT m_typeTtype;
+     private Set Tasks = new HashSet(0);
+     private Set Tasks1 = new HashSet(0);
 
     public Users() {
     }
 
-    public Users(String login, String password, Integer type, typeT m_typeT, Set Rightss) {
+    public Users(String login, String password, Integer type, String personId, typeT m_typeTtype, Set Tasks, Set Tasks1) {
        this.login = login;
        this.password = password;
        this.type = type;
-       this.m_typeT = m_typeT;
-       this.Rightss = Rightss;
+       this.personId = personId;
+       this.m_typeTtype = m_typeTtype;
+       this.Tasks = Tasks;
+       this.Tasks1 = Tasks1;
     }
    
     public Integer getId() {
@@ -57,19 +61,33 @@ public class Users  implements java.io.Serializable {
     public void setType(Integer type) {
         this.type = type;
     }
-    public typeT getM_typeT() {
-        return this.m_typeT;
+    public String getPersonId() {
+        return this.personId;
     }
     
-    public void setM_typeT(typeT m_typeT) {
-        this.m_typeT = m_typeT;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
-    public Set getRightss() {
-        return this.Rightss;
+    public typeT getM_typeTtype() {
+        return this.m_typeTtype;
     }
     
-    public void setRightss(Set Rightss) {
-        this.Rightss = Rightss;
+    public void setM_typeTtype(typeT m_typeTtype) {
+        this.m_typeTtype = m_typeTtype;
+    }
+    public Set getTasks() {
+        return this.Tasks;
+    }
+    
+    public void setTasks(Set Tasks) {
+        this.Tasks = Tasks;
+    }
+    public Set getTasks1() {
+        return this.Tasks1;
+    }
+    
+    public void setTasks1(Set Tasks1) {
+        this.Tasks1 = Tasks1;
     }
 
 

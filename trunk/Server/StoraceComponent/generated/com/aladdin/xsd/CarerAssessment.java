@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;
@@ -18,12 +18,12 @@ public class CarerAssessment  implements java.io.Serializable {
      private String EmotionalOrMentalDisorder;
      private String PsychoactiveDrugs;
      private Integer QualityOfLife;
-     private Carer m_Carer;
+     private Carer m_Carercarer;
 
     public CarerAssessment() {
     }
 
-    public CarerAssessment(Integer carer, Timestamp DateOfAssessment, String RelevantHealthProblem, Integer SeverityOfBurden, String EmotionalOrMentalDisorder, String PsychoactiveDrugs, Integer QualityOfLife, Carer m_Carer) {
+    public CarerAssessment(Integer carer, Timestamp DateOfAssessment, String RelevantHealthProblem, Integer SeverityOfBurden, String EmotionalOrMentalDisorder, String PsychoactiveDrugs, Integer QualityOfLife, Carer m_Carercarer) {
        this.carer = carer;
        this.DateOfAssessment = DateOfAssessment;
        this.RelevantHealthProblem = RelevantHealthProblem;
@@ -31,7 +31,7 @@ public class CarerAssessment  implements java.io.Serializable {
        this.EmotionalOrMentalDisorder = EmotionalOrMentalDisorder;
        this.PsychoactiveDrugs = PsychoactiveDrugs;
        this.QualityOfLife = QualityOfLife;
-       this.m_Carer = m_Carer;
+       this.m_Carercarer = m_Carercarer;
     }
    
     public Integer getId() {
@@ -90,12 +90,12 @@ public class CarerAssessment  implements java.io.Serializable {
     public void setQualityOfLife(Integer QualityOfLife) {
         this.QualityOfLife = QualityOfLife;
     }
-    public Carer getM_Carer() {
-        return this.m_Carer;
+    public Carer getM_Carercarer() {
+        return this.m_Carercarer;
     }
     
-    public void setM_Carer(Carer m_Carer) {
-        this.m_Carer = m_Carer;
+    public void setM_Carercarer(Carer m_Carercarer) {
+        this.m_Carercarer = m_Carercarer;
     }
 
 

@@ -8,8 +8,10 @@
 <property name="login" type="java.lang.String"><column name="login"/></property>
 <property name="password" type="java.lang.String"><column name="password"/></property>
 <property name="type" type="java.lang.Integer"><column name="type"/></property>
-<many-to-one name="m_typeT" class="com.aladdin.xsd.typeT" insert="false" update="false"><column name="type" not-null="false" /></many-to-one>
-<set name="Rightss" inverse="true" cascade="none"><key><column name="usr" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Rights"/></set>
+<property name="personId" type="java.lang.String"><column name="personId"/></property>
+<many-to-one name="m_typeTtype" class="com.aladdin.xsd.typeT" insert="false" update="false"><column name="type" not-null="false" /></many-to-one>
+<set name="Tasks" inverse="true" cascade="none"><key><column name="Executor" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Task"/></set>
+<set name="Tasks1" inverse="true" cascade="none"><key><column name="Assigner" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Task"/></set>
 </class>
 </hibernate-mapping>
 

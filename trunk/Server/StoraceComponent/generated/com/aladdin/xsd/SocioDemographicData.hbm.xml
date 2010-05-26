@@ -10,11 +10,11 @@
 <property name="MaritalStatus" type="java.lang.Integer"><column name="MaritalStatus"/></property>
 <property name="Children" type="java.lang.Integer"><column name="Children"/></property>
 <property name="LivingWith" type="java.lang.Integer"><column name="LivingWith"/></property>
-<many-to-one name="m_GenderT" class="com.aladdin.xsd.GenderT" insert="false" update="false"><column name="Gender" not-null="false" /></many-to-one>
-<many-to-one name="m_MaritalStatusT" class="com.aladdin.xsd.MaritalStatusT" insert="false" update="false"><column name="MaritalStatus" not-null="false" /></many-to-one>
-<many-to-one name="m_LivingWithT" class="com.aladdin.xsd.LivingWithT" insert="false" update="false"><column name="LivingWith" not-null="false" /></many-to-one>
+<many-to-one name="m_GenderTGender" class="com.aladdin.xsd.GenderT" insert="false" update="false"><column name="Gender" not-null="false" /></many-to-one>
+<many-to-one name="m_MaritalStatusTMaritalStatus" class="com.aladdin.xsd.MaritalStatusT" insert="false" update="false"><column name="MaritalStatus" not-null="false" /></many-to-one>
+<many-to-one name="m_LivingWithTLivingWith" class="com.aladdin.xsd.LivingWithT" insert="false" update="false"><column name="LivingWith" not-null="false" /></many-to-one>
 <set name="Carers" inverse="true" cascade="none"><key><column name="sd" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Carer"/></set>
-<set name="Patients" inverse="true" cascade="none"><key><column name="sd" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Patient"/></set>
+<set name="Patients1" inverse="true" cascade="none"><key><column name="sd" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Patient"/></set>
 </class>
 </hibernate-mapping>
 

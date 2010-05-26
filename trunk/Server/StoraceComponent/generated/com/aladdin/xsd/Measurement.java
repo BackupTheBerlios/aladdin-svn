@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.math.BigDecimal;
@@ -19,12 +19,14 @@ public class Measurement  implements java.io.Serializable {
      private BigDecimal lowerlimit;
      private BigDecimal upperlimit;
      private Integer patient;
-     private PatientAssessment m_PatientAssessment;
+     private Integer task;
+     private PatientAssessment m_PatientAssessmentpatient;
+     private Task m_Tasktask;
 
     public Measurement() {
     }
 
-    public Measurement(String type, BigDecimal value, Timestamp datetime, String units, BigDecimal lowerlimit, BigDecimal upperlimit, Integer patient, PatientAssessment m_PatientAssessment) {
+    public Measurement(String type, BigDecimal value, Timestamp datetime, String units, BigDecimal lowerlimit, BigDecimal upperlimit, Integer patient, Integer task, PatientAssessment m_PatientAssessmentpatient, Task m_Tasktask) {
        this.type = type;
        this.value = value;
        this.datetime = datetime;
@@ -32,7 +34,9 @@ public class Measurement  implements java.io.Serializable {
        this.lowerlimit = lowerlimit;
        this.upperlimit = upperlimit;
        this.patient = patient;
-       this.m_PatientAssessment = m_PatientAssessment;
+       this.task = task;
+       this.m_PatientAssessmentpatient = m_PatientAssessmentpatient;
+       this.m_Tasktask = m_Tasktask;
     }
    
     public Integer getId() {
@@ -91,12 +95,26 @@ public class Measurement  implements java.io.Serializable {
     public void setPatient(Integer patient) {
         this.patient = patient;
     }
-    public PatientAssessment getM_PatientAssessment() {
-        return this.m_PatientAssessment;
+    public Integer getTask() {
+        return this.task;
     }
     
-    public void setM_PatientAssessment(PatientAssessment m_PatientAssessment) {
-        this.m_PatientAssessment = m_PatientAssessment;
+    public void setTask(Integer task) {
+        this.task = task;
+    }
+    public PatientAssessment getM_PatientAssessmentpatient() {
+        return this.m_PatientAssessmentpatient;
+    }
+    
+    public void setM_PatientAssessmentpatient(PatientAssessment m_PatientAssessmentpatient) {
+        this.m_PatientAssessmentpatient = m_PatientAssessmentpatient;
+    }
+    public Task getM_Tasktask() {
+        return this.m_Tasktask;
+    }
+    
+    public void setM_Tasktask(Task m_Tasktask) {
+        this.m_Tasktask = m_Tasktask;
     }
 
 

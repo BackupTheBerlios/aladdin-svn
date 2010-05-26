@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -18,25 +18,27 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
      private Integer parentid;
      private String title;
      private Integer quest;
-     private QuestionnaireQuestion m_QuestionnaireQuestion;
-     private Questionnaire m_Questionnaire;
+     private Integer condition;
+     private QuestionnaireQuestion m_QuestionnaireQuestionparentid;
+     private Questionnaire m_Questionnairequest;
      private Set QuestionnaireQuestionAnswers = new HashSet(0);
-     private Set QuestionnaireAnswers = new HashSet(0);
+     private Set QuestionnaireAnswers1 = new HashSet(0);
 
     public QuestionnaireQuestion() {
     }
 
-    public QuestionnaireQuestion(String type, Boolean isPrimary, Boolean subquetsions, Integer parentid, String title, Integer quest, QuestionnaireQuestion m_QuestionnaireQuestion, Questionnaire m_Questionnaire, Set QuestionnaireQuestionAnswers, Set QuestionnaireAnswers) {
+    public QuestionnaireQuestion(String type, Boolean isPrimary, Boolean subquetsions, Integer parentid, String title, Integer quest, Integer condition, QuestionnaireQuestion m_QuestionnaireQuestionparentid, Questionnaire m_Questionnairequest, Set QuestionnaireQuestionAnswers, Set QuestionnaireAnswers1) {
        this.type = type;
        this.isPrimary = isPrimary;
        this.subquetsions = subquetsions;
        this.parentid = parentid;
        this.title = title;
        this.quest = quest;
-       this.m_QuestionnaireQuestion = m_QuestionnaireQuestion;
-       this.m_Questionnaire = m_Questionnaire;
+       this.condition = condition;
+       this.m_QuestionnaireQuestionparentid = m_QuestionnaireQuestionparentid;
+       this.m_Questionnairequest = m_Questionnairequest;
        this.QuestionnaireQuestionAnswers = QuestionnaireQuestionAnswers;
-       this.QuestionnaireAnswers = QuestionnaireAnswers;
+       this.QuestionnaireAnswers1 = QuestionnaireAnswers1;
     }
    
     public Integer getId() {
@@ -88,19 +90,26 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
     public void setQuest(Integer quest) {
         this.quest = quest;
     }
-    public QuestionnaireQuestion getM_QuestionnaireQuestion() {
-        return this.m_QuestionnaireQuestion;
+    public Integer getCondition() {
+        return this.condition;
     }
     
-    public void setM_QuestionnaireQuestion(QuestionnaireQuestion m_QuestionnaireQuestion) {
-        this.m_QuestionnaireQuestion = m_QuestionnaireQuestion;
+    public void setCondition(Integer condition) {
+        this.condition = condition;
     }
-    public Questionnaire getM_Questionnaire() {
-        return this.m_Questionnaire;
+    public QuestionnaireQuestion getM_QuestionnaireQuestionparentid() {
+        return this.m_QuestionnaireQuestionparentid;
     }
     
-    public void setM_Questionnaire(Questionnaire m_Questionnaire) {
-        this.m_Questionnaire = m_Questionnaire;
+    public void setM_QuestionnaireQuestionparentid(QuestionnaireQuestion m_QuestionnaireQuestionparentid) {
+        this.m_QuestionnaireQuestionparentid = m_QuestionnaireQuestionparentid;
+    }
+    public Questionnaire getM_Questionnairequest() {
+        return this.m_Questionnairequest;
+    }
+    
+    public void setM_Questionnairequest(Questionnaire m_Questionnairequest) {
+        this.m_Questionnairequest = m_Questionnairequest;
     }
     public Set getQuestionnaireQuestionAnswers() {
         return this.QuestionnaireQuestionAnswers;
@@ -109,12 +118,12 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
     public void setQuestionnaireQuestionAnswers(Set QuestionnaireQuestionAnswers) {
         this.QuestionnaireQuestionAnswers = QuestionnaireQuestionAnswers;
     }
-    public Set getQuestionnaireAnswers() {
-        return this.QuestionnaireAnswers;
+    public Set getQuestionnaireAnswers1() {
+        return this.QuestionnaireAnswers1;
     }
     
-    public void setQuestionnaireAnswers(Set QuestionnaireAnswers) {
-        this.QuestionnaireAnswers = QuestionnaireAnswers;
+    public void setQuestionnaireAnswers1(Set QuestionnaireAnswers1) {
+        this.QuestionnaireAnswers1 = QuestionnaireAnswers1;
     }
 
 

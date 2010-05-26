@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -13,16 +13,16 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable {
      private Integer value;
      private String description;
      private Integer question;
-     private QuestionnaireQuestion m_QuestionnaireQuestion;
+     private QuestionnaireQuestion m_QuestionnaireQuestionquestion;
 
     public QuestionnaireQuestionAnswer() {
     }
 
-    public QuestionnaireQuestionAnswer(Integer value, String description, Integer question, QuestionnaireQuestion m_QuestionnaireQuestion) {
+    public QuestionnaireQuestionAnswer(Integer value, String description, Integer question, QuestionnaireQuestion m_QuestionnaireQuestionquestion) {
        this.value = value;
        this.description = description;
        this.question = question;
-       this.m_QuestionnaireQuestion = m_QuestionnaireQuestion;
+       this.m_QuestionnaireQuestionquestion = m_QuestionnaireQuestionquestion;
     }
    
     public Integer getId() {
@@ -53,12 +53,12 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable {
     public void setQuestion(Integer question) {
         this.question = question;
     }
-    public QuestionnaireQuestion getM_QuestionnaireQuestion() {
-        return this.m_QuestionnaireQuestion;
+    public QuestionnaireQuestion getM_QuestionnaireQuestionquestion() {
+        return this.m_QuestionnaireQuestionquestion;
     }
     
-    public void setM_QuestionnaireQuestion(QuestionnaireQuestion m_QuestionnaireQuestion) {
-        this.m_QuestionnaireQuestion = m_QuestionnaireQuestion;
+    public void setM_QuestionnaireQuestionquestion(QuestionnaireQuestion m_QuestionnaireQuestionquestion) {
+        this.m_QuestionnaireQuestionquestion = m_QuestionnaireQuestionquestion;
     }
 
 

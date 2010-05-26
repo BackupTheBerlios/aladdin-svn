@@ -12,7 +12,7 @@
 <property name="EmotionalOrMentalDisorder" type="java.lang.String"><column name="EmotionalOrMentalDisorder"/></property>
 <property name="PsychoactiveDrugs" type="java.lang.String"><column name="PsychoactiveDrugs"/></property>
 <property name="QualityOfLife" type="java.lang.Integer"><column name="QualityOfLife"/></property>
-<many-to-one name="m_Carer" class="com.aladdin.xsd.Carer" insert="false" update="false"><column name="carer" not-null="false" /></many-to-one>
+<many-to-one name="m_Carercarer" class="com.aladdin.xsd.Carer" insert="false" update="false"><column name="carer" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

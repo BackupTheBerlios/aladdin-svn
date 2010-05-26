@@ -14,7 +14,7 @@
 <property name="Notes" type="java.lang.String"><column name="Notes"/></property>
 <property name="IsPrimary" type="java.lang.Boolean"><column name="IsPrimary"/></property>
 <property name="persondata" type="java.lang.Integer"><column name="persondata"/></property>
-<many-to-one name="m_PersonData" class="com.aladdin.xsd.PersonData" insert="false" update="false"><column name="persondata" not-null="false" /></many-to-one>
+<many-to-one name="m_PersonDatapersondata" class="com.aladdin.xsd.PersonData" insert="false" update="false"><column name="persondata" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

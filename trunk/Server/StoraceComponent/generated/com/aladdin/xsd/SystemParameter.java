@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -10,13 +10,13 @@ public class SystemParameter  implements java.io.Serializable {
 
 
      private Integer id;
-     private Integer Code;
+     private String Code;
      private String Description;
 
     public SystemParameter() {
     }
 
-    public SystemParameter(Integer Code, String Description) {
+    public SystemParameter(String Code, String Description) {
        this.Code = Code;
        this.Description = Description;
     }
@@ -28,11 +28,11 @@ public class SystemParameter  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getCode() {
+    public String getCode() {
         return this.Code;
     }
     
-    public void setCode(Integer Code) {
+    public void setCode(String Code) {
         this.Code = Code;
     }
     public String getDescription() {

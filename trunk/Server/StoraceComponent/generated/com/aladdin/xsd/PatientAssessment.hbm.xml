@@ -30,8 +30,8 @@
 <property name="Immobility" type="java.lang.Boolean"><column name="Immobility"/></property>
 <property name="SensorialDeficits" type="java.lang.Boolean"><column name="SensorialDeficits"/></property>
 <property name="PharmacologyTreatment" type="java.lang.String"><column name="PharmacologyTreatment"/></property>
-<many-to-one name="m_Patient" class="com.aladdin.xsd.Patient" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
-<many-to-one name="m_AetologyT" class="com.aladdin.xsd.AetologyT" insert="false" update="false"><column name="Aetology" not-null="false" /></many-to-one>
+<many-to-one name="m_Patientpatient" class="com.aladdin.xsd.Patient" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
+<many-to-one name="m_AetologyTAetology" class="com.aladdin.xsd.AetologyT" insert="false" update="false"><column name="Aetology" not-null="false" /></many-to-one>
 <set name="Measurements" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Measurement"/></set>
 </class>
 </hibernate-mapping>

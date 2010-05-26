@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -15,24 +15,26 @@ public class Patient  implements java.io.Serializable {
      private Integer persondata;
      private Integer sd;
      private Integer clinician;
-     private Set PatientAssessments = new HashSet(0);
-     private PersonData m_PersonData;
-     private SocioDemographicData m_SocioDemographicData;
-     private Clinician m_Clinician;
-     private Set PatientCarers = new HashSet(0);
+     private Set Notes = new HashSet(0);
+     private Set PatientAssessments1 = new HashSet(0);
+     private PersonData m_PersonDatapersondata;
+     private SocioDemographicData m_SocioDemographicDatasd;
+     private Clinician m_Clinicianclinician;
+     private Set PatientCarers11 = new HashSet(0);
 
     public Patient() {
     }
 
-    public Patient(Integer persondata, Integer sd, Integer clinician, Set PatientAssessments, PersonData m_PersonData, SocioDemographicData m_SocioDemographicData, Clinician m_Clinician, Set PatientCarers) {
+    public Patient(Integer persondata, Integer sd, Integer clinician, Set Notes, Set PatientAssessments1, PersonData m_PersonDatapersondata, SocioDemographicData m_SocioDemographicDatasd, Clinician m_Clinicianclinician, Set PatientCarers11) {
        this.persondata = persondata;
        this.sd = sd;
        this.clinician = clinician;
-       this.PatientAssessments = PatientAssessments;
-       this.m_PersonData = m_PersonData;
-       this.m_SocioDemographicData = m_SocioDemographicData;
-       this.m_Clinician = m_Clinician;
-       this.PatientCarers = PatientCarers;
+       this.Notes = Notes;
+       this.PatientAssessments1 = PatientAssessments1;
+       this.m_PersonDatapersondata = m_PersonDatapersondata;
+       this.m_SocioDemographicDatasd = m_SocioDemographicDatasd;
+       this.m_Clinicianclinician = m_Clinicianclinician;
+       this.PatientCarers11 = PatientCarers11;
     }
    
     public Integer getId() {
@@ -63,40 +65,47 @@ public class Patient  implements java.io.Serializable {
     public void setClinician(Integer clinician) {
         this.clinician = clinician;
     }
-    public Set getPatientAssessments() {
-        return this.PatientAssessments;
+    public Set getNotes() {
+        return this.Notes;
     }
     
-    public void setPatientAssessments(Set PatientAssessments) {
-        this.PatientAssessments = PatientAssessments;
+    public void setNotes(Set Notes) {
+        this.Notes = Notes;
     }
-    public PersonData getM_PersonData() {
-        return this.m_PersonData;
-    }
-    
-    public void setM_PersonData(PersonData m_PersonData) {
-        this.m_PersonData = m_PersonData;
-    }
-    public SocioDemographicData getM_SocioDemographicData() {
-        return this.m_SocioDemographicData;
+    public Set getPatientAssessments1() {
+        return this.PatientAssessments1;
     }
     
-    public void setM_SocioDemographicData(SocioDemographicData m_SocioDemographicData) {
-        this.m_SocioDemographicData = m_SocioDemographicData;
+    public void setPatientAssessments1(Set PatientAssessments1) {
+        this.PatientAssessments1 = PatientAssessments1;
     }
-    public Clinician getM_Clinician() {
-        return this.m_Clinician;
-    }
-    
-    public void setM_Clinician(Clinician m_Clinician) {
-        this.m_Clinician = m_Clinician;
-    }
-    public Set getPatientCarers() {
-        return this.PatientCarers;
+    public PersonData getM_PersonDatapersondata() {
+        return this.m_PersonDatapersondata;
     }
     
-    public void setPatientCarers(Set PatientCarers) {
-        this.PatientCarers = PatientCarers;
+    public void setM_PersonDatapersondata(PersonData m_PersonDatapersondata) {
+        this.m_PersonDatapersondata = m_PersonDatapersondata;
+    }
+    public SocioDemographicData getM_SocioDemographicDatasd() {
+        return this.m_SocioDemographicDatasd;
+    }
+    
+    public void setM_SocioDemographicDatasd(SocioDemographicData m_SocioDemographicDatasd) {
+        this.m_SocioDemographicDatasd = m_SocioDemographicDatasd;
+    }
+    public Clinician getM_Clinicianclinician() {
+        return this.m_Clinicianclinician;
+    }
+    
+    public void setM_Clinicianclinician(Clinician m_Clinicianclinician) {
+        this.m_Clinicianclinician = m_Clinicianclinician;
+    }
+    public Set getPatientCarers11() {
+        return this.PatientCarers11;
+    }
+    
+    public void setPatientCarers11(Set PatientCarers11) {
+        this.PatientCarers11 = PatientCarers11;
     }
 
 

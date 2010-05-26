@@ -5,7 +5,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping><class name="com.aladdin.xsd.TaskStatusT">
 <id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">TaskStatusT_id_seq</param></generator></id>
-<property name="Code" type="java.lang.Integer"><column name="Code"/></property>
+<property name="Code" type="java.lang.String"><column name="Code"/></property>
 <property name="Description" type="java.lang.String"><column name="Description"/></property>
 <set name="Tasks" inverse="true" cascade="none"><key><column name="TaskStatus" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Task"/></set>
 </class>

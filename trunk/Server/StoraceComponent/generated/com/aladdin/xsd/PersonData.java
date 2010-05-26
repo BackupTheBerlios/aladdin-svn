@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -15,24 +15,26 @@ public class PersonData  implements java.io.Serializable {
      private String Surname;
      private String Name;
      private Set Identifiers = new HashSet(0);
-     private Set Addresss = new HashSet(0);
-     private Set Communications = new HashSet(0);
-     private Set Clinicians = new HashSet(0);
-     private Set Carers = new HashSet(0);
-     private Set Patients = new HashSet(0);
+     private Set Addresss1 = new HashSet(0);
+     private Set Communications11 = new HashSet(0);
+     private Set Clinicians111 = new HashSet(0);
+     private Set Carers1111 = new HashSet(0);
+     private Set Patients11111 = new HashSet(0);
+     private Set Administrators111111 = new HashSet(0);
 
     public PersonData() {
     }
 
-    public PersonData(String Surname, String Name, Set Identifiers, Set Addresss, Set Communications, Set Clinicians, Set Carers, Set Patients) {
+    public PersonData(String Surname, String Name, Set Identifiers, Set Addresss1, Set Communications11, Set Clinicians111, Set Carers1111, Set Patients11111, Set Administrators111111) {
        this.Surname = Surname;
        this.Name = Name;
        this.Identifiers = Identifiers;
-       this.Addresss = Addresss;
-       this.Communications = Communications;
-       this.Clinicians = Clinicians;
-       this.Carers = Carers;
-       this.Patients = Patients;
+       this.Addresss1 = Addresss1;
+       this.Communications11 = Communications11;
+       this.Clinicians111 = Clinicians111;
+       this.Carers1111 = Carers1111;
+       this.Patients11111 = Patients11111;
+       this.Administrators111111 = Administrators111111;
     }
    
     public Integer getId() {
@@ -63,40 +65,47 @@ public class PersonData  implements java.io.Serializable {
     public void setIdentifiers(Set Identifiers) {
         this.Identifiers = Identifiers;
     }
-    public Set getAddresss() {
-        return this.Addresss;
+    public Set getAddresss1() {
+        return this.Addresss1;
     }
     
-    public void setAddresss(Set Addresss) {
-        this.Addresss = Addresss;
+    public void setAddresss1(Set Addresss1) {
+        this.Addresss1 = Addresss1;
     }
-    public Set getCommunications() {
-        return this.Communications;
-    }
-    
-    public void setCommunications(Set Communications) {
-        this.Communications = Communications;
-    }
-    public Set getClinicians() {
-        return this.Clinicians;
+    public Set getCommunications11() {
+        return this.Communications11;
     }
     
-    public void setClinicians(Set Clinicians) {
-        this.Clinicians = Clinicians;
+    public void setCommunications11(Set Communications11) {
+        this.Communications11 = Communications11;
     }
-    public Set getCarers() {
-        return this.Carers;
-    }
-    
-    public void setCarers(Set Carers) {
-        this.Carers = Carers;
-    }
-    public Set getPatients() {
-        return this.Patients;
+    public Set getClinicians111() {
+        return this.Clinicians111;
     }
     
-    public void setPatients(Set Patients) {
-        this.Patients = Patients;
+    public void setClinicians111(Set Clinicians111) {
+        this.Clinicians111 = Clinicians111;
+    }
+    public Set getCarers1111() {
+        return this.Carers1111;
+    }
+    
+    public void setCarers1111(Set Carers1111) {
+        this.Carers1111 = Carers1111;
+    }
+    public Set getPatients11111() {
+        return this.Patients11111;
+    }
+    
+    public void setPatients11111(Set Patients11111) {
+        this.Patients11111 = Patients11111;
+    }
+    public Set getAdministrators111111() {
+        return this.Administrators111111;
+    }
+    
+    public void setAdministrators111111(Set Administrators111111) {
+        this.Administrators111111 = Administrators111111;
     }
 
 

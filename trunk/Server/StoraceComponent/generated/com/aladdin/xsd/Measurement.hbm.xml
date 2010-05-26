@@ -12,7 +12,9 @@
 <property name="lowerlimit" type="java.math.BigDecimal"><column name="lowerlimit"/></property>
 <property name="upperlimit" type="java.math.BigDecimal"><column name="upperlimit"/></property>
 <property name="patient" type="java.lang.Integer"><column name="patient"/></property>
-<many-to-one name="m_PatientAssessment" class="com.aladdin.xsd.PatientAssessment" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
+<property name="task" type="java.lang.Integer"><column name="task"/></property>
+<many-to-one name="m_PatientAssessmentpatient" class="com.aladdin.xsd.PatientAssessment" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
+<many-to-one name="m_Tasktask" class="com.aladdin.xsd.Task" insert="false" update="false"><column name="task" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

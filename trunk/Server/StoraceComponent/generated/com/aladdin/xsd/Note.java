@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.sql.Timestamp;
@@ -13,17 +13,21 @@ public class Note  implements java.io.Serializable {
      private Integer id;
      private Timestamp DateTimeOfNote;
      private String text;
-     private String UserType;
-     private String UserId;
+     private Integer carer;
+     private Integer patient;
+     private Carer m_Carercarer;
+     private Patient m_Patientpatient;
 
     public Note() {
     }
 
-    public Note(Timestamp DateTimeOfNote, String text, String UserType, String UserId) {
+    public Note(Timestamp DateTimeOfNote, String text, Integer carer, Integer patient, Carer m_Carercarer, Patient m_Patientpatient) {
        this.DateTimeOfNote = DateTimeOfNote;
        this.text = text;
-       this.UserType = UserType;
-       this.UserId = UserId;
+       this.carer = carer;
+       this.patient = patient;
+       this.m_Carercarer = m_Carercarer;
+       this.m_Patientpatient = m_Patientpatient;
     }
    
     public Integer getId() {
@@ -47,19 +51,33 @@ public class Note  implements java.io.Serializable {
     public void setText(String text) {
         this.text = text;
     }
-    public String getUserType() {
-        return this.UserType;
+    public Integer getCarer() {
+        return this.carer;
     }
     
-    public void setUserType(String UserType) {
-        this.UserType = UserType;
+    public void setCarer(Integer carer) {
+        this.carer = carer;
     }
-    public String getUserId() {
-        return this.UserId;
+    public Integer getPatient() {
+        return this.patient;
     }
     
-    public void setUserId(String UserId) {
-        this.UserId = UserId;
+    public void setPatient(Integer patient) {
+        this.patient = patient;
+    }
+    public Carer getM_Carercarer() {
+        return this.m_Carercarer;
+    }
+    
+    public void setM_Carercarer(Carer m_Carercarer) {
+        this.m_Carercarer = m_Carercarer;
+    }
+    public Patient getM_Patientpatient() {
+        return this.m_Patientpatient;
+    }
+    
+    public void setM_Patientpatient(Patient m_Patientpatient) {
+        this.m_Patientpatient = m_Patientpatient;
     }
 
 

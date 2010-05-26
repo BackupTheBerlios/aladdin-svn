@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -17,26 +17,26 @@ public class SocioDemographicData  implements java.io.Serializable {
      private Integer MaritalStatus;
      private Integer Children;
      private Integer LivingWith;
-     private GenderT m_GenderT;
-     private MaritalStatusT m_MaritalStatusT;
-     private LivingWithT m_LivingWithT;
+     private GenderT m_GenderTGender;
+     private MaritalStatusT m_MaritalStatusTMaritalStatus;
+     private LivingWithT m_LivingWithTLivingWith;
      private Set Carers = new HashSet(0);
-     private Set Patients = new HashSet(0);
+     private Set Patients1 = new HashSet(0);
 
     public SocioDemographicData() {
     }
 
-    public SocioDemographicData(Integer Age, Integer Gender, Integer MaritalStatus, Integer Children, Integer LivingWith, GenderT m_GenderT, MaritalStatusT m_MaritalStatusT, LivingWithT m_LivingWithT, Set Carers, Set Patients) {
+    public SocioDemographicData(Integer Age, Integer Gender, Integer MaritalStatus, Integer Children, Integer LivingWith, GenderT m_GenderTGender, MaritalStatusT m_MaritalStatusTMaritalStatus, LivingWithT m_LivingWithTLivingWith, Set Carers, Set Patients1) {
        this.Age = Age;
        this.Gender = Gender;
        this.MaritalStatus = MaritalStatus;
        this.Children = Children;
        this.LivingWith = LivingWith;
-       this.m_GenderT = m_GenderT;
-       this.m_MaritalStatusT = m_MaritalStatusT;
-       this.m_LivingWithT = m_LivingWithT;
+       this.m_GenderTGender = m_GenderTGender;
+       this.m_MaritalStatusTMaritalStatus = m_MaritalStatusTMaritalStatus;
+       this.m_LivingWithTLivingWith = m_LivingWithTLivingWith;
        this.Carers = Carers;
-       this.Patients = Patients;
+       this.Patients1 = Patients1;
     }
    
     public Integer getId() {
@@ -81,26 +81,26 @@ public class SocioDemographicData  implements java.io.Serializable {
     public void setLivingWith(Integer LivingWith) {
         this.LivingWith = LivingWith;
     }
-    public GenderT getM_GenderT() {
-        return this.m_GenderT;
+    public GenderT getM_GenderTGender() {
+        return this.m_GenderTGender;
     }
     
-    public void setM_GenderT(GenderT m_GenderT) {
-        this.m_GenderT = m_GenderT;
+    public void setM_GenderTGender(GenderT m_GenderTGender) {
+        this.m_GenderTGender = m_GenderTGender;
     }
-    public MaritalStatusT getM_MaritalStatusT() {
-        return this.m_MaritalStatusT;
-    }
-    
-    public void setM_MaritalStatusT(MaritalStatusT m_MaritalStatusT) {
-        this.m_MaritalStatusT = m_MaritalStatusT;
-    }
-    public LivingWithT getM_LivingWithT() {
-        return this.m_LivingWithT;
+    public MaritalStatusT getM_MaritalStatusTMaritalStatus() {
+        return this.m_MaritalStatusTMaritalStatus;
     }
     
-    public void setM_LivingWithT(LivingWithT m_LivingWithT) {
-        this.m_LivingWithT = m_LivingWithT;
+    public void setM_MaritalStatusTMaritalStatus(MaritalStatusT m_MaritalStatusTMaritalStatus) {
+        this.m_MaritalStatusTMaritalStatus = m_MaritalStatusTMaritalStatus;
+    }
+    public LivingWithT getM_LivingWithTLivingWith() {
+        return this.m_LivingWithTLivingWith;
+    }
+    
+    public void setM_LivingWithTLivingWith(LivingWithT m_LivingWithTLivingWith) {
+        this.m_LivingWithTLivingWith = m_LivingWithTLivingWith;
     }
     public Set getCarers() {
         return this.Carers;
@@ -109,12 +109,12 @@ public class SocioDemographicData  implements java.io.Serializable {
     public void setCarers(Set Carers) {
         this.Carers = Carers;
     }
-    public Set getPatients() {
-        return this.Patients;
+    public Set getPatients1() {
+        return this.Patients1;
     }
     
-    public void setPatients(Set Patients) {
-        this.Patients = Patients;
+    public void setPatients1(Set Patients1) {
+        this.Patients1 = Patients1;
     }
 
 

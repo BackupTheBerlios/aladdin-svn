@@ -8,11 +8,12 @@
 <property name="Surname" type="java.lang.String"><column name="Surname"/></property>
 <property name="Name" type="java.lang.String"><column name="Name"/></property>
 <set name="Identifiers" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Identifier"/></set>
-<set name="Addresss" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Address"/></set>
-<set name="Communications" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Communication"/></set>
-<set name="Clinicians" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Clinician"/></set>
-<set name="Carers" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Carer"/></set>
-<set name="Patients" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Patient"/></set>
+<set name="Addresss1" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Address"/></set>
+<set name="Communications11" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Communication"/></set>
+<set name="Clinicians111" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Clinician"/></set>
+<set name="Carers1111" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Carer"/></set>
+<set name="Patients11111" inverse="true" cascade="none"><key><column name="persondata" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Patient"/></set>
+<set name="Administrators111111" inverse="true" cascade="none"><key><column name="personData" not-null="true" /></key><one-to-many class="com.aladdin.xsd.Administrator"/></set>
 </class>
 </hibernate-mapping>
 

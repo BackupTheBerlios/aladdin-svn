@@ -1,5 +1,5 @@
 package com.aladdin.xsd;
-// Generated Apr 30, 2010 4:50:19 PM by Hibernate Tools 3.2.4.GA
+// Generated May 26, 2010 2:15:07 PM by Hibernate Tools 3.2.4.GA
 
 
 
@@ -19,12 +19,12 @@ public class Address  implements java.io.Serializable {
      private String Notes;
      private Boolean IsPrimary;
      private Integer persondata;
-     private PersonData m_PersonData;
+     private PersonData m_PersonDatapersondata;
 
     public Address() {
     }
 
-    public Address(String Street, String StreetNo, String City, String County, String Country, String ZipCode, String Notes, Boolean IsPrimary, Integer persondata, PersonData m_PersonData) {
+    public Address(String Street, String StreetNo, String City, String County, String Country, String ZipCode, String Notes, Boolean IsPrimary, Integer persondata, PersonData m_PersonDatapersondata) {
        this.Street = Street;
        this.StreetNo = StreetNo;
        this.City = City;
@@ -34,7 +34,7 @@ public class Address  implements java.io.Serializable {
        this.Notes = Notes;
        this.IsPrimary = IsPrimary;
        this.persondata = persondata;
-       this.m_PersonData = m_PersonData;
+       this.m_PersonDatapersondata = m_PersonDatapersondata;
     }
    
     public Integer getId() {
@@ -107,12 +107,12 @@ public class Address  implements java.io.Serializable {
     public void setPersondata(Integer persondata) {
         this.persondata = persondata;
     }
-    public PersonData getM_PersonData() {
-        return this.m_PersonData;
+    public PersonData getM_PersonDatapersondata() {
+        return this.m_PersonDatapersondata;
     }
     
-    public void setM_PersonData(PersonData m_PersonData) {
-        this.m_PersonData = m_PersonData;
+    public void setM_PersonDatapersondata(PersonData m_PersonDatapersondata) {
+        this.m_PersonDatapersondata = m_PersonDatapersondata;
     }
 
 
