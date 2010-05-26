@@ -2,7 +2,7 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified" xmlns:Q1="http://aladdin.com/xsd">
     <complexType name="SystemParameter">
     	<sequence>
-    		<element name="Code" type="int"></element>
+    		<element name="Code" type="string"></element>
     		<element name="Description" type="string"></element>
     	</sequence>
     </complexType>
@@ -11,21 +11,17 @@
     		<element name="login" type="string"></element>
     		<element name="password" type="string"></element>
     		<element name="type" type="tns:SystemParameter"></element>
+    		<element name="personId" type="string"></element>
     	</sequence>
     </complexType>
 
-    <complexType name="Service">
+    <complexType name="ExternalService">
     	<sequence>
-    		<element name="name" type="string"></element>
+    		<element name="Address" type="string"></element>
+    		<element name="Description" type="string"></element>
     	</sequence>
     </complexType>
 
-    <complexType name="Rights">
-    	<sequence>
-    		<element name="srv" type="tns:Service"></element>
-    		<element name="usr" type="tns:Users"></element>
-    	</sequence>
-    </complexType>
     
     <complexType name="Identifier">
     	<sequence>
@@ -106,6 +102,7 @@
     		<element name="parentid" type="tns:QuestionnaireQuestion"></element>
     		<element name="title" type="string"></element>
     		<element name="quest" type="tns:Questionnaire"></element>
+    		<element name="condition" type="unsignedByte"></element>
     	</sequence>
     </complexType>
 
@@ -122,6 +119,7 @@
     		<element name="question" type="tns:QuestionnaireQuestion"></element>
     		<element name="value" type="string"></element>
     		<element name="UserId" type="int"></element>
+    		<element name="dateTime" type="dateTime"></element>
     	</sequence>
     </complexType>
 
@@ -129,8 +127,8 @@
     	<sequence>
     		<element name="DateTimeOfNote" type="dateTime"></element>
     		<element name="text" type="string"></element>
-    		<element name="UserType" type="string"></element>
-    		<element name="UserId" type="string"></element>
+    		<element name="carer" type="tns:Carer"></element>
+    		<element name="patient" type="tns:Patient"></element>
     	</sequence>
     </complexType>
 
@@ -142,8 +140,8 @@
     		<element name="TaskStatus" type="tns:SystemParameter"></element>
     		<element name="url" type="string"></element>
     		<element name="questionnaire" type="tns:Questionnaire"></element>
-    		<element name="UserType" type="string"></element>
-    		<element name="UserId" type="int"></element>
+    		<element name="Executor" type="tns:Users"></element>
+    		<element name="Assigner" type="tns:Users"></element>
     	</sequence>
     </complexType>
 
@@ -220,7 +218,14 @@
     		<element name="lowerlimit" type="decimal"></element>
     		<element name="upperlimit" type="decimal"></element>
     		<element name="patient" type="tns:PatientAssessment"></element>
+    		<element name="task" type="tns:Task"></element>
     	</sequence>
     </complexType>
 
+
+    <complexType name="Administrator">
+    	<sequence>
+    		<element name="personData" type="tns:PersonData"></element>
+    	</sequence>
+    </complexType>
 </schema>
