@@ -102,6 +102,17 @@ namespace Aladdin.ClientApplication.ViewModels
             }
         }
 
+        ExternalServicePage _ExternalServicePage;
+        ExternalServicePage ExternalServicePage
+        {
+            get
+            {
+                if (_ExternalServicePage == null)
+                    _ExternalServicePage = new ExternalServicePage();
+                return _ExternalServicePage;
+            }
+        }
+
         public MainWindowViewModel()
         {
             this.ActivePage = this.StartPage;
@@ -132,6 +143,9 @@ namespace Aladdin.ClientApplication.ViewModels
                         break;
                     case "ContactUsPage":
                         page = this.ContactUsPage;
+                        break;
+                    case "PlayGame":
+                        page = this.ExternalServicePage;
                         break;
                     default:
                         break;

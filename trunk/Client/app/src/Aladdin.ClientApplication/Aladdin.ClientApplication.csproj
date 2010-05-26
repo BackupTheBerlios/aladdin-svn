@@ -57,6 +57,9 @@
     <Compile Include="Controls\ContactUsPage.xaml.cs">
       <DependentUpon>ContactUsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ExternalServicePage.xaml.cs">
+      <DependentUpon>ExternalServicePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LastWizardPage.xaml.cs">
       <DependentUpon>LastWizardPage.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ContactUsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ExternalServicePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

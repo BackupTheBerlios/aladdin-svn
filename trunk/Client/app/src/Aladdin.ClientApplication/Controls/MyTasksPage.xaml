@@ -20,6 +20,6 @@
         <Button Grid.Row="2" Style="{StaticResource MediumButton}">Fill the carer's questionnaire</Button>
         <Button Grid.Row="3" Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MeasureWeightBloodPage">Measure weight and blood pressure</Button>
         <Button Grid.Row="4" Style="{StaticResource MediumButton}">Measure activity</Button>
-        <Button Grid.Row="5" Style="{StaticResource MediumButton}">Play games</Button>
+        <Button Grid.Row="5" Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="PlayGame">Play games</Button>
     </Grid>
 </UserControl>
