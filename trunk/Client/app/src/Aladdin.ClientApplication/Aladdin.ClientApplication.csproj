@@ -206,7 +206,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\Users.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\clock.png" />
   </ItemGroup>
@@ -214,6 +216,9 @@
     <Resource Include="Resources\Images\ContactUs.png" />
     <Resource Include="Resources\Images\Tasks.png" />
     <Resource Include="Resources\Images\TV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\HomeHS.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

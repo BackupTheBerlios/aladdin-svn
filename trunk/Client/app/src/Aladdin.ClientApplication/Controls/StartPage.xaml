@@ -17,21 +17,26 @@
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MyTasksPage">
             <StackPanel>
-                <TextBlock>My tasks</TextBlock>
-                <Image Source="../Resources/Images/clock.png" Height="64" />
+                <TextBlock Margin="0 0 0 10">My tasks</TextBlock>
+                <Image Source="../Resources/Images/clock.png" Height="48" />
             </StackPanel>
         </Button>
-        <Button Grid.Row="0" Grid.Column="1" Content="Social network" Style="{StaticResource LargeButton}" />
+        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="SocialNetwork">
+            <StackPanel>
+                <TextBlock Margin="0 0 0 10">Social network</TextBlock>
+                <Image Source="../Resources/Images/Users.png" Height="48" />
+            </StackPanel>
+        </Button>
         <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource LargeButton}"  Command="local:AppCommands.MoveToPageCommand" CommandParameter="ContactUsPage">
             <StackPanel>
-                <TextBlock>Contact us</TextBlock>
-                <Image Source="../Resources/Images/ContactUs.png" Height="64" />
+                <TextBlock Margin="0 0 0 10">Contact us</TextBlock>
+                <Image Source="../Resources/Images/ContactUs.png" Height="48" />
             </StackPanel>
         </Button>
         <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="VideoPage">
             <StackPanel>
-                <TextBlock>Aladdin TV</TextBlock>
-                <Image Source="../Resources/Images/TV.png" Height="64" />
+                <TextBlock Margin="0 0 0 10">Aladdin TV</TextBlock>
+                <Image Source="../Resources/Images/TV.png" Height="48" />
             </StackPanel>
         </Button>
     </Grid>

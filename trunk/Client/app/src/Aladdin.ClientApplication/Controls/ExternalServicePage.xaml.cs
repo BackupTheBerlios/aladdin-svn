@@ -24,9 +24,11 @@ namespace Aladdin.ClientApplication.Controls
             InitializeComponent();
         }
 
+        public string Url { get; set; }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Uri uri = new Uri("http://www.lumosity.com/brain-games/memory-games/memory-matrix");
+            Uri uri = new Uri(Url);
             if (uri != null)
                 this.WebBrowser.Source = uri;
         }

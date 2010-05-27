@@ -146,6 +146,11 @@ namespace Aladdin.ClientApplication.ViewModels
                         break;
                     case "PlayGame":
                         page = this.ExternalServicePage;
+                        (page as ExternalServicePage).Url = "http://www.lumosity.com/brain-games/memory-games/memory-matrix";
+                        break;
+                    case "SocialNetwork":
+                        page = this.ExternalServicePage;
+                        (page as ExternalServicePage).Url = "http://www.aladdin-project.eu";
                         break;
                     default:
                         break;
