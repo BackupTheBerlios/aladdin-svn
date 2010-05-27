@@ -101,8 +101,11 @@ namespace Aladdin.ClientApplication.ViewModels
             get { return _QuestionSummaryVisibility; }
             set
             {
-                _QuestionSummaryVisibility = value;
-                this.SendPropertyChanged("QuestionSummaryVisibility");
+                if (_QuestionSummaryVisibility != value)
+                {
+                    _QuestionSummaryVisibility = value;
+                    this.SendPropertyChanged("QuestionSummaryVisibility");
+                }
             }
         }
 
@@ -130,6 +133,7 @@ namespace Aladdin.ClientApplication.ViewModels
             }
             else
             {
+                this.QuestionSummaryVisibility = Visibility.Visible;
                 this.QuestionNumber = string.Format("Question {0}", this.QuestionnaireWizard.ActiveQuestion.ID);
                 this.QuestionTitle = this.QuestionnaireWizard.ActiveQuestion.Title;
                 if (this.QuestionnaireWizard.ActiveQuestion.QuestionType == QuestionnaireQuestionAnswerType.OneAnswer)
@@ -181,6 +185,7 @@ namespace Aladdin.ClientApplication.ViewModels
             string xml = this.QuestionnaireAnswers.ToXml();
             //todo: upload xml to server
             MessageBox.Show(xml);
+            AppCommands.MoveToPageCommand.Execute("MyTasksPage", null);
         }
     }
 }
