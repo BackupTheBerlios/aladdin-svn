@@ -8,9 +8,88 @@ import java.util.Set;
 import org.hibernate.Session;
 import com.aladdin.xsd.*;
 
+/*import org.apache.axis2.AxisFault;
+import org.apache.axis2.client.Options;
+import org.apache.axis2.client.ServiceClient;
+import org.apache.axis2.context.ConfigurationContext;
+import org.apache.axis2.context.ConfigurationContextFactory;
+*/
+import org.apache.axis2.transport.http.HttpTransportProperties.Authenticator;
+import org.apache.axis2.context.MessageContext;
+import org.apache.axis2.transport.http.HTTPConstants;
+//import org.apache.rampart.RampartMessageData;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+
 public class StorageComponent {
 
-	public java.lang.Integer CreateClinician(Clinician clinician) {
+/*	public int main() throws Exception {
+		
+//    	System.setProperty("javax.net.ssl.trustStore", "C:/1/.keystore");
+    	System.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+    	
+    	//To be able to load the client configuration from axis2.xml
+//    	ConfigurationContext ctx = ConfigurationContextFactory.createDefaultConfigurationContext();
+ConfigurationContext ctx = ConfigurationContextFactory.createConfigurationContextFromFileSystem("C:/intalio-bpms-6.0.3.010.01/webapps/axis2/WEB-INF", "C:/intalio-bpms-6.0.3.010.01/webapps/axis2/WEB-INF/conf/axis2.xml");
+
+//ctx.setProperty("javax.net.ssl.trustStore", "C:/1/.keystore");
+ctx.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+
+		
+		SecureServiceStub stub = new SecureServiceStub(ctx,"http://localhost:8080/axis2/services/SecureService");
+		
+		ServiceClient sc = stub._getServiceClient();
+		
+		ctx.getAxisConfiguration().engageModule("rampart");
+		
+		Options options = sc.getOptions();
+		options.setUserName("apache");
+		options.setPassword("password");
+		
+		int a = 3;
+		int b = 4;
+		
+		return stub.add(a, b);
+	}
+*/
+
+public int a () throws Exception {
+	StorageComponentStub stub = new StorageComponentStub(null, "http://localhost:8080/axis2/services/StorageComponent");
+
+Authenticator auth = new Authenticator();
+auth.setUsername("user");
+auth.setPassword("pwd");
+auth.setPreemptiveAuthentication(true);
+stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.AUTHENTICATE, auth);
+
+	return stub.b (123);
+
+}
+
+public int b (int f) {
+
+//MessageContext msgContext = MessageContext.getCurrentMessageContext();
+//HttpServletRequest req = (HttpServletRequest) msgContext.getProperty(org.apache.axis2.transport.http.HTTPConstants.MC_HTTP_SERVLETREQUEST);
+//System.out.println ("\ngetAuthType    " + req.getAuthType ());
+//System.out.println ("getRemoteUser " + req.getRemoteUser ());
+
+MessageContext msgCtx = MessageContext.getCurrentMessageContext();
+HttpServletRequest obj =(HttpServletRequest)msgCtx.getProperty("transport.http.servletRequest");
+System.out.println ("obj " + obj.toString ());
+System.out.println (obj.getRequestURI ());
+System.out.println("Acceptable Encoding type: "+obj.getHeader("Accept-Encoding"));
+System.out.println("Acceptable character set: " +obj.getHeader("Accept-Charset"));
+System.out.println("Acceptable Media Type: "+obj.getHeader("Accept"));
+Principal p = obj.getUserPrincipal ();
+if (p != null) {
+	System.out.println ("p: " + p.getName ());
+} else System.out.println ("null");
+System.out.println ("");
+
+return f*2; 
+}
+
+/*	public java.lang.Integer CreateClinician(Clinician clinician) {
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.beginTransaction();
 
@@ -516,7 +595,7 @@ public class StorageComponent {
 		return GetXPlannedTasks(id, "carer");
 	}
 	
-	public int StoreQuestionnaireAnswers (/*int taskId, */List<QuestionnaireAnswer> data) {
+	public int StoreQuestionnaireAnswers (List<QuestionnaireAnswer> data) {
 		
 		if (data.size() < 1) return -1;
 		
@@ -660,5 +739,5 @@ public class StorageComponent {
 		
 		s.getTransaction().commit();
 		return questionnaire.getId();
-	}
+	}*/
 }
