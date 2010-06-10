@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" xmlns:tns="http://www.example.org/am" elementFormDefault="qualified" xmlns:Q1="http://aladdin.com/xsd">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" elementFormDefault="qualified" xmlns:tns="http://aladdin.com/xsd">
     <complexType name="Questionnaire">
     	<sequence>
-    		<element name="questions" type="Q1:QuestionListType"></element>
+    		<element name="questions" type="tns:QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="1"></element>
     	</sequence>
     	<attribute name="version" type="decimal"></attribute>
     	<attribute name="ID" type="string"></attribute>
     	<attribute name="title" type="string"></attribute>
     </complexType>
 
-    <complexType name="QuestionListType">
-		<sequence maxOccurs="unbounded">
-			<element name="question" type="Q1:Question"/>
-		</sequence>
-	</complexType>
-
-    <complexType name="Question">
+    <complexType name="QuestionnaireQuestion">
     	<sequence>
-    		<element name="answer" type="Q1:QuestionAnswerListType"></element>
-    		<element name="questions" type="Q1:QuestionnaireQuestionAnswer"></element>
+    		<element name="title" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="answer" type="tns:QuestionnaireQuestionAnswer"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
+    		<element name="questions" type="tns:QuestionnaireQuestion"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
     	</sequence>
     	<attribute name="verision" type="decimal"></attribute>
     	<attribute name="id" type="string"></attribute>
-    	<attribute name="title" type="string"></attribute>
     </complexType>
 
-    <complexType name="QuestionAnswerListType">
-		<sequence maxOccurs="unbounded">
-			<element name="question" type="Q1:QuestionnaireQuestionAnswer"/>
-		</sequence>
-	</complexType>
-	
 	<complexType name="QuestionnaireQuestionAnswer">
 		<simpleContent>
 			<extension base="string">
@@ -41,7 +33,7 @@
 
 	<complexType name="QuestionnaireAnswers">
 		<sequence>
-			<element name="answer" type="Q1:QuestionnaireAnswerListType"></element>
+			<element name="answer" type="tns:QuestionnaireAnswer" maxOccurs="unbounded" minOccurs="1"></element>
 		</sequence>
 		<attribute name="ID" type="string"></attribute>
 		<attribute name="DateTime" type="dateTime"></attribute>
@@ -49,12 +41,6 @@
 		<attribute name="UserID" type="string"></attribute>
 	</complexType>
 	
-    <complexType name="QuestionnaireAnswerListType">
-		<sequence maxOccurs="unbounded">
-			<element name="question" type="Q1:QuestionnaireAnswer"/>
-		</sequence>
-	</complexType>
-
 	<complexType name="QuestionnaireAnswer">
 		<simpleContent>
 			<extension base="string">
@@ -72,280 +58,248 @@
 		</restriction>
 	</simpleType>
 	
-
 	<complexType name="Warning">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="DateTimeOfWarning" type="dateTime"></element>
-			<element name="Effect" type="Q1:SystemParameter"></element>
-			<element name="Indicator" type="Q1:SystemParameter"></element>
-			<element name="RiskLevel" type="Q1:SystemParameter"></element>
-			<element name="JustificationText" type="string"></element>
-			<element name="EmergencyLevel" type="Q1:SystemParameter"></element>
-			<element name="PatientID" type="string"></element>
-			<element name="Delivered" type="boolean"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="SystemParameter">
 		<sequence>
-			<element name="Code" type="string"></element>
-			<element name="Description" type="string"></element>
+			<element name="Code" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Description" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="ExternalService">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="Description" type="string"></element>
-			<element name="Address" type="string"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Description" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Address" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Event">
 		<sequence>
-			<element name="EventType" type="Q1:SystemParameter"></element>
-			<element name="Subject" type="string"></element>
-			<element name="Text" type="string"></element>
-			<element name="Target" type="string"></element>
+			<element name="EventType" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="Subject" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Text" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Target" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="User">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="Type" type="Q1:SystemParameter"></element>
-			<element name="PersonID" type="string"></element>
-			<element name="Login" type="string"></element>
-			<element name="Password" type="string"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="PersonID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Login" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Password" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="SearchCriteria">
 		<sequence>
-			<element name="FieldName" type="string"></element>
-			<element name="CompareOp" type="Q1:SystemParameter"></element>
-			<element name="FieldValue1" type="string"></element>
-			<element name="FieldValue2" type="string"></element>
+			<element name="FieldName" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="CompareOp" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="FieldValue1" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="FieldValue2" type="string" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Task">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="TaskType" type="Q1:SystemParameter"></element>
-			<element name="DateTimeAssigned" type="dateTime"></element>
-			<element name="DateTimeFulfilled" type="dateTime"></element>
-			<element name="TaskStatus" type="Q1:SystemParameter"></element>
-			<element name="URL" type="string"></element>
-			<element name="Questionnaire" type="Q1:Questionnaire"></element>
-			<element name="ExecutorID" type="string"></element>
-			<element name="AssignerID" type="string"></element>
-			<element name="ObjectID" type="string"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="TaskType" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateTimeAssigned" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateTimeFulfilled" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="TaskStatus" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="URL" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Questionnaire" type="tns:Questionnaire" maxOccurs="1" minOccurs="0"></element>
+			<element name="ExecutorID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="AssignerID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="ObjectID" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="CarerAssessment">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="CarerID" type="string"></element>
-			<element name="ClinicianID" type="string"></element>
-			<element name="DateOfAssessment" type="dateTime"></element>
-			<element name="RelevantHealthProblem" type="string"></element>
-			<element name="SeverityOfBurden" type="unsignedByte"></element>
-			<element name="EmotionalOrMentalDisorders" type="string"></element>
-			<element name="PsychoactiveDrugs" type="string"></element>
-			<element name="QualityOfLife" type="unsignedByte"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="CarerID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="ClinicianID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateOfAssessment" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="RelevantHealthProblem" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="SeverityOfBurden" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
+			<element name="EmotionalOrMentalDisorders" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="PsychoactiveDrugs" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="QualityOfLife" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="PatientAssessment">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="PatientID" type="string"></element>
-			<element name="DateOfAssessment" type="dateTime"></element>
-			<element name="Aetology" type="Q1:SystemParameter"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateOfAssessment" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="Aetology" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
 			<element name="TimeEllapsedSinceDiagnosed"
-				type="unsignedByte">
+				type="unsignedByte" maxOccurs="1" minOccurs="1">
 			</element>
-			<element name="Severity" type="unsignedByte"></element>
+			<element name="Severity" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
 			<element name="RelevantPathologyAntecedents"
-				type="string">
+				type="string" maxOccurs="1" minOccurs="0">
 			</element>
-			<element name="Comorbidity" type="string"></element>
+			<element name="Comorbidity" type="string" maxOccurs="1" minOccurs="0"></element>
 			<element name="CharlsonComorbidityIndex"
-				type="unsignedByte">
+				type="unsignedByte" maxOccurs="1" minOccurs="0">
 			</element>
-			<element name="BarthelIndex" type="unsignedByte"></element>
-			<element name="LawtonIndex" type="unsignedByte"></element>
-			<element name="MMSE" type="unsignedByte"></element>
-			<element name="MDRS" type="unsignedByte"></element>
-			<element name="BlessedScalePart1" type="decimal"></element>
-			<element name="BlessedScalePart2" type="unsignedByte"></element>
-			<element name="BlessedScalePart3" type="unsignedByte"></element>
-			<element name="ChecklistMBP" type="unsignedByte"></element>
-			<element name="NPQI_Severity" type="unsignedByte"></element>
-			<element name="NPQI_Stress" type="unsignedByte"></element>
-			<element name="GDS" type="unsignedByte"></element>
-			<element name="Falls" type="boolean"></element>
-			<element name="Incontinence" type="boolean"></element>
-			<element name="Delirium" type="boolean"></element>
-			<element name="Immobility" type="boolean"></element>
-			<element name="SensorialDeficits" type="boolean"></element>
-			<element name="PharmacologicalTreatment" type="string"></element>
-			<element name="ClinicalData" type="Q1:SystemParameter"></element>
+			<element name="BarthelIndex" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="LawtonIndex" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="MMSE" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
+			<element name="MDRS" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="BlessedScalePart1" type="decimal" maxOccurs="1" minOccurs="0"></element>
+			<element name="BlessedScalePart2" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="BlessedScalePart3" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="ChecklistMBP" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="NPQI_Severity" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="NPQI_Stress" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="GDS" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+			<element name="Falls" type="boolean" maxOccurs="1" minOccurs="0"></element>
+			<element name="Incontinence" type="boolean" maxOccurs="1" minOccurs="0"></element>
+			<element name="Delirium" type="boolean" maxOccurs="1" minOccurs="0"></element>
+			<element name="Immobility" type="boolean" maxOccurs="1" minOccurs="0"></element>
+			<element name="SensorialDeficits" type="boolean" maxOccurs="1" minOccurs="0"></element>
+			<element name="PharmacologicalTreatment" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="ClinicalData" type="tns:Measurement" maxOccurs="unbounded" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Measurement">
 		<sequence>
-			<element name="Type" type="string"></element>
-			<element name="Value" type="decimal"></element>
-			<element name="DateTime" type="dateTime"></element>
-			<element name="Units" type="string"></element>
-			<element name="LowerLimit" type="decimal"></element>
-			<element name="UpperLimit" type="decimal"></element>
-			<element name="PatientID" type="string"></element>
-			<element name="TaskID" type="string"></element>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Value" type="decimal" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateTime" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="Units" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="LowerLimit" type="decimal" maxOccurs="1" minOccurs="0"></element>
+			<element name="UpperLimit" type="decimal" maxOccurs="1" minOccurs="0"></element>
+			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="TaskID" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Identifier">
 		<sequence>
-			<element name="Type" type="string"></element>
-			<element name="Number" type="string"></element>
-			<element name="IssueDate" type="date"></element>
-			<element name="IssueAuthority" type="string"></element>
-		</sequence>
-	</complexType>
-
-    <complexType name="IdentifierListType">
-		<sequence maxOccurs="unbounded">
-			<element name="IdentifierList" type="Q1:Identifier"/>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Number" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="IssueDate" type="date" maxOccurs="1" minOccurs="0"></element>
+			<element name="IssueAuthority" type="string" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Address">
 		<sequence>
-			<element name="Street" type="string"></element>
-			<element name="StreetNo" type="string"></element>
-			<element name="City" type="string"></element>
-			<element name="County" type="string"></element>
-			<element name="Country" type="string"></element>
-			<element name="ZipCode" type="string"></element>
-			<element name="Notes" type="string"></element>
-			<element name="IsPrimary" type="boolean"></element>
-		</sequence>
-	</complexType>
-
-    <complexType name="AddressListType">
-		<sequence maxOccurs="unbounded">
-			<element name="AddressList" type="Q1:Address"/>
+			<element name="Street" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="StreetNo" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="City" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="County" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Country" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="ZipCode" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Notes" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Communication">
 		<sequence>
-			<element name="Type" type="string"></element>
-			<element name="Value" type="string"></element>
-			<element name="Notes" type="string"></element>
-			<element name="IsPrimary" type="boolean"></element>
-		</sequence>
-	</complexType>
-
-    <complexType name="CommunicationListType">
-		<sequence maxOccurs="unbounded">
-			<element name="CommunicationList" type="Q1:Communication"/>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Value" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Notes" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="SocioDemographicData">
 		<sequence>
-			<element name="Age" type="unsignedByte"></element>
-			<element name="Gender" type="Q1:SystemParameter"></element>
-			<element name="MaritalStatus" type="Q1:SystemParameter"></element>
-			<element name="Children" type="unsignedByte"></element>
-			<element name="LivingWith" type="Q1:SystemParameter"></element>
+			<element name="Age" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
+			<element name="Gender" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="MaritalStatus" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="Children" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
+			<element name="LivingWith" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="PersonData">
 		<sequence>
-			<element name="Surname" type="string"></element>
-			<element name="Name" type="string"></element>
+			<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="IdentifierList"
-				type="Q1:IdentifierListType">
+				type="tns:Identifier" maxOccurs="unbounded" minOccurs="1">
 			</element>
-			<element name="AddressList" type="string"></element>
-			<element name="CommunicationList" type="Q1:CommunicationListType"></element>
+			<element name="AddressList" type="tns:Address" maxOccurs="unbounded" minOccurs="1"></element>
+			<element name="CommunicationList" type="tns:Communication" maxOccurs="unbounded" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Carer">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="PersonData" type="Q1:PersonData"></element>
-			<element name="SD_Data" type="Q1:SocioDemographicData"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
+			<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="PatientCarer">
 		<sequence>
-			<element name="Carer" type="Q1:Carer"></element>
-			<element name="IsPrimary" type="boolean"></element>
+			<element name="Carer" type="tns:Carer" maxOccurs="1" minOccurs="1"></element>
+			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Clinician">
 		<sequence>
-			<element name="ID" type="string"></element>
-			<element name="PersonData" type="Q1:PersonData"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 	
-    <complexType name="ClinicianListType">
-		<sequence maxOccurs="unbounded">
-			<element name="ClinicianList" type="Q1:Clinician"/>
-		</sequence>
-	</complexType>
-
-    <complexType name="PatientCarerListType">
-		<sequence maxOccurs="unbounded">
-			<element name="PatientCarerList" type="Q1:PatientCarer"/>
-		</sequence>
-	</complexType>
-	
-
     <complexType name="Patient">
     	<sequence>
-    		<element name="ID" type="string"></element>
-    		<element name="PersonData" type="Q1:PersonData"></element>
-    		<element name="SD_Data" type="Q1:SocioDemographicData"></element>
-    		<element name="ResponsibleClinicianID" type="string"></element>
-    		<element name="PatientCarerList" type="Q1:PatientCarerListType"></element>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
+    		<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
+    		<element name="ResponsibleClinicianID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="PatientCarerList" type="tns:PatientCarer" maxOccurs="unbounded" minOccurs="1"></element>
     	</sequence>
     </complexType>
 
     <complexType name="Administrator">
     	<sequence>
-    		<element name="ID" type="string"></element>
-    		<element name="PersonData" type="Q1:PersonData"></element>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     
     <complexType name="PatientInfo">
     	<sequence>
-    		<element name="ID" type="string"></element>
-    		<element name="Surname" type="string"></element>
-    		<element name="Name" type="string"></element>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     
     <complexType name="CarerInfo">
     	<sequence>
-    		<element name="ID" type="string"></element>
-    		<element name="Surname" type="string"></element>
-    		<element name="Name" type="string"></element>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     
@@ -359,9 +313,9 @@
     
     <complexType name="AdministratorInfo">
     	<sequence>
-    		<element name="ID" type="string"></element>
-    		<element name="Surname" type="string"></element>
-    		<element name="Name" type="string"></element>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     
@@ -373,9 +327,9 @@
 
 	<complexType name="OperationResult">
 		<sequence>
-			<element name="Code" type="string"></element>
-			<element name="Status" type="unsignedByte"></element>
-			<element name="Description" type="string"></element>
+			<element name="Code" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Status" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
+			<element name="Description" type="string" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
     
