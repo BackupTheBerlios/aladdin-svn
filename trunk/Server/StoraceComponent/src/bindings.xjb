@@ -1,0 +1,16 @@
+<jxb:bindings version="2.0"
+xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<jxb:bindings schemaLocation="schemata-interface.xsd" node="/xsd:schema">
+<jxb:bindings node="//xsd:complexType[@name='QuestionnaireQuestionAnswer']">
+<jxb:bindings node=".//xsd:attribute[@name='value']">
+<jxb:property name="ValueToFixError1"/>
+</jxb:bindings>
+</jxb:bindings>
+<jxb:bindings node="//xsd:complexType[@name='QuestionnaireAnswer']">
+<jxb:bindings node=".//xsd:attribute[@name='value']">
+<jxb:property name="ValueToFixError2"/>
+</jxb:bindings>
+</jxb:bindings>
+</jxb:bindings>
+</jxb:bindings>
