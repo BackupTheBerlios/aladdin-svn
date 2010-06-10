@@ -52,4 +52,22 @@
 
   </Service>
 
+  <Service name="Catalina-local">
+
+    <Connector port="8081" maxHttpHeaderSize="8192"
+               maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
+               enableLookups="false" redirectPort="8443" acceptCount="100"
+               connectionTimeout="20000" disableUploadTimeout="true" />
+
+    <Engine name="Catalina-local" defaultHost="localhost">
+      <Host name="localhost" appBase="webapps2"
+       unpackWARs="true" autoDeploy="true"
+       xmlValidation="false" xmlNamespaceAware="false">
+
+      </Host>
+
+    </Engine>
+
+  </Service>
+
 </Server>
