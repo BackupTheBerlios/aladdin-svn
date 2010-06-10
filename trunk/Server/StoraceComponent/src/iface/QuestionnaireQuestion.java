@@ -19,20 +19,21 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Questionnaire complex type.
+ * <p>Java class for QuestionnaireQuestion complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Questionnaire">
+ * &lt;complexType name="QuestionnaireQuestion">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="questions" type="{http://aladdin.com/xsd}QuestionnaireQuestion" maxOccurs="unbounded"/>
+ *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="answer" type="{http://aladdin.com/xsd}QuestionnaireQuestionAnswer" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="questions" type="{http://aladdin.com/xsd}QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}decimal" />
- *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="title" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="verision" type="{http://www.w3.org/2001/XMLSchema}decimal" />
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -41,19 +42,74 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Questionnaire", propOrder = {
+@XmlType(name = "QuestionnaireQuestion", propOrder = {
+    "title",
+    "answer",
     "questions"
 })
-public class Questionnaire {
+public class QuestionnaireQuestion {
 
     @XmlElement(required = true)
+    protected String title;
+    protected List<QuestionnaireQuestionAnswer> answer;
     protected List<QuestionnaireQuestion> questions;
     @XmlAttribute
-    protected BigDecimal version;
-    @XmlAttribute(name = "ID")
-    protected String id;
+    protected BigDecimal verision;
     @XmlAttribute
-    protected String title;
+    protected String id;
+
+    /**
+     * Gets the value of the title property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets the value of the title property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTitle(String value) {
+        this.title = value;
+    }
+
+    /**
+     * Gets the value of the answer property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the answer property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAnswer().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link QuestionnaireQuestionAnswer }
+     * 
+     * 
+     */
+    public List<QuestionnaireQuestionAnswer> getAnswer() {
+        if (answer == null) {
+            answer = new ArrayList<QuestionnaireQuestionAnswer>();
+        }
+        return this.answer;
+    }
 
     /**
      * Gets the value of the questions property.
@@ -85,27 +141,27 @@ public class Questionnaire {
     }
 
     /**
-     * Gets the value of the version property.
+     * Gets the value of the verision property.
      * 
      * @return
      *     possible object is
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getVersion() {
-        return version;
+    public BigDecimal getVerision() {
+        return verision;
     }
 
     /**
-     * Sets the value of the version property.
+     * Sets the value of the verision property.
      * 
      * @param value
      *     allowed object is
      *     {@link BigDecimal }
      *     
      */
-    public void setVersion(BigDecimal value) {
-        this.version = value;
+    public void setVerision(BigDecimal value) {
+        this.verision = value;
     }
 
     /**
@@ -116,7 +172,7 @@ public class Questionnaire {
      *     {@link String }
      *     
      */
-    public String getID() {
+    public String getId() {
         return id;
     }
 
@@ -128,32 +184,8 @@ public class Questionnaire {
      *     {@link String }
      *     
      */
-    public void setID(String value) {
+    public void setId(String value) {
         this.id = value;
-    }
-
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTitle(String value) {
-        this.title = value;
     }
 
 }
