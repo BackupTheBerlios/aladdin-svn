@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:tns="http://aladdin.com/SCGen/"
+	targetNamespace="http://aladdin.com/SCGen/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="SCGen"
+	xmlns:aladdin="http://aladdin.com/xsd"
+	>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://aladdin.com/SCGen/">
+      <xsd:import namespace="http://aladdin.com/xsd" schemaLocation="../XSD/schemata.xsd"/>
+      <xsd:element name="GetWarning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetWarningResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="aladdin:Warning"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveWarning">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="aladdin:Warning"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveWarningResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:SystemParameter"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetWarningRequest">
+    <wsdl:part element="tns:GetWarning" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetWarningResponse">
+    <wsdl:part element="tns:GetWarningResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SaveWarningRequest">
+  	<wsdl:part name="parameters" element="tns:SaveWarning"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveWarningResponse">
+  	<wsdl:part name="parameters" element="tns:SaveWarningResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SCGen">
+    <wsdl:operation name="GetWarning">
+      <wsdl:input message="tns:GetWarningRequest"/>
+      <wsdl:output message="tns:GetWarningResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWarning">
+    	<wsdl:input message="tns:SaveWarningRequest"></wsdl:input>
+    	<wsdl:output message="tns:SaveWarningResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SCGenSOAP" type="tns:SCGen">
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="GetWarning">
+  		<soap:operation
+  			soapAction="http://aladdin.com/SCGen/GetWarning" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="SaveWarning">
+  		<soap:operation
+  			soapAction="http://aladdin.com/SCGen/SaveWarning" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SCGen">
+    <wsdl:port binding="tns:SCGenSOAP" name="SCGenSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
