@@ -1,4 +1,4 @@
-<service name="StorageComponent" scope="application" targetNamespace="http://fokus.fraunhofer.de/">
+<service name="StorageComponent" scope="application" targetNamespace="http://aladdin.com/">
     <description>
         StorageComponent
     </description>
@@ -8,6 +8,6 @@
         <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
                          class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
     </messageReceivers>
-    <schema schemaNamespace="http://xsd.aladdin.xsd/xsd"/>
+    <!-- schema schemaNamespace="http://aladdin.com/xsd"/ -->
     <parameter name="ServiceClass">com.aladdin.sc.StorageComponent</parameter>
 </service>

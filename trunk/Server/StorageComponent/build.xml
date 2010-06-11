@@ -64,6 +64,7 @@
         <copy toDir="${build.dir}/classes" failonerror="false">
             <fileset dir="${basedir}/resources">
                 <include name="**/*.xml"/>
+                <include name="**/*.wsdl"/>
             </fileset>
         </copy>
         <jar destfile="${build.dir}/StorageComponent.aar">
