@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
-//import com.aladdin.xsd.*;
-import iface.*;
+import com.aladdin.xsd.*;
 
 public class StorageComponent {
 
