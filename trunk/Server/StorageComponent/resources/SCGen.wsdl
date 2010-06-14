@@ -1,0 +1,1770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SCGen" targetNamespace="http://aladdin-project.eu/SCGen/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://aladdin-project.eu/SCGen/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aladdin="http://aladdin-project.eu/xsd">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://aladdin-project.eu/SCGen/">
+      <xsd:import namespace="http://aladdin-project.eu/xsd" schemaLocation="schemata.xsd"/>
+      <xsd:element name="CreatePatient">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Patient"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreatePatientResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdataPatient">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Patient"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdataPatientResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeletePatient">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeletePatientResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatient">
+      	<xsd:complexType>
+      		<xsd:sequence>
+				<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatientResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Patient"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfPatients">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="filter" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfPatientsResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:PatientInfo"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateAdministrator">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Administrator"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateAdministratorResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateAdministrator">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Administrator"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateAdministratorResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteAdministrator">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteAdministratorResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAdministrator">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAdministratorResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfAdministrators">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="filter" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfAdministratorsResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:AdministratorInfo"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateCarer">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Carer"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateCarerResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateCarer">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Carer"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateCarerResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteCarer">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteCarerResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetCarer">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetCarerResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Carer"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfCarers">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="filter" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfCarersResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:CarerInfo"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateClinician">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Clinician"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateClinicianResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateClinician">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Clinician"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateClinicianResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteClinician">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteClinicianResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetClinician">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetClinicianResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Clinician"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfClinicians">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="filter" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfCliniciansResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:ClinicianInfo"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetUserPlannedTasks">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="uid" type="xsd:string"/>
+      			<xsd:element name="fromData" type="xsd:dateTime"/>
+      			<xsd:element name="toData" type="xsd:dateTime"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetUserPlannedTasksResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:Task"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="StoreMeasurements">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Measurement"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="StoreMeasurementsResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatientMeasurement">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="PatientId" type="xsd:string"/>
+      			<xsd:element name="MeasurementType" type="xsd:int"/>
+      			<xsd:element name="fromData" type="xsd:dateTime"/>
+      			<xsd:element name="toData" type="xsd:dateTime"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatientMeasurementResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:Measurement"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ChangeTaskStatus">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="TaskId" type="xsd:int"/>
+      			<xsd:element name="TaskStatus" type="xsd:int"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ChangeTaskStatusResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AssignTask">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="task" type="aladdin:Task"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AssignTaskResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfPossibleTasks">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userType" type="xsd:int"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfPossibleTasksResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:SystemParameter"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="StoreQuestionnaireAnswers">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:QuestionnaireAnswers"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="StoreQuestionnaireAnswersResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfQuestionnaires">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfQuestionnairesResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:QuestionnaireInfo"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionnaire">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionnaireResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Questionnaire"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateQuestionnaire">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Questionnaire"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateQuestionnaireResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateQuestionnaire">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:Questionnaire"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateQuestionnaireResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteQuestionnaire">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteQuestionnaireResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Questionnaire"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionnaireAnswers">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="ObjectId" type="xsd:string"/>
+      			<xsd:element name="fromDate" type="xsd:dateTime"/>
+      			<xsd:element name="toDate" type="xsd:dateTime"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionnaireAnswersResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:QuestionnaireAnswers"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SavePatientAssessment">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="assessment" type="aladdin:PatientAssessment"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SavePatientAssessmentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveCarerAssessment">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="assessment" type="aladdin:CarerAssessment"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveCarerAssessmentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeletePatientAssessment">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="assessmentId" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeletePatientAssessmentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteCarerAssessment">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="assessmentId" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteCarerAssessmentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatientAssessment">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatientAssessmentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:PatientAssessment"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetCarerAssessment">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetCarerAssessmentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:CarerAssessment"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateExternalService">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:ExternalService"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateExternalServiceResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateExternalService">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="data" type="aladdin:ExternalService"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateExternalServiceResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteExternalService">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteExternalServiceResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAllExternalServices">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAllExternalServicesResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:ExternalService"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveWarning">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="warn" type="aladdin:Warning"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveWarningResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetWarnings">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="warn" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetWarningsResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:Warning"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MarkWarningAsRead">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MarkWarningAsReadResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateCarerResponse">
+    <wsdl:part name="parameters" element="tns:UpdateCarerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfAdministratorsRequest">
+    <wsdl:part name="parameters" element="tns:ListOfAdministrators">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateAdministratorRequest">
+    <wsdl:part name="parameters" element="tns:UpdateAdministrator">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteClinicianResponse">
+    <wsdl:part name="parameters" element="tns:DeleteClinicianResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientMeasurementRequest">
+    <wsdl:part name="parameters" element="tns:GetPatientMeasurement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeletePatientAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:DeletePatientAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdataPatientResponse">
+    <wsdl:part name="parameters" element="tns:UpdataPatientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateExternalServiceResponse">
+    <wsdl:part name="parameters" element="tns:UpdateExternalServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteCarerAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:DeleteCarerAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:DeleteQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateClinicianResponse">
+    <wsdl:part name="parameters" element="tns:UpdateClinicianResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangeTaskStatusRequest">
+    <wsdl:part name="parameters" element="tns:ChangeTaskStatus">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:DeleteQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AssignTaskResponse">
+    <wsdl:part name="parameters" element="tns:AssignTaskResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfAdministratorsResponse">
+    <wsdl:part name="parameters" element="tns:ListOfAdministratorsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfPossibleTasksResponse">
+    <wsdl:part name="parameters" element="tns:ListOfPossibleTasksResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfCarersRequest">
+    <wsdl:part name="parameters" element="tns:ListOfCarers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateClinicianRequest">
+    <wsdl:part name="parameters" element="tns:UpdateClinician">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SavePatientAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:SavePatientAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateAdministratorResponse">
+    <wsdl:part name="parameters" element="tns:UpdateAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MarkWarningAsReadResponse">
+    <wsdl:part name="parameters" element="tns:MarkWarningAsReadResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfCliniciansResponse">
+    <wsdl:part name="parameters" element="tns:ListOfCliniciansResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfQuestionnairesRequest">
+    <wsdl:part name="parameters" element="tns:ListOfQuestionnaires">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCarerAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:GetCarerAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:GetQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteExternalServiceRequest">
+    <wsdl:part name="parameters" element="tns:DeleteExternalService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCarerAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:GetCarerAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfPatientsResponse">
+    <wsdl:part name="parameters" element="tns:ListOfPatientsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCarerResponse">
+    <wsdl:part name="parameters" element="tns:GetCarerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveCarerAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:SaveCarerAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeletePatientRequest">
+    <wsdl:part name="parameters" element="tns:DeletePatient">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteClinicianRequest">
+    <wsdl:part name="parameters" element="tns:DeleteClinician">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientMeasurementResponse">
+    <wsdl:part name="parameters" element="tns:GetPatientMeasurementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateCarerResponse">
+    <wsdl:part name="parameters" element="tns:CreateCarerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserPlannedTasksResponse">
+    <wsdl:part name="parameters" element="tns:GetUserPlannedTasksResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCarerRequest">
+    <wsdl:part name="parameters" element="tns:GetCarer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:GetPatientAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:CreateQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientRequest">
+    <wsdl:part name="parameters" element="tns:GetPatient">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateExternalServiceRequest">
+    <wsdl:part name="parameters" element="tns:CreateExternalService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfQuestionnairesResponse">
+    <wsdl:part name="parameters" element="tns:ListOfQuestionnairesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangeTaskStatusResponse">
+    <wsdl:part name="parameters" element="tns:ChangeTaskStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StoreQuestionnaireAnswersResponse">
+    <wsdl:part name="parameters" element="tns:StoreQuestionnaireAnswersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StoreMeasurementsResponse">
+    <wsdl:part name="parameters" element="tns:StoreMeasurementsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreatePatientRequest">
+    <wsdl:part name="parameters" element="tns:CreatePatient">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteCarerResponse">
+    <wsdl:part name="parameters" element="tns:DeleteCarerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StoreMeasurementsRequest">
+    <wsdl:part name="parameters" element="tns:StoreMeasurements">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:CreateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAdministratorResponse">
+    <wsdl:part name="parameters" element="tns:GetAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateAdministratorResponse">
+    <wsdl:part name="parameters" element="tns:CreateAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateCarerRequest">
+    <wsdl:part name="parameters" element="tns:CreateCarer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAdministratorRequest">
+    <wsdl:part name="parameters" element="tns:GetAdministrator">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateClinicianResponse">
+    <wsdl:part name="parameters" element="tns:CreateClinicianResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StoreQuestionnaireAnswersRequest">
+    <wsdl:part name="parameters" element="tns:StoreQuestionnaireAnswers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllExternalServicesRequest">
+    <wsdl:part name="parameters" element="tns:GetAllExternalServices">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateExternalServiceRequest">
+    <wsdl:part name="parameters" element="tns:UpdateExternalService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveWarningResponse">
+    <wsdl:part name="parameters" element="tns:SaveWarningResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MarkWarningAsReadRequest">
+    <wsdl:part name="parameters" element="tns:MarkWarningAsRead">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SavePatientAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:SavePatientAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateClinicianRequest">
+    <wsdl:part name="parameters" element="tns:CreateClinician">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientResponse">
+    <wsdl:part name="parameters" element="tns:GetPatientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:UpdateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetWarningsRequest">
+    <wsdl:part name="parameters" element="tns:GetWarnings">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteCarerRequest">
+    <wsdl:part name="parameters" element="tns:DeleteCarer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AssignTaskRequest">
+    <wsdl:part name="parameters" element="tns:AssignTask">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteAdministratorResponse">
+    <wsdl:part name="parameters" element="tns:DeleteAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetClinicianRequest">
+    <wsdl:part name="parameters" element="tns:GetClinician">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllExternalServicesResponse">
+    <wsdl:part name="parameters" element="tns:GetAllExternalServicesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfPatientsRequest">
+    <wsdl:part name="parameters" element="tns:ListOfPatients">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfCliniciansRequest">
+    <wsdl:part name="parameters" element="tns:ListOfClinicians">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeletePatientResponse">
+    <wsdl:part name="parameters" element="tns:DeletePatientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreatePatientResponse">
+    <wsdl:part name="parameters" element="tns:CreatePatientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:UpdateQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetWarningsResponse">
+    <wsdl:part name="parameters" element="tns:GetWarningsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteAdministratorRequest">
+    <wsdl:part name="parameters" element="tns:DeleteAdministrator">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersRequest">
+    <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserPlannedTasksRequest">
+    <wsdl:part name="parameters" element="tns:GetUserPlannedTasks">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveCarerAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:SaveCarerAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateAdministratorRequest">
+    <wsdl:part name="parameters" element="tns:CreateAdministrator">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfCarersResponse">
+    <wsdl:part name="parameters" element="tns:ListOfCarersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateCarerRequest">
+    <wsdl:part name="parameters" element="tns:UpdateCarer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:GetQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteCarerAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:DeleteCarerAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetClinicianResponse">
+    <wsdl:part name="parameters" element="tns:GetClinicianResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveWarningRequest">
+    <wsdl:part name="parameters" element="tns:SaveWarning">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateExternalServiceResponse">
+    <wsdl:part name="parameters" element="tns:CreateExternalServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfPossibleTasksRequest">
+    <wsdl:part name="parameters" element="tns:ListOfPossibleTasks">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeletePatientAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:DeletePatientAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersResponse">
+    <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteExternalServiceResponse">
+    <wsdl:part name="parameters" element="tns:DeleteExternalServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdataPatientRequest">
+    <wsdl:part name="parameters" element="tns:UpdataPatient">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:GetPatientAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SCGen">
+    <wsdl:operation name="CreatePatient">
+      <wsdl:input message="tns:CreatePatientRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreatePatientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdataPatient">
+      <wsdl:input message="tns:UpdataPatientRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdataPatientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePatient">
+      <wsdl:input message="tns:DeletePatientRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeletePatientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <wsdl:input message="tns:GetPatientRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetPatientResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfPatients">
+      <wsdl:input message="tns:ListOfPatientsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfPatientsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAdministrator">
+      <wsdl:input message="tns:CreateAdministratorRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateAdministratorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAdministrator">
+      <wsdl:input message="tns:UpdateAdministratorRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateAdministratorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAdministrator">
+      <wsdl:input message="tns:DeleteAdministratorRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteAdministratorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdministrator">
+      <wsdl:input message="tns:GetAdministratorRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAdministratorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfAdministrators">
+      <wsdl:input message="tns:ListOfAdministratorsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfAdministratorsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCarer">
+      <wsdl:input message="tns:CreateCarerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateCarerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCarer">
+      <wsdl:input message="tns:UpdateCarerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateCarerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarer">
+      <wsdl:input message="tns:DeleteCarerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteCarerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarer">
+      <wsdl:input message="tns:GetCarerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetCarerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfCarers">
+      <wsdl:input message="tns:ListOfCarersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfCarersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateClinician">
+      <wsdl:input message="tns:CreateClinicianRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateClinicianResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClinician">
+      <wsdl:input message="tns:UpdateClinicianRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateClinicianResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteClinician">
+      <wsdl:input message="tns:DeleteClinicianRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteClinicianResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClinician">
+      <wsdl:input message="tns:GetClinicianRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetClinicianResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfClinicians">
+      <wsdl:input message="tns:ListOfCliniciansRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfCliniciansResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPlannedTasks">
+      <wsdl:input message="tns:GetUserPlannedTasksRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserPlannedTasksResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreMeasurements">
+      <wsdl:input message="tns:StoreMeasurementsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:StoreMeasurementsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientMeasurement">
+      <wsdl:input message="tns:GetPatientMeasurementRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetPatientMeasurementResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeTaskStatus">
+      <wsdl:input message="tns:ChangeTaskStatusRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangeTaskStatusResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignTask">
+      <wsdl:input message="tns:AssignTaskRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AssignTaskResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfPossibleTasks">
+      <wsdl:input message="tns:ListOfPossibleTasksRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfPossibleTasksResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreQuestionnaireAnswers">
+      <wsdl:input message="tns:StoreQuestionnaireAnswersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:StoreQuestionnaireAnswersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfQuestionnaires">
+      <wsdl:input message="tns:ListOfQuestionnairesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfQuestionnairesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionnaire">
+      <wsdl:input message="tns:GetQuestionnaireRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetQuestionnaireResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateQuestionnaire">
+      <wsdl:input message="tns:UpdateQuestionnaireRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateQuestionnaireResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuestionnaire">
+      <wsdl:input message="tns:CreateQuestionnaireRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateQuestionnaireResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteQuestionnaire">
+      <wsdl:input message="tns:DeleteQuestionnaireRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteQuestionnaireResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionnaireAnswers">
+      <wsdl:input message="tns:GetQuestionnaireAnswersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetQuestionnaireAnswersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePatientAssessment">
+      <wsdl:input message="tns:SavePatientAssessmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:SavePatientAssessmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCarerAssessment">
+      <wsdl:input message="tns:SaveCarerAssessmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:SaveCarerAssessmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePatientAssessment">
+      <wsdl:input message="tns:DeletePatientAssessmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeletePatientAssessmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarerAssessment">
+      <wsdl:input message="tns:DeleteCarerAssessmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteCarerAssessmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientAssessment">
+      <wsdl:input message="tns:GetPatientAssessmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetPatientAssessmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarerAssessment">
+      <wsdl:input message="tns:GetCarerAssessmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetCarerAssessmentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateExternalService">
+      <wsdl:input message="tns:CreateExternalServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateExternalServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExternalService">
+      <wsdl:input message="tns:UpdateExternalServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateExternalServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExternalService">
+      <wsdl:input message="tns:DeleteExternalServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteExternalServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllExternalServices">
+      <wsdl:input message="tns:GetAllExternalServicesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllExternalServicesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWarning">
+      <wsdl:input message="tns:SaveWarningRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:SaveWarningResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWarnings">
+      <wsdl:input message="tns:GetWarningsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetWarningsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkWarningAsRead">
+      <wsdl:input message="tns:MarkWarningAsReadRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:MarkWarningAsReadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SCGenSOAP" type="tns:SCGen">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CreatePatient">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/CreatePatient"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdataPatient">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/UpdataPatient"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePatient">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeletePatient"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatient">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetPatient"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfPatients">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ListOfPatients"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAdministrator">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/CreateAdministrator"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAdministrator">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/UpdateAdministrator"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAdministrator">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeleteAdministrator"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdministrator">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetAdministrator"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfAdministrators">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ListOfAdministrators"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCarer">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/CreateCarer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCarer">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/UpdateCarer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarer">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeleteCarer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarer">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetCarer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfCarers">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ListOfCarers"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateClinician">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/CreateClinician"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClinician">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/UpdateClinician"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteClinician">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeleteClinician"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClinician">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetClinician"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfClinicians">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ListOfClinicians"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPlannedTasks">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetUserPlannedTasks"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreMeasurements">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/StoreMeasurements"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientMeasurement">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetPatientMeasurement"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeTaskStatus">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ChangeTaskStatus"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignTask">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/AssignTask"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfPossibleTasks">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ListOfPossibleTasks"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreQuestionnaireAnswers">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/StoreQuestionnaireAnswers"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfQuestionnaires">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/ListOfQuestionnaires"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionnaire">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetQuestionnaire"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateQuestionnaire">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/UpdateQuestionnaire"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuestionnaire">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/CreateQuestionnaire"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteQuestionnaire">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeleteQuestionnaire"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionnaireAnswers">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetQuestionnaireAnswers"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePatientAssessment">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/SavePatientAssessment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCarerAssessment">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/SaveCarerAssessment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePatientAssessment">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeletePatientAssessment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCarerAssessment">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeleteCarerAssessment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientAssessment">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetPatientAssessment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarerAssessment">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetCarerAssessment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateExternalService">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/CreateExternalService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExternalService">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/UpdateExternalService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExternalService">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/DeleteExternalService"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllExternalServices">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetAllExternalServices"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWarning">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/SaveWarning"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWarnings">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/GetWarnings"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarkWarningAsRead">
+      <soap:operation soapAction="http://aladdin-project.eu/SCGen/MarkWarningAsRead"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SCGen">
+    <wsdl:port name="SCGenSOAP" binding="tns:SCGenSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

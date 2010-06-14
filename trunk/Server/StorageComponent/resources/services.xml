@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT) -->
+<serviceGroup>
+    <service name="SCGen">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.aladdin.sc.SCGenMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">com.aladdin.sc.SCGenSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="DeleteCarerAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeleteCarerAssessment</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeleteCarerAssessmentResponse</outputActionMapping>
+        </operation>
+        <operation name="GetAllExternalServices" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetAllExternalServices</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetAllExternalServicesResponse</outputActionMapping>
+        </operation>
+        <operation name="SaveWarning" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/SaveWarning</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/SaveWarningResponse</outputActionMapping>
+        </operation>
+        <operation name="UpdateAdministrator" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/UpdateAdministrator</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/UpdateAdministratorResponse</outputActionMapping>
+        </operation>
+        <operation name="DeletePatientAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeletePatientAssessment</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeletePatientAssessmentResponse</outputActionMapping>
+        </operation>
+        <operation name="MarkWarningAsRead" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/MarkWarningAsRead</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/MarkWarningAsReadResponse</outputActionMapping>
+        </operation>
+        <operation name="CreateCarer" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/CreateCarer</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/CreateCarerResponse</outputActionMapping>
+        </operation>
+        <operation name="GetClinician" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetClinician</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetClinicianResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfClinicians" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ListOfClinicians</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ListOfCliniciansResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfAdministrators" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ListOfAdministrators</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ListOfAdministratorsResponse</outputActionMapping>
+        </operation>
+        <operation name="DeleteClinician" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeleteClinician</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeleteClinicianResponse</outputActionMapping>
+        </operation>
+        <operation name="StoreMeasurements" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/StoreMeasurements</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/StoreMeasurementsResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfCarers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ListOfCarers</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ListOfCarersResponse</outputActionMapping>
+        </operation>
+        <operation name="CreateExternalService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/CreateExternalService</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/CreateExternalServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="GetPatientAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetPatientAssessment</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetPatientAssessmentResponse</outputActionMapping>
+        </operation>
+        <operation name="UpdateQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/UpdateQuestionnaire</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/UpdateQuestionnaireResponse</outputActionMapping>
+        </operation>
+        <operation name="GetPatientMeasurement" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetPatientMeasurement</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetPatientMeasurementResponse</outputActionMapping>
+        </operation>
+        <operation name="CreateAdministrator" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/CreateAdministrator</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/CreateAdministratorResponse</outputActionMapping>
+        </operation>
+        <operation name="GetPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetPatient</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetPatientResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfQuestionnaires" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ListOfQuestionnaires</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ListOfQuestionnairesResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfPossibleTasks" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ListOfPossibleTasks</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ListOfPossibleTasksResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfPatients" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ListOfPatients</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ListOfPatientsResponse</outputActionMapping>
+        </operation>
+        <operation name="DeleteCarer" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeleteCarer</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeleteCarerResponse</outputActionMapping>
+        </operation>
+        <operation name="GetCarerAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetCarerAssessment</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetCarerAssessmentResponse</outputActionMapping>
+        </operation>
+        <operation name="UpdateClinician" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/UpdateClinician</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/UpdateClinicianResponse</outputActionMapping>
+        </operation>
+        <operation name="ChangeTaskStatus" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/ChangeTaskStatus</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/ChangeTaskStatusResponse</outputActionMapping>
+        </operation>
+        <operation name="DeleteExternalService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeleteExternalService</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeleteExternalServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="CreateClinician" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/CreateClinician</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/CreateClinicianResponse</outputActionMapping>
+        </operation>
+        <operation name="GetCarer" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetCarer</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetCarerResponse</outputActionMapping>
+        </operation>
+        <operation name="CreateQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/CreateQuestionnaire</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/CreateQuestionnaireResponse</outputActionMapping>
+        </operation>
+        <operation name="GetQuestionnaireAnswers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetQuestionnaireAnswers</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetQuestionnaireAnswersResponse</outputActionMapping>
+        </operation>
+        <operation name="StoreQuestionnaireAnswers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/StoreQuestionnaireAnswers</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/StoreQuestionnaireAnswersResponse</outputActionMapping>
+        </operation>
+        <operation name="DeleteAdministrator" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeleteAdministrator</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeleteAdministratorResponse</outputActionMapping>
+        </operation>
+        <operation name="DeleteQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeleteQuestionnaire</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeleteQuestionnaireResponse</outputActionMapping>
+        </operation>
+        <operation name="SavePatientAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/SavePatientAssessment</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/SavePatientAssessmentResponse</outputActionMapping>
+        </operation>
+        <operation name="UpdateCarer" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/UpdateCarer</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/UpdateCarerResponse</outputActionMapping>
+        </operation>
+        <operation name="GetWarnings" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetWarnings</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetWarningsResponse</outputActionMapping>
+        </operation>
+        <operation name="UpdateExternalService" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/UpdateExternalService</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/UpdateExternalServiceResponse</outputActionMapping>
+        </operation>
+        <operation name="AssignTask" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/AssignTask</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/AssignTaskResponse</outputActionMapping>
+        </operation>
+        <operation name="GetQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetQuestionnaire</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetQuestionnaireResponse</outputActionMapping>
+        </operation>
+        <operation name="DeletePatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/DeletePatient</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/DeletePatientResponse</outputActionMapping>
+        </operation>
+        <operation name="SaveCarerAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/SaveCarerAssessment</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/SaveCarerAssessmentResponse</outputActionMapping>
+        </operation>
+        <operation name="GetUserPlannedTasks" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetUserPlannedTasks</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetUserPlannedTasksResponse</outputActionMapping>
+        </operation>
+        <operation name="GetAdministrator" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/GetAdministrator</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/GetAdministratorResponse</outputActionMapping>
+        </operation>
+        <operation name="CreatePatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/CreatePatient</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/CreatePatientResponse</outputActionMapping>
+        </operation>
+        <operation name="UpdataPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/SCGen/">
+            <actionMapping>http://aladdin-project.eu/SCGen/UpdataPatient</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/SCGen/SCGen/UpdataPatientResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>
