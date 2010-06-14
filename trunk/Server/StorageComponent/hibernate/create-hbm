@@ -1,0 +1,3 @@
+#!/bin/sh
+
+for i in `xsd2hbm -x ../../XSD/db.xsd -i SystemParameter --list`; do echo "create $i" && xsd2hbm -x ../../XSD/db.xsd -i SystemParameter -b $i > src/com/aladdin/sc/db/$i.hbm.xml ; done;

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="com.aladdin.sc.db.Questionnaire">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Questionnaire_id_seq</param></generator></id>
+<property name="version" type="java.math.BigDecimal"><column name="version"/></property>
+<property name="title" type="java.lang.String"><column name="title"/></property>
+<set name="QuestionnaireQuestions" inverse="true" cascade="none"><key><column name="quest" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.QuestionnaireQuestion"/></set>
+<set name="Tasks1" inverse="true" cascade="none"><key><column name="questionnaire" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.Task"/></set>
+</class>
+</hibernate-mapping>
+

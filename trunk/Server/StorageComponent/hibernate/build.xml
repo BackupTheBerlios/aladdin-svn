@@ -1,0 +1,72 @@
+<project basedir="." default="generate.service">
+
+    <property environment="env"/>
+    <property name="AXIS2_HOME" value="${env.AXIS2_HOME}"/>
+    <property name="build.dir" value="build"/>
+
+    <path id="classpath">
+        <fileset dir="${AXIS2_HOME}/lib">
+            <include name="*.jar"/>
+        </fileset>
+	<fileset dir="jar">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="generate.hbm">
+    	<exec executable="create-hbm"/>
+    </target>
+
+<target name="schemaexport">
+    <taskdef name="schemaexport"
+        classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+        classpathref="classpath"/>
+    
+    <schemaexport
+        properties="src/hibernate.properties"
+        quiet="no"
+        text="no"
+        drop="no"
+        delimiter=";"
+        output="data/sc.sql">
+        <fileset dir="generated">
+            <include name="**/*.hbm.xml"/>
+        </fileset>
+    </schemaexport>
+</target>
+
+
+    <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath" />
+    <target name="hbm2java" depends="generate.hbm">
+    	<hibernatetool destdir="generated">
+    		<configuration configurationfile="src/hibernate-aladdin-sc.cfg.xml">
+	    		<fileset dir="src/com/aladdin/sc/db">
+    				<include name="**/*.hbm.xml"/>
+    			</fileset>
+    		</configuration>
+    		<hbm2java/>
+    	</hibernatetool>
+    </target>
+
+    <target name="compile.hibernate.jar" depends="hbm2java">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/g_classes"/>
+        <javac debug="on" 
+               fork="true"
+               destdir="${build.dir}/g_classes" 
+               srcdir="${basedir}/generated"
+               classpathref="classpath">
+        </javac>
+    </target>
+
+    <target name="generate.hibernate.jar" depends="compile.hibernate.jar">
+        <jar destfile="${build.dir}/StorageComponentHibernate.jar">
+            <fileset includes="**/*.class" dir="${build.dir}/g_classes"/>
+        </jar>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+</project>

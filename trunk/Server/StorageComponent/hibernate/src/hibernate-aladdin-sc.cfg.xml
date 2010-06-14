@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="SC">
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">12345678</property>
+        <property name="hibernate.connection.url">jdbc:postgresql:sc</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.default_schema">public</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+<!-- mapping resource="com/aladdin/xsd/Service.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Questionnaire.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/LivingWithT.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/QuestionnaireAnswer.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/SocioDemographicData.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/MaritalStatusT.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Note.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Clinician.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/PatientCarer.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/SystemParameter.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/PersonData.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/QuestionnaireQuestion.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Communication.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Task.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Patient.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/GenderT.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Right.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/typeT.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Address.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/User.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/PatientAssessment.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/CarerAssessment.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/QuestionnaireQuestionAnswer.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/AetologyT.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/TaskStatusT.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Carer.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Measurment.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/Identifier.hbm.xml"/>
+<mapping resource="com/aladdin/xsd/TaskTypeT.hbm.xml"/ -->
+
+    </session-factory>
+</hibernate-configuration>

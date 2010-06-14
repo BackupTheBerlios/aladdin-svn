@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="com.aladdin.sc.db.PatientCarer">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">PatientCarer_id_seq</param></generator></id>
+<property name="patient" type="java.lang.Integer"><column name="patient"/></property>
+<property name="carer" type="java.lang.Integer"><column name="carer"/></property>
+<property name="isprimary" type="java.lang.Boolean"><column name="isprimary"/></property>
+<many-to-one name="m_Patientpatient" class="com.aladdin.sc.db.Patient" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
+<many-to-one name="m_Carercarer" class="com.aladdin.sc.db.Carer" insert="false" update="false"><column name="carer" not-null="false" /></many-to-one>
+</class>
+</hibernate-mapping>
+

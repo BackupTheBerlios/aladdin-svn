@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+	PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping><class name="com.aladdin.sc.db.Patient">
+<id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Patient_id_seq</param></generator></id>
+<property name="persondata" type="java.lang.Integer"><column name="persondata"/></property>
+<property name="sd" type="java.lang.Integer"><column name="sd"/></property>
+<property name="clinician" type="java.lang.Integer"><column name="clinician"/></property>
+<set name="PatientAssessments" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.PatientAssessment"/></set>
+<many-to-one name="m_PersonDatapersondata" class="com.aladdin.sc.db.PersonData" insert="false" update="false"><column name="persondata" not-null="false" /></many-to-one>
+<many-to-one name="m_SocioDemographicDatasd" class="com.aladdin.sc.db.SocioDemographicData" insert="false" update="false"><column name="sd" not-null="false" /></many-to-one>
+<many-to-one name="m_Clinicianclinician" class="com.aladdin.sc.db.Clinician" insert="false" update="false"><column name="clinician" not-null="false" /></many-to-one>
+<set name="PatientCarers1" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.PatientCarer"/></set>
+</class>
+</hibernate-mapping>
+
