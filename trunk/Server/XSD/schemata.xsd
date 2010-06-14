@@ -60,15 +60,34 @@
 	
 	<complexType name="Warning">
 		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="1"></element>
+			<element name="ID" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="TypeOfWarning" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="DateTimeOfWarning" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="Effect" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="Indicator" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="RiskLevel" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="JustificationText" type="string"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="EmergencyLevel" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="PatientID" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="Delivered" type="boolean" maxOccurs="1"
+				minOccurs="1">
+			</element>
 		</sequence>
 	</complexType>
 
@@ -101,7 +120,7 @@
 			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
 			<element name="PersonID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Login" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Username" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="Password" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
