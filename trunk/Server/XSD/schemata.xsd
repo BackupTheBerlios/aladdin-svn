@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin.com/xsd" elementFormDefault="qualified" xmlns:tns="http://aladdin.com/xsd">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin-project.eu/xsd" elementFormDefault="qualified" xmlns:tns="http://aladdin-project.eu/xsd">
     <complexType name="Questionnaire">
     	<sequence>
     		<element name="questions" type="tns:QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="1"></element>
