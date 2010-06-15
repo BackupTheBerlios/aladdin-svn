@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions
-	xmlns:tns="http://aladdin-project.eu/SCGen/"
-	targetNamespace="http://aladdin-project.eu/SCGen/"
+	xmlns:tns="http://aladdin-project.eu/StorageComponent/"
+	targetNamespace="http://aladdin-project.eu/StorageComponent/"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	name="SCGen"
+	name="StorageComponent"
 	xmlns:aladdin="http://aladdin-project.eu/xsd"
 	>
   <wsdl:types>
-    <xsd:schema targetNamespace="http://aladdin-project.eu/SCGen/">
+    <xsd:schema targetNamespace="http://aladdin-project.eu/StorageComponent/">
       <xsd:import namespace="http://aladdin-project.eu/xsd" schemaLocation="../XSD/schemata.xsd"/>
       <xsd:element name="CreatePatient">
       	<xsd:complexType>
@@ -984,7 +984,7 @@
   <wsdl:message name="MarkWarningAsReadResponse">
   	<wsdl:part name="parameters" element="tns:MarkWarningAsReadResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:portType name="SCGen">
+  <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
         	<wsdl:output message="tns:CreatePatientResponse"></wsdl:output>
@@ -1170,12 +1170,12 @@
         	<wsdl:output message="tns:MarkWarningAsReadResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="SCGenSOAP" type="tns:SCGen">
+  <wsdl:binding name="StorageComponentSOAP" type="tns:StorageComponent">
   	<soap:binding style="document"
   		transport="http://schemas.xmlsoap.org/soap/http" />
   	<wsdl:operation name="CreatePatient">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/CreatePatient" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/CreatePatient" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1185,7 +1185,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="UpdataPatient">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/UpdataPatient" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdataPatient" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1195,7 +1195,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeletePatient">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeletePatient" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeletePatient" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1205,7 +1205,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetPatient">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetPatient" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatient" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1215,7 +1215,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ListOfPatients">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ListOfPatients" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfPatients" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1225,7 +1225,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="CreateAdministrator">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/CreateAdministrator" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/CreateAdministrator" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1235,7 +1235,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="UpdateAdministrator">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/UpdateAdministrator" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateAdministrator" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1245,7 +1245,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeleteAdministrator">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeleteAdministrator" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteAdministrator" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1255,7 +1255,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetAdministrator">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetAdministrator" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetAdministrator" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1265,7 +1265,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ListOfAdministrators">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ListOfAdministrators" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfAdministrators" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1275,7 +1275,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="CreateCarer">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/CreateCarer" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/CreateCarer" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1285,7 +1285,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="UpdateCarer">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/UpdateCarer" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateCarer" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1295,7 +1295,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeleteCarer">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeleteCarer" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteCarer" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1305,7 +1305,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetCarer">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetCarer" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetCarer" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1315,7 +1315,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ListOfCarers">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ListOfCarers" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfCarers" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1325,7 +1325,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="CreateClinician">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/CreateClinician" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/CreateClinician" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1335,7 +1335,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="UpdateClinician">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/UpdateClinician" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateClinician" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1345,7 +1345,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeleteClinician">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeleteClinician" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteClinician" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1355,7 +1355,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetClinician">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetClinician" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetClinician" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1365,7 +1365,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ListOfClinicians">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ListOfClinicians" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfClinicians" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1375,7 +1375,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetUserPlannedTasks">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetUserPlannedTasks" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetUserPlannedTasks" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1385,7 +1385,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="StoreMeasurements">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/StoreMeasurements" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/StoreMeasurements" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1395,7 +1395,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetPatientMeasurement">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetPatientMeasurement" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientMeasurement" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1405,7 +1405,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ChangeTaskStatus">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ChangeTaskStatus" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ChangeTaskStatus" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1415,7 +1415,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="AssignTask">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/AssignTask" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/AssignTask" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1425,7 +1425,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ListOfPossibleTasks">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ListOfPossibleTasks" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfPossibleTasks" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1435,7 +1435,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="StoreQuestionnaireAnswers">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/StoreQuestionnaireAnswers" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/StoreQuestionnaireAnswers" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1445,7 +1445,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="ListOfQuestionnaires">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/ListOfQuestionnaires" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfQuestionnaires" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1455,7 +1455,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetQuestionnaire">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetQuestionnaire" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionnaire" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1465,7 +1465,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="UpdateQuestionnaire">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/UpdateQuestionnaire" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateQuestionnaire" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1475,7 +1475,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="CreateQuestionnaire">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/CreateQuestionnaire" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/CreateQuestionnaire" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1485,7 +1485,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeleteQuestionnaire">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeleteQuestionnaire" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteQuestionnaire" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1495,7 +1495,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetQuestionnaireAnswers">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetQuestionnaireAnswers" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionnaireAnswers" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1505,7 +1505,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="SavePatientAssessment">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/SavePatientAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/SavePatientAssessment" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1515,7 +1515,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="SaveCarerAssessment">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/SaveCarerAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/SaveCarerAssessment" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1525,7 +1525,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeletePatientAssessment">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeletePatientAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeletePatientAssessment" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1535,7 +1535,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeleteCarerAssessment">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeleteCarerAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteCarerAssessment" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1545,7 +1545,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetPatientAssessment">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetPatientAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientAssessment" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1555,7 +1555,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetCarerAssessment">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetCarerAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetCarerAssessment" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1565,7 +1565,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="CreateExternalService">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/CreateExternalService" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/CreateExternalService" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1575,7 +1575,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="UpdateExternalService">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/UpdateExternalService" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateExternalService" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1585,7 +1585,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="DeleteExternalService">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/DeleteExternalService" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteExternalService" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1595,7 +1595,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetAllExternalServices">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetAllExternalServices" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetAllExternalServices" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1605,7 +1605,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="SaveWarning">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/SaveWarning" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/SaveWarning" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1615,7 +1615,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetWarnings">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/GetWarnings" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetWarnings" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1625,7 +1625,7 @@
   	</wsdl:operation>
   	<wsdl:operation name="MarkWarningAsRead">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/SCGen/MarkWarningAsRead" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/MarkWarningAsRead" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1634,8 +1634,8 @@
   		</wsdl:output>
   	</wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="SCGen">
-    <wsdl:port binding="tns:SCGenSOAP" name="SCGenSOAP">
+  <wsdl:service name="StorageComponent">
+    <wsdl:port binding="tns:StorageComponentSOAP" name="StorageComponentSOAP">
       <soap:address location="http://www.example.org/"/>
     </wsdl:port>
   </wsdl:service>

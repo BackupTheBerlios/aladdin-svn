@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Language extends org.apache.xmlbeans.XmlLanguage
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Language.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s63797E7E0B2ADD7DB39E2536A3333547").resolveHandle("languagea8detype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Language.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("languagea8detype");
     
     /**
      * Gets the "id" attribute

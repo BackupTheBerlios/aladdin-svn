@@ -51,8 +51,8 @@
     <complexType name="Warning">
         <sequence>
             <element name="ID" type="string"/>
-            <element name="TypeOfWarning" type="string"/>
-            <element name="DateTimeOfWarning" type="tns:SystemParameter"/>
+            <element name="TypeOfWarning" type="tns:SystemParameter"/>
+            <element name="DateTimeOfWarning" type="dateTime"/>
             <element name="Effect" type="tns:SystemParameter"/>
             <element name="Indicator" type="tns:SystemParameter"/>
             <element name="RiskLevel" type="tns:SystemParameter"/>

@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface LanguageDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(LanguageDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s63797E7E0B2ADD7DB39E2536A3333547").resolveHandle("language02eedoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(LanguageDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("language02eedoctype");
     
     /**
      * Gets the "language" element

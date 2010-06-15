@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Warning extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s63797E7E0B2ADD7DB39E2536A3333547").resolveHandle("warning2936type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("warning2936type");
     
     /**
      * Gets the "ID" element
@@ -41,37 +41,37 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     /**
      * Gets the "TypeOfWarning" element
      */
-    java.lang.String getTypeOfWarning();
-    
-    /**
-     * Gets (as xml) the "TypeOfWarning" element
-     */
-    org.apache.xmlbeans.XmlString xgetTypeOfWarning();
+    eu.aladdin_project.xsd.SystemParameter getTypeOfWarning();
     
     /**
      * Sets the "TypeOfWarning" element
      */
-    void setTypeOfWarning(java.lang.String typeOfWarning);
+    void setTypeOfWarning(eu.aladdin_project.xsd.SystemParameter typeOfWarning);
     
     /**
-     * Sets (as xml) the "TypeOfWarning" element
+     * Appends and returns a new empty "TypeOfWarning" element
      */
-    void xsetTypeOfWarning(org.apache.xmlbeans.XmlString typeOfWarning);
+    eu.aladdin_project.xsd.SystemParameter addNewTypeOfWarning();
     
     /**
      * Gets the "DateTimeOfWarning" element
      */
-    eu.aladdin_project.xsd.SystemParameter getDateTimeOfWarning();
+    java.util.Calendar getDateTimeOfWarning();
+    
+    /**
+     * Gets (as xml) the "DateTimeOfWarning" element
+     */
+    org.apache.xmlbeans.XmlDateTime xgetDateTimeOfWarning();
     
     /**
      * Sets the "DateTimeOfWarning" element
      */
-    void setDateTimeOfWarning(eu.aladdin_project.xsd.SystemParameter dateTimeOfWarning);
+    void setDateTimeOfWarning(java.util.Calendar dateTimeOfWarning);
     
     /**
-     * Appends and returns a new empty "DateTimeOfWarning" element
+     * Sets (as xml) the "DateTimeOfWarning" element
      */
-    eu.aladdin_project.xsd.SystemParameter addNewDateTimeOfWarning();
+    void xsetDateTimeOfWarning(org.apache.xmlbeans.XmlDateTime dateTimeOfWarning);
     
     /**
      * Gets the "Effect" element

@@ -112,31 +112,17 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     /**
      * Gets the "TypeOfWarning" element
      */
-    public java.lang.String getTypeOfWarning()
+    public eu.aladdin_project.xsd.SystemParameter getTypeOfWarning()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TYPEOFWARNING$2, 0);
+            eu.aladdin_project.xsd.SystemParameter target = null;
+            target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(TYPEOFWARNING$2, 0);
             if (target == null)
             {
                 return null;
             }
-            return target.getStringValue();
-        }
-    }
-    
-    /**
-     * Gets (as xml) the "TypeOfWarning" element
-     */
-    public org.apache.xmlbeans.XmlString xgetTypeOfWarning()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TYPEOFWARNING$2, 0);
             return target;
         }
     }
@@ -144,53 +130,63 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     /**
      * Sets the "TypeOfWarning" element
      */
-    public void setTypeOfWarning(java.lang.String typeOfWarning)
+    public void setTypeOfWarning(eu.aladdin_project.xsd.SystemParameter typeOfWarning)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TYPEOFWARNING$2, 0);
+            eu.aladdin_project.xsd.SystemParameter target = null;
+            target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(TYPEOFWARNING$2, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TYPEOFWARNING$2);
-            }
-            target.setStringValue(typeOfWarning);
-        }
-    }
-    
-    /**
-     * Sets (as xml) the "TypeOfWarning" element
-     */
-    public void xsetTypeOfWarning(org.apache.xmlbeans.XmlString typeOfWarning)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TYPEOFWARNING$2, 0);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TYPEOFWARNING$2);
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(TYPEOFWARNING$2);
             }
             target.set(typeOfWarning);
         }
     }
     
     /**
-     * Gets the "DateTimeOfWarning" element
+     * Appends and returns a new empty "TypeOfWarning" element
      */
-    public eu.aladdin_project.xsd.SystemParameter getDateTimeOfWarning()
+    public eu.aladdin_project.xsd.SystemParameter addNewTypeOfWarning()
     {
         synchronized (monitor())
         {
             check_orphaned();
             eu.aladdin_project.xsd.SystemParameter target = null;
-            target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
+            target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(TYPEOFWARNING$2);
+            return target;
+        }
+    }
+    
+    /**
+     * Gets the "DateTimeOfWarning" element
+     */
+    public java.util.Calendar getDateTimeOfWarning()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
             if (target == null)
             {
                 return null;
             }
+            return target.getCalendarValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "DateTimeOfWarning" element
+     */
+    public org.apache.xmlbeans.XmlDateTime xgetDateTimeOfWarning()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlDateTime target = null;
+            target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
             return target;
         }
     }
@@ -198,32 +194,36 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     /**
      * Sets the "DateTimeOfWarning" element
      */
-    public void setDateTimeOfWarning(eu.aladdin_project.xsd.SystemParameter dateTimeOfWarning)
+    public void setDateTimeOfWarning(java.util.Calendar dateTimeOfWarning)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.SystemParameter target = null;
-            target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(DATETIMEOFWARNING$4);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(DATETIMEOFWARNING$4);
             }
-            target.set(dateTimeOfWarning);
+            target.setCalendarValue(dateTimeOfWarning);
         }
     }
     
     /**
-     * Appends and returns a new empty "DateTimeOfWarning" element
+     * Sets (as xml) the "DateTimeOfWarning" element
      */
-    public eu.aladdin_project.xsd.SystemParameter addNewDateTimeOfWarning()
+    public void xsetDateTimeOfWarning(org.apache.xmlbeans.XmlDateTime dateTimeOfWarning)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.SystemParameter target = null;
-            target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(DATETIMEOFWARNING$4);
-            return target;
+            org.apache.xmlbeans.XmlDateTime target = null;
+            target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlDateTime)get_store().add_element_user(DATETIMEOFWARNING$4);
+            }
+            target.set(dateTimeOfWarning);
         }
     }
     

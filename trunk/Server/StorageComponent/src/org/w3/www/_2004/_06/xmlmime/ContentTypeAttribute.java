@@ -17,7 +17,7 @@ package org.w3.www._2004._06.xmlmime;
 public interface ContentTypeAttribute extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ContentTypeAttribute.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s63797E7E0B2ADD7DB39E2536A3333547").resolveHandle("contenttypeed83attrtypetype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ContentTypeAttribute.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("contenttypeed83attrtypetype");
     
     /**
      * Gets the "contentType" attribute
@@ -57,7 +57,7 @@ public interface ContentTypeAttribute extends org.apache.xmlbeans.XmlObject
     public interface ContentType extends org.apache.xmlbeans.XmlString
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ContentType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s63797E7E0B2ADD7DB39E2536A3333547").resolveHandle("contenttyped54eattrtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ContentType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("contenttyped54eattrtype");
         
         /**
          * A factory class with static methods for creating instances
