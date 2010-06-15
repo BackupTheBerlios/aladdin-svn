@@ -64,7 +64,7 @@
 				minOccurs="1">
 			</element>
 			<element name="TypeOfWarning" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTimeOfWarning" type="tns:dateTime"
+			<element name="DateTimeOfWarning" type="dateTime"
 				maxOccurs="1" minOccurs="1">
 			</element>
 			<element name="Effect" type="tns:SystemParameter"
