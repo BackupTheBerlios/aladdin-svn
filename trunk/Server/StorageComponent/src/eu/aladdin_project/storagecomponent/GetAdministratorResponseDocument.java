@@ -47,17 +47,17 @@ public interface GetAdministratorResponseDocument extends org.apache.xmlbeans.Xm
         /**
          * Gets the "out" element
          */
-        eu.aladdin_project.xsd.OperationResult getOut();
+        eu.aladdin_project.xsd.Administrator getOut();
         
         /**
          * Sets the "out" element
          */
-        void setOut(eu.aladdin_project.xsd.OperationResult out);
+        void setOut(eu.aladdin_project.xsd.Administrator out);
         
         /**
          * Appends and returns a new empty "out" element
          */
-        eu.aladdin_project.xsd.OperationResult addNewOut();
+        eu.aladdin_project.xsd.Administrator addNewOut();
         
         /**
          * A factory class with static methods for creating instances

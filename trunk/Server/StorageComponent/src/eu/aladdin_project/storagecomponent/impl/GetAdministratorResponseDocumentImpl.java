@@ -93,13 +93,13 @@ public class GetAdministratorResponseDocumentImpl extends org.apache.xmlbeans.im
         /**
          * Gets the "out" element
          */
-        public eu.aladdin_project.xsd.OperationResult getOut()
+        public eu.aladdin_project.xsd.Administrator getOut()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                eu.aladdin_project.xsd.OperationResult target = null;
-                target = (eu.aladdin_project.xsd.OperationResult)get_store().find_element_user(OUT$0, 0);
+                eu.aladdin_project.xsd.Administrator target = null;
+                target = (eu.aladdin_project.xsd.Administrator)get_store().find_element_user(OUT$0, 0);
                 if (target == null)
                 {
                     return null;
@@ -111,16 +111,16 @@ public class GetAdministratorResponseDocumentImpl extends org.apache.xmlbeans.im
         /**
          * Sets the "out" element
          */
-        public void setOut(eu.aladdin_project.xsd.OperationResult out)
+        public void setOut(eu.aladdin_project.xsd.Administrator out)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                eu.aladdin_project.xsd.OperationResult target = null;
-                target = (eu.aladdin_project.xsd.OperationResult)get_store().find_element_user(OUT$0, 0);
+                eu.aladdin_project.xsd.Administrator target = null;
+                target = (eu.aladdin_project.xsd.Administrator)get_store().find_element_user(OUT$0, 0);
                 if (target == null)
                 {
-                    target = (eu.aladdin_project.xsd.OperationResult)get_store().add_element_user(OUT$0);
+                    target = (eu.aladdin_project.xsd.Administrator)get_store().add_element_user(OUT$0);
                 }
                 target.set(out);
             }
@@ -129,13 +129,13 @@ public class GetAdministratorResponseDocumentImpl extends org.apache.xmlbeans.im
         /**
          * Appends and returns a new empty "out" element
          */
-        public eu.aladdin_project.xsd.OperationResult addNewOut()
+        public eu.aladdin_project.xsd.Administrator addNewOut()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                eu.aladdin_project.xsd.OperationResult target = null;
-                target = (eu.aladdin_project.xsd.OperationResult)get_store().add_element_user(OUT$0);
+                eu.aladdin_project.xsd.Administrator target = null;
+                target = (eu.aladdin_project.xsd.Administrator)get_store().add_element_user(OUT$0);
                 return target;
             }
         }

@@ -93,13 +93,13 @@ public class DeleteQuestionnaireResponseDocumentImpl extends org.apache.xmlbeans
         /**
          * Gets the "out" element
          */
-        public eu.aladdin_project.xsd.Questionnaire getOut()
+        public eu.aladdin_project.xsd.OperationResult getOut()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                eu.aladdin_project.xsd.Questionnaire target = null;
-                target = (eu.aladdin_project.xsd.Questionnaire)get_store().find_element_user(OUT$0, 0);
+                eu.aladdin_project.xsd.OperationResult target = null;
+                target = (eu.aladdin_project.xsd.OperationResult)get_store().find_element_user(OUT$0, 0);
                 if (target == null)
                 {
                     return null;
@@ -111,16 +111,16 @@ public class DeleteQuestionnaireResponseDocumentImpl extends org.apache.xmlbeans
         /**
          * Sets the "out" element
          */
-        public void setOut(eu.aladdin_project.xsd.Questionnaire out)
+        public void setOut(eu.aladdin_project.xsd.OperationResult out)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                eu.aladdin_project.xsd.Questionnaire target = null;
-                target = (eu.aladdin_project.xsd.Questionnaire)get_store().find_element_user(OUT$0, 0);
+                eu.aladdin_project.xsd.OperationResult target = null;
+                target = (eu.aladdin_project.xsd.OperationResult)get_store().find_element_user(OUT$0, 0);
                 if (target == null)
                 {
-                    target = (eu.aladdin_project.xsd.Questionnaire)get_store().add_element_user(OUT$0);
+                    target = (eu.aladdin_project.xsd.OperationResult)get_store().add_element_user(OUT$0);
                 }
                 target.set(out);
             }
@@ -129,13 +129,13 @@ public class DeleteQuestionnaireResponseDocumentImpl extends org.apache.xmlbeans
         /**
          * Appends and returns a new empty "out" element
          */
-        public eu.aladdin_project.xsd.Questionnaire addNewOut()
+        public eu.aladdin_project.xsd.OperationResult addNewOut()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                eu.aladdin_project.xsd.Questionnaire target = null;
-                target = (eu.aladdin_project.xsd.Questionnaire)get_store().add_element_user(OUT$0);
+                eu.aladdin_project.xsd.OperationResult target = null;
+                target = (eu.aladdin_project.xsd.OperationResult)get_store().add_element_user(OUT$0);
                 return target;
             }
         }

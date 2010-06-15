@@ -47,17 +47,17 @@ public interface DeleteQuestionnaireResponseDocument extends org.apache.xmlbeans
         /**
          * Gets the "out" element
          */
-        eu.aladdin_project.xsd.Questionnaire getOut();
+        eu.aladdin_project.xsd.OperationResult getOut();
         
         /**
          * Sets the "out" element
          */
-        void setOut(eu.aladdin_project.xsd.Questionnaire out);
+        void setOut(eu.aladdin_project.xsd.OperationResult out);
         
         /**
          * Appends and returns a new empty "out" element
          */
-        eu.aladdin_project.xsd.Questionnaire addNewOut();
+        eu.aladdin_project.xsd.OperationResult addNewOut();
         
         /**
          * A factory class with static methods for creating instances

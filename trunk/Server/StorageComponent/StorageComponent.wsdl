@@ -142,7 +142,7 @@
       <xsd:element name="GetAdministratorResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      			<xsd:element name="out" type="aladdin:Administrator"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -491,7 +491,7 @@
       <xsd:element name="DeleteQuestionnaireResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="out" type="aladdin:Questionnaire"></xsd:element>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
