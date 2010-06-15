@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetPatientMeasurementDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientMeasurementDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("getpatientmeasurementc93bdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientMeasurementDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE47689FE1C7E05EF3D8B8B2E98B36AA8").resolveHandle("getpatientmeasurementc93bdoctype");
     
     /**
      * Gets the "GetPatientMeasurement" element
@@ -42,7 +42,7 @@ public interface GetPatientMeasurementDocument extends org.apache.xmlbeans.XmlOb
     public interface GetPatientMeasurement extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientMeasurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C3C7FA15BB27D3206A345B01D8BBF16").resolveHandle("getpatientmeasurement6874elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientMeasurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE47689FE1C7E05EF3D8B8B2E98B36AA8").resolveHandle("getpatientmeasurement6874elemtype");
         
         /**
          * Gets the "PatientId" element
