@@ -73,7 +73,7 @@ create table CarerAssessment (id int4 not null, carer int4, DateOfAssessment tim
 create table Clinician (id int4 not null, persondata int4, primary key (id));
 create table Communication (id int4 not null, Type varchar(255), Value varchar(255), Notes varchar(255), IsPrimary bool, persondata int4, primary key (id));
 create table ExternalService (id int4 not null, Address varchar(255), Description varchar(255), primary key (id));
-create table Identifier (id int4 not null, Type varchar(255), Number varchar(255), IssueDate varchar(255), IssueAuthority varchar(255), persondata int4, primary key (id));
+create table Identifier (id int4 not null, Type varchar(255), Number varchar(255), IssueDate timestamp, IssueAuthority varchar(255), persondata int4, primary key (id));
 create table Measurement (id int4 not null, type varchar(255), value numeric(19, 2), datetime timestamp, units varchar(255), lowerlimit numeric(19, 2), upperlimit numeric(19, 2), patient int4, task int4, primary key (id));
 create table Patient (id int4 not null, persondata int4, sd int4, clinician int4, primary key (id));
 create table PatientAssessment (id int4 not null, patient int4, DateOfAssessment timestamp, Aetology int4, TimeElapsedSinceDiagnose int4, Severity int4, RelevantPathologyAntecedents varchar(255), Comorbidity varchar(255), CharlsonComobodityIndex int4, BarthelIndex int4, LawtonIndex int4, MMSE int4, MDRS int4, BlessedScalePart1 numeric(19, 2), BlessedScalePart2 int4, BlessedScalePart3 int4, ChecklistMBPC int4, NPQISeverity int4, NPQIStress int4, GDS int4, Falls bool, Incontinence bool, Delirium bool, Immobility bool, SensorialDeficits bool, PharmacologyTreatment varchar(255), primary key (id));

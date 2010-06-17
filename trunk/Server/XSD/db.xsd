@@ -41,7 +41,7 @@
     	<sequence>
     		<element name="Type" type="string"></element>
     		<element name="Number" type="string"></element>
-    		<element name="IssueDate" type="string"></element>
+    		<element name="IssueDate" type="dateTime"></element>
     		<element name="IssueAuthority" type="string"></element>
     		<element name="persondata" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
