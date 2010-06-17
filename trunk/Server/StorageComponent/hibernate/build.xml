@@ -8,7 +8,7 @@
         <fileset dir="${AXIS2_HOME}/lib">
             <include name="*.jar"/>
         </fileset>
-	<fileset dir="jar">
+	<fileset dir="../jar">
             <include name="*.jar"/>
         </fileset>
     </path>
@@ -61,7 +61,7 @@
     </target>
 
     <target name="jar" depends="compile.hibernate.jar">
-        <jar destfile="${build.dir}/StorageComponentHibernate.jar">
+        <jar destfile="../jar/StorageComponentHibernate.jar">
             <fileset includes="**/*.class" dir="${build.dir}/classes"/>
         </jar>
     </target>
