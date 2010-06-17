@@ -17,8 +17,12 @@
     <path id="axis2.class.path">
         <pathelement path="${java.class.path}"/>
         <pathelement path="${maven.class.path}"/>
+        <pathelement path="jar"/>
         <fileset dir="${axis2.home}">
             <include name="lib/*.jar"/>
+        </fileset>
+        <fileset dir="jar">
+            <include name="*.jar"/>
         </fileset>
     </path>
     <target name="init">

@@ -2,7 +2,10 @@
 package com.aladdin.sc;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Calendar;
+
+import org.hibernate.Session;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
@@ -52,6 +55,7 @@ import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.Updat
 import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.xsd.*;
+import org.hibernate.Session;
 
 /**
      *  StorageComponentSkeleton java skeleton for the axisService
@@ -301,13 +305,84 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	         
-	public CreatePatientResponseDocument createPatient (CreatePatientDocument createPatient42) {
+	public CreatePatientResponseDocument createPatient (CreatePatientDocument req) {
 		CreatePatientResponseDocument respdoc = CreatePatientResponseDocument.Factory.newInstance();
 		CreatePatientResponse resp = respdoc.addNewCreatePatientResponse();
 		OperationResult res = resp.addNewOut();
-		res.setCode("000");
-		res.setDescription("none");
+		res.setCode("0");
+		res.setDescription("failed");
+		res.setStatus((short) 0);
+		
+		Patient data = req.getCreatePatient().getData();
+		
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		s.beginTransaction();
+		
+		com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
+		
+		com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
+		PersonData rpd = data.getPersonData();
+		pd.setName(rpd.getName());
+		pd.setSurname(rpd.getSurname());
+		s.save (rpd);
+		
+		Address[] rad = rpd.getAddressListArray();
+		com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
+		ad.setPersondata(pd.getId());
+		for (int i = 0; i < rad.length; i++) {
+			ad.setCity(rad[i].getCity());
+			ad.setCountry(rad[i].getCountry());
+			ad.setCounty(rad[i].getCounty());
+			ad.setNotes(rad[i].getNotes());
+			ad.setStreet(rad[i].getStreet());
+			ad.setStreetNo(rad[i].getStreetNo());
+			ad.setZipCode(rad[i].getZipCode());
+			ad.setIsPrimary(rad[i].getIsPrimary());
+			s.save (ad);
+		}
+		
+		Identifier[] rid = rpd.getIdentifierListArray();
+		com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
+		id.setPersondata(pd.getId());
+		for (int i = 0; i < rid.length; i++) {
+			id.setType(rid[i].getType());
+			id.setNumber(rid[i].getNumber());
+			id.setIssueDate(new Timestamp(rid[i].getIssueDate().getTimeInMillis()));
+			id.setIssueAuthority(rid[i].getIssueAuthority());
+			s.save (id);
+		}
+		
+		Communication[] rcm = rpd.getCommunicationListArray();
+		com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
+		cm.setPersondata(pd.getId());
+		for (int i = 0; i < rcm.length; i++) {
+			cm.setType(rcm[i].getType());
+			cm.setValue(rcm[i].getValue());
+			cm.setNotes(rcm[i].getNotes());
+			cm.setIsPrimary(rcm[i].getIsPrimary());
+			s.save (cm);
+		}
+		
+		com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
+		SocioDemographicData rsd = data.getSDData();
+		sd.setAge(new Integer(rsd.getAge()));
+		sd.setGender(new Integer(rsd.getGender().getCode()));
+		sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
+		sd.setChildren(new Integer(rsd.getChildren()));
+		sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
+		s.save(sd);
+		
+		p.setPersondata(pd.getId());
+		p.setSd(sd.getId());
+		p.setClinician(new Integer(data.getResponsibleClinicianID()));
+		s.save(p);
+		
+		s.getTransaction().commit();
+		
+		res.setCode(p.getId().toString());
 		res.setStatus((short) 1);
+		res.setDescription("ok");
+		
 		return respdoc;
 	}
 	     
