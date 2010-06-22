@@ -21,12 +21,12 @@ public interface QuestionnaireQuestionAnswer extends org.apache.xmlbeans.XmlStri
     /**
      * Gets the "value" attribute
      */
-    java.lang.String getValue();
+    short getValue();
     
     /**
      * Gets (as xml) the "value" attribute
      */
-    org.apache.xmlbeans.XmlString xgetValue();
+    org.apache.xmlbeans.XmlUnsignedByte xgetValue();
     
     /**
      * True if has "value" attribute
@@ -36,12 +36,12 @@ public interface QuestionnaireQuestionAnswer extends org.apache.xmlbeans.XmlStri
     /**
      * Sets the "value" attribute
      */
-    void setValue(java.lang.String value);
+    void setValue(short value);
     
     /**
      * Sets (as xml) the "value" attribute
      */
-    void xsetValue(org.apache.xmlbeans.XmlString value);
+    void xsetValue(org.apache.xmlbeans.XmlUnsignedByte value);
     
     /**
      * Unsets the "value" attribute

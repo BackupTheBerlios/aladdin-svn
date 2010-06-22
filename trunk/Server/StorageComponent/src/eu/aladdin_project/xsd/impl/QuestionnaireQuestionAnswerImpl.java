@@ -31,7 +31,7 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
     /**
      * Gets the "value" attribute
      */
-    public java.lang.String getValue()
+    public short getValue()
     {
         synchronized (monitor())
         {
@@ -40,22 +40,22 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
             target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VALUE$0);
             if (target == null)
             {
-                return null;
+                return 0;
             }
-            return target.getStringValue();
+            return target.getShortValue();
         }
     }
     
     /**
      * Gets (as xml) the "value" attribute
      */
-    public org.apache.xmlbeans.XmlString xgetValue()
+    public org.apache.xmlbeans.XmlUnsignedByte xgetValue()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(VALUE$0);
+            org.apache.xmlbeans.XmlUnsignedByte target = null;
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(VALUE$0);
             return target;
         }
     }
@@ -75,7 +75,7 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
     /**
      * Sets the "value" attribute
      */
-    public void setValue(java.lang.String value)
+    public void setValue(short value)
     {
         synchronized (monitor())
         {
@@ -86,23 +86,23 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
             {
                 target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(VALUE$0);
             }
-            target.setStringValue(value);
+            target.setShortValue(value);
         }
     }
     
     /**
      * Sets (as xml) the "value" attribute
      */
-    public void xsetValue(org.apache.xmlbeans.XmlString value)
+    public void xsetValue(org.apache.xmlbeans.XmlUnsignedByte value)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(VALUE$0);
+            org.apache.xmlbeans.XmlUnsignedByte target = null;
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(VALUE$0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(VALUE$0);
+                target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().add_attribute_user(VALUE$0);
             }
             target.set(value);
         }

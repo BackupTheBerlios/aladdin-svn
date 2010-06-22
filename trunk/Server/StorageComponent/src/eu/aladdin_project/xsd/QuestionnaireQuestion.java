@@ -179,6 +179,66 @@ public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
     void unsetId();
     
     /**
+     * Gets the "type" attribute
+     */
+    java.lang.String getType();
+    
+    /**
+     * Gets (as xml) the "type" attribute
+     */
+    org.apache.xmlbeans.XmlString xgetType();
+    
+    /**
+     * True if has "type" attribute
+     */
+    boolean isSetType();
+    
+    /**
+     * Sets the "type" attribute
+     */
+    void setType(java.lang.String type);
+    
+    /**
+     * Sets (as xml) the "type" attribute
+     */
+    void xsetType(org.apache.xmlbeans.XmlString type);
+    
+    /**
+     * Unsets the "type" attribute
+     */
+    void unsetType();
+    
+    /**
+     * Gets the "condition" attribute
+     */
+    short getCondition();
+    
+    /**
+     * Gets (as xml) the "condition" attribute
+     */
+    org.apache.xmlbeans.XmlUnsignedByte xgetCondition();
+    
+    /**
+     * True if has "condition" attribute
+     */
+    boolean isSetCondition();
+    
+    /**
+     * Sets the "condition" attribute
+     */
+    void setCondition(short condition);
+    
+    /**
+     * Sets (as xml) the "condition" attribute
+     */
+    void xsetCondition(org.apache.xmlbeans.XmlUnsignedByte condition);
+    
+    /**
+     * Unsets the "condition" attribute
+     */
+    void unsetCondition();
+    
+    /**
      * A factory class with static methods for creating instances
      * of this type.
      */

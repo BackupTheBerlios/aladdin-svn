@@ -29,6 +29,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         new javax.xml.namespace.QName("", "verision");
     private static final javax.xml.namespace.QName ID$8 = 
         new javax.xml.namespace.QName("", "id");
+    private static final javax.xml.namespace.QName TYPE$10 = 
+        new javax.xml.namespace.QName("", "type");
+    private static final javax.xml.namespace.QName CONDITION$12 = 
+        new javax.xml.namespace.QName("", "condition");
     
     
     /**
@@ -512,6 +516,190 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             get_store().remove_attribute(ID$8);
+        }
+    }
+    
+    /**
+     * Gets the "type" attribute
+     */
+    public java.lang.String getType()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TYPE$10);
+            if (target == null)
+            {
+                return null;
+            }
+            return target.getStringValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "type" attribute
+     */
+    public org.apache.xmlbeans.XmlString xgetType()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TYPE$10);
+            return target;
+        }
+    }
+    
+    /**
+     * True if has "type" attribute
+     */
+    public boolean isSetType()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().find_attribute_user(TYPE$10) != null;
+        }
+    }
+    
+    /**
+     * Sets the "type" attribute
+     */
+    public void setType(java.lang.String type)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TYPE$10);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(TYPE$10);
+            }
+            target.setStringValue(type);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "type" attribute
+     */
+    public void xsetType(org.apache.xmlbeans.XmlString type)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TYPE$10);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(TYPE$10);
+            }
+            target.set(type);
+        }
+    }
+    
+    /**
+     * Unsets the "type" attribute
+     */
+    public void unsetType()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_attribute(TYPE$10);
+        }
+    }
+    
+    /**
+     * Gets the "condition" attribute
+     */
+    public short getCondition()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(CONDITION$12);
+            if (target == null)
+            {
+                return 0;
+            }
+            return target.getShortValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "condition" attribute
+     */
+    public org.apache.xmlbeans.XmlUnsignedByte xgetCondition()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlUnsignedByte target = null;
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(CONDITION$12);
+            return target;
+        }
+    }
+    
+    /**
+     * True if has "condition" attribute
+     */
+    public boolean isSetCondition()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().find_attribute_user(CONDITION$12) != null;
+        }
+    }
+    
+    /**
+     * Sets the "condition" attribute
+     */
+    public void setCondition(short condition)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(CONDITION$12);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(CONDITION$12);
+            }
+            target.setShortValue(condition);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "condition" attribute
+     */
+    public void xsetCondition(org.apache.xmlbeans.XmlUnsignedByte condition)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlUnsignedByte target = null;
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(CONDITION$12);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().add_attribute_user(CONDITION$12);
+            }
+            target.set(condition);
+        }
+    }
+    
+    /**
+     * Unsets the "condition" attribute
+     */
+    public void unsetCondition()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_attribute(CONDITION$12);
         }
     }
 }
