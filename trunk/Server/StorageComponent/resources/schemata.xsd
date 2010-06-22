@@ -16,11 +16,13 @@
         </sequence>
         <attribute name="verision" type="decimal"/>
         <attribute name="id" type="string"/>
+        <attribute name="type" type="string"/>
+        <attribute name="condition" type="unsignedByte"/>
     </complexType>
     <complexType name="QuestionnaireQuestionAnswer">
         <simpleContent>
             <extension base="string">
-                <attribute name="value" type="string"/>
+                <attribute name="value" type="unsignedByte"/>
             </extension>
         </simpleContent>
     </complexType>

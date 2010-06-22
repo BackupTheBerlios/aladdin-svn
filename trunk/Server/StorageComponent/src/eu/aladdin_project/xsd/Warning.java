@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Warning extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE47689FE1C7E05EF3D8B8B2E98B36AA8").resolveHandle("warning2936type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("warning2936type");
     
     /**
      * Gets the "ID" element
