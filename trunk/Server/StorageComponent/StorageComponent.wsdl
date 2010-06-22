@@ -331,7 +331,7 @@
       <xsd:element name="StoreMeasurements">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="data" type="aladdin:Measurement"></xsd:element>
+      			<xsd:element name="data" type="aladdin:Measurement" maxOccurs="unbounded" minOccurs="1"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>

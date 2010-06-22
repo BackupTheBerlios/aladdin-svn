@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfAdministratorsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministratorsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("listofadministrators929bdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministratorsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("listofadministrators929bdoctype");
     
     /**
      * Gets the "ListOfAdministrators" element
@@ -42,7 +42,7 @@ public interface ListOfAdministratorsDocument extends org.apache.xmlbeans.XmlObj
     public interface ListOfAdministrators extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministrators.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("listofadministrators3cc4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministrators.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("listofadministrators3cc4elemtype");
         
         /**
          * Gets array of all "filter" elements

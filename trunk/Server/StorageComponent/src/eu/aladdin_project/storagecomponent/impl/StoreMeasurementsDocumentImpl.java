@@ -93,43 +93,97 @@ public class StoreMeasurementsDocumentImpl extends org.apache.xmlbeans.impl.valu
         
         
         /**
-         * Gets the "data" element
+         * Gets array of all "data" elements
          */
-        public eu.aladdin_project.xsd.Measurement getData()
+        public eu.aladdin_project.xsd.Measurement[] getDataArray()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                java.util.List targetList = new java.util.ArrayList();
+                get_store().find_all_element_users(DATA$0, targetList);
+                eu.aladdin_project.xsd.Measurement[] result = new eu.aladdin_project.xsd.Measurement[targetList.size()];
+                targetList.toArray(result);
+                return result;
+            }
+        }
+        
+        /**
+         * Gets ith "data" element
+         */
+        public eu.aladdin_project.xsd.Measurement getDataArray(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 eu.aladdin_project.xsd.Measurement target = null;
-                target = (eu.aladdin_project.xsd.Measurement)get_store().find_element_user(DATA$0, 0);
+                target = (eu.aladdin_project.xsd.Measurement)get_store().find_element_user(DATA$0, i);
                 if (target == null)
                 {
-                    return null;
+                    throw new IndexOutOfBoundsException();
                 }
                 return target;
             }
         }
         
         /**
-         * Sets the "data" element
+         * Returns number of "data" element
          */
-        public void setData(eu.aladdin_project.xsd.Measurement data)
+        public int sizeOfDataArray()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                return get_store().count_elements(DATA$0);
+            }
+        }
+        
+        /**
+         * Sets array of all "data" element
+         */
+        public void setDataArray(eu.aladdin_project.xsd.Measurement[] dataArray)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                arraySetterHelper(dataArray, DATA$0);
+            }
+        }
+        
+        /**
+         * Sets ith "data" element
+         */
+        public void setDataArray(int i, eu.aladdin_project.xsd.Measurement data)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 eu.aladdin_project.xsd.Measurement target = null;
-                target = (eu.aladdin_project.xsd.Measurement)get_store().find_element_user(DATA$0, 0);
+                target = (eu.aladdin_project.xsd.Measurement)get_store().find_element_user(DATA$0, i);
                 if (target == null)
                 {
-                    target = (eu.aladdin_project.xsd.Measurement)get_store().add_element_user(DATA$0);
+                    throw new IndexOutOfBoundsException();
                 }
                 target.set(data);
             }
         }
         
         /**
-         * Appends and returns a new empty "data" element
+         * Inserts and returns a new empty value (as xml) as the ith "data" element
+         */
+        public eu.aladdin_project.xsd.Measurement insertNewData(int i)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                eu.aladdin_project.xsd.Measurement target = null;
+                target = (eu.aladdin_project.xsd.Measurement)get_store().insert_element_user(DATA$0, i);
+                return target;
+            }
+        }
+        
+        /**
+         * Appends and returns a new empty value (as xml) as the last "data" element
          */
         public eu.aladdin_project.xsd.Measurement addNewData()
         {
@@ -139,6 +193,18 @@ public class StoreMeasurementsDocumentImpl extends org.apache.xmlbeans.impl.valu
                 eu.aladdin_project.xsd.Measurement target = null;
                 target = (eu.aladdin_project.xsd.Measurement)get_store().add_element_user(DATA$0);
                 return target;
+            }
+        }
+        
+        /**
+         * Removes the ith "data" element
+         */
+        public void removeData(int i)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                get_store().remove_element(DATA$0, i);
             }
         }
         

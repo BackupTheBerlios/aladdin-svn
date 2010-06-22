@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface StoreMeasurementsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurementsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("storemeasurements6a86doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurementsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("storemeasurements6a86doctype");
     
     /**
      * Gets the "StoreMeasurements" element
@@ -42,22 +42,47 @@ public interface StoreMeasurementsDocument extends org.apache.xmlbeans.XmlObject
     public interface StoreMeasurements extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurements.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("storemeasurements648aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurements.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("storemeasurements648aelemtype");
         
         /**
-         * Gets the "data" element
+         * Gets array of all "data" elements
          */
-        eu.aladdin_project.xsd.Measurement getData();
+        eu.aladdin_project.xsd.Measurement[] getDataArray();
         
         /**
-         * Sets the "data" element
+         * Gets ith "data" element
          */
-        void setData(eu.aladdin_project.xsd.Measurement data);
+        eu.aladdin_project.xsd.Measurement getDataArray(int i);
         
         /**
-         * Appends and returns a new empty "data" element
+         * Returns number of "data" element
+         */
+        int sizeOfDataArray();
+        
+        /**
+         * Sets array of all "data" element
+         */
+        void setDataArray(eu.aladdin_project.xsd.Measurement[] dataArray);
+        
+        /**
+         * Sets ith "data" element
+         */
+        void setDataArray(int i, eu.aladdin_project.xsd.Measurement data);
+        
+        /**
+         * Inserts and returns a new empty value (as xml) as the ith "data" element
+         */
+        eu.aladdin_project.xsd.Measurement insertNewData(int i);
+        
+        /**
+         * Appends and returns a new empty value (as xml) as the last "data" element
          */
         eu.aladdin_project.xsd.Measurement addNewData();
+        
+        /**
+         * Removes the ith "data" element
+         */
+        void removeData(int i);
         
         /**
          * Gets the "userId" element

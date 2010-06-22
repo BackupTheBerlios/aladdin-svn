@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateCarerDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("createcarer6073doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("createcarer6073doctype");
     
     /**
      * Gets the "CreateCarer" element
@@ -42,7 +42,7 @@ public interface CreateCarerDocument extends org.apache.xmlbeans.XmlObject
     public interface CreateCarer extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s75C0694379B96E638B0903E9290ABDE2").resolveHandle("createcarerf564elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("createcarerf564elemtype");
         
         /**
          * Gets the "data" element
