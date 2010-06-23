@@ -86,7 +86,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			pd.setSurname(rpd.getSurname());
 			s.save (pd);
 			
-			Address[] rad = rpd.getAddressListArray();
+			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
 				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
 				ad.setPersondata(pd.getId());
@@ -101,7 +101,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				s.save (ad);
 			}
 
-			Identifier[] rid = rpd.getIdentifierListArray();
+			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
 				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
 				id.setPersondata(pd.getId());
@@ -116,7 +116,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				s.save (id);
 			}
 			
-			Communication[] rcm = rpd.getCommunicationListArray();
+			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
 				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
 				cm.setPersondata(pd.getId());
@@ -166,7 +166,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			pd.setSurname(rpd.getSurname());
 			s.save (pd);
 			
-			Address[] rad = rpd.getAddressListArray();
+			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
 				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
 				ad.setPersondata(pd.getId());
@@ -181,7 +181,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				s.save (ad);
 			}
 			
-			Identifier[] rid = rpd.getIdentifierListArray();
+			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
 				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
 				id.setPersondata(pd.getId());
@@ -196,7 +196,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				s.save (id);
 			}
 			
-			Communication[] rcm = rpd.getCommunicationListArray();
+			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
 				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
 				cm.setPersondata(pd.getId());
@@ -224,7 +224,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			p.setClinician(new Integer(responsibleClinicianID));
 			s.save(p);
 			
-			PatientCarer[] pcl = data.getPatientCarerListArray();
+			PatientCarer[] pcl = data.getPatientCarerList().getPatientCarerArray();
 			for (int i = 0; i < pcl.length; i++) {
 				com.aladdin.sc.db.PatientCarer pc = new com.aladdin.sc.db.PatientCarer ();
 				pc.setPatient(p.getId());
@@ -271,7 +271,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			pd.setSurname(rpd.getSurname());
 			s.save (pd);
 			
-			Address[] rad = rpd.getAddressListArray();
+			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
 				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
 				ad.setPersondata(pd.getId());
@@ -286,7 +286,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				s.save (ad);
 			}
 			
-			Identifier[] rid = rpd.getIdentifierListArray();
+			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
 				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
 				id.setPersondata(pd.getId());
@@ -301,7 +301,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				s.save (id);
 			}
 			
-			Communication[] rcm = rpd.getCommunicationListArray();
+			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
 				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
 				cm.setPersondata(pd.getId());
@@ -358,7 +358,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			quest.setVersion(rquest.getVersion());
 			s.save (quest);
 			
-			QuestionnaireQuestion[] rqq = rquest.getQuestionsArray();
+			QuestionnaireQuestion[] rqq = rquest.getQuestionArray();
 			 
 			for (int i = 0; i < rqq.length; i++) {
 				updateQQ(rqq[i], s, 0);
@@ -386,14 +386,14 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		qq.setTitle(rqq.getTitle());
 		qq.setParentid(parentId);
 		s.save (qq);
-		for (int i = 0; i < rqq.getQuestionsArray().length; i++) {
-			updateQQ (rqq.getQuestionsArray(i), s, qq.getId());
+		for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
+			updateQQ (rqq.getQuestions().getQuestionArray(i), s, qq.getId());
 		}
 		QuestionnaireQuestionAnswer rqqa = null;
 		com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
 		s.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + qq.getId().toString()).executeUpdate();
-		for (int i = 0; i < rqq.getAnswerArray().length; i++) {
-			rqqa = rqq.getAnswerArray(i);
+		for (int i = 0; i < rqq.getAnswers().getAnswerArray().length; i++) {
+			rqqa = rqq.getAnswers().getAnswerArray(i);
 			qqa.setValue(new Integer(rqqa.getValue()));
 			qqa.setQuestion(qq.getId());
 			qqa.setDescription(rqqa.getStringValue());
@@ -489,7 +489,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			s.save (pd);
 			
 			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			Address[] rad = rpd.getAddressListArray();
+			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
 				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
 				ad.setPersondata(pd.getId());
@@ -505,7 +505,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			}
 			
 			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			Identifier[] rid = rpd.getIdentifierListArray();
+			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
 				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
 				id.setPersondata(pd.getId());
@@ -521,7 +521,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			}
 			
 			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			Communication[] rcm = rpd.getCommunicationListArray();
+			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
 				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
 				cm.setPersondata(pd.getId());
@@ -620,7 +620,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			s.save (pd);
 			
 			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			Address[] rad = rpd.getAddressListArray();
+			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
 				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
 				ad.setPersondata(pd.getId());
@@ -636,7 +636,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			}
 			
 			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			Identifier[] rid = rpd.getIdentifierListArray();
+			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
 				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
 				id.setPersondata(pd.getId());
@@ -652,7 +652,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			}
 			
 			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			Communication[] rcm = rpd.getCommunicationListArray();
+			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
 				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
 				cm.setPersondata(pd.getId());
@@ -769,20 +769,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			pa.setPharmacologyTreatment(rpa.getPharmacologicalTreatment());
 			s.save(pa);
 			
+			Integer pid = new Integer (pa.getId());
 			for (int i = 0; i < rpa.getClinicalDataArray().length; i++) {
-				com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-				m.setPatient(new Integer (pa.getId()));
-				Measurement rm = rpa.getClinicalDataArray(i);
-				m.setType(rm.getType());
-				m.setValue(rm.getValue());
-				timeInMillis = 0;
-				if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
-				m.setDatetime(new Timestamp(timeInMillis));
-				m.setUnits(rm.getUnits());
-				m.setLowerlimit(rm.getLowerLimit());
-				m.setUpperlimit(rm.getUpperLimit());
-				m.setTask(new Integer (rm.getTaskID()));
-				s.save (m);
+				storeMeasurement(s, pid, rpa.getClinicalDataArray(i));
 			}
 			
 			s.getTransaction().commit();
@@ -799,6 +788,22 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		
 		return respdoc;
 	}
+
+	private Integer storeMeasurement(Session s, Integer pid, Measurement rm) {
+		long timeInMillis = 0;
+		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
+		m.setPatient(new Integer (pid));
+		m.setType(rm.getType().getCode());
+		m.setValue(rm.getValue());
+		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
+		m.setDatetime(new Timestamp(timeInMillis));
+		m.setUnits(rm.getUnits());
+		m.setLowerlimit(rm.getLowerLimit());
+		m.setUpperlimit(rm.getUpperLimit());
+		m.setTask(new Integer (rm.getTaskID()));
+		s.save (m);
+		return m.getId();
+	}
 	
 	public StoreMeasurementsResponseDocument storeMeasurements (StoreMeasurementsDocument req) {
 		StoreMeasurementsResponseDocument respdoc = StoreMeasurementsResponseDocument.Factory.newInstance();
@@ -813,24 +818,13 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			s.beginTransaction();
 			
 			Measurement[] rm = req.getStoreMeasurements().getDataArray();
-			String id = "";
+			Integer id = 0;
 			for (int i = 0; i < rm.length; i++) {
-				com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-				m.setType(rm[i].getType());
-				m.setValue(rm[i].getValue());
-				long timeInMillis = 0;
-				if (rm[i].getDateTime() != null) timeInMillis = rm[i].getDateTime().getTimeInMillis();
-				m.setDatetime(new Timestamp(timeInMillis));
-				m.setUnits(rm[i].getUnits());
-				m.setLowerlimit(rm[i].getLowerLimit());
-				m.setUpperlimit(rm[i].getUpperLimit());
-				m.setTask(new Integer (rm[i].getTaskID()));
-				s.save (m);
-				id = m.getId().toString();
+				id = storeMeasurement(s, null, rm[i]);
 			}
 			
 			s.getTransaction().commit();
-			res.setCode(id);
+			res.setCode(id.toString());
 			res.setStatus((short) 1);
 			res.setDescription("ok");
 		} catch (Exception e) {
@@ -852,17 +846,17 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		PersonData pd = p.addNewPersonData();
 		pd.setName("Vovka");
 		pd.setSurname("Morkovka");
-		Address a = pd.addNewAddressList();
-		a.setCity("Baden");
-		a.setCountry("Schweiz");
-		a.setStreet("Big street");
-		a.setZipCode("111111");
-		Communication c = pd.addNewCommunicationList();
-		c.setType("phone");
-		c.setValue("+49XXXXXXX");
-		Identifier i = pd.addNewIdentifierList();
-		i.setNumber("XXX1123");
-		i.setType("pass");
+//		Address a = pd.addNewAddressList();
+//		a.setCity("Baden");
+//		a.setCountry("Schweiz");
+//		a.setStreet("Big street");
+//		a.setZipCode("111111");
+//		Communication c = pd.addNewCommunicationList();
+//		c.setType("phone");
+//		c.setValue("+49XXXXXXX");
+//		Identifier i = pd.addNewIdentifierList();
+//		i.setNumber("XXX1123");
+//		i.setType("pass");
 		p.setID("P-0001");
 		SocioDemographicData sd = p.addNewSDData();
 		SystemParameter gender = sd.addNewGender();
@@ -952,7 +946,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		m.setDateTime(c);
 		m.setPatientID("P-0001");
 		m.setTaskID("T-0001");
-		m.setType("none");
+		//m.setType("none");
 		m.setUnits("l");
 		BigDecimal b = new BigDecimal(1.0);
 		m.setValue (b);
@@ -1076,17 +1070,17 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		PersonData pd = p.addNewPersonData();
 		pd.setName("Vovka");
 		pd.setSurname("Morkovka");
-		Address a = pd.addNewAddressList();
-		a.setCity("Baden");
-		a.setCountry("Schweiz");
-		a.setStreet("Big street");
-		a.setZipCode("111111");
-		Communication c = pd.addNewCommunicationList();
-		c.setType("phone");
-		c.setValue("+49XXXXXXX");
-		Identifier i = pd.addNewIdentifierList();
-		i.setNumber("XXX1123");
-		i.setType("pass");
+//		Address a = pd.addNewAddressList();
+//		a.setCity("Baden");
+//		a.setCountry("Schweiz");
+//		a.setStreet("Big street");
+//		a.setZipCode("111111");
+//		Communication c = pd.addNewCommunicationList();
+//		c.setType("phone");
+//		c.setValue("+49XXXXXXX");
+//		Identifier i = pd.addNewIdentifierList();
+//		i.setNumber("XXX1123");
+//		i.setType("pass");
 		p.setID("P-0001");
 		return respdoc;
 	}
@@ -1117,17 +1111,17 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		PersonData pd = p.addNewPersonData();
 		pd.setName("Vovka");
 		pd.setSurname("Morkovka");
-		Address a = pd.addNewAddressList();
-		a.setCity("Baden");
-		a.setCountry("Schweiz");
-		a.setStreet("Big street");
-		a.setZipCode("111111");
-		Communication c = pd.addNewCommunicationList();
-		c.setType("phone");
-		c.setValue("+49XXXXXXX");
-		Identifier i = pd.addNewIdentifierList();
-		i.setNumber("XXX1123");
-		i.setType("pass");
+//		Address a = pd.addNewAddressList();
+//		a.setCity("Baden");
+//		a.setCountry("Schweiz");
+//		a.setStreet("Big street");
+//		a.setZipCode("111111");
+//		Communication c = pd.addNewCommunicationList();
+//		c.setType("phone");
+//		c.setValue("+49XXXXXXX");
+//		Identifier i = pd.addNewIdentifierList();
+//		i.setNumber("XXX1123");
+//		i.setType("pass");
 		p.setID("P-0001");
 		SocioDemographicData sd = p.addNewSDData();
 		SystemParameter gender = sd.addNewGender();
@@ -1149,17 +1143,17 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		PersonData pd = p.addNewPersonData();
 		pd.setName("Vovka");
 		pd.setSurname("Morkovka");
-		Address a = pd.addNewAddressList();
-		a.setCity("Baden");
-		a.setCountry("Schweiz");
-		a.setStreet("Big street");
-		a.setZipCode("111111");
-		Communication c = pd.addNewCommunicationList();
-		c.setType("phone");
-		c.setValue("+49XXXXXXX");
-		Identifier i = pd.addNewIdentifierList();
-		i.setNumber("XXX1123");
-		i.setType("pass");
+//		Address a = pd.addNewAddressList();
+//		a.setCity("Baden");
+//		a.setCountry("Schweiz");
+//		a.setStreet("Big street");
+//		a.setZipCode("111111");
+//		Communication c = pd.addNewCommunicationList();
+//		c.setType("phone");
+//		c.setValue("+49XXXXXXX");
+//		Identifier i = pd.addNewIdentifierList();
+//		i.setNumber("XXX1123");
+//		i.setType("pass");
 		p.setID("P-0001");
 		return respdoc;
 	}
@@ -1181,11 +1175,11 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		q.setID("Q-0001");
 		q.setTitle("Quest#1");
 		q.setVersion(new BigDecimal(1.0));
-		QuestionnaireQuestion qq = q.addNewQuestions();
-		qq.setId("QQ-0001");
-		QuestionnaireQuestionAnswer qqa = qq.addNewAnswer();
-		qqa.setStringValue("answer1");
-		qqa.setValue((short) -1);
+//		QuestionnaireQuestion qq = q.addNewQuestions();
+//		qq.setId("QQ-0001");
+//		QuestionnaireQuestionAnswer qqa = qq.addNewAnswer();
+//		qqa.setStringValue("answer1");
+//		qqa.setValue((short) -1);
 		return respdoc;
 	}
 	
