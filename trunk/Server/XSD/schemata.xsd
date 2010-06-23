@@ -19,7 +19,6 @@
     			maxOccurs="unbounded" minOccurs="0">
     		</element>
     	</sequence>
-    	<attribute name="verision" type="decimal"></attribute>
     	<attribute name="id" type="string"></attribute>
     	<attribute name="type" type="string"></attribute>
     	<attribute name="condition" type="unsignedByte"></attribute>
