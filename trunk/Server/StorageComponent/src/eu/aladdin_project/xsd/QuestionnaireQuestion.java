@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("questionnairequestion0b43type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("questionnairequestion0b43type");
     
     /**
      * Gets the "title" element
@@ -117,36 +117,6 @@ public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
      * Removes the ith "questions" element
      */
     void removeQuestions(int i);
-    
-    /**
-     * Gets the "verision" attribute
-     */
-    java.math.BigDecimal getVerision();
-    
-    /**
-     * Gets (as xml) the "verision" attribute
-     */
-    org.apache.xmlbeans.XmlDecimal xgetVerision();
-    
-    /**
-     * True if has "verision" attribute
-     */
-    boolean isSetVerision();
-    
-    /**
-     * Sets the "verision" attribute
-     */
-    void setVerision(java.math.BigDecimal verision);
-    
-    /**
-     * Sets (as xml) the "verision" attribute
-     */
-    void xsetVerision(org.apache.xmlbeans.XmlDecimal verision);
-    
-    /**
-     * Unsets the "verision" attribute
-     */
-    void unsetVerision();
     
     /**
      * Gets the "id" attribute

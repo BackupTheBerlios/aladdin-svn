@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetAdministratorDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("getadministratorc677doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("getadministratorc677doctype");
     
     /**
      * Gets the "GetAdministrator" element
@@ -42,7 +42,7 @@ public interface GetAdministratorDocument extends org.apache.xmlbeans.XmlObject
     public interface GetAdministrator extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("getadministratorfc44elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("getadministratorfc44elemtype");
         
         /**
          * Gets the "id" element

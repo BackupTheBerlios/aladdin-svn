@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ChangeTaskStatusResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangeTaskStatusResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("changetaskstatusresponsea7e8doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangeTaskStatusResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("changetaskstatusresponsea7e8doctype");
     
     /**
      * Gets the "ChangeTaskStatusResponse" element
@@ -42,7 +42,7 @@ public interface ChangeTaskStatusResponseDocument extends org.apache.xmlbeans.Xm
     public interface ChangeTaskStatusResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangeTaskStatusResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("changetaskstatusresponseefa4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangeTaskStatusResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("changetaskstatusresponseefa4elemtype");
         
         /**
          * Gets the "out" element

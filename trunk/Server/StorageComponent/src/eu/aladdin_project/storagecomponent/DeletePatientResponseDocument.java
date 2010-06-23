@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeletePatientResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeletePatientResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("deletepatientresponsecc09doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeletePatientResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("deletepatientresponsecc09doctype");
     
     /**
      * Gets the "DeletePatientResponse" element
@@ -42,7 +42,7 @@ public interface DeletePatientResponseDocument extends org.apache.xmlbeans.XmlOb
     public interface DeletePatientResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeletePatientResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("deletepatientresponse6410elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeletePatientResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("deletepatientresponse6410elemtype");
         
         /**
          * Gets the "out" element

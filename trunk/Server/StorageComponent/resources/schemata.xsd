@@ -14,7 +14,6 @@
             <element maxOccurs="unbounded" minOccurs="0" name="answer" type="tns:QuestionnaireQuestionAnswer"/>
             <element maxOccurs="unbounded" minOccurs="0" name="questions" type="tns:QuestionnaireQuestion"/>
         </sequence>
-        <attribute name="verision" type="decimal"/>
         <attribute name="id" type="string"/>
         <attribute name="type" type="string"/>
         <attribute name="condition" type="unsignedByte"/>

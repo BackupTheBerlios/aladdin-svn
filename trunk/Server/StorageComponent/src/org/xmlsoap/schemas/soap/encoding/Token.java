@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Token extends org.apache.xmlbeans.XmlToken
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Token.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("token528dtype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Token.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("token528dtype");
     
     /**
      * Gets the "id" attribute

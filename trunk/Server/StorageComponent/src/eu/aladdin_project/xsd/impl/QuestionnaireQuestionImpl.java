@@ -25,13 +25,11 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answer");
     private static final javax.xml.namespace.QName QUESTIONS$4 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "questions");
-    private static final javax.xml.namespace.QName VERISION$6 = 
-        new javax.xml.namespace.QName("", "verision");
-    private static final javax.xml.namespace.QName ID$8 = 
+    private static final javax.xml.namespace.QName ID$6 = 
         new javax.xml.namespace.QName("", "id");
-    private static final javax.xml.namespace.QName TYPE$10 = 
+    private static final javax.xml.namespace.QName TYPE$8 = 
         new javax.xml.namespace.QName("", "type");
-    private static final javax.xml.namespace.QName CONDITION$12 = 
+    private static final javax.xml.namespace.QName CONDITION$10 = 
         new javax.xml.namespace.QName("", "condition");
     
     
@@ -336,98 +334,6 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
     }
     
     /**
-     * Gets the "verision" attribute
-     */
-    public java.math.BigDecimal getVerision()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VERISION$6);
-            if (target == null)
-            {
-                return null;
-            }
-            return target.getBigDecimalValue();
-        }
-    }
-    
-    /**
-     * Gets (as xml) the "verision" attribute
-     */
-    public org.apache.xmlbeans.XmlDecimal xgetVerision()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_attribute_user(VERISION$6);
-            return target;
-        }
-    }
-    
-    /**
-     * True if has "verision" attribute
-     */
-    public boolean isSetVerision()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            return get_store().find_attribute_user(VERISION$6) != null;
-        }
-    }
-    
-    /**
-     * Sets the "verision" attribute
-     */
-    public void setVerision(java.math.BigDecimal verision)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VERISION$6);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(VERISION$6);
-            }
-            target.setBigDecimalValue(verision);
-        }
-    }
-    
-    /**
-     * Sets (as xml) the "verision" attribute
-     */
-    public void xsetVerision(org.apache.xmlbeans.XmlDecimal verision)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_attribute_user(VERISION$6);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.XmlDecimal)get_store().add_attribute_user(VERISION$6);
-            }
-            target.set(verision);
-        }
-    }
-    
-    /**
-     * Unsets the "verision" attribute
-     */
-    public void unsetVerision()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_attribute(VERISION$6);
-        }
-    }
-    
-    /**
      * Gets the "id" attribute
      */
     public java.lang.String getId()
@@ -436,7 +342,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(ID$8);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(ID$6);
             if (target == null)
             {
                 return null;
@@ -454,7 +360,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(ID$8);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(ID$6);
             return target;
         }
     }
@@ -467,7 +373,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().find_attribute_user(ID$8) != null;
+            return get_store().find_attribute_user(ID$6) != null;
         }
     }
     
@@ -480,10 +386,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(ID$8);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(ID$6);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(ID$8);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(ID$6);
             }
             target.setStringValue(id);
         }
@@ -498,10 +404,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(ID$8);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(ID$6);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(ID$8);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(ID$6);
             }
             target.set(id);
         }
@@ -515,7 +421,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_attribute(ID$8);
+            get_store().remove_attribute(ID$6);
         }
     }
     
@@ -528,7 +434,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TYPE$10);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TYPE$8);
             if (target == null)
             {
                 return null;
@@ -546,7 +452,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TYPE$10);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TYPE$8);
             return target;
         }
     }
@@ -559,7 +465,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().find_attribute_user(TYPE$10) != null;
+            return get_store().find_attribute_user(TYPE$8) != null;
         }
     }
     
@@ -572,10 +478,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TYPE$10);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TYPE$8);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(TYPE$10);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(TYPE$8);
             }
             target.setStringValue(type);
         }
@@ -590,10 +496,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TYPE$10);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TYPE$8);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(TYPE$10);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(TYPE$8);
             }
             target.set(type);
         }
@@ -607,7 +513,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_attribute(TYPE$10);
+            get_store().remove_attribute(TYPE$8);
         }
     }
     
@@ -620,7 +526,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(CONDITION$12);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(CONDITION$10);
             if (target == null)
             {
                 return 0;
@@ -638,7 +544,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.XmlUnsignedByte target = null;
-            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(CONDITION$12);
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(CONDITION$10);
             return target;
         }
     }
@@ -651,7 +557,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().find_attribute_user(CONDITION$12) != null;
+            return get_store().find_attribute_user(CONDITION$10) != null;
         }
     }
     
@@ -664,10 +570,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(CONDITION$12);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(CONDITION$10);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(CONDITION$12);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(CONDITION$10);
             }
             target.setShortValue(condition);
         }
@@ -682,10 +588,10 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             org.apache.xmlbeans.XmlUnsignedByte target = null;
-            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(CONDITION$12);
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(CONDITION$10);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().add_attribute_user(CONDITION$12);
+                target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().add_attribute_user(CONDITION$10);
             }
             target.set(condition);
         }
@@ -699,7 +605,7 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_attribute(CONDITION$12);
+            get_store().remove_attribute(CONDITION$10);
         }
     }
 }

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteExternalServiceDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalServiceDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("deleteexternalservice780ddoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalServiceDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("deleteexternalservice780ddoctype");
     
     /**
      * Gets the "DeleteExternalService" element
@@ -42,7 +42,7 @@ public interface DeleteExternalServiceDocument extends org.apache.xmlbeans.XmlOb
     public interface DeleteExternalService extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalService.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("deleteexternalservicef018elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalService.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("deleteexternalservicef018elemtype");
         
         /**
          * Gets the "id" element

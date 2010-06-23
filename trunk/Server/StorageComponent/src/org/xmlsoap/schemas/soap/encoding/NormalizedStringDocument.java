@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NormalizedStringDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NormalizedStringDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("normalizedstring6c7edoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NormalizedStringDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("normalizedstring6c7edoctype");
     
     /**
      * Gets the "normalizedString" element

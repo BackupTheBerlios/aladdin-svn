@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateExternalServiceResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateExternalServiceResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("updateexternalserviceresponsefd10doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateExternalServiceResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("updateexternalserviceresponsefd10doctype");
     
     /**
      * Gets the "UpdateExternalServiceResponse" element
@@ -42,7 +42,7 @@ public interface UpdateExternalServiceResponseDocument extends org.apache.xmlbea
     public interface UpdateExternalServiceResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateExternalServiceResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9B11522ADB9A0B3D3AED631FE243F900").resolveHandle("updateexternalserviceresponsea21eelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateExternalServiceResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("updateexternalserviceresponsea21eelemtype");
         
         /**
          * Gets the "out" element
