@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface PersonData extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PersonData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("persondataed6btype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PersonData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("persondataed6btype");
     
     /**
      * Gets the "Surname" element
@@ -59,124 +59,49 @@ public interface PersonData extends org.apache.xmlbeans.XmlObject
     void xsetName(org.apache.xmlbeans.XmlString name);
     
     /**
-     * Gets array of all "IdentifierList" elements
+     * Gets the "IdentifierList" element
      */
-    eu.aladdin_project.xsd.Identifier[] getIdentifierListArray();
+    eu.aladdin_project.xsd.IdentifierList getIdentifierList();
     
     /**
-     * Gets ith "IdentifierList" element
+     * Sets the "IdentifierList" element
      */
-    eu.aladdin_project.xsd.Identifier getIdentifierListArray(int i);
+    void setIdentifierList(eu.aladdin_project.xsd.IdentifierList identifierList);
     
     /**
-     * Returns number of "IdentifierList" element
+     * Appends and returns a new empty "IdentifierList" element
      */
-    int sizeOfIdentifierListArray();
+    eu.aladdin_project.xsd.IdentifierList addNewIdentifierList();
     
     /**
-     * Sets array of all "IdentifierList" element
+     * Gets the "AddressList" element
      */
-    void setIdentifierListArray(eu.aladdin_project.xsd.Identifier[] identifierListArray);
+    eu.aladdin_project.xsd.AddressList getAddressList();
     
     /**
-     * Sets ith "IdentifierList" element
+     * Sets the "AddressList" element
      */
-    void setIdentifierListArray(int i, eu.aladdin_project.xsd.Identifier identifierList);
+    void setAddressList(eu.aladdin_project.xsd.AddressList addressList);
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "IdentifierList" element
+     * Appends and returns a new empty "AddressList" element
      */
-    eu.aladdin_project.xsd.Identifier insertNewIdentifierList(int i);
+    eu.aladdin_project.xsd.AddressList addNewAddressList();
     
     /**
-     * Appends and returns a new empty value (as xml) as the last "IdentifierList" element
+     * Gets the "CommunicationList" element
      */
-    eu.aladdin_project.xsd.Identifier addNewIdentifierList();
+    eu.aladdin_project.xsd.CommunicationList getCommunicationList();
     
     /**
-     * Removes the ith "IdentifierList" element
+     * Sets the "CommunicationList" element
      */
-    void removeIdentifierList(int i);
+    void setCommunicationList(eu.aladdin_project.xsd.CommunicationList communicationList);
     
     /**
-     * Gets array of all "AddressList" elements
+     * Appends and returns a new empty "CommunicationList" element
      */
-    eu.aladdin_project.xsd.Address[] getAddressListArray();
-    
-    /**
-     * Gets ith "AddressList" element
-     */
-    eu.aladdin_project.xsd.Address getAddressListArray(int i);
-    
-    /**
-     * Returns number of "AddressList" element
-     */
-    int sizeOfAddressListArray();
-    
-    /**
-     * Sets array of all "AddressList" element
-     */
-    void setAddressListArray(eu.aladdin_project.xsd.Address[] addressListArray);
-    
-    /**
-     * Sets ith "AddressList" element
-     */
-    void setAddressListArray(int i, eu.aladdin_project.xsd.Address addressList);
-    
-    /**
-     * Inserts and returns a new empty value (as xml) as the ith "AddressList" element
-     */
-    eu.aladdin_project.xsd.Address insertNewAddressList(int i);
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "AddressList" element
-     */
-    eu.aladdin_project.xsd.Address addNewAddressList();
-    
-    /**
-     * Removes the ith "AddressList" element
-     */
-    void removeAddressList(int i);
-    
-    /**
-     * Gets array of all "CommunicationList" elements
-     */
-    eu.aladdin_project.xsd.Communication[] getCommunicationListArray();
-    
-    /**
-     * Gets ith "CommunicationList" element
-     */
-    eu.aladdin_project.xsd.Communication getCommunicationListArray(int i);
-    
-    /**
-     * Returns number of "CommunicationList" element
-     */
-    int sizeOfCommunicationListArray();
-    
-    /**
-     * Sets array of all "CommunicationList" element
-     */
-    void setCommunicationListArray(eu.aladdin_project.xsd.Communication[] communicationListArray);
-    
-    /**
-     * Sets ith "CommunicationList" element
-     */
-    void setCommunicationListArray(int i, eu.aladdin_project.xsd.Communication communicationList);
-    
-    /**
-     * Inserts and returns a new empty value (as xml) as the ith "CommunicationList" element
-     */
-    eu.aladdin_project.xsd.Communication insertNewCommunicationList(int i);
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "CommunicationList" element
-     */
-    eu.aladdin_project.xsd.Communication addNewCommunicationList();
-    
-    /**
-     * Removes the ith "CommunicationList" element
-     */
-    void removeCommunicationList(int i);
+    eu.aladdin_project.xsd.CommunicationList addNewCommunicationList();
     
     /**
      * A factory class with static methods for creating instances

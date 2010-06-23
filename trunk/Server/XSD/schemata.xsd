@@ -2,7 +2,7 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin-project.eu/xsd" elementFormDefault="qualified" xmlns:tns="http://aladdin-project.eu/xsd">
     <complexType name="Questionnaire">
     	<sequence>
-    		<element name="questions" type="tns:QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="question" type="tns:QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="1"></element>
     	</sequence>
     	<attribute name="version" type="decimal"></attribute>
     	<attribute name="ID" type="string"></attribute>
@@ -12,17 +12,32 @@
     <complexType name="QuestionnaireQuestion">
     	<sequence>
     		<element name="title" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="answer" type="tns:QuestionnaireQuestionAnswer"
-    			maxOccurs="unbounded" minOccurs="0">
+    		<element name="answers" type="tns:QuestionnaireQuestionAnswerList"
+    			maxOccurs="1" minOccurs="1">
     		</element>
-    		<element name="questions" type="tns:QuestionnaireQuestion"
-    			maxOccurs="unbounded" minOccurs="0">
+    		<element name="questions" type="tns:QuestionnaireQuestionList"
+    			maxOccurs="1" minOccurs="1">
     		</element>
     	</sequence>
     	<attribute name="id" type="string"></attribute>
     	<attribute name="type" type="string"></attribute>
     	<attribute name="condition" type="unsignedByte"></attribute>
     </complexType>
+    
+    <complexType name="QuestionnaireQuestionList">
+    	<sequence>
+    		<element name="question" type="tns:QuestionnaireQuestion"
+    			maxOccurs="unbounded" minOccurs="0"/>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="QuestionnaireQuestionAnswerList">
+    	<sequence>
+    		<element name="answer" type="tns:QuestionnaireQuestionAnswer"
+    			maxOccurs="unbounded" minOccurs="0"/>
+    	</sequence>
+    </complexType>
+    
 
 	<complexType name="QuestionnaireQuestionAnswer">
 		<simpleContent>
@@ -61,34 +76,16 @@
 	
 	<complexType name="Warning">
 		<sequence>
-			<element name="ID" type="string" maxOccurs="1"
-				minOccurs="1">
-			</element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="TypeOfWarning" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTimeOfWarning" type="dateTime"
-				maxOccurs="1" minOccurs="1">
-			</element>
-			<element name="Effect" type="tns:SystemParameter"
-				maxOccurs="1" minOccurs="1">
-			</element>
-			<element name="Indicator" type="tns:SystemParameter"
-				maxOccurs="1" minOccurs="1">
-			</element>
-			<element name="RiskLevel" type="tns:SystemParameter"
-				maxOccurs="1" minOccurs="1">
-			</element>
-			<element name="JustificationText" type="string"
-				maxOccurs="1" minOccurs="1">
-			</element>
-			<element name="EmergencyLevel" type="tns:SystemParameter"
-				maxOccurs="1" minOccurs="1">
-			</element>
-			<element name="PatientID" type="string" maxOccurs="1"
-				minOccurs="1">
-			</element>
-			<element name="Delivered" type="boolean" maxOccurs="1"
-				minOccurs="1">
-			</element>
+			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="1"></element>
+			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
@@ -204,7 +201,7 @@
 
 	<complexType name="Measurement">
 		<sequence>
-			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
 			<element name="Value" type="decimal" maxOccurs="1" minOccurs="1"></element>
 			<element name="DateTime" type="dateTime" maxOccurs="1" minOccurs="1"></element>
 			<element name="Units" type="string" maxOccurs="1" minOccurs="1"></element>
@@ -260,11 +257,30 @@
 		<sequence>
 			<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="IdentifierList"
-				type="tns:Identifier" maxOccurs="unbounded" minOccurs="1">
-			</element>
-			<element name="AddressList" type="tns:Address" maxOccurs="unbounded" minOccurs="1"></element>
-			<element name="CommunicationList" type="tns:Communication" maxOccurs="unbounded" minOccurs="1"></element>
+			<element name="IdentifierList" type="tns:IdentifierList" maxOccurs="1" minOccurs="1"></element>
+			<element name="AddressList" type="tns:AddressList" maxOccurs="1" minOccurs="1"></element>
+			<element name="CommunicationList" type="tns:CommunicationList" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+	
+	<complexType name="CommunicationList">
+		<sequence>
+			<element name="Communication"
+				type="tns:Communication" maxOccurs="unbounded" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="AddressList">
+		<sequence>
+			<element name="Address"
+				type="tns:Address" maxOccurs="unbounded" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="IdentifierList">
+		<sequence>
+			<element name="Identifier"
+				type="tns:Identifier" maxOccurs="unbounded" minOccurs="0"/>
 		</sequence>
 	</complexType>
 
@@ -296,7 +312,13 @@
     		<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
     		<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
     		<element name="ResponsibleClinicianID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="PatientCarerList" type="tns:PatientCarer" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="PatientCarerList" type="tns:PatientCarerList" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="PatientCarerList">
+    	<sequence>
+    		<element name="PatientCarer" type="tns:PatientCarer" maxOccurs="unbounded" minOccurs="0"></element>
     	</sequence>
     </complexType>
 

@@ -168,350 +168,152 @@ public class PersonDataImpl extends org.apache.xmlbeans.impl.values.XmlComplexCo
     }
     
     /**
-     * Gets array of all "IdentifierList" elements
+     * Gets the "IdentifierList" element
      */
-    public eu.aladdin_project.xsd.Identifier[] getIdentifierListArray()
+    public eu.aladdin_project.xsd.IdentifierList getIdentifierList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            java.util.List targetList = new java.util.ArrayList();
-            get_store().find_all_element_users(IDENTIFIERLIST$4, targetList);
-            eu.aladdin_project.xsd.Identifier[] result = new eu.aladdin_project.xsd.Identifier[targetList.size()];
-            targetList.toArray(result);
-            return result;
-        }
-    }
-    
-    /**
-     * Gets ith "IdentifierList" element
-     */
-    public eu.aladdin_project.xsd.Identifier getIdentifierListArray(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Identifier target = null;
-            target = (eu.aladdin_project.xsd.Identifier)get_store().find_element_user(IDENTIFIERLIST$4, i);
+            eu.aladdin_project.xsd.IdentifierList target = null;
+            target = (eu.aladdin_project.xsd.IdentifierList)get_store().find_element_user(IDENTIFIERLIST$4, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                return null;
             }
             return target;
         }
     }
     
     /**
-     * Returns number of "IdentifierList" element
+     * Sets the "IdentifierList" element
      */
-    public int sizeOfIdentifierListArray()
+    public void setIdentifierList(eu.aladdin_project.xsd.IdentifierList identifierList)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(IDENTIFIERLIST$4);
-        }
-    }
-    
-    /**
-     * Sets array of all "IdentifierList" element
-     */
-    public void setIdentifierListArray(eu.aladdin_project.xsd.Identifier[] identifierListArray)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            arraySetterHelper(identifierListArray, IDENTIFIERLIST$4);
-        }
-    }
-    
-    /**
-     * Sets ith "IdentifierList" element
-     */
-    public void setIdentifierListArray(int i, eu.aladdin_project.xsd.Identifier identifierList)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Identifier target = null;
-            target = (eu.aladdin_project.xsd.Identifier)get_store().find_element_user(IDENTIFIERLIST$4, i);
+            eu.aladdin_project.xsd.IdentifierList target = null;
+            target = (eu.aladdin_project.xsd.IdentifierList)get_store().find_element_user(IDENTIFIERLIST$4, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                target = (eu.aladdin_project.xsd.IdentifierList)get_store().add_element_user(IDENTIFIERLIST$4);
             }
             target.set(identifierList);
         }
     }
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "IdentifierList" element
+     * Appends and returns a new empty "IdentifierList" element
      */
-    public eu.aladdin_project.xsd.Identifier insertNewIdentifierList(int i)
+    public eu.aladdin_project.xsd.IdentifierList addNewIdentifierList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.Identifier target = null;
-            target = (eu.aladdin_project.xsd.Identifier)get_store().insert_element_user(IDENTIFIERLIST$4, i);
+            eu.aladdin_project.xsd.IdentifierList target = null;
+            target = (eu.aladdin_project.xsd.IdentifierList)get_store().add_element_user(IDENTIFIERLIST$4);
             return target;
         }
     }
     
     /**
-     * Appends and returns a new empty value (as xml) as the last "IdentifierList" element
+     * Gets the "AddressList" element
      */
-    public eu.aladdin_project.xsd.Identifier addNewIdentifierList()
+    public eu.aladdin_project.xsd.AddressList getAddressList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.Identifier target = null;
-            target = (eu.aladdin_project.xsd.Identifier)get_store().add_element_user(IDENTIFIERLIST$4);
-            return target;
-        }
-    }
-    
-    /**
-     * Removes the ith "IdentifierList" element
-     */
-    public void removeIdentifierList(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_element(IDENTIFIERLIST$4, i);
-        }
-    }
-    
-    /**
-     * Gets array of all "AddressList" elements
-     */
-    public eu.aladdin_project.xsd.Address[] getAddressListArray()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            java.util.List targetList = new java.util.ArrayList();
-            get_store().find_all_element_users(ADDRESSLIST$6, targetList);
-            eu.aladdin_project.xsd.Address[] result = new eu.aladdin_project.xsd.Address[targetList.size()];
-            targetList.toArray(result);
-            return result;
-        }
-    }
-    
-    /**
-     * Gets ith "AddressList" element
-     */
-    public eu.aladdin_project.xsd.Address getAddressListArray(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Address target = null;
-            target = (eu.aladdin_project.xsd.Address)get_store().find_element_user(ADDRESSLIST$6, i);
+            eu.aladdin_project.xsd.AddressList target = null;
+            target = (eu.aladdin_project.xsd.AddressList)get_store().find_element_user(ADDRESSLIST$6, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                return null;
             }
             return target;
         }
     }
     
     /**
-     * Returns number of "AddressList" element
+     * Sets the "AddressList" element
      */
-    public int sizeOfAddressListArray()
+    public void setAddressList(eu.aladdin_project.xsd.AddressList addressList)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(ADDRESSLIST$6);
-        }
-    }
-    
-    /**
-     * Sets array of all "AddressList" element
-     */
-    public void setAddressListArray(eu.aladdin_project.xsd.Address[] addressListArray)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            arraySetterHelper(addressListArray, ADDRESSLIST$6);
-        }
-    }
-    
-    /**
-     * Sets ith "AddressList" element
-     */
-    public void setAddressListArray(int i, eu.aladdin_project.xsd.Address addressList)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Address target = null;
-            target = (eu.aladdin_project.xsd.Address)get_store().find_element_user(ADDRESSLIST$6, i);
+            eu.aladdin_project.xsd.AddressList target = null;
+            target = (eu.aladdin_project.xsd.AddressList)get_store().find_element_user(ADDRESSLIST$6, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                target = (eu.aladdin_project.xsd.AddressList)get_store().add_element_user(ADDRESSLIST$6);
             }
             target.set(addressList);
         }
     }
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "AddressList" element
+     * Appends and returns a new empty "AddressList" element
      */
-    public eu.aladdin_project.xsd.Address insertNewAddressList(int i)
+    public eu.aladdin_project.xsd.AddressList addNewAddressList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.Address target = null;
-            target = (eu.aladdin_project.xsd.Address)get_store().insert_element_user(ADDRESSLIST$6, i);
+            eu.aladdin_project.xsd.AddressList target = null;
+            target = (eu.aladdin_project.xsd.AddressList)get_store().add_element_user(ADDRESSLIST$6);
             return target;
         }
     }
     
     /**
-     * Appends and returns a new empty value (as xml) as the last "AddressList" element
+     * Gets the "CommunicationList" element
      */
-    public eu.aladdin_project.xsd.Address addNewAddressList()
+    public eu.aladdin_project.xsd.CommunicationList getCommunicationList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.Address target = null;
-            target = (eu.aladdin_project.xsd.Address)get_store().add_element_user(ADDRESSLIST$6);
-            return target;
-        }
-    }
-    
-    /**
-     * Removes the ith "AddressList" element
-     */
-    public void removeAddressList(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_element(ADDRESSLIST$6, i);
-        }
-    }
-    
-    /**
-     * Gets array of all "CommunicationList" elements
-     */
-    public eu.aladdin_project.xsd.Communication[] getCommunicationListArray()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            java.util.List targetList = new java.util.ArrayList();
-            get_store().find_all_element_users(COMMUNICATIONLIST$8, targetList);
-            eu.aladdin_project.xsd.Communication[] result = new eu.aladdin_project.xsd.Communication[targetList.size()];
-            targetList.toArray(result);
-            return result;
-        }
-    }
-    
-    /**
-     * Gets ith "CommunicationList" element
-     */
-    public eu.aladdin_project.xsd.Communication getCommunicationListArray(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Communication target = null;
-            target = (eu.aladdin_project.xsd.Communication)get_store().find_element_user(COMMUNICATIONLIST$8, i);
+            eu.aladdin_project.xsd.CommunicationList target = null;
+            target = (eu.aladdin_project.xsd.CommunicationList)get_store().find_element_user(COMMUNICATIONLIST$8, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                return null;
             }
             return target;
         }
     }
     
     /**
-     * Returns number of "CommunicationList" element
+     * Sets the "CommunicationList" element
      */
-    public int sizeOfCommunicationListArray()
+    public void setCommunicationList(eu.aladdin_project.xsd.CommunicationList communicationList)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(COMMUNICATIONLIST$8);
-        }
-    }
-    
-    /**
-     * Sets array of all "CommunicationList" element
-     */
-    public void setCommunicationListArray(eu.aladdin_project.xsd.Communication[] communicationListArray)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            arraySetterHelper(communicationListArray, COMMUNICATIONLIST$8);
-        }
-    }
-    
-    /**
-     * Sets ith "CommunicationList" element
-     */
-    public void setCommunicationListArray(int i, eu.aladdin_project.xsd.Communication communicationList)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Communication target = null;
-            target = (eu.aladdin_project.xsd.Communication)get_store().find_element_user(COMMUNICATIONLIST$8, i);
+            eu.aladdin_project.xsd.CommunicationList target = null;
+            target = (eu.aladdin_project.xsd.CommunicationList)get_store().find_element_user(COMMUNICATIONLIST$8, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                target = (eu.aladdin_project.xsd.CommunicationList)get_store().add_element_user(COMMUNICATIONLIST$8);
             }
             target.set(communicationList);
         }
     }
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "CommunicationList" element
+     * Appends and returns a new empty "CommunicationList" element
      */
-    public eu.aladdin_project.xsd.Communication insertNewCommunicationList(int i)
+    public eu.aladdin_project.xsd.CommunicationList addNewCommunicationList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.Communication target = null;
-            target = (eu.aladdin_project.xsd.Communication)get_store().insert_element_user(COMMUNICATIONLIST$8, i);
+            eu.aladdin_project.xsd.CommunicationList target = null;
+            target = (eu.aladdin_project.xsd.CommunicationList)get_store().add_element_user(COMMUNICATIONLIST$8);
             return target;
-        }
-    }
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "CommunicationList" element
-     */
-    public eu.aladdin_project.xsd.Communication addNewCommunicationList()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.Communication target = null;
-            target = (eu.aladdin_project.xsd.Communication)get_store().add_element_user(COMMUNICATIONLIST$8);
-            return target;
-        }
-    }
-    
-    /**
-     * Removes the ith "CommunicationList" element
-     */
-    public void removeCommunicationList(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_element(COMMUNICATIONLIST$8, i);
         }
     }
 }

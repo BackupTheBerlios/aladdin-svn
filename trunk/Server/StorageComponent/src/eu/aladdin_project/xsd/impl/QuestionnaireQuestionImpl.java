@@ -21,8 +21,8 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
     
     private static final javax.xml.namespace.QName TITLE$0 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "title");
-    private static final javax.xml.namespace.QName ANSWER$2 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answer");
+    private static final javax.xml.namespace.QName ANSWERS$2 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answers");
     private static final javax.xml.namespace.QName QUESTIONS$4 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "questions");
     private static final javax.xml.namespace.QName ID$6 = 
@@ -102,234 +102,102 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
     }
     
     /**
-     * Gets array of all "answer" elements
+     * Gets the "answers" element
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] getAnswerArray()
+    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList getAnswers()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            java.util.List targetList = new java.util.ArrayList();
-            get_store().find_all_element_users(ANSWER$2, targetList);
-            eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] result = new eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[targetList.size()];
-            targetList.toArray(result);
-            return result;
-        }
-    }
-    
-    /**
-     * Gets ith "answer" element
-     */
-    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswer getAnswerArray(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestionAnswer target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswer)get_store().find_element_user(ANSWER$2, i);
+            eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList target = null;
+            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList)get_store().find_element_user(ANSWERS$2, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                return null;
             }
             return target;
         }
     }
     
     /**
-     * Returns number of "answer" element
+     * Sets the "answers" element
      */
-    public int sizeOfAnswerArray()
+    public void setAnswers(eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList answers)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(ANSWER$2);
-        }
-    }
-    
-    /**
-     * Sets array of all "answer" element
-     */
-    public void setAnswerArray(eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] answerArray)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            arraySetterHelper(answerArray, ANSWER$2);
-        }
-    }
-    
-    /**
-     * Sets ith "answer" element
-     */
-    public void setAnswerArray(int i, eu.aladdin_project.xsd.QuestionnaireQuestionAnswer answer)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestionAnswer target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswer)get_store().find_element_user(ANSWER$2, i);
+            eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList target = null;
+            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList)get_store().find_element_user(ANSWERS$2, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList)get_store().add_element_user(ANSWERS$2);
             }
-            target.set(answer);
+            target.set(answers);
         }
     }
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "answer" element
+     * Appends and returns a new empty "answers" element
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswer insertNewAnswer(int i)
+    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList addNewAnswers()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestionAnswer target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswer)get_store().insert_element_user(ANSWER$2, i);
+            eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList target = null;
+            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList)get_store().add_element_user(ANSWERS$2);
             return target;
         }
     }
     
     /**
-     * Appends and returns a new empty value (as xml) as the last "answer" element
+     * Gets the "questions" element
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswer addNewAnswer()
+    public eu.aladdin_project.xsd.QuestionnaireQuestionList getQuestions()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestionAnswer target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestionAnswer)get_store().add_element_user(ANSWER$2);
-            return target;
-        }
-    }
-    
-    /**
-     * Removes the ith "answer" element
-     */
-    public void removeAnswer(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_element(ANSWER$2, i);
-        }
-    }
-    
-    /**
-     * Gets array of all "questions" elements
-     */
-    public eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestionsArray()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            java.util.List targetList = new java.util.ArrayList();
-            get_store().find_all_element_users(QUESTIONS$4, targetList);
-            eu.aladdin_project.xsd.QuestionnaireQuestion[] result = new eu.aladdin_project.xsd.QuestionnaireQuestion[targetList.size()];
-            targetList.toArray(result);
-            return result;
-        }
-    }
-    
-    /**
-     * Gets ith "questions" element
-     */
-    public eu.aladdin_project.xsd.QuestionnaireQuestion getQuestionsArray(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestion target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestion)get_store().find_element_user(QUESTIONS$4, i);
+            eu.aladdin_project.xsd.QuestionnaireQuestionList target = null;
+            target = (eu.aladdin_project.xsd.QuestionnaireQuestionList)get_store().find_element_user(QUESTIONS$4, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                return null;
             }
             return target;
         }
     }
     
     /**
-     * Returns number of "questions" element
+     * Sets the "questions" element
      */
-    public int sizeOfQuestionsArray()
+    public void setQuestions(eu.aladdin_project.xsd.QuestionnaireQuestionList questions)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(QUESTIONS$4);
-        }
-    }
-    
-    /**
-     * Sets array of all "questions" element
-     */
-    public void setQuestionsArray(eu.aladdin_project.xsd.QuestionnaireQuestion[] questionsArray)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            arraySetterHelper(questionsArray, QUESTIONS$4);
-        }
-    }
-    
-    /**
-     * Sets ith "questions" element
-     */
-    public void setQuestionsArray(int i, eu.aladdin_project.xsd.QuestionnaireQuestion questions)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestion target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestion)get_store().find_element_user(QUESTIONS$4, i);
+            eu.aladdin_project.xsd.QuestionnaireQuestionList target = null;
+            target = (eu.aladdin_project.xsd.QuestionnaireQuestionList)get_store().find_element_user(QUESTIONS$4, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                target = (eu.aladdin_project.xsd.QuestionnaireQuestionList)get_store().add_element_user(QUESTIONS$4);
             }
             target.set(questions);
         }
     }
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "questions" element
+     * Appends and returns a new empty "questions" element
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestion insertNewQuestions(int i)
+    public eu.aladdin_project.xsd.QuestionnaireQuestionList addNewQuestions()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestion target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestion)get_store().insert_element_user(QUESTIONS$4, i);
+            eu.aladdin_project.xsd.QuestionnaireQuestionList target = null;
+            target = (eu.aladdin_project.xsd.QuestionnaireQuestionList)get_store().add_element_user(QUESTIONS$4);
             return target;
-        }
-    }
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "questions" element
-     */
-    public eu.aladdin_project.xsd.QuestionnaireQuestion addNewQuestions()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.QuestionnaireQuestion target = null;
-            target = (eu.aladdin_project.xsd.QuestionnaireQuestion)get_store().add_element_user(QUESTIONS$4);
-            return target;
-        }
-    }
-    
-    /**
-     * Removes the ith "questions" element
-     */
-    public void removeQuestions(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_element(QUESTIONS$4, i);
         }
     }
     

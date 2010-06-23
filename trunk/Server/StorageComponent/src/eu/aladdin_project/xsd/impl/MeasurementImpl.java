@@ -40,31 +40,17 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Gets the "Type" element
      */
-    public java.lang.String getType()
+    public eu.aladdin_project.xsd.SystemParameter getType()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TYPE$0, 0);
+            eu.aladdin_project.xsd.SystemParameter target = null;
+            target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(TYPE$0, 0);
             if (target == null)
             {
                 return null;
             }
-            return target.getStringValue();
-        }
-    }
-    
-    /**
-     * Gets (as xml) the "Type" element
-     */
-    public org.apache.xmlbeans.XmlString xgetType()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TYPE$0, 0);
             return target;
         }
     }
@@ -72,36 +58,32 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Sets the "Type" element
      */
-    public void setType(java.lang.String type)
+    public void setType(eu.aladdin_project.xsd.SystemParameter type)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TYPE$0, 0);
+            eu.aladdin_project.xsd.SystemParameter target = null;
+            target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(TYPE$0, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TYPE$0);
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(TYPE$0);
             }
-            target.setStringValue(type);
+            target.set(type);
         }
     }
     
     /**
-     * Sets (as xml) the "Type" element
+     * Appends and returns a new empty "Type" element
      */
-    public void xsetType(org.apache.xmlbeans.XmlString type)
+    public eu.aladdin_project.xsd.SystemParameter addNewType()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TYPE$0, 0);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TYPE$0);
-            }
-            target.set(type);
+            eu.aladdin_project.xsd.SystemParameter target = null;
+            target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(TYPE$0);
+            return target;
         }
     }
     

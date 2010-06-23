@@ -2,7 +2,7 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://aladdin-project.eu/xsd" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://aladdin-project.eu/xsd">
     <complexType name="Questionnaire">
         <sequence>
-            <element maxOccurs="unbounded" name="questions" type="tns:QuestionnaireQuestion"/>
+            <element maxOccurs="unbounded" name="question" type="tns:QuestionnaireQuestion"/>
         </sequence>
         <attribute name="version" type="decimal"/>
         <attribute name="ID" type="string"/>
@@ -11,12 +11,22 @@
     <complexType name="QuestionnaireQuestion">
         <sequence>
             <element name="title" type="string"/>
-            <element maxOccurs="unbounded" minOccurs="0" name="answer" type="tns:QuestionnaireQuestionAnswer"/>
-            <element maxOccurs="unbounded" minOccurs="0" name="questions" type="tns:QuestionnaireQuestion"/>
+            <element name="answers" type="tns:QuestionnaireQuestionAnswerList"/>
+            <element name="questions" type="tns:QuestionnaireQuestionList"/>
         </sequence>
         <attribute name="id" type="string"/>
         <attribute name="type" type="string"/>
         <attribute name="condition" type="unsignedByte"/>
+    </complexType>
+    <complexType name="QuestionnaireQuestionList">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="question" type="tns:QuestionnaireQuestion"/>
+        </sequence>
+    </complexType>
+    <complexType name="QuestionnaireQuestionAnswerList">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="answer" type="tns:QuestionnaireQuestionAnswer"/>
+        </sequence>
     </complexType>
     <complexType name="QuestionnaireQuestionAnswer">
         <simpleContent>
@@ -161,7 +171,7 @@
     </complexType>
     <complexType name="Measurement">
         <sequence>
-            <element name="Type" type="string"/>
+            <element name="Type" type="tns:SystemParameter"/>
             <element name="Value" type="decimal"/>
             <element name="DateTime" type="dateTime"/>
             <element name="Units" type="string"/>
@@ -212,9 +222,24 @@
         <sequence>
             <element name="Surname" type="string"/>
             <element name="Name" type="string"/>
-            <element maxOccurs="unbounded" name="IdentifierList" type="tns:Identifier"/>
-            <element maxOccurs="unbounded" name="AddressList" type="tns:Address"/>
-            <element maxOccurs="unbounded" name="CommunicationList" type="tns:Communication"/>
+            <element name="IdentifierList" type="tns:IdentifierList"/>
+            <element name="AddressList" type="tns:AddressList"/>
+            <element name="CommunicationList" type="tns:CommunicationList"/>
+        </sequence>
+    </complexType>
+    <complexType name="CommunicationList">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="Communication" type="tns:Communication"/>
+        </sequence>
+    </complexType>
+    <complexType name="AddressList">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="Address" type="tns:Address"/>
+        </sequence>
+    </complexType>
+    <complexType name="IdentifierList">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="Identifier" type="tns:Identifier"/>
         </sequence>
     </complexType>
     <complexType name="Carer">
@@ -242,7 +267,12 @@
             <element name="PersonData" type="tns:PersonData"/>
             <element name="SD_Data" type="tns:SocioDemographicData"/>
             <element name="ResponsibleClinicianID" type="string"/>
-            <element maxOccurs="unbounded" name="PatientCarerList" type="tns:PatientCarer"/>
+            <element name="PatientCarerList" type="tns:PatientCarerList"/>
+        </sequence>
+    </complexType>
+    <complexType name="PatientCarerList">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="PatientCarer" type="tns:PatientCarer"/>
         </sequence>
     </complexType>
     <complexType name="Administrator">

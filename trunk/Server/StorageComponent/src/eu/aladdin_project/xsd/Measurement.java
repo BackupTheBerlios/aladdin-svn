@@ -16,27 +16,22 @@ package eu.aladdin_project.xsd;
 public interface Measurement extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Measurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("measurementf9d6type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Measurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("measurementf9d6type");
     
     /**
      * Gets the "Type" element
      */
-    java.lang.String getType();
-    
-    /**
-     * Gets (as xml) the "Type" element
-     */
-    org.apache.xmlbeans.XmlString xgetType();
+    eu.aladdin_project.xsd.SystemParameter getType();
     
     /**
      * Sets the "Type" element
      */
-    void setType(java.lang.String type);
+    void setType(eu.aladdin_project.xsd.SystemParameter type);
     
     /**
-     * Sets (as xml) the "Type" element
+     * Appends and returns a new empty "Type" element
      */
-    void xsetType(org.apache.xmlbeans.XmlString type);
+    eu.aladdin_project.xsd.SystemParameter addNewType();
     
     /**
      * Gets the "Value" element

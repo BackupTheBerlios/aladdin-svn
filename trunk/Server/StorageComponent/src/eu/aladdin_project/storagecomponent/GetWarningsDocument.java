@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetWarningsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarningsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("getwarnings125bdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarningsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("getwarnings125bdoctype");
     
     /**
      * Gets the "GetWarnings" element
@@ -42,7 +42,7 @@ public interface GetWarningsDocument extends org.apache.xmlbeans.XmlObject
     public interface GetWarnings extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarnings.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("getwarningse334elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarnings.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("getwarningse334elemtype");
         
         /**
          * Gets array of all "warn" elements

@@ -25,7 +25,7 @@ public interface NMTOKENS extends org.apache.xmlbeans.XmlNMTOKENS
     /** @deprecated */
     void set(java.util.List list);
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NMTOKENS.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("nmtokens8c5ftype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NMTOKENS.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("nmtokens8c5ftype");
     
     /**
      * Gets the "id" attribute

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteCarerResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarerResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("deletecarerresponse8985doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarerResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("deletecarerresponse8985doctype");
     
     /**
      * Gets the "DeleteCarerResponse" element
@@ -42,7 +42,7 @@ public interface DeleteCarerResponseDocument extends org.apache.xmlbeans.XmlObje
     public interface DeleteCarerResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarerResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("deletecarerresponsefc08elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarerResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("deletecarerresponsefc08elemtype");
         
         /**
          * Gets the "out" element

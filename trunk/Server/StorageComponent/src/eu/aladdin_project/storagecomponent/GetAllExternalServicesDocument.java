@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetAllExternalServicesDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServicesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("getallexternalservicesfef4doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServicesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("getallexternalservicesfef4doctype");
     
     /**
      * Gets the "GetAllExternalServices" element
@@ -42,7 +42,7 @@ public interface GetAllExternalServicesDocument extends org.apache.xmlbeans.XmlO
     public interface GetAllExternalServices extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServices.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("getallexternalservices9064elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServices.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("getallexternalservices9064elemtype");
         
         /**
          * Gets the "userId" element

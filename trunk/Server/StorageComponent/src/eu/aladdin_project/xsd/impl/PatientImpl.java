@@ -268,118 +268,52 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
-     * Gets array of all "PatientCarerList" elements
+     * Gets the "PatientCarerList" element
      */
-    public eu.aladdin_project.xsd.PatientCarer[] getPatientCarerListArray()
+    public eu.aladdin_project.xsd.PatientCarerList getPatientCarerList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            java.util.List targetList = new java.util.ArrayList();
-            get_store().find_all_element_users(PATIENTCARERLIST$8, targetList);
-            eu.aladdin_project.xsd.PatientCarer[] result = new eu.aladdin_project.xsd.PatientCarer[targetList.size()];
-            targetList.toArray(result);
-            return result;
-        }
-    }
-    
-    /**
-     * Gets ith "PatientCarerList" element
-     */
-    public eu.aladdin_project.xsd.PatientCarer getPatientCarerListArray(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.PatientCarer target = null;
-            target = (eu.aladdin_project.xsd.PatientCarer)get_store().find_element_user(PATIENTCARERLIST$8, i);
+            eu.aladdin_project.xsd.PatientCarerList target = null;
+            target = (eu.aladdin_project.xsd.PatientCarerList)get_store().find_element_user(PATIENTCARERLIST$8, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                return null;
             }
             return target;
         }
     }
     
     /**
-     * Returns number of "PatientCarerList" element
+     * Sets the "PatientCarerList" element
      */
-    public int sizeOfPatientCarerListArray()
+    public void setPatientCarerList(eu.aladdin_project.xsd.PatientCarerList patientCarerList)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(PATIENTCARERLIST$8);
-        }
-    }
-    
-    /**
-     * Sets array of all "PatientCarerList" element
-     */
-    public void setPatientCarerListArray(eu.aladdin_project.xsd.PatientCarer[] patientCarerListArray)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            arraySetterHelper(patientCarerListArray, PATIENTCARERLIST$8);
-        }
-    }
-    
-    /**
-     * Sets ith "PatientCarerList" element
-     */
-    public void setPatientCarerListArray(int i, eu.aladdin_project.xsd.PatientCarer patientCarerList)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.PatientCarer target = null;
-            target = (eu.aladdin_project.xsd.PatientCarer)get_store().find_element_user(PATIENTCARERLIST$8, i);
+            eu.aladdin_project.xsd.PatientCarerList target = null;
+            target = (eu.aladdin_project.xsd.PatientCarerList)get_store().find_element_user(PATIENTCARERLIST$8, 0);
             if (target == null)
             {
-                throw new IndexOutOfBoundsException();
+                target = (eu.aladdin_project.xsd.PatientCarerList)get_store().add_element_user(PATIENTCARERLIST$8);
             }
             target.set(patientCarerList);
         }
     }
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "PatientCarerList" element
+     * Appends and returns a new empty "PatientCarerList" element
      */
-    public eu.aladdin_project.xsd.PatientCarer insertNewPatientCarerList(int i)
+    public eu.aladdin_project.xsd.PatientCarerList addNewPatientCarerList()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.xsd.PatientCarer target = null;
-            target = (eu.aladdin_project.xsd.PatientCarer)get_store().insert_element_user(PATIENTCARERLIST$8, i);
+            eu.aladdin_project.xsd.PatientCarerList target = null;
+            target = (eu.aladdin_project.xsd.PatientCarerList)get_store().add_element_user(PATIENTCARERLIST$8);
             return target;
-        }
-    }
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "PatientCarerList" element
-     */
-    public eu.aladdin_project.xsd.PatientCarer addNewPatientCarerList()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.PatientCarer target = null;
-            target = (eu.aladdin_project.xsd.PatientCarer)get_store().add_element_user(PATIENTCARERLIST$8);
-            return target;
-        }
-    }
-    
-    /**
-     * Removes the ith "PatientCarerList" element
-     */
-    public void removePatientCarerList(int i)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_element(PATIENTCARERLIST$8, i);
         }
     }
 }

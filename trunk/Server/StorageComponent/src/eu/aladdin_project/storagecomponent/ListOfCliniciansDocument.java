@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfCliniciansDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCliniciansDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("listofclinicians059adoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCliniciansDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("listofclinicians059adoctype");
     
     /**
      * Gets the "ListOfClinicians" element
@@ -42,7 +42,7 @@ public interface ListOfCliniciansDocument extends org.apache.xmlbeans.XmlObject
     public interface ListOfClinicians extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfClinicians.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("listofclinicianseb64elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfClinicians.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("listofclinicianseb64elemtype");
         
         /**
          * Gets array of all "filter" elements

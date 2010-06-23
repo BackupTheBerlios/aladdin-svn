@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("questionnairequestion0b43type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("questionnairequestion0b43type");
     
     /**
      * Gets the "title" element
@@ -39,84 +39,34 @@ public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
     void xsetTitle(org.apache.xmlbeans.XmlString title);
     
     /**
-     * Gets array of all "answer" elements
+     * Gets the "answers" element
      */
-    eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] getAnswerArray();
+    eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList getAnswers();
     
     /**
-     * Gets ith "answer" element
+     * Sets the "answers" element
      */
-    eu.aladdin_project.xsd.QuestionnaireQuestionAnswer getAnswerArray(int i);
+    void setAnswers(eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList answers);
     
     /**
-     * Returns number of "answer" element
+     * Appends and returns a new empty "answers" element
      */
-    int sizeOfAnswerArray();
+    eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList addNewAnswers();
     
     /**
-     * Sets array of all "answer" element
+     * Gets the "questions" element
      */
-    void setAnswerArray(eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] answerArray);
+    eu.aladdin_project.xsd.QuestionnaireQuestionList getQuestions();
     
     /**
-     * Sets ith "answer" element
+     * Sets the "questions" element
      */
-    void setAnswerArray(int i, eu.aladdin_project.xsd.QuestionnaireQuestionAnswer answer);
+    void setQuestions(eu.aladdin_project.xsd.QuestionnaireQuestionList questions);
     
     /**
-     * Inserts and returns a new empty value (as xml) as the ith "answer" element
+     * Appends and returns a new empty "questions" element
      */
-    eu.aladdin_project.xsd.QuestionnaireQuestionAnswer insertNewAnswer(int i);
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "answer" element
-     */
-    eu.aladdin_project.xsd.QuestionnaireQuestionAnswer addNewAnswer();
-    
-    /**
-     * Removes the ith "answer" element
-     */
-    void removeAnswer(int i);
-    
-    /**
-     * Gets array of all "questions" elements
-     */
-    eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestionsArray();
-    
-    /**
-     * Gets ith "questions" element
-     */
-    eu.aladdin_project.xsd.QuestionnaireQuestion getQuestionsArray(int i);
-    
-    /**
-     * Returns number of "questions" element
-     */
-    int sizeOfQuestionsArray();
-    
-    /**
-     * Sets array of all "questions" element
-     */
-    void setQuestionsArray(eu.aladdin_project.xsd.QuestionnaireQuestion[] questionsArray);
-    
-    /**
-     * Sets ith "questions" element
-     */
-    void setQuestionsArray(int i, eu.aladdin_project.xsd.QuestionnaireQuestion questions);
-    
-    /**
-     * Inserts and returns a new empty value (as xml) as the ith "questions" element
-     */
-    eu.aladdin_project.xsd.QuestionnaireQuestion insertNewQuestions(int i);
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "questions" element
-     */
-    eu.aladdin_project.xsd.QuestionnaireQuestion addNewQuestions();
-    
-    /**
-     * Removes the ith "questions" element
-     */
-    void removeQuestions(int i);
+    eu.aladdin_project.xsd.QuestionnaireQuestionList addNewQuestions();
     
     /**
      * Gets the "id" attribute

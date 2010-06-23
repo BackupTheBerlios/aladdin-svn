@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Patient extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Patient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sA2431263ED66DEFEF40FF37837CEB3BE").resolveHandle("patient46dftype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Patient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7EF2E24E41D60F56AF6EE0ED32245BA7").resolveHandle("patient46dftype");
     
     /**
      * Gets the "ID" element
@@ -89,44 +89,19 @@ public interface Patient extends org.apache.xmlbeans.XmlObject
     void xsetResponsibleClinicianID(org.apache.xmlbeans.XmlString responsibleClinicianID);
     
     /**
-     * Gets array of all "PatientCarerList" elements
+     * Gets the "PatientCarerList" element
      */
-    eu.aladdin_project.xsd.PatientCarer[] getPatientCarerListArray();
+    eu.aladdin_project.xsd.PatientCarerList getPatientCarerList();
     
     /**
-     * Gets ith "PatientCarerList" element
+     * Sets the "PatientCarerList" element
      */
-    eu.aladdin_project.xsd.PatientCarer getPatientCarerListArray(int i);
+    void setPatientCarerList(eu.aladdin_project.xsd.PatientCarerList patientCarerList);
     
     /**
-     * Returns number of "PatientCarerList" element
+     * Appends and returns a new empty "PatientCarerList" element
      */
-    int sizeOfPatientCarerListArray();
-    
-    /**
-     * Sets array of all "PatientCarerList" element
-     */
-    void setPatientCarerListArray(eu.aladdin_project.xsd.PatientCarer[] patientCarerListArray);
-    
-    /**
-     * Sets ith "PatientCarerList" element
-     */
-    void setPatientCarerListArray(int i, eu.aladdin_project.xsd.PatientCarer patientCarerList);
-    
-    /**
-     * Inserts and returns a new empty value (as xml) as the ith "PatientCarerList" element
-     */
-    eu.aladdin_project.xsd.PatientCarer insertNewPatientCarerList(int i);
-    
-    /**
-     * Appends and returns a new empty value (as xml) as the last "PatientCarerList" element
-     */
-    eu.aladdin_project.xsd.PatientCarer addNewPatientCarerList();
-    
-    /**
-     * Removes the ith "PatientCarerList" element
-     */
-    void removePatientCarerList(int i);
+    eu.aladdin_project.xsd.PatientCarerList addNewPatientCarerList();
     
     /**
      * A factory class with static methods for creating instances
