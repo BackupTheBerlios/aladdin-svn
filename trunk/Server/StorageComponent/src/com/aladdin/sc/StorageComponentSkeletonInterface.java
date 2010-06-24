@@ -15,6 +15,76 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param updateCarer
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument updateCarer
+                (
+                  eu.aladdin_project.storagecomponent.UpdateCarerDocument updateCarer
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updateUser
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateUserResponseDocument updateUser
+                (
+                  eu.aladdin_project.storagecomponent.UpdateUserDocument updateUser
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param deleteAdministrator
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument deleteAdministrator
+                (
+                  eu.aladdin_project.storagecomponent.DeleteAdministratorDocument deleteAdministrator
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updataPatient
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument updataPatient
+                (
+                  eu.aladdin_project.storagecomponent.UpdataPatientDocument updataPatient
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param deleteUser
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.DeleteUserResponseDocument deleteUser
+                (
+                  eu.aladdin_project.storagecomponent.DeleteUserDocument deleteUser
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param updateQuestionnaire
          */
 
@@ -50,48 +120,6 @@
                 public eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarning
                 (
                   eu.aladdin_project.storagecomponent.SaveWarningDocument saveWarning
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param updateCarer
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument updateCarer
-                (
-                  eu.aladdin_project.storagecomponent.UpdateCarerDocument updateCarer
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param deleteAdministrator
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument deleteAdministrator
-                (
-                  eu.aladdin_project.storagecomponent.DeleteAdministratorDocument deleteAdministrator
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param updataPatient
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument updataPatient
-                (
-                  eu.aladdin_project.storagecomponent.UpdataPatientDocument updataPatient
                  )
             ;
         
@@ -197,6 +225,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param auth
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.AuthResponseDocument auth
+                (
+                  eu.aladdin_project.storagecomponent.AuthDocument auth
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getQuestionnaireAnswers
          */
 
@@ -232,6 +274,20 @@
                 public eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument deleteClinician
                 (
                   eu.aladdin_project.storagecomponent.DeleteClinicianDocument deleteClinician
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param changePassword
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument changePassword
+                (
+                  eu.aladdin_project.storagecomponent.ChangePasswordDocument changePassword
                  )
             ;
         
@@ -638,6 +694,20 @@
                 public eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinician
                 (
                   eu.aladdin_project.storagecomponent.UpdateClinicianDocument updateClinician
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param createUser
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUser
+                (
+                  eu.aladdin_project.storagecomponent.CreateUserDocument createUser
                  )
             ;
         

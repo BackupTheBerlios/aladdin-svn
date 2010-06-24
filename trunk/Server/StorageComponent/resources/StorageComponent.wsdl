@@ -697,6 +697,79 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="CreateUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="user" type="aladdin:User"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CreateUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="user" type="aladdin:User"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ChangePassword">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userId" type="xsd:string"/>
+      			<xsd:element name="password" type="xsd:string"/>
+      			<xsd:element name="reqId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ChangePasswordResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Auth">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="login" type="xsd:string"/>
+      			<xsd:element name="password" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AuthResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdataPatientResponse">
@@ -715,140 +788,80 @@
     <wsdl:part name="parameters" element="tns:UpdateCarerResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ListOfAdministratorsRequest">
-    <wsdl:part name="parameters" element="tns:ListOfAdministrators">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="UpdateAdministratorRequest">
-    <wsdl:part name="parameters" element="tns:UpdateAdministrator">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="DeleteClinicianResponse">
     <wsdl:part name="parameters" element="tns:DeleteClinicianResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="GetPatientMeasurementRequest">
-    <wsdl:part name="parameters" element="tns:GetPatientMeasurement">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="DeletePatientAssessmentRequest">
     <wsdl:part name="parameters" element="tns:DeletePatientAssessment">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="DeleteQuestionnaireResponse">
-    <wsdl:part name="parameters" element="tns:DeleteQuestionnaireResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="UpdateClinicianResponse">
-    <wsdl:part name="parameters" element="tns:UpdateClinicianResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="ChangeTaskStatusRequest">
-    <wsdl:part name="parameters" element="tns:ChangeTaskStatus">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="ListOfPossibleTasksResponse">
-    <wsdl:part name="parameters" element="tns:ListOfPossibleTasksResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="ListOfCarersRequest">
     <wsdl:part name="parameters" element="tns:ListOfCarers">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="UpdateClinicianRequest">
-    <wsdl:part name="parameters" element="tns:UpdateClinician">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="SavePatientAssessmentRequest">
     <wsdl:part name="parameters" element="tns:SavePatientAssessment">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="DeleteQuestionnaireRequest">
-    <wsdl:part name="parameters" element="tns:DeleteQuestionnaire">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="AssignTaskResponse">
     <wsdl:part name="parameters" element="tns:AssignTaskResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ListOfAdministratorsResponse">
-    <wsdl:part name="parameters" element="tns:ListOfAdministratorsResponse">
+  <wsdl:message name="DeleteQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:DeleteQuestionnaire">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ListOfQuestionnairesRequest">
-    <wsdl:part name="parameters" element="tns:ListOfQuestionnaires">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="GetCarerAssessmentResponse">
-    <wsdl:part name="parameters" element="tns:GetCarerAssessmentResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="GetQuestionnaireResponse">
-    <wsdl:part name="parameters" element="tns:GetQuestionnaireResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="DeleteExternalServiceRequest">
-    <wsdl:part name="parameters" element="tns:DeleteExternalService">
+  <wsdl:message name="UpdateUserRequest">
+    <wsdl:part name="parameters" element="tns:UpdateUser">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetCarerAssessmentRequest">
     <wsdl:part name="parameters" element="tns:GetCarerAssessment">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="UpdateAdministratorResponse">
-    <wsdl:part name="parameters" element="tns:UpdateAdministratorResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="MarkWarningAsReadResponse">
-    <wsdl:part name="parameters" element="tns:MarkWarningAsReadResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="ListOfCliniciansResponse">
     <wsdl:part name="parameters" element="tns:ListOfCliniciansResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteUserResponse">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetCarerResponse">
     <wsdl:part name="parameters" element="tns:GetCarerResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="SaveCarerAssessmentRequest">
-    <wsdl:part name="parameters" element="tns:SaveCarerAssessment">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="DeletePatientRequest">
-    <wsdl:part name="parameters" element="tns:DeletePatient">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="ListOfPatientsResponse">
     <wsdl:part name="parameters" element="tns:ListOfPatientsResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="CreateCarerResponse">
-    <wsdl:part name="parameters" element="tns:CreateCarerResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetUserPlannedTasksResponse">
     <wsdl:part name="parameters" element="tns:GetUserPlannedTasksResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="CreateCarerResponse">
+    <wsdl:part name="parameters" element="tns:CreateCarerResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="GetCarerRequest">
     <wsdl:part name="parameters" element="tns:GetCarer">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetPatientAssessmentResponse">
-    <wsdl:part name="parameters" element="tns:GetPatientAssessmentResponse">
+  <wsdl:message name="DeleteUserRequest">
+    <wsdl:part name="parameters" element="tns:DeleteUser">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="CreateQuestionnaireResponse">
     <wsdl:part name="parameters" element="tns:CreateQuestionnaireResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="DeleteClinicianRequest">
-    <wsdl:part name="parameters" element="tns:DeleteClinician">
+  <wsdl:message name="GetPatientAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:GetPatientAssessmentResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetPatientMeasurementResponse">
-    <wsdl:part name="parameters" element="tns:GetPatientMeasurementResponse">
+  <wsdl:message name="DeleteClinicianRequest">
+    <wsdl:part name="parameters" element="tns:DeleteClinician">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="StoreQuestionnaireAnswersResponse">
@@ -859,52 +872,32 @@
     <wsdl:part name="parameters" element="tns:StoreMeasurementsResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="CreatePatientRequest">
-    <wsdl:part name="parameters" element="tns:CreatePatient">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="GetPatientRequest">
     <wsdl:part name="parameters" element="tns:GetPatient">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="CreateExternalServiceRequest">
-    <wsdl:part name="parameters" element="tns:CreateExternalService">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="ListOfQuestionnairesResponse">
     <wsdl:part name="parameters" element="tns:ListOfQuestionnairesResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="ChangeTaskStatusResponse">
-    <wsdl:part name="parameters" element="tns:ChangeTaskStatusResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="CreateAdministratorResponse">
-    <wsdl:part name="parameters" element="tns:CreateAdministratorResponse">
+  <wsdl:message name="CreateExternalServiceRequest">
+    <wsdl:part name="parameters" element="tns:CreateExternalService">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="CreateCarerRequest">
     <wsdl:part name="parameters" element="tns:CreateCarer">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetAdministratorRequest">
-    <wsdl:part name="parameters" element="tns:GetAdministrator">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="CreateClinicianResponse">
     <wsdl:part name="parameters" element="tns:CreateClinicianResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="DeleteCarerResponse">
-    <wsdl:part name="parameters" element="tns:DeleteCarerResponse">
+  <wsdl:message name="ChangePasswordRequest">
+    <wsdl:part name="parameters" element="tns:ChangePassword">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="StoreMeasurementsRequest">
-    <wsdl:part name="parameters" element="tns:StoreMeasurements">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="CreateQuestionnaireRequest">
-    <wsdl:part name="parameters" element="tns:CreateQuestionnaire">
+  <wsdl:message name="AuthResponse">
+    <wsdl:part name="parameters" element="tns:AuthResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetAdministratorResponse">
@@ -919,20 +912,8 @@
     <wsdl:part name="parameters" element="tns:SaveWarningResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="StoreQuestionnaireAnswersRequest">
-    <wsdl:part name="parameters" element="tns:StoreQuestionnaireAnswers">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="GetAllExternalServicesRequest">
     <wsdl:part name="parameters" element="tns:GetAllExternalServices">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="CreateClinicianRequest">
-    <wsdl:part name="parameters" element="tns:CreateClinician">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="MarkWarningAsReadRequest">
-    <wsdl:part name="parameters" element="tns:MarkWarningAsRead">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="SavePatientAssessmentResponse">
@@ -943,20 +924,12 @@
     <wsdl:part name="parameters" element="tns:DeleteCarer">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="AssignTaskRequest">
-    <wsdl:part name="parameters" element="tns:AssignTask">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="DeleteAdministratorResponse">
     <wsdl:part name="parameters" element="tns:DeleteAdministratorResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetPatientResponse">
     <wsdl:part name="parameters" element="tns:GetPatientResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="UpdateQuestionnaireRequest">
-    <wsdl:part name="parameters" element="tns:UpdateQuestionnaire">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetWarningsRequest">
@@ -967,48 +940,24 @@
     <wsdl:part name="parameters" element="tns:DeletePatientResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="CreatePatientResponse">
-    <wsdl:part name="parameters" element="tns:CreatePatientResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="UpdateQuestionnaireResponse">
-    <wsdl:part name="parameters" element="tns:UpdateQuestionnaireResponse">
+  <wsdl:message name="ChangePasswordResponse">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetClinicianRequest">
     <wsdl:part name="parameters" element="tns:GetClinician">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetAllExternalServicesResponse">
-    <wsdl:part name="parameters" element="tns:GetAllExternalServicesResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="ListOfPatientsRequest">
     <wsdl:part name="parameters" element="tns:ListOfPatients">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="ListOfCliniciansRequest">
-    <wsdl:part name="parameters" element="tns:ListOfClinicians">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="GetWarningsResponse">
-    <wsdl:part name="parameters" element="tns:GetWarningsResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="DeleteAdministratorRequest">
     <wsdl:part name="parameters" element="tns:DeleteAdministrator">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetQuestionnaireAnswersRequest">
-    <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswers">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="GetUserPlannedTasksRequest">
-    <wsdl:part name="parameters" element="tns:GetUserPlannedTasks">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="SaveCarerAssessmentResponse">
-    <wsdl:part name="parameters" element="tns:SaveCarerAssessmentResponse">
+  <wsdl:message name="GetWarningsResponse">
+    <wsdl:part name="parameters" element="tns:GetWarningsResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="CreateAdministratorRequest">
@@ -1019,12 +968,12 @@
     <wsdl:part name="parameters" element="tns:ListOfCarersResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="UpdateCarerRequest">
-    <wsdl:part name="parameters" element="tns:UpdateCarer">
+  <wsdl:message name="CreateUserRequest">
+    <wsdl:part name="parameters" element="tns:CreateUser">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="CreateExternalServiceResponse">
-    <wsdl:part name="parameters" element="tns:CreateExternalServiceResponse">
+  <wsdl:message name="CreateUserResponse">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="ListOfPossibleTasksRequest">
@@ -1039,24 +988,188 @@
     <wsdl:part name="parameters" element="tns:DeleteCarerAssessment">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetClinicianResponse">
-    <wsdl:part name="parameters" element="tns:GetClinicianResponse">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="SaveWarningRequest">
-    <wsdl:part name="parameters" element="tns:SaveWarning">
+  <wsdl:message name="AuthRequest">
+    <wsdl:part name="parameters" element="tns:Auth">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetQuestionnaireAnswersResponse">
     <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="UpdataPatientRequest">
+    <wsdl:part name="parameters" element="tns:UpdataPatient">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="DeleteExternalServiceResponse">
     <wsdl:part name="parameters" element="tns:DeleteExternalServiceResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="UpdataPatientRequest">
-    <wsdl:part name="parameters" element="tns:UpdataPatient">
+  <wsdl:message name="GetPatientMeasurementRequest">
+    <wsdl:part name="parameters" element="tns:GetPatientMeasurement">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateAdministratorRequest">
+    <wsdl:part name="parameters" element="tns:UpdateAdministrator">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfAdministratorsRequest">
+    <wsdl:part name="parameters" element="tns:ListOfAdministrators">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserResponse">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:DeleteQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateClinicianResponse">
+    <wsdl:part name="parameters" element="tns:UpdateClinicianResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangeTaskStatusRequest">
+    <wsdl:part name="parameters" element="tns:ChangeTaskStatus">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateClinicianRequest">
+    <wsdl:part name="parameters" element="tns:UpdateClinician">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfPossibleTasksResponse">
+    <wsdl:part name="parameters" element="tns:ListOfPossibleTasksResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfAdministratorsResponse">
+    <wsdl:part name="parameters" element="tns:ListOfAdministratorsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfQuestionnairesRequest">
+    <wsdl:part name="parameters" element="tns:ListOfQuestionnaires">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:GetQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCarerAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:GetCarerAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteExternalServiceRequest">
+    <wsdl:part name="parameters" element="tns:DeleteExternalService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateAdministratorResponse">
+    <wsdl:part name="parameters" element="tns:UpdateAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MarkWarningAsReadResponse">
+    <wsdl:part name="parameters" element="tns:MarkWarningAsReadResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeletePatientRequest">
+    <wsdl:part name="parameters" element="tns:DeletePatient">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveCarerAssessmentRequest">
+    <wsdl:part name="parameters" element="tns:SaveCarerAssessment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientMeasurementResponse">
+    <wsdl:part name="parameters" element="tns:GetPatientMeasurementResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreatePatientRequest">
+    <wsdl:part name="parameters" element="tns:CreatePatient">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangeTaskStatusResponse">
+    <wsdl:part name="parameters" element="tns:ChangeTaskStatusResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateAdministratorResponse">
+    <wsdl:part name="parameters" element="tns:CreateAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAdministratorRequest">
+    <wsdl:part name="parameters" element="tns:GetAdministrator">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StoreMeasurementsRequest">
+    <wsdl:part name="parameters" element="tns:StoreMeasurements">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteCarerResponse">
+    <wsdl:part name="parameters" element="tns:DeleteCarerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:CreateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StoreQuestionnaireAnswersRequest">
+    <wsdl:part name="parameters" element="tns:StoreQuestionnaireAnswers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateClinicianRequest">
+    <wsdl:part name="parameters" element="tns:CreateClinician">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MarkWarningAsReadRequest">
+    <wsdl:part name="parameters" element="tns:MarkWarningAsRead">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AssignTaskRequest">
+    <wsdl:part name="parameters" element="tns:AssignTask">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateQuestionnaireRequest">
+    <wsdl:part name="parameters" element="tns:UpdateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreatePatientResponse">
+    <wsdl:part name="parameters" element="tns:CreatePatientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateQuestionnaireResponse">
+    <wsdl:part name="parameters" element="tns:UpdateQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllExternalServicesResponse">
+    <wsdl:part name="parameters" element="tns:GetAllExternalServicesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfCliniciansRequest">
+    <wsdl:part name="parameters" element="tns:ListOfClinicians">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserPlannedTasksRequest">
+    <wsdl:part name="parameters" element="tns:GetUserPlannedTasks">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersRequest">
+    <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveCarerAssessmentResponse">
+    <wsdl:part name="parameters" element="tns:SaveCarerAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateCarerRequest">
+    <wsdl:part name="parameters" element="tns:UpdateCarer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateExternalServiceResponse">
+    <wsdl:part name="parameters" element="tns:CreateExternalServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetClinicianResponse">
+    <wsdl:part name="parameters" element="tns:GetClinicianResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaveWarningRequest">
+    <wsdl:part name="parameters" element="tns:SaveWarning">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetPatientAssessmentRequest">
@@ -1342,6 +1455,36 @@
       <wsdl:input message="tns:MarkWarningAsReadRequest">
     </wsdl:input>
       <wsdl:output message="tns:MarkWarningAsReadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input message="tns:CreateUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input message="tns:DeleteUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input message="tns:UpdateUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input message="tns:ChangePasswordRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangePasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <wsdl:input message="tns:AuthRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AuthResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -1754,6 +1897,51 @@
     </wsdl:operation>
     <wsdl:operation name="MarkWarningAsRead">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/MarkWarningAsRead"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/CreateUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/DeleteUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/UpdateUser"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/ChangePassword"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Auth">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/Auth"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
