@@ -57,12 +57,19 @@ import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.Updat
 import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.xsd.*;
+
 import org.hibernate.Session;
 
 /**
      *  StorageComponentSkeleton java skeleton for the axisService
      */
 public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
+	
+	private Session s;
+	
+	public StorageComponentSkeleton () {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+	}
 
 	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
 		CreateClinicianResponseDocument respdoc = CreateClinicianResponseDocument.Factory.newInstance();
@@ -75,59 +82,29 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		try {
 			Clinician data = req.getCreateClinician().getData();
 			
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			com.aladdin.sc.db.Clinician clinician = new com.aladdin.sc.db.Clinician ();
 			
-			com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
 			PersonData rpd = data.getPersonData();
-			pd.setName(rpd.getName());
-			pd.setSurname(rpd.getSurname());
-			s.save (pd);
+			Integer pdid = storePersondata(rpd, null); 
 			
 			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
-				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
-				ad.setPersondata(pd.getId());
-				ad.setCity(rad[i].getCity());
-				ad.setCountry(rad[i].getCountry());
-				ad.setCounty(rad[i].getCounty());
-				ad.setNotes(rad[i].getNotes());
-				ad.setStreet(rad[i].getStreet());
-				ad.setStreetNo(rad[i].getStreetNo());
-				ad.setZipCode(rad[i].getZipCode());
-				ad.setIsPrimary(rad[i].getIsPrimary());
-				s.save (ad);
+				storeAddress(rad[i], pdid);
 			}
 
 			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
-				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
-				id.setPersondata(pd.getId());
-				id.setType(rid[i].getType());
-				id.setNumber(rid[i].getNumber());
-				Calendar issueDate = rid[i].getIssueDate();
-				
-				long timeInMillis = 0;
-				if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
-				id.setIssueDate(new Timestamp(timeInMillis));
-				id.setIssueAuthority(rid[i].getIssueAuthority());
-				s.save (id);
+				storeIdentifier(rid[i], pdid);
 			}
 			
 			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
-				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
-				cm.setPersondata(pd.getId());
-				cm.setType(rcm[i].getType());
-				cm.setValue(rcm[i].getValue());
-				cm.setNotes(rcm[i].getNotes());
-				cm.setIsPrimary(rcm[i].getIsPrimary());
-				s.save (cm);
+				storeCommunication(rcm[i], pdid);
 			}
 			
-			clinician.setPersondata(pd.getId());
+			clinician.setPersondata(pdid);
 			s.save(clinician);
 			
 			s.getTransaction().commit();
@@ -143,6 +120,53 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		
 		return respdoc;
 	}
+	
+	private Integer storePersondata (PersonData rpd, Integer id) {
+		com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
+		pd.setName(rpd.getName());
+		pd.setSurname(rpd.getSurname());
+		if (id != null && id > 0) pd.setId(id);
+		s.save (pd);
+		return pd.getId();
+	}
+
+	private void storeCommunication(Communication rcm, Integer pdid) {
+		com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
+		cm.setPersondata(pdid);
+		cm.setType(rcm.getType());
+		cm.setValue(rcm.getValue());
+		cm.setNotes(rcm.getNotes());
+		cm.setIsPrimary(rcm.getIsPrimary());
+		s.save (cm);
+	}
+
+	private void storeIdentifier(Identifier rid, Integer pdid) {
+		com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
+		id.setPersondata(pdid);
+		id.setType(rid.getType());
+		id.setNumber(rid.getNumber());
+		Calendar issueDate = rid.getIssueDate();
+		
+		long timeInMillis = 0;
+		if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
+		id.setIssueDate(new Timestamp(timeInMillis));
+		id.setIssueAuthority(rid.getIssueAuthority());
+		s.save (id);
+	}
+
+	private void storeAddress(Address rad, Integer pdid) {
+		com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
+		ad.setPersondata(pdid);
+		ad.setCity(rad.getCity());
+		ad.setCountry(rad.getCountry());
+		ad.setCounty(rad.getCounty());
+		ad.setNotes(rad.getNotes());
+		ad.setStreet(rad.getStreet());
+		ad.setStreetNo(rad.getStreetNo());
+		ad.setZipCode(rad.getZipCode());
+		ad.setIsPrimary(rad.getIsPrimary());
+		s.save (ad);
+	}
 
 	public CreatePatientResponseDocument createPatient (CreatePatientDocument req) {
 		CreatePatientResponseDocument respdoc = CreatePatientResponseDocument.Factory.newInstance();
@@ -155,70 +179,32 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		try {
 			Patient data = req.getCreatePatient().getData();
 			
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
 			
-			com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
 			PersonData rpd = data.getPersonData();
-			pd.setName(rpd.getName());
-			pd.setSurname(rpd.getSurname());
-			s.save (pd);
+			Integer pdid = storePersondata(rpd, null);
 			
 			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
-				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
-				ad.setPersondata(pd.getId());
-				ad.setCity(rad[i].getCity());
-				ad.setCountry(rad[i].getCountry());
-				ad.setCounty(rad[i].getCounty());
-				ad.setNotes(rad[i].getNotes());
-				ad.setStreet(rad[i].getStreet());
-				ad.setStreetNo(rad[i].getStreetNo());
-				ad.setZipCode(rad[i].getZipCode());
-				ad.setIsPrimary(rad[i].getIsPrimary());
-				s.save (ad);
+				storeAddress(rad[i], pdid);
 			}
 			
 			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
-				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
-				id.setPersondata(pd.getId());
-				id.setType(rid[i].getType());
-				id.setNumber(rid[i].getNumber());
-				Calendar issueDate = rid[i].getIssueDate();
-				
-				long timeInMillis = 0;
-				if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
-				id.setIssueDate(new Timestamp(timeInMillis));
-				id.setIssueAuthority(rid[i].getIssueAuthority());
-				s.save (id);
+				storeIdentifier(rid[i], pdid);
 			}
 			
 			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
-				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
-				cm.setPersondata(pd.getId());
-				cm.setType(rcm[i].getType());
-				cm.setValue(rcm[i].getValue());
-				cm.setNotes(rcm[i].getNotes());
-				cm.setIsPrimary(rcm[i].getIsPrimary());
-				s.save (cm);
+				storeCommunication(rcm[i], pdid);
 			}
 			
-			com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
-			SocioDemographicData rsd = data.getSDData();
-			sd.setAge(new Integer(rsd.getAge()));
-			sd.setGender(new Integer(rsd.getGender().getCode()));
-			sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
-			sd.setChildren(new Integer(rsd.getChildren()));
-			System.out.println(28);
-			sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
-			s.save(sd);
+			Integer sdid = storeSocioDemographic(data.getSDData(), null);
 			
-			p.setPersondata(pd.getId());
-			p.setSd(sd.getId());
+			p.setPersondata(pdid);
+			p.setSd(sdid);
 			String responsibleClinicianID = data.getResponsibleClinicianID();
 			if (responsibleClinicianID == null) responsibleClinicianID = "0";
 			p.setClinician(new Integer(responsibleClinicianID));
@@ -246,6 +232,18 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		
 		return respdoc;
 	}
+
+	private Integer storeSocioDemographic (SocioDemographicData rsd, Integer id) {
+		com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
+		sd.setAge(new Integer(rsd.getAge()));
+		sd.setGender(new Integer(rsd.getGender().getCode()));
+		sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
+		sd.setChildren(new Integer(rsd.getChildren()));
+		sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
+		if (id != null && id > 0) sd.setId(id);
+		s.save(sd);
+		return sd.getId();
+	}
 	
 	public CreateCarerResponseDocument createCarer (CreateCarerDocument req) {
 		CreateCarerResponseDocument respdoc = CreateCarerResponseDocument.Factory.newInstance();
@@ -260,69 +258,32 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		try {
 			Carer data = req.getCreateCarer().getData();
 			
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			com.aladdin.sc.db.Carer p = new com.aladdin.sc.db.Carer ();
 			
-			com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
 			PersonData rpd = data.getPersonData();
-			pd.setName(rpd.getName());
-			pd.setSurname(rpd.getSurname());
-			s.save (pd);
+			Integer pdid = storePersondata(rpd, null);
 			
 			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
-				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
-				ad.setPersondata(pd.getId());
-				ad.setCity(rad[i].getCity());
-				ad.setCountry(rad[i].getCountry());
-				ad.setCounty(rad[i].getCounty());
-				ad.setNotes(rad[i].getNotes());
-				ad.setStreet(rad[i].getStreet());
-				ad.setStreetNo(rad[i].getStreetNo());
-				ad.setZipCode(rad[i].getZipCode());
-				ad.setIsPrimary(rad[i].getIsPrimary());
-				s.save (ad);
+				storeAddress(rad[i], pdid);
 			}
 			
 			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
-				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
-				id.setPersondata(pd.getId());
-				id.setType(rid[i].getType());
-				id.setNumber(rid[i].getNumber());
-				Calendar issueDate = rid[i].getIssueDate();
-				
-				long timeInMillis = 0;
-				if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
-				id.setIssueDate(new Timestamp(timeInMillis));
-				id.setIssueAuthority(rid[i].getIssueAuthority());
-				s.save (id);
+				storeIdentifier(rid[i], pdid);
 			}
 			
 			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
-				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
-				cm.setPersondata(pd.getId());
-				cm.setType(rcm[i].getType());
-				cm.setValue(rcm[i].getValue());
-				cm.setNotes(rcm[i].getNotes());
-				cm.setIsPrimary(rcm[i].getIsPrimary());
-				s.save (cm);
+				storeCommunication(rcm[i], pdid);
 			}
 
-			com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
-			SocioDemographicData rsd = data.getSDData();
-			sd.setAge(new Integer(rsd.getAge()));
-			sd.setGender(new Integer(rsd.getGender().getCode()));
-			sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
-			sd.setChildren(new Integer(rsd.getChildren()));
-			sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
-			s.save(sd);
+			Integer sdid = storeSocioDemographic(data.getSDData(), null);
 			
-			p.setPersondata(pd.getId());
-			p.setSd(sd.getId());
+			p.setPersondata(pdid);
+			p.setSd(sdid);
 			s.save(p);
 			
 			s.getTransaction().commit();
@@ -347,7 +308,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		res.setStatus((short) 0);
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			Questionnaire rquest = req.getUpdateQuestionnaire().getData();
@@ -406,7 +366,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		ListOfQuestionnairesResponse resp = respdoc.addNewListOfQuestionnairesResponse();
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			com.aladdin.sc.db.Questionnaire[] ql = (com.aladdin.sc.db.Questionnaire[]) s.createSQLQuery("SELECT * FROM questionnaire").list().toArray();
 			for (int i = 0; i < ql.length; i++) {
 				QuestionnaireInfo qi = resp.addNewOut();
@@ -429,7 +388,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		res.setStatus((short) 0);
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			Warning rwarn = req.getSaveWarning().getWarn();
@@ -474,72 +432,34 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		try {
 			Carer data = req.getUpdateCarer().getData();
 			
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			List l = s.createQuery("from carer").setParameter("id", data.getID(), Hibernate.INTEGER).list();
 			if (l.size() < 1) throw new Exception("error");
 			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) l.get(0);
 			
-			com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
 			PersonData rpd = data.getPersonData();
-			pd.setId(p.getPersondata());
-			pd.setName(rpd.getName());
-			pd.setSurname(rpd.getSurname());
-			s.save (pd);
+			storePersondata(rpd, p.getPersondata());
 			
-			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM address WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
 			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
-				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
-				ad.setPersondata(pd.getId());
-				ad.setCity(rad[i].getCity());
-				ad.setCountry(rad[i].getCountry());
-				ad.setCounty(rad[i].getCounty());
-				ad.setNotes(rad[i].getNotes());
-				ad.setStreet(rad[i].getStreet());
-				ad.setStreetNo(rad[i].getStreetNo());
-				ad.setZipCode(rad[i].getZipCode());
-				ad.setIsPrimary(rad[i].getIsPrimary());
-				s.save (ad);
+				storeAddress(rad[i], p.getPersondata());
 			}
 			
-			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
 			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
-				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
-				id.setPersondata(pd.getId());
-				id.setType(rid[i].getType());
-				id.setNumber(rid[i].getNumber());
-				Calendar issueDate = rid[i].getIssueDate();
-				
-				long timeInMillis = 0;
-				if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
-				id.setIssueDate(new Timestamp(timeInMillis));
-				id.setIssueAuthority(rid[i].getIssueAuthority());
-				s.save (id);
+				storeIdentifier(rid[i], p.getPersondata());
 			}
 			
-			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
 			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
-				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
-				cm.setPersondata(pd.getId());
-				cm.setType(rcm[i].getType());
-				cm.setValue(rcm[i].getValue());
-				cm.setNotes(rcm[i].getNotes());
-				cm.setIsPrimary(rcm[i].getIsPrimary());
-				s.save (cm);
+				storeCommunication(rcm[i], p.getPersondata());
 			}
 			
-			com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
-			SocioDemographicData rsd = data.getSDData();
-			sd.setAge(new Integer(rsd.getAge()));
-			sd.setGender(new Integer(rsd.getGender().getCode()));
-			sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
-			sd.setChildren(new Integer(rsd.getChildren()));
-			sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
-			s.save(sd);
+			storeSocioDemographic(data.getSDData(), p.getSd());
 			
 			s.getTransaction().commit();
 			
@@ -568,7 +488,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			if (id < 1) throw new Exception ("error");
 			
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
@@ -612,65 +531,28 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			if (l.size() < 1) throw new Exception("error");
 			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) l.get(0);
 			
-			com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
 			PersonData rpd = data.getPersonData();
-			pd.setId(p.getPersondata());
-			pd.setName(rpd.getName());
-			pd.setSurname(rpd.getSurname());
-			s.save (pd);
+			storePersondata(rpd, p.getPersondata());
 			
-			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM address WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
 			Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
-				com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
-				ad.setPersondata(pd.getId());
-				ad.setCity(rad[i].getCity());
-				ad.setCountry(rad[i].getCountry());
-				ad.setCounty(rad[i].getCounty());
-				ad.setNotes(rad[i].getNotes());
-				ad.setStreet(rad[i].getStreet());
-				ad.setStreetNo(rad[i].getStreetNo());
-				ad.setZipCode(rad[i].getZipCode());
-				ad.setIsPrimary(rad[i].getIsPrimary());
-				s.save (ad);
+				storeAddress(rad[i], p.getPersondata());
 			}
 			
-			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
 			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
 			for (int i = 0; i < rid.length; i++) {
-				com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
-				id.setPersondata(pd.getId());
-				id.setType(rid[i].getType());
-				id.setNumber(rid[i].getNumber());
-				Calendar issueDate = rid[i].getIssueDate();
-				
-				long timeInMillis = 0;
-				if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
-				id.setIssueDate(new Timestamp(timeInMillis));
-				id.setIssueAuthority(rid[i].getIssueAuthority());
-				s.save (id);
+				storeIdentifier(rid[i], p.getPersondata());
 			}
 			
-			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
 			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
 			for (int i = 0; i < rcm.length; i++) {
-				com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
-				cm.setPersondata(pd.getId());
-				cm.setType(rcm[i].getType());
-				cm.setValue(rcm[i].getValue());
-				cm.setNotes(rcm[i].getNotes());
-				cm.setIsPrimary(rcm[i].getIsPrimary());
-				s.save (cm);
+				storeCommunication(rcm[i], p.getPersondata());
 			}
 			
-			com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
-			SocioDemographicData rsd = data.getSDData();
-			sd.setAge(new Integer(rsd.getAge()));
-			sd.setGender(new Integer(rsd.getGender().getCode()));
-			sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
-			sd.setChildren(new Integer(rsd.getChildren()));
-			sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
-			s.save(sd);
+			storeSocioDemographic(data.getSDData(), p.getSd());
 			
 			s.getTransaction().commit();
 			
@@ -690,7 +572,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		ListOfCarersResponse resp = respdoc.addNewListOfCarersResponse();
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			com.aladdin.sc.db.Carer[] ql = (com.aladdin.sc.db.Carer[]) s.createQuery("from carer").list().toArray();
 			for (int i = 0; i < ql.length; i++) {
 				CarerInfo qi = resp.addNewOut();
@@ -709,7 +590,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		ListOfCliniciansResponse resp = respdoc.addNewListOfCliniciansResponse();
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			com.aladdin.sc.db.Clinician[] ql = (com.aladdin.sc.db.Clinician[]) s.createQuery("from clinician").list().toArray();
 			for (int i = 0; i < ql.length; i++) {
 				ClinicianInfo qi = resp.addNewOut();
@@ -732,7 +612,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		res.setStatus((short) 0);
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			com.aladdin.sc.db.PatientAssessment pa = new com.aladdin.sc.db.PatientAssessment();
@@ -771,7 +650,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			Integer pid = new Integer (pa.getId());
 			for (int i = 0; i < rpa.getClinicalDataArray().length; i++) {
-				storeMeasurement(s, pid, rpa.getClinicalDataArray(i));
+				storeMeasurement(rpa.getClinicalDataArray(i), pid);
 			}
 			
 			s.getTransaction().commit();
@@ -785,11 +664,10 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			res.setDescription("database error");
 		}
 		
-		
 		return respdoc;
 	}
 
-	private Integer storeMeasurement(Session s, Integer pid, Measurement rm) {
+	private Integer storeMeasurement(Measurement rm, Integer pid) {
 		long timeInMillis = 0;
 		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
 		m.setPatient(new Integer (pid));
@@ -814,13 +692,12 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		res.setStatus((short) 0);
 		
 		try {
-			Session s = HibernateUtil.getSessionFactory().openSession();
 			s.beginTransaction();
 			
 			Measurement[] rm = req.getStoreMeasurements().getDataArray();
 			Integer id = 0;
 			for (int i = 0; i < rm.length; i++) {
-				id = storeMeasurement(s, null, rm[i]);
+				id = storeMeasurement(rm[i], null);
 			}
 			
 			s.getTransaction().commit();
