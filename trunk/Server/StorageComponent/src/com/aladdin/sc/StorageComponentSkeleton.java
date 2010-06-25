@@ -5,6 +5,7 @@
     import java.util.Calendar;
     import java.util.List;
 
+import org.apache.axis2.clustering.configuration.commands.ExceptionCommand;
     import org.hibernate.Hibernate;
     import org.hibernate.Session;
 
@@ -87,23 +88,7 @@ import org.hibernate.Session;
     			
     			com.aladdin.sc.db.Clinician clinician = new com.aladdin.sc.db.Clinician ();
     			
-    			PersonData rpd = data.getPersonData();
-    			Integer pdid = storePersondata(rpd, null); 
-    			
-    			Address[] rad = rpd.getAddressList().getAddressArray();
-    			for (int i = 0; i < rad.length; i++) {
-    				storeAddress(rad[i], pdid);
-    			}
-
-    			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
-    			for (int i = 0; i < rid.length; i++) {
-    				storeIdentifier(rid[i], pdid);
-    			}
-    			
-    			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
-    			for (int i = 0; i < rcm.length; i++) {
-    				storeCommunication(rcm[i], pdid);
-    			}
+    			Integer pdid = storePersondata(data.getPersonData(), null); 
     			
     			clinician.setPersondata(pdid);
     			s.save(clinician);
@@ -128,6 +113,29 @@ import org.hibernate.Session;
     		pd.setSurname(rpd.getSurname());
     		if (id != null && id > 0) pd.setId(id);
     		s.save (pd);
+    		
+    		Integer pdid = pd.getId();
+    		
+			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
+
+    		
+    		Address[] rad = rpd.getAddressList().getAddressArray();
+			for (int i = 0; i < rad.length; i++) {
+				storeAddress(rad[i], pdid);
+			}
+
+			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
+			for (int i = 0; i < rid.length; i++) {
+				storeIdentifier(rid[i], pdid);
+			}
+			
+			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
+			for (int i = 0; i < rcm.length; i++) {
+				storeCommunication(rcm[i], pdid);
+			}
+    		
     		return pd.getId();
     	}
 
@@ -184,23 +192,7 @@ import org.hibernate.Session;
     			
     			com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
     			
-    			PersonData rpd = data.getPersonData();
-    			Integer pdid = storePersondata(rpd, null);
-    			
-    			Address[] rad = rpd.getAddressList().getAddressArray();
-    			for (int i = 0; i < rad.length; i++) {
-    				storeAddress(rad[i], pdid);
-    			}
-    			
-    			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
-    			for (int i = 0; i < rid.length; i++) {
-    				storeIdentifier(rid[i], pdid);
-    			}
-    			
-    			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
-    			for (int i = 0; i < rcm.length; i++) {
-    				storeCommunication(rcm[i], pdid);
-    			}
+    			Integer pdid = storePersondata(data.getPersonData(), null);
     			
     			Integer sdid = storeSocioDemographic(data.getSDData(), null);
     			
@@ -263,24 +255,8 @@ import org.hibernate.Session;
     			
     			com.aladdin.sc.db.Carer p = new com.aladdin.sc.db.Carer ();
     			
-    			PersonData rpd = data.getPersonData();
-    			Integer pdid = storePersondata(rpd, null);
+    			Integer pdid = storePersondata(data.getPersonData(), null);
     			
-    			Address[] rad = rpd.getAddressList().getAddressArray();
-    			for (int i = 0; i < rad.length; i++) {
-    				storeAddress(rad[i], pdid);
-    			}
-    			
-    			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
-    			for (int i = 0; i < rid.length; i++) {
-    				storeIdentifier(rid[i], pdid);
-    			}
-    			
-    			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
-    			for (int i = 0; i < rcm.length; i++) {
-    				storeCommunication(rcm[i], pdid);
-    			}
-
     			Integer sdid = storeSocioDemographic(data.getSDData(), null);
     			
     			p.setPersondata(pdid);
@@ -322,7 +298,7 @@ import org.hibernate.Session;
     			QuestionnaireQuestion[] rqq = rquest.getQuestionArray();
     			 
     			for (int i = 0; i < rqq.length; i++) {
-    				updateQQ(rqq[i], s, 0);
+    				updateQQ(rqq[i], 0);
     			}
     			
     			s.getTransaction().commit();
@@ -339,7 +315,7 @@ import org.hibernate.Session;
     		return respdoc;
     	}
 
-    	private void updateQQ(QuestionnaireQuestion rqq, Session s, int parentId) {
+    	private void updateQQ(QuestionnaireQuestion rqq, int parentId) {
     		com.aladdin.sc.db.QuestionnaireQuestion qq = new com.aladdin.sc.db.QuestionnaireQuestion ();
     		qq.setType(rqq.getType());
     		if (rqq.getId() != null) qq.setId(new Integer (rqq.getId()));
@@ -348,7 +324,7 @@ import org.hibernate.Session;
     		qq.setParentid(parentId);
     		s.save (qq);
     		for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
-    			updateQQ (rqq.getQuestions().getQuestionArray(i), s, qq.getId());
+    			updateQQ (rqq.getQuestions().getQuestionArray(i), qq.getId());
     		}
     		QuestionnaireQuestionAnswer rqqa = null;
     		com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
@@ -439,26 +415,7 @@ import org.hibernate.Session;
     			if (l.size() < 1) throw new Exception("error");
     			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) l.get(0);
     			
-    			PersonData rpd = data.getPersonData();
-    			storePersondata(rpd, p.getPersondata());
-    			
-    			s.createSQLQuery("DELETE FROM address WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
-    			Address[] rad = rpd.getAddressList().getAddressArray();
-    			for (int i = 0; i < rad.length; i++) {
-    				storeAddress(rad[i], p.getPersondata());
-    			}
-    			
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
-    			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
-    			for (int i = 0; i < rid.length; i++) {
-    				storeIdentifier(rid[i], p.getPersondata());
-    			}
-    			
-    			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
-    			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
-    			for (int i = 0; i < rcm.length; i++) {
-    				storeCommunication(rcm[i], p.getPersondata());
-    			}
+    			storePersondata(data.getPersonData(), p.getPersondata());
     			
     			storeSocioDemographic(data.getSDData(), p.getSd());
     			
@@ -479,12 +436,8 @@ import org.hibernate.Session;
     		DeleteAdministratorResponseDocument respdoc = DeleteAdministratorResponseDocument.Factory.newInstance();
     		DeleteAdministratorResponse resp = respdoc.addNewDeleteAdministratorResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("");
-    		res.setDescription("");
-    		res.setStatus((short) 0);
     		
     		try {
-    			
     			Integer id = new Integer (req.getDeleteAdministrator().getId());
     			
     			if (id < 1) throw new Exception ("error");
@@ -532,26 +485,7 @@ import org.hibernate.Session;
     			if (l.size() < 1) throw new Exception("error");
     			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) l.get(0);
     			
-    			PersonData rpd = data.getPersonData();
-    			storePersondata(rpd, p.getPersondata());
-    			
-    			s.createSQLQuery("DELETE FROM address WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
-    			Address[] rad = rpd.getAddressList().getAddressArray();
-    			for (int i = 0; i < rad.length; i++) {
-    				storeAddress(rad[i], p.getPersondata());
-    			}
-    			
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
-    			Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
-    			for (int i = 0; i < rid.length; i++) {
-    				storeIdentifier(rid[i], p.getPersondata());
-    			}
-    			
-    			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + p.getPersondata().toString()).executeUpdate();
-    			Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
-    			for (int i = 0; i < rcm.length; i++) {
-    				storeCommunication(rcm[i], p.getPersondata());
-    			}
+    			storePersondata(data.getPersonData(), p.getPersondata());
     			
     			storeSocioDemographic(data.getSDData(), p.getSd());
     			
@@ -668,10 +602,11 @@ import org.hibernate.Session;
     		return respdoc;
     	}
 
-    	private Integer storeMeasurement(Measurement rm, Integer pid) {
+    	private Integer storeMeasurement(Measurement rm, Integer paid) {
     		long timeInMillis = 0;
     		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-    		m.setPatient(new Integer (pid));
+    		m.setPatient(new Integer (rm.getPatientID()));
+    		m.setPatientassessment (paid);
     		m.setType(rm.getType().getCode());
     		m.setValue(rm.getValue());
     		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
@@ -714,132 +649,366 @@ import org.hibernate.Session;
     		return respdoc;
     	}
     	
-    	
-    	
-    	
-    	public GetPatientResponseDocument getPatient (GetPatientDocument getPatient20) {
+    	public GetPatientResponseDocument getPatient (GetPatientDocument req) {
     		GetPatientResponseDocument respdoc = GetPatientResponseDocument.Factory.newInstance();
     		GetPatientResponse resp = respdoc.addNewGetPatientResponse();
-    		Patient p = resp.addNewOut();
-    		PersonData pd = p.addNewPersonData();
-    		pd.setName("Vovka");
-    		pd.setSurname("Morkovka");
-//    		Address a = pd.addNewAddressList();
-//    		a.setCity("Baden");
-//    		a.setCountry("Schweiz");
-//    		a.setStreet("Big street");
-//    		a.setZipCode("111111");
-//    		Communication c = pd.addNewCommunicationList();
-//    		c.setType("phone");
-//    		c.setValue("+49XXXXXXX");
-//    		Identifier i = pd.addNewIdentifierList();
-//    		i.setNumber("XXX1123");
-//    		i.setType("pass");
-    		p.setID("P-0001");
-    		SocioDemographicData sd = p.addNewSDData();
-    		SystemParameter gender = sd.addNewGender();
-    		gender.setCode("1");
-    		gender.setDescription("male");
-    		SystemParameter LivingWith = sd.addNewLivingWith();
-    		LivingWith.setCode("1");
-    		SystemParameter MaritalStatus = sd.addNewMaritalStatus();
-    		MaritalStatus.setCode("1");
-    		sd.setAge((short) 60);
-    		sd.setChildren((short) 2);
+    		
+    		try {
+    			List list =  s.createQuery("from patient").setInteger("id", new Integer (req.getGetPatient().getId())).list();
+        		if (list.size() != 1) throw new Exception ("");
+        		
+        		com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) list.get(0);
+        		
+        		resp.setOut (exportPatient (patient));
+        		
+    		} catch (Exception e) {
+    		}
+    		
     		return respdoc;
     	}
-    	
-    	public DeleteCarerAssessmentResponseDocument deleteCarerAssessment (DeleteCarerAssessmentDocument deleteCarerAssessment22) {
+
+		private Patient exportPatient(com.aladdin.sc.db.Patient patient) {
+			Patient p = Patient.Factory.newInstance();
+			p.setID(patient.getId().toString());
+			p.setPersonData(exportPersonData(patient.getM_PersonDatapersondata()));
+			p.setSDData (exportSocioDemographicData(patient.getM_SocioDemographicDatasd()));
+			p.setResponsibleClinicianID(patient.getClinician().toString());
+			
+			com.aladdin.sc.db.PatientCarer[] pc = (com.aladdin.sc.db.PatientCarer[]) patient.getPatientCarers1().toArray();
+			PatientCarerList pcl = p.addNewPatientCarerList();
+			for (int i = 0; i < pc.length; i++) {
+				PatientCarer rpc = pcl.addNewPatientCarer();
+				rpc.setIsPrimary(pc[i].getIsprimary());
+				rpc.setCarer(exportCarer(pc[i].getM_Carercarer()));
+			}
+			return p;
+		}
+
+		private Carer exportCarer(com.aladdin.sc.db.Carer carer) {
+			Carer c = Carer.Factory.newInstance();
+			c.setID(carer.getId().toString());
+			c.setPersonData(exportPersonData(carer.getM_PersonDatapersondata()));
+			c.setSDData(exportSocioDemographicData(carer.getM_SocioDemographicDatasd()));
+			return c;
+		}
+
+		private SocioDemographicData exportSocioDemographicData (com.aladdin.sc.db.SocioDemographicData SDData) {
+			SocioDemographicData sd = SocioDemographicData.Factory.newInstance();
+			sd.setAge(SDData.getAge().shortValue());
+			SystemParameter gender = SystemParameter.Factory.newInstance();
+			gender.setCode(SDData.getGender().toString());
+			sd.setGender(gender);
+			SystemParameter maritalStatus = SystemParameter.Factory.newInstance();
+			maritalStatus.setCode(SDData.getMaritalStatus().toString());
+			sd.setMaritalStatus(maritalStatus);
+			sd.setChildren(SDData.getChildren().shortValue());
+			SystemParameter livingWith = SystemParameter.Factory.newInstance();
+			livingWith.setCode(SDData.getLivingWith().toString());
+			sd.setLivingWith(livingWith);
+			return sd;
+		}
+
+		private PersonData exportPersonData(com.aladdin.sc.db.PersonData personData) {
+			PersonData pd = PersonData.Factory.newInstance();
+			pd.setSurname(personData.getSurname());
+			pd.setName(personData.getName());
+			
+			com.aladdin.sc.db.Identifier[] id = (com.aladdin.sc.db.Identifier[]) personData.getIdentifiers().toArray();
+			IdentifierList idl = pd.addNewIdentifierList();
+			for (int i = 0; i < id.length; i++) {
+				exportIdentifier(id[i], idl);
+			}
+			
+			com.aladdin.sc.db.Address[] ad = (com.aladdin.sc.db.Address[]) personData.getAddresss1().toArray();
+			AddressList adl = pd.addNewAddressList();
+			for (int i = 0; i < ad.length; i++) {
+				exportAddress(ad[i], adl);
+			}
+			
+			com.aladdin.sc.db.Communication[] cm = (com.aladdin.sc.db.Communication[]) personData.getCommunications11().toArray();
+			CommunicationList cml = pd.addNewCommunicationList();
+			for (int i = 0; i < cm.length; i++) {
+				exportCommunication(cm[i], cml);
+			}
+			return pd;
+		}
+
+		private void exportCommunication(com.aladdin.sc.db.Communication cm, CommunicationList cml) {
+			Communication rcm = cml.addNewCommunication();
+			rcm.setType(cm.getType());
+			rcm.setValue(cm.getValue());
+			rcm.setNotes(cm.getNotes());
+			rcm.setIsPrimary(cm.getIsPrimary());
+		}
+
+		private void exportAddress(com.aladdin.sc.db.Address ad, AddressList adl) {
+			Address rad = adl.addNewAddress();
+			rad.setStreet(ad.getStreet());
+			rad.setStreetNo(ad.getStreetNo());
+			rad.setCity(ad.getCity());
+			rad.setCountry(ad.getCountry());
+			rad.setCounty(ad.getCounty());
+			rad.setZipCode(ad.getZipCode());
+			rad.setNotes(ad.getNotes());
+			rad.setIsPrimary(ad.getIsPrimary());
+		}
+
+		private void exportIdentifier(com.aladdin.sc.db.Identifier id, IdentifierList idl) {
+			Identifier rid = idl.addNewIdentifier();
+			rid.setType(id.getType());
+			rid.setNumber(id.getNumber());
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(id.getIssueDate().getTime());
+			rid.setIssueDate(c);
+			rid.setIssueAuthority(id.getIssueAuthority());
+		}
+		
+    	public DeleteCarerAssessmentResponseDocument deleteCarerAssessment (DeleteCarerAssessmentDocument req) {
     		DeleteCarerAssessmentResponseDocument respdoc = DeleteCarerAssessmentResponseDocument.Factory.newInstance();
     		DeleteCarerAssessmentResponse resp = respdoc.addNewDeleteCarerAssessmentResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("R-0001");
-    		res.setDescription("");
-    		res.setStatus((short) 1);
+    		
+    		try {
+    			s.createSQLQuery("DELETE FROM patientassessment WHERE id = " + req.getDeleteCarerAssessment().getAssessmentId());
+    			res.setCode(req.getDeleteCarerAssessment().getAssessmentId());
+        		res.setDescription("ok");
+        		res.setStatus((short) 1);
+    		} catch (Exception e) {
+    			res.setCode("-2");
+        		res.setDescription("database error");
+        		res.setStatus((short) 0);
+    		}
+    		
     		return respdoc;
     	}
     	
-    	public GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswers (GetQuestionnaireAnswersDocument getQuestionnaireAnswers26) {
+    	public GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswers (GetQuestionnaireAnswersDocument req) {
     		GetQuestionnaireAnswersResponseDocument respdoc = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
     		GetQuestionnaireAnswersResponse resp = respdoc.addNewGetQuestionnaireAnswersResponse();
-    		QuestionnaireAnswers q = resp.addNewOut();
-    		q.setID("Q-0001");
-    		q.setObjectID("O-0001");
-    		q.setUserID("U-0001");
-    		Calendar c = Calendar.getInstance();
-    		c.set(2010, 06, 15, 14, 55, 30);
-    		q.setDateTime(c);
-    		QuestionnaireAnswer qa = q.addNewAnswer();
-    		qa.setQuestionID("QQ-0001");
-    		qa.setStringValue("sv");
+    		
+    		try {
+    			
+    			Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
+    			Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
+    			Integer objectId  = new Integer (req.getGetQuestionnaireAnswers().getObjectId());
+    			
+    			String sql = "SELECT * FROM questionnaireanswer WHERE objectid = '" + objectId.toString() + "' AND datetime BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY question";
+    			com.aladdin.sc.db.QuestionnaireAnswer[] questionids = (com.aladdin.sc.db.QuestionnaireAnswer[]) s.createSQLQuery(sql).list().toArray();
+    			if (questionids.length < 1) throw new Exception("");
+    			
+    			com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) questionids[0];
+    			sql = "SELECT * FROM questionnaireanswer WHERE objectid = '" + objectId.toString() + "' AND datetime BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' AND question = " + qa.getId().toString();
+    			questionids = (com.aladdin.sc.db.QuestionnaireAnswer[]) s.createSQLQuery(sql).list().toArray();
+    			
+    			QuestionnaireAnswers rqas = resp.addNewOut();
+    			Calendar dateTime = Calendar.getInstance();
+    			dateTime.setTimeInMillis(questionids[0].getDateTime().getTime());
+    			rqas.setDateTime(dateTime);
+    			rqas.setObjectID(questionids[0].getObjectId().toString());
+    			rqas.setUserID(questionids[0].getUserId().toString());
+    			
+    			for (int i = 0; i < questionids.length; i++) {
+    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
+    				rqa.setQuestionID(questionids[i].getQuestion().toString());
+    				rqa.setValue(questionids[i].getValue());
+    			}
+    			
+    		} catch (Exception e) {
+    		}
+
     		return respdoc;
     	}
     	
-    	public DeleteExternalServiceResponseDocument deleteExternalService (DeleteExternalServiceDocument deleteExternalService28) {
+    	public DeleteExternalServiceResponseDocument deleteExternalService (DeleteExternalServiceDocument req) {
     		DeleteExternalServiceResponseDocument respdoc = DeleteExternalServiceResponseDocument.Factory.newInstance();
     		DeleteExternalServiceResponse resp = respdoc.addNewDeleteExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("R-0001");
-    		res.setDescription("");
-    		res.setStatus((short) 1);
+    		
+    		try {
+    			Integer id = new Integer (req.getDeleteExternalService().getId());
+    			s.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString());
+    			res.setCode(id.toString());
+        		res.setDescription("ok");
+        		res.setStatus((short) 1);
+    		} catch (Exception e) {
+				res.setCode("-2");
+        		res.setDescription("database error");
+        		res.setStatus((short) 0);
+			}
+    		
     		return respdoc;
     	}
     	
-    	public DeleteClinicianResponseDocument deleteClinician (DeleteClinicianDocument deleteClinician30) {
+    	public DeleteClinicianResponseDocument deleteClinician (DeleteClinicianDocument req) {
     		DeleteClinicianResponseDocument respdoc = DeleteClinicianResponseDocument.Factory.newInstance();
     		DeleteClinicianResponse resp = respdoc.addNewDeleteClinicianResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("R-0001");
-    		res.setDescription("");
-    		res.setStatus((short) 1);
+    		
+    		try {
+    			Integer id = new Integer (req.getDeleteClinician().getId());
+    			
+    			if (id < 1) throw new Exception ("error");
+    			
+    			s.beginTransaction();
+    			
+    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT communication FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM persondata WHERE id = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM clinician WHERE id = " + id.toString()).executeUpdate();
+    			
+    			s.getTransaction().commit();
+    			
+    			res.setCode(id.toString ());
+    			res.setStatus((short) 1);
+    			res.setDescription("ok");
+    		}  catch (Exception e) {
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("database error");
+    		}
+    		
     		return respdoc;
     	}
     	
-    	public DeletePatientResponseDocument deletePatient (DeletePatientDocument deletePatient32) {
+    	public DeletePatientResponseDocument deletePatient (DeletePatientDocument req) {
     		DeletePatientResponseDocument respdoc = DeletePatientResponseDocument.Factory.newInstance();
     		DeletePatientResponse resp = respdoc.addNewDeletePatientResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("R-0001");
-    		res.setDescription("");
-    		res.setStatus((short) 1);
+    		
+    		try {
+    			Integer id = new Integer (req.getDeletePatient().getId());
+    			
+    			if (id < 1) throw new Exception ("error");
+    			
+    			s.beginTransaction();
+    			
+    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT communication FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM persondata WHERE id = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM patient WHERE id = " + id.toString()).executeUpdate();
+    			
+    			s.getTransaction().commit();
+    			
+    			res.setCode(id.toString ());
+    			res.setStatus((short) 1);
+    			res.setDescription("ok");
+    		} catch (Exception e) {
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("database error");
+    		}
+    		
     		return respdoc;
     	}
     	
-    	public CreateQuestionnaireResponseDocument createQuestionnaire (CreateQuestionnaireDocument createQuestionnaire34) {
+    	public CreateQuestionnaireResponseDocument createQuestionnaire (CreateQuestionnaireDocument req) {
     		CreateQuestionnaireResponseDocument respdoc = CreateQuestionnaireResponseDocument.Factory.newInstance();
     		CreateQuestionnaireResponse resp = respdoc.addNewCreateQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("R-0001");
-    		res.setDescription("");
-    		res.setStatus((short) 1);
+    		
+    		try {
+    			
+    			Questionnaire rq = req.getCreateQuestionnaire().getData();
+    			
+    			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
+    			q.setTitle(rq.getTitle());
+    			q.setVersion(rq.getVersion());
+    			s.save (q);
+    			
+    			QuestionnaireQuestion[] rqq = rq.getQuestionArray();
+   			 
+    			for (int i = 0; i < rqq.length; i++) {
+    				updateQQ(rqq[i], 0);
+    			}
+    			
+    			s.getTransaction().commit();
+    			
+    			res.setCode(q.getId().toString ());
+    			res.setStatus((short) 1);
+    			res.setDescription("ok");
+    		} catch (Exception e) {
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("database error");
+    		}
+    		
     		return respdoc;
     	}
     	
-    	public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument getPatientMeasurement36) {
+    	public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument req) {
     		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
-    		Measurement m = resp.addNewOut();
-    		Calendar c = Calendar.getInstance();
-    		c.set(2010, 06, 15, 14, 55, 30);
-    		m.setDateTime(c);
-    		m.setPatientID("P-0001");
-    		m.setTaskID("T-0001");
-    		//m.setType("none");
-    		m.setUnits("l");
-    		BigDecimal b = new BigDecimal(1.0);
-    		m.setValue (b);
+    		
+    		try {
+    			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
+    			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
+    			Calendar fromDate = req.getGetPatientMeasurement().getFromData();
+    			Calendar toDate = req.getGetPatientMeasurement().getToData();
+    			com.aladdin.sc.db.Measurement[] m = (com.aladdin.sc.db.Measurement[]) s.createSQLQuery("SELECT * FROM measurement WHERE patient = " + patientId.toString() + " AND datetime BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString() + "' AND type = " + measurementType.toString()).list().toArray();
+    			for (int i = 0; i < m.length; i++) {
+    				resp.setOutArray(i, exportMeasurement(m[i]));
+    			}
+    		} catch (Exception e) {
+			}
+    		
     		return respdoc;
     	}
-    	
-    	public DeleteQuestionnaireResponseDocument deleteQuestionnaire (DeleteQuestionnaireDocument deleteQuestionnaire38) {
+
+		private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
+			Measurement rm = Measurement.Factory.newInstance();
+			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
+			rmeasurementType.setCode(m.getType());
+			rm.setType(rmeasurementType);
+			rm.setValue(m.getValue());
+			Timestamp datetime = m.getDatetime();
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(datetime.getTime());
+			rm.setDateTime(c);
+			rm.setUnits(m.getUnits());
+			rm.setLowerLimit(m.getLowerlimit());
+			rm.setUpperLimit(m.getUpperlimit());
+			rm.setPatientID(m.getPatient().toString());
+			return rm;
+		}
+		
+    	public DeleteQuestionnaireResponseDocument deleteQuestionnaire (DeleteQuestionnaireDocument req) {
     		DeleteQuestionnaireResponseDocument respdoc = DeleteQuestionnaireResponseDocument.Factory.newInstance();
     		DeleteQuestionnaireResponse resp = respdoc.addNewDeleteQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
-    		res.setCode("R-0001");
-    		res.setDescription("");
-    		res.setStatus((short) 1);
+    		
+    		try {
+    			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
+    			QuestionnaireQuestion[] qq = (QuestionnaireQuestion[]) s.createSQLQuery("SELECT * FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
+    			for (int i = 0; i < qq.length; i++) {
+    				dropQQ (new Integer (qq[i].getId()));
+    			}
+    			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString());
+    			
+    			res.setCode(id.toString());
+    			res.setDescription("ok");
+        		res.setStatus((short) 1);
+    		} catch (Exception e) {
+    			res.setCode("-2");
+        		res.setDescription("database error");
+        		res.setStatus((short) 0);
+			}
+    		
     		return respdoc;
     	}
+    	
+    	private void dropQQ (Integer id) {
+    		QuestionnaireQuestion[] qq = (QuestionnaireQuestion[]) s.createSQLQuery("SELECT * FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
+			for (int i = 0; i < qq.length; i++) {
+				dropQQ (new Integer (qq[i].getId()));
+			}
+			s.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
+			s.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
+    	}
+    	
+    	
     	
     	public AssignTaskResponseDocument assignTask (AssignTaskDocument assignTask40) {
     		AssignTaskResponseDocument respdoc = AssignTaskResponseDocument.Factory.newInstance();
@@ -1179,7 +1348,8 @@ import org.hibernate.Session;
         	CreateUserResponseDocument respdoc = CreateUserResponseDocument.Factory.newInstance();
         	CreateUserResponse resp = respdoc.addNewCreateUserResponse();
         	resp.addNewOut().setStatus((short) -1);
-        	return respdoc;        }
+        	return respdoc;
+        }
     
     }
     
