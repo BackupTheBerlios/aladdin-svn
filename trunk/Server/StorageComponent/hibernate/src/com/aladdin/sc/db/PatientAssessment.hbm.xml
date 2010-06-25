@@ -31,7 +31,7 @@
 <property name="SensorialDeficits" type="java.lang.Boolean"><column name="SensorialDeficits"/></property>
 <property name="PharmacologyTreatment" type="java.lang.String"><column name="PharmacologyTreatment"/></property>
 <many-to-one name="m_Patientpatient" class="com.aladdin.sc.db.Patient" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
-<set name="Measurements" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.Measurement"/></set>
+<set name="Measurements" inverse="true" cascade="none"><key><column name="patientassessment" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.Measurement"/></set>
 </class>
 </hibernate-mapping>
 

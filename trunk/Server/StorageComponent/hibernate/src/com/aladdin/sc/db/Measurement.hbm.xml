@@ -11,9 +11,11 @@
 <property name="units" type="java.lang.String"><column name="units"/></property>
 <property name="lowerlimit" type="java.math.BigDecimal"><column name="lowerlimit"/></property>
 <property name="upperlimit" type="java.math.BigDecimal"><column name="upperlimit"/></property>
+<property name="patientassessment" type="java.lang.Integer"><column name="patientassessment"/></property>
 <property name="patient" type="java.lang.Integer"><column name="patient"/></property>
 <property name="task" type="java.lang.Integer"><column name="task"/></property>
-<many-to-one name="m_PatientAssessmentpatient" class="com.aladdin.sc.db.PatientAssessment" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
+<many-to-one name="m_PatientAssessmentpatientassessment" class="com.aladdin.sc.db.PatientAssessment" insert="false" update="false"><column name="patientassessment" not-null="false" /></many-to-one>
+<many-to-one name="m_Patientpatient" class="com.aladdin.sc.db.Patient" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
 <many-to-one name="m_Tasktask" class="com.aladdin.sc.db.Task" insert="false" update="false"><column name="task" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>

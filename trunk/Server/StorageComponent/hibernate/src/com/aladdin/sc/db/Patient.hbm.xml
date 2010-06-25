@@ -13,6 +13,7 @@
 <many-to-one name="m_SocioDemographicDatasd" class="com.aladdin.sc.db.SocioDemographicData" insert="false" update="false"><column name="sd" not-null="false" /></many-to-one>
 <many-to-one name="m_Clinicianclinician" class="com.aladdin.sc.db.Clinician" insert="false" update="false"><column name="clinician" not-null="false" /></many-to-one>
 <set name="PatientCarers1" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.PatientCarer"/></set>
+<set name="Measurements11" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.Measurement"/></set>
 </class>
 </hibernate-mapping>
 

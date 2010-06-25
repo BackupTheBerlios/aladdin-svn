@@ -221,7 +221,8 @@
     		<element name="units" type="string"></element>
     		<element name="lowerlimit" type="decimal"></element>
     		<element name="upperlimit" type="decimal"></element>
-    		<element name="patient" type="tns:PatientAssessment" maxOccurs="1" minOccurs="1"></element>
+    		<element name="patientassessment" type="tns:PatientAssessment" maxOccurs="1" minOccurs="0"></element>
+    		<element name="patient" type="tns:Patient" maxOccurs="1" minOccurs="0"></element>
     		<element name="task" type="tns:Task" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
