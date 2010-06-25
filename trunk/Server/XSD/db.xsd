@@ -131,10 +131,13 @@
 
     <complexType name="QuestionnaireAnswer">
     	<sequence>
-    		<element name="question" type="tns:QuestionnaireQuestion" maxOccurs="1" minOccurs="1"></element>
+    		<element name="question" type="tns:QuestionnaireQuestion"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
     		<element name="value" type="string"></element>
     		<element name="UserId" type="int"></element>
     		<element name="dateTime" type="dateTime"></element>
+    		<element name="objectId" type="int"></element>
     	</sequence>
     </complexType>
 
