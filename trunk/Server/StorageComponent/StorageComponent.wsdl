@@ -357,7 +357,7 @@
       <xsd:element name="GetPatientMeasurementResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="out" type="aladdin:Measurement" maxOccurs="unbounded"></xsd:element>
+      			<xsd:element name="out" type="aladdin:Measurement" minOccurs="0" maxOccurs="unbounded"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
