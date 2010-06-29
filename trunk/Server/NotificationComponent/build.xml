@@ -69,6 +69,7 @@
                 <include name="*.xml"/>
                 <include name="*.wsdl"/>
                 <include name="*.xsd"/>
+                <include name="email.properties"/>
                 <exclude name="**/schemaorg_apache_xmlbean/**"/>
             </fileset>
         </copy>
