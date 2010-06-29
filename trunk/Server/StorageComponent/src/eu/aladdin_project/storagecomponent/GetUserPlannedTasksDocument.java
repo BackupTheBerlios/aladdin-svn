@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("getuserplannedtasks6799doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("getuserplannedtasks6799doctype");
     
     /**
      * Gets the "GetUserPlannedTasks" element
@@ -42,67 +42,7 @@ public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObje
     public interface GetUserPlannedTasks extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("getuserplannedtasks3130elemtype");
-        
-        /**
-         * Gets the "uid" element
-         */
-        java.lang.String getUid();
-        
-        /**
-         * Gets (as xml) the "uid" element
-         */
-        org.apache.xmlbeans.XmlString xgetUid();
-        
-        /**
-         * Sets the "uid" element
-         */
-        void setUid(java.lang.String uid);
-        
-        /**
-         * Sets (as xml) the "uid" element
-         */
-        void xsetUid(org.apache.xmlbeans.XmlString uid);
-        
-        /**
-         * Gets the "fromData" element
-         */
-        java.util.Calendar getFromData();
-        
-        /**
-         * Gets (as xml) the "fromData" element
-         */
-        org.apache.xmlbeans.XmlDateTime xgetFromData();
-        
-        /**
-         * Sets the "fromData" element
-         */
-        void setFromData(java.util.Calendar fromData);
-        
-        /**
-         * Sets (as xml) the "fromData" element
-         */
-        void xsetFromData(org.apache.xmlbeans.XmlDateTime fromData);
-        
-        /**
-         * Gets the "toData" element
-         */
-        java.util.Calendar getToData();
-        
-        /**
-         * Gets (as xml) the "toData" element
-         */
-        org.apache.xmlbeans.XmlDateTime xgetToData();
-        
-        /**
-         * Sets the "toData" element
-         */
-        void setToData(java.util.Calendar toData);
-        
-        /**
-         * Sets (as xml) the "toData" element
-         */
-        void xsetToData(org.apache.xmlbeans.XmlDateTime toData);
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("getuserplannedtasks3130elemtype");
         
         /**
          * Gets the "userId" element
@@ -123,6 +63,66 @@ public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObje
          * Sets (as xml) the "userId" element
          */
         void xsetUserId(org.apache.xmlbeans.XmlString userId);
+        
+        /**
+         * Gets the "fromDate" element
+         */
+        java.util.Calendar getFromDate();
+        
+        /**
+         * Gets (as xml) the "fromDate" element
+         */
+        org.apache.xmlbeans.XmlDateTime xgetFromDate();
+        
+        /**
+         * Sets the "fromDate" element
+         */
+        void setFromDate(java.util.Calendar fromDate);
+        
+        /**
+         * Sets (as xml) the "fromDate" element
+         */
+        void xsetFromDate(org.apache.xmlbeans.XmlDateTime fromDate);
+        
+        /**
+         * Gets the "toDate" element
+         */
+        java.util.Calendar getToDate();
+        
+        /**
+         * Gets (as xml) the "toDate" element
+         */
+        org.apache.xmlbeans.XmlDateTime xgetToDate();
+        
+        /**
+         * Sets the "toDate" element
+         */
+        void setToDate(java.util.Calendar toDate);
+        
+        /**
+         * Sets (as xml) the "toDate" element
+         */
+        void xsetToDate(org.apache.xmlbeans.XmlDateTime toDate);
+        
+        /**
+         * Gets the "requesterId" element
+         */
+        java.lang.String getRequesterId();
+        
+        /**
+         * Gets (as xml) the "requesterId" element
+         */
+        org.apache.xmlbeans.XmlString xgetRequesterId();
+        
+        /**
+         * Sets the "requesterId" element
+         */
+        void setRequesterId(java.lang.String requesterId);
+        
+        /**
+         * Sets (as xml) the "requesterId" element
+         */
+        void xsetRequesterId(org.apache.xmlbeans.XmlString requesterId);
         
         /**
          * A factory class with static methods for creating instances

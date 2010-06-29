@@ -17,7 +17,6 @@
     
 	<complexType name="Warning">
 		<sequence>
-			<element name="ID" type="string"></element>
 			<element name="TypeOfWarning" type="int"></element>
 			<element name="DateTimeOfWarning" type="tns:dateTime"></element>
 			<element name="Effect" type="int"></element>
@@ -157,13 +156,16 @@
 
     <complexType name="CarerAssessment">
     	<sequence>
-    		<element name="carer" type="tns:Carer" maxOccurs="1" minOccurs="1"></element>
+    		<element name="carer" type="tns:Carer" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
     		<element name="DateOfAssessment" type="dateTime"></element>
     		<element name="RelevantHealthProblem" type="string"></element>
     		<element name="SeverityOfBurden" type="unsignedByte"></element>
     		<element name="EmotionalOrMentalDisorder" type="string"></element>
     		<element name="PsychoactiveDrugs" type="string"></element>
     		<element name="QualityOfLife" type="unsignedByte"></element>
+    		<element name="clinician" type="tns:Clinician" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
 

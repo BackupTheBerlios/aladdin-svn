@@ -305,10 +305,10 @@
       <xsd:element name="GetUserPlannedTasks">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="uid" type="xsd:string"/>
-      			<xsd:element name="fromData" type="xsd:dateTime"/>
-      			<xsd:element name="toData" type="xsd:dateTime"/>
       			<xsd:element name="userId" type="xsd:string"/>
+      			<xsd:element name="fromDate" type="xsd:dateTime"/>
+      			<xsd:element name="toDate" type="xsd:dateTime"/>
+      			<xsd:element name="requesterId" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>

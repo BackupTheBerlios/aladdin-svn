@@ -86,219 +86,15 @@ public class GetUserPlannedTasksDocumentImpl extends org.apache.xmlbeans.impl.va
             super(sType);
         }
         
-        private static final javax.xml.namespace.QName UID$0 = 
-            new javax.xml.namespace.QName("", "uid");
-        private static final javax.xml.namespace.QName FROMDATA$2 = 
-            new javax.xml.namespace.QName("", "fromData");
-        private static final javax.xml.namespace.QName TODATA$4 = 
-            new javax.xml.namespace.QName("", "toData");
-        private static final javax.xml.namespace.QName USERID$6 = 
+        private static final javax.xml.namespace.QName USERID$0 = 
             new javax.xml.namespace.QName("", "userId");
+        private static final javax.xml.namespace.QName FROMDATE$2 = 
+            new javax.xml.namespace.QName("", "fromDate");
+        private static final javax.xml.namespace.QName TODATE$4 = 
+            new javax.xml.namespace.QName("", "toDate");
+        private static final javax.xml.namespace.QName REQUESTERID$6 = 
+            new javax.xml.namespace.QName("", "requesterId");
         
-        
-        /**
-         * Gets the "uid" element
-         */
-        public java.lang.String getUid()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(UID$0, 0);
-                if (target == null)
-                {
-                    return null;
-                }
-                return target.getStringValue();
-            }
-        }
-        
-        /**
-         * Gets (as xml) the "uid" element
-         */
-        public org.apache.xmlbeans.XmlString xgetUid()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(UID$0, 0);
-                return target;
-            }
-        }
-        
-        /**
-         * Sets the "uid" element
-         */
-        public void setUid(java.lang.String uid)
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(UID$0, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(UID$0);
-                }
-                target.setStringValue(uid);
-            }
-        }
-        
-        /**
-         * Sets (as xml) the "uid" element
-         */
-        public void xsetUid(org.apache.xmlbeans.XmlString uid)
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(UID$0, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(UID$0);
-                }
-                target.set(uid);
-            }
-        }
-        
-        /**
-         * Gets the "fromData" element
-         */
-        public java.util.Calendar getFromData()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(FROMDATA$2, 0);
-                if (target == null)
-                {
-                    return null;
-                }
-                return target.getCalendarValue();
-            }
-        }
-        
-        /**
-         * Gets (as xml) the "fromData" element
-         */
-        public org.apache.xmlbeans.XmlDateTime xgetFromData()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlDateTime target = null;
-                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(FROMDATA$2, 0);
-                return target;
-            }
-        }
-        
-        /**
-         * Sets the "fromData" element
-         */
-        public void setFromData(java.util.Calendar fromData)
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(FROMDATA$2, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(FROMDATA$2);
-                }
-                target.setCalendarValue(fromData);
-            }
-        }
-        
-        /**
-         * Sets (as xml) the "fromData" element
-         */
-        public void xsetFromData(org.apache.xmlbeans.XmlDateTime fromData)
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlDateTime target = null;
-                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(FROMDATA$2, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.XmlDateTime)get_store().add_element_user(FROMDATA$2);
-                }
-                target.set(fromData);
-            }
-        }
-        
-        /**
-         * Gets the "toData" element
-         */
-        public java.util.Calendar getToData()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TODATA$4, 0);
-                if (target == null)
-                {
-                    return null;
-                }
-                return target.getCalendarValue();
-            }
-        }
-        
-        /**
-         * Gets (as xml) the "toData" element
-         */
-        public org.apache.xmlbeans.XmlDateTime xgetToData()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlDateTime target = null;
-                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(TODATA$4, 0);
-                return target;
-            }
-        }
-        
-        /**
-         * Sets the "toData" element
-         */
-        public void setToData(java.util.Calendar toData)
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TODATA$4, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TODATA$4);
-                }
-                target.setCalendarValue(toData);
-            }
-        }
-        
-        /**
-         * Sets (as xml) the "toData" element
-         */
-        public void xsetToData(org.apache.xmlbeans.XmlDateTime toData)
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlDateTime target = null;
-                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(TODATA$4, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.XmlDateTime)get_store().add_element_user(TODATA$4);
-                }
-                target.set(toData);
-            }
-        }
         
         /**
          * Gets the "userId" element
@@ -309,7 +105,7 @@ public class GetUserPlannedTasksDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$6, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$0, 0);
                 if (target == null)
                 {
                     return null;
@@ -327,7 +123,7 @@ public class GetUserPlannedTasksDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$6, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$0, 0);
                 return target;
             }
         }
@@ -341,10 +137,10 @@ public class GetUserPlannedTasksDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$6, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(USERID$6);
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(USERID$0);
                 }
                 target.setStringValue(userId);
             }
@@ -359,12 +155,216 @@ public class GetUserPlannedTasksDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$6, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(USERID$6);
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(USERID$0);
                 }
                 target.set(userId);
+            }
+        }
+        
+        /**
+         * Gets the "fromDate" element
+         */
+        public java.util.Calendar getFromDate()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(FROMDATE$2, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target.getCalendarValue();
+            }
+        }
+        
+        /**
+         * Gets (as xml) the "fromDate" element
+         */
+        public org.apache.xmlbeans.XmlDateTime xgetFromDate()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlDateTime target = null;
+                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(FROMDATE$2, 0);
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "fromDate" element
+         */
+        public void setFromDate(java.util.Calendar fromDate)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(FROMDATE$2, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(FROMDATE$2);
+                }
+                target.setCalendarValue(fromDate);
+            }
+        }
+        
+        /**
+         * Sets (as xml) the "fromDate" element
+         */
+        public void xsetFromDate(org.apache.xmlbeans.XmlDateTime fromDate)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlDateTime target = null;
+                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(FROMDATE$2, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.XmlDateTime)get_store().add_element_user(FROMDATE$2);
+                }
+                target.set(fromDate);
+            }
+        }
+        
+        /**
+         * Gets the "toDate" element
+         */
+        public java.util.Calendar getToDate()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TODATE$4, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target.getCalendarValue();
+            }
+        }
+        
+        /**
+         * Gets (as xml) the "toDate" element
+         */
+        public org.apache.xmlbeans.XmlDateTime xgetToDate()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlDateTime target = null;
+                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(TODATE$4, 0);
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "toDate" element
+         */
+        public void setToDate(java.util.Calendar toDate)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TODATE$4, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TODATE$4);
+                }
+                target.setCalendarValue(toDate);
+            }
+        }
+        
+        /**
+         * Sets (as xml) the "toDate" element
+         */
+        public void xsetToDate(org.apache.xmlbeans.XmlDateTime toDate)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlDateTime target = null;
+                target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(TODATE$4, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.XmlDateTime)get_store().add_element_user(TODATE$4);
+                }
+                target.set(toDate);
+            }
+        }
+        
+        /**
+         * Gets the "requesterId" element
+         */
+        public java.lang.String getRequesterId()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(REQUESTERID$6, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target.getStringValue();
+            }
+        }
+        
+        /**
+         * Gets (as xml) the "requesterId" element
+         */
+        public org.apache.xmlbeans.XmlString xgetRequesterId()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(REQUESTERID$6, 0);
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "requesterId" element
+         */
+        public void setRequesterId(java.lang.String requesterId)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(REQUESTERID$6, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(REQUESTERID$6);
+                }
+                target.setStringValue(requesterId);
+            }
+        }
+        
+        /**
+         * Sets (as xml) the "requesterId" element
+         */
+        public void xsetRequesterId(org.apache.xmlbeans.XmlString requesterId)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(REQUESTERID$6, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(REQUESTERID$6);
+                }
+                target.set(requesterId);
             }
         }
     }

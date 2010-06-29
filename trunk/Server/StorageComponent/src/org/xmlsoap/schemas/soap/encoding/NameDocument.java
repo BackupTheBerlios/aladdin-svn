@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NameDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NameDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("name8b01doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NameDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("name8b01doctype");
     
     /**
      * Gets the "Name" element

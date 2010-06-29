@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetCarerDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("getcarerc02bdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("getcarerc02bdoctype");
     
     /**
      * Gets the "GetCarer" element
@@ -42,7 +42,7 @@ public interface GetCarerDocument extends org.apache.xmlbeans.XmlObject
     public interface GetCarer extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("getcarer51c4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("getcarer51c4elemtype");
         
         /**
          * Gets the "id" element

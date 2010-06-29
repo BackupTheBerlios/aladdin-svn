@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteAdministratorDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("deleteadministrator08f0doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("deleteadministrator08f0doctype");
     
     /**
      * Gets the "DeleteAdministrator" element
@@ -42,7 +42,7 @@ public interface DeleteAdministratorDocument extends org.apache.xmlbeans.XmlObje
     public interface DeleteAdministrator extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("deleteadministratorc89eelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("deleteadministratorc89eelemtype");
         
         /**
          * Gets the "id" element

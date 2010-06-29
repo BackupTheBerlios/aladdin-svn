@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface CommunicationList extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CommunicationList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEB878E303EE9393334F52EB68B360A72").resolveHandle("communicationlist206etype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CommunicationList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("communicationlist206etype");
     
     /**
      * Gets array of all "Communication" elements
