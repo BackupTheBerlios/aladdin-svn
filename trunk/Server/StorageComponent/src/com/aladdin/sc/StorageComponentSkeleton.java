@@ -1,79 +1,96 @@
     package com.aladdin.sc;
 
-    import java.math.BigDecimal;
-    import java.sql.Timestamp;
+import java.io.PrintStream;
+import java.lang.reflect.Field;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-    import java.util.Calendar;
-    import java.util.List;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.axis2.clustering.configuration.commands.ExceptionCommand;
-    import org.hibernate.Hibernate;
-    import org.hibernate.Session;
-
-    import eu.aladdin_project.storagecomponent.*;
-    import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import eu.aladdin_project.storagecomponent.*;
+import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
 import eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument.ChangePasswordResponse;
-    import eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument.ChangeTaskStatusResponse;
-    import eu.aladdin_project.storagecomponent.CreateAdministratorResponseDocument.CreateAdministratorResponse;
-    import eu.aladdin_project.storagecomponent.CreateCarerResponseDocument.CreateCarerResponse;
-    import eu.aladdin_project.storagecomponent.CreateClinicianResponseDocument.CreateClinicianResponse;
-    import eu.aladdin_project.storagecomponent.CreateExternalServiceResponseDocument.CreateExternalServiceResponse;
-    import eu.aladdin_project.storagecomponent.CreatePatientResponseDocument.CreatePatientResponse;
-    import eu.aladdin_project.storagecomponent.CreateQuestionnaireResponseDocument.CreateQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument.ChangeTaskStatusResponse;
+import eu.aladdin_project.storagecomponent.CreateAdministratorResponseDocument.CreateAdministratorResponse;
+import eu.aladdin_project.storagecomponent.CreateCarerResponseDocument.CreateCarerResponse;
+import eu.aladdin_project.storagecomponent.CreateClinicianResponseDocument.CreateClinicianResponse;
+import eu.aladdin_project.storagecomponent.CreateExternalServiceResponseDocument.CreateExternalServiceResponse;
+import eu.aladdin_project.storagecomponent.CreatePatientResponseDocument.CreatePatientResponse;
+import eu.aladdin_project.storagecomponent.CreateQuestionnaireResponseDocument.CreateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.CreateUserResponseDocument.CreateUserResponse;
-    import eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument.DeleteAdministratorResponse;
-    import eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument.DeleteCarerAssessmentResponse;
-    import eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument.DeleteCarerResponse;
-    import eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument.DeleteClinicianResponse;
-    import eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument.DeleteExternalServiceResponse;
-    import eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument.DeletePatientAssessmentResponse;
-    import eu.aladdin_project.storagecomponent.DeletePatientResponseDocument.DeletePatientResponse;
-    import eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument.DeleteQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument.DeleteAdministratorResponse;
+import eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument.DeleteCarerAssessmentResponse;
+import eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument.DeleteCarerResponse;
+import eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument.DeleteClinicianResponse;
+import eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument.DeleteExternalServiceResponse;
+import eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument.DeletePatientAssessmentResponse;
+import eu.aladdin_project.storagecomponent.DeletePatientResponseDocument.DeletePatientResponse;
+import eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument.DeleteQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.DeleteUserResponseDocument.DeleteUserResponse;
-    import eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument.GetAdministratorResponse;
-    import eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument.GetAllExternalServicesResponse;
-    import eu.aladdin_project.storagecomponent.GetCarerAssessmentResponseDocument.GetCarerAssessmentResponse;
-    import eu.aladdin_project.storagecomponent.GetCarerResponseDocument.GetCarerResponse;
-    import eu.aladdin_project.storagecomponent.GetClinicianResponseDocument.GetClinicianResponse;
-    import eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse;
-    import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
-    import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
-    import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
-    import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
-    import eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument.GetUserPlannedTasksResponse;
-    import eu.aladdin_project.storagecomponent.GetWarningsResponseDocument.GetWarningsResponse;
-    import eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument.ListOfAdministratorsResponse;
-    import eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument.ListOfCarersResponse;
-    import eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument.ListOfCliniciansResponse;
-    import eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument.ListOfPatientsResponse;
-    import eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument.ListOfPossibleTasksResponse;
-    import eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.ListOfQuestionnairesResponse;
-    import eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument.MarkWarningAsReadResponse;
-    import eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument.SaveCarerAssessmentResponse;
-    import eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument.SavePatientAssessmentResponse;
-    import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarningResponse;
-    import eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument.StoreMeasurementsResponse;
-    import eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument.StoreQuestionnaireAnswersResponse;
-    import eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse;
-    import eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument.UpdateAdministratorResponse;
-    import eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument.UpdateCarerResponse;
-    import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.UpdateClinicianResponse;
-    import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
-    import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument.GetAdministratorResponse;
+import eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument.GetAllExternalServicesResponse;
+import eu.aladdin_project.storagecomponent.GetCarerAssessmentResponseDocument.GetCarerAssessmentResponse;
+import eu.aladdin_project.storagecomponent.GetCarerResponseDocument.GetCarerResponse;
+import eu.aladdin_project.storagecomponent.GetClinicianResponseDocument.GetClinicianResponse;
+import eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse;
+import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
+import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument.GetUserPlannedTasksResponse;
+import eu.aladdin_project.storagecomponent.GetWarningsResponseDocument.GetWarningsResponse;
+import eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument.ListOfAdministratorsResponse;
+import eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument.ListOfCarersResponse;
+import eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument.ListOfCliniciansResponse;
+import eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument.ListOfPatientsResponse;
+import eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument.ListOfPossibleTasksResponse;
+import eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.ListOfQuestionnairesResponse;
+import eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument.MarkWarningAsReadResponse;
+import eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument.SaveCarerAssessmentResponse;
+import eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument.SavePatientAssessmentResponse;
+import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarningResponse;
+import eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument.StoreMeasurementsResponse;
+import eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument.StoreQuestionnaireAnswersResponse;
+import eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse;
+import eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument.UpdateAdministratorResponse;
+import eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument.UpdateCarerResponse;
+import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.UpdateClinicianResponse;
+import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
+import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
-    import eu.aladdin_project.xsd.*;
-
-import org.hibernate.Session;
+import eu.aladdin_project.xsd.*;
 
 import com.aladdin.sc.db.Users;
     
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
+    	
+    	public static int OP_LESS = 1;
+    	public static int OP_GREAT = 2;
+    	public static int OP_EQ = 3;
+    	public static int OP_NOTEQ = 4;
+    	public static int OP_LIKE = 5;
+    	public static int OP_BETWEEN = 7;
+    	
+    	private HashMap<Integer, String> op;
+    	
         
     	private Session s;
     	
     	public StorageComponentSkeleton () {
     		s = HibernateUtil.getSessionFactory().openSession();
+
+    		op = new HashMap<Integer, String>();
+    		op.put(OP_LESS, " %s < '%s' ");
+    		op.put(OP_GREAT, " %s > '%s' ");
+    		op.put(OP_EQ, " %s = '%s' ");
+    		op.put(OP_NOTEQ, " %s != '%s' ");
+    		op.put(OP_LIKE, "%s like '%s' ");
+    		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
     	}
 
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
@@ -478,12 +495,34 @@ import com.aladdin.sc.db.Users;
     		return respdoc;
     	}
     	
-    	public ListOfCarersResponseDocument listOfCarers (ListOfCarersDocument listOfCarers12) {
+    	public ListOfCarersResponseDocument listOfCarers (ListOfCarersDocument req) {
     		ListOfCarersResponseDocument respdoc = ListOfCarersResponseDocument.Factory.newInstance();
     		ListOfCarersResponse resp = respdoc.addNewListOfCarersResponse();
     		
     		try {
-    			com.aladdin.sc.db.Carer[] ql = (com.aladdin.sc.db.Carer[]) s.createQuery("from carer").list().toArray();
+    			
+    			List<Field> fl = new ArrayList<Field>();
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			
+    			String sql = "SELECT p.* FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
+    			
+    			SearchCriteria[] sc = req.getListOfCarers().getFilterArray();
+    			for (int i = 0; i < sc.length; i++) {
+    				for (int j = 0; j < fl.size(); j++) {
+    					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+    						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+    						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+    						sql += " AND ";
+    					}
+    				}
+    			}
+    			sql += " 1 GROUP BY p.id";
+    			
+    			com.aladdin.sc.db.Carer[] ql = (com.aladdin.sc.db.Carer[]) s.createQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				CarerInfo qi = resp.addNewOut();
     				qi.setID(ql[i].getId().toString());
@@ -496,12 +535,33 @@ import com.aladdin.sc.db.Users;
     		return respdoc;
     	}
     	
-    	public ListOfCliniciansResponseDocument listOfClinicians (ListOfCliniciansDocument listOfClinicians14) {
+    	public ListOfCliniciansResponseDocument listOfClinicians (ListOfCliniciansDocument req) {
     		ListOfCliniciansResponseDocument respdoc = ListOfCliniciansResponseDocument.Factory.newInstance();
     		ListOfCliniciansResponse resp = respdoc.addNewListOfCliniciansResponse();
     		
     		try {
-    			com.aladdin.sc.db.Clinician[] ql = (com.aladdin.sc.db.Clinician[]) s.createQuery("from clinician").list().toArray();
+    			
+    			List<Field> fl = new ArrayList<Field>();
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			
+    			String sql = "SELECT p.* FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) WHERE ";
+    			
+    			SearchCriteria[] sc = req.getListOfClinicians().getFilterArray();
+    			for (int i = 0; i < sc.length; i++) {
+    				for (int j = 0; j < fl.size(); j++) {
+    					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+    						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+    						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+    						sql += " AND ";
+    					}
+    				}
+    			}
+    			sql += " 1 GROUP BY p.id";
+    			
+    			com.aladdin.sc.db.Clinician[] ql = (com.aladdin.sc.db.Clinician[]) s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				ClinicianInfo qi = resp.addNewOut();
     				qi.setID(ql[i].getId().toString());
@@ -1024,17 +1084,38 @@ import com.aladdin.sc.db.Users;
     		return respdoc;
     	}
     	         
-    	public ListOfAdministratorsResponseDocument listOfAdministrators (ListOfAdministratorsDocument listOfAdministrators44) {
+    	public ListOfAdministratorsResponseDocument listOfAdministrators (ListOfAdministratorsDocument req) {
     		ListOfAdministratorsResponseDocument respdoc = ListOfAdministratorsResponseDocument.Factory.newInstance();
     		ListOfAdministratorsResponse resp = respdoc.addNewListOfAdministratorsResponse();
     		
     		try {
-    			com.aladdin.sc.db.Carer[] ql = (com.aladdin.sc.db.Carer[]) s.createQuery("from carer").list().toArray();
+    			
+    			List<Field> fl = new ArrayList<Field>();
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			
+    			String sql = "SELECT p.* FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) WHERE ";
+    			
+    			SearchCriteria[] sc = req.getListOfAdministrators().getFilterArray();
+    			for (int i = 0; i < sc.length; i++) {
+    				for (int j = 0; j < fl.size(); j++) {
+    					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+    						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+    						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+    						sql += " AND ";
+    					}
+    				}
+    			}
+    			sql += " 1 GROUP BY p.id";
+    			
+    			com.aladdin.sc.db.Administrator[] ql = (com.aladdin.sc.db.Administrator[]) s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				AdministratorInfo ai = resp.addNewOut();
     				ai.setID(ql[i].getId().toString());
-    				ai.setSurname(ql[i].getM_PersonDatapersondata().getSurname());
-    				ai.setName(ql[i].getM_PersonDatapersondata().getName());
+    				ai.setSurname(ql[i].getM_PersonDatapersonData().getSurname());
+    				ai.setName(ql[i].getM_PersonDatapersonData().getName());
     			}
     		} catch (Exception e) {
     		}
@@ -1594,12 +1675,34 @@ import com.aladdin.sc.db.Users;
     		return respdoc;
     	}
     	
-    	public ListOfPatientsResponseDocument listOfPatients (ListOfPatientsDocument listOfPatients84) {
+    	public ListOfPatientsResponseDocument listOfPatients (ListOfPatientsDocument req) {
     		ListOfPatientsResponseDocument respdoc = ListOfPatientsResponseDocument.Factory.newInstance();
     		ListOfPatientsResponse resp = respdoc.addNewListOfPatientsResponse();
     		
     		try {
-    			com.aladdin.sc.db.Patient[] ql = (com.aladdin.sc.db.Patient[]) s.createQuery("from patient").list().toArray();
+    			
+    			List<Field> fl = new ArrayList<Field>();
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			
+    			String sql = "SELECT p.* FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
+    			
+    			SearchCriteria[] sc = req.getListOfPatients().getFilterArray();
+    			for (int i = 0; i < sc.length; i++) {
+    				for (int j = 0; j < fl.size(); j++) {
+    					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+    						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+    						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+    						sql += " AND ";
+    					}
+    				}
+    			}
+    			sql += " 1 GROUP BY p.id";
+    			
+    			com.aladdin.sc.db.Patient[] ql = (com.aladdin.sc.db.Patient[]) s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				PatientInfo qi = resp.addNewOut();
     				qi.setID(ql[i].getId().toString());
@@ -1617,7 +1720,24 @@ import com.aladdin.sc.db.Users;
     		GetWarningsResponse resp = respdoc.addNewGetWarningsResponse();
     		
     		try {
-    			com.aladdin.sc.db.Warning[] wl = (com.aladdin.sc.db.Warning[]) s.createQuery("from warning").list().toArray();
+    			
+    			Field[] field = com.aladdin.sc.db.Warning.class.getFields();
+    			String sql = "SELECT * FROM warning WHERE ";
+    			
+    			SearchCriteria[] sc = req.getGetWarnings().getWarnArray();
+    			for (int i = 0; i < sc.length; i++) {
+    				for (int j = 0; j < field.length; j++) {
+    					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+    						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+    						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+    						sql += " AND ";
+    					}
+    				}
+    			}
+    			sql += "1";
+    			
+    			
+    			com.aladdin.sc.db.Warning[] wl = (com.aladdin.sc.db.Warning[]) s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < wl.length; i++) {
     				Warning rw = resp.addNewOut();
     				rw.setID(wl[i].getId().toString());
@@ -1820,7 +1940,7 @@ import com.aladdin.sc.db.Users;
         public CreateUserResponseDocument createUser (CreateUserDocument req) {
         	CreateUserResponseDocument respdoc = CreateUserResponseDocument.Factory.newInstance();
         	CreateUserResponse resp = respdoc.addNewCreateUserResponse();
-OperationResult res = resp.addNewOut();
+        	OperationResult res = resp.addNewOut();
         	
         	try {
         		User ru = req.getCreateUser().getUser();
