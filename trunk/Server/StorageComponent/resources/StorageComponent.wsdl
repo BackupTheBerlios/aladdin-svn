@@ -1952,7 +1952,7 @@
   </wsdl:binding>
   <wsdl:service name="StorageComponent">
     <wsdl:port name="StorageComponentSOAP" binding="tns:StorageComponentSOAP">
-      <soap:address location="http://www.example.org/"/>
+      <soap:address location="http://193.174.152.114:28080/axis2/services/StorageComponent"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
