@@ -11,35 +11,28 @@
         <property name="hibernate.default_schema">public</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-<!-- mapping resource="com/aladdin/xsd/Service.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Questionnaire.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/LivingWithT.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/QuestionnaireAnswer.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/SocioDemographicData.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/MaritalStatusT.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Note.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Clinician.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/PatientCarer.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/SystemParameter.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/PersonData.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/QuestionnaireQuestion.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Communication.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Task.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Patient.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/GenderT.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Right.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/typeT.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Address.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/User.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/PatientAssessment.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/CarerAssessment.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/QuestionnaireQuestionAnswer.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/AetologyT.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/TaskStatusT.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Carer.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Measurment.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/Identifier.hbm.xml"/>
-<mapping resource="com/aladdin/xsd/TaskTypeT.hbm.xml"/ -->
+<mapping resource="com/aladdin/sc/db/Address.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Administrator.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/CarerAssessment.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Carer.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Clinician.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Communication.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/ExternalService.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Identifier.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Measurement.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/PatientAssessment.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/PatientCarer.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Patient.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/PersonData.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/QuestionnaireAnswer.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Questionnaire.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/QuestionnaireQuestionAnswer.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/QuestionnaireQuestion.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/SocioDemographicData.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/SystemParameter.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Task.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Users.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/Warning.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
