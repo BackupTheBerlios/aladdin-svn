@@ -69,17 +69,25 @@ import com.aladdin.sc.db.Users;
     
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
-    	public static int OP_LESS = 1;
-    	public static int OP_GREAT = 2;
-    	public static int OP_EQ = 3;
-    	public static int OP_NOTEQ = 4;
-    	public static int OP_LIKE = 5;
-    	public static int OP_BETWEEN = 7;
+    	public final static int OP_LESS = 1;
+    	public final static int OP_GREAT = 2;
+    	public final static int OP_EQ = 3;
+    	public final static int OP_NOTEQ = 4;
+    	public final static int OP_LIKE = 5;
+    	public final static int OP_BETWEEN = 7;
     	
     	private HashMap<Integer, String> op;
     	
-        
     	private Session s;
+    	
+    	public final static int U_CARER = 1;
+    	public final static int U_PATIENT = 2;
+    	public final static int U_CLINICIAN = 3;
+    	public final static int U_ADMIN = 4;
+    	
+    	private boolean checkUser (String userId, Integer userType) {
+    		return (s.createSQLQuery("SELECT * FROM users WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'").list().size() > 0);
+    	}
     	
     	public StorageComponentSkeleton () {
     		s = HibernateUtil.getSessionFactory().openSession();
@@ -97,6 +105,13 @@ import com.aladdin.sc.db.Users;
     		CreateClinicianResponseDocument respdoc = CreateClinicianResponseDocument.Factory.newInstance();
     		CreateClinicianResponse resp = respdoc.addNewCreateClinicianResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (!checkUser(req.getCreateClinician().getUserId(), U_ADMIN)) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			Clinician data = req.getCreateClinician().getData();
@@ -199,6 +214,15 @@ import com.aladdin.sc.db.Users;
     		CreatePatientResponse resp = respdoc.addNewCreatePatientResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getCreatePatient().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Patient data = req.getCreatePatient().getData();
     			
@@ -257,6 +281,15 @@ import com.aladdin.sc.db.Users;
     		CreateCarerResponse resp = respdoc.addNewCreateCarerResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getCreateCarer().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Carer data = req.getCreateCarer().getData();
     			
@@ -289,6 +322,15 @@ import com.aladdin.sc.db.Users;
     		UpdateQuestionnaireResponseDocument respdoc = UpdateQuestionnaireResponseDocument.Factory.newInstance();
     		UpdateQuestionnaireResponse resp = respdoc.addNewUpdateQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getUpdateQuestionnaire().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			s.beginTransaction();
@@ -348,6 +390,8 @@ import com.aladdin.sc.db.Users;
     		ListOfQuestionnairesResponseDocument respdoc = ListOfQuestionnairesResponseDocument.Factory.newInstance();
     		ListOfQuestionnairesResponse resp = respdoc.addNewListOfQuestionnairesResponse();
     		
+    		// TODO: auth
+    		
     		try {
     			com.aladdin.sc.db.Questionnaire[] ql = (com.aladdin.sc.db.Questionnaire[]) s.createSQLQuery("SELECT * FROM questionnaire").list().toArray();
     			for (int i = 0; i < ql.length; i++) {
@@ -366,6 +410,15 @@ import com.aladdin.sc.db.Users;
     		SaveWarningResponseDocument respdoc = SaveWarningResponseDocument.Factory.newInstance();
     		SaveWarningResponse resp = respdoc.addNewSaveWarningResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getSaveWarning().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			s.beginTransaction();
@@ -404,6 +457,15 @@ import com.aladdin.sc.db.Users;
     		UpdateCarerResponse resp = respdoc.addNewUpdateCarerResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getUpdateCarer().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Carer data = req.getUpdateCarer().getData();
     			
@@ -434,6 +496,15 @@ import com.aladdin.sc.db.Users;
     		DeleteAdministratorResponseDocument respdoc = DeleteAdministratorResponseDocument.Factory.newInstance();
     		DeleteAdministratorResponse resp = respdoc.addNewDeleteAdministratorResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getDeleteAdministrator().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			Integer id = new Integer (req.getDeleteAdministrator().getId());
@@ -468,6 +539,15 @@ import com.aladdin.sc.db.Users;
     		UpdataPatientResponse resp = respdoc.addNewUpdataPatientResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getUpdataPatient().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Patient data = req.getUpdataPatient().getData();
     			
@@ -498,6 +578,13 @@ import com.aladdin.sc.db.Users;
     	public ListOfCarersResponseDocument listOfCarers (ListOfCarersDocument req) {
     		ListOfCarersResponseDocument respdoc = ListOfCarersResponseDocument.Factory.newInstance();
     		ListOfCarersResponse resp = respdoc.addNewListOfCarersResponse();
+    		
+    		if (
+    				!checkUser(req.getListOfCarers().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getListOfCarers().getUserId(), U_ADMIN)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			
@@ -539,6 +626,13 @@ import com.aladdin.sc.db.Users;
     		ListOfCliniciansResponseDocument respdoc = ListOfCliniciansResponseDocument.Factory.newInstance();
     		ListOfCliniciansResponse resp = respdoc.addNewListOfCliniciansResponse();
     		
+    		if (
+    				!checkUser(req.getListOfClinicians().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getListOfClinicians().getUserId(), U_ADMIN)
+				) {
+    			return respdoc;
+    		}
+    		
     		try {
     			
     			List<Field> fl = new ArrayList<Field>();
@@ -578,6 +672,17 @@ import com.aladdin.sc.db.Users;
     		SavePatientAssessmentResponseDocument respdoc = SavePatientAssessmentResponseDocument.Factory.newInstance();
     		SavePatientAssessmentResponse resp = respdoc.addNewSavePatientAssessmentResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getSavePatientAssessment().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getSavePatientAssessment().getUserId(), U_CARER) ||
+    				!checkUser(req.getSavePatientAssessment().getUserId(), U_PATIENT)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			s.beginTransaction();
@@ -657,6 +762,15 @@ import com.aladdin.sc.db.Users;
     		StoreMeasurementsResponse resp = respdoc.addNewStoreMeasurementsResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getStoreMeasurements().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.beginTransaction();
     			
@@ -682,6 +796,13 @@ import com.aladdin.sc.db.Users;
     	public GetPatientResponseDocument getPatient (GetPatientDocument req) {
     		GetPatientResponseDocument respdoc = GetPatientResponseDocument.Factory.newInstance();
     		GetPatientResponse resp = respdoc.addNewGetPatientResponse();
+    		
+    		if (
+    				!checkUser(req.getGetPatient().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetPatient().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			List list =  s.createQuery("from patient").setInteger("id", new Integer (req.getGetPatient().getId())).list();
@@ -798,6 +919,16 @@ import com.aladdin.sc.db.Users;
     		DeleteCarerAssessmentResponse resp = respdoc.addNewDeleteCarerAssessmentResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.createSQLQuery("DELETE FROM carerassessment WHERE id = " + req.getDeleteCarerAssessment().getAssessmentId());
     			res.setCode(req.getDeleteCarerAssessment().getAssessmentId());
@@ -815,6 +946,12 @@ import com.aladdin.sc.db.Users;
     	public GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswers (GetQuestionnaireAnswersDocument req) {
     		GetQuestionnaireAnswersResponseDocument respdoc = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
     		GetQuestionnaireAnswersResponse resp = respdoc.addNewGetQuestionnaireAnswersResponse();
+    		
+    		if (
+    				!checkUser(req.getGetQuestionnaireAnswers().getUserId(), U_CLINICIAN)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			
@@ -854,6 +991,16 @@ import com.aladdin.sc.db.Users;
     		DeleteExternalServiceResponse resp = respdoc.addNewDeleteExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getDeleteExternalService().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getDeleteExternalService().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Integer id = new Integer (req.getDeleteExternalService().getId());
     			s.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString());
@@ -873,6 +1020,15 @@ import com.aladdin.sc.db.Users;
     		DeleteClinicianResponseDocument respdoc = DeleteClinicianResponseDocument.Factory.newInstance();
     		DeleteClinicianResponse resp = respdoc.addNewDeleteClinicianResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getDeleteClinician().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			Integer id = new Integer (req.getDeleteClinician().getId());
@@ -906,6 +1062,15 @@ import com.aladdin.sc.db.Users;
     		DeletePatientResponse resp = respdoc.addNewDeletePatientResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getDeletePatient().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Integer id = new Integer (req.getDeletePatient().getId());
     			
@@ -937,6 +1102,15 @@ import com.aladdin.sc.db.Users;
     		CreateQuestionnaireResponseDocument respdoc = CreateQuestionnaireResponseDocument.Factory.newInstance();
     		CreateQuestionnaireResponse resp = respdoc.addNewCreateQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getCreateQuestionnaire().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			
@@ -975,6 +1149,13 @@ import com.aladdin.sc.db.Users;
     	public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument req) {
     		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
+    		
+    		if (
+    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			s.beginTransaction();
@@ -1015,6 +1196,15 @@ import com.aladdin.sc.db.Users;
     		DeleteQuestionnaireResponse resp = respdoc.addNewDeleteQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getDeleteQuestionnaire().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.beginTransaction();
     			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
@@ -1052,6 +1242,15 @@ import com.aladdin.sc.db.Users;
     		AssignTaskResponse resp = respdoc.addNewAssignTaskResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getAssignTask().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.beginTransaction();
     			
@@ -1087,6 +1286,12 @@ import com.aladdin.sc.db.Users;
     	public ListOfAdministratorsResponseDocument listOfAdministrators (ListOfAdministratorsDocument req) {
     		ListOfAdministratorsResponseDocument respdoc = ListOfAdministratorsResponseDocument.Factory.newInstance();
     		ListOfAdministratorsResponse resp = respdoc.addNewListOfAdministratorsResponse();
+    		
+    		if (
+    				!checkUser(req.getListOfAdministrators().getUserId(), U_ADMIN)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			
@@ -1126,6 +1331,13 @@ import com.aladdin.sc.db.Users;
     	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
+    		
+    		if (
+    				!checkUser(req.getGetUserPlannedTasks().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetUserPlannedTasks().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
@@ -1220,6 +1432,16 @@ import com.aladdin.sc.db.Users;
     		CreateExternalServiceResponse resp = respdoc.addNewCreateExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getCreateExternalService().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getCreateExternalService().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.beginTransaction();
     			
@@ -1248,6 +1470,15 @@ import com.aladdin.sc.db.Users;
     		SaveCarerAssessmentResponseDocument respdoc = SaveCarerAssessmentResponseDocument.Factory.newInstance();
     		SaveCarerAssessmentResponse resp = respdoc.addNewSaveCarerAssessmentResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getSaveCarerAssessment().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			s.beginTransaction();
@@ -1284,6 +1515,15 @@ import com.aladdin.sc.db.Users;
     		DeleteCarerResponse resp = respdoc.addNewDeleteCarerResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getDeleteCarer().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Integer id = new Integer (req.getDeleteCarer().getId());
     			
@@ -1316,6 +1556,15 @@ import com.aladdin.sc.db.Users;
     		CreateAdministratorResponse resp = respdoc.addNewCreateAdministratorResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getCreateAdministrator().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Administrator data = req.getCreateAdministrator().getData();
     			
@@ -1347,6 +1596,16 @@ import com.aladdin.sc.db.Users;
     		UpdateExternalServiceResponse resp = respdoc.addNewUpdateExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getUpdateExternalService().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getUpdateExternalService().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.beginTransaction();
     			
@@ -1376,6 +1635,12 @@ import com.aladdin.sc.db.Users;
     		GetClinicianResponseDocument respdoc = GetClinicianResponseDocument.Factory.newInstance();
     		GetClinicianResponse resp = respdoc.addNewGetClinicianResponse();
     		
+    		if (
+    				!checkUser(req.getGetClinician().getUserId(), U_CLINICIAN)
+				) {
+    			return respdoc;
+    		}
+    		
     		try {
     			List list =  s.createQuery("from clinician").setInteger("id", new Integer (req.getGetClinician().getId())).list();
         		if (list.size() != 1) throw new Exception ("");
@@ -1401,6 +1666,16 @@ import com.aladdin.sc.db.Users;
     		DeletePatientAssessmentResponseDocument respdoc = DeletePatientAssessmentResponseDocument.Factory.newInstance();
     		DeletePatientAssessmentResponse resp = respdoc.addNewDeletePatientAssessmentResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			s.createSQLQuery("DELETE FROM patientassessment WHERE id = " + req.getDeletePatientAssessment().getAssessmentId());
@@ -1438,6 +1713,12 @@ import com.aladdin.sc.db.Users;
     		GetCarerResponseDocument respdoc = GetCarerResponseDocument.Factory.newInstance();
     		GetCarerResponse resp = respdoc.addNewGetCarerResponse();
     		
+    		if (
+    				!checkUser(req.getGetCarer().getUserId(), U_CLINICIAN)
+				) {
+    			return respdoc;
+    		}
+    		
     		try {
     			List list =  s.createQuery("from carer").setInteger("id", new Integer (req.getGetCarer().getId())).list();
         		if (list.size() != 1) throw new Exception ("");
@@ -1455,6 +1736,12 @@ import com.aladdin.sc.db.Users;
     	public GetAdministratorResponseDocument getAdministrator (GetAdministratorDocument req) {
     		GetAdministratorResponseDocument respdoc = GetAdministratorResponseDocument.Factory.newInstance();
     		GetAdministratorResponse resp = respdoc.addNewGetAdministratorResponse();
+    		
+    		if (
+    				!checkUser(req.getGetAdministrator().getUserId(), U_ADMIN)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			List list =  s.createQuery("from administrator").setInteger("id", new Integer (req.getGetAdministrator().getId())).list();
@@ -1481,6 +1768,15 @@ import com.aladdin.sc.db.Users;
     		UpdateAdministratorResponseDocument respdoc = UpdateAdministratorResponseDocument.Factory.newInstance();
     		UpdateAdministratorResponse resp = respdoc.addNewUpdateAdministratorResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getUpdateAdministrator().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			Administrator data = req.getUpdateAdministrator().getData();
@@ -1529,6 +1825,15 @@ import com.aladdin.sc.db.Users;
     		StoreQuestionnaireAnswersResponse resp = respdoc.addNewStoreQuestionnaireAnswersResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getStoreQuestionnaireAnswers().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			s.beginTransaction();
     			
@@ -1566,6 +1871,13 @@ import com.aladdin.sc.db.Users;
     	public GetPatientAssessmentResponseDocument getPatientAssessment (GetPatientAssessmentDocument req) {
     		GetPatientAssessmentResponseDocument respdoc = GetPatientAssessmentResponseDocument.Factory.newInstance();
     		GetPatientAssessmentResponse resp = respdoc.addNewGetPatientAssessmentResponse();
+    		
+    		if (
+    				!checkUser(req.getGetPatientAssessment().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetPatientAssessment().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			Integer id = new Integer (req.getGetPatientAssessment().getId());
@@ -1624,6 +1936,12 @@ import com.aladdin.sc.db.Users;
     		GetCarerAssessmentResponseDocument respdoc = GetCarerAssessmentResponseDocument.Factory.newInstance();
     		GetCarerAssessmentResponse resp = respdoc.addNewGetCarerAssessmentResponse();
     		
+    		if (
+    				!checkUser(req.getGetCarerAssessment().getUserId(), U_CLINICIAN)
+				) {
+    			return respdoc;
+    		}
+    		
     		try {
     			Integer id = new Integer (req.getGetCarerAssessment().getId());
     			com.aladdin.sc.db.CarerAssessment[] cal = (com.aladdin.sc.db.CarerAssessment[]) s.createSQLQuery("SELECT * FROM carerassessment WHERE id = " + id.toString()).list().toArray();
@@ -1654,6 +1972,15 @@ import com.aladdin.sc.db.Users;
     		ChangeTaskStatusResponse resp = respdoc.addNewChangeTaskStatusResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getChangeTaskStatus().getUserId(), U_CARER)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Integer id = req.getChangeTaskStatus().getTaskId();
     			Integer status = req.getChangeTaskStatus().getTaskStatus();
@@ -1678,6 +2005,13 @@ import com.aladdin.sc.db.Users;
     	public ListOfPatientsResponseDocument listOfPatients (ListOfPatientsDocument req) {
     		ListOfPatientsResponseDocument respdoc = ListOfPatientsResponseDocument.Factory.newInstance();
     		ListOfPatientsResponse resp = respdoc.addNewListOfPatientsResponse();
+    		
+    		if (
+    				!checkUser(req.getListOfPatients().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getListOfPatients().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			
@@ -1718,6 +2052,12 @@ import com.aladdin.sc.db.Users;
     	public GetWarningsResponseDocument getWarnings (GetWarningsDocument req) {
     		GetWarningsResponseDocument respdoc = GetWarningsResponseDocument.Factory.newInstance();
     		GetWarningsResponse resp = respdoc.addNewGetWarningsResponse();
+    		
+    		if (
+    				!checkUser(req.getGetWarnings().getUserId(), U_CLINICIAN)
+				) {
+    			return respdoc;
+    		}
     		
     		try {
     			
@@ -1774,6 +2114,15 @@ import com.aladdin.sc.db.Users;
     		UpdateClinicianResponse resp = respdoc.addNewUpdateClinicianResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		if (
+    				!checkUser(req.getUpdateClinician().getUserId(), U_ADMIN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
+    		
     		try {
     			Clinician data = req.getUpdateClinician().getData();
     			
@@ -1804,6 +2153,15 @@ import com.aladdin.sc.db.Users;
     		MarkWarningAsReadResponseDocument respdoc = MarkWarningAsReadResponseDocument.Factory.newInstance();
     		MarkWarningAsReadResponse resp = respdoc.addNewMarkWarningAsReadResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		if (
+    				!checkUser(req.getMarkWarningAsRead().getUserId(), U_CLINICIAN)
+				) {
+    			res.setCode("-1");
+    			res.setStatus((short) 0);
+    			res.setDescription("auth error");
+    			return respdoc;
+    		}
     		
     		try {
     			Integer id = new Integer (req.getMarkWarningAsRead().getId());
