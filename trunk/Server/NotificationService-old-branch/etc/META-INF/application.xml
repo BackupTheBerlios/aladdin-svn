@@ -1,0 +1,14 @@
+<application>
+     <display-name>NotificationService</display-name>
+
+      <module>
+         <web>
+            <web-uri>NotificationService.war</web-uri>
+            <context-root>/NotificationService</context-root>
+         </web>
+      </module>
+
+      <module>
+         <ejb>NotificationService.jar</ejb>
+      </module>
+ </application>

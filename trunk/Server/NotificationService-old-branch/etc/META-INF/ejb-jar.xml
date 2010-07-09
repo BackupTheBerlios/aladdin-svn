@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd" version="3.0">
+
+	<enterprise-beans>
+	<session>
+		<ejb-name>NotificationManager</ejb-name>
+		<ejb-ref>
+			<!-- Injection target point: -->
+			<ejb-ref-name>sweb/local/NotificationManager</ejb-ref-name>
+			<!-- Type of target bean: entity oder session: -->
+			<ejb-ref-type>Session</ejb-ref-type>
+		
+			<!-- JNDI-Name of the bean to inject into the target: -->
+			<ejb-link>NotificationManager</ejb-link>			
+			
+		</ejb-ref>
+	</session>	
+	</enterprise-beans>
+</ejb-jar>
