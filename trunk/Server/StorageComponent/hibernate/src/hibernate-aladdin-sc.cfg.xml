@@ -11,6 +11,7 @@
         <property name="hibernate.default_schema">public</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
+<!--
 <mapping resource="com/aladdin/sc/db/Address.hbm.xml"/>
 <mapping resource="com/aladdin/sc/db/Administrator.hbm.xml"/>
 <mapping resource="com/aladdin/sc/db/CarerAssessment.hbm.xml"/>
@@ -31,8 +32,8 @@
 <mapping resource="com/aladdin/sc/db/SocioDemographicData.hbm.xml"/>
 <mapping resource="com/aladdin/sc/db/SystemParameter.hbm.xml"/>
 <mapping resource="com/aladdin/sc/db/Task.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Users.hbm.xml"/>
+<mapping resource="com/aladdin/sc/db/AladdinUser.hbm.xml"/>
 <mapping resource="com/aladdin/sc/db/Warning.hbm.xml"/>
-
+-->
     </session-factory>
 </hibernate-configuration>

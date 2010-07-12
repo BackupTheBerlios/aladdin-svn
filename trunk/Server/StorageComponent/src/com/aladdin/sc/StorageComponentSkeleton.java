@@ -1,16 +1,19 @@
     package com.aladdin.sc;
 
-import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+
+import com.aladdin.sc.db.AladdinUser;
+
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
@@ -65,8 +68,6 @@ import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.U
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
 import eu.aladdin_project.xsd.*;
 
-import com.aladdin.sc.db.Users;
-    
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
     	public final static int OP_LESS = 1;
@@ -80,13 +81,16 @@ import com.aladdin.sc.db.Users;
     	
     	private Session s;
     	
-    	public final static int U_CARER = 1;
-    	public final static int U_PATIENT = 2;
-    	public final static int U_CLINICIAN = 3;
-    	public final static int U_ADMIN = 4;
+    	public final static int U_CARER = 3;
+    	public final static int U_PATIENT = 4;
+    	public final static int U_CLINICIAN = 2;
+    	public final static int U_ADMIN = 1;
     	
     	private boolean checkUser (String userId, Integer userType) {
-    		return (s.createSQLQuery("SELECT * FROM users WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'").list().size() > 0);
+    		if (userId == null) return false;
+    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
+    		System.out.println (sql);
+			return (s.createSQLQuery(sql).list().size() > 0);
     	}
     	
     	public StorageComponentSkeleton () {
@@ -2183,7 +2187,7 @@ import com.aladdin.sc.db.Users;
     	}
     	
     	private Integer existUser (String username, Integer id) {
-    		if (s.createSQLQuery("SELECT * FROM users WHERE username like '" + username + "' AND id != '" + id.toString() + "'").list().size() > 1) return 1;
+    		if (s.createSQLQuery("SELECT * FROM aladdinuser WHERE username like '" + username + "' AND id != '" + id.toString() + "'").list().size() > 1) return 1;
     		return 0;
     	}
          
@@ -2202,7 +2206,7 @@ import com.aladdin.sc.db.Users;
         		
         		s.beginTransaction();
         		
-        		com.aladdin.sc.db.Users u = new com.aladdin.sc.db.Users ();
+        		com.aladdin.sc.db.AladdinUser u = new com.aladdin.sc.db.AladdinUser ();
         		
         		u.setId(new Integer (ru.getID()));
         		u.setType(new Integer (ru.getType().getCode()));
@@ -2233,7 +2237,7 @@ import com.aladdin.sc.db.Users;
         	try {
         		s.beginTransaction();
         		Integer id = new Integer (req.getDeleteUser().getId());
-        		s.createSQLQuery("DELETE FROM users WHERE id = " + id.toString()).executeUpdate();
+        		s.createSQLQuery("DELETE FROM aladdinuser WHERE id = " + id.toString()).executeUpdate();
         		s.getTransaction().commit();
         		
         		res.setCode(id.toString());
@@ -2253,18 +2257,25 @@ import com.aladdin.sc.db.Users;
         	AuthResponse resp = respdoc.addNewAuthResponse();
         	OperationResult res = resp.addNewOut();
         	
+        	String sql = "";
+        	
         	try {
         		String username = req.getAuth().getLogin();
         		String password = req.getAuth().getPassword();
-        		com.aladdin.sc.db.Users[] ul = (Users[]) s.createSQLQuery("SELECT * FROM users WHERE username like '" + username + "' AND password like '" + password + "'").list().toArray();
-        		if (ul.length > 0) {
-        			res.setCode(ul[0].getId().toString());
+        		sql = "SELECT id FROM aladdinuser WHERE username like '" + username + "' AND password like '" + password + "'";
+        		SQLQuery q = s.createSQLQuery(sql);
+        		if (q.list().size() == 1) {
+        			res.setCode(q.list().get(0).toString());
         			res.setDescription("ok");
         			res.setStatus((short) 1);
+        		} else {
+        			res.setCode("0");
+        			res.setDescription("none");
+        			res.setStatus((short) 0);
         		}
         	} catch (Exception e) {
         		res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error sql = " + sql + " ex = " + e.toString());
         		res.setStatus((short) 0);
 			}
         	
@@ -2280,7 +2291,7 @@ import com.aladdin.sc.db.Users;
         		Integer id = new Integer (req.getChangePassword().getUserId());
         		String password = req.getChangePassword().getPassword();
         		s.beginTransaction();
-        		s.createSQLQuery("UPDATE users SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
+        		s.createSQLQuery("UPDATE aladdinuser SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
         		s.getTransaction().commit();
         		
         		res.setCode(id.toString());
@@ -2310,7 +2321,7 @@ import com.aladdin.sc.db.Users;
         		
         		s.beginTransaction();
         		
-        		com.aladdin.sc.db.Users u = new com.aladdin.sc.db.Users ();
+        		com.aladdin.sc.db.AladdinUser u = new com.aladdin.sc.db.AladdinUser ();
         		
         		u.setType(new Integer (ru.getType().getCode()));
         		u.setPersonId(ru.getPersonID());
@@ -2325,7 +2336,7 @@ import com.aladdin.sc.db.Users;
         		res.setStatus((short) 1);
         	} catch (Exception e) {
         		res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
         	return respdoc;

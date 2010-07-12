@@ -15,9 +15,9 @@
 <property name="Assigner" type="java.lang.Integer"><column name="Assigner"/></property>
 <property name="Object" type="java.lang.Integer"><column name="Object"/></property>
 <many-to-one name="m_Questionnairequestionnaire" class="com.aladdin.sc.db.Questionnaire" insert="false" update="false"><column name="questionnaire" not-null="false" /></many-to-one>
-<many-to-one name="m_UsersExecutor" class="com.aladdin.sc.db.Users" insert="false" update="false"><column name="Executor" not-null="false" /></many-to-one>
-<many-to-one name="m_UsersAssigner" class="com.aladdin.sc.db.Users" insert="false" update="false"><column name="Assigner" not-null="false" /></many-to-one>
-<many-to-one name="m_UsersObject" class="com.aladdin.sc.db.Users" insert="false" update="false"><column name="Object" not-null="false" /></many-to-one>
+<many-to-one name="m_AladdinUserExecutor" class="com.aladdin.sc.db.AladdinUser" insert="false" update="false"><column name="Executor" not-null="false" /></many-to-one>
+<many-to-one name="m_AladdinUserAssigner" class="com.aladdin.sc.db.AladdinUser" insert="false" update="false"><column name="Assigner" not-null="false" /></many-to-one>
+<many-to-one name="m_AladdinUserObject" class="com.aladdin.sc.db.AladdinUser" insert="false" update="false"><column name="Object" not-null="false" /></many-to-one>
 <set name="Measurements" inverse="true" cascade="none"><key><column name="task" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.Measurement"/></set>
 </class>
 </hibernate-mapping>

@@ -6,7 +6,7 @@
     		<element name="Description" type="string"></element>
     	</sequence>
     </complexType>
-    <complexType name="Users">
+    <complexType name="AladdinUser">
     	<sequence>
     		<element name="username" type="string"></element>
     		<element name="password" type="string"></element>
@@ -148,9 +148,9 @@
     		<element name="TaskStatus" type="int"></element>
     		<element name="url" type="string"></element>
     		<element name="questionnaire" type="tns:Questionnaire" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Executor" type="tns:Users" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Assigner" type="tns:Users" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Object" type="tns:Users" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Executor" type="tns:AladdinUser" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Assigner" type="tns:AladdinUser" maxOccurs="1" minOccurs="1"></element>
+    		<element name="Object" type="tns:AladdinUser" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
 
