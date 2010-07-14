@@ -87,9 +87,8 @@ import eu.aladdin_project.xsd.*;
     	public final static int U_ADMIN = 1;
     	
     	private boolean checkUser (String userId, Integer userType) {
-    		if (userId == null) return false;
+    		if (userId == null) return true;
     		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
-    		System.out.println (sql);
 			return (s.createSQLQuery(sql).list().size() > 0);
     	}
     	
@@ -147,15 +146,18 @@ import eu.aladdin_project.xsd.*;
     		com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
     		pd.setName(rpd.getName());
     		pd.setSurname(rpd.getSurname());
-    		if (id != null && id > 0) pd.setId(id);
-    		s.save (pd);
-    		
+    		if (id != null && id > 0) {
+    			pd.setId(id);
+    			s.merge(pd);
+    		} else {
+    			s.save (pd);
+    		}
+
     		Integer pdid = pd.getId();
     		
 			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
 			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
 			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
-
     		
     		Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
@@ -210,7 +212,7 @@ import eu.aladdin_project.xsd.*;
     		ad.setStreetNo(rad.getStreetNo());
     		ad.setZipCode(rad.getZipCode());
     		ad.setIsPrimary(rad.getIsPrimary());
-    		s.save (ad);
+    		s.save(ad);
     	}
 
     	public CreatePatientResponseDocument createPatient (CreatePatientDocument req) {
@@ -275,8 +277,13 @@ import eu.aladdin_project.xsd.*;
     		sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
     		sd.setChildren(new Integer(rsd.getChildren()));
     		sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
-    		if (id != null && id > 0) sd.setId(id);
-    		s.save(sd);
+    		if (id != null && id > 0) {
+    			sd.setId(id);
+    			s.merge(sd);
+    		} else {
+    			s.save(sd);
+    		}
+    		
     		return sd.getId();
     	}
     	
@@ -442,12 +449,14 @@ import eu.aladdin_project.xsd.*;
     			warn.setEmergencyLevel(new Integer(rwarn.getEmergencyLevel().getCode()));
     			warn.setPatientID(rwarn.getPatientID());
     			warn.setDelivered(rwarn.getDelivered());
-    			
+
+    			s.save (warn);
     			s.getTransaction().commit();
     			res.setCode(warn.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+   				System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -475,7 +484,8 @@ import eu.aladdin_project.xsd.*;
     			
     			s.beginTransaction();
     			
-    			List l = s.createQuery("from carer").setParameter("id", data.getID(), Hibernate.INTEGER).list();
+    			Integer id = new Integer (data.getID());
+    			List l = s.createSQLQuery("select * from carer WHERE id = " + id.toString()).list();
     			if (l.size() < 1) throw new Exception("error");
     			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) l.get(0);
     			
@@ -555,23 +565,19 @@ import eu.aladdin_project.xsd.*;
     		try {
     			Patient data = req.getUpdataPatient().getData();
     			
-    			Session s = HibernateUtil.getSessionFactory().openSession();
     			s.beginTransaction();
     			
-    			List l = s.createQuery("from patient").setParameter("id", data.getID(), Hibernate.INTEGER).list();
-    			if (l.size() < 1) throw new Exception("error");
-    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) l.get(0);
-    			
+    			Integer id = new Integer (data.getID());
+    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) s.load (com.aladdin.sc.db.Patient.class, id);
     			storePersondata(data.getPersonData(), p.getPersondata());
-    			
     			storeSocioDemographic(data.getSDData(), p.getSd());
-    			
+    			s.update(p);
     			s.getTransaction().commit();
-    			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			System.out.println(e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -809,14 +815,11 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			List list =  s.createQuery("from patient").setInteger("id", new Integer (req.getGetPatient().getId())).list();
-        		if (list.size() != 1) throw new Exception ("");
-        		
-        		com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) list.get(0);
-        		
+    			Integer id = new Integer (req.getGetPatient().getId());
+        		com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
         		resp.setOut (exportPatient (patient));
-        		
     		} catch (Exception e) {
+    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -829,12 +832,12 @@ import eu.aladdin_project.xsd.*;
 			p.setSDData (exportSocioDemographicData(patient.getM_SocioDemographicDatasd()));
 			p.setResponsibleClinicianID(patient.getClinician().toString());
 			
-			com.aladdin.sc.db.PatientCarer[] pc = (com.aladdin.sc.db.PatientCarer[]) patient.getPatientCarers1().toArray();
+			Object[] pc = patient.getPatientCarers1().toArray();
 			PatientCarerList pcl = p.addNewPatientCarerList();
 			for (int i = 0; i < pc.length; i++) {
 				PatientCarer rpc = pcl.addNewPatientCarer();
-				rpc.setIsPrimary(pc[i].getIsprimary());
-				rpc.setCarer(exportCarer(pc[i].getM_Carercarer()));
+				rpc.setIsPrimary( ((com.aladdin.sc.db.PatientCarer) pc[i]).getIsprimary());
+				rpc.setCarer(exportCarer(((com.aladdin.sc.db.PatientCarer)pc[i]).getM_Carercarer()));
 			}
 			return p;
 		}
@@ -868,22 +871,22 @@ import eu.aladdin_project.xsd.*;
 			pd.setSurname(personData.getSurname());
 			pd.setName(personData.getName());
 			
-			com.aladdin.sc.db.Identifier[] id = (com.aladdin.sc.db.Identifier[]) personData.getIdentifiers().toArray();
+			Object[] id = personData.getIdentifiers().toArray();
 			IdentifierList idl = pd.addNewIdentifierList();
 			for (int i = 0; i < id.length; i++) {
-				exportIdentifier(id[i], idl);
+				exportIdentifier( (com.aladdin.sc.db.Identifier) id[i], idl);
 			}
 			
-			com.aladdin.sc.db.Address[] ad = (com.aladdin.sc.db.Address[]) personData.getAddresss1().toArray();
+			Object[] ad = personData.getAddresss1().toArray();
 			AddressList adl = pd.addNewAddressList();
 			for (int i = 0; i < ad.length; i++) {
-				exportAddress(ad[i], adl);
+				exportAddress( (com.aladdin.sc.db.Address) ad[i], adl);
 			}
 			
-			com.aladdin.sc.db.Communication[] cm = (com.aladdin.sc.db.Communication[]) personData.getCommunications11().toArray();
+			Object[] cm = personData.getCommunications11().toArray();
 			CommunicationList cml = pd.addNewCommunicationList();
 			for (int i = 0; i < cm.length; i++) {
-				exportCommunication(cm[i], cml);
+				exportCommunication( (com.aladdin.sc.db.Communication) cm[i], cml);
 			}
 			return pd;
 		}
@@ -1082,18 +1085,24 @@ import eu.aladdin_project.xsd.*;
     			
     			s.beginTransaction();
     			
+    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
+    			Integer pd = p.getPersondata();
+    			
     			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
     			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT communication FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM persondata WHERE id = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			s.createSQLQuery("DELETE FROM patientcarer WHERE patient = " + id.toString()).executeUpdate();
     			s.createSQLQuery("DELETE FROM patient WHERE id = " + id.toString()).executeUpdate();
-    			
+    			s.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
+    			s.createSQLQuery("DELETE FROM sociodemographicdata WHERE id = " + pd.toString()).executeUpdate();
+
     			s.getTransaction().commit();
     			
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -1273,14 +1282,16 @@ import eu.aladdin_project.xsd.*;
     				task.setM_Questionnairequestionnaire(storeQuestionnaire(rtask.getQuestionnaire()));
     			}
     			
+    			s.save (task);
     			s.getTransaction().commit();
     			
     			res.setCode(task.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			System.out.println (e.toString());
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error ");
         		res.setStatus((short) 0);
 			}
     		
@@ -1337,8 +1348,8 @@ import eu.aladdin_project.xsd.*;
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
     		if (
-    				!checkUser(req.getGetUserPlannedTasks().getUserId(), U_CLINICIAN) ||
-    				!checkUser(req.getGetUserPlannedTasks().getUserId(), U_CARER)
+    				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CARER)
 				) {
     			return respdoc;
     		}
@@ -1375,7 +1386,7 @@ import eu.aladdin_project.xsd.*;
     			}
     			
     		} catch (Exception e) {
-
+    			System.out.println(e.toString());
 			}
     		
     		return respdoc;
@@ -1646,14 +1657,11 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			List list =  s.createQuery("from clinician").setInteger("id", new Integer (req.getGetClinician().getId())).list();
-        		if (list.size() != 1) throw new Exception ("");
-        		
-        		com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) list.get(0);
-        		
+    			Integer id = new Integer (req.getGetClinician().getId());
+    			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) s.load(com.aladdin.sc.db.Clinician.class, id);
         		resp.setOut (exportClinician (clinician));
-        		
     		} catch (Exception e) {
+    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -1724,14 +1732,11 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			List list =  s.createQuery("from carer").setInteger("id", new Integer (req.getGetCarer().getId())).list();
-        		if (list.size() != 1) throw new Exception ("");
-        		
-        		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) list.get(0);
-        		
+    			Integer id = new Integer (req.getGetCarer().getId());
+        		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, id);
         		resp.setOut (exportCarer (carer));
-        		
     		} catch (Exception e) {
+    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -1748,7 +1753,8 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			List list =  s.createQuery("from administrator").setInteger("id", new Integer (req.getGetAdministrator().getId())).list();
+    			Integer id = new Integer (req.getGetAdministrator().getId());
+				List list =  s.createQuery("select * from administrator WHERE id = " + id.toString()).list();
         		if (list.size() != 1) throw new Exception ("");
         		
         		com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) list.get(0);
@@ -1787,7 +1793,8 @@ import eu.aladdin_project.xsd.*;
     			
     			s.beginTransaction();
     			
-    			List l = s.createQuery("from administrator").setParameter("id", data.getID(), Hibernate.INTEGER).list();
+    			Integer id = new Integer (data.getID());
+    			List l = s.createSQLQuery("select * from administrator WHERE id = " + id.toString()).list();
     			if (l.size() < 1) throw new Exception("error");
     			com.aladdin.sc.db.Administrator p = (com.aladdin.sc.db.Administrator) l.get(0);
     			
@@ -2026,7 +2033,7 @@ import eu.aladdin_project.xsd.*;
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
     			
-    			String sql = "SELECT p.* FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
+    			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
     			
     			SearchCriteria[] sc = req.getListOfPatients().getFilterArray();
     			for (int i = 0; i < sc.length; i++) {
@@ -2038,16 +2045,19 @@ import eu.aladdin_project.xsd.*;
     					}
     				}
     			}
-    			sql += " 1 GROUP BY p.id";
-    			
-    			com.aladdin.sc.db.Patient[] ql = (com.aladdin.sc.db.Patient[]) s.createSQLQuery(sql).list().toArray();
+    			sql += " 1=1 GROUP BY p.id, p.persondata, p.clinician, p.sd";
+
+    			Object[] ql = s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
+    				Integer id = (Integer) ql[i];
+    				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)s.load(com.aladdin.sc.db.Patient.class, id);
     				PatientInfo qi = resp.addNewOut();
-    				qi.setID(ql[i].getId().toString());
-    				qi.setSurname(ql[i].getM_PersonDatapersondata().getSurname());
-    				qi.setName(ql[i].getM_PersonDatapersondata().getName());
+    				qi.setID(p.getId().toString());
+    				qi.setSurname(p.getM_PersonDatapersondata().getSurname());
+    				qi.setName(p.getM_PersonDatapersondata().getName());
     			}
     		} catch (Exception e) {
+    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -2064,7 +2074,6 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			
     			Field[] field = com.aladdin.sc.db.Warning.class.getFields();
     			String sql = "SELECT * FROM warning WHERE ";
     			
@@ -2078,36 +2087,37 @@ import eu.aladdin_project.xsd.*;
     					}
     				}
     			}
-    			sql += "1";
+    			sql += "1=1";
     			
-    			
-    			com.aladdin.sc.db.Warning[] wl = (com.aladdin.sc.db.Warning[]) s.createSQLQuery(sql).list().toArray();
-    			for (int i = 0; i < wl.length; i++) {
-    				Warning rw = resp.addNewOut();
-    				rw.setID(wl[i].getId().toString());
+    			List list = s.createSQLQuery(sql).list();
+				for (int i = 0; i < list.size(); i++) {
+    				com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) list.get(i);
+					Warning rw = resp.addNewOut();
+    				rw.setID(w.getId().toString());
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
-    				typeOfWarning.setCode(wl[i].getTypeOfWarning().toString());
+    				typeOfWarning.setCode(w.getTypeOfWarning().toString());
     				rw.setTypeOfWarning(typeOfWarning);
     				Calendar c1 = Calendar.getInstance();
-    				c1.setTimeInMillis(wl[i].getDateTimeOfWarning().getTime());
+    				c1.setTimeInMillis(w.getDateTimeOfWarning().getTime());
     				rw.setDateTimeOfWarning(c1);
     				SystemParameter effect = SystemParameter.Factory.newInstance();
-    				effect.setCode(wl[i].getEffect().toString());
+    				effect.setCode(w.getEffect().toString());
     				rw.setEffect(effect);
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
-    				indicator.setCode(wl[i].getIndicator().toString());
+    				indicator.setCode(w.getIndicator().toString());
     				rw.setIndicator(indicator);
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
-    				riskLevel.setCode(wl[i].getRiskLevel().toString());
+    				riskLevel.setCode(w.getRiskLevel().toString());
     				rw.setRiskLevel(riskLevel);
-    				rw.setJustificationText(wl[i].getJustificationText());
+    				rw.setJustificationText(w.getJustificationText());
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
-    				emergencyLevel.setCode(wl[i].getEmergencyLevel().toString());
+    				emergencyLevel.setCode(w.getEmergencyLevel().toString());
     				rw.setEmergencyLevel(emergencyLevel);
-    				rw.setPatientID(wl[i].getPatientID());
-    				rw.setDelivered(wl[i].getDelivered());
+    				rw.setPatientID(w.getPatientID());
+    				rw.setDelivered(w.getDelivered());
     			}
     		} catch (Exception e) {
+    			System.out.println (e.toString());
 			}
     		
     		return respdoc;
@@ -2130,10 +2140,10 @@ import eu.aladdin_project.xsd.*;
     		try {
     			Clinician data = req.getUpdateClinician().getData();
     			
-    			Session s = HibernateUtil.getSessionFactory().openSession();
     			s.beginTransaction();
     			
-    			List l = s.createQuery("from clinician").setParameter("id", data.getID(), Hibernate.INTEGER).list();
+    			Integer id = new Integer (data.getID());
+    			List l = s.createSQLQuery("select * from clinician WHERE id = " + id.toString()).list();
     			if (l.size() < 1) throw new Exception("error");
     			com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician) l.get(0);
     			
