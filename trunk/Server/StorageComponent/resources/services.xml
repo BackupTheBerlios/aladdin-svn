@@ -9,6 +9,18 @@
         <parameter name="ServiceClass">com.aladdin.sc.StorageComponentSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">false</parameter>
+        <operation name="UpdateQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/UpdateQuestionnaire</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdateQuestionnaireResponse</outputActionMapping>
+        </operation>
+        <operation name="ListOfQuestionnaires" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/ListOfQuestionnaires</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/ListOfQuestionnairesResponse</outputActionMapping>
+        </operation>
+        <operation name="SaveWarning" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/SaveWarning</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/SaveWarningResponse</outputActionMapping>
+        </operation>
         <operation name="UpdateCarer" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/UpdateCarer</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdateCarerResponse</outputActionMapping>
@@ -21,25 +33,13 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/DeleteAdministrator</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/DeleteAdministratorResponse</outputActionMapping>
         </operation>
-        <operation name="UpdataPatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/UpdataPatient</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdataPatientResponse</outputActionMapping>
-        </operation>
         <operation name="DeleteUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/DeleteUser</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/DeleteUserResponse</outputActionMapping>
         </operation>
-        <operation name="UpdateQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/UpdateQuestionnaire</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdateQuestionnaireResponse</outputActionMapping>
-        </operation>
-        <operation name="ListOfQuestionnaires" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/ListOfQuestionnaires</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/ListOfQuestionnairesResponse</outputActionMapping>
-        </operation>
-        <operation name="SaveWarning" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/SaveWarning</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/SaveWarningResponse</outputActionMapping>
+        <operation name="GetCarerAssessments" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetCarerAssessments</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetCarerAssessmentsResponse</outputActionMapping>
         </operation>
         <operation name="ListOfCarers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/ListOfCarers</actionMapping>
@@ -101,6 +101,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetPatientMeasurement</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetPatientMeasurementResponse</outputActionMapping>
         </operation>
+        <operation name="UpdatePatient" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/UpdatePatient</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdatePatientResponse</outputActionMapping>
+        </operation>
         <operation name="DeleteQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/DeleteQuestionnaire</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/DeleteQuestionnaireResponse</outputActionMapping>
@@ -149,6 +153,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/UpdateExternalService</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdateExternalServiceResponse</outputActionMapping>
         </operation>
+        <operation name="GetPatientAssessments" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetPatientAssessments</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetPatientAssessmentsResponse</outputActionMapping>
+        </operation>
         <operation name="GetClinician" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetClinician</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetClinicianResponse</outputActionMapping>
@@ -180,14 +188,6 @@
         <operation name="StoreQuestionnaireAnswers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/StoreQuestionnaireAnswers</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/StoreQuestionnaireAnswersResponse</outputActionMapping>
-        </operation>
-        <operation name="GetPatientAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/GetPatientAssessment</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetPatientAssessmentResponse</outputActionMapping>
-        </operation>
-        <operation name="GetCarerAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/GetCarerAssessment</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetCarerAssessmentResponse</outputActionMapping>
         </operation>
         <operation name="ChangeTaskStatus" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/ChangeTaskStatus</actionMapping>
