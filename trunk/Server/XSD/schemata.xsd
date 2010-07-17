@@ -11,19 +11,24 @@
 
     <complexType name="QuestionnaireQuestion">
     	<sequence>
-    		<element name="title" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="answers" type="tns:QuestionnaireQuestionAnswerList"
-    			maxOccurs="1" minOccurs="1">
+    		<element name="title" type="string" maxOccurs="1"
+    			minOccurs="1">
     		</element>
-    		<element name="questions" type="tns:QuestionnaireQuestionList"
-    			maxOccurs="1" minOccurs="1">
+    		<element name="answers"
+    			type="tns:QuestionnaireQuestionAnswerList" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="questions"
+    			type="tns:QuestionnaireQuestionList" maxOccurs="1"
+    			minOccurs="1">
     		</element>
     	</sequence>
     	<attribute name="id" type="string"></attribute>
     	<attribute name="type" type="string"></attribute>
     	<attribute name="condition" type="unsignedByte"></attribute>
+    	<attribute name="deleted" type="boolean"></attribute>
     </complexType>
-    
+
     <complexType name="QuestionnaireQuestionList">
     	<sequence>
     		<element name="question" type="tns:QuestionnaireQuestion"
@@ -43,6 +48,8 @@
 		<simpleContent>
 			<extension base="string">
 				<attribute type="unsignedByte" name="value"/>
+				<attribute type="boolean" name="deleted"/>
+				<attribute type="int" name="id"/>
 			</extension>
 		</simpleContent>
 	</complexType>

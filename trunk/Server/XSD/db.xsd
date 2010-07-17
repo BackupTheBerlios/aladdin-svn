@@ -112,11 +112,15 @@
     	<sequence>
     		<element name="type" type="string"></element>
     		<element name="isPrimary" type="boolean"></element>
-    		<element name="subquetsions" type="boolean"></element>
-    		<element name="parentid" type="tns:QuestionnaireQuestion" maxOccurs="1" minOccurs="0"></element>
+    		<element name="parentid" type="tns:QuestionnaireQuestion"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
     		<element name="title" type="string"></element>
-    		<element name="quest" type="tns:Questionnaire" maxOccurs="1" minOccurs="1"></element>
+    		<element name="quest" type="tns:Questionnaire" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
     		<element name="condition" type="unsignedByte"></element>
+    		<element name="deleted" type="boolean"></element>
     	</sequence>
     </complexType>
 
@@ -125,6 +129,7 @@
     		<element name="value" type="unsignedByte"></element>
     		<element name="description" type="string"></element>
     		<element name="question" type="tns:QuestionnaireQuestion" maxOccurs="1" minOccurs="1"></element>
+    		<element name="deleted" type="boolean"></element>
     	</sequence>
     </complexType>
 
