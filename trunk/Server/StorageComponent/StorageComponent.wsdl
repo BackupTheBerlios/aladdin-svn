@@ -27,7 +27,7 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="UpdataPatient">
+      <xsd:element name="UpdatePatient">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="data" type="aladdin:Patient"></xsd:element>
@@ -35,7 +35,7 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="UpdataPatientResponse">
+      <xsd:element name="UpdatePatientResponse">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
@@ -572,33 +572,33 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="GetPatientAssessment">
+      <xsd:element name="GetPatientAssessments">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="id" type="xsd:string"></xsd:element>
+      			<xsd:element name="patientId" type="xsd:string"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="GetPatientAssessmentResponse">
+      <xsd:element name="GetPatientAssessmentsResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="out" type="aladdin:PatientAssessment" maxOccurs="unbounded"></xsd:element>
+      			<xsd:element name="out" type="aladdin:PatientAssessment" maxOccurs="unbounded" minOccurs="0"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="GetCarerAssessment">
+      <xsd:element name="GetCarerAssessments">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="id" type="xsd:string"></xsd:element>
+      			<xsd:element name="carerId" type="xsd:string"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
-      <xsd:element name="GetCarerAssessmentResponse">
+      <xsd:element name="GetCarerAssessmentsResponse">
       	<xsd:complexType>
       		<xsd:sequence>
-      			<xsd:element name="out" type="aladdin:CarerAssessment"></xsd:element>
+      			<xsd:element name="out" type="aladdin:CarerAssessment" maxOccurs="unbounded" minOccurs="0"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -787,11 +787,11 @@
   <wsdl:message name="CreatePatientResponse">
   	<wsdl:part name="parameters" element="tns:CreatePatientResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="UpdataPatientRequest">
-  	<wsdl:part name="parameters" element="tns:UpdataPatient"></wsdl:part>
+  <wsdl:message name="UpdatePatientRequest">
+  	<wsdl:part name="parameters" element="tns:UpdatePatient"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="UpdataPatientResponse">
-  	<wsdl:part name="parameters" element="tns:UpdataPatientResponse"></wsdl:part>
+  <wsdl:message name="UpdatePatientResponse">
+  	<wsdl:part name="parameters" element="tns:UpdatePatientResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="DeletePatientRequest">
   	<wsdl:part name="parameters" element="tns:DeletePatient"></wsdl:part>
@@ -1003,17 +1003,17 @@
   <wsdl:message name="DeleteCarerAssessmentResponse">
   	<wsdl:part name="parameters" element="tns:DeleteCarerAssessmentResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetPatientAssessmentRequest">
-  	<wsdl:part name="parameters" element="tns:GetPatientAssessment"></wsdl:part>
+  <wsdl:message name="GetPatientAssessmentsRequest">
+  	<wsdl:part name="parameters" element="tns:GetPatientAssessments"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetPatientAssessmentResponse">
-  	<wsdl:part name="parameters" element="tns:GetPatientAssessmentResponse"></wsdl:part>
+  <wsdl:message name="GetPatientAssessmentsResponse">
+  	<wsdl:part name="parameters" element="tns:GetPatientAssessmentsResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetCarerAssessmentRequest">
-  	<wsdl:part name="parameters" element="tns:GetCarerAssessment"></wsdl:part>
+  <wsdl:message name="GetCarerAssessmentsRequest">
+  	<wsdl:part name="parameters" element="tns:GetCarerAssessments"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetCarerAssessmentResponse">
-  	<wsdl:part name="parameters" element="tns:GetCarerAssessmentResponse"></wsdl:part>
+  <wsdl:message name="GetCarerAssessmentsResponse">
+  	<wsdl:part name="parameters" element="tns:GetCarerAssessmentsResponse"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="CreateExternalServiceRequest">
   	<wsdl:part name="parameters" element="tns:CreateExternalService"></wsdl:part>
@@ -1092,9 +1092,9 @@
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
         	<wsdl:output message="tns:CreatePatientResponse"></wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="UpdataPatient">
-        	<wsdl:input message="tns:UpdataPatientRequest"></wsdl:input>
-        	<wsdl:output message="tns:UpdataPatientResponse"></wsdl:output>
+        <wsdl:operation name="UpdatePatient">
+        	<wsdl:input message="tns:UpdatePatientRequest"></wsdl:input>
+        	<wsdl:output message="tns:UpdatePatientResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeletePatient">
         	<wsdl:input message="tns:DeletePatientRequest"></wsdl:input>
@@ -1236,13 +1236,13 @@
         	<wsdl:input message="tns:DeleteCarerAssessmentRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteCarerAssessmentResponse"></wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="GetPatientAssessment">
-        	<wsdl:input message="tns:GetPatientAssessmentRequest"></wsdl:input>
-        	<wsdl:output message="tns:GetPatientAssessmentResponse"></wsdl:output>
+        <wsdl:operation name="GetPatientAssessments">
+        	<wsdl:input message="tns:GetPatientAssessmentsRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetPatientAssessmentsResponse"></wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="GetCarerAssessment">
-        	<wsdl:input message="tns:GetCarerAssessmentRequest"></wsdl:input>
-        	<wsdl:output message="tns:GetCarerAssessmentResponse"></wsdl:output>
+        <wsdl:operation name="GetCarerAssessments">
+        	<wsdl:input message="tns:GetCarerAssessmentsRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetCarerAssessmentsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateExternalService">
         	<wsdl:input message="tns:CreateExternalServiceRequest"></wsdl:input>
@@ -1307,9 +1307,9 @@
   			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
-  	<wsdl:operation name="UpdataPatient">
+  	<wsdl:operation name="UpdatePatient">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/StorageComponent/UpdataPatient" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdatePatient" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1667,9 +1667,9 @@
   			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
-  	<wsdl:operation name="GetPatientAssessment">
+  	<wsdl:operation name="GetPatientAssessments">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientAssessments" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
@@ -1677,9 +1677,9 @@
   			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
-  	<wsdl:operation name="GetCarerAssessment">
+  	<wsdl:operation name="GetCarerAssessments">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/StorageComponent/GetCarerAssessment" />
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetCarerAssessments" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
