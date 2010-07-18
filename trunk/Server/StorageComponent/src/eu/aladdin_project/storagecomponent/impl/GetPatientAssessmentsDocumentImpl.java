@@ -1,39 +1,39 @@
 /*
  * An XML document type.
- * Localname: GetPatientAssessment
+ * Localname: GetPatientAssessments
  * Namespace: http://aladdin-project.eu/StorageComponent/
- * Java type: eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument
+ * Java type: eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument
  *
  * Automatically generated - do not modify.
  */
 package eu.aladdin_project.storagecomponent.impl;
 /**
- * A document containing one GetPatientAssessment(@http://aladdin-project.eu/StorageComponent/) element.
+ * A document containing one GetPatientAssessments(@http://aladdin-project.eu/StorageComponent/) element.
  *
  * This is a complex type.
  */
-public class GetPatientAssessmentDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument
+public class GetPatientAssessmentsDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument
 {
     
-    public GetPatientAssessmentDocumentImpl(org.apache.xmlbeans.SchemaType sType)
+    public GetPatientAssessmentsDocumentImpl(org.apache.xmlbeans.SchemaType sType)
     {
         super(sType);
     }
     
-    private static final javax.xml.namespace.QName GETPATIENTASSESSMENT$0 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetPatientAssessment");
+    private static final javax.xml.namespace.QName GETPATIENTASSESSMENTS$0 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetPatientAssessments");
     
     
     /**
-     * Gets the "GetPatientAssessment" element
+     * Gets the "GetPatientAssessments" element
      */
-    public eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment getGetPatientAssessment()
+    public eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments getGetPatientAssessments()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment target = null;
-            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment)get_store().find_element_user(GETPATIENTASSESSMENT$0, 0);
+            eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments target = null;
+            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments)get_store().find_element_user(GETPATIENTASSESSMENTS$0, 0);
             if (target == null)
             {
                 return null;
@@ -43,65 +43,65 @@ public class GetPatientAssessmentDocumentImpl extends org.apache.xmlbeans.impl.v
     }
     
     /**
-     * Sets the "GetPatientAssessment" element
+     * Sets the "GetPatientAssessments" element
      */
-    public void setGetPatientAssessment(eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment getPatientAssessment)
+    public void setGetPatientAssessments(eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments getPatientAssessments)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment target = null;
-            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment)get_store().find_element_user(GETPATIENTASSESSMENT$0, 0);
+            eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments target = null;
+            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments)get_store().find_element_user(GETPATIENTASSESSMENTS$0, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment)get_store().add_element_user(GETPATIENTASSESSMENT$0);
+                target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments)get_store().add_element_user(GETPATIENTASSESSMENTS$0);
             }
-            target.set(getPatientAssessment);
+            target.set(getPatientAssessments);
         }
     }
     
     /**
-     * Appends and returns a new empty "GetPatientAssessment" element
+     * Appends and returns a new empty "GetPatientAssessments" element
      */
-    public eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment addNewGetPatientAssessment()
+    public eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments addNewGetPatientAssessments()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment target = null;
-            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment)get_store().add_element_user(GETPATIENTASSESSMENT$0);
+            eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments target = null;
+            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments)get_store().add_element_user(GETPATIENTASSESSMENTS$0);
             return target;
         }
     }
     /**
-     * An XML GetPatientAssessment(@http://aladdin-project.eu/StorageComponent/).
+     * An XML GetPatientAssessments(@http://aladdin-project.eu/StorageComponent/).
      *
      * This is a complex type.
      */
-    public static class GetPatientAssessmentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument.GetPatientAssessment
+    public static class GetPatientAssessmentsImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.GetPatientAssessments
     {
         
-        public GetPatientAssessmentImpl(org.apache.xmlbeans.SchemaType sType)
+        public GetPatientAssessmentsImpl(org.apache.xmlbeans.SchemaType sType)
         {
             super(sType);
         }
         
-        private static final javax.xml.namespace.QName ID$0 = 
-            new javax.xml.namespace.QName("", "id");
+        private static final javax.xml.namespace.QName PATIENTID$0 = 
+            new javax.xml.namespace.QName("", "patientId");
         private static final javax.xml.namespace.QName USERID$2 = 
             new javax.xml.namespace.QName("", "userId");
         
         
         /**
-         * Gets the "id" element
+         * Gets the "patientId" element
          */
-        public java.lang.String getId()
+        public java.lang.String getPatientId()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$0, 0);
                 if (target == null)
                 {
                     return null;
@@ -111,52 +111,52 @@ public class GetPatientAssessmentDocumentImpl extends org.apache.xmlbeans.impl.v
         }
         
         /**
-         * Gets (as xml) the "id" element
+         * Gets (as xml) the "patientId" element
          */
-        public org.apache.xmlbeans.XmlString xgetId()
+        public org.apache.xmlbeans.XmlString xgetPatientId()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$0, 0);
                 return target;
             }
         }
         
         /**
-         * Sets the "id" element
+         * Sets the "patientId" element
          */
-        public void setId(java.lang.String id)
+        public void setPatientId(java.lang.String patientId)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(ID$0);
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(PATIENTID$0);
                 }
-                target.setStringValue(id);
+                target.setStringValue(patientId);
             }
         }
         
         /**
-         * Sets (as xml) the "id" element
+         * Sets (as xml) the "patientId" element
          */
-        public void xsetId(org.apache.xmlbeans.XmlString id)
+        public void xsetPatientId(org.apache.xmlbeans.XmlString patientId)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(ID$0);
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(PATIENTID$0);
                 }
-                target.set(id);
+                target.set(patientId);
             }
         }
         

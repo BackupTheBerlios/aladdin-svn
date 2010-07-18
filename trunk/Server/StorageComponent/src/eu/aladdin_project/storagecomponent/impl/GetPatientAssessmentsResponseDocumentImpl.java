@@ -1,39 +1,39 @@
 /*
  * An XML document type.
- * Localname: GetPatientAssessmentResponse
+ * Localname: GetPatientAssessmentsResponse
  * Namespace: http://aladdin-project.eu/StorageComponent/
- * Java type: eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument
+ * Java type: eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument
  *
  * Automatically generated - do not modify.
  */
 package eu.aladdin_project.storagecomponent.impl;
 /**
- * A document containing one GetPatientAssessmentResponse(@http://aladdin-project.eu/StorageComponent/) element.
+ * A document containing one GetPatientAssessmentsResponse(@http://aladdin-project.eu/StorageComponent/) element.
  *
  * This is a complex type.
  */
-public class GetPatientAssessmentResponseDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument
+public class GetPatientAssessmentsResponseDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument
 {
     
-    public GetPatientAssessmentResponseDocumentImpl(org.apache.xmlbeans.SchemaType sType)
+    public GetPatientAssessmentsResponseDocumentImpl(org.apache.xmlbeans.SchemaType sType)
     {
         super(sType);
     }
     
-    private static final javax.xml.namespace.QName GETPATIENTASSESSMENTRESPONSE$0 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetPatientAssessmentResponse");
+    private static final javax.xml.namespace.QName GETPATIENTASSESSMENTSRESPONSE$0 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetPatientAssessmentsResponse");
     
     
     /**
-     * Gets the "GetPatientAssessmentResponse" element
+     * Gets the "GetPatientAssessmentsResponse" element
      */
-    public eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse getGetPatientAssessmentResponse()
+    public eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse getGetPatientAssessmentsResponse()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse target = null;
-            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse)get_store().find_element_user(GETPATIENTASSESSMENTRESPONSE$0, 0);
+            eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse target = null;
+            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse)get_store().find_element_user(GETPATIENTASSESSMENTSRESPONSE$0, 0);
             if (target == null)
             {
                 return null;
@@ -43,45 +43,45 @@ public class GetPatientAssessmentResponseDocumentImpl extends org.apache.xmlbean
     }
     
     /**
-     * Sets the "GetPatientAssessmentResponse" element
+     * Sets the "GetPatientAssessmentsResponse" element
      */
-    public void setGetPatientAssessmentResponse(eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse getPatientAssessmentResponse)
+    public void setGetPatientAssessmentsResponse(eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse getPatientAssessmentsResponse)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse target = null;
-            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse)get_store().find_element_user(GETPATIENTASSESSMENTRESPONSE$0, 0);
+            eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse target = null;
+            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse)get_store().find_element_user(GETPATIENTASSESSMENTSRESPONSE$0, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse)get_store().add_element_user(GETPATIENTASSESSMENTRESPONSE$0);
+                target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse)get_store().add_element_user(GETPATIENTASSESSMENTSRESPONSE$0);
             }
-            target.set(getPatientAssessmentResponse);
+            target.set(getPatientAssessmentsResponse);
         }
     }
     
     /**
-     * Appends and returns a new empty "GetPatientAssessmentResponse" element
+     * Appends and returns a new empty "GetPatientAssessmentsResponse" element
      */
-    public eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse addNewGetPatientAssessmentResponse()
+    public eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse addNewGetPatientAssessmentsResponse()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse target = null;
-            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse)get_store().add_element_user(GETPATIENTASSESSMENTRESPONSE$0);
+            eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse target = null;
+            target = (eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse)get_store().add_element_user(GETPATIENTASSESSMENTSRESPONSE$0);
             return target;
         }
     }
     /**
-     * An XML GetPatientAssessmentResponse(@http://aladdin-project.eu/StorageComponent/).
+     * An XML GetPatientAssessmentsResponse(@http://aladdin-project.eu/StorageComponent/).
      *
      * This is a complex type.
      */
-    public static class GetPatientAssessmentResponseImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument.GetPatientAssessmentResponse
+    public static class GetPatientAssessmentsResponseImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse
     {
         
-        public GetPatientAssessmentResponseImpl(org.apache.xmlbeans.SchemaType sType)
+        public GetPatientAssessmentsResponseImpl(org.apache.xmlbeans.SchemaType sType)
         {
             super(sType);
         }

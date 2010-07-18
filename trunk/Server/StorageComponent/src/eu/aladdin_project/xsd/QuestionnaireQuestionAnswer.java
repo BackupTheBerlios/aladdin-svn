@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireQuestionAnswer extends org.apache.xmlbeans.XmlString
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestionAnswer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("questionnairequestionanswercea1type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestionAnswer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2951DB2012764CCF247DDAD3EBE7BB42").resolveHandle("questionnairequestionanswercea1type");
     
     /**
      * Gets the "value" attribute
@@ -47,6 +47,66 @@ public interface QuestionnaireQuestionAnswer extends org.apache.xmlbeans.XmlStri
      * Unsets the "value" attribute
      */
     void unsetValue();
+    
+    /**
+     * Gets the "deleted" attribute
+     */
+    boolean getDeleted();
+    
+    /**
+     * Gets (as xml) the "deleted" attribute
+     */
+    org.apache.xmlbeans.XmlBoolean xgetDeleted();
+    
+    /**
+     * True if has "deleted" attribute
+     */
+    boolean isSetDeleted();
+    
+    /**
+     * Sets the "deleted" attribute
+     */
+    void setDeleted(boolean deleted);
+    
+    /**
+     * Sets (as xml) the "deleted" attribute
+     */
+    void xsetDeleted(org.apache.xmlbeans.XmlBoolean deleted);
+    
+    /**
+     * Unsets the "deleted" attribute
+     */
+    void unsetDeleted();
+    
+    /**
+     * Gets the "id" attribute
+     */
+    int getId();
+    
+    /**
+     * Gets (as xml) the "id" attribute
+     */
+    org.apache.xmlbeans.XmlInt xgetId();
+    
+    /**
+     * True if has "id" attribute
+     */
+    boolean isSetId();
+    
+    /**
+     * Sets the "id" attribute
+     */
+    void setId(int id);
+    
+    /**
+     * Sets (as xml) the "id" attribute
+     */
+    void xsetId(org.apache.xmlbeans.XmlInt id);
+    
+    /**
+     * Unsets the "id" attribute
+     */
+    void unsetId();
     
     /**
      * A factory class with static methods for creating instances

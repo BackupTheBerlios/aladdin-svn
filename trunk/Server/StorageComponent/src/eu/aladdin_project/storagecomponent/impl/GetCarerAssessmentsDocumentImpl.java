@@ -1,39 +1,39 @@
 /*
  * An XML document type.
- * Localname: GetCarerAssessment
+ * Localname: GetCarerAssessments
  * Namespace: http://aladdin-project.eu/StorageComponent/
- * Java type: eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument
+ * Java type: eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument
  *
  * Automatically generated - do not modify.
  */
 package eu.aladdin_project.storagecomponent.impl;
 /**
- * A document containing one GetCarerAssessment(@http://aladdin-project.eu/StorageComponent/) element.
+ * A document containing one GetCarerAssessments(@http://aladdin-project.eu/StorageComponent/) element.
  *
  * This is a complex type.
  */
-public class GetCarerAssessmentDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument
+public class GetCarerAssessmentsDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument
 {
     
-    public GetCarerAssessmentDocumentImpl(org.apache.xmlbeans.SchemaType sType)
+    public GetCarerAssessmentsDocumentImpl(org.apache.xmlbeans.SchemaType sType)
     {
         super(sType);
     }
     
-    private static final javax.xml.namespace.QName GETCARERASSESSMENT$0 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetCarerAssessment");
+    private static final javax.xml.namespace.QName GETCARERASSESSMENTS$0 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetCarerAssessments");
     
     
     /**
-     * Gets the "GetCarerAssessment" element
+     * Gets the "GetCarerAssessments" element
      */
-    public eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment getGetCarerAssessment()
+    public eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments getGetCarerAssessments()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment target = null;
-            target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment)get_store().find_element_user(GETCARERASSESSMENT$0, 0);
+            eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments target = null;
+            target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments)get_store().find_element_user(GETCARERASSESSMENTS$0, 0);
             if (target == null)
             {
                 return null;
@@ -43,65 +43,65 @@ public class GetCarerAssessmentDocumentImpl extends org.apache.xmlbeans.impl.val
     }
     
     /**
-     * Sets the "GetCarerAssessment" element
+     * Sets the "GetCarerAssessments" element
      */
-    public void setGetCarerAssessment(eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment getCarerAssessment)
+    public void setGetCarerAssessments(eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments getCarerAssessments)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment target = null;
-            target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment)get_store().find_element_user(GETCARERASSESSMENT$0, 0);
+            eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments target = null;
+            target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments)get_store().find_element_user(GETCARERASSESSMENTS$0, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment)get_store().add_element_user(GETCARERASSESSMENT$0);
+                target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments)get_store().add_element_user(GETCARERASSESSMENTS$0);
             }
-            target.set(getCarerAssessment);
+            target.set(getCarerAssessments);
         }
     }
     
     /**
-     * Appends and returns a new empty "GetCarerAssessment" element
+     * Appends and returns a new empty "GetCarerAssessments" element
      */
-    public eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment addNewGetCarerAssessment()
+    public eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments addNewGetCarerAssessments()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment target = null;
-            target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment)get_store().add_element_user(GETCARERASSESSMENT$0);
+            eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments target = null;
+            target = (eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments)get_store().add_element_user(GETCARERASSESSMENTS$0);
             return target;
         }
     }
     /**
-     * An XML GetCarerAssessment(@http://aladdin-project.eu/StorageComponent/).
+     * An XML GetCarerAssessments(@http://aladdin-project.eu/StorageComponent/).
      *
      * This is a complex type.
      */
-    public static class GetCarerAssessmentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument.GetCarerAssessment
+    public static class GetCarerAssessmentsImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.GetCarerAssessments
     {
         
-        public GetCarerAssessmentImpl(org.apache.xmlbeans.SchemaType sType)
+        public GetCarerAssessmentsImpl(org.apache.xmlbeans.SchemaType sType)
         {
             super(sType);
         }
         
-        private static final javax.xml.namespace.QName ID$0 = 
-            new javax.xml.namespace.QName("", "id");
+        private static final javax.xml.namespace.QName CARERID$0 = 
+            new javax.xml.namespace.QName("", "carerId");
         private static final javax.xml.namespace.QName USERID$2 = 
             new javax.xml.namespace.QName("", "userId");
         
         
         /**
-         * Gets the "id" element
+         * Gets the "carerId" element
          */
-        public java.lang.String getId()
+        public java.lang.String getCarerId()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(CARERID$0, 0);
                 if (target == null)
                 {
                     return null;
@@ -111,52 +111,52 @@ public class GetCarerAssessmentDocumentImpl extends org.apache.xmlbeans.impl.val
         }
         
         /**
-         * Gets (as xml) the "id" element
+         * Gets (as xml) the "carerId" element
          */
-        public org.apache.xmlbeans.XmlString xgetId()
+        public org.apache.xmlbeans.XmlString xgetCarerId()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(CARERID$0, 0);
                 return target;
             }
         }
         
         /**
-         * Sets the "id" element
+         * Sets the "carerId" element
          */
-        public void setId(java.lang.String id)
+        public void setCarerId(java.lang.String carerId)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(CARERID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(ID$0);
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(CARERID$0);
                 }
-                target.setStringValue(id);
+                target.setStringValue(carerId);
             }
         }
         
         /**
-         * Sets (as xml) the "id" element
+         * Sets (as xml) the "carerId" element
          */
-        public void xsetId(org.apache.xmlbeans.XmlString id)
+        public void xsetCarerId(org.apache.xmlbeans.XmlString carerId)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ID$0, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(CARERID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(ID$0);
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(CARERID$0);
                 }
-                target.set(id);
+                target.set(carerId);
             }
         }
         

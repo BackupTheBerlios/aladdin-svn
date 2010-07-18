@@ -1,39 +1,39 @@
 /*
  * An XML document type.
- * Localname: UpdataPatientResponse
+ * Localname: UpdatePatientResponse
  * Namespace: http://aladdin-project.eu/StorageComponent/
- * Java type: eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument
+ * Java type: eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument
  *
  * Automatically generated - do not modify.
  */
 package eu.aladdin_project.storagecomponent.impl;
 /**
- * A document containing one UpdataPatientResponse(@http://aladdin-project.eu/StorageComponent/) element.
+ * A document containing one UpdatePatientResponse(@http://aladdin-project.eu/StorageComponent/) element.
  *
  * This is a complex type.
  */
-public class UpdataPatientResponseDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument
+public class UpdatePatientResponseDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument
 {
     
-    public UpdataPatientResponseDocumentImpl(org.apache.xmlbeans.SchemaType sType)
+    public UpdatePatientResponseDocumentImpl(org.apache.xmlbeans.SchemaType sType)
     {
         super(sType);
     }
     
-    private static final javax.xml.namespace.QName UPDATAPATIENTRESPONSE$0 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "UpdataPatientResponse");
+    private static final javax.xml.namespace.QName UPDATEPATIENTRESPONSE$0 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "UpdatePatientResponse");
     
     
     /**
-     * Gets the "UpdataPatientResponse" element
+     * Gets the "UpdatePatientResponse" element
      */
-    public eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse getUpdataPatientResponse()
+    public eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse getUpdatePatientResponse()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse target = null;
-            target = (eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse)get_store().find_element_user(UPDATAPATIENTRESPONSE$0, 0);
+            eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse target = null;
+            target = (eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse)get_store().find_element_user(UPDATEPATIENTRESPONSE$0, 0);
             if (target == null)
             {
                 return null;
@@ -43,45 +43,45 @@ public class UpdataPatientResponseDocumentImpl extends org.apache.xmlbeans.impl.
     }
     
     /**
-     * Sets the "UpdataPatientResponse" element
+     * Sets the "UpdatePatientResponse" element
      */
-    public void setUpdataPatientResponse(eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse updataPatientResponse)
+    public void setUpdatePatientResponse(eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse updatePatientResponse)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse target = null;
-            target = (eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse)get_store().find_element_user(UPDATAPATIENTRESPONSE$0, 0);
+            eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse target = null;
+            target = (eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse)get_store().find_element_user(UPDATEPATIENTRESPONSE$0, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse)get_store().add_element_user(UPDATAPATIENTRESPONSE$0);
+                target = (eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse)get_store().add_element_user(UPDATEPATIENTRESPONSE$0);
             }
-            target.set(updataPatientResponse);
+            target.set(updatePatientResponse);
         }
     }
     
     /**
-     * Appends and returns a new empty "UpdataPatientResponse" element
+     * Appends and returns a new empty "UpdatePatientResponse" element
      */
-    public eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse addNewUpdataPatientResponse()
+    public eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse addNewUpdatePatientResponse()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse target = null;
-            target = (eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse)get_store().add_element_user(UPDATAPATIENTRESPONSE$0);
+            eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse target = null;
+            target = (eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse)get_store().add_element_user(UPDATEPATIENTRESPONSE$0);
             return target;
         }
     }
     /**
-     * An XML UpdataPatientResponse(@http://aladdin-project.eu/StorageComponent/).
+     * An XML UpdatePatientResponse(@http://aladdin-project.eu/StorageComponent/).
      *
      * This is a complex type.
      */
-    public static class UpdataPatientResponseImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument.UpdataPatientResponse
+    public static class UpdatePatientResponseImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse
     {
         
-        public UpdataPatientResponseImpl(org.apache.xmlbeans.SchemaType sType)
+        public UpdatePatientResponseImpl(org.apache.xmlbeans.SchemaType sType)
         {
             super(sType);
         }

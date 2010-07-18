@@ -1,39 +1,39 @@
 /*
  * An XML document type.
- * Localname: UpdataPatient
+ * Localname: UpdatePatient
  * Namespace: http://aladdin-project.eu/StorageComponent/
- * Java type: eu.aladdin_project.storagecomponent.UpdataPatientDocument
+ * Java type: eu.aladdin_project.storagecomponent.UpdatePatientDocument
  *
  * Automatically generated - do not modify.
  */
 package eu.aladdin_project.storagecomponent.impl;
 /**
- * A document containing one UpdataPatient(@http://aladdin-project.eu/StorageComponent/) element.
+ * A document containing one UpdatePatient(@http://aladdin-project.eu/StorageComponent/) element.
  *
  * This is a complex type.
  */
-public class UpdataPatientDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdataPatientDocument
+public class UpdatePatientDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdatePatientDocument
 {
     
-    public UpdataPatientDocumentImpl(org.apache.xmlbeans.SchemaType sType)
+    public UpdatePatientDocumentImpl(org.apache.xmlbeans.SchemaType sType)
     {
         super(sType);
     }
     
-    private static final javax.xml.namespace.QName UPDATAPATIENT$0 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "UpdataPatient");
+    private static final javax.xml.namespace.QName UPDATEPATIENT$0 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "UpdatePatient");
     
     
     /**
-     * Gets the "UpdataPatient" element
+     * Gets the "UpdatePatient" element
      */
-    public eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient getUpdataPatient()
+    public eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient getUpdatePatient()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient target = null;
-            target = (eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient)get_store().find_element_user(UPDATAPATIENT$0, 0);
+            eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient target = null;
+            target = (eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient)get_store().find_element_user(UPDATEPATIENT$0, 0);
             if (target == null)
             {
                 return null;
@@ -43,45 +43,45 @@ public class UpdataPatientDocumentImpl extends org.apache.xmlbeans.impl.values.X
     }
     
     /**
-     * Sets the "UpdataPatient" element
+     * Sets the "UpdatePatient" element
      */
-    public void setUpdataPatient(eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient updataPatient)
+    public void setUpdatePatient(eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient updatePatient)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient target = null;
-            target = (eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient)get_store().find_element_user(UPDATAPATIENT$0, 0);
+            eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient target = null;
+            target = (eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient)get_store().find_element_user(UPDATEPATIENT$0, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient)get_store().add_element_user(UPDATAPATIENT$0);
+                target = (eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient)get_store().add_element_user(UPDATEPATIENT$0);
             }
-            target.set(updataPatient);
+            target.set(updatePatient);
         }
     }
     
     /**
-     * Appends and returns a new empty "UpdataPatient" element
+     * Appends and returns a new empty "UpdatePatient" element
      */
-    public eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient addNewUpdataPatient()
+    public eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient addNewUpdatePatient()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient target = null;
-            target = (eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient)get_store().add_element_user(UPDATAPATIENT$0);
+            eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient target = null;
+            target = (eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient)get_store().add_element_user(UPDATEPATIENT$0);
             return target;
         }
     }
     /**
-     * An XML UpdataPatient(@http://aladdin-project.eu/StorageComponent/).
+     * An XML UpdatePatient(@http://aladdin-project.eu/StorageComponent/).
      *
      * This is a complex type.
      */
-    public static class UpdataPatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdataPatientDocument.UpdataPatient
+    public static class UpdatePatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.storagecomponent.UpdatePatientDocument.UpdatePatient
     {
         
-        public UpdataPatientImpl(org.apache.xmlbeans.SchemaType sType)
+        public UpdatePatientImpl(org.apache.xmlbeans.SchemaType sType)
         {
             super(sType);
         }

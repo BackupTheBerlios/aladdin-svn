@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s769F45F74475D6B8A7BEA267DA7CDB52").resolveHandle("questionnairequestion0b43type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2951DB2012764CCF247DDAD3EBE7BB42").resolveHandle("questionnairequestion0b43type");
     
     /**
      * Gets the "title" element
@@ -157,6 +157,36 @@ public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
      * Unsets the "condition" attribute
      */
     void unsetCondition();
+    
+    /**
+     * Gets the "deleted" attribute
+     */
+    boolean getDeleted();
+    
+    /**
+     * Gets (as xml) the "deleted" attribute
+     */
+    org.apache.xmlbeans.XmlBoolean xgetDeleted();
+    
+    /**
+     * True if has "deleted" attribute
+     */
+    boolean isSetDeleted();
+    
+    /**
+     * Sets the "deleted" attribute
+     */
+    void setDeleted(boolean deleted);
+    
+    /**
+     * Sets (as xml) the "deleted" attribute
+     */
+    void xsetDeleted(org.apache.xmlbeans.XmlBoolean deleted);
+    
+    /**
+     * Unsets the "deleted" attribute
+     */
+    void unsetDeleted();
     
     /**
      * A factory class with static methods for creating instances
