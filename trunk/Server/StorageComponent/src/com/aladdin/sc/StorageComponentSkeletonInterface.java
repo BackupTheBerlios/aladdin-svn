@@ -15,6 +15,48 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param updateQuestionnaire
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaire
+                (
+                  eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument updateQuestionnaire
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param listOfQuestionnaires
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnaires
+                (
+                  eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument listOfQuestionnaires
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param saveWarning
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarning
+                (
+                  eu.aladdin_project.storagecomponent.SaveWarningDocument saveWarning
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param updateCarer
          */
 
@@ -57,20 +99,6 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param updataPatient
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdataPatientResponseDocument updataPatient
-                (
-                  eu.aladdin_project.storagecomponent.UpdataPatientDocument updataPatient
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
                                     * @param deleteUser
          */
 
@@ -85,41 +113,13 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param updateQuestionnaire
+                                    * @param getCarerAssessments
          */
 
         
-                public eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaire
+                public eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument getCarerAssessments
                 (
-                  eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument updateQuestionnaire
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param listOfQuestionnaires
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnaires
-                (
-                  eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument listOfQuestionnaires
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param saveWarning
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarning
-                (
-                  eu.aladdin_project.storagecomponent.SaveWarningDocument saveWarning
+                  eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument getCarerAssessments
                  )
             ;
         
@@ -337,6 +337,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param updatePatient
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument updatePatient
+                (
+                  eu.aladdin_project.storagecomponent.UpdatePatientDocument updatePatient
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param deleteQuestionnaire
          */
 
@@ -505,6 +519,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getPatientAssessments
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument getPatientAssessments
+                (
+                  eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument getPatientAssessments
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getClinician
          */
 
@@ -610,34 +638,6 @@
                 public eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswers
                 (
                   eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument storeQuestionnaireAnswers
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param getPatientAssessment
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.GetPatientAssessmentResponseDocument getPatientAssessment
-                (
-                  eu.aladdin_project.storagecomponent.GetPatientAssessmentDocument getPatientAssessment
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param getCarerAssessment
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.GetCarerAssessmentResponseDocument getCarerAssessment
-                (
-                  eu.aladdin_project.storagecomponent.GetCarerAssessmentDocument getCarerAssessment
                  )
             ;
         
