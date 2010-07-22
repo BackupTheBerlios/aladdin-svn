@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Aladdin.DataModel;
 using Aladdin.ClientApplication.ViewModels;
 
+
 namespace Aladdin.ClientApplication.Windows
 {
     /// <summary>
@@ -30,6 +31,11 @@ namespace Aladdin.ClientApplication.Windows
             InitializeComponent();
         }
 
+        public void MoveToStartPage()
+        {
+            this.ViewModel.MoveToPage("StartPage");
+        }
+
         private void MoveToPage_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             e.Handled = true;
@@ -44,6 +50,12 @@ namespace Aladdin.ClientApplication.Windows
 
             if (AppCommands.ExitApplicationCommand.Equals(e.Command))
                 this.ViewModel.ExitApplication();
+        }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.Handled = true;
+            e.CanExecute = App.IsUserAuthenticated;
         }
     }
 }

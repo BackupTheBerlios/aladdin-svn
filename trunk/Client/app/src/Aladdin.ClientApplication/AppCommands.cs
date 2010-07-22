@@ -10,6 +10,8 @@ namespace Aladdin.ClientApplication
     {
         public static RoutedUICommand MoveToPageCommand = new RoutedUICommand();
 
+        public static RoutedUICommand LoginCommand = new RoutedUICommand();
+
         public static RoutedUICommand ExitApplicationCommand = new RoutedUICommand();
 
         public static RoutedUICommand QuetionnaireMoveNextCommand = new RoutedUICommand();

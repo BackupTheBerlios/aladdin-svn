@@ -16,10 +16,25 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Style="{StaticResource Heading1}">My tasks for today...</TextBlock>
-        <Button Grid.Row="1" Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="WizardPage">Fill the patient's questionnaire</Button>
-        <Button Grid.Row="2" Style="{StaticResource MediumButton}">Fill the carer's questionnaire</Button>
-        <Button Grid.Row="3" Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MeasureWeightBloodPage">Measure weight and blood pressure</Button>
-        <Button Grid.Row="4" Style="{StaticResource MediumButton}">Measure activity</Button>
-        <Button Grid.Row="5" Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="PlayGame">Play games</Button>
+        <StackPanel Orientation="Horizontal"  Grid.Row="1">
+            <Button Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="WizardPage">Fill the patient's questionnaire</Button>
+            <Image Source="../Resources/Images/tick.ico" Height="48" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="2">
+            <Button Style="{StaticResource MediumButton}">Fill the carer's questionnaire</Button>
+            <Image Source="../Resources/Images/tick.ico" Height="48" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="3">
+        <Button Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MeasureWeightBloodPage">Measure weight and blood pressure</Button>
+            <Image Source="../Resources/Images/clock.png" Height="48" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="4">
+        <Button Style="{StaticResource MediumButton}">Measure activity</Button>
+            <Image Source="../Resources/Images/clock.png" Height="48" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="5">
+        <Button Style="{StaticResource MediumButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="PlayGame">Play games</Button>
+        <Image Source="../Resources/Images/clock.png" Height="48" />
+        </StackPanel>
     </Grid>
 </UserControl>

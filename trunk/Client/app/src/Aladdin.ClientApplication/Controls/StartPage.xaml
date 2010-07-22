@@ -35,7 +35,7 @@
         </Button>
         <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="VideoPage">
             <StackPanel>
-                <TextBlock Margin="0 0 0 10">Aladdin TV</TextBlock>
+                <TextBlock Margin="0 0 0 10">ALADDIN TV</TextBlock>
                 <Image Source="../Resources/Images/TV.png" Height="48" />
             </StackPanel>
         </Button>

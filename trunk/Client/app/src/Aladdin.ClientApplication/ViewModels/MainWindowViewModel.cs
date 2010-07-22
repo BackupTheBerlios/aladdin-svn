@@ -36,6 +36,17 @@ namespace Aladdin.ClientApplication.ViewModels
             }
         }
 
+        LoginPage _LoginPage;
+        LoginPage LoginPage
+        {
+            get
+            {
+                if (_LoginPage == null)
+                    _LoginPage = new LoginPage();
+                return _LoginPage;
+            }
+        }
+
         StartPage _StartPage;
         StartPage StartPage
         {
@@ -113,9 +124,13 @@ namespace Aladdin.ClientApplication.ViewModels
             }
         }
 
+
         public MainWindowViewModel()
         {
-            this.ActivePage = this.StartPage;
+            if (App.IsUserAuthenticated)
+                this.ActivePage = this.StartPage;
+            else
+                this.ActivePage = this.LoginPage;
         }
 
         internal void MoveToPage(string to)
@@ -165,5 +180,6 @@ namespace Aladdin.ClientApplication.ViewModels
         {
             Application.Current.Shutdown();
         }
+
     }
 }

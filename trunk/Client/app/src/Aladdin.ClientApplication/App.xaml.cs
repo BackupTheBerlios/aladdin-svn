@@ -12,5 +12,9 @@ namespace Aladdin.ClientApplication
     /// </summary>
     public partial class App : Application
     {
+
+        public static bool IsUserAuthenticated;
+        public static string CurrentUserID;
+
     }
 }

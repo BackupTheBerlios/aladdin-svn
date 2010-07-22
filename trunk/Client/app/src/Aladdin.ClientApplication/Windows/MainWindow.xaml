@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Style="{StaticResource MainMenu}">
             <Menu.CommandBindings>
-                <CommandBinding Command="{x:Static local:AppCommands.MoveToPageCommand}" Executed="MoveToPage_Executed" />
+                <CommandBinding Command="{x:Static local:AppCommands.MoveToPageCommand}" Executed="MoveToPage_Executed" CanExecute="CommandBinding_CanExecute" />
                 <CommandBinding Command="{x:Static local:AppCommands.ExitApplicationCommand}" Executed="CommandBinding_Executed" />
             </Menu.CommandBindings>
             <MenuItem Header="Home" Command="local:AppCommands.MoveToPageCommand" CommandParameter="StartPage">

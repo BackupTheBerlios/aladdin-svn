@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"?>
-<questionnaire xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0">
-  <question id="1" type="OneAnswer">
+<questionnaire xmlns="http://aladdin-project.eu/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" ID="1A" title="Patient's Daily Questionnaire">
+  <question id="1" type="OneAnswer" condition="0">
     <title>What is the year, season, date, day, and month?&#x0a;Did he/she answer correctly?</title>
     <answers>
       <answer value="1">YES</answer>
