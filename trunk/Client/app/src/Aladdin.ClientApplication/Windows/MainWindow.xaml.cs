@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Aladdin.DataModel;
 using Aladdin.ClientApplication.ViewModels;
+using System.Threading;
 
 
 namespace Aladdin.ClientApplication.Windows
@@ -29,6 +30,34 @@ namespace Aladdin.ClientApplication.Windows
             this.ViewModel = new MainWindowViewModel();
             this.DataContext = this.ViewModel;            
             InitializeComponent();
+            SetLanguageDictionary();
+        }
+
+        private void SetLanguageDictionary()
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (Thread.CurrentThread.CurrentCulture.ToString())
+            {
+                case "en-US":
+                    dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    break;
+                case "de-DE":
+                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);
+                    break;
+                case "it-IT":
+                    dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
+                    break;
+                case "es-ES":
+                    dict.Source = new Uri("..\\Resources\\StringResources.es-ES.xaml", UriKind.Relative);
+                    break;
+                case "el-GR":
+                    dict.Source = new Uri("..\\Resources\\StringResources.el-GR.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    break;
+            }
+            this.Resources.MergedDictionaries.Add(dict);
         }
 
         public void MoveToStartPage()

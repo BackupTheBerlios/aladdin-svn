@@ -21,12 +21,12 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Style="{StaticResource Heading1}" MaxWidth="800" TextWrapping="Wrap" Margin="50,50,113,50" Width="726">Wellcome to ALADDIN</TextBlock>
-        <TextBlock Grid.Row="1" Style="{StaticResource Title}" HorizontalAlignment="Right">Username:</TextBlock>
+        <TextBlock Grid.ColumnSpan="2" Style="{StaticResource Heading1}" MaxWidth="800" TextWrapping="Wrap" Margin="50,50,113,50" Width="726" Text="{DynamicResource Wellcome}"></TextBlock>
+        <TextBlock Grid.Row="1" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="{DynamicResource UserName}"></TextBlock>
         <TextBox Name="txtUsername" Grid.Row="1" Grid.Column="1" MinWidth="350" />
-        <TextBlock Grid.Row="2" Style="{StaticResource Title}" HorizontalAlignment="Right">Password:</TextBlock>
+        <TextBlock Grid.Row="2" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="{DynamicResource Password}"></TextBlock>
         <PasswordBox Name="txtPassword" Grid.Row="2" Grid.Column="1" MinWidth="350" PasswordChar="*"  />
         <TextBlock Name="txtMessage" Grid.Row="3" Style="{StaticResource Title}" HorizontalAlignment="Center" Foreground="Red" Grid.ColumnSpan="2" MinWidth="350"  />
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource LargeButton}" IsDefault="True" Command="local:AppCommands.LoginCommand">Login</Button>
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource LargeButton}" IsDefault="True" Command="local:AppCommands.LoginCommand" Content="{DynamicResource Login}"></Button>
     </Grid>
 </UserControl>
