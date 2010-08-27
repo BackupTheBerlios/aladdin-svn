@@ -1,0 +1,80 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.Administrator;
+		import eu.aladdin_project.xsd.Clinician;
+		
+		String title = Labels.getLabel("login.title");
+		String wintitle = Labels.getLabel("login.window");
+		String lguser = Labels.getLabel("login.field.login");
+		String lgpwd = Labels.getLabel("login.field.password");
+		String lgbtn = Labels.getLabel("login.field.button");
+		page.setTitle(title);
+	
+		public void authenticate(String user, String password){
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			try{
+ 				eu.aladdin_project.xsd.OperationResult result = proxy.auth(user,password);
+ 				//System.out.println("RESULT CODE: "+result.getCode());
+ 				//System.out.println("RESULT DESC: "+result.getDescription());
+ 				//System.out.println("RESULT STATUS: "+result.getStatus());
+ 				
+ 				//Check if getCode() function return error code (0)
+ 				if(result.getCode().equals("0")){
+ 					//TODO Show error code	
+ 				}else{
+ 					//TODO Retrieve user info from SC (there is no data in SC sample to implement this)
+ 				}
+ 				
+ 				session.setAttribute("user",user);
+ 				session.setAttribute("userid",result.getCode());
+ 				
+ 			}catch(java.rmi.RemoteException re){
+ 				re.printStackTrace();
+ 			}finally{
+ 				String page = "/";
+				Executions.getCurrent().sendRedirect(page);
+ 			}
+			
+		}
+		
+		public void alreadyLoggedIn(){
+			if(session.getAttribute("user")!=null){
+				Executions.getCurrent().sendRedirect("/");
+			}
+		}
+	</zscript>
+	<style src="/inc/style.css"/>
+	<separator height="120px"/>
+	<window border="none" sclass="centerwin" width="35%">
+		<image src="/inc/logo.png" />
+	</window>
+	<separator height="30px"/>
+	<window title="${wintitle}" width="65%" sclass="centerwin" onCreate="alreadyLoggedIn()" >
+		<grid>
+			<columns>
+				<column align="right"/>
+				<column align="left"/>
+			</columns>
+			<rows>
+				<row>
+					<label value="${lguser}"/>
+					<textbox id="login_user" value="Admin"/>
+				</row>
+				<row>
+					<label value="${lgpwd}"/>
+					<textbox id="login_password" type="password" value="Admin"/>
+				</row>
+				<row>
+					<label value=""/>
+					<button label="${lgbtn}" onClick="authenticate(login_user.getValue(),login_password.getValue())"/>
+					<!-- <button label="${lgbtn}" onClick="login(login_user.getValue())"/> -->
+				</row>
+			</rows>	
+		</grid>
+	</window>
+</zk>

@@ -1,0 +1,54 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.PatientInfo;
+		import eu.aladdin_project.xsd.SearchCriteria;
+		
+		String title = Labels.getLabel("qm.title");
+		String newq = Labels.getLabel("qm.new");
+		String idstr  = Labels.getLabel("common.id");
+		String version = Labels.getLabel("qm.new.version");
+		String qtitle = Labels.getLabel("qm.new.desc");
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+		
+		page.setTitle(title);
+		
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		eu.aladdin_project.xsd.QuestionnaireInfo[] qlist = null;
+		try{
+			qlist = proxy.listOfQuestionnaires("1");
+			System.out.println("**** List SIZE: "+qlist.length);
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+	</zscript>
+	<window border="none" width="80%" sclass="centerwin">
+	<vbox>
+	<button label="+ ${newq}" href="/qm/form.zul" sclass="newitem" />
+	<grid>
+		<columns>
+			<column label="${idstr }" width="35px" sort="auto"/>
+			<column label="${version }" sort="auto"/>
+			<column label="${qtitle }" sort="auto"/>
+			<column width="80px" align="center" />
+			<column width="80px" align="center" />
+		</columns>
+		<rows>
+		<row forEach="${qlist }">
+			<label value="${each.ID }"/>
+			<label value="${each.version }"/>
+			<label value="${each.title }"/>
+			<label value="${updmsg }" sclass="link"/>
+			<label value="${delmsg }" sclass="link"/>
+		</row>
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+</zk>

@@ -1,0 +1,14 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String title = Labels.getLabel("clinicians.new.title");
+		page.setTitle(title);	
+	</zscript>
+	<window title="${title}" id="clinicform" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.ClinicianControllerWindow">
+		<button label="Save Clinician" onClick="clinicform.createClinician()"/>
+	</window>
+</zk>

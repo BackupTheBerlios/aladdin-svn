@@ -1,0 +1,43 @@
+<zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		
+		if(session.getAttribute("user")==null){
+			Executions.sendRedirect("/login.zul");
+		}
+		String user = (String)session.getAttribute("user");
+		
+		String home = Labels.getLabel("menu.home");
+		String patients = Labels.getLabel("menu.patients");
+		String carers = Labels.getLabel("menu.carers");
+		String clinicians = Labels.getLabel("menu.clinicians");
+		String calendar = Labels.getLabel("menu.calendar");
+		String qm = Labels.getLabel("qm.menu");
+		
+		String hello = Labels.getLabel("menu.hello");
+		String lout = Labels.getLabel("menu.logout");
+		String contact = Labels.getLabel("menu.contact");
+		
+		public void aladdinLogout(){
+			session.removeAttribute("user");
+			Executions.getCurrent().sendRedirect("/login.zul");
+		}
+	</zscript>
+	<style src="/inc/style.css"/>
+	<image src="/inc/logo.png" onClick='Executions.getCurrent().sendRedirect("/")' />
+	<vbox sclass="head-left">
+		<hbox>
+			<label value="${hello} ${user}, " />
+			<label value="${lout}" id="logout" sclass="link" onClick="aladdinLogout()"/>
+		</hbox>
+		<label value="Contact administrator"/>
+	</vbox>
+	<menubar id="menubar" width="100%" sclass="menubar">
+		<menuitem label="${home}" left="20" image="/inc/home2.png" height="32px" sclass="menubar" href="/"/>
+		<menuitem label="${patients}" href="/patients/"/>
+		<menuitem label="${carers}" href="/carers/"/>
+		<menuitem label="${clinicians}" href="/clinicians/"/>
+		<menuitem label="${qm}" href="/qm/"/>
+		<menuitem label="${calendar}" />
+	</menubar>
+</zk>

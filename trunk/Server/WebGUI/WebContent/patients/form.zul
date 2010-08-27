@@ -1,0 +1,25 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String title = Labels.getLabel("patients.title.new");
+		page.setTitle(title);	
+		
+		public void openDialog(){
+			try{
+				Window win = (Window)Executions.createComponents("/carers/list.zul", page.getFellow("patientform"), null);
+				win.setClosable(true);
+				win.doModal();
+			}catch(InterruptedException ie){
+			
+			}
+		}
+		
+	</zscript>
+	<window title="${title}" id="patientform" sclass="centerwin" use="eu.aladdin_project.controllers.PattientControllerWindow" width="70%">
+	<button label="Save Patient" onClick="patientform.createPatient()"/>
+	</window>
+</zk>

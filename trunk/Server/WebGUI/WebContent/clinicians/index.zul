@@ -1,0 +1,55 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.ClinicianInfo;
+		
+		String title = Labels.getLabel("clinicians.title");
+		page.setTitle(title);
+		String newprof = Labels.getLabel("clinicians.new");
+		String idstr  = Labels.getLabel("common.id");
+		String surnlbl= Labels.getLabel("common.sname");
+		String namelbl= Labels.getLabel("common.name");
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+		
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		ClinicianInfo[] plist = null;
+		Session ses = Sessions.getCurrent();
+		String id = (String)ses.getAttribute("userid");
+		try{
+			plist = proxy.listOfClinicians(null,id);
+			System.out.println("**** List SIZE: "+plist.length);
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+	</zscript>
+	<window border="none" width="80%" sclass="centerwin" id="clinics" use="eu.aladdin_project.controllers.IndexCliniciansWindow">
+	<vbox>
+	<button label="+ ${newprof}" href="/clinicians/form.zul" sclass="newitem" />
+	<grid>
+		<columns>
+			<column label="${idstr }" width="35px" sort="auto"/>
+			<column label="${surnlbl }" sort="auto"/>
+			<column label="${namelbl }" sort="auto"/>
+			<column width="80px" align="center" />
+			<column width="80px" align="center" />
+		</columns>
+		<rows>
+			<row forEach="${plist }" id="${each.ID }">
+				<label value="${each.ID }"/>
+				<label value="${each.surname }"/>
+				<label value="${each.name }"/>
+				<label value="${updmsg }" sclass="link" onClick="clinics.updateClinician(self.getParent().getId())"/>
+				<label value="${delmsg }" sclass="link" onClick="clinics.deleteClinicianMsg(self.getParent().getId())"/>
+			</row>
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>

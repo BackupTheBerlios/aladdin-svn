@@ -1,0 +1,55 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.CarerInfo;
+		
+		String title = Labels.getLabel("carers.title");
+		page.setTitle(title);
+		String newprof = Labels.getLabel("carers.new");
+		String idstr  = Labels.getLabel("common.id");
+		String surnlbl= Labels.getLabel("common.sname");
+		String namelbl= Labels.getLabel("common.name");
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+		
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		CarerInfo[] plist = null;
+		Session ses = Sessions.getCurrent();
+		String id = (String)ses.getAttribute("userid");
+		try{
+			plist = proxy.listOfCarers(null,id);
+			System.out.println("**** List SIZE: "+plist.length);
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+	</zscript>
+	<window id="carers" border="none" width="80%" sclass="centerwin" use="eu.aladdin_project.controllers.IndexCarersWindow">
+	<vbox>
+	<button label="+ ${newprof}" href="/carers/form.zul" sclass="newitem" />
+	<grid>
+		<columns>
+			<column label="${idstr }" width="35px" sort="auto"/>
+			<column label="${surnlbl }" sort="auto"/>
+			<column label="${namelbl }" sort="auto"/>
+			<column width="80px" align="center" />
+			<column width="80px" align="center" />
+		</columns>
+		<rows>
+			<row forEach="${plist }" id="${each.ID }">
+				<label value="${each.ID }"/>
+				<label value="${each.surname }"/>
+				<label value="${each.name }"/>
+				<label value="${updmsg }" sclass="link" onClick="carers.updateCarer(self.getParent().getId())"/>
+				<label value="${delmsg }" sclass="link" onClick="carers.deleteCarerMsg(self.getParent().getId())"/>
+			</row>
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>

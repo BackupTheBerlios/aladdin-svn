@@ -1,0 +1,340 @@
+package eu.aladdin_project.qm;
+
+import java.util.ArrayList;
+
+import org.apache.axis.types.UnsignedByte;
+import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Column;
+import org.zkoss.zul.Columns;
+import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Row;
+import org.zkoss.zul.Rows;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
+
+import eu.aladdin_project.xsd.QuestionnaireQuestion;
+import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
+
+public class QuestionWindow extends Window{
+	
+	private static final long serialVersionUID = 4976983401212316183L;
+	private QuestionnaireFormWindow pform = null;
+	private String ID = null;
+	private String type = null;
+	private ArrayList<QuestionnaireQuestionAnswer> answers = new ArrayList<QuestionnaireQuestionAnswer>();
+
+	/**
+	 * Constructor with mandatory reference to "parent" Window. This reference will be used to send information about the question
+	 * 
+	 * @param QUestionnaireFormWindow pform parent Window
+	 * @param String ID question id
+	 * @param String type question type 
+	 */
+	public QuestionWindow(QuestionnaireFormWindow pform, String ID, String type){
+		this.pform = pform;
+		this.ID = ID;
+		this.type = type;
+		this.setTitle(Labels.getLabel("qm.ans.title.new"));
+		this.setClosable(true);
+		this.setWidth("650px");
+		this.addMainQuestionGrid();
+		if(this.type.equals(QuestionnaireFormWindow.ONE_ANSWER_QUESTION_TYPE) || this.type.equals(QuestionnaireFormWindow.MANY_ANSWERS_QUESTION_TYPE)){
+			this.addAnswersRow();
+		}else{
+			this.addFreeAnswerRow();
+		}
+	}
+	
+	public QuestionWindow(QuestionnaireFormWindow pform, QuestionnaireQuestion question){
+		this.pform = pform;
+		this.ID = question.getId();
+		this.type = question.getType();
+		
+		QuestionnaireQuestionAnswer[] qans = question.getAnswers();
+		for(int i = 0; i<qans.length; i++){
+			this.answers.add(qans[i]);
+		}
+		
+		this.setTitle(Labels.getLabel("qm.ans.title.update"));
+		this.setClosable(true);
+		this.setWidth("650px");
+		this.addMainQuestionGrid();
+		this.setMainGridFields(question);
+		if(this.type.equals(QuestionnaireFormWindow.ONE_ANSWER_QUESTION_TYPE) || this.type.equals(QuestionnaireFormWindow.MANY_ANSWERS_QUESTION_TYPE)){
+			this.addAnswersRow();
+			this.setAnswersRows();
+		}else{
+			this.addFreeAnswerRow();
+		}
+	}
+	
+	public void saveQuestion(){
+		QuestionnaireQuestion q = new QuestionnaireQuestion();
+		q.setType(this.type);
+		q.setId(this.ID);
+		
+		String title = ((Textbox)getFellow("question_text")).getValue();
+		q.setTitle(title);
+		
+		if(this.type.equals(QuestionnaireFormWindow.ONE_ANSWER_QUESTION_TYPE) || this.type.equals(QuestionnaireFormWindow.MANY_ANSWERS_QUESTION_TYPE)){
+			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
+			for(int i = 0; i<this.answers.size(); i++){
+				answersvec[i]=this.answers.get(i);
+			}
+			q.setAnswers(answersvec);
+		}else{
+			q.setAnswers(null);
+		}
+		System.out.println("Added");
+		this.pform.addQuestion(q);
+		this.setVisible(false);
+	}
+	
+	/**
+	 * This method is called when users submits a new answer.
+	 * Submitted answer is stored on the ArrayList and appended to the main grid.
+	 * 
+	 */
+	public void apendAnswer(){
+		Textbox valuebox = (Textbox)getFellow("ans_val");
+		String val = valuebox.getValue();
+		
+		Textbox txtbox = (Textbox)getFellow("ans_text");
+		String text = txtbox.getValue();
+		
+		Row row = new Row();
+		String rowid = val+"-rowform";
+		row.setId(rowid);
+		Label lab1 = new Label();
+		lab1.setValue(val);
+		row.appendChild(lab1);
+		
+		Label lab2 = new Label();
+		lab2.setValue(text);
+		row.appendChild(lab2);
+		
+		Button btn = new Button();
+		btn.setLabel("-");
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				Component comp = arg0.getTarget();
+				comp = comp.getParent();
+				System.out.println(comp.getId());
+				removeRow(comp);
+				
+			}
+		});
+		row.appendChild(btn);
+		
+		Rows rows = (Rows)getFellow("rows");
+		Row rowRef = (Row)getFellow("rowform");
+		rows.removeChild(rowRef);
+		rows.appendChild(row);
+		rows.appendChild(rowRef);
+		
+		valuebox.setValue("");
+		txtbox.setValue("");
+		//rows.beforeChildAdded(row, rowRef);
+		QuestionnaireQuestionAnswer qqanswer = new QuestionnaireQuestionAnswer();
+		qqanswer.set_value(text);
+		qqanswer.setValue(new UnsignedByte(val));
+		this.answers.add(qqanswer);
+	}
+	
+	/**
+	 * This method removes an answer from the grid and the ArrayList
+	 * 
+	 * @param comp Component to remove. It is a Row
+	 */
+	public void removeRow(Component comp){
+		Rows rows = (Rows)getFellow("rows");
+		rows.removeChild(comp);
+		System.out.println("SIZE before: "+this.answers.size());
+		this.removeAnswer(comp.getId().substring(0, comp.getId().length()-8));
+		System.out.println("SIZE after: "+this.answers.size());
+	}
+	
+	/**
+	 * Helper method to remove an answer from the ArrayList
+	 * 
+	 * @param ID String which can be parsed to an UnsignedByte
+	 */
+	private void removeAnswer(String ID){
+		UnsignedByte idbyte = new UnsignedByte(ID);
+		for(int i=0;i<this.answers.size(); i++){
+			QuestionnaireQuestionAnswer elem = this.answers.get(i);
+			if(elem.getValue().equals(idbyte)){
+				this.answers.remove(i);
+			}
+		}
+	}
+	
+	/**
+	 * This method builds up a one answer form
+	 * 
+	 */
+	private void addMainQuestionGrid(){
+		Grid grid = new Grid();
+			Rows rows = new Rows();
+			rows.setId("answersrows");
+			
+			Row row0 = new Row();
+				Label lab0 = new Label();
+				lab0.setValue(Labels.getLabel("qm.ans.fields.id"));
+				row0.appendChild(lab0);
+	
+				Textbox tbox0 = new Textbox();
+				tbox0.setId("question_id");
+				tbox0.setValue(this.ID);
+				tbox0.setReadonly(true);
+				row0.appendChild(tbox0);
+			rows.appendChild(row0);
+			Row row01 = new Row();
+				Label lab01 = new Label();
+				lab01.setValue(Labels.getLabel("qm.ans.fields.type"));
+				row01.appendChild(lab01);
+	
+				Textbox tbox01 = new Textbox();
+				tbox01.setId("question_type");
+				tbox01.setValue(this.type);
+				tbox01.setReadonly(true);
+				row01.appendChild(tbox01);
+			rows.appendChild(row01);
+				Row row1 = new Row();
+					Label lab1 = new Label();
+					lab1.setValue(Labels.getLabel("qm.ans.fields.text"));
+					row1.appendChild(lab1);
+		
+					Textbox tbox1 = new Textbox();
+					tbox1.setId("question_text");
+					row1.appendChild(tbox1);
+				rows.appendChild(row1);
+				
+			grid.appendChild(rows);
+			
+		this.appendChild(grid);
+		Button btn = new Button();
+		btn.setLabel(Labels.getLabel("qm.ans.fields.addans"));
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				saveQuestion();
+			}
+		});
+		this.appendChild(btn);
+
+	}
+	
+	private void setMainGridFields(QuestionnaireQuestion q){
+		((Textbox)getFellow("question_text")).setValue(q.getTitle());
+	}
+	
+	private void addFreeAnswerRow(){
+		Rows rows = (Rows)getFellow("answersrows");
+		Row row2 = new Row();
+		
+		Label lab2 = new Label();
+		lab2.setValue(Labels.getLabel("qm.ans.fields.grid.answers"));
+		row2.appendChild(lab2);
+		
+		Label lab3 = new Label();
+		lab3.setValue(Labels.getLabel("qm.ans.fields.grid.free"));
+		row2.appendChild(lab3);
+
+		rows.appendChild(row2);
+	}
+	
+	private void addAnswersRow(){
+		Rows rows = (Rows)getFellow("answersrows");
+		Row row2 = new Row();
+		
+		Label lab2 = new Label();
+		lab2.setValue(Labels.getLabel("qm.ans.fields.grid.answers"));
+		row2.appendChild(lab2);
+
+		Grid answ = new Grid();
+		Columns columns2 = new Columns();
+		Column cola1 = new Column();
+		cola1.setLabel(Labels.getLabel("qm.ans.fields.grid.value"));
+		Column cola2 = new Column();
+		cola2.setLabel(Labels.getLabel("qm.ans.fields.grid.text"));
+		Column cola3 = new Column();
+		
+		columns2.appendChild(cola1);
+		columns2.appendChild(cola2);
+		columns2.appendChild(cola3);
+		answ.appendChild(columns2);
+		
+		Rows arows = new Rows();
+		arows.setId("rows");
+		Row rowa1 = new Row();
+		rowa1.setId("rowform");
+		Textbox tboxans1 = new Textbox();
+		tboxans1.setId("ans_val");
+		Textbox tboxans2 = new Textbox();
+		tboxans2.setId("ans_text");
+		Button butonans1 = new Button();
+		butonans1.setLabel("+");
+		butonans1.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				apendAnswer();
+				
+			}
+		});
+
+		rowa1.appendChild(tboxans1);
+		rowa1.appendChild(tboxans2);
+		rowa1.appendChild(butonans1);
+		arows.appendChild(rowa1);
+		
+		answ.appendChild(arows);
+		row2.appendChild(answ);
+		
+		rows.appendChild(row2);
+	}
+	
+	private void setAnswersRows(){
+		for(int i = 0; i<this.answers.size(); i++){
+			QuestionnaireQuestionAnswer answer = this.answers.get(i);
+			Row row = new Row();
+			String rowid = answer.getValue().toString()+"-rowform";
+			row.setId(rowid);
+			Label lab1 = new Label();
+			lab1.setValue(answer.getValue().toString());
+			row.appendChild(lab1);
+			
+			Label lab2 = new Label();
+			lab2.setValue(answer.get_value());
+			row.appendChild(lab2);
+			
+			Button btn = new Button();
+			btn.setLabel("-");
+			btn.addEventListener("onClick", new EventListener() {
+				
+				public void onEvent(Event arg0) throws Exception {
+					Component comp = arg0.getTarget();
+					comp = comp.getParent();
+					System.out.println(comp.getId());
+					removeRow(comp);
+					
+				}
+			});
+			row.appendChild(btn);
+			
+			Rows rows = (Rows)getFellow("rows");
+			Row rowRef = (Row)getFellow("rowform");
+			rows.removeChild(rowRef);
+			rows.appendChild(row);
+			rows.appendChild(rowRef);
+		}
+		
+	}
+	
+}

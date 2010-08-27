@@ -1,0 +1,70 @@
+<?page id="pageqm" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String title = Labels.getLabel("qm.new");
+		String btnyesno = Labels.getLabel("qm.new.yesno");
+		String btnmany = Labels.getLabel("qm.new.manyansw");
+		String btnfree = Labels.getLabel("qm.new.open");
+		
+		String questid = Labels.getLabel("qm.new.id");
+		String versionl = Labels.getLabel("qm.new.version");
+		String descl = Labels.getLabel("qm.new.desc");
+		String questionsl = Labels.getLabel("qm.new.questions");
+		String idl = Labels.getLabel("qm.new.questions.id");
+		String typel = Labels.getLabel("qm.new.questions.type");
+		String textl = Labels.getLabel("qm.new.questions.text");
+		String ansl = Labels.getLabel("qm.new.questions.answers");
+		
+		page.setTitle(title);
+		
+	</zscript>
+	<window id="qm_sketch" sclass="centerwin" width="70%" title="${title}" border="normal" use="eu.aladdin_project.qm.QuestionnaireFormWindow">
+		<grid>
+			<columns>
+				<column align="right"/>
+				<column align="left"/>
+			</columns>
+			<rows>
+				<row>
+					<label value="${questid}"/>
+					<textbox readonly="true" value="ID-GENERATED"/>
+				</row>
+				<row>
+					<label value="${versionl}"/>
+					<textbox/>
+				</row>
+				<row>
+					<label value="${descl}"/>
+					<textbox id="qtitle"/>
+				</row>
+				<row>
+					<label value="${questionsl}"/>
+					<grid>
+						<columns>
+							<column label="${idl}" width="30px" sort="auto"/>
+							<column label="${typel}" width="80px"/>
+							<column label="${textl}"/>
+							<column label="#${ansl}" width="80px"/>
+							<column  width="30px"/>
+						</columns>
+						<rows id="rows_questions">
+						</rows>
+					</grid>
+				</row>
+				<row>
+					<label value=""/>
+					<hbox>
+						<button label="${btnyesno}" onClick="qm_sketch.showOneAnswerWindow()"/>
+						<button label="${btnmany}" onClick="qm_sketch.showManyAnswersWindow()"/>
+						<button label="${btnfree}" onClick="qm_sketch.showFreeTextWindow()"/>	
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<button label="Save Questionnaire" onClick="qm_sketch.saveQuestionnaire()"/>
+	</window>
+</zk>

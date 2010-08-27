@@ -1,0 +1,21 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String title = Labels.getLabel("home.title");
+		page.setTitle(title);
+		String newprof = Labels.getLabel("home.newprofile");
+	</zscript>
+	<borderlayout>
+		<north size="100%" splittable="false" collapsible="false" border="0">
+			<button label="+ ${newprof}" href="/patients/new.zul" sclass="newitem" />
+		</north>
+		<center border="0">
+		
+		</center>
+	</borderlayout>
+	<include src="/inc/footer.zul"/>
+</zk>
