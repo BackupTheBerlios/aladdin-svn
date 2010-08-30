@@ -5,6 +5,15 @@
 .left{
 	text-align:left;
 	}
+.right{
+	text-align:right;
+	}
+.bold{
+	font-weight: bold;
+	}
+.listseparation{
+	padding-top: 10px;
+	}
 .newitem{
 	margin-top:20px;
 	margin-bottom:10px;

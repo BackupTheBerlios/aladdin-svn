@@ -65,6 +65,10 @@ public class IndexCarersWindow extends Window{
 		Executions.sendRedirect("/carers/update.zul?carerid="+id);
 	}
 	
+	public void detailsCarer(String id){
+		Executions.sendRedirect("/carers/details.zul?carerid="+id);
+	}
+	
 	public class ConfirmDeleteCarer extends Window{
 		
 		public ConfirmDeleteCarer(String id){

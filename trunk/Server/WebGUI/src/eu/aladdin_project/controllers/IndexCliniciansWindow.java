@@ -66,6 +66,10 @@ public class IndexCliniciansWindow extends Window{
 		Executions.sendRedirect("/clinicians/update.zul?clinid="+id);
 	}
 	
+	public void detailsClinician(String id){
+		Executions.sendRedirect("/clinicians/details.zul?clinid="+id);
+	}
+	
 	public class ConfirmDeleteClinician extends Window{
 		
 		public ConfirmDeleteClinician(String id){

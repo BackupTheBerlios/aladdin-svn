@@ -65,6 +65,10 @@ public class IndexPatientsWindow extends Window {
 		Executions.sendRedirect("/patients/update.zul?patid="+id);
 	}
 	
+	public void detailsPatient(String id){
+		Executions.sendRedirect("/patients/details.zul?patid="+id);
+	}
+	
 	public class ConfirmDeletePatient extends Window{
 		
 		public ConfirmDeletePatient(String id){

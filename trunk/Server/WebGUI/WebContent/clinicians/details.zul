@@ -1,0 +1,42 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailClinicianController">
+	<label value="Actions"/>
+	<grid>
+		<rows>
+			<row align="center" id="actionrow">
+			</row>
+		</rows>
+	</grid>
+	<separator height="10px"/>
+	<label value="Data"/>
+	<listbox id="datarows">
+		<listhead>
+			<listheader width="200px"/>
+			<listheader/>
+		</listhead>
+	</listbox>
+	</window>
+		<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.Clinician;
+		
+		String title = Labels.getLabel("clinicians.update.title");
+		page.setTitle(title);	
+		
+		String clinid = (String)Executions.getCurrent().getParameter("clinid");
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		Session ses = Sessions.getCurrent();
+		String userid = (String)ses.getAttribute("userid");
+		try{
+			Clinician clinicobj = proxy.getClinician(clinid,userid);
+			detailswin.setControllerData(clinicobj.getID(),clinicobj.getPersonData(),null,null,null);
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+	</zscript>
+</zk>

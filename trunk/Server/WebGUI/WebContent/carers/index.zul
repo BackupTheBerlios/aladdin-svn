@@ -38,12 +38,14 @@
 			<column label="${namelbl }" sort="auto"/>
 			<column width="80px" align="center" />
 			<column width="80px" align="center" />
+			<column width="80px" align="center" />
 		</columns>
 		<rows>
 			<row forEach="${plist }" id="${each.ID }">
 				<label value="${each.ID }"/>
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
+				<label value="Details" sclass="link" onClick="carers.detailsCarer(self.getParent().getId())"/>
 				<label value="${updmsg }" sclass="link" onClick="carers.updateCarer(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="carers.deleteCarerMsg(self.getParent().getId())"/>
 			</row>
