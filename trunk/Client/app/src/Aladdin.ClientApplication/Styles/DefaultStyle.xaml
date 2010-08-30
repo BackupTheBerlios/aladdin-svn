@@ -9,6 +9,7 @@
         <ResourceDictionary Source="DefaultStyle/ComboBoxItem.xaml"/>
         <ResourceDictionary Source="DefaultStyle/ComboBox.xaml"/>
         <ResourceDictionary Source="DefaultStyle/PasswordBox.xaml"/>
+        <ResourceDictionary Source="WhistlerBlue.xaml"/>        
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

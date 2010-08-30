@@ -5,4 +5,7 @@
     <system:String x:Key="Password">Contraseña</system:String>
     <system:String x:Key="Wellcome">Bienvenido a ALADDIN</system:String>
     <system:String x:Key="Login">Entra</system:String>
+    <system:String x:Key="Save">Save</system:String>
+    <system:String x:Key="Server">Server</system:String>
+    <system:String x:Key="Language">Language</system:String>
 </ResourceDictionary>
