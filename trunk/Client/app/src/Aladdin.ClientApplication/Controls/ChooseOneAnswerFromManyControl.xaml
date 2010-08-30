@@ -46,7 +46,7 @@
             </Setter>-->
         </Style>
         </UserControl.Resources>
-    <StackPanel x:Name="AnswersStackPanel">
+    <StackPanel x:Name="AnswersStackPanel" Margin="0,10,0,0">
         <!--<RadioButton MinWidth="100" Content="Answer 1" />
         <RadioButton MinWidth="100" Content="Answer 2" />
         <RadioButton MinWidth="100" Content="Answer 3" />

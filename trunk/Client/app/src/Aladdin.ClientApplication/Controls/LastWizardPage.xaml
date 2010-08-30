@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:Aladdin.ClientApplication"
     mc:Ignorable="d" 
-    d:DesignHeight="300" d:DesignWidth="600">
+    d:DesignHeight="395" d:DesignWidth="598">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
