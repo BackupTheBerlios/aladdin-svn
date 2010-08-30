@@ -34,4 +34,9 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{x:Null}" x:Key="NormalText">
+        <Setter Property="Foreground" Value="#000" />
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+
 </ResourceDictionary>

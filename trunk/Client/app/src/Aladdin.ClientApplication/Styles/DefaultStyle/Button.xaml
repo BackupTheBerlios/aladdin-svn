@@ -1,6 +1,67 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="{x:Type Button}" BasedOn="{x:Null}" x:Key="LargeButton">
+
+    <Style TargetType="{x:Type Button}" BasedOn="{x:Null}" x:Key="NormalButton">
+        <Setter Property="Template" Value="{DynamicResource ButtonTemplate}" />
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxWidth" Value="300"/>
+        <Setter Property="MinHeight" Value="100"/>
+        <Setter Property="MaxHeight" Value="100"/>
+        <Setter Property="FontSize" Value="48"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="#FF042271"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="PreviewMouseDown">
+                <SoundPlayerAction Source="/Aladdin.ClientApplication;component/click.wav" />
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="LargeButton">
+        <Setter Property="MinWidth" Value="400"/>
+        <Setter Property="MaxWidth" Value="400"/>
+        <Setter Property="MinHeight" Value="250"/>
+        <Setter Property="MaxHeight" Value="250"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="LoginButton">
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxWidth" Value="300"/>
+        <Setter Property="MinHeight" Value="130"/>
+        <Setter Property="MaxHeight" Value="130"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="130"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="TaskButton">
+        <Setter Property="MinWidth" Value="600"/>
+        <Setter Property="MaxWidth" Value="600"/>
+        <Setter Property="MinHeight" Value="60"/>
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="WizardButton">
+        <Setter Property="MinWidth" Value="200"/>
+        <Setter Property="MaxWidth" Value="200"/>
+        <Setter Property="MinHeight" Value="60"/>
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="LargeYesButton">
+        <Setter Property="Foreground" Value="Green"/>
+        <Setter Property="MinHeight" Value="150"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="LargeNoButton">
+        <Setter Property="Foreground" Value="Red"/>
+        <Setter Property="MinHeight" Value="150"/>
+    </Style>
+
+    <!--<Style TargetType="{x:Type Button}" BasedOn="{x:Null}" x:Key="LargeButton">
         <Setter Property="Margin" Value="10"/>
         <Setter Property="MinWidth" Value="400"/>
         <Setter Property="MaxWidth" Value="600"/>
@@ -15,7 +76,7 @@
             <EventTrigger RoutedEvent="PreviewMouseDown">
                 <SoundPlayerAction Source="/Aladdin.ClientApplication;component/click.wav" />
             </EventTrigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
         <!--<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -28,28 +89,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>-->
-    </Style>
+    <!--</Style>-->
 
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource LargeButton}" x:Key="LargeYesButton">
-        <Setter Property="Foreground" Value="Green"/>
-        <Setter Property="MinHeight" Value="150"/>
-        <Style.Triggers>
-            <EventTrigger RoutedEvent="PreviewMouseDown">
-                <SoundPlayerAction Source="/Aladdin.ClientApplication;component/click.wav" />
-            </EventTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource LargeButton}" x:Key="LargeNoButton">
-        <Setter Property="Foreground" Value="Red"/>
-        <Setter Property="MinHeight" Value="150"/>
-        <Style.Triggers>
-            <EventTrigger RoutedEvent="PreviewMouseDown">
-                <SoundPlayerAction Source="/Aladdin.ClientApplication;component/click.wav" />
-            </EventTrigger>
-        </Style.Triggers>
-    </Style>
-
+    <!--
     <Style TargetType="{x:Type Button}" BasedOn="{x:Null}" x:Key="MediumButton">
         <Setter Property="Margin" Value="10"/>
         <Setter Property="MinWidth" Value="600"/>
@@ -67,7 +109,9 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-
+    -->
+    
+    <!--
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MediumButton}" x:Key="QuestionnaireButton">
         <Setter Property="MinWidth" Value="200"/>
         <Style.Triggers>
@@ -76,5 +120,6 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+    -->
 
 </ResourceDictionary>
