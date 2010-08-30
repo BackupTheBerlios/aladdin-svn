@@ -21,17 +21,17 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" MaxWidth="800" TextWrapping="Wrap" Margin="20,20,20,0" Width="726" Style="{StaticResource Heading1}">Welcome to</TextBlock>
-        <TextBlock Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource NormalText}" Margin="20,25,20,10">Username</TextBlock>
+        <TextBlock Grid.ColumnSpan="2" MaxWidth="800" TextWrapping="Wrap" Margin="20,20,20,0" Width="726" Style="{StaticResource Heading1}" Text="{DynamicResource Wellcome}"></TextBlock>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource NormalText}" Margin="20,25,20,10" Text="{DynamicResource UserName}"></TextBlock>
         <TextBox Name="txtUsername" Grid.Row="2" Grid.Column="1" MinWidth="350" Margin="20,20,20,10" Width="300" HorizontalAlignment="Left" />
-        <TextBlock Grid.Row="3" Style="{StaticResource NormalText}" HorizontalAlignment="Right"  Margin="20,10,20,10">Password</TextBlock>
+        <TextBlock Grid.Row="3" Style="{StaticResource NormalText}" HorizontalAlignment="Right"  Margin="20,10,20,10" Text="{DynamicResource Password}"></TextBlock>
         <PasswordBox Name="txtPassword" Grid.Row="3" Grid.Column="1" MinWidth="350" PasswordChar="*" Margin="20,10,20,10" Width="300" HorizontalAlignment="Left" />
         <TextBlock Name="txtMessage" Grid.Row="4" Style="{StaticResource NormalText}" HorizontalAlignment="Center" Grid.ColumnSpan="2" MinWidth="350" Margin="20,10,20,10" />
         <Image Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,10" Name="image1" Stretch="Uniform" VerticalAlignment="Center" Source="/Aladdin.ClientApplication;component/Resources/Images/logo%20aladdin%20800x217%20white.png" Grid.ColumnSpan="2" Width="700" />
         <Button Grid.Row="5" Grid.ColumnSpan="2" IsDefault="True" Command="local:AppCommands.LoginCommand" Grid.RowSpan="1" Margin="20" Style="{StaticResource LoginButton}">
             <StackPanel Orientation="Horizontal">
                 <Image Height="96" Source="/Aladdin.ClientApplication;component/Resources/Images/icon_login.png" />
-                <TextBlock Margin="0" VerticalAlignment="Center">Login</TextBlock>
+                <TextBlock Margin="0" VerticalAlignment="Center" Text="{DynamicResource Login}"></TextBlock>
             </StackPanel>
         </Button>
     </Grid>
