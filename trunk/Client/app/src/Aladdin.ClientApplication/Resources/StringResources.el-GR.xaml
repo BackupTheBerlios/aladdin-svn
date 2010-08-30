@@ -5,4 +5,5 @@
   <system:String x:Key="Password">Κωδικός χρήστη</system:String>
   <system:String x:Key="Wellcome">Καλωσήρθατε στο ALADDIN</system:String>
   <system:String x:Key="Login">Εισαγωγή</system:String>
+  <system:String x:Key="Save">Αποθήκευση</system:String>
 </ResourceDictionary>

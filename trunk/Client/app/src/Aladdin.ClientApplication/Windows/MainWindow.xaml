@@ -22,12 +22,18 @@
         <Menu Grid.Row="0" Style="{StaticResource MainMenu}">
             <Menu.CommandBindings>
                 <CommandBinding Command="{x:Static local:AppCommands.MoveToPageCommand}" Executed="MoveToPage_Executed" CanExecute="CommandBinding_CanExecute" />
+                <CommandBinding Command="{x:Static local:AppCommands.MoveToPageWithoutAuthenticationCommand}" Executed="MoveToPageWithoutAuthenticationCommand" />
                 <CommandBinding Command="{x:Static local:AppCommands.ExitApplicationCommand}" Executed="CommandBinding_Executed" />
             </Menu.CommandBindings>
             <MenuItem Header="Home" Command="local:AppCommands.MoveToPageCommand" CommandParameter="StartPage">
                 <MenuItem.Icon>
                     <Image Source="..\Resources\Images\HomeHS.png" Height="36"/>
                 </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Options" Command="local:AppCommands.MoveToPageWithoutAuthenticationCommand" CommandParameter="OptionsPage">
+                <!--<MenuItem.Icon>
+                    <Image Source="..\Resources\Images\HomeHS.png" Height="36"/>
+                </MenuItem.Icon>-->
             </MenuItem>
             <MenuItem Header="Exit" x:Name="ExitMenu" Command="local:AppCommands.ExitApplicationCommand" />
         </Menu>

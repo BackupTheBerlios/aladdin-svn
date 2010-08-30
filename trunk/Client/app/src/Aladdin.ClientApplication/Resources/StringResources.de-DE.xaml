@@ -5,4 +5,5 @@
     <system:String x:Key="Password">Passwort</system:String>
     <system:String x:Key="Wellcome">Willkommen zu ALADDIN</system:String>
     <system:String x:Key="Login">Anmelden</system:String>
+    <system:String x:Key="Save">Save</system:String>
 </ResourceDictionary>

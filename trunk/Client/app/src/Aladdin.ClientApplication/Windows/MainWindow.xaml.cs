@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using Aladdin.DataModel;
 using Aladdin.ClientApplication.ViewModels;
 using System.Threading;
+using System.Configuration;
+using Aladdin.ClientApplication.Properties;
 
 
 namespace Aladdin.ClientApplication.Windows
@@ -36,22 +38,24 @@ namespace Aladdin.ClientApplication.Windows
         private void SetLanguageDictionary()
         {
             ResourceDictionary dict = new ResourceDictionary();
-            switch (Thread.CurrentThread.CurrentCulture.ToString())
+            App.DefaultLanguage = ConfigurationManager.AppSettings["DefaultLanguage"];
+            App.ServerAddress = Settings.Default.Aladdin_ClientApplication_aladdinService_StorageComponent;
+            switch (App.DefaultLanguage)
             {
-                case "en-US":
+                case "1":
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
                     break;
-                case "de-DE":
-                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);
-                    break;
-                case "it-IT":
-                    dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
-                    break;
-                case "es-ES":
+                case "2":
                     dict.Source = new Uri("..\\Resources\\StringResources.es-ES.xaml", UriKind.Relative);
                     break;
-                case "el-GR":
+                case "3":
                     dict.Source = new Uri("..\\Resources\\StringResources.el-GR.xaml", UriKind.Relative);
+                    break;
+                case "4":
+                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);
+                    break;
+                case "5":
+                    dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
                     break;
                 default:
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
@@ -66,6 +70,14 @@ namespace Aladdin.ClientApplication.Windows
         }
 
         private void MoveToPage_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            e.Handled = true;
+
+            if (e.Parameter is string)
+                this.ViewModel.MoveToPage(e.Parameter as string);
+        }
+
+        private void MoveToPageWithoutAuthenticationCommand(object sender, ExecutedRoutedEventArgs e)
         {
             e.Handled = true;
 

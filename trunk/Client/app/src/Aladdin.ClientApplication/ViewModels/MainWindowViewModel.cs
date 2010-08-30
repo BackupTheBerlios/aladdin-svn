@@ -22,6 +22,8 @@ namespace Aladdin.ClientApplication.ViewModels
 
         #endregion
 
+ 
+
         object _ActivePage;
         public object ActivePage
         {
@@ -124,6 +126,17 @@ namespace Aladdin.ClientApplication.ViewModels
             }
         }
 
+        OptionsPage _OptionsPage;
+        OptionsPage OptionsPage
+        {
+            get
+            {
+                if (_OptionsPage == null)
+                    _OptionsPage = new OptionsPage();
+                return _OptionsPage;
+            }
+        }
+
 
         public MainWindowViewModel()
         {
@@ -143,6 +156,9 @@ namespace Aladdin.ClientApplication.ViewModels
                 {
                     case "MyTasksPage":
                         page = this.MyTasksPage;
+                        break;
+                    case "OptionsPage":
+                        page = this.OptionsPage;
                         break;
                     case "WizardPage":
                         page = this.WizardPage;

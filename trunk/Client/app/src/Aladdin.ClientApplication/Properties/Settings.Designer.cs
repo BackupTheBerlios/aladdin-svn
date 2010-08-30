@@ -23,13 +23,16 @@ namespace Aladdin.ClientApplication.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://193.174.152.114:28080/axis2/services/StorageComponent")]
         public string Aladdin_ClientApplication_aladdinService_StorageComponent {
             get {
                 return ((string)(this["Aladdin_ClientApplication_aladdinService_StorageComponent"]));
+            }
+            set {
+                this["Aladdin_ClientApplication_aladdinService_StorageComponent"] = value;
             }
         }
     }

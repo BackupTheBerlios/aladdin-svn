@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Aladdin.ClientApplication.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Aladdin_ClientApplication_aladdinService_StorageComponent" Type="(Web Service URL)" Scope="Application">
+    <Setting Name="Aladdin_ClientApplication_aladdinService_StorageComponent" Type="(Web Service URL)" Scope="User">
       <Value Profile="(Default)">http://193.174.152.114:28080/axis2/services/StorageComponent</Value>
     </Setting>
   </Settings>

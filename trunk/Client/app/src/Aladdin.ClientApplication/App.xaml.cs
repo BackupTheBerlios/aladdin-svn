@@ -15,6 +15,8 @@ namespace Aladdin.ClientApplication
 
         public static bool IsUserAuthenticated;
         public static string CurrentUserID;
+        public static string DefaultLanguage;
+        public static string ServerAddress;
 
     }
 }

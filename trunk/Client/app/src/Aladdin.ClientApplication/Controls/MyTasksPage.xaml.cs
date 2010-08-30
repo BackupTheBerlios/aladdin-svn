@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Policy;
 
 namespace Aladdin.ClientApplication.Controls
 {
@@ -32,7 +33,7 @@ namespace Aladdin.ClientApplication.Controls
             try
             {
                 aladdinService.StorageComponent sc = new aladdinService.StorageComponent();
-                aladdinService.Task[] mytasks = sc.GetUserPlannedTasks(App.CurrentUserID, new DateTime(2010, 7, 1), new DateTime(2010, 7, 31), App.CurrentUserID);
+                aladdinService.Task[] mytasks = sc.GetUserPlannedTasks(App.CurrentUserID, new DateTime(2010, 7, 1), new DateTime(2010, 9, 30), App.CurrentUserID);
             }
             catch (Exception ex)
             {
