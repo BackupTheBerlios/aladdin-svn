@@ -17,22 +17,26 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Style="{StaticResource Heading1}" MaxWidth="800" TextWrapping="Wrap" Margin="50,50,113,50" Width="726">Please measure patient's weight and blood pressure and type here the results:</TextBlock>
+        <Border Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3" Height="271" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Top" Width="661" Style="{StaticResource RoundBorder}" />
+        <TextBlock Grid.ColumnSpan="2" Style="{StaticResource Heading2}" MaxWidth="800" TextWrapping="Wrap" Margin="20,20,20,40" Width="726">Please, measure patient's weight and blood pressure and type here the results</TextBlock>
         
-        <TextBlock Grid.Row="1" Style="{StaticResource Title}">Weight:</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="200" />
+        <TextBlock Grid.Row="1" HorizontalAlignment="Right" Margin="20,45,20,20" Style="{StaticResource NormalText}">Weight</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="20,40,20,20" MinWidth="300" MaxWidth="300" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="340,45,20,20" Style="{StaticResource NormalText}">(kg)</TextBlock>
 
-        <TextBlock Grid.Row="2" Style="{StaticResource Title}">Blood pressure:</TextBlock>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="20,25,20,20" Style="{StaticResource NormalText}">Blood pressure</TextBlock>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <TextBlock MinWidth="150" Style="{StaticResource Title}">Min:</TextBlock>
-            <TextBox MinWidth="200" />
+            <TextBlock HorizontalAlignment="Right" Width="50" Margin="20,25,0,20" Style="{StaticResource NormalText}">Min</TextBlock>
+            <TextBox MinWidth="200" MaxWidth="200" Margin="20" HorizontalAlignment="Left" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,25,20,20" Style="{StaticResource NormalText}">(mm Hg)</TextBlock>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-            <TextBlock MinWidth="150" Style="{StaticResource Title}">Max:</TextBlock>
-            <TextBox MinWidth="200" />
+            <TextBlock HorizontalAlignment="Right" Width="50" Margin="20,25,0,40" Style="{StaticResource NormalText}">Max</TextBlock>
+            <TextBox MinWidth="200" Margin="20,20,20,40" />
+            <TextBlock HorizontalAlignment="Left" Margin="0,25,20,40" Style="{StaticResource NormalText}">(mm Hg)</TextBlock>
         </StackPanel>
 
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource LargeButton}" IsDefault="True">Submit</Button>
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="20,40,20,20" Style="{StaticResource NormalButton}" IsDefault="True" HorizontalAlignment="Center">Submit</Button>
     </Grid>
 </UserControl>

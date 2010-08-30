@@ -4,29 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300"  MaxWidth="800" d:DesignWidth="800">
+             d:DesignHeight="543"  MaxWidth="800" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="230" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Style="{StaticResource Title}" HorizontalAlignment="Right">Situation</TextBlock>
-        <ComboBox Style="{StaticResource ComboBox}" Grid.Row="0" Grid.Column="1" MinWidth="500">
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Falls</ComboBoxItem>
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Difficult to control PBS</ComboBoxItem>
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Health problems</ComboBoxItem>
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Increase in dependence</ComboBoxItem>
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Problems related to pharmacological treatment</ComboBoxItem>
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Carer mental health/stress/work overload</ComboBoxItem>
-            <ComboBoxItem Style="{StaticResource ComboBoxItem}">Other problems</ComboBoxItem>
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="2" Height="325" HorizontalAlignment="Left" VerticalAlignment="Top" Width="800" Grid.Row="1"  Style="{StaticResource RoundBorder}" />
+        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Margin="20,20,20,40" Style="{StaticResource Heading1}" HorizontalAlignment="Center">Contact us</TextBlock>
+        <TextBlock Grid.Row="1" Margin="20,40,20,20" Style="{StaticResource NormalText}" HorizontalAlignment="Right">Situation</TextBlock>
+        <ComboBox Margin="20,40,20,20" Grid.Row="1" Grid.Column="1" MinWidth="600">
+            <ComboBoxItem>Falls</ComboBoxItem>
+            <ComboBoxItem>Difficult to control PBS</ComboBoxItem>
+            <ComboBoxItem>Health problems</ComboBoxItem>
+            <ComboBoxItem>Increase in dependence</ComboBoxItem>
+            <ComboBoxItem>Problems related to pharmacological treatment</ComboBoxItem>
+            <ComboBoxItem>Carer mental health/stress/work overload</ComboBoxItem>
+            <ComboBoxItem>Other problems</ComboBoxItem>
         </ComboBox>
-        <TextBlock Grid.Row="1" Style="{StaticResource Title}" HorizontalAlignment="Right">Description</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="500" MaxWidth="500"  TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
-        <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource LargeButton}" IsDefault="True" HorizontalAlignment="Left">Contact Us</Button>
+        <TextBlock Grid.Row="2" Margin="20" Style="{StaticResource NormalText}" HorizontalAlignment="Right">Description</TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="20,20,20,40" MinWidth="600" MaxWidth="600" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="3" Margin="20,40,20,20" Style="{StaticResource NormalButton}" IsDefault="True" HorizontalAlignment="Center">Send</Button>
     </Grid>
 </UserControl>

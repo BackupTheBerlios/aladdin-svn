@@ -19,8 +19,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Height="200" BorderThickness="3" BorderBrush="Gray" Margin="30" VerticalAlignment="Top" Visibility="{Binding QuestionSummaryVisibility}">
-            <StackPanel Orientation="Vertical" Margin="30, 10">
+        <Border Height="200" Margin="30" VerticalAlignment="Top" Visibility="{Binding QuestionSummaryVisibility}" Style="{StaticResource RoundBorder}">
+            <StackPanel Orientation="Vertical" Margin="30">
                 <TextBlock Style="{StaticResource QuetionnaireQuestionNumber}" Text="{Binding QuestionNumber}" />
                 <TextBlock Style="{StaticResource QuetionnaireQuestionTitle}" Text="{Binding QuestionTitle}" />
             </StackPanel>
@@ -31,8 +31,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource QuestionnaireButton}" HorizontalAlignment="Left" Content="Back" Command="local:AppCommands.QuetionnaireMoveBackCommand" />
-            <Button Grid.Column="1" Style="{StaticResource QuestionnaireButton}" HorizontalAlignment="Right" Content="Next" IsDefault="True" Command="local:AppCommands.QuetionnaireMoveNextCommand" Visibility="{Binding QuestionSummaryVisibility}" />
+            <Button Grid.Column="0" Style="{StaticResource WizardButton}" HorizontalAlignment="Left" Margin="20" Content="Back" Command="local:AppCommands.QuetionnaireMoveBackCommand" />
+            <Button Grid.Column="1" Style="{StaticResource WizardButton}" HorizontalAlignment="Right" Margin="20" Content="Next" IsDefault="True" Command="local:AppCommands.QuetionnaireMoveNextCommand" Visibility="{Binding QuestionSummaryVisibility}" />
         </Grid>
     </Grid>
 </UserControl>

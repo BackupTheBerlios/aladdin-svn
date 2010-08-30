@@ -4,29 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Aladdin.ClientApplication"
-             mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800" FocusManager.FocusedElement="{Binding ElementName=txtUsername}">
+             mc:Ignorable="d" FocusManager.FocusedElement="{Binding ElementName=txtUsername}" d:DesignHeight="623" d:DesignWidth="904">
     <UserControl.CommandBindings>
         <CommandBinding Command="local:AppCommands.LoginCommand" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
     </UserControl.CommandBindings>
-    <Grid HorizontalAlignment="Left">
+    <Grid HorizontalAlignment="Left" Background="{x:Null}" Margin="0">
         <Grid.RowDefinitions>
+            <RowDefinition Height="62" />
+            <RowDefinition Height="220" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="186*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Style="{StaticResource Heading1}" MaxWidth="800" TextWrapping="Wrap" Margin="50,50,113,50" Width="726" Text="{DynamicResource Wellcome}"></TextBlock>
-        <TextBlock Grid.Row="1" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="{DynamicResource UserName}"></TextBlock>
-        <TextBox Name="txtUsername" Grid.Row="1" Grid.Column="1" MinWidth="350" />
-        <TextBlock Grid.Row="2" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="{DynamicResource Password}"></TextBlock>
-        <PasswordBox Name="txtPassword" Grid.Row="2" Grid.Column="1" MinWidth="350" PasswordChar="*"  />
-        <TextBlock Name="txtMessage" Grid.Row="3" Style="{StaticResource Title}" HorizontalAlignment="Center" Foreground="Red" Grid.ColumnSpan="2" MinWidth="350"  />
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource LargeButton}" IsDefault="True" Command="local:AppCommands.LoginCommand" Content="{DynamicResource Login}"></Button>
+        <TextBlock Grid.ColumnSpan="2" MaxWidth="800" TextWrapping="Wrap" Margin="20,20,20,0" Width="726" Style="{StaticResource Heading1}">Welcome to</TextBlock>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource NormalText}" Margin="20,25,20,15">Username</TextBlock>
+        <TextBox Name="txtUsername" Grid.Row="2" Grid.Column="1" MinWidth="350" Margin="20,20,20,15" Width="300" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="3" Style="{StaticResource NormalText}" HorizontalAlignment="Right"  Margin="20,15,20,20">Password</TextBlock>
+        <PasswordBox Name="txtPassword" Grid.Row="3" Grid.Column="1" MinWidth="350" PasswordChar="*" Margin="20,15,20,20" Width="300" HorizontalAlignment="Left" />
+        <TextBlock Name="txtMessage" Grid.Row="4" Style="{StaticResource NormalText}" HorizontalAlignment="Center" Grid.ColumnSpan="2" MinWidth="350" Margin="20,15,20,20" />
+        <Image Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,10" Name="image1" Stretch="Uniform" VerticalAlignment="Center" Source="/Aladdin.ClientApplication;component/Resources/Images/logo%20aladdin%20800x217%20white.png" Grid.ColumnSpan="2" Width="700" />
+        <Button Grid.Row="5" Grid.ColumnSpan="2" IsDefault="True" Command="local:AppCommands.LoginCommand" Grid.RowSpan="1" Margin="20" Style="{StaticResource LoginButton}">
+            <StackPanel Orientation="Horizontal">
+                <Image Height="96" Source="/Aladdin.ClientApplication;component/Resources/Images/icon_login.png" />
+                <TextBlock Margin="0" VerticalAlignment="Center">Login</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>

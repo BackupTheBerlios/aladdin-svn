@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Aladdin.ClientApplication"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     mc:Ignorable="d">
-    <Grid>
+    <Grid Background="{x:Null}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -15,28 +15,28 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MyTasksPage">
+        <Button Grid.Row="0" Grid.Column="0" Command="local:AppCommands.MoveToPageCommand" CommandParameter="MyTasksPage" Margin="20" Style="{StaticResource LargeButton}">
             <StackPanel>
-                <TextBlock Margin="0 0 0 10">My tasks</TextBlock>
-                <Image Source="../Resources/Images/clock.png" Height="48" />
+                <Image Source="/Aladdin.ClientApplication;component/Resources/Images/icon_tasks.png" Height="128" />
+                <TextBlock Margin="0 0 0 10" FontSize="48">My tasks</TextBlock>
             </StackPanel>
         </Button>
-        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="SocialNetwork">
+        <Button Grid.Row="0" Grid.Column="1" Command="local:AppCommands.MoveToPageCommand" CommandParameter="SocialNetwork" Margin="20"  Style="{StaticResource LargeButton}">
             <StackPanel>
+                <Image Source="/Aladdin.ClientApplication;component/Resources/Images/icon_socialnet.png" Height="128" />
                 <TextBlock Margin="0 0 0 10">Social network</TextBlock>
-                <Image Source="../Resources/Images/Users.png" Height="48" />
             </StackPanel>
         </Button>
-        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource LargeButton}"  Command="local:AppCommands.MoveToPageCommand" CommandParameter="ContactUsPage">
+        <Button Grid.Row="1" Grid.Column="0" Command="local:AppCommands.MoveToPageCommand" CommandParameter="ContactUsPage" Margin="20" Style="{StaticResource LargeButton}">
             <StackPanel>
+                <Image Source="/Aladdin.ClientApplication;component/Resources/Images/icon_contact.png" Height="128" />
                 <TextBlock Margin="0 0 0 10">Contact us</TextBlock>
-                <Image Source="../Resources/Images/ContactUs.png" Height="48" />
             </StackPanel>
         </Button>
-        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource LargeButton}" Command="local:AppCommands.MoveToPageCommand" CommandParameter="VideoPage">
+        <Button Grid.Row="1" Grid.Column="1" Command="local:AppCommands.MoveToPageCommand" CommandParameter="VideoPage" Margin="20" Style="{StaticResource LargeButton}">
             <StackPanel>
+                <Image Source="/Aladdin.ClientApplication;component/Resources/Images/icon_tv.png" Height="128" />
                 <TextBlock Margin="0 0 0 10">ALADDIN TV</TextBlock>
-                <Image Source="../Resources/Images/TV.png" Height="48" />
             </StackPanel>
         </Button>
     </Grid>

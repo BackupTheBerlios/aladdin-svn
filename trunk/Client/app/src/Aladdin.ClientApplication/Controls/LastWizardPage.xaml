@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Style="{StaticResource Heading2}" Text="Questionnaire completed! &#x0a; Please, press Submit button to save your answers." />
-        <Button Grid.Row="1" Style="{StaticResource LargeButton}" Command="local:AppCommands.UploadQuestionnaireCommand" IsDefault="True">Submit</Button>
+        <TextBlock Grid.Row="0" Margin="20,20,20,40" Style="{StaticResource Heading2}" Text="Questionnaire completed! &#x0a; Please, press the Submit button to save your answers." />
+        <Button Grid.Row="1" Style="{StaticResource NormalButton}" Margin="20" Command="local:AppCommands.UploadQuestionnaireCommand" IsDefault="True">Submit</Button>
     </Grid>
 </UserControl>
