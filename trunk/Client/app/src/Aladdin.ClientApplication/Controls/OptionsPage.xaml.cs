@@ -26,12 +26,13 @@ namespace Aladdin.ClientApplication.Controls
     {
         public string DefaultLanguage { get; set; }
 
-        public List<aladdinService.SystemParameter> Languages = new List<aladdinService.SystemParameter>();
+        public List<aladdinService.SystemParameter> Languages { get; set; }
 
         public OptionsPage()
         {
             InitializeComponent();
             this.DefaultLanguage = App.DefaultLanguage;
+            this.Languages = new List<aladdinService.SystemParameter>();
             aladdinService.SystemParameter p1 = new aladdinService.SystemParameter();
             p1.Code = "1";
             p1.Description = "English";
@@ -71,7 +72,8 @@ namespace Aladdin.ClientApplication.Controls
 
             if (AppCommands.SaveCommand.Equals(e.Command))
             {
-                
+
+                App.DefaultLanguage = this.DefaultLanguage;
                 Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
                 config.AppSettings.Settings["DefaultLanguage"].Value = App.DefaultLanguage;
                 config.Save();

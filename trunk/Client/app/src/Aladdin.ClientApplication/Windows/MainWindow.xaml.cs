@@ -52,10 +52,10 @@ namespace Aladdin.ClientApplication.Windows
                     dict.Source = new Uri("..\\Resources\\StringResources.el-GR.xaml", UriKind.Relative);
                     break;
                 case "4":
-                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);
+                    dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
                     break;
                 case "5":
-                    dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
+                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);                    
                     break;
                 default:
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);

@@ -22,8 +22,9 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="Server"></TextBlock>
         <TextBox Name="serverAddress" Grid.Row="0" Grid.Column="1" MinWidth="350" />
         <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="Language"></TextBlock>
-        <ComboBox Name="languageCombo" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Languages}"
-                  SelectedValue="{Binding DefaultLanguage}" SelectedValuePath="Code" DisplayMemberPath="Description"/>
+        <ComboBox Style="{StaticResource ComboBox}" Name="languageCombo" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Languages}"
+                  SelectedValue="{Binding DefaultLanguage}" SelectedValuePath="Code" DisplayMemberPath="Description">
+        </ComboBox>
         <Button Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource LargeButton}" IsDefault="True" Command="local:AppCommands.SaveCommand" Content="{DynamicResource Save}"></Button>
     </Grid>
 </UserControl>
