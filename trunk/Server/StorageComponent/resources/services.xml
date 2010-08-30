@@ -49,6 +49,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/ListOfClinicians</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/ListOfCliniciansResponse</outputActionMapping>
         </operation>
+        <operation name="GetUserType" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetUserType</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetUserTypeResponse</outputActionMapping>
+        </operation>
         <operation name="SavePatientAssessment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/SavePatientAssessment</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/SavePatientAssessmentResponse</outputActionMapping>

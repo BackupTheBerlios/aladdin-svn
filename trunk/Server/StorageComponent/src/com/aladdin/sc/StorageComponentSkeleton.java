@@ -70,6 +70,9 @@ import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
 import eu.aladdin_project.xsd.*;
+import eu.aladdin_project.storagecomponent.GetUserTypeDocument;
+import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument;
+import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -379,6 +382,7 @@ import eu.aladdin_project.xsd.*;
     		qq.setCondition(new Integer(rqq.getCondition()));
     		System.out.println (" uQQ 5");
     		qq.setTitle(rqq.getTitle());
+    		System.out.println (qq.getTitle());
     		System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
@@ -387,6 +391,15 @@ import eu.aladdin_project.xsd.*;
     			rqq.setDeleted(false);
     		}
     		qq.setDeleted(rqq.getDeleted());
+    		
+    		System.out.print (" question ");
+    		System.out.print (qq.getTitle());
+    		System.out.print (" ");
+    		System.out.print (qq.getType());
+    		System.out.print (" ");
+    		System.out.println (qq.getId());
+    		
+    		
     		s.saveOrUpdate(qq);
     		System.out.println (" uQQ 8");
     		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
@@ -396,20 +409,28 @@ import eu.aladdin_project.xsd.*;
         			System.out.println (" uQQ 19");
         		}    			
     		}
+    		
     		QuestionnaireQuestionAnswer rqqa = null;
     		System.out.println (" uQQ 11");
-    		com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
-    		System.out.println (" uQQ 12");
-    		System.out.println (" uQQ 13");
     		if (rqq.getAnswers() != null && rqq.getAnswers().getAnswerArray() != null) {
     			for (int i = 0; i < rqq.getAnswers().getAnswerArray().length; i++) {
         			rqqa = rqq.getAnswers().getAnswerArray(i);
+        			
+        			
+        			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
         			qqa.setValue(new Integer(rqqa.getValue()));
         			qqa.setQuestion(qq.getId());
         			qqa.setDescription(rqqa.getStringValue());
         			if (rqqa.getDeleted() != true) rqqa.setDeleted(true);
         			qqa.setDeleted(rqqa.getDeleted());
         			if (rqqa.getId() > 0) qqa.setId(rqqa.getId());
+        			
+        			
+        			System.out.print (" answer ");
+        			System.out.print (qqa.getQuestion());
+        			System.out.print (" ");
+        			System.out.println (qqa.getDescription());
+        			
         			s.saveOrUpdate(qqa);
         		}    			
     		}
@@ -1360,23 +1381,39 @@ import eu.aladdin_project.xsd.*;
     		try {
     			s.beginTransaction();
     			
+    			System.out.println (1);
     			com.aladdin.sc.db.Task task = new com.aladdin.sc.db.Task ();
+    			System.out.println (2);
     			Task rtask = req.getAssignTask().getTask();
+    			System.out.println (3);
     			task.setTaskType(new Integer (rtask.getTaskType().getCode()));
+    			System.out.println (4);
     			task.setDateTimeAssigned(new Timestamp(rtask.getDateTimeAssigned().getTimeInMillis()));
+    			System.out.println (5);
     			task.setDateTimeFulfilled(new Timestamp(rtask.getDateTimeFulfilled().getTimeInMillis()));
+    			System.out.println (6);
     			task.setTaskStatus(new Integer (rtask.getTaskStatus().getCode()));
+    			System.out.println (7);
     			task.setUrl(rtask.getURL());
+    			System.out.println (8);
     			task.setExecutor(new Integer (rtask.getExecutorID()));
+    			System.out.println (9);
     			task.setAssigner(new Integer (rtask.getAssignerID()));
+    			System.out.println (10);
     			task.setObject(new Integer (rtask.getObjectID()));
+    			System.out.println (11);
     			
     			if (rtask.getQuestionnaire() != null) {
-    				task.setM_Questionnairequestionnaire(storeQuestionnaire(rtask.getQuestionnaire()));
+    				System.out.println (12);
+    				task.setQuestionnaire(storeQuestionnaire(rtask.getQuestionnaire()).getId());
+    				System.out.println (13);
     			}
+    			System.out.println (14);
     			
     			s.save (task);
+    			System.out.println (15);
     			s.getTransaction().commit();
+    			System.out.println (16);
     			
     			res.setCode(task.getId().toString());
         		res.setDescription("ok");
@@ -1440,6 +1477,21 @@ import eu.aladdin_project.xsd.*;
     		return respdoc;
     	}
     	
+    	private String getTaskDescription (Integer code) {
+    		switch (code) {
+    			case 1: return "Patient Questionnaire Task"; 
+    			case 2: return "Carer Questionnaire Task"; 
+    			case 3: return "Blood Pressure Task"; 
+    			case 4: return "Weight Task"; 
+    			case 5: return "Cognitivae Game Task"; 
+    			default: return "";
+    		}
+    	}
+    	
+    	private Integer getTaskTypesCount () {
+    		return 5;
+    	}
+    	
     	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
@@ -1466,6 +1518,7 @@ import eu.aladdin_project.xsd.*;
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
     				taskType.setCode(t.getTaskType().toString());
+    				taskType.setDescription(getTaskDescription (t.getTaskType()));
     				rt.setTaskType(taskType);
     				Calendar c1 = Calendar.getInstance();
     				c1.setTimeInMillis(t.getDateTimeAssigned().getTime());
@@ -2571,15 +2624,45 @@ import eu.aladdin_project.xsd.*;
         	return respdoc;
         }
         
+		public GetUserTypeResponseDocument getUserType (GetUserTypeDocument req) {
+			GetUserTypeResponseDocument respdoc = GetUserTypeResponseDocument.Factory.newInstance();
+			GetUserTypeResponse resp = respdoc.addNewGetUserTypeResponse();
+			OperationResult res = resp.addNewOut();
+				 
+			try {
+				Integer id = new Integer (req.getGetUserType().getId());
+				String sql = "SELECT type FROM aladdinuser WHERE id = '" + id + "'";
+        		SQLQuery q = s.createSQLQuery(sql);
+        		if (q.list().size() == 1) {
+        			res.setCode(q.list().get(0).toString());
+        			res.setDescription("ok");
+        			res.setStatus((short) 1);
+        		} else {
+        			res.setCode("0");
+        			res.setDescription("none");
+        			res.setStatus((short) 0);
+        		}
+			} catch (Exception e) {
+				res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				res.setStatus((short) 0);
+			}
+				 
+			return respdoc;
+		}
+        
         
     	// TODO:
     	public ListOfPossibleTasksResponseDocument listOfPossibleTasks (ListOfPossibleTasksDocument listOfPossibleTasks48) {
     		ListOfPossibleTasksResponseDocument respdoc = ListOfPossibleTasksResponseDocument.Factory.newInstance();
     		ListOfPossibleTasksResponse resp = respdoc.addNewListOfPossibleTasksResponse();
-    		SystemParameter pt1 = resp.addNewOut();
-    		pt1.setCode("1");
-    		SystemParameter pt2 = resp.addNewOut();
-    		pt2.setCode("2");
+    		
+    		for (Integer i = 1; i < getTaskTypesCount() + 1; i++) {
+    			SystemParameter pt = resp.addNewOut();
+        		pt.setCode(i.toString());
+        		pt.setDescription(getTaskDescription(i));
+    		}
+    		
     		return respdoc;
     	}
 

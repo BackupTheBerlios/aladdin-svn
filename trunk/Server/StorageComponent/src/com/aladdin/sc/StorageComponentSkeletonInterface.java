@@ -155,6 +155,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getUserType
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument getUserType
+                (
+                  eu.aladdin_project.storagecomponent.GetUserTypeDocument getUserType
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param savePatientAssessment
          */
 

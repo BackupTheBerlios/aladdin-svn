@@ -770,6 +770,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetUserType">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetUserTypeResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -806,6 +820,10 @@
   </wsdl:message>
   <wsdl:message name="DeleteQuestionnaireRequest">
     <wsdl:part name="parameters" element="tns:DeleteQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserTypeResponse">
+    <wsdl:part name="parameters" element="tns:GetUserTypeResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="UpdateUserRequest">
@@ -926,6 +944,10 @@
   </wsdl:message>
   <wsdl:message name="DeleteAdministratorResponse">
     <wsdl:part name="parameters" element="tns:DeleteAdministratorResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserTypeRequest">
+    <wsdl:part name="parameters" element="tns:GetUserType">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetPatientResponse">
@@ -1487,6 +1509,12 @@
       <wsdl:output message="tns:AuthResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserType">
+      <wsdl:input message="tns:GetUserTypeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserTypeResponse">
+    </wsdl:output>
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP" type="tns:StorageComponent">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -1942,6 +1970,15 @@
     </wsdl:operation>
     <wsdl:operation name="Auth">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/Auth"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserType">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetUserType"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>
