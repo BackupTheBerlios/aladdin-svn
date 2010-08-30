@@ -30,7 +30,7 @@
                     <Image Source="/Aladdin.ClientApplication;component/Resources/Images/icon_home2.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Options" Command="local:AppCommands.MoveToPageWithoutAuthenticationCommand" CommandParameter="OptionsPage">
+            <MenuItem Header="Options" Command="local:AppCommands.MoveToPageWithoutAuthenticationCommand" CommandParameter="OptionsPage" Margin="6">
                 <!--<MenuItem.Icon>
                     <Image Source="..\Resources\Images\HomeHS.png" Height="36"/>
                 </MenuItem.Icon>-->
