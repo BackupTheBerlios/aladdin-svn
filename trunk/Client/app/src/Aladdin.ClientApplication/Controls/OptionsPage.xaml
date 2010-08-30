@@ -19,9 +19,9 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="Server"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="{DynamicResource Server}"></TextBlock>
         <TextBox Name="serverAddress" Grid.Row="0" Grid.Column="1" MinWidth="350" />
-        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="Language"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Title}" HorizontalAlignment="Right" Text="{DynamicResource Language}"></TextBlock>
         <ComboBox Style="{StaticResource ComboBox}" Name="languageCombo" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Languages}"
                   SelectedValue="{Binding DefaultLanguage}" SelectedValuePath="Code" DisplayMemberPath="Description">
         </ComboBox>

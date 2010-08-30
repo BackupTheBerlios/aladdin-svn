@@ -6,4 +6,6 @@
   <system:String x:Key="Wellcome">Καλωσήρθατε στο ALADDIN</system:String>
   <system:String x:Key="Login">Εισαγωγή</system:String>
   <system:String x:Key="Save">Αποθήκευση</system:String>
+  <system:String x:Key="Server">Διακομιστής</system:String>
+  <system:String x:Key="Language">Γλώσσα</system:String>
 </ResourceDictionary>
