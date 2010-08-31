@@ -4,7 +4,7 @@
     	<sequence>
     		<element name="question" type="tns:QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="1"></element>
     	</sequence>
-    	<attribute name="version" type="decimal"></attribute>
+    	<attribute name="version" type="double"></attribute>
     	<attribute name="ID" type="string"></attribute>
     	<attribute name="title" type="string"></attribute>
     </complexType>
@@ -189,7 +189,7 @@
 			<element name="LawtonIndex" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
 			<element name="MMSE" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
 			<element name="MDRS" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="BlessedScalePart1" type="decimal" maxOccurs="1" minOccurs="0"></element>
+			<element name="BlessedScalePart1" type="double" maxOccurs="1" minOccurs="0"></element>
 			<element name="BlessedScalePart2" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
 			<element name="BlessedScalePart3" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
 			<element name="ChecklistMBP" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
@@ -209,11 +209,11 @@
 	<complexType name="Measurement">
 		<sequence>
 			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="Value" type="decimal" maxOccurs="1" minOccurs="1"></element>
+			<element name="Value" type="double" maxOccurs="1" minOccurs="1"></element>
 			<element name="DateTime" type="dateTime" maxOccurs="1" minOccurs="1"></element>
 			<element name="Units" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="LowerLimit" type="decimal" maxOccurs="1" minOccurs="0"></element>
-			<element name="UpperLimit" type="decimal" maxOccurs="1" minOccurs="0"></element>
+			<element name="LowerLimit" type="double" maxOccurs="1" minOccurs="0"></element>
+			<element name="UpperLimit" type="double" maxOccurs="1" minOccurs="0"></element>
 			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="TaskID" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
@@ -369,7 +369,7 @@
     </complexType>
     
     <complexType name="QuestionnaireInfo">
-    	<attribute name="version" type="decimal"></attribute>
+    	<attribute name="version" type="double"></attribute>
     	<attribute name="ID" type="string"></attribute>
     	<attribute name="title" type="string"></attribute>
     </complexType>
