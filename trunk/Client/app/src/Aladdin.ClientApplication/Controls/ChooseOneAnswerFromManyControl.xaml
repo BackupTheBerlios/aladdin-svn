@@ -12,7 +12,7 @@
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="FocusVisualStyle" Value="{DynamicResource RadioButtonFocusVisual}"/>
             <Setter Property="Foreground" Value="{StaticResource OutsideFontColor}"/>
-            <!--<Setter Property="FontSize" Value="24"/>-->
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Padding" Value="20,0,10,0"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>

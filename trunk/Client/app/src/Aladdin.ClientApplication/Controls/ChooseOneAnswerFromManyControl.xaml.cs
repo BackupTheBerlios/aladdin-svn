@@ -40,7 +40,7 @@ namespace Aladdin.ClientApplication.Controls
             this.AnswersStackPanel.Children.Clear();
             foreach (QuestionnaireQuestionAnswer answer in question.Answers)
             {
-                RadioButton rb = new RadioButton { MinWidth = 100, FontSize = 48, Content = answer.Answer, Tag = answer.Value };
+                RadioButton rb = new RadioButton { MinWidth = 100, Content = answer.Answer, Tag = answer.Value };
                 rb.Click += new RoutedEventHandler(RadioButton_Click);
 
                 this.AnswersStackPanel.Children.Add(rb);
