@@ -1088,7 +1088,7 @@ public class PatientAssessmentImpl extends org.apache.xmlbeans.impl.values.XmlCo
     /**
      * Gets the "BlessedScalePart1" element
      */
-    public java.math.BigDecimal getBlessedScalePart1()
+    public double getBlessedScalePart1()
     {
         synchronized (monitor())
         {
@@ -1097,22 +1097,22 @@ public class PatientAssessmentImpl extends org.apache.xmlbeans.impl.values.XmlCo
             target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(BLESSEDSCALEPART1$26, 0);
             if (target == null)
             {
-                return null;
+                return 0.0;
             }
-            return target.getBigDecimalValue();
+            return target.getDoubleValue();
         }
     }
     
     /**
      * Gets (as xml) the "BlessedScalePart1" element
      */
-    public org.apache.xmlbeans.XmlDecimal xgetBlessedScalePart1()
+    public org.apache.xmlbeans.XmlDouble xgetBlessedScalePart1()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(BLESSEDSCALEPART1$26, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(BLESSEDSCALEPART1$26, 0);
             return target;
         }
     }
@@ -1132,7 +1132,7 @@ public class PatientAssessmentImpl extends org.apache.xmlbeans.impl.values.XmlCo
     /**
      * Sets the "BlessedScalePart1" element
      */
-    public void setBlessedScalePart1(java.math.BigDecimal blessedScalePart1)
+    public void setBlessedScalePart1(double blessedScalePart1)
     {
         synchronized (monitor())
         {
@@ -1143,23 +1143,23 @@ public class PatientAssessmentImpl extends org.apache.xmlbeans.impl.values.XmlCo
             {
                 target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(BLESSEDSCALEPART1$26);
             }
-            target.setBigDecimalValue(blessedScalePart1);
+            target.setDoubleValue(blessedScalePart1);
         }
     }
     
     /**
      * Sets (as xml) the "BlessedScalePart1" element
      */
-    public void xsetBlessedScalePart1(org.apache.xmlbeans.XmlDecimal blessedScalePart1)
+    public void xsetBlessedScalePart1(org.apache.xmlbeans.XmlDouble blessedScalePart1)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(BLESSEDSCALEPART1$26, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(BLESSEDSCALEPART1$26, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlDecimal)get_store().add_element_user(BLESSEDSCALEPART1$26);
+                target = (org.apache.xmlbeans.XmlDouble)get_store().add_element_user(BLESSEDSCALEPART1$26);
             }
             target.set(blessedScalePart1);
         }

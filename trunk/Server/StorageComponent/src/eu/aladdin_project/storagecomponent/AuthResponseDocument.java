@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface AuthResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AuthResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s02D4CFA1FA6B4C1F387BF657192A00F8").resolveHandle("authresponsec6e9doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AuthResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE5146C640B0EE3213268885FE36430F2").resolveHandle("authresponsec6e9doctype");
     
     /**
      * Gets the "AuthResponse" element
@@ -42,7 +42,7 @@ public interface AuthResponseDocument extends org.apache.xmlbeans.XmlObject
     public interface AuthResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AuthResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s02D4CFA1FA6B4C1F387BF657192A00F8").resolveHandle("authresponse2104elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AuthResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE5146C640B0EE3213268885FE36430F2").resolveHandle("authresponse2104elemtype");
         
         /**
          * Gets the "out" element

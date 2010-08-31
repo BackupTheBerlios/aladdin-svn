@@ -90,7 +90,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Gets the "Value" element
      */
-    public java.math.BigDecimal getValue()
+    public double getValue()
     {
         synchronized (monitor())
         {
@@ -99,22 +99,22 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
             target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(VALUE$2, 0);
             if (target == null)
             {
-                return null;
+                return 0.0;
             }
-            return target.getBigDecimalValue();
+            return target.getDoubleValue();
         }
     }
     
     /**
      * Gets (as xml) the "Value" element
      */
-    public org.apache.xmlbeans.XmlDecimal xgetValue()
+    public org.apache.xmlbeans.XmlDouble xgetValue()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(VALUE$2, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(VALUE$2, 0);
             return target;
         }
     }
@@ -122,7 +122,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Sets the "Value" element
      */
-    public void setValue(java.math.BigDecimal value)
+    public void setValue(double value)
     {
         synchronized (monitor())
         {
@@ -133,23 +133,23 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
             {
                 target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(VALUE$2);
             }
-            target.setBigDecimalValue(value);
+            target.setDoubleValue(value);
         }
     }
     
     /**
      * Sets (as xml) the "Value" element
      */
-    public void xsetValue(org.apache.xmlbeans.XmlDecimal value)
+    public void xsetValue(org.apache.xmlbeans.XmlDouble value)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(VALUE$2, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(VALUE$2, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlDecimal)get_store().add_element_user(VALUE$2);
+                target = (org.apache.xmlbeans.XmlDouble)get_store().add_element_user(VALUE$2);
             }
             target.set(value);
         }
@@ -294,7 +294,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Gets the "LowerLimit" element
      */
-    public java.math.BigDecimal getLowerLimit()
+    public double getLowerLimit()
     {
         synchronized (monitor())
         {
@@ -303,22 +303,22 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
             target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(LOWERLIMIT$8, 0);
             if (target == null)
             {
-                return null;
+                return 0.0;
             }
-            return target.getBigDecimalValue();
+            return target.getDoubleValue();
         }
     }
     
     /**
      * Gets (as xml) the "LowerLimit" element
      */
-    public org.apache.xmlbeans.XmlDecimal xgetLowerLimit()
+    public org.apache.xmlbeans.XmlDouble xgetLowerLimit()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(LOWERLIMIT$8, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(LOWERLIMIT$8, 0);
             return target;
         }
     }
@@ -338,7 +338,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Sets the "LowerLimit" element
      */
-    public void setLowerLimit(java.math.BigDecimal lowerLimit)
+    public void setLowerLimit(double lowerLimit)
     {
         synchronized (monitor())
         {
@@ -349,23 +349,23 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
             {
                 target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(LOWERLIMIT$8);
             }
-            target.setBigDecimalValue(lowerLimit);
+            target.setDoubleValue(lowerLimit);
         }
     }
     
     /**
      * Sets (as xml) the "LowerLimit" element
      */
-    public void xsetLowerLimit(org.apache.xmlbeans.XmlDecimal lowerLimit)
+    public void xsetLowerLimit(org.apache.xmlbeans.XmlDouble lowerLimit)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(LOWERLIMIT$8, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(LOWERLIMIT$8, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlDecimal)get_store().add_element_user(LOWERLIMIT$8);
+                target = (org.apache.xmlbeans.XmlDouble)get_store().add_element_user(LOWERLIMIT$8);
             }
             target.set(lowerLimit);
         }
@@ -386,7 +386,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Gets the "UpperLimit" element
      */
-    public java.math.BigDecimal getUpperLimit()
+    public double getUpperLimit()
     {
         synchronized (monitor())
         {
@@ -395,22 +395,22 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
             target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(UPPERLIMIT$10, 0);
             if (target == null)
             {
-                return null;
+                return 0.0;
             }
-            return target.getBigDecimalValue();
+            return target.getDoubleValue();
         }
     }
     
     /**
      * Gets (as xml) the "UpperLimit" element
      */
-    public org.apache.xmlbeans.XmlDecimal xgetUpperLimit()
+    public org.apache.xmlbeans.XmlDouble xgetUpperLimit()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(UPPERLIMIT$10, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(UPPERLIMIT$10, 0);
             return target;
         }
     }
@@ -430,7 +430,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     /**
      * Sets the "UpperLimit" element
      */
-    public void setUpperLimit(java.math.BigDecimal upperLimit)
+    public void setUpperLimit(double upperLimit)
     {
         synchronized (monitor())
         {
@@ -441,23 +441,23 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
             {
                 target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(UPPERLIMIT$10);
             }
-            target.setBigDecimalValue(upperLimit);
+            target.setDoubleValue(upperLimit);
         }
     }
     
     /**
      * Sets (as xml) the "UpperLimit" element
      */
-    public void xsetUpperLimit(org.apache.xmlbeans.XmlDecimal upperLimit)
+    public void xsetUpperLimit(org.apache.xmlbeans.XmlDouble upperLimit)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_element_user(UPPERLIMIT$10, 0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_element_user(UPPERLIMIT$10, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlDecimal)get_store().add_element_user(UPPERLIMIT$10);
+                target = (org.apache.xmlbeans.XmlDouble)get_store().add_element_user(UPPERLIMIT$10);
             }
             target.set(upperLimit);
         }

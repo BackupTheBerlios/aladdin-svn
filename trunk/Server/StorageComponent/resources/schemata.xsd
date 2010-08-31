@@ -4,7 +4,7 @@
         <sequence>
             <element maxOccurs="unbounded" name="question" type="tns:QuestionnaireQuestion"/>
         </sequence>
-        <attribute name="version" type="decimal"/>
+        <attribute name="version" type="double"/>
         <attribute name="ID" type="string"/>
         <attribute name="title" type="string"/>
     </complexType>
@@ -156,7 +156,7 @@
             <element minOccurs="0" name="LawtonIndex" type="unsignedByte"/>
             <element name="MMSE" type="unsignedByte"/>
             <element minOccurs="0" name="MDRS" type="unsignedByte"/>
-            <element minOccurs="0" name="BlessedScalePart1" type="decimal"/>
+            <element minOccurs="0" name="BlessedScalePart1" type="double"/>
             <element minOccurs="0" name="BlessedScalePart2" type="unsignedByte"/>
             <element minOccurs="0" name="BlessedScalePart3" type="unsignedByte"/>
             <element minOccurs="0" name="ChecklistMBP" type="unsignedByte"/>
@@ -175,11 +175,11 @@
     <complexType name="Measurement">
         <sequence>
             <element name="Type" type="tns:SystemParameter"/>
-            <element name="Value" type="decimal"/>
+            <element name="Value" type="double"/>
             <element name="DateTime" type="dateTime"/>
             <element name="Units" type="string"/>
-            <element minOccurs="0" name="LowerLimit" type="decimal"/>
-            <element minOccurs="0" name="UpperLimit" type="decimal"/>
+            <element minOccurs="0" name="LowerLimit" type="double"/>
+            <element minOccurs="0" name="UpperLimit" type="double"/>
             <element name="PatientID" type="string"/>
             <element name="TaskID" type="string"/>
         </sequence>
@@ -313,7 +313,7 @@
         </sequence>
     </complexType>
     <complexType name="QuestionnaireInfo">
-        <attribute name="version" type="decimal"/>
+        <attribute name="version" type="double"/>
         <attribute name="ID" type="string"/>
         <attribute name="title" type="string"/>
     </complexType>

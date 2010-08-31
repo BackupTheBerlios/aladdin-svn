@@ -451,7 +451,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				QuestionnaireInfo qi = resp.addNewOut();
     				qi.setID(((Integer)quest[0]).toString());
     				qi.setTitle((String)quest[1]);
-    				qi.setVersion((BigDecimal)quest[2]);
+    				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
     		} catch (Exception e) {
     			System.out.println (e.toString());
@@ -764,7 +764,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     			pa.setLawtonIndex((int)rpa.getLawtonIndex());
     			pa.setMMSE((int)rpa.getMMSE());
     			pa.setMDRS((int)rpa.getMDRS());
-    			pa.setBlessedScalePart1(rpa.getBlessedScalePart1());
+    			pa.setBlessedScalePart1(new BigDecimal (rpa.getBlessedScalePart1()));
     			pa.setBlessedScalePart2((int)rpa.getBlessedScalePart2());
     			pa.setBlessedScalePart3((int)rpa.getBlessedScalePart3());
     			pa.setChecklistMBPC((int)rpa.getChecklistMBP());
@@ -805,12 +805,12 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		m.setPatient(new Integer (rm.getPatientID()));
     		if (paid != null) m.setPatientassessment (paid);
     		m.setType(rm.getType().getCode());
-    		m.setValue(rm.getValue());
+    		m.setValue(new BigDecimal (rm.getValue()));
     		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
     		m.setDatetime(new Timestamp(timeInMillis));
     		m.setUnits(rm.getUnits());
-    		m.setLowerlimit(rm.getLowerLimit());
-    		m.setUpperlimit(rm.getUpperLimit());
+    		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
+    		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
     		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
     		s.save (m);
     		return m.getId();
@@ -1228,7 +1228,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			System.out.println (rq.getTitle());
 			System.out.println (" sQ 3");
 			System.out.println (rq.getVersion());
-			q.setVersion(rq.getVersion());
+			q.setVersion(new BigDecimal (rq.getVersion()));
 			System.out.println (" sQ 4");
 			if (rq.getID() != null) {
 				System.out.println (" id " + rq.getID());
@@ -1296,7 +1296,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			System.out.println ("4");
 			rm.setType(rmeasurementType);
 			System.out.println ("5");
-			rm.setValue(m.getValue());
+			rm.setValue(m.getValue().doubleValue ());
 			System.out.println ("6");
 			Timestamp datetime = m.getDatetime();
 			System.out.println ("7");
@@ -1308,9 +1308,9 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			System.out.println ("10");
 			rm.setUnits(m.getUnits());
 			System.out.println ("11");
-			rm.setLowerLimit(m.getLowerlimit());
+			rm.setLowerLimit(m.getLowerlimit().doubleValue ());
 			System.out.println ("12");
-			rm.setUpperLimit(m.getUpperlimit());
+			rm.setUpperLimit(m.getUpperlimit().doubleValue ());
 			System.out.println ("13");
 			rm.setPatientID(m.getPatient().toString());
 			System.out.println ("14");
@@ -1550,7 +1550,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		System.out.println (" eQ 3");
     		rq.setTitle(q.getTitle());
     		System.out.println (" eQ 4");
-    		rq.setVersion(q.getVersion());
+    		rq.setVersion(q.getVersion().doubleValue ());
     		System.out.println (" eQ 5");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
@@ -2164,7 +2164,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 	    			System.out.println ("22");
 	    			rpa.setMDRS(pa.getMDRS().shortValue());
 	    			System.out.println ("23");
-	    			rpa.setBlessedScalePart1(pa.getBlessedScalePart1());
+	    			rpa.setBlessedScalePart1(pa.getBlessedScalePart1().doubleValue());
 	    			System.out.println ("24");
 	    			rpa.setBlessedScalePart2(pa.getBlessedScalePart2().shortValue());
 	    			System.out.println ("25");
