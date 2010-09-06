@@ -34,7 +34,7 @@ public class PatientAssessment  implements java.io.Serializable {
 
     private org.apache.axis.types.UnsignedByte MDRS;
 
-    private java.math.BigDecimal blessedScalePart1;
+    private java.lang.Double blessedScalePart1;
 
     private org.apache.axis.types.UnsignedByte blessedScalePart2;
 
@@ -79,7 +79,7 @@ public class PatientAssessment  implements java.io.Serializable {
            org.apache.axis.types.UnsignedByte lawtonIndex,
            org.apache.axis.types.UnsignedByte MMSE,
            org.apache.axis.types.UnsignedByte MDRS,
-           java.math.BigDecimal blessedScalePart1,
+           java.lang.Double blessedScalePart1,
            org.apache.axis.types.UnsignedByte blessedScalePart2,
            org.apache.axis.types.UnsignedByte blessedScalePart3,
            org.apache.axis.types.UnsignedByte checklistMBP,
@@ -388,7 +388,7 @@ public class PatientAssessment  implements java.io.Serializable {
      * 
      * @return blessedScalePart1
      */
-    public java.math.BigDecimal getBlessedScalePart1() {
+    public java.lang.Double getBlessedScalePart1() {
         return blessedScalePart1;
     }
 
@@ -398,7 +398,7 @@ public class PatientAssessment  implements java.io.Serializable {
      * 
      * @param blessedScalePart1
      */
-    public void setBlessedScalePart1(java.math.BigDecimal blessedScalePart1) {
+    public void setBlessedScalePart1(java.lang.Double blessedScalePart1) {
         this.blessedScalePart1 = blessedScalePart1;
     }
 
@@ -960,7 +960,7 @@ public class PatientAssessment  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("blessedScalePart1");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "BlessedScalePart1"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

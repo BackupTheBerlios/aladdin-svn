@@ -8,7 +8,7 @@
 package eu.aladdin_project.xsd;
 
 public class QuestionnaireInfo  implements java.io.Serializable {
-    private java.math.BigDecimal version;  // attribute
+    private double version;  // attribute
 
     private java.lang.String ID;  // attribute
 
@@ -18,7 +18,7 @@ public class QuestionnaireInfo  implements java.io.Serializable {
     }
 
     public QuestionnaireInfo(
-           java.math.BigDecimal version,
+           double version,
            java.lang.String ID,
            java.lang.String title) {
            this.version = version;
@@ -32,7 +32,7 @@ public class QuestionnaireInfo  implements java.io.Serializable {
      * 
      * @return version
      */
-    public java.math.BigDecimal getVersion() {
+    public double getVersion() {
         return version;
     }
 
@@ -42,7 +42,7 @@ public class QuestionnaireInfo  implements java.io.Serializable {
      * 
      * @param version
      */
-    public void setVersion(java.math.BigDecimal version) {
+    public void setVersion(double version) {
         this.version = version;
     }
 
@@ -98,9 +98,7 @@ public class QuestionnaireInfo  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            ((this.version==null && other.getVersion()==null) || 
-             (this.version!=null &&
-              this.version.equals(other.getVersion()))) &&
+            this.version == other.getVersion() &&
             ((this.ID==null && other.getID()==null) || 
              (this.ID!=null &&
               this.ID.equals(other.getID()))) &&
@@ -118,9 +116,7 @@ public class QuestionnaireInfo  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        if (getVersion() != null) {
-            _hashCode += getVersion().hashCode();
-        }
+        _hashCode += new Double(getVersion()).hashCode();
         if (getID() != null) {
             _hashCode += getID().hashCode();
         }
@@ -140,7 +136,7 @@ public class QuestionnaireInfo  implements java.io.Serializable {
         org.apache.axis.description.AttributeDesc attrField = new org.apache.axis.description.AttributeDesc();
         attrField.setFieldName("version");
         attrField.setXmlName(new javax.xml.namespace.QName("", "version"));
-        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
         typeDesc.addFieldDesc(attrField);
         attrField = new org.apache.axis.description.AttributeDesc();
         attrField.setFieldName("ID");

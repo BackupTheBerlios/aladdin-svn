@@ -40,4 +40,18 @@
 		<menuitem label="${qm}" href="/qm/"/>
 		<menuitem label="${calendar}" />
 	</menubar>
+	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
+		<label id="errorlbl"/>
+	</window>
+	<zscript>
+		public void setErrorLabel(){
+			String error = Executions.getCurrent().getParameter("error");
+			if(error != null){
+				int errorcode = Integer.parseInt(error);
+				Label errorlbl = (Label)mainerror.getFellow("errorlbl");
+				errorlbl.setValue(Labels.getLabel(eu.aladdin_project.ErrorDictionary.getErrorLabel(errorcode)));
+				mainerror.setVisible(true);
+			}
+		}
+	</zscript>
 </zk>

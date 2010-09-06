@@ -10,15 +10,15 @@ package eu.aladdin_project.xsd;
 public class Measurement  implements java.io.Serializable {
     private eu.aladdin_project.xsd.SystemParameter type;
 
-    private java.math.BigDecimal value;
+    private double value;
 
     private java.util.Calendar dateTime;
 
     private java.lang.String units;
 
-    private java.math.BigDecimal lowerLimit;
+    private java.lang.Double lowerLimit;
 
-    private java.math.BigDecimal upperLimit;
+    private java.lang.Double upperLimit;
 
     private java.lang.String patientID;
 
@@ -29,11 +29,11 @@ public class Measurement  implements java.io.Serializable {
 
     public Measurement(
            eu.aladdin_project.xsd.SystemParameter type,
-           java.math.BigDecimal value,
+           double value,
            java.util.Calendar dateTime,
            java.lang.String units,
-           java.math.BigDecimal lowerLimit,
-           java.math.BigDecimal upperLimit,
+           java.lang.Double lowerLimit,
+           java.lang.Double upperLimit,
            java.lang.String patientID,
            java.lang.String taskID) {
            this.type = type;
@@ -72,7 +72,7 @@ public class Measurement  implements java.io.Serializable {
      * 
      * @return value
      */
-    public java.math.BigDecimal getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -82,7 +82,7 @@ public class Measurement  implements java.io.Serializable {
      * 
      * @param value
      */
-    public void setValue(java.math.BigDecimal value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
@@ -132,7 +132,7 @@ public class Measurement  implements java.io.Serializable {
      * 
      * @return lowerLimit
      */
-    public java.math.BigDecimal getLowerLimit() {
+    public java.lang.Double getLowerLimit() {
         return lowerLimit;
     }
 
@@ -142,7 +142,7 @@ public class Measurement  implements java.io.Serializable {
      * 
      * @param lowerLimit
      */
-    public void setLowerLimit(java.math.BigDecimal lowerLimit) {
+    public void setLowerLimit(java.lang.Double lowerLimit) {
         this.lowerLimit = lowerLimit;
     }
 
@@ -152,7 +152,7 @@ public class Measurement  implements java.io.Serializable {
      * 
      * @return upperLimit
      */
-    public java.math.BigDecimal getUpperLimit() {
+    public java.lang.Double getUpperLimit() {
         return upperLimit;
     }
 
@@ -162,7 +162,7 @@ public class Measurement  implements java.io.Serializable {
      * 
      * @param upperLimit
      */
-    public void setUpperLimit(java.math.BigDecimal upperLimit) {
+    public void setUpperLimit(java.lang.Double upperLimit) {
         this.upperLimit = upperLimit;
     }
 
@@ -221,9 +221,7 @@ public class Measurement  implements java.io.Serializable {
             ((this.type==null && other.getType()==null) || 
              (this.type!=null &&
               this.type.equals(other.getType()))) &&
-            ((this.value==null && other.getValue()==null) || 
-             (this.value!=null &&
-              this.value.equals(other.getValue()))) &&
+            this.value == other.getValue() &&
             ((this.dateTime==null && other.getDateTime()==null) || 
              (this.dateTime!=null &&
               this.dateTime.equals(other.getDateTime()))) &&
@@ -256,9 +254,7 @@ public class Measurement  implements java.io.Serializable {
         if (getType() != null) {
             _hashCode += getType().hashCode();
         }
-        if (getValue() != null) {
-            _hashCode += getValue().hashCode();
-        }
+        _hashCode += new Double(getValue()).hashCode();
         if (getDateTime() != null) {
             _hashCode += getDateTime().hashCode();
         }
@@ -296,7 +292,7 @@ public class Measurement  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("value");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Value"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
@@ -314,14 +310,14 @@ public class Measurement  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("lowerLimit");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "LowerLimit"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("upperLimit");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "UpperLimit"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

@@ -7,6 +7,8 @@
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Administrator;
 		import eu.aladdin_project.xsd.Clinician;
+		import eu.aladdin_project.xsd.OperationResult;
+		import eu.aladdin_project.SystemDictionary;;
 		
 		String title = Labels.getLabel("login.title");
 		String wintitle = Labels.getLabel("login.window");
@@ -17,26 +19,58 @@
 	
 		public void authenticate(String user, String password){
 			StorageComponentProxy proxy = new StorageComponentProxy();
+			String page = "/";
 			try{
- 				eu.aladdin_project.xsd.OperationResult result = proxy.auth(user,password);
- 				//System.out.println("RESULT CODE: "+result.getCode());
- 				//System.out.println("RESULT DESC: "+result.getDescription());
- 				//System.out.println("RESULT STATUS: "+result.getStatus());
+ 				OperationResult result = proxy.auth(user,password);
+ 				System.out.println("RESULT CODE: "+result.getCode());
+ 				System.out.println("RESULT DESC: "+result.getDescription());
+ 				System.out.println("RESULT STATUS: "+result.getStatus());
  				
  				//Check if getCode() function return error code (0)
  				if(result.getCode().equals("0")){
- 					//TODO Show error code	
+ 					throw new eu.aladdin_project.exceptions.InvalidCredentialsException();
  				}else{
  					//TODO Retrieve user info from SC (there is no data in SC sample to implement this)
+ 					OperationResult restype = proxy.getUserType(result.getCode());
+ 					String usertype = null;
+ 					String username = null;
+ 					String usersname = null;
+ 					if(restype.getCode().equals(SystemDictionary.USERTYPE_ADMIN)){
+						System.out.println("Welcome Administrator");
+						usertype = SystemDictionary.USERTYPE_ADMIN;
+						Administrator admin = proxy.getAdministrator(result.getCode(),result.getCode());
+					//	System.out.println("Welcome Administrator2 "+admin);
+					//	username = admin.getPersonData().getName();
+					//	usersname = admin.getPersonData().getSurname();
+						
+ 					}else if(restype.getCode().equals(SystemDictionary.USERTYPE_CLINICIAN)){
+ 						System.out.println("Welcome Clinician");
+ 						usertype = SystemDictionary.USERTYPE_CLINICIAN;
+ 						Clinician clinic = proxy.getClinician(result.getCode(),result.getCode());
+ 					//	System.out.println("Welcome Clinician "+restype.getDescription());
+ 					//	username = clinic.getPersonData().getName();
+					//	usersname = clinic.getPersonData().getSurname();
+ 					}else{
+ 						//TODO Return not allowed user type
+ 						throw new eu.aladdin_project.exceptions.InvalidUserTypeException();
+ 					}
+ 					System.out.println("Welcome Administrator3");
+ 					session.setAttribute("user",user);
+ 					session.setAttribute("userid",result.getCode());
+ 					session.setAttribute("usertype",usertype);
+ 					//session.setAttribute("username",username);
+ 					//session.setAttribute("usersname",usersname);
+ 					System.out.println("Welcome Administrator4");
  				}
- 				
- 				session.setAttribute("user",user);
- 				session.setAttribute("userid",result.getCode());
- 				
  			}catch(java.rmi.RemoteException re){
- 				re.printStackTrace();
+ 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR_LBL;
+ 			}catch(eu.aladdin_project.exceptions.InvalidUserTypeException ue){
+ 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.USERTYPE_NOT_ALLOWED;	
+ 			}catch(eu.aladdin_project.exceptions.InvalidCredentialsException ce){
+ 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.INVALID_CREDENTIALS;
+ 			}catch(Exception e){
+ 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR_LBL;
  			}finally{
- 				String page = "/";
 				Executions.getCurrent().sendRedirect(page);
  			}
 			
@@ -53,7 +87,11 @@
 	<window border="none" sclass="centerwin" width="35%">
 		<image src="/inc/logo.png" />
 	</window>
-	<separator height="30px"/>
+	<separator height="15px"/>
+	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
+		<label id="errorlbl"/>
+	</window>
+	<separator height="15px"/>
 	<window title="${wintitle}" width="65%" sclass="centerwin" onCreate="alreadyLoggedIn()" >
 		<grid>
 			<columns>
@@ -77,4 +115,15 @@
 			</rows>	
 		</grid>
 	</window>
+	<zscript>
+		public void setErrorLabel(){
+			String error = Executions.getCurrent().getParameter("error");
+			if(error != null){
+				int errorcode = Integer.parseInt(error);
+				Label errorlbl = (Label)mainerror.getFellow("errorlbl");
+				errorlbl.setValue(Labels.getLabel(eu.aladdin_project.ErrorDictionary.getErrorLabel(errorcode)));
+				mainerror.setVisible(true);
+			}
+		}
+	</zscript>
 </zk>
