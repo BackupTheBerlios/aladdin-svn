@@ -1202,7 +1202,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     			
     			Questionnaire rq = req.getCreateQuestionnaire().getData();
     			rq.setID(null);
-				com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq);
+			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq);
     			
     			s.getTransaction().commit();
     			
@@ -1286,6 +1286,12 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		return respdoc;
     	}
 
+		private String getMeasurementType (Integer code) {
+			if (code == 1) return "Blood pressure";
+			if (code == 2) return "Weight";
+			return "";
+		}
+
 		private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
 			System.out.println ("1");
 			Measurement rm = Measurement.Factory.newInstance();
@@ -1293,6 +1299,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
 			System.out.println ("3");
 			rmeasurementType.setCode(m.getType());
+			rmeasurementType.setDescription ( getMeasurementType (Integer.valueOf ( m.getType() ) ) );
 			System.out.println ("4");
 			rm.setType(rmeasurementType);
 			System.out.println ("5");
@@ -1491,6 +1498,12 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     	private Integer getTaskTypesCount () {
     		return 5;
     	}
+
+	private String getTaskStatusType (Integer code) {
+		if (code == 0) return "pending";
+		if (code == 1) return "completed";
+		return "";
+	}
     	
     	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
@@ -1528,6 +1541,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				rt.setDateTimeFulfilled(c2);
     				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
     				taskStatus.setCode(t.getTaskStatus().toString());
+				taskStatus.setDescription ( getTaskStatusType ( t.getTaskStatus() ) );
     				rt.setTaskStatus(taskStatus);
     				rt.setURL(t.getUrl());
     				rt.setExecutorID(t.getExecutor().toString());
@@ -1605,11 +1619,28 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		System.out.println (" eQQ 14");
-    		Object[] qql = s.createSQLQuery("SELECT * FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'").list().toArray();
+    		Object[] qql = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'").list().toArray();
     		System.out.println (" eQQ 15");
     		for (int i = 0; i < qql.length; i++) {
     			System.out.println (" eQQ 16");
-    			rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
+//			System.out.println (qql[i].class.toString());
+			System.out.println (qql[i].toString());
+			System.out.println (qql.length);
+
+
+//			Object[] _obj_ = qq
+			System.out.println ("b");
+			Integer _id = (Integer) (qql[i]);
+			System.out.println ("c");
+			System.out.println (_id);
+			System.out.println ("load...");
+			com.aladdin.sc.db.QuestionnaireQuestion _obj = 
+				(com.aladdin.sc.db.QuestionnaireQuestion)
+					s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
+			rqql.add ( exportQQ ( _obj ) );
+
+//			if (qql.length > 1) rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
+//			else rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) (Object) qql));
     			System.out.println (" eQQ 17");
     		}
     		System.out.println (" eQQ 18");
