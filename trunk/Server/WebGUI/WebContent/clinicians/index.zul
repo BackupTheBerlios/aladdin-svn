@@ -16,6 +16,7 @@
 		String namelbl= Labels.getLabel("common.name");
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
+		String details = Labels.getLabel("common.details");
 		
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		ClinicianInfo[] plist = null;
@@ -45,7 +46,7 @@
 				<label value="${each.ID }"/>
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
-				<label value="Details" sclass="link" onClick="clinics.detailsClinician(self.getParent().getId())" />
+				<label value="${details }" sclass="link" onClick="clinics.detailsClinician(self.getParent().getId())" />
 				<label value="${updmsg }" sclass="link" onClick="clinics.updateClinician(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="clinics.deleteClinicianMsg(self.getParent().getId())"/>
 			</row>

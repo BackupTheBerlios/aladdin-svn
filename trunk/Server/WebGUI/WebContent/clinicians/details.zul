@@ -2,9 +2,14 @@
 <?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
 <?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
 <zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String actions = Labels.getLabel("common.actions");
+		String data = Labels.getLabel("common.personal.data");
+	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailClinicianController">
-	<label value="Actions"/>
+	<label value="${actions }"/>
 	<grid>
 		<rows>
 			<row align="center" id="actionrow">
@@ -12,7 +17,7 @@
 		</rows>
 	</grid>
 	<separator height="10px"/>
-	<label value="Data"/>
+	<label value="${data }"/>
 	<listbox id="datarows">
 		<listhead>
 			<listheader width="200px"/>
@@ -21,7 +26,6 @@
 	</listbox>
 	</window>
 		<zscript>
-		import org.zkoss.util.resource.Labels;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Clinician;
 		

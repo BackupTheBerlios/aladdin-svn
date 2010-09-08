@@ -6,6 +6,7 @@
 	<zscript>
 		import org.zkoss.util.resource.Labels;
 		String title = Labels.getLabel("patients.title.new");
+		String save = Labels.getLabel("patients.save");
 		page.setTitle(title);	
 		
 		public void openDialog(){
@@ -20,6 +21,6 @@
 		
 	</zscript>
 	<window title="${title}" id="patientform" sclass="centerwin" use="eu.aladdin_project.controllers.PattientControllerWindow" width="70%">
-	<button label="Save Patient" onClick="patientform.createPatient()"/>
+	<button label="${save }" onClick="patientform.createPatient()"/>
 	</window>
 </zk>

@@ -16,6 +16,7 @@
 		String namelbl= Labels.getLabel("common.name");
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
+		String details = Labels.getLabel("common.details");
 		
 		page.setTitle(title);
 		StorageComponentProxy proxy = new StorageComponentProxy();
@@ -46,7 +47,7 @@
 				<label value="${each.ID }"/>
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
-				<label value="Details" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
+				<label value="${details }" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
 				<label value="${updmsg }" sclass="link" onClick="patients.updatePatient(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="patients.deletePatientMsg(self.getParent().getId())"/>
 			</row>

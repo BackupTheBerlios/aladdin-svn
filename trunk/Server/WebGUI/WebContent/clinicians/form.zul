@@ -6,9 +6,10 @@
 	<zscript>
 		import org.zkoss.util.resource.Labels;
 		String title = Labels.getLabel("clinicians.new.title");
+		String save = Labels.getLabel("clinicians.save");
 		page.setTitle(title);	
 	</zscript>
 	<window title="${title}" id="clinicform" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.ClinicianControllerWindow">
-		<button label="Save Clinician" onClick="clinicform.createClinician()"/>
+		<button label="${save }" onClick="clinicform.createClinician()"/>
 	</window>
 </zk>
