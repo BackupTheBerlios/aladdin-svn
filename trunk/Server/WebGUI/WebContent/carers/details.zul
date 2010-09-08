@@ -2,25 +2,48 @@
 <?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
 <?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
 <zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String tasks = Labels.getLabel("common.tasks");
+		String actions = Labels.getLabel("common.actions");
+		String data = Labels.getLabel("common.personal.data");
+		String ids = Labels.getLabel("common.id");
+		String types = Labels.getLabel("common.type");
+		String statuss = Labels.getLabel("common.status");
+		String personaddr = Labels.getLabel("common.addressed.person");
+		String assigned = Labels.getLabel("common.date.assigned");
+		String fulfilled = Labels.getLabel("common.date.fulfilled");
+	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailSDController">
-	<label value="Actions"/>
+	<label value="${actions}"/>
 	<grid>
 		<rows>
 			<row align="center" id="actionrow"></row>
 		</rows>
 	</grid>
 	<separator height="10px"/>
-	<label value="Data"/>
+	<label value="${data}"/>
 	<listbox id="datarows">
 		<listhead>
 			<listheader width="200px"/>
 			<listheader/>
 		</listhead>
 	</listbox>
+	<separator height="10px"/>
+	<label id="taskrowslbl" value="${tasks}" visible="false"/>
+	<listbox id="taskrows" visible="false">
+		<listhead>
+		<listheader label="${ids}" sort="auto" width="35px"/>
+			<listheader label="${types}" sort="auto" width="200px"/>
+			<listheader label="${statuss }" sort="auto"/>
+			<listheader label="${personaddr }" sort="auto"/>
+			<listheader label="${assigned }" sort="auto" width="100px"/>
+			<listheader label="${fulfilled }" sort="auto" width="100px"/>
+		</listhead>
+	</listbox>
 	</window>
 		<zscript>
-		import org.zkoss.util.resource.Labels;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Carer;
 		

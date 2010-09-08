@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -90,7 +91,8 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 	
 	public Button createUpdateButton(){
 		Button btn = new Button();
-		btn.setLabel("Update Clinician Data");
+		String text = Labels.getLabel("clinicians.update.title");
+		btn.setLabel(text);
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {

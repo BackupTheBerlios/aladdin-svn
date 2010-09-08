@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -98,7 +99,8 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	
 	public Button createUpdateButton(){
 		Button btn = new Button();
-		btn.setLabel("Update Carer Data");
+		String text = Labels.getLabel("carers.update.title");
+		btn.setLabel(text);
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {

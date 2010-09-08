@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.details;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -10,11 +11,13 @@ public class DetailPatientController extends DetailSDController{
 
 	public Button[] createActionButtons(){
 		Button btn = new Button();
-		btn.setLabel("Modify Patient");
+		String text = Labels.getLabel("patients.update.title");
+		btn.setLabel(text);
 		btn.setHref("/patients/update.zul?patid="+this.currentid);
 		
 		Button btn1 = new Button();
-		btn1.setLabel("Assign New Task");
+		String text2 = Labels.getLabel("common.tasks.new");
+		btn1.setLabel(text2);
 		btn.setHref("/patients");
 		
 		Button[] ret = new Button[2];
@@ -47,7 +50,8 @@ public class DetailPatientController extends DetailSDController{
 	
 	protected Listitem getCurrentResponsibleListItem(){
 		Listitem lst = new Listitem();
-		Listcell cell1 = new Listcell("Responsible clinician");
+		String text = Labels.getLabel("patients.form.responsible");
+		Listcell cell1 = new Listcell(text);
 		Listcell cell2 = new Listcell(this.currentresponsible);
 		
 		lst.appendChild(cell1);
@@ -60,7 +64,8 @@ public class DetailPatientController extends DetailSDController{
 	protected Listitem[] getCarerListAsListItems(){
 		Listitem[] ret = new Listitem[this.currentcarers.length+1];
 		Listitem title = new Listitem();
-		Listcell cell1 = new Listcell("Carers");
+		String text = Labels.getLabel("menu.carers");
+		Listcell cell1 = new Listcell(text);
 		cell1.setSpan(2);
 		title.appendChild(cell1);
 		ret[0]=title;

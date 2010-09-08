@@ -63,13 +63,15 @@
  					System.out.println("Welcome Administrator4");
  				}
  			}catch(java.rmi.RemoteException re){
- 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR_LBL;
+ 				System.out.println("Server failed");
+ 				re.printStackTrace();
+ 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR;
  			}catch(eu.aladdin_project.exceptions.InvalidUserTypeException ue){
  				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.USERTYPE_NOT_ALLOWED;	
  			}catch(eu.aladdin_project.exceptions.InvalidCredentialsException ce){
  				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.INVALID_CREDENTIALS;
  			}catch(Exception e){
- 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR_LBL;
+ 				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR;
  			}finally{
 				Executions.getCurrent().sendRedirect(page);
  			}

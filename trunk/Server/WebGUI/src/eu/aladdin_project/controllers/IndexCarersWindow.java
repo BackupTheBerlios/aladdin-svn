@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -38,7 +39,8 @@ public class IndexCarersWindow extends Window{
 		this.carerid = id;
 		ConfirmDeleteCarer auxwin = new ConfirmDeleteCarer(id);
 		Button btn = new Button();
-		btn.setLabel("I'm sure, delete carer");
+		String text = Labels.getLabel("carers.delete.sure");
+		btn.setLabel(text);
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {
@@ -73,14 +75,16 @@ public class IndexCarersWindow extends Window{
 		
 		public ConfirmDeleteCarer(String id){
 			Label message = new Label();
-			message.setValue("Are you sure you want to delete the carer with ID = "+id+"?");
+			String confirm = Labels.getLabel("carers.delete.confirm");
+			message.setValue(confirm+" "+id+"?");
 			this.appendChild(message);
 			
 			Separator sep = new Separator();
 			sep.setHeight("10px");
 			this.appendChild(sep);
 			
-			this.setTitle("Delete Carer");
+			String deletetxt = Labels.getLabel("carers.delete");
+			this.setTitle(deletetxt);
 			this.setBorder("normal");
 			this.setClosable(true);
 		}

@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.details;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -52,13 +53,15 @@ public abstract class DetailPersonController extends Window {
 	
 	protected Listitem[] getPersonDataListItems(){
 		Listitem lst1 = new Listitem();
-			Listcell namecell = new Listcell("Name");
+			String text = Labels.getLabel("common.name");
+			Listcell namecell = new Listcell(text);
 			Listcell namecell2 = new Listcell(this.currentdata.getSurname()+", "+this.currentdata.getName());
 		lst1.appendChild(namecell);
 		lst1.appendChild(namecell2);
 		
 		Listitem lst2 = new Listitem();
-		Listcell addtitle = new Listcell("Addresses");
+		String text2 = Labels.getLabel("common.addresses");
+		Listcell addtitle = new Listcell(text2);
 		addtitle.setSpan(2);
 		lst2.appendChild(addtitle);
 		
@@ -70,19 +73,22 @@ public abstract class DetailPersonController extends Window {
 		addressstring += "\n"+addressdata.getZipCode()+" "+addressdata.getCountry();
 		
 		Listitem lst3 = new Listitem();
-			Listcell addcell = new Listcell("Address");
+			String text3 = Labels.getLabel("common.address");
+			Listcell addcell = new Listcell(text3);
 			Listcell addcell2 = new Listcell(addressstring);
 		lst3.appendChild(addcell);
 		lst3.appendChild(addcell2);
 		
 		Listitem lst4 = new Listitem();
-			Listcell addcell3 = new Listcell("Note");
+			String text4 = Labels.getLabel("common.notes");
+			Listcell addcell3 = new Listcell(text4);
 			Listcell addcell4 = new Listcell(addressdata.getNotes());
 		lst4.appendChild(addcell3);
 		lst4.appendChild(addcell4);
 		
 		Listitem lst5 = new Listitem();
-		Listcell comtitle = new Listcell("Communications");
+		String text5 = Labels.getLabel("common.communications");
+		Listcell comtitle = new Listcell(text5);
 		comtitle.setSpan(2);
 		lst5.appendChild(comtitle);
 		
@@ -95,7 +101,7 @@ public abstract class DetailPersonController extends Window {
 		lst6.appendChild(comcell2);
 	
 		Listitem lst7 = new Listitem();
-			Listcell comcell3 = new Listcell("Note");
+			Listcell comcell3 = new Listcell(text4);
 			Listcell comcell4 = new Listcell(commdata.getNotes());
 		lst7.appendChild(comcell3);
 		lst7.appendChild(comcell4);

@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.details;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Row;
@@ -8,7 +9,8 @@ public class DetailClinicianController extends DetailPersonController{
 
 	public Button[] createActionButtons() {
 		Button btn = new Button();
-		btn.setLabel("Modify Clinician");
+		String text = Labels.getLabel("clinicians.update.title");
+		btn.setLabel(text);
 		btn.setHref("/clinicians/update.zul?clinid="+this.currentid);
 		
 		Button[] ret = new Button[1];

@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -20,7 +21,6 @@ public class IndexCliniciansWindow extends Window{
 	private String clinicianid = null;
 
 	public void deleteClinician(){
-		System.out.println("HOLA?");
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		StorageComponentProxy proxy = new StorageComponentProxy();
@@ -39,7 +39,8 @@ public class IndexCliniciansWindow extends Window{
 		this.clinicianid = id;
 		ConfirmDeleteClinician auxwin = new ConfirmDeleteClinician(id);
 		Button btn = new Button();
-		btn.setLabel("I'm sure, delete clinician");
+		String text = Labels.getLabel("clinicians.delete.sure");
+		btn.setLabel(text);
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {
@@ -74,14 +75,16 @@ public class IndexCliniciansWindow extends Window{
 		
 		public ConfirmDeleteClinician(String id){
 			Label message = new Label();
-			message.setValue("Are you sure you want to delete the clinician with ID = "+id+"?");
+			String text = Labels.getLabel("clinicians.delete.confirm");
+			message.setValue(text+" "+id+"?");
 			this.appendChild(message);
 			
 			Separator sep = new Separator();
 			sep.setHeight("10px");
 			this.appendChild(sep);
 			
-			this.setTitle("Delete Clinician");
+			String text2 = Labels.getLabel("clinicians.delete");
+			this.setTitle(text2);
 			this.setBorder("normal");
 			this.setClosable(true);
 		}

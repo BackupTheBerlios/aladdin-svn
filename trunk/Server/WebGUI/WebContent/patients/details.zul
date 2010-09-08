@@ -18,6 +18,18 @@
 			<listheader/>
 		</listhead>
 	</listbox>
+	<separator height="10px"/>
+	<label id="taskrowslbl" value="Tasks" visible="false"/>
+	<listbox id="taskrows" visible="false">
+		<listhead>
+		<listheader label="ID" sort="auto" width="35px"/>
+			<listheader label="Type" sort="auto" width="200px"/>
+			<listheader label="Status" sort="auto"/>
+			<listheader label="Addressed person ID" sort="auto"/>
+			<listheader label="Assigned on" sort="auto" width="100px"/>
+			<listheader label="Fulfilled on" sort="auto" width="100px"/>
+		</listhead>
+	</listbox>
 	</window>
 		<zscript>
 		import org.zkoss.util.resource.Labels;

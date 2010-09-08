@@ -252,7 +252,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	
 	public Button createUpdateButton(){
 		Button btn = new Button();
-		btn.setLabel("Update Patient Data");
+		String text = Labels.getLabel("patients.update.title");
+		btn.setLabel(text);
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {
