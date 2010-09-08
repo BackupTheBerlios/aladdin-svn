@@ -240,4 +240,13 @@
     		<element name="personData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
+
+    <complexType name="dict">
+    	<sequence>
+    		<element name="code" type="int"></element>
+    		<element name="description" type="string"></element>
+    		<element name="type" type="int"></element>
+    		<element name="lang" type="string"></element>
+    	</sequence>
+    </complexType>
 </schema>

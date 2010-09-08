@@ -898,19 +898,28 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			c.setSDData(exportSocioDemographicData(carer.getM_SocioDemographicDatasd()));
 			return c;
 		}
-
+		
 		private SocioDemographicData exportSocioDemographicData (com.aladdin.sc.db.SocioDemographicData SDData) {
 			SocioDemographicData sd = SocioDemographicData.Factory.newInstance();
 			sd.setAge(SDData.getAge().shortValue());
+			
 			SystemParameter gender = SystemParameter.Factory.newInstance();
 			gender.setCode(SDData.getGender().toString());
+			gender.setDescription(Dict.getGenderDescription(gender.getCode(), s));
+			
 			sd.setGender(gender);
+			
 			SystemParameter maritalStatus = SystemParameter.Factory.newInstance();
 			maritalStatus.setCode(SDData.getMaritalStatus().toString());
+			maritalStatus.setDescription(Dict.getMaritalStatusDescription(maritalStatus.getCode(), s));
+			
 			sd.setMaritalStatus(maritalStatus);
 			sd.setChildren(SDData.getChildren().shortValue());
+			
 			SystemParameter livingWith = SystemParameter.Factory.newInstance();
 			livingWith.setCode(SDData.getLivingWith().toString());
+			livingWith.setDescription(Dict.getLivingWithDescription(livingWith.getCode(), s));
+			
 			sd.setLivingWith(livingWith);
 			return sd;
 		}
@@ -1286,12 +1295,6 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		return respdoc;
     	}
 
-		private String getMeasurementType (Integer code) {
-			if (code == 1) return "Blood pressure";
-			if (code == 2) return "Weight";
-			return "";
-		}
-
 		private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
 			System.out.println ("1");
 			Measurement rm = Measurement.Factory.newInstance();
@@ -1299,7 +1302,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
 			System.out.println ("3");
 			rmeasurementType.setCode(m.getType());
-			rmeasurementType.setDescription ( getMeasurementType (Integer.valueOf ( m.getType() ) ) );
+			rmeasurementType.setDescription ( Dict.getMeasurementType ( rmeasurementType.getCode(), s ) );
 			System.out.println ("4");
 			rm.setType(rmeasurementType);
 			System.out.println ("5");
@@ -1484,27 +1487,10 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		return respdoc;
     	}
     	
-    	private String getTaskDescription (Integer code) {
-    		switch (code) {
-    			case 1: return "Patient Questionnaire Task"; 
-    			case 2: return "Carer Questionnaire Task"; 
-    			case 3: return "Blood Pressure Task"; 
-    			case 4: return "Weight Task"; 
-    			case 5: return "Cognitivae Game Task"; 
-    			default: return "";
-    		}
-    	}
-    	
     	private Integer getTaskTypesCount () {
-    		return 5;
+    		return 7;
     	}
 
-	private String getTaskStatusType (Integer code) {
-		if (code == 0) return "pending";
-		if (code == 1) return "completed";
-		return "";
-	}
-    	
     	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
@@ -1531,7 +1517,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
     				taskType.setCode(t.getTaskType().toString());
-    				taskType.setDescription(getTaskDescription (t.getTaskType()));
+    				taskType.setDescription(Dict.getTaskDescription (taskType.getCode(), s));
     				rt.setTaskType(taskType);
     				Calendar c1 = Calendar.getInstance();
     				c1.setTimeInMillis(t.getDateTimeAssigned().getTime());
@@ -1541,7 +1527,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				rt.setDateTimeFulfilled(c2);
     				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
     				taskStatus.setCode(t.getTaskStatus().toString());
-				taskStatus.setDescription ( getTaskStatusType ( t.getTaskStatus() ) );
+    				taskStatus.setDescription ( Dict.getTaskStatusType ( taskStatus.getCode(), s ) );
     				rt.setTaskStatus(taskStatus);
     				rt.setURL(t.getUrl());
     				rt.setExecutorID(t.getExecutor().toString());
@@ -2398,24 +2384,39 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 					com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) s.load(com.aladdin.sc.db.Warning.class, id);
 					Warning rw = resp.addNewOut();
     				rw.setID(w.getId().toString());
+    				
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
     				typeOfWarning.setCode(w.getTypeOfWarning().toString());
+    				typeOfWarning.setDescription(Dict.getTypeOfWarningDesciption(typeOfWarning.getCode(), s));
+    				
     				rw.setTypeOfWarning(typeOfWarning);
     				Calendar c1 = Calendar.getInstance();
     				c1.setTimeInMillis(w.getDateTimeOfWarning().getTime());
     				rw.setDateTimeOfWarning(c1);
+    				
     				SystemParameter effect = SystemParameter.Factory.newInstance();
     				effect.setCode(w.getEffect().toString());
+    				effect.setDescription(Dict.getEffectOfWarningDesciption(effect.getCode(), s));
+    				
     				rw.setEffect(effect);
+    				
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
     				indicator.setCode(w.getIndicator().toString());
+    				indicator.setDescription(Dict.getIndicatorOfWarningDesciption(indicator.getCode(), s));
+    				
     				rw.setIndicator(indicator);
+    				
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
     				riskLevel.setCode(w.getRiskLevel().toString());
+    				riskLevel.setDescription(Dict.getRisklevelOfWarningDesciption(riskLevel.getCode(), s));
+    				
     				rw.setRiskLevel(riskLevel);
     				rw.setJustificationText(w.getJustificationText());
+    				
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
+    				emergencyLevel.setDescription(Dict.getEmergencylevelOfWarningDesciption(emergencyLevel.getCode(), s));
+    				
     				rw.setEmergencyLevel(emergencyLevel);
     				rw.setPatientID(w.getPatientID());
     				rw.setDelivered(w.getDelivered());
@@ -2691,7 +2692,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		for (Integer i = 1; i < getTaskTypesCount() + 1; i++) {
     			SystemParameter pt = resp.addNewOut();
         		pt.setCode(i.toString());
-        		pt.setDescription(getTaskDescription(i));
+        		pt.setDescription(Dict.getTaskDescription(i.toString(), s));
     		}
     		
     		return respdoc;
