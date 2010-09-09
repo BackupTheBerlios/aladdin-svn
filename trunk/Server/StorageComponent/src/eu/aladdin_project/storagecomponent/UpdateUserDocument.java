@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateUserDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE6D08197329E0478E99E5FAF01ABE7A8").resolveHandle("updateusere2d4doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF346BF777108104C0BE92CE56E86E749").resolveHandle("updateusere2d4doctype");
     
     /**
      * Gets the "UpdateUser" element
@@ -42,7 +42,7 @@ public interface UpdateUserDocument extends org.apache.xmlbeans.XmlObject
     public interface UpdateUser extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE6D08197329E0478E99E5FAF01ABE7A8").resolveHandle("updateuserbde4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF346BF777108104C0BE92CE56E86E749").resolveHandle("updateuserbde4elemtype");
         
         /**
          * Gets the "user" element

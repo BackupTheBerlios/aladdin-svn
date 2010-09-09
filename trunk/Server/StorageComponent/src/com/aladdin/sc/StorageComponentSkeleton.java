@@ -426,9 +426,9 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
         			qqa.setValue(new Integer(rqqa.getValue()));
         			qqa.setQuestion(qq.getId());
         			qqa.setDescription(rqqa.getStringValue());
-        			if (rqqa.getDeleted() != true) rqqa.setDeleted(true);
-        			qqa.setDeleted(rqqa.getDeleted());
-        			if (rqqa.getId() > 0) qqa.setId(rqqa.getId());
+//        			if (rqqa.getDeleted() != true) rqqa.setDeleted(true);
+//        			qqa.setDeleted(rqqa.getDeleted());
+//        			if (rqqa.getId() > 0) qqa.setId(rqqa.getId());
         			
         			
         			System.out.print (" answer ");
@@ -1648,10 +1648,10 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     		System.out.println (" eQQA 3");
     		rqqa.setValue(qqa.getValue().shortValue());
     		System.out.println (" eQQA 4");
-    		if (qqa.getDeleted() != null) rqqa.setDeleted(qqa.getDeleted());
-    		else rqqa.setDeleted(false);
+//    		if (qqa.getDeleted() != null) rqqa.setDeleted(qqa.getDeleted());
+//    		else rqqa.setDeleted(false);
     		System.out.println (" eQQA 5");
-    		rqqa.setId(qqa.getId());
+//    		rqqa.setId(qqa.getId());
     		System.out.println (" eQQA 6");
     		
     		return rqqa;

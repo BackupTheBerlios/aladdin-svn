@@ -48,8 +48,6 @@
 		<simpleContent>
 			<extension base="string">
 				<attribute type="unsignedByte" name="value"/>
-				<attribute type="boolean" name="deleted"/>
-				<attribute type="int" name="id"/>
 			</extension>
 		</simpleContent>
 	</complexType>
