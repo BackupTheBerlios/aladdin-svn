@@ -784,6 +784,21 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetSystemParameterList">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="type" type="xsd:int"/>
+      			<xsd:element name="language" type="xsd:int"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSystemParameterListResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" name="out" type="aladdin:SystemParameter"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -832,6 +847,10 @@
   </wsdl:message>
   <wsdl:message name="ListOfCliniciansResponse">
     <wsdl:part name="parameters" element="tns:ListOfCliniciansResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSystemParameterListRequest">
+    <wsdl:part name="parameters" element="tns:GetSystemParameterList">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="DeleteUserResponse">
@@ -928,6 +947,10 @@
   </wsdl:message>
   <wsdl:message name="SaveWarningResponse">
     <wsdl:part name="parameters" element="tns:SaveWarningResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSystemParameterListResponse">
+    <wsdl:part name="parameters" element="tns:GetSystemParameterListResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetAllExternalServicesRequest">
@@ -1515,6 +1538,12 @@
       <wsdl:output message="tns:GetUserTypeResponse">
     </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetSystemParameterList">
+      <wsdl:input message="tns:GetSystemParameterListRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetSystemParameterListResponse">
+    </wsdl:output>
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP" type="tns:StorageComponent">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -1986,10 +2015,19 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetSystemParameterList">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetSystemParameterList"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="StorageComponent">
     <wsdl:port name="StorageComponentSOAP" binding="tns:StorageComponentSOAP">
-      <soap:address location="http://193.174.152.114:28080/axis2/services/StorageComponent"/>
+      <soap:address location="http://193.174.152.114:28080/axis2/services/StorageComponent/"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

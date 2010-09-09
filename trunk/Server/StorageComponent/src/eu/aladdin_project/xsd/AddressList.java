@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface AddressList extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AddressList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE5146C640B0EE3213268885FE36430F2").resolveHandle("addresslistb24ctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AddressList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE6D08197329E0478E99E5FAF01ABE7A8").resolveHandle("addresslistb24ctype");
     
     /**
      * Gets array of all "Address" elements

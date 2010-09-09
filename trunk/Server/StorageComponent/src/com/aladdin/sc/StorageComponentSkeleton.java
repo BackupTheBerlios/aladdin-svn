@@ -2,6 +2,7 @@
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,6 +74,10 @@ import eu.aladdin_project.xsd.*;
 import eu.aladdin_project.storagecomponent.GetUserTypeDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
+import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument;
+import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument;
+import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.GetSystemParameterList;
+import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -905,20 +910,20 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			
 			SystemParameter gender = SystemParameter.Factory.newInstance();
 			gender.setCode(SDData.getGender().toString());
-			gender.setDescription(Dict.getGenderDescription(gender.getCode(), s));
+			//gender.setDescription(Dict.getGenderDescription(gender.getCode(), s));
 			
 			sd.setGender(gender);
 			
 			SystemParameter maritalStatus = SystemParameter.Factory.newInstance();
 			maritalStatus.setCode(SDData.getMaritalStatus().toString());
-			maritalStatus.setDescription(Dict.getMaritalStatusDescription(maritalStatus.getCode(), s));
+			//maritalStatus.setDescription(Dict.getMaritalStatusDescription(maritalStatus.getCode(), s));
 			
 			sd.setMaritalStatus(maritalStatus);
 			sd.setChildren(SDData.getChildren().shortValue());
 			
 			SystemParameter livingWith = SystemParameter.Factory.newInstance();
 			livingWith.setCode(SDData.getLivingWith().toString());
-			livingWith.setDescription(Dict.getLivingWithDescription(livingWith.getCode(), s));
+			//livingWith.setDescription(Dict.getLivingWithDescription(livingWith.getCode(), s));
 			
 			sd.setLivingWith(livingWith);
 			return sd;
@@ -1302,7 +1307,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
 			System.out.println ("3");
 			rmeasurementType.setCode(m.getType());
-			rmeasurementType.setDescription ( Dict.getMeasurementType ( rmeasurementType.getCode(), s ) );
+			//rmeasurementType.setDescription ( Dict.getMeasurementType ( rmeasurementType.getCode(), s ) );
 			System.out.println ("4");
 			rm.setType(rmeasurementType);
 			System.out.println ("5");
@@ -1517,7 +1522,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
     				taskType.setCode(t.getTaskType().toString());
-    				taskType.setDescription(Dict.getTaskDescription (taskType.getCode(), s));
+    				//taskType.setDescription(Dict.getTaskDescription (taskType.getCode(), s));
     				rt.setTaskType(taskType);
     				Calendar c1 = Calendar.getInstance();
     				c1.setTimeInMillis(t.getDateTimeAssigned().getTime());
@@ -1527,7 +1532,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				rt.setDateTimeFulfilled(c2);
     				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
     				taskStatus.setCode(t.getTaskStatus().toString());
-    				taskStatus.setDescription ( Dict.getTaskStatusType ( taskStatus.getCode(), s ) );
+    				//taskStatus.setDescription ( Dict.getTaskStatusType ( taskStatus.getCode(), s ) );
     				rt.setTaskStatus(taskStatus);
     				rt.setURL(t.getUrl());
     				rt.setExecutorID(t.getExecutor().toString());
@@ -2387,7 +2392,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
     				typeOfWarning.setCode(w.getTypeOfWarning().toString());
-    				typeOfWarning.setDescription(Dict.getTypeOfWarningDesciption(typeOfWarning.getCode(), s));
+    				//typeOfWarning.setDescription(Dict.getTypeOfWarningDesciption(typeOfWarning.getCode(), s));
     				
     				rw.setTypeOfWarning(typeOfWarning);
     				Calendar c1 = Calendar.getInstance();
@@ -2396,26 +2401,26 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     				
     				SystemParameter effect = SystemParameter.Factory.newInstance();
     				effect.setCode(w.getEffect().toString());
-    				effect.setDescription(Dict.getEffectOfWarningDesciption(effect.getCode(), s));
+    				//effect.setDescription(Dict.getEffectOfWarningDesciption(effect.getCode(), s));
     				
     				rw.setEffect(effect);
     				
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
     				indicator.setCode(w.getIndicator().toString());
-    				indicator.setDescription(Dict.getIndicatorOfWarningDesciption(indicator.getCode(), s));
+    				//indicator.setDescription(Dict.getIndicatorOfWarningDesciption(indicator.getCode(), s));
     				
     				rw.setIndicator(indicator);
     				
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
     				riskLevel.setCode(w.getRiskLevel().toString());
-    				riskLevel.setDescription(Dict.getRisklevelOfWarningDesciption(riskLevel.getCode(), s));
+    				//riskLevel.setDescription(Dict.getRisklevelOfWarningDesciption(riskLevel.getCode(), s));
     				
     				rw.setRiskLevel(riskLevel);
     				rw.setJustificationText(w.getJustificationText());
     				
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
-    				emergencyLevel.setDescription(Dict.getEmergencylevelOfWarningDesciption(emergencyLevel.getCode(), s));
+    				//emergencyLevel.setDescription(Dict.getEmergencylevelOfWarningDesciption(emergencyLevel.getCode(), s));
     				
     				rw.setEmergencyLevel(emergencyLevel);
     				rw.setPatientID(w.getPatientID());
@@ -2682,6 +2687,31 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 				 
 			return respdoc;
 		}
+		
+		public GetSystemParameterListResponseDocument getSystemParameterList (GetSystemParameterListDocument req) {
+			GetSystemParameterListResponseDocument respdoc = GetSystemParameterListResponseDocument.Factory.newInstance();
+			GetSystemParameterListResponse resp = respdoc.addNewGetSystemParameterListResponse();
+			
+			try {
+				Integer type = new Integer (req.getGetSystemParameterList().getType());
+				Integer language = new Integer (req.getGetSystemParameterList().getLanguage());
+				
+				String sql = "SELECT code, description FROM dict WHERE type = '" + type.toString() + "' AND language = '" + language.toString() + "'";
+				Object[] ret = s.createSQLQuery(sql).list().toArray();
+				
+				for (int i = 0; i < ret.length; i++) {
+					Object[] obj = (Object[]) ret[i];
+					SystemParameter sp = resp.addNewOut();
+					sp.setCode(obj[0].toString());
+					sp.setDescription(obj[1].toString());
+				}
+				
+			} catch (Exception e) {
+				
+			}
+			
+			return respdoc;
+        }
         
         
     	// TODO:
@@ -2692,7 +2722,7 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
     		for (Integer i = 1; i < getTaskTypesCount() + 1; i++) {
     			SystemParameter pt = resp.addNewOut();
         		pt.setCode(i.toString());
-        		pt.setDescription(Dict.getTaskDescription(i.toString(), s));
+        		//pt.setDescription(Dict.getTaskDescription(i.toString(), s));
     		}
     		
     		return respdoc;

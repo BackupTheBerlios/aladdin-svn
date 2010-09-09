@@ -92,7 +92,7 @@ create table SocioDemographicData (id int4 not null, Age int4, Gender int4, Mari
 create table SystemParameter (id int4 not null, Code varchar(255), Description varchar(255), primary key (id));
 create table Task (id int4 not null, TaskType int4, DateTimeAssigned timestamp, DateTimeFulfilled timestamp, TaskStatus int4, url varchar(255), questionnaire int4, Executor int4, Assigner int4, Object int4, primary key (id));
 create table Warning (id int4 not null, TypeOfWarning int4, DateTimeOfWarning timestamp, Effect int4, Indicator int4, RiskLevel int4, JustificationText varchar(255), EmergencyLevel int4, PatientID varchar(255), Delivered bool, primary key (id));
-create table dict (id int4 not null, code int4, description varchar(255), type varchar(255), lang varchar(255), primary key (id));
+create table dict (id int4 not null, code int4, description varchar(255), type int4, language int4, primary key (id));
 alter table Address add constraint FK1ED033D44EAC96B0 foreign key (persondata) references PersonData;
 alter table Administrator add constraint FK8BEF2AD4EAC96B0 foreign key (personData) references PersonData;
 alter table Carer add constraint FK3DDF7614EAC96B0 foreign key (persondata) references PersonData;

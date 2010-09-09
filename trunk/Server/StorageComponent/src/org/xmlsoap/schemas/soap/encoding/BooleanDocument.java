@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface BooleanDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(BooleanDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE5146C640B0EE3213268885FE36430F2").resolveHandle("boolean3c2cdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(BooleanDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE6D08197329E0478E99E5FAF01ABE7A8").resolveHandle("boolean3c2cdoctype");
     
     /**
      * Gets the "boolean" element

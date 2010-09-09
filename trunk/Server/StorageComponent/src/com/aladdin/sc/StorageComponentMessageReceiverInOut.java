@@ -38,938 +38,956 @@
 
             if("updateQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaireResponse105 = null;
+                eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaireResponse107 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateQuestionnaireResponse105 =
+                                               updateQuestionnaireResponse107 =
                                                    
                                                    
                                                          skel.updateQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateQuestionnaireResponse105, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateQuestionnaireResponse107, false);
                                     } else 
 
             if("listOfQuestionnaires".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnairesResponse107 = null;
+                eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnairesResponse109 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfQuestionnairesResponse107 =
+                                               listOfQuestionnairesResponse109 =
                                                    
                                                    
                                                          skel.listOfQuestionnaires(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfQuestionnairesResponse107, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfQuestionnairesResponse109, false);
                                     } else 
 
             if("saveWarning".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarningResponse109 = null;
+                eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarningResponse111 = null;
 	                        eu.aladdin_project.storagecomponent.SaveWarningDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.SaveWarningDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.SaveWarningDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               saveWarningResponse109 =
+                                               saveWarningResponse111 =
                                                    
                                                    
                                                          skel.saveWarning(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveWarningResponse109, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveWarningResponse111, false);
                                     } else 
 
             if("updateCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument updateCarerResponse111 = null;
+                eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument updateCarerResponse113 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateCarerResponse111 =
+                                               updateCarerResponse113 =
                                                    
                                                    
                                                          skel.updateCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateCarerResponse111, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateCarerResponse113, false);
                                     } else 
 
             if("updateUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateUserResponseDocument updateUserResponse113 = null;
+                eu.aladdin_project.storagecomponent.UpdateUserResponseDocument updateUserResponse115 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateUserResponse113 =
+                                               updateUserResponse115 =
                                                    
                                                    
                                                          skel.updateUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateUserResponse113, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateUserResponse115, false);
                                     } else 
 
             if("deleteAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument deleteAdministratorResponse115 = null;
+                eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument deleteAdministratorResponse117 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteAdministratorResponse115 =
+                                               deleteAdministratorResponse117 =
                                                    
                                                    
                                                          skel.deleteAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteAdministratorResponse115, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteAdministratorResponse117, false);
                                     } else 
 
             if("deleteUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteUserResponseDocument deleteUserResponse117 = null;
+                eu.aladdin_project.storagecomponent.DeleteUserResponseDocument deleteUserResponse119 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteUserResponse117 =
+                                               deleteUserResponse119 =
                                                    
                                                    
                                                          skel.deleteUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteUserResponse117, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteUserResponse119, false);
+                                    } else 
+
+            if("getSystemParameterList".equals(methodName)){
+                
+                eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument getSystemParameterListResponse121 = null;
+	                        eu.aladdin_project.storagecomponent.GetSystemParameterListDocument wrappedParam =
+                                                             (eu.aladdin_project.storagecomponent.GetSystemParameterListDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               getSystemParameterListResponse121 =
+                                                   
+                                                   
+                                                         skel.getSystemParameterList(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getSystemParameterListResponse121, false);
                                     } else 
 
             if("getCarerAssessments".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument getCarerAssessmentsResponse119 = null;
+                eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument getCarerAssessmentsResponse123 = null;
 	                        eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getCarerAssessmentsResponse119 =
+                                               getCarerAssessmentsResponse123 =
                                                    
                                                    
                                                          skel.getCarerAssessments(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerAssessmentsResponse119, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerAssessmentsResponse123, false);
                                     } else 
 
             if("listOfCarers".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument listOfCarersResponse121 = null;
+                eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument listOfCarersResponse125 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfCarersDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfCarersDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfCarersDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfCarersResponse121 =
+                                               listOfCarersResponse125 =
                                                    
                                                    
                                                          skel.listOfCarers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCarersResponse121, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCarersResponse125, false);
                                     } else 
 
             if("listOfClinicians".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument listOfCliniciansResponse123 = null;
+                eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument listOfCliniciansResponse127 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfCliniciansDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfCliniciansDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfCliniciansDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfCliniciansResponse123 =
+                                               listOfCliniciansResponse127 =
                                                    
                                                    
                                                          skel.listOfClinicians(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCliniciansResponse123, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCliniciansResponse127, false);
                                     } else 
 
             if("getUserType".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument getUserTypeResponse125 = null;
+                eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument getUserTypeResponse129 = null;
 	                        eu.aladdin_project.storagecomponent.GetUserTypeDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetUserTypeDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetUserTypeDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getUserTypeResponse125 =
+                                               getUserTypeResponse129 =
                                                    
                                                    
                                                          skel.getUserType(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserTypeResponse125, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserTypeResponse129, false);
                                     } else 
 
             if("savePatientAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument savePatientAssessmentResponse127 = null;
+                eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument savePatientAssessmentResponse131 = null;
 	                        eu.aladdin_project.storagecomponent.SavePatientAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.SavePatientAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.SavePatientAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               savePatientAssessmentResponse127 =
+                                               savePatientAssessmentResponse131 =
                                                    
                                                    
                                                          skel.savePatientAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), savePatientAssessmentResponse127, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), savePatientAssessmentResponse131, false);
                                     } else 
 
             if("storeMeasurements".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument storeMeasurementsResponse129 = null;
+                eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument storeMeasurementsResponse133 = null;
 	                        eu.aladdin_project.storagecomponent.StoreMeasurementsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.StoreMeasurementsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.StoreMeasurementsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               storeMeasurementsResponse129 =
+                                               storeMeasurementsResponse133 =
                                                    
                                                    
                                                          skel.storeMeasurements(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeMeasurementsResponse129, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeMeasurementsResponse133, false);
                                     } else 
 
             if("getPatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientResponseDocument getPatientResponse131 = null;
+                eu.aladdin_project.storagecomponent.GetPatientResponseDocument getPatientResponse135 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientResponse131 =
+                                               getPatientResponse135 =
                                                    
                                                    
                                                          skel.getPatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientResponse131, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientResponse135, false);
                                     } else 
 
             if("deleteCarerAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument deleteCarerAssessmentResponse133 = null;
+                eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument deleteCarerAssessmentResponse137 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteCarerAssessmentResponse133 =
+                                               deleteCarerAssessmentResponse137 =
                                                    
                                                    
                                                          skel.deleteCarerAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerAssessmentResponse133, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerAssessmentResponse137, false);
                                     } else 
 
             if("createClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateClinicianResponseDocument createClinicianResponse135 = null;
+                eu.aladdin_project.storagecomponent.CreateClinicianResponseDocument createClinicianResponse139 = null;
 	                        eu.aladdin_project.storagecomponent.CreateClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createClinicianResponse135 =
+                                               createClinicianResponse139 =
                                                    
                                                    
                                                          skel.createClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createClinicianResponse135, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createClinicianResponse139, false);
                                     } else 
 
             if("auth".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.AuthResponseDocument authResponse137 = null;
+                eu.aladdin_project.storagecomponent.AuthResponseDocument authResponse141 = null;
 	                        eu.aladdin_project.storagecomponent.AuthDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.AuthDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.AuthDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               authResponse137 =
+                                               authResponse141 =
                                                    
                                                    
                                                          skel.auth(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), authResponse137, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), authResponse141, false);
                                     } else 
 
             if("getQuestionnaireAnswers".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswersResponse139 = null;
+                eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswersResponse143 = null;
 	                        eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getQuestionnaireAnswersResponse139 =
+                                               getQuestionnaireAnswersResponse143 =
                                                    
                                                    
                                                          skel.getQuestionnaireAnswers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireAnswersResponse139, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireAnswersResponse143, false);
                                     } else 
 
             if("deleteExternalService".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument deleteExternalServiceResponse141 = null;
+                eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument deleteExternalServiceResponse145 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteExternalServiceDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteExternalServiceDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteExternalServiceDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteExternalServiceResponse141 =
+                                               deleteExternalServiceResponse145 =
                                                    
                                                    
                                                          skel.deleteExternalService(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteExternalServiceResponse141, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteExternalServiceResponse145, false);
                                     } else 
 
             if("deleteClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument deleteClinicianResponse143 = null;
+                eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument deleteClinicianResponse147 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteClinicianResponse143 =
+                                               deleteClinicianResponse147 =
                                                    
                                                    
                                                          skel.deleteClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteClinicianResponse143, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteClinicianResponse147, false);
                                     } else 
 
             if("changePassword".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument changePasswordResponse145 = null;
+                eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument changePasswordResponse149 = null;
 	                        eu.aladdin_project.storagecomponent.ChangePasswordDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ChangePasswordDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ChangePasswordDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               changePasswordResponse145 =
+                                               changePasswordResponse149 =
                                                    
                                                    
                                                          skel.changePassword(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), changePasswordResponse145, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), changePasswordResponse149, false);
                                     } else 
 
             if("deletePatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeletePatientResponseDocument deletePatientResponse147 = null;
+                eu.aladdin_project.storagecomponent.DeletePatientResponseDocument deletePatientResponse151 = null;
 	                        eu.aladdin_project.storagecomponent.DeletePatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeletePatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeletePatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deletePatientResponse147 =
+                                               deletePatientResponse151 =
                                                    
                                                    
                                                          skel.deletePatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientResponse147, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientResponse151, false);
                                     } else 
 
             if("createQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateQuestionnaireResponseDocument createQuestionnaireResponse149 = null;
+                eu.aladdin_project.storagecomponent.CreateQuestionnaireResponseDocument createQuestionnaireResponse153 = null;
 	                        eu.aladdin_project.storagecomponent.CreateQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createQuestionnaireResponse149 =
+                                               createQuestionnaireResponse153 =
                                                    
                                                    
                                                          skel.createQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createQuestionnaireResponse149, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createQuestionnaireResponse153, false);
                                     } else 
 
             if("getPatientMeasurement".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument getPatientMeasurementResponse151 = null;
+                eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument getPatientMeasurementResponse155 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientMeasurementResponse151 =
+                                               getPatientMeasurementResponse155 =
                                                    
                                                    
                                                          skel.getPatientMeasurement(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientMeasurementResponse151, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientMeasurementResponse155, false);
                                     } else 
 
             if("updatePatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument updatePatientResponse153 = null;
+                eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument updatePatientResponse157 = null;
 	                        eu.aladdin_project.storagecomponent.UpdatePatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdatePatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdatePatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updatePatientResponse153 =
+                                               updatePatientResponse157 =
                                                    
                                                    
                                                          skel.updatePatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updatePatientResponse153, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updatePatientResponse157, false);
                                     } else 
 
             if("deleteQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument deleteQuestionnaireResponse155 = null;
+                eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument deleteQuestionnaireResponse159 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteQuestionnaireResponse155 =
+                                               deleteQuestionnaireResponse159 =
                                                    
                                                    
                                                          skel.deleteQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteQuestionnaireResponse155, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteQuestionnaireResponse159, false);
                                     } else 
 
             if("assignTask".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.AssignTaskResponseDocument assignTaskResponse157 = null;
+                eu.aladdin_project.storagecomponent.AssignTaskResponseDocument assignTaskResponse161 = null;
 	                        eu.aladdin_project.storagecomponent.AssignTaskDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.AssignTaskDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.AssignTaskDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               assignTaskResponse157 =
+                                               assignTaskResponse161 =
                                                    
                                                    
                                                          skel.assignTask(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), assignTaskResponse157, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), assignTaskResponse161, false);
                                     } else 
 
             if("createPatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreatePatientResponseDocument createPatientResponse159 = null;
+                eu.aladdin_project.storagecomponent.CreatePatientResponseDocument createPatientResponse163 = null;
 	                        eu.aladdin_project.storagecomponent.CreatePatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreatePatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreatePatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createPatientResponse159 =
+                                               createPatientResponse163 =
                                                    
                                                    
                                                          skel.createPatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createPatientResponse159, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createPatientResponse163, false);
                                     } else 
 
             if("listOfAdministrators".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument listOfAdministratorsResponse161 = null;
+                eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument listOfAdministratorsResponse165 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfAdministratorsResponse161 =
+                                               listOfAdministratorsResponse165 =
                                                    
                                                    
                                                          skel.listOfAdministrators(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfAdministratorsResponse161, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfAdministratorsResponse165, false);
                                     } else 
 
             if("getUserPlannedTasks".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument getUserPlannedTasksResponse163 = null;
+                eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument getUserPlannedTasksResponse167 = null;
 	                        eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getUserPlannedTasksResponse163 =
+                                               getUserPlannedTasksResponse167 =
                                                    
                                                    
                                                          skel.getUserPlannedTasks(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserPlannedTasksResponse163, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserPlannedTasksResponse167, false);
                                     } else 
 
             if("listOfPossibleTasks".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument listOfPossibleTasksResponse165 = null;
+                eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument listOfPossibleTasksResponse169 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfPossibleTasksDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfPossibleTasksDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfPossibleTasksDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfPossibleTasksResponse165 =
+                                               listOfPossibleTasksResponse169 =
                                                    
                                                    
                                                          skel.listOfPossibleTasks(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPossibleTasksResponse165, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPossibleTasksResponse169, false);
                                     } else 
 
             if("createCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateCarerResponseDocument createCarerResponse167 = null;
+                eu.aladdin_project.storagecomponent.CreateCarerResponseDocument createCarerResponse171 = null;
 	                        eu.aladdin_project.storagecomponent.CreateCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createCarerResponse167 =
+                                               createCarerResponse171 =
                                                    
                                                    
                                                          skel.createCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createCarerResponse167, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createCarerResponse171, false);
                                     } else 
 
             if("createExternalService".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateExternalServiceResponseDocument createExternalServiceResponse169 = null;
+                eu.aladdin_project.storagecomponent.CreateExternalServiceResponseDocument createExternalServiceResponse173 = null;
 	                        eu.aladdin_project.storagecomponent.CreateExternalServiceDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateExternalServiceDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateExternalServiceDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createExternalServiceResponse169 =
+                                               createExternalServiceResponse173 =
                                                    
                                                    
                                                          skel.createExternalService(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createExternalServiceResponse169, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createExternalServiceResponse173, false);
                                     } else 
 
             if("saveCarerAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument saveCarerAssessmentResponse171 = null;
+                eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument saveCarerAssessmentResponse175 = null;
 	                        eu.aladdin_project.storagecomponent.SaveCarerAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.SaveCarerAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.SaveCarerAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               saveCarerAssessmentResponse171 =
+                                               saveCarerAssessmentResponse175 =
                                                    
                                                    
                                                          skel.saveCarerAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveCarerAssessmentResponse171, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveCarerAssessmentResponse175, false);
                                     } else 
 
             if("deleteCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument deleteCarerResponse173 = null;
+                eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument deleteCarerResponse177 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteCarerResponse173 =
+                                               deleteCarerResponse177 =
                                                    
                                                    
                                                          skel.deleteCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerResponse173, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerResponse177, false);
                                     } else 
 
             if("createAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateAdministratorResponseDocument createAdministratorResponse175 = null;
+                eu.aladdin_project.storagecomponent.CreateAdministratorResponseDocument createAdministratorResponse179 = null;
 	                        eu.aladdin_project.storagecomponent.CreateAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createAdministratorResponse175 =
+                                               createAdministratorResponse179 =
                                                    
                                                    
                                                          skel.createAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createAdministratorResponse175, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createAdministratorResponse179, false);
                                     } else 
 
             if("updateExternalService".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument updateExternalServiceResponse177 = null;
+                eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument updateExternalServiceResponse181 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateExternalServiceDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateExternalServiceDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateExternalServiceDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateExternalServiceResponse177 =
+                                               updateExternalServiceResponse181 =
                                                    
                                                    
                                                          skel.updateExternalService(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateExternalServiceResponse177, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateExternalServiceResponse181, false);
                                     } else 
 
             if("getPatientAssessments".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument getPatientAssessmentsResponse179 = null;
+                eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument getPatientAssessmentsResponse183 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientAssessmentsResponse179 =
+                                               getPatientAssessmentsResponse183 =
                                                    
                                                    
                                                          skel.getPatientAssessments(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientAssessmentsResponse179, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientAssessmentsResponse183, false);
                                     } else 
 
             if("getClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetClinicianResponseDocument getClinicianResponse181 = null;
+                eu.aladdin_project.storagecomponent.GetClinicianResponseDocument getClinicianResponse185 = null;
 	                        eu.aladdin_project.storagecomponent.GetClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getClinicianResponse181 =
+                                               getClinicianResponse185 =
                                                    
                                                    
                                                          skel.getClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getClinicianResponse181, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getClinicianResponse185, false);
                                     } else 
 
             if("deletePatientAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument deletePatientAssessmentResponse183 = null;
+                eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument deletePatientAssessmentResponse187 = null;
 	                        eu.aladdin_project.storagecomponent.DeletePatientAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeletePatientAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeletePatientAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deletePatientAssessmentResponse183 =
+                                               deletePatientAssessmentResponse187 =
                                                    
                                                    
                                                          skel.deletePatientAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientAssessmentResponse183, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientAssessmentResponse187, false);
                                     } else 
 
             if("getAllExternalServices".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument getAllExternalServicesResponse185 = null;
+                eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument getAllExternalServicesResponse189 = null;
 	                        eu.aladdin_project.storagecomponent.GetAllExternalServicesDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetAllExternalServicesDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetAllExternalServicesDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getAllExternalServicesResponse185 =
+                                               getAllExternalServicesResponse189 =
                                                    
                                                    
                                                          skel.getAllExternalServices(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAllExternalServicesResponse185, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAllExternalServicesResponse189, false);
                                     } else 
 
             if("getCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetCarerResponseDocument getCarerResponse187 = null;
+                eu.aladdin_project.storagecomponent.GetCarerResponseDocument getCarerResponse191 = null;
 	                        eu.aladdin_project.storagecomponent.GetCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getCarerResponse187 =
+                                               getCarerResponse191 =
                                                    
                                                    
                                                          skel.getCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerResponse187, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerResponse191, false);
                                     } else 
 
             if("getAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministratorResponse189 = null;
+                eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministratorResponse193 = null;
 	                        eu.aladdin_project.storagecomponent.GetAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getAdministratorResponse189 =
+                                               getAdministratorResponse193 =
                                                    
                                                    
                                                          skel.getAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAdministratorResponse189, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAdministratorResponse193, false);
                                     } else 
 
             if("updateAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministratorResponse191 = null;
+                eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministratorResponse195 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateAdministratorResponse191 =
+                                               updateAdministratorResponse195 =
                                                    
                                                    
                                                          skel.updateAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateAdministratorResponse191, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateAdministratorResponse195, false);
                                     } else 
 
             if("getQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument getQuestionnaireResponse193 = null;
+                eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument getQuestionnaireResponse197 = null;
 	                        eu.aladdin_project.storagecomponent.GetQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getQuestionnaireResponse193 =
+                                               getQuestionnaireResponse197 =
                                                    
                                                    
                                                          skel.getQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireResponse193, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireResponse197, false);
                                     } else 
 
             if("storeQuestionnaireAnswers".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswersResponse195 = null;
+                eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswersResponse199 = null;
 	                        eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               storeQuestionnaireAnswersResponse195 =
+                                               storeQuestionnaireAnswersResponse199 =
                                                    
                                                    
                                                          skel.storeQuestionnaireAnswers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeQuestionnaireAnswersResponse195, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeQuestionnaireAnswersResponse199, false);
                                     } else 
 
             if("changeTaskStatus".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument changeTaskStatusResponse197 = null;
+                eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument changeTaskStatusResponse201 = null;
 	                        eu.aladdin_project.storagecomponent.ChangeTaskStatusDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ChangeTaskStatusDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ChangeTaskStatusDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               changeTaskStatusResponse197 =
+                                               changeTaskStatusResponse201 =
                                                    
                                                    
                                                          skel.changeTaskStatus(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), changeTaskStatusResponse197, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), changeTaskStatusResponse201, false);
                                     } else 
 
             if("listOfPatients".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument listOfPatientsResponse199 = null;
+                eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument listOfPatientsResponse203 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfPatientsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfPatientsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfPatientsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfPatientsResponse199 =
+                                               listOfPatientsResponse203 =
                                                    
                                                    
                                                          skel.listOfPatients(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPatientsResponse199, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPatientsResponse203, false);
                                     } else 
 
             if("getWarnings".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetWarningsResponseDocument getWarningsResponse201 = null;
+                eu.aladdin_project.storagecomponent.GetWarningsResponseDocument getWarningsResponse205 = null;
 	                        eu.aladdin_project.storagecomponent.GetWarningsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetWarningsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetWarningsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getWarningsResponse201 =
+                                               getWarningsResponse205 =
                                                    
                                                    
                                                          skel.getWarnings(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getWarningsResponse201, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getWarningsResponse205, false);
                                     } else 
 
             if("updateClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinicianResponse203 = null;
+                eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinicianResponse207 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateClinicianResponse203 =
+                                               updateClinicianResponse207 =
                                                    
                                                    
                                                          skel.updateClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateClinicianResponse203, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateClinicianResponse207, false);
                                     } else 
 
             if("createUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUserResponse205 = null;
+                eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUserResponse209 = null;
 	                        eu.aladdin_project.storagecomponent.CreateUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createUserResponse205 =
+                                               createUserResponse209 =
                                                    
                                                    
                                                          skel.createUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createUserResponse205, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createUserResponse209, false);
                                     } else 
 
             if("markWarningAsRead".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument markWarningAsReadResponse207 = null;
+                eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument markWarningAsReadResponse211 = null;
 	                        eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               markWarningAsReadResponse207 =
+                                               markWarningAsReadResponse211 =
                                                    
                                                    
                                                          skel.markWarningAsRead(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), markWarningAsReadResponse207, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), markWarningAsReadResponse211, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");
@@ -1880,6 +1898,142 @@
             }
 
             private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.DeleteUserResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetSystemParameterListDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetSystemParameterListDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument param)
                     throws org.apache.axis2.AxisFault {
 
                 final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
@@ -8120,6 +8274,15 @@
                             return envelope;
                             }
                         
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
                             private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument param, boolean optimizeContent)
                             throws org.apache.axis2.AxisFault {
                             org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
@@ -8717,6 +8880,32 @@
             new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
             }else{
             return eu.aladdin_project.storagecomponent.DeleteUserResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.Factory.parse(
             param.getXMLStreamReaderWithoutCaching());
             }
             }

@@ -113,6 +113,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getSystemParameterList
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument getSystemParameterList
+                (
+                  eu.aladdin_project.storagecomponent.GetSystemParameterListDocument getSystemParameterList
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getCarerAssessments
          */
 

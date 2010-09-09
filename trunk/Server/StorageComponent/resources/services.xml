@@ -37,6 +37,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/DeleteUser</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/DeleteUserResponse</outputActionMapping>
         </operation>
+        <operation name="GetSystemParameterList" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetSystemParameterList</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetSystemParameterListResponse</outputActionMapping>
+        </operation>
         <operation name="GetCarerAssessments" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetCarerAssessments</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetCarerAssessmentsResponse</outputActionMapping>

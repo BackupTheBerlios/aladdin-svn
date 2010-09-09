@@ -793,6 +793,21 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetSystemParameterList">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="type" type="xsd:int"></xsd:element>
+      			<xsd:element name="language" type="xsd:int"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSystemParameterListResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:SystemParameter" maxOccurs="unbounded"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1107,6 +1122,12 @@
   <wsdl:message name="GetUserTypeResponse">
   	<wsdl:part name="parameters" element="tns:GetUserTypeResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetSystemParameterListRequest">
+  	<wsdl:part name="parameters" element="tns:GetSystemParameterList"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSystemParameterListResponse">
+  	<wsdl:part name="parameters" element="tns:GetSystemParameterListResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1315,6 +1336,10 @@
         <wsdl:operation name="GetUserType">
         	<wsdl:input message="tns:GetUserTypeRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserTypeResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetSystemParameterList">
+        	<wsdl:input message="tns:GetSystemParameterListRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetSystemParameterListResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -1834,6 +1859,16 @@
   	<wsdl:operation name="GetUserType">
   		<soap:operation
   			soapAction="http://aladdin-project.eu/StorageComponent/GetUserType" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetSystemParameterList">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetSystemParameterList" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfPossibleTasksResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasksResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE5146C640B0EE3213268885FE36430F2").resolveHandle("listofpossibletasksresponsec877doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasksResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE6D08197329E0478E99E5FAF01ABE7A8").resolveHandle("listofpossibletasksresponsec877doctype");
     
     /**
      * Gets the "ListOfPossibleTasksResponse" element
@@ -42,7 +42,7 @@ public interface ListOfPossibleTasksResponseDocument extends org.apache.xmlbeans
     public interface ListOfPossibleTasksResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasksResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE5146C640B0EE3213268885FE36430F2").resolveHandle("listofpossibletasksresponse426celemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasksResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE6D08197329E0478E99E5FAF01ABE7A8").resolveHandle("listofpossibletasksresponse426celemtype");
         
         /**
          * Gets array of all "out" elements
