@@ -18,7 +18,7 @@ public class DetailPatientController extends DetailSDController{
 		Button btn1 = new Button();
 		String text2 = Labels.getLabel("common.tasks.new");
 		btn1.setLabel(text2);
-		btn.setHref("/patients");
+		btn1.setHref("/patients");
 		
 		Button[] ret = new Button[2];
 		ret[0] = btn;
