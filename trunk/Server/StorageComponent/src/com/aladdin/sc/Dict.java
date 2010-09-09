@@ -8,7 +8,7 @@ public class Dict {
 		SQLQuery q = s.createSQLQuery("SELECT description from dict where code = '" + code + "' and type = '" + type + "'");
 		Object[] data = q.list().toArray();
 		if (data.length > 0) {
-			return (String) ((Object[])data[0])[0];
+			return (String)data[0];
 		}
 		return "";
 	}

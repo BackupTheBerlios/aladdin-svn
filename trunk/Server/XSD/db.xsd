@@ -245,7 +245,7 @@
     	<sequence>
     		<element name="code" type="int"></element>
     		<element name="description" type="string"></element>
-    		<element name="type" type="int"></element>
+    		<element name="type" type="string"></element>
     		<element name="lang" type="string"></element>
     	</sequence>
     </complexType>
