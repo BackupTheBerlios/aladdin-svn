@@ -12,6 +12,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
@@ -47,7 +48,7 @@ public class DetailSDController extends DetailPersonController{
 		Listcell cell1 = new Listcell(text);
 		lst1.appendChild(cell1);
 		
-		String sddatavalue = this.currentsd.getGender().getDescription()+" ("+this.currentsd.getAge()+")";
+		String sddatavalue = SystemDictionary.getGenderLabel(this.currentsd.getGender().getCode())+" ("+this.currentsd.getAge()+" "+Labels.getLabel("common.years.old")+")";
 		if(this.currentsd.getChildren().toString().equals("0")){
 			String text2 = Labels.getLabel("common.children.no");
 			sddatavalue += " "+text2;
@@ -60,7 +61,7 @@ public class DetailSDController extends DetailPersonController{
 			sddatavalue += " "+text4;
 		}
 		String text5 = Labels.getLabel("patients.form.sd.living");
-		sddatavalue += ", "+this.currentsd.getMaritalStatus().getDescription()+" "+text5+this.currentsd.getLivingWith().getDescription();
+		sddatavalue += ", "+ SystemDictionary.getMaritalStatuspeLabel(this.currentsd.getMaritalStatus().getCode())+" "+text5+" "+SystemDictionary.getLivingWithLabel(this.currentsd.getLivingWith().getCode());
 		
 		Listcell cell2 = new Listcell(sddatavalue);
 		lst1.appendChild(cell2);
@@ -77,7 +78,7 @@ public class DetailSDController extends DetailPersonController{
 		Button btn1 = new Button();
 		String text2 = Labels.getLabel("common.tasks.new");
 		btn1.setLabel(text2);
-		btn1.setHref("/carers");
+		btn1.setHref("/carers/newtask.zul?carerid="+this.currentid);
 		
 		Button[] ret = new Button[2];
 		ret[0] = btn;

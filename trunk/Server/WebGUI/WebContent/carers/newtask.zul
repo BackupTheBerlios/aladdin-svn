@@ -1,0 +1,95 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<zscript>
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.Carer;
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.SystemDictionary;
+		
+		String objid = (String)Executions.getCurrent().getParameter("carerid");
+		String objstr = "";
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		Session ses = Sessions.getCurrent();
+		String userid = (String)ses.getAttribute("userid");
+		try{
+			Carer userobj = proxy.getCarer(objid,userid);
+			objstr = userobj.getPersonData().getSurname()+", "+userobj.getPersonData().getName();
+		}catch(java.rmi.RemoteException re){
+		
+		}finally{
+			objstr = Labels.getLabel("common.tasks.new.for")+": "+objstr;
+		}
+		
+		String ttcarerqs = Labels.getLabel("dic.task.type.carers");
+		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
+		String ttweight = Labels.getLabel("dic.task.type.weight.mes");
+		String ttcoggame = Labels.getLabel("dic.task.type.coggame");
+		String ttact = Labels.getLabel("dic.task.type.activity.mon");
+		String ttex = Labels.getLabel("dic.task.type.exercise");
+		
+		int ttcarerqsi = SystemDictionary.TASK_TYPE_CARERQS_INT;
+		int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
+		int ttweighti = SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT_INT;
+		int ttcoggamei = SystemDictionary.TASK_TYPE_COGGAME_INT;
+		int ttacti = SystemDictionary.TASK_TYPE_ACTMONITOR_INT;
+		int ttexi = SystemDictionary.TASK_TYPE_EXERCISE_INT;
+		
+	</zscript>
+	<include src="/inc/header.zul"/>
+	<window id="taskwin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.task.CarerTaskController">
+		<label value="${objstr}"/>
+		<grid>
+			<columns>
+				<column width="200px" align="right"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<label value="Task type"/>
+					<listbox id="tasktypesel" mold="select" onSelect="taskwin.changeTaskType()">
+						<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
+						<listitem label="${ttblood }" value="${ttbloodi }"/>
+						<listitem label="${ttweight }" value="${ttweighti }"/>
+						<listitem label="${ttcoggame }" value="${ttcoggamei }"/>
+						<listitem label="${ttact }" value="${ttacti }"/>
+						<listitem label="${ttex }" value="${ttexi }"/>
+					</listbox>
+				</row>
+				<row id="qsrow" visible="false">
+					<label value="Questionnaire"/>
+					<textbox/>
+				</row>
+				<row id="urlrow" visible="false">
+					<label value="URL"/>
+					<textbox/>
+				</row>
+				<row>
+					<label value="Assigned Date"/>
+					<hbox>
+						<datebox cols="16" format="dd/MM/yyyy" onCreate="self.setValue(new Date())" compact="true"/>
+						<timebox cols="16" />
+					</hbox>
+					
+				</row>
+				<row>
+					<label value="Executor"/>
+					<textbox value="${objid }" readonly="true"/>
+				</row>
+				<row>
+					<label value="Assigner"/>
+					<textbox value="${userid }" readonly="true"/>
+				</row>
+				<row>
+					<label value="Object"/>
+					<label value=""/>
+				</row>
+			</rows>
+		</grid>
+		<button label="Assign task"/>
+	</window>
+	<window id="selqs" visible="false">
+		
+	</window>
+</zk>

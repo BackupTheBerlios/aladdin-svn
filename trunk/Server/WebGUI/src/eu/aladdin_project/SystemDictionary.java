@@ -1,151 +1,154 @@
 package eu.aladdin_project;
 
+import org.zkoss.util.resource.Labels;
+
 public class SystemDictionary {
 	
 	public static String getUsertypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case USERTYPE_ADMIN_INT:
-			return USERTYPE_ADMIN_LBL;
+			ret= USERTYPE_ADMIN_LBL;
 		case USERTYPE_CLINICIAN_INT:
-			return USERTYPE_CLINICIAN_LBL;
-		default:
-			return null;
+			ret= USERTYPE_CLINICIAN_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	
 	public static String getTaskStatusLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case TASK_STATUS_CANCELLED_INT:
-			return TASK_STATUS_CANCELLED_LBL;
+			ret= TASK_STATUS_CANCELLED_LBL;
 		case TASK_STATUS_COMPLETED_INT:
-			return TASK_STATUS_COMPLETED_LBL;
+			ret= TASK_STATUS_COMPLETED_LBL;
 		case TASK_STATUS_PENDING_INT:
-			return TASK_STATUS_PENDING_LBL;
-		default:
-			return null;
+			ret= TASK_STATUS_PENDING_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getTaskTypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case TASK_TYPE_ACTMONITOR_INT:
-			return TASK_TYPE_ACTMONITOR_LBL;
+			ret= TASK_TYPE_ACTMONITOR_LBL;
 		case TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT:
-			return TASK_TYPE_BLOODPRESSURE_MEASUREMENT_LBL;
+			ret= TASK_TYPE_BLOODPRESSURE_MEASUREMENT_LBL;
 		case TASK_TYPE_CARERQS_INT:
-			return TASK_TYPE_CARERQS_LBL;
+			ret= TASK_TYPE_CARERQS_LBL;
 		case TASK_TYPE_COGGAME_INT:
-			return TASK_TYPE_COGGAME_LBL;
+			ret= TASK_TYPE_COGGAME_LBL;
 		case TASK_TYPE_EXERCISE_INT:
-			return TASK_TYPE_EXERCISE_LBL;
+			ret= TASK_TYPE_EXERCISE_LBL;
 		case TASK_TYPE_PATIENTQS_INT:
-			return TASK_TYPE_PATIENTQS_LBL;
+			ret= TASK_TYPE_PATIENTQS_LBL;
 		case TASK_TYPE_WEIGHT_MEASUREMENT_INT:
-			return TASK_TYPE_WEIGHT_MEASUREMENT_LBL;
-		default:
-			return null;
+			ret= TASK_TYPE_WEIGHT_MEASUREMENT_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getGenderLabel(String dic){
+		System.out.println("GENDER: "+dic);
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case GENDER_MALE_INT:
-			return GENDER_MALE_LBL;
+			ret= GENDER_MALE_LBL;
 		case GENDER_FEMALE_INT:
-			return GENDER_FEMALE_LBL;
-		default:
-			return null;
+			ret= GENDER_FEMALE_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getMaritalStatuspeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case MARITAL_DIVORCED_INT:
-			return MARITAL_DIVORCED_LBL;
+			ret= MARITAL_DIVORCED_LBL;
 		case MARITAL_MARRIED_INT:
-			return MARITAL_MARRIED_LBL;
+			ret= MARITAL_MARRIED_LBL;
 		case MARITAL_SINGLE_INT:
-			return MARITAL_SINGLE_LBL;
+			ret= MARITAL_SINGLE_LBL;
 		case MARITAL_WIDOW_INT:
-			return MARITAL_WIDOW_LBL;
-		default:
-			return null;
+			ret= MARITAL_WIDOW_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getLivingWithLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case LIVING_ALONE_INT:
-			return LIVING_ALONE_LBL;
+			ret= LIVING_ALONE_LBL;
 		case LIVING_PARTER_SONDAUGHTER_INT:
-			return LIVING_PARTER_SONDAUGHTER_LBL;
+			ret= LIVING_PARTER_SONDAUGHTER_LBL;
 		case LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_INT:
-			return LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
+			ret= LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
 		case LIVING_PARTER_SONDAUGHTER_SDLAW_INT:
-			return LIVING_PARTER_SONDAUGHTER_SDLAW_LBL;
+			ret= LIVING_PARTER_SONDAUGHTER_SDLAW_LBL;
 		case LIVING_PARTNER_INT:
-			return LIVING_PARTNER_LBL;
+			ret= LIVING_PARTNER_LBL;
 		case LIVING_SONDAUGHTER_INT:
-			return LIVING_SONDAUGHTER_LBL;
-		default:
-			return null;
+			ret= LIVING_SONDAUGHTER_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getWarningTypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case WARNING_AUTO_INT:
-			return WARNING_AUTO_LBL;
+			ret= WARNING_AUTO_LBL;
 		case WARNING_MANUAL_INT:
-			return WARNING_MANUAL_LBL;
-		default:
-			return null;
+			ret= WARNING_MANUAL_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getWarningEffectLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case EFFECT_WARNING_STROKE_INT:
-			return EFFECT_WARNING_STROKE_LBL;
-		default:
-			return null;
+			ret= EFFECT_WARNING_STROKE_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getWarningIndicatorLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case INDICATOR_WARNING_BLODDPRESSURE_INT:
-			return INDICATOR_WARNING_BLODDPRESSURE_LBL;
+			ret= INDICATOR_WARNING_BLODDPRESSURE_LBL;
 		case INDICATOR_WARNING_WEIGHT_INT:
-			return INDICATOR_WARNING_WEIGHT_LBL;
-		default:
-			return null;
+			ret= INDICATOR_WARNING_WEIGHT_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	public static String getWarningEmergencyLevelLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case EMERGENCYLEVEL_WARNING_ATTENTION_INT:
-			return EMERGENCYLEVEL_WARNING_ATTENTION_LBL;
+			ret= EMERGENCYLEVEL_WARNING_ATTENTION_LBL;
 		case EMERGENCYLEVEL_WARNING_IMMEDIATE_INT:
-			return EMERGENCYLEVEL_WARNING_IMMEDIATE_LBL;
-		default:
-			return null;
+			ret= EMERGENCYLEVEL_WARNING_IMMEDIATE_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	
 	public static String getMeasurementTypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
 		switch(dictn){
 		case MEASUREMENT_BLODDPRESSURE_INT:
-			return MEASUREMENT_BLODDPRESSURE_LBL;
+			ret= MEASUREMENT_BLODDPRESSURE_LBL;
 		case MEASUREMENT_WEIGHT_INT:
-			return MEASUREMENT_WEIGHT_LBL;
-		default:
-			return null;
+			ret= MEASUREMENT_WEIGHT_LBL;
 		}
+		return Labels.getLabel(ret);
 	}
 	
 	public final static String USERTYPE_ADMIN = "1";
