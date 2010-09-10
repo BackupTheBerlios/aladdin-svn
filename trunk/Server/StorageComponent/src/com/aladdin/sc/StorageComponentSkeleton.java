@@ -392,10 +392,10 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
     		System.out.println (" uQQ 7");
-    		if (rqq.getDeleted() != true) {
+/*    		if (rqq.getDeleted() != true) {
     			rqq.setDeleted(false);
     		}
-    		qq.setDeleted(rqq.getDeleted());
+    		qq.setDeleted(rqq.getDeleted());*/
     		
     		System.out.print (" question ");
     		System.out.print (qq.getTitle());
@@ -1538,7 +1538,15 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     				rt.setExecutorID(t.getExecutor().toString());
     				rt.setAssignerID(t.getAssigner().toString());
     				rt.setObjectID(t.getObject().toString());
-    				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnairequestionnaire()));
+    				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
+    					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnairequestionnaire()));
+    					System.out.println ();
+    					System.out.println ();
+    					System.out.println (" === QUESTIONNAIRE == ");
+    					System.out.println (rt.toString());
+    					System.out.println ();
+    					System.out.println ();
+    				}
     			}
     		} catch (Exception e) {
     			System.out.println(e.toString());
@@ -1560,14 +1568,23 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		System.out.println (" eQ 6");
-    		Object[] qql = q.getQuestionnaireQuestions().toArray();
+    		
+    		//Object[] qql = q.getQuestionnaireQuestions().toArray();
+    		String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
+    		Object[] qql = s.createSQLQuery(sql).list ().toArray(); 
+    		
+    		
+    		
     		System.out.println (" eQ 7");
     		for (int i = 0; i < qql.length; i++) {
     			System.out.println (" eQ 8");
-    			com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) qql[i];
-    			if (!qq.getDeleted()) {
-    				rqql.add(exportQQ(qq));
-    			}
+    			com.aladdin.sc.db.QuestionnaireQuestion qq =
+    				(com.aladdin.sc.db.QuestionnaireQuestion)
+    					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
+    				;
+    			///if (!qq.getDeleted()) {
+    				rqql.add(exportQQ(qq, true));
+    			//}
     			System.out.println (" eQ 9");
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
@@ -1576,7 +1593,7 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     		return rq;
     	}
     	
-    	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq) {
+    	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1) {
     		System.out.println (" eQQ 1");
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
     		System.out.println (" eQQ 2");
@@ -1585,10 +1602,24 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     		System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
     		System.out.println (" eQQ 4");
-    		rqq.setCondition(qq.getCondition().shortValue());
-    		System.out.println (" eQQ 5");
+    		
+    		System.out.println ("");
+			System.out.println ("");
+			System.out.println (" ======================== ");
+			System.out.println (qq.getId() + " " + (level1 ? "condition" : "empty"));
+			System.out.println (" ======================== ");
+			System.out.println ("");
+			System.out.println ("");
+    		
+    		if (!level1) {
+    			rqq.setCondition(qq.getCondition().shortValue());
+    			System.out.println (" eQQ 5");
+    		}
+    		
     		rqq.setTitle(qq.getTitle());
-    		rqq.setDeleted(qq.getDeleted());
+    		
+    		//rqq.setDeleted(qq.getDeleted());
+    		
     		System.out.println (" eQQ 6");
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
@@ -1615,26 +1646,28 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     		for (int i = 0; i < qql.length; i++) {
     			System.out.println (" eQQ 16");
 //			System.out.println (qql[i].class.toString());
-			System.out.println (qql[i].toString());
-			System.out.println (qql.length);
+				System.out.println (qql[i].toString());
+				System.out.println (qql.length);
 
 
 //			Object[] _obj_ = qq
-			System.out.println ("b");
-			Integer _id = (Integer) (qql[i]);
-			System.out.println ("c");
-			System.out.println (_id);
-			System.out.println ("load...");
-			com.aladdin.sc.db.QuestionnaireQuestion _obj = 
-				(com.aladdin.sc.db.QuestionnaireQuestion)
-					s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
-			rqql.add ( exportQQ ( _obj ) );
+				System.out.println ("b");
+				Integer _id = (Integer) (qql[i]);
+				System.out.println ("c");
+				System.out.println (_id);
+				System.out.println ("load...");
+				com.aladdin.sc.db.QuestionnaireQuestion _obj = 
+					(com.aladdin.sc.db.QuestionnaireQuestion)
+						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
+				rqql.add ( exportQQ ( _obj, false ) );
 
 //			if (qql.length > 1) rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
 //			else rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) (Object) qql));
     			System.out.println (" eQQ 17");
     		}
     		System.out.println (" eQQ 18");
+    		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
+    		System.out.println (" eQQ 19");
     		
     		return rqq;
     	}

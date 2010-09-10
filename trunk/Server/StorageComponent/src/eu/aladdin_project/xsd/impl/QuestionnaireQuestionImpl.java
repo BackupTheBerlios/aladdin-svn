@@ -31,8 +31,6 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         new javax.xml.namespace.QName("", "type");
     private static final javax.xml.namespace.QName CONDITION$10 = 
         new javax.xml.namespace.QName("", "condition");
-    private static final javax.xml.namespace.QName DELETED$12 = 
-        new javax.xml.namespace.QName("", "deleted");
     
     
     /**
@@ -476,98 +474,6 @@ public class QuestionnaireQuestionImpl extends org.apache.xmlbeans.impl.values.X
         {
             check_orphaned();
             get_store().remove_attribute(CONDITION$10);
-        }
-    }
-    
-    /**
-     * Gets the "deleted" attribute
-     */
-    public boolean getDeleted()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(DELETED$12);
-            if (target == null)
-            {
-                return false;
-            }
-            return target.getBooleanValue();
-        }
-    }
-    
-    /**
-     * Gets (as xml) the "deleted" attribute
-     */
-    public org.apache.xmlbeans.XmlBoolean xgetDeleted()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlBoolean target = null;
-            target = (org.apache.xmlbeans.XmlBoolean)get_store().find_attribute_user(DELETED$12);
-            return target;
-        }
-    }
-    
-    /**
-     * True if has "deleted" attribute
-     */
-    public boolean isSetDeleted()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            return get_store().find_attribute_user(DELETED$12) != null;
-        }
-    }
-    
-    /**
-     * Sets the "deleted" attribute
-     */
-    public void setDeleted(boolean deleted)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(DELETED$12);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(DELETED$12);
-            }
-            target.setBooleanValue(deleted);
-        }
-    }
-    
-    /**
-     * Sets (as xml) the "deleted" attribute
-     */
-    public void xsetDeleted(org.apache.xmlbeans.XmlBoolean deleted)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlBoolean target = null;
-            target = (org.apache.xmlbeans.XmlBoolean)get_store().find_attribute_user(DELETED$12);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.XmlBoolean)get_store().add_attribute_user(DELETED$12);
-            }
-            target.set(deleted);
-        }
-    }
-    
-    /**
-     * Unsets the "deleted" attribute
-     */
-    public void unsetDeleted()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            get_store().remove_attribute(DELETED$12);
         }
     }
 }

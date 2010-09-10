@@ -16,8 +16,7 @@
         </sequence>
         <attribute name="id" type="string"/>
         <attribute name="type" type="string"/>
-        <attribute name="condition" type="unsignedByte"/>
-        <attribute name="deleted" type="boolean"/>
+        <attribute name="condition" type="unsignedByte" use="optional"/>
     </complexType>
     <complexType name="QuestionnaireQuestionList">
         <sequence>
