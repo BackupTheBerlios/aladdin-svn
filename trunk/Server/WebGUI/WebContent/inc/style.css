@@ -1,3 +1,11 @@
+.float-right{
+	float: right;
+	display: inline;
+	}
+.float-left{
+	float: left;
+	display: inline;
+	}	
 .mainerror{
 	margin: 4px auto 3px;
 	background-color: #ED95A0;
