@@ -43,9 +43,13 @@
 		</listhead>
 	</listbox>
 	</window>
+	<window id="calsample" sclass="centerwin" width="80%" title="Calendar sample">
+		<calendars/>
+	</window>
 		<zscript>
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Carer;
+		import org.zkoss.calendar.Calendars;
 		
 		String title = Labels.getLabel("carers.update.title");
 		page.setTitle(title);	
