@@ -1,8 +1,12 @@
 package eu.aladdin_project.controllers.details;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.zkoss.calendar.Calendars;
+import org.zkoss.calendar.impl.SimpleCalendarEvent;
+import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -20,6 +24,7 @@ import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.Task;
 
 public class DetailSDController extends DetailPersonController{
+	private SimpleCalendarModel calmodel = null;
 	
 	public DetailSDController(){
 	}
@@ -34,12 +39,14 @@ public class DetailSDController extends DetailPersonController{
 		if(tasklist != null){
 			for(int i = 0; i < tasklist.length; i++){
 				listgui.appendChild(tasklist[i]);
+				
 			}
 			listgui.setVisible(true);
 			listlabel.setVisible(true);
 		}
 		
-		
+		Calendars calendar = (Calendars)getFellow("cal");
+		calendar.setModel(this.calmodel);
 	}
 	
 	protected Listitem getSDItem(){
@@ -68,7 +75,7 @@ public class DetailSDController extends DetailPersonController{
 		
 		return lst1;
 	}
-
+	
 	public Button[] createActionButtons() {
 		Button btn = new Button();
 		String text = Labels.getLabel("carers.update.title");
@@ -116,11 +123,12 @@ public class DetailSDController extends DetailPersonController{
 			Task[] tasklist = proxy.getUserPlannedTasks("42", calfrom, calto, userid);
 			System.out.println("TASKLIST SIZE: "+tasklist.length);
 			ret = new Listitem[tasklist.length];
+			this.calmodel = new SimpleCalendarModel();
 			
 			for(int i = 0; i<tasklist.length; i++){
 				Listitem item = new Listitem();
 				Listcell cell1 = new Listcell(tasklist[i].getID());
-				Listcell cell2 = new Listcell(tasklist[i].getTaskType().getDescription());
+				Listcell cell2 = new Listcell(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
 				Listcell lab2 = new Listcell(tasklist[i].getTaskStatus().getCode());
 				Listcell lab3 = new Listcell(tasklist[i].getObjectID());
 				GregorianCalendar calendar1 = new GregorianCalendar();
@@ -138,6 +146,17 @@ public class DetailSDController extends DetailPersonController{
 				item.appendChild(lab4);
 				item.appendChild(lab5);
 				ret[i]=item;
+				
+				SimpleCalendarEvent clevent = new SimpleCalendarEvent();
+				clevent.setBeginDate(calendar1.getTime());
+				clevent.setContent("");
+				clevent.setEndDate(new Date(calendar2.getTime().getTime()+3600000));
+				clevent.setLocked(true);
+				clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+				clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+				clevent.setHeaderColor("black");
+				clevent.setContentColor("black");
+				this.calmodel.add(clevent);
 			}
 			return ret;
 		}catch(Exception e){

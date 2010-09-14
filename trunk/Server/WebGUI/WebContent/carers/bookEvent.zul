@@ -1,0 +1,121 @@
+<zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.SystemDictionary;
+		import eu.aladdin_project.xsd.SystemParameter;
+		import eu.aladdin_project.xsd.Task;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		
+		String ttcarerqs = Labels.getLabel("dic.task.type.carers");
+		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
+		String ttweight = Labels.getLabel("dic.task.type.weight.mes");
+		String ttcoggame = Labels.getLabel("dic.task.type.coggame");
+		String ttact = Labels.getLabel("dic.task.type.activity.mon");
+		String ttex = Labels.getLabel("dic.task.type.exercise");
+		
+		int ttcarerqsi = SystemDictionary.TASK_TYPE_CARERQS_INT;
+		int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
+		int ttweighti = SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT_INT;
+		int ttcoggamei = SystemDictionary.TASK_TYPE_COGGAME_INT;
+		int ttacti = SystemDictionary.TASK_TYPE_ACTMONITOR_INT;
+		int ttexi = SystemDictionary.TASK_TYPE_EXERCISE_INT;
+		
+		public void changeTaskType(){
+			Listbox listbox = (Listbox)create_my_entry.getFellow("tasktypesel");
+			Listitem listitem = listbox.getSelectedItem();
+			int comp = ((Integer)listitem.getValue()).intValue(); 
+			if(comp == SystemDictionary.TASK_TYPE_COGGAME_INT){
+				create_my_entry.getFellow("urlrow").setVisible(true);
+				create_my_entry.getFellow("qsrow").setVisible(false);
+				System.out.println("IEEE");
+			}else if(comp == SystemDictionary.TASK_TYPE_CARERQS_INT){
+				create_my_entry.getFellow("urlrow").setVisible(false);
+				create_my_entry.getFellow("qsrow").setVisible(true);
+				System.out.println("EEEI");
+			}else{
+				create_my_entry.getFellow("urlrow").setVisible(false);
+				create_my_entry.getFellow("qsrow").setVisible(false);
+				System.out.println("IEEI");
+			}
+		}
+		
+		public void saveTask(){
+			Listbox listbox = (Listbox)create_my_entry.getFellow("tasktypesel");
+			Listitem listitem = listbox.getSelectedItem();
+			SystemParameter tastype = new SystemParameter(listitem.getValue().toString(), listitem.getLabel());
+			
+			Datebox dbox = (Datebox)create_my_entry.getFellow("datetask");
+			Timebox tbox = (Timebox)create_my_entry.getFellow("timetask");
+			GregorianCalendar caltas = new GregorianCalendar();
+			caltas.setTime(new Date(dbox.getValue().getTime()));
+			GregorianCalendar caltas2 = new GregorianCalendar();
+			caltas2.setTime(new Date(dbox.getValue().getTime()+3600000));
+			
+			SystemParameter tasstatus = new SystemParameter(SystemDictionary.TASK_STATUS_PENDING,SystemDictionary.TASK_STATUS_PENDING_LBL);
+			
+			String objids = ((Textbox)create_my_entry.getFellow("objid")).getValue();
+			String userids = ((Textbox)create_my_entry.getFellow("userid")).getValue();
+			
+			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, null, null, "42", userids, "43");
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			System.out.println("HEHEHE");
+			try{
+				proxy.assignTask(ts,"43");
+			}catch(java.rmi.RemoteException re){
+				re.printStackTrace();
+			}
+		}
+		
+	</zscript>
+	<window id="create_my_entry" title="New Task" border="normal" visible="false" width="70%" closable="true" position="center,center">
+		<label value="${objstr}"/>
+		<grid>
+			<columns>
+				<column width="200px" align="right"/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<label value="Task type"/>
+					<listbox id="tasktypesel" mold="select" onSelect="changeTaskType()">
+						<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
+						<listitem label="${ttblood }" value="${ttbloodi }"/>
+						<listitem label="${ttweight }" value="${ttweighti }"/>
+						<listitem label="${ttcoggame }" value="${ttcoggamei }"/>
+						<listitem label="${ttact }" value="${ttacti }"/>
+						<listitem label="${ttex }" value="${ttexi }"/>
+					</listbox>
+				</row>
+				<row id="qsrow" visible="false">
+					<label value="Questionnaire"/>
+					<textbox/>
+				</row>
+				<row id="urlrow" visible="false">
+					<label value="URL"/>
+					<textbox/>
+				</row>
+				<row>
+					<label value="Assigned Date"/>
+					<hbox>
+						<datebox id="datetask" cols="16" format="dd/MM/yyyy" compact="false"/>
+						<timebox id="timetask" cols="16"/>
+					</hbox>
+					
+				</row>
+				<row>
+					<label value="Executor"/>
+					<textbox id="objid" value="${objid }" readonly="true"/>
+				</row>
+				<row>
+					<label value="Assigner"/>
+					<textbox id="userid" value="${userid }" readonly="true"/>
+				</row>
+				<row>
+					<label value="Object"/>
+					<label value=""/>
+				</row>
+			</rows>
+		</grid>
+		<button label="Assign task" onClick="saveTask()"/>
+	</window>
+</zk>
