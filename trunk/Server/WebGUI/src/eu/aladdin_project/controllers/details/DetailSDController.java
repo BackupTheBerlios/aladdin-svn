@@ -25,12 +25,14 @@ import eu.aladdin_project.xsd.Task;
 
 public class DetailSDController extends DetailPersonController{
 	private SimpleCalendarModel calmodel = null;
+	private Calendars calendars = null;
 	
 	public DetailSDController(){
 	}
 	
 	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
 		super.setControllerData(id, data, sddata, responsible, carers);
+		this.calendars = (Calendars)this.getFellow("cal");
 		
 		Listbox listgui = (Listbox)getFellow("taskrows");
 		Label listlabel = (Label)getFellow("taskrowslbl");
@@ -110,15 +112,16 @@ public class DetailSDController extends DetailPersonController{
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
-		//Calendar calfrom = new GregorianCalendar();
-		//Calendar calto = new GregorianCalendar();
-		//calto.setTimeInMillis(calfrom.getTimeInMillis()+604800000);
-		Listitem[] ret = null;
+		if(this.calendars == null){
+			this.calendars = (Calendars)this.getFellow("cal");
+		}
 		Calendar calfrom = new GregorianCalendar();
-		((GregorianCalendar)calfrom).set(2005, 8, 5);
+		calfrom.setTime(this.calendars.getBeginDate());
 		Calendar calto = new GregorianCalendar();
-		((GregorianCalendar)calto).set(2015, 8, 15);
+		calto.setTime(this.calendars.getEndDate());
+		Listitem[] ret = null;
 		try{
+			//TODO Un-hardcore user ID to retrieve tasks
 			//Task[] tasklist = proxy.getUserPlannedTasks(this.currentid, calfrom, calto, userid);
 			Task[] tasklist = proxy.getUserPlannedTasks("42", calfrom, calto, userid);
 			System.out.println("TASKLIST SIZE: "+tasklist.length);
@@ -163,6 +166,50 @@ public class DetailSDController extends DetailPersonController{
 			e.printStackTrace();
 		}
 		return ret;
+	}
+	
+	public void refreshCalendarData(){
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		Session ses = Sessions.getCurrent();
+		String userid = (String)ses.getAttribute("userid");
+		if(this.calendars == null){
+			this.calendars = (Calendars)this.getFellow("cal");
+		}
+		Calendar calfrom = new GregorianCalendar();
+		calfrom.setTime(this.calendars.getBeginDate());
+		Calendar calto = new GregorianCalendar();
+		calto.setTime(this.calendars.getEndDate());
+		try{
+			//TODO Un-hardcore user ID to retrieve tasks
+			//Task[] tasklist = proxy.getUserPlannedTasks(this.currentid, calfrom, calto, userid);
+			Task[] tasklist = proxy.getUserPlannedTasks("42", calfrom, calto, userid);
+			System.out.println("TASKLIST CALENDAR SIZE: "+tasklist.length);
+			this.calmodel = new SimpleCalendarModel();
+			for(int i = 0; i<tasklist.length; i++){
+				GregorianCalendar calendar1 = new GregorianCalendar();
+				calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
+				
+				GregorianCalendar calendar2 = new GregorianCalendar();
+				calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
+				
+				SimpleCalendarEvent clevent = new SimpleCalendarEvent();
+				clevent.setBeginDate(calendar1.getTime());
+				clevent.setContent("");
+				clevent.setEndDate(new Date(calendar2.getTime().getTime()+3600000));
+				clevent.setLocked(true);
+				clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+				clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+				clevent.setHeaderColor("black");
+				clevent.setContentColor("black");
+				this.calmodel.add(clevent);
+			}
+			
+			Calendars calendar = (Calendars)getFellow("cal");
+			calendar.setModel(this.calmodel);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

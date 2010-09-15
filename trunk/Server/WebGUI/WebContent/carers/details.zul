@@ -73,6 +73,7 @@
 							java.text.SimpleDateFormat sdfV = new java.text.SimpleDateFormat("dd/MM/yyyy", org.zkoss.util.Locales.getCurrent());
 							sdfV.setTimeZone(cal.getDefaultTimeZone());
 							label.setValue(sdfV.format(b) + " - " + sdfV.format(e));
+							detailswin.refreshCalendarData();
 						}
 					</zscript>
 				</hbox>
