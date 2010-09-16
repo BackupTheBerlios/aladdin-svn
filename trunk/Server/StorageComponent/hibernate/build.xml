@@ -54,7 +54,7 @@
         <mkdir dir="${build.dir}/classes"/>
         <javac debug="on" 
                fork="true"
-               destdir="${build.dir}/classes" 
+               destdir="${build.dir}/classes/"
                srcdir="${build.dir}/src"
                classpathref="classpath">
         </javac>

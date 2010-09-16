@@ -3,22 +3,22 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="com.aladdin.sc.db.Task">
+<hibernate-mapping package="com.aladdin.sc.db"><class name="Task">
 <id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Task_id_seq</param></generator></id>
 <property name="TaskType" type="java.lang.Integer"><column name="TaskType"/></property>
 <property name="DateTimeAssigned" type="java.sql.Timestamp"><column name="DateTimeAssigned"/></property>
 <property name="DateTimeFulfilled" type="java.sql.Timestamp"><column name="DateTimeFulfilled"/></property>
 <property name="TaskStatus" type="java.lang.Integer"><column name="TaskStatus"/></property>
-<property name="url" type="java.lang.String"><column name="url"/></property>
+<property name="url" type="String"><column name="url"/></property>
 <property name="questionnaire" type="java.lang.Integer"><column name="questionnaire"/></property>
 <property name="Executor" type="java.lang.Integer"><column name="Executor"/></property>
 <property name="Assigner" type="java.lang.Integer"><column name="Assigner"/></property>
 <property name="Object" type="java.lang.Integer"><column name="Object"/></property>
-<many-to-one name="m_Questionnairequestionnaire" class="com.aladdin.sc.db.Questionnaire" insert="false" update="false"><column name="questionnaire" not-null="false" /></many-to-one>
-<many-to-one name="m_AladdinUserExecutor" class="com.aladdin.sc.db.AladdinUser" insert="false" update="false"><column name="Executor" not-null="false" /></many-to-one>
-<many-to-one name="m_AladdinUserAssigner" class="com.aladdin.sc.db.AladdinUser" insert="false" update="false"><column name="Assigner" not-null="false" /></many-to-one>
-<many-to-one name="m_AladdinUserObject" class="com.aladdin.sc.db.AladdinUser" insert="false" update="false"><column name="Object" not-null="false" /></many-to-one>
-<set name="Measurements" inverse="true" cascade="none"><key><column name="task" not-null="true" /></key><one-to-many class="com.aladdin.sc.db.Measurement"/></set>
+<many-to-one name="m_Questionnaire" class="Questionnaire" ><column name="questionnaire" not-null="false" /></many-to-one>
+<many-to-one name="m_AladdinUser" class="AladdinUser" ><column name="Executor" not-null="false" /></many-to-one>
+<many-to-one name="m_AladdinUser1" class="AladdinUser" ><column name="Assigner" not-null="false" /></many-to-one>
+<many-to-one name="m_AladdinUser11" class="AladdinUser" ><column name="Object" not-null="false" /></many-to-one>
+<set name="Measurements" inverse="true" cascade="none"><key><column name="task" not-null="true" /></key><one-to-many class="Measurement"/></set>
 </class>
 </hibernate-mapping>
 

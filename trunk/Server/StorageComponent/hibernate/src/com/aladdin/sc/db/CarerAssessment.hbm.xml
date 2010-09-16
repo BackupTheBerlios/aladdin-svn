@@ -3,18 +3,18 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="com.aladdin.sc.db.CarerAssessment">
+<hibernate-mapping package="com.aladdin.sc.db"><class name="CarerAssessment">
 <id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">CarerAssessment_id_seq</param></generator></id>
 <property name="carer" type="java.lang.Integer"><column name="carer"/></property>
 <property name="DateOfAssessment" type="java.sql.Timestamp"><column name="DateOfAssessment"/></property>
-<property name="RelevantHealthProblem" type="java.lang.String"><column name="RelevantHealthProblem"/></property>
+<property name="RelevantHealthProblem" type="String"><column name="RelevantHealthProblem"/></property>
 <property name="SeverityOfBurden" type="java.lang.Integer"><column name="SeverityOfBurden"/></property>
-<property name="EmotionalOrMentalDisorder" type="java.lang.String"><column name="EmotionalOrMentalDisorder"/></property>
-<property name="PsychoactiveDrugs" type="java.lang.String"><column name="PsychoactiveDrugs"/></property>
+<property name="EmotionalOrMentalDisorder" type="String"><column name="EmotionalOrMentalDisorder"/></property>
+<property name="PsychoactiveDrugs" type="String"><column name="PsychoactiveDrugs"/></property>
 <property name="QualityOfLife" type="java.lang.Integer"><column name="QualityOfLife"/></property>
 <property name="clinician" type="java.lang.Integer"><column name="clinician"/></property>
-<many-to-one name="m_Carercarer" class="com.aladdin.sc.db.Carer" insert="false" update="false"><column name="carer" not-null="false" /></many-to-one>
-<many-to-one name="m_Clinicianclinician" class="com.aladdin.sc.db.Clinician" insert="false" update="false"><column name="clinician" not-null="false" /></many-to-one>
+<many-to-one name="m_Carer" class="Carer" ><column name="carer" not-null="false" /></many-to-one>
+<many-to-one name="m_Clinician" class="Clinician" ><column name="clinician" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

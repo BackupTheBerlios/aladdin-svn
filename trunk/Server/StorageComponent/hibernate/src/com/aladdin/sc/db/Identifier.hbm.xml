@@ -3,14 +3,14 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="com.aladdin.sc.db.Identifier">
+<hibernate-mapping package="com.aladdin.sc.db"><class name="Identifier">
 <id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Identifier_id_seq</param></generator></id>
-<property name="Type" type="java.lang.String"><column name="Type"/></property>
-<property name="Number" type="java.lang.String"><column name="Number"/></property>
+<property name="Type" type="String"><column name="Type"/></property>
+<property name="Number" type="String"><column name="Number"/></property>
 <property name="IssueDate" type="java.sql.Timestamp"><column name="IssueDate"/></property>
-<property name="IssueAuthority" type="java.lang.String"><column name="IssueAuthority"/></property>
+<property name="IssueAuthority" type="String"><column name="IssueAuthority"/></property>
 <property name="persondata" type="java.lang.Integer"><column name="persondata"/></property>
-<many-to-one name="m_PersonDatapersondata" class="com.aladdin.sc.db.PersonData" insert="false" update="false"><column name="persondata" not-null="false" /></many-to-one>
+<many-to-one name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

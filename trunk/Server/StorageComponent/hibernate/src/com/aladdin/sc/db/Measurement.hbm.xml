@@ -3,20 +3,18 @@
 	PUBLIC
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping><class name="com.aladdin.sc.db.Measurement">
+<hibernate-mapping package="com.aladdin.sc.db"><class name="Measurement">
 <id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">Measurement_id_seq</param></generator></id>
-<property name="type" type="java.lang.String"><column name="type"/></property>
+<property name="type" type="String"><column name="type"/></property>
 <property name="value" type="java.math.BigDecimal"><column name="value"/></property>
 <property name="datetime" type="java.sql.Timestamp"><column name="datetime"/></property>
-<property name="units" type="java.lang.String"><column name="units"/></property>
+<property name="units" type="String"><column name="units"/></property>
 <property name="lowerlimit" type="java.math.BigDecimal"><column name="lowerlimit"/></property>
 <property name="upperlimit" type="java.math.BigDecimal"><column name="upperlimit"/></property>
 <property name="patientassessment" type="java.lang.Integer"><column name="patientassessment"/></property>
-<property name="patient" type="java.lang.Integer"><column name="patient"/></property>
 <property name="task" type="java.lang.Integer"><column name="task"/></property>
-<many-to-one name="m_PatientAssessmentpatientassessment" class="com.aladdin.sc.db.PatientAssessment" insert="false" update="false"><column name="patientassessment" not-null="false" /></many-to-one>
-<many-to-one name="m_Patientpatient" class="com.aladdin.sc.db.Patient" insert="false" update="false"><column name="patient" not-null="false" /></many-to-one>
-<many-to-one name="m_Tasktask" class="com.aladdin.sc.db.Task" insert="false" update="false"><column name="task" not-null="false" /></many-to-one>
+<many-to-one name="m_PatientAssessment" class="PatientAssessment" ><column name="patientassessment" not-null="false" /></many-to-one>
+<many-to-one name="m_Task" class="Task" ><column name="task" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

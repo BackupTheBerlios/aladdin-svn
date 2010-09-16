@@ -2,7 +2,6 @@
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-//import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,9 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-//import org.apache.axis2.databinding.types.soapencoding.DateTime;
-//import org.hibernate.Hibernate;
-//import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -69,17 +65,15 @@ import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.Updat
 import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
-import eu.aladdin_project.xsd.*;
 import eu.aladdin_project.storagecomponent.GetUserTypeDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument;
-//import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.GetSystemParameterList;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
-
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserDocument;
+import eu.aladdin_project.xsd.*;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -675,8 +669,8 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     				com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer)s.load(com.aladdin.sc.db.Carer.class, id);
     				CarerInfo qi = resp.addNewOut();
     				qi.setID(p.getId().toString());
-    				qi.setSurname(p.getM_PersonDatapersondata().getSurname());
-    				qi.setName(p.getM_PersonDatapersondata().getName());
+    				qi.setSurname(p.getM_PersonData().getSurname());
+    				qi.setName(p.getM_PersonData().getName());
     			}
     		} catch (Exception e) {
     			System.out.println (e.toString());
@@ -724,8 +718,8 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     				com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician)s.load(com.aladdin.sc.db.Clinician.class, id);
     				ClinicianInfo qi = resp.addNewOut();
     				qi.setID(p.getId().toString());
-    				qi.setSurname(p.getM_PersonDatapersondata().getSurname());
-    				qi.setName(p.getM_PersonDatapersondata().getName());
+    				qi.setSurname(p.getM_PersonData().getSurname());
+    				qi.setName(p.getM_PersonData().getName());
     			}
     		} catch (Exception e) {
     		}
@@ -808,7 +802,6 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     	private Integer storeMeasurement(Measurement rm, Integer paid) {
     		long timeInMillis = 0;
     		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-    		m.setPatient(new Integer (rm.getPatientID()));
     		if (paid != null) m.setPatientassessment (paid);
     		m.setType(rm.getType().getCode());
     		m.setValue(new BigDecimal (rm.getValue()));
@@ -883,16 +876,16 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
 		private Patient exportPatient(com.aladdin.sc.db.Patient patient) {
 			Patient p = Patient.Factory.newInstance();
 			p.setID(patient.getId().toString());
-			p.setPersonData(exportPersonData(patient.getM_PersonDatapersondata()));
-			p.setSDData (exportSocioDemographicData(patient.getM_SocioDemographicDatasd()));
+			p.setPersonData(exportPersonData(patient.getM_PersonData()));
+			p.setSDData (exportSocioDemographicData(patient.getM_SocioDemographicData()));
 			p.setResponsibleClinicianID(patient.getClinician().toString());
 			
-			Object[] pc = patient.getPatientCarers1().toArray();
+			Object[] pc = patient.getPatientCarers().toArray();
 			PatientCarerList pcl = p.addNewPatientCarerList();
 			for (int i = 0; i < pc.length; i++) {
 				PatientCarer rpc = pcl.addNewPatientCarer();
 				rpc.setIsPrimary( ((com.aladdin.sc.db.PatientCarer) pc[i]).getIsprimary());
-				rpc.setCarer(exportCarer(((com.aladdin.sc.db.PatientCarer)pc[i]).getM_Carercarer()));
+				rpc.setCarer(exportCarer(((com.aladdin.sc.db.PatientCarer)pc[i]).getM_Carer()));
 			}
 			return p;
 		}
@@ -900,8 +893,8 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
 		private Carer exportCarer(com.aladdin.sc.db.Carer carer) {
 			Carer c = Carer.Factory.newInstance();
 			c.setID(carer.getId().toString());
-			c.setPersonData(exportPersonData(carer.getM_PersonDatapersondata()));
-			c.setSDData(exportSocioDemographicData(carer.getM_SocioDemographicDatasd()));
+			c.setPersonData(exportPersonData(carer.getM_PersonData()));
+			c.setSDData(exportSocioDemographicData(carer.getM_SocioDemographicData()));
 			return c;
 		}
 		
@@ -941,13 +934,13 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
 				exportIdentifier( (com.aladdin.sc.db.Identifier) id[i], idl);
 			}
 			
-			Object[] ad = personData.getAddresss1().toArray();
+			Object[] ad = personData.getAddresss().toArray();
 			AddressList adl = pd.addNewAddressList();
 			for (int i = 0; i < ad.length; i++) {
 				exportAddress( (com.aladdin.sc.db.Address) ad[i], adl);
 			}
 			
-			Object[] cm = personData.getCommunications11().toArray();
+			Object[] cm = personData.getCommunications().toArray();
 			CommunicationList cml = pd.addNewCommunicationList();
 			for (int i = 0; i < cm.length; i++) {
 				exportCommunication( (com.aladdin.sc.db.Communication) cm[i], cml);
@@ -1328,8 +1321,6 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
 			System.out.println ("12");
 			rm.setUpperLimit(m.getUpperlimit().doubleValue ());
 			System.out.println ("13");
-			rm.setPatientID(m.getPatient().toString());
-			System.out.println ("14");
 			return rm;
 		}
 		
@@ -1483,8 +1474,8 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     				com.aladdin.sc.db.Administrator a = (com.aladdin.sc.db.Administrator)s.load(com.aladdin.sc.db.Administrator.class, id);
     				AdministratorInfo ai = resp.addNewOut();
     				ai.setID(a.getId().toString());
-    				ai.setSurname(a.getM_PersonDatapersonData().getSurname());
-    				ai.setName(a.getM_PersonDatapersonData().getName());
+    				ai.setSurname(a.getM_PersonData().getSurname());
+    				ai.setName(a.getM_PersonData().getName());
     			}
     		} catch (Exception e) {
     			System.out.println (e.toString());
@@ -1540,7 +1531,7 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     				rt.setAssignerID(t.getAssigner().toString());
     				rt.setObjectID(t.getObject().toString());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
-    					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnairequestionnaire()));
+    					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire()));
     					System.out.println ();
     					System.out.println ();
     					System.out.println (" === QUESTIONNAIRE == ");
@@ -1926,7 +1917,7 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     	private Clinician exportClinician(com.aladdin.sc.db.Clinician clinician) {
     		Clinician p = Clinician.Factory.newInstance();
 			p.setID(clinician.getId().toString());
-			p.setPersonData(exportPersonData(clinician.getM_PersonDatapersondata()));
+			p.setPersonData(exportPersonData(clinician.getM_PersonData()));
 			return p;
 		}
     	
@@ -2034,7 +2025,7 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     	private Administrator exportAdministrator (com.aladdin.sc.db.Administrator administrator) {
     		Administrator p = Administrator.Factory.newInstance();
 			p.setID(administrator.getId().toString());
-			p.setPersonData(exportPersonData(administrator.getM_PersonDatapersonData()));
+			p.setPersonData(exportPersonData(administrator.getM_PersonData()));
 			return p;
 		}
     	
@@ -2381,8 +2372,8 @@ import eu.aladdin_project.storagecomponent.GetUserDocument;
     				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)s.load(com.aladdin.sc.db.Patient.class, id);
     				PatientInfo qi = resp.addNewOut();
     				qi.setID(p.getId().toString());
-    				qi.setSurname(p.getM_PersonDatapersondata().getSurname());
-    				qi.setName(p.getM_PersonDatapersondata().getName());
+    				qi.setSurname(p.getM_PersonData().getSurname());
+    				qi.setName(p.getM_PersonData().getName());
     			}
     		} catch (Exception e) {
     			System.out.println (e.toString());
