@@ -808,6 +808,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:User"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1128,6 +1142,12 @@
   <wsdl:message name="GetSystemParameterListResponse">
   	<wsdl:part name="parameters" element="tns:GetSystemParameterListResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetUserRequest">
+  	<wsdl:part name="parameters" element="tns:GetUser"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserResponse">
+  	<wsdl:part name="parameters" element="tns:GetUserResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1340,6 +1360,10 @@
         <wsdl:operation name="GetSystemParameterList">
         	<wsdl:input message="tns:GetSystemParameterListRequest"></wsdl:input>
         	<wsdl:output message="tns:GetSystemParameterListResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetUser">
+        	<wsdl:input message="tns:GetUserRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetUserResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -1876,10 +1900,20 @@
   			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
+  	<wsdl:operation name="GetUser">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetUser" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="StorageComponent">
     <wsdl:port binding="tns:StorageComponentSOAP" name="StorageComponentSOAP">
-      <soap:address location="http://www.example.org/"/>
+      <soap:address location="http://193.174.152.114:28080/axis2/services/StorageComponent/"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -799,6 +799,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetUser">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetUserResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:User"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -879,6 +893,10 @@
   </wsdl:message>
   <wsdl:message name="DeleteUserRequest">
     <wsdl:part name="parameters" element="tns:DeleteUser">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserRequest">
+    <wsdl:part name="parameters" element="tns:GetUser">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="CreateQuestionnaireResponse">
@@ -1151,6 +1169,10 @@
   </wsdl:message>
   <wsdl:message name="CreateQuestionnaireRequest">
     <wsdl:part name="parameters" element="tns:CreateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserResponse">
+    <wsdl:part name="parameters" element="tns:GetUserResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="StoreQuestionnaireAnswersRequest">
@@ -1542,6 +1564,12 @@
       <wsdl:input message="tns:GetSystemParameterListRequest">
     </wsdl:input>
       <wsdl:output message="tns:GetSystemParameterListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input message="tns:GetUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetUserResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -2017,6 +2045,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetSystemParameterList">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetSystemParameterList"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetUser"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

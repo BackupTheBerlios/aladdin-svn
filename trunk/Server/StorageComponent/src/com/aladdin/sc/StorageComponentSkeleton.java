@@ -2,7 +2,7 @@
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.math.BigInteger;
+//import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,13 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.apache.axis2.databinding.types.soapencoding.DateTime;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
+//import org.apache.axis2.databinding.types.soapencoding.DateTime;
+//import org.hibernate.Hibernate;
+//import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-
-import com.aladdin.sc.db.AladdinUser;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
@@ -50,6 +48,7 @@ import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatient
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument.GetUserPlannedTasksResponse;
+import eu.aladdin_project.storagecomponent.GetUserResponseDocument.GetUserResponse;
 import eu.aladdin_project.storagecomponent.GetWarningsResponseDocument.GetWarningsResponse;
 import eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument.ListOfAdministratorsResponse;
 import eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument.ListOfCarersResponse;
@@ -76,8 +75,11 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument;
-import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.GetSystemParameterList;
+//import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.GetSystemParameterList;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
+
+import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
+import eu.aladdin_project.storagecomponent.GetUserDocument;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -98,7 +100,6 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
     	public final static int U_ADMIN = 1;
     	
     	private boolean checkUser (String userId, Integer userType) {
-    		if (1 == 1) return true;
     		if (userId == null) return true;
     		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
 			return (s.createSQLQuery(sql).list().size() > 0);
@@ -2738,6 +2739,30 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
 					sp.setCode(obj[0].toString());
 					sp.setDescription(obj[1].toString());
 				}
+				
+			} catch (Exception e) {
+				
+			}
+			
+			return respdoc;
+        }
+		
+		public GetUserResponseDocument getUser (GetUserDocument req) {
+			GetUserResponseDocument respdoc = GetUserResponseDocument.Factory.newInstance();
+			GetUserResponse resp = respdoc.addNewGetUserResponse();
+			
+			try {
+				Integer id = new Integer (req.getGetUser().getId());
+				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
+				
+				User ru = resp.addNewOut();
+				ru.setID(user.getId().toString());
+				ru.setPassword("");
+				ru.setPersonID(user.getPersonId());
+				SystemParameter spType = SystemParameter.Factory.newInstance();
+				spType.setCode(user.getType().toString());
+				ru.setType(spType);
+				ru.setUsername(user.getUsername());
 				
 			} catch (Exception e) {
 				

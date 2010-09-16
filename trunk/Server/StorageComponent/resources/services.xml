@@ -209,13 +209,17 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetWarnings</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetWarningsResponse</outputActionMapping>
         </operation>
+        <operation name="CreateUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/CreateUser</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/CreateUserResponse</outputActionMapping>
+        </operation>
         <operation name="UpdateClinician" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/UpdateClinician</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdateClinicianResponse</outputActionMapping>
         </operation>
-        <operation name="CreateUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
-            <actionMapping>http://aladdin-project.eu/StorageComponent/CreateUser</actionMapping>
-            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/CreateUserResponse</outputActionMapping>
+        <operation name="GetUser" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetUser</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetUserResponse</outputActionMapping>
         </operation>
         <operation name="MarkWarningAsRead" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/MarkWarningAsRead</actionMapping>

@@ -715,6 +715,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param createUser
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUser
+                (
+                  eu.aladdin_project.storagecomponent.CreateUserDocument createUser
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param updateClinician
          */
 
@@ -729,13 +743,13 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param createUser
+                                    * @param getUser
          */
 
         
-                public eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUser
+                public eu.aladdin_project.storagecomponent.GetUserResponseDocument getUser
                 (
-                  eu.aladdin_project.storagecomponent.CreateUserDocument createUser
+                  eu.aladdin_project.storagecomponent.GetUserDocument getUser
                  )
             ;
         

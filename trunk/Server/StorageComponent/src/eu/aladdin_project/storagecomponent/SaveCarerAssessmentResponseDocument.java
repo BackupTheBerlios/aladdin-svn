@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface SaveCarerAssessmentResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveCarerAssessmentResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD722927FC7C73DBB441AF7CA8A5FAE14").resolveHandle("savecarerassessmentresponse7fd5doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveCarerAssessmentResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s80EC67886967E3DACA6F9D6C5DCA6FD0").resolveHandle("savecarerassessmentresponse7fd5doctype");
     
     /**
      * Gets the "SaveCarerAssessmentResponse" element
@@ -42,7 +42,7 @@ public interface SaveCarerAssessmentResponseDocument extends org.apache.xmlbeans
     public interface SaveCarerAssessmentResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveCarerAssessmentResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD722927FC7C73DBB441AF7CA8A5FAE14").resolveHandle("savecarerassessmentresponsef8a8elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveCarerAssessmentResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s80EC67886967E3DACA6F9D6C5DCA6FD0").resolveHandle("savecarerassessmentresponsef8a8elemtype");
         
         /**
          * Gets the "out" element
