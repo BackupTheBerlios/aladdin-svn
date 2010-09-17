@@ -650,11 +650,11 @@ import eu.aladdin_project.xsd.*;
     		try {
     			
     			List<Field> fl = new ArrayList<Field>();
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getDeclaredFields()));
     			
     			String sql = "SELECT p.id FROM carer p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
     			
@@ -700,10 +700,10 @@ import eu.aladdin_project.xsd.*;
     		try {
     			
     			List<Field> fl = new ArrayList<Field>();
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getDeclaredFields()));
     			
     			String sql = "SELECT p.id FROM clinician p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) WHERE ";
     			
@@ -1464,10 +1464,10 @@ import eu.aladdin_project.xsd.*;
     		try {
     			
     			List<Field> fl = new ArrayList<Field>();
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getDeclaredFields()));
     			
     			String sql = "SELECT p.id FROM administrator p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) WHERE ";
     			
@@ -2376,15 +2376,18 @@ import eu.aladdin_project.xsd.*;
     		try {
     			
     			List<Field> fl = new ArrayList<Field>();
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getFields()));
-    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Communication.class.getDeclaredFields()));
+    			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getDeclaredFields()));
     			
-    			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
+    			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) LEFT JOIN patientcarer ON (patientcarer.patient = p.id) WHERE ";
     			
     			SearchCriteria[] sc = req.getListOfPatients().getFilterArray();
+    			System.out.println ("listOfPatients");
+    			System.out.println (sc.length);
+    			System.out.println (fl.size());
     			for (int i = 0; i < sc.length; i++) {
     				for (int j = 0; j < fl.size(); j++) {
     					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
@@ -2393,6 +2396,11 @@ import eu.aladdin_project.xsd.*;
     						sql += " AND ";
     					}
     				}
+    				if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
+						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+						sql += String.format(op.get(opnum), "patientcarer.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
+						sql += " AND ";
+					}
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata, p.clinician, p.sd";
 
@@ -2424,7 +2432,7 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			Field[] field = com.aladdin.sc.db.Warning.class.getFields();
+    			Field[] field = com.aladdin.sc.db.Warning.class.getDeclaredFields();
     			String sql = "SELECT id FROM warning WHERE ";
     			
     			SearchCriteria[] sc = req.getGetWarnings().getWarnArray();
