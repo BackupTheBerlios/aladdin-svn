@@ -634,7 +634,7 @@ import eu.aladdin_project.xsd.*;
     		ListOfCarersResponse resp = respdoc.addNewListOfCarersResponse();
     		
     		if (
-    				!checkUser(req.getListOfCarers().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getListOfCarers().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getListOfCarers().getUserId(), U_ADMIN)
 				) {
     			return respdoc;
@@ -684,7 +684,7 @@ import eu.aladdin_project.xsd.*;
     		ListOfCliniciansResponse resp = respdoc.addNewListOfCliniciansResponse();
     		
     		if (
-    				!checkUser(req.getListOfClinicians().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getListOfClinicians().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getListOfClinicians().getUserId(), U_ADMIN)
 				) {
     			return respdoc;
@@ -733,8 +733,8 @@ import eu.aladdin_project.xsd.*;
     		OperationResult res = resp.addNewOut();
     		
     		if (
-    				!checkUser(req.getSavePatientAssessment().getUserId(), U_CLINICIAN) ||
-    				!checkUser(req.getSavePatientAssessment().getUserId(), U_CARER) ||
+    				!checkUser(req.getSavePatientAssessment().getUserId(), U_CLINICIAN) &&
+    				!checkUser(req.getSavePatientAssessment().getUserId(), U_CARER) &&
     				!checkUser(req.getSavePatientAssessment().getUserId(), U_PATIENT)
 				) {
     			res.setCode("-1");
@@ -856,7 +856,7 @@ import eu.aladdin_project.xsd.*;
     		GetPatientResponse resp = respdoc.addNewGetPatientResponse();
     		
     		if (
-    				!checkUser(req.getGetPatient().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetPatient().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetPatient().getUserId(), U_CARER)
 				) {
     			return respdoc;
@@ -984,7 +984,7 @@ import eu.aladdin_project.xsd.*;
     		OperationResult res = resp.addNewOut();
     		
     		if (
-    				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CARER)
 				) {
     			res.setCode("-1");
@@ -1072,7 +1072,7 @@ import eu.aladdin_project.xsd.*;
     		OperationResult res = resp.addNewOut();
     		
     		if (
-    				!checkUser(req.getDeleteExternalService().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getDeleteExternalService().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getDeleteExternalService().getUserId(), U_ADMIN)
 				) {
     			res.setCode("-1");
@@ -1261,7 +1261,7 @@ import eu.aladdin_project.xsd.*;
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
     		
     		if (
-    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CARER)
 				) {
     			return respdoc;
@@ -1493,7 +1493,7 @@ import eu.aladdin_project.xsd.*;
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
     		if (
-    				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CLINICIAN) &&
     				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CARER)
 				) {
     			return respdoc;
@@ -1688,7 +1688,7 @@ import eu.aladdin_project.xsd.*;
     		OperationResult res = resp.addNewOut();
     		
     		if (
-    				!checkUser(req.getCreateExternalService().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getCreateExternalService().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getCreateExternalService().getUserId(), U_ADMIN)
 				) {
     			res.setCode("-1");
@@ -1858,7 +1858,7 @@ import eu.aladdin_project.xsd.*;
     		OperationResult res = resp.addNewOut();
     		
     		if (
-    				!checkUser(req.getUpdateExternalService().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getUpdateExternalService().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getUpdateExternalService().getUserId(), U_ADMIN)
 				) {
     			res.setCode("-1");
@@ -1927,7 +1927,7 @@ import eu.aladdin_project.xsd.*;
     		OperationResult res = resp.addNewOut();
     		
     		if (
-    				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CARER)
 				) {
     			res.setCode("-1");
@@ -2155,7 +2155,7 @@ import eu.aladdin_project.xsd.*;
     		GetPatientAssessmentsResponse resp = respdoc.addNewGetPatientAssessmentsResponse();
     		
     		if (
-    				!checkUser(req.getGetPatientAssessments().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getGetPatientAssessments().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetPatientAssessments().getUserId(), U_CARER)
 				) {
     			return respdoc;
@@ -2337,7 +2337,7 @@ import eu.aladdin_project.xsd.*;
     		ListOfPatientsResponse resp = respdoc.addNewListOfPatientsResponse();
     		
     		if (
-    				!checkUser(req.getListOfPatients().getUserId(), U_CLINICIAN) ||
+    				!checkUser(req.getListOfPatients().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getListOfPatients().getUserId(), U_CARER)
 				) {
     			return respdoc;
