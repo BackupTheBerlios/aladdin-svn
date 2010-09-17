@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface FloatDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(FloatDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s80EC67886967E3DACA6F9D6C5DCA6FD0").resolveHandle("floatef20doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(FloatDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("floatef20doctype");
     
     /**
      * Gets the "float" element

@@ -177,7 +177,6 @@
             <element name="Units" type="string"/>
             <element minOccurs="0" name="LowerLimit" type="double"/>
             <element minOccurs="0" name="UpperLimit" type="double"/>
-            <element name="PatientID" type="string"/>
             <element name="TaskID" type="string"/>
         </sequence>
     </complexType>

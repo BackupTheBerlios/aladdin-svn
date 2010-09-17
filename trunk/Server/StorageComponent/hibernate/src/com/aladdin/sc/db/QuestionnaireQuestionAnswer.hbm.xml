@@ -6,10 +6,10 @@
 <hibernate-mapping package="com.aladdin.sc.db"><class name="QuestionnaireQuestionAnswer">
 <id name="id" type="java.lang.Integer" column="id" unsaved-value="null"><generator class="sequence"><param name="sequence">QuestionnaireQuestionAnswer_id_seq</param></generator></id>
 <property name="value" type="java.lang.Integer"><column name="value"/></property>
-<property name="description" type="String"><column name="description"/></property>
+<property name="description" type="string"><column name="description"/></property>
 <property name="question" type="java.lang.Integer"><column name="question"/></property>
 <property name="deleted" type="java.lang.Boolean"><column name="deleted"/></property>
-<many-to-one name="m_QuestionnaireQuestion" class="QuestionnaireQuestion" ><column name="question" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_QuestionnaireQuestion" class="QuestionnaireQuestion" ><column name="question" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

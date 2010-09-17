@@ -31,9 +31,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "LowerLimit");
     private static final javax.xml.namespace.QName UPPERLIMIT$10 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "UpperLimit");
-    private static final javax.xml.namespace.QName PATIENTID$12 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientID");
-    private static final javax.xml.namespace.QName TASKID$14 = 
+    private static final javax.xml.namespace.QName TASKID$12 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "TaskID");
     
     
@@ -476,74 +474,6 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
     }
     
     /**
-     * Gets the "PatientID" element
-     */
-    public java.lang.String getPatientID()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$12, 0);
-            if (target == null)
-            {
-                return null;
-            }
-            return target.getStringValue();
-        }
-    }
-    
-    /**
-     * Gets (as xml) the "PatientID" element
-     */
-    public org.apache.xmlbeans.XmlString xgetPatientID()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$12, 0);
-            return target;
-        }
-    }
-    
-    /**
-     * Sets the "PatientID" element
-     */
-    public void setPatientID(java.lang.String patientID)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$12, 0);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(PATIENTID$12);
-            }
-            target.setStringValue(patientID);
-        }
-    }
-    
-    /**
-     * Sets (as xml) the "PatientID" element
-     */
-    public void xsetPatientID(org.apache.xmlbeans.XmlString patientID)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$12, 0);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(PATIENTID$12);
-            }
-            target.set(patientID);
-        }
-    }
-    
-    /**
      * Gets the "TaskID" element
      */
     public java.lang.String getTaskID()
@@ -552,7 +482,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TASKID$14, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TASKID$12, 0);
             if (target == null)
             {
                 return null;
@@ -570,7 +500,7 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TASKID$14, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TASKID$12, 0);
             return target;
         }
     }
@@ -584,10 +514,10 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TASKID$14, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TASKID$12, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TASKID$14);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TASKID$12);
             }
             target.setStringValue(taskID);
         }
@@ -602,10 +532,10 @@ public class MeasurementImpl extends org.apache.xmlbeans.impl.values.XmlComplexC
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TASKID$14, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TASKID$12, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TASKID$14);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TASKID$12);
             }
             target.set(taskID);
         }

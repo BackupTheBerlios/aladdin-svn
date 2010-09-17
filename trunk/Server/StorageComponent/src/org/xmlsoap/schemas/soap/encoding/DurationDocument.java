@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface DurationDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DurationDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s80EC67886967E3DACA6F9D6C5DCA6FD0").resolveHandle("duration322adoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DurationDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("duration322adoctype");
     
     /**
      * Gets the "duration" element

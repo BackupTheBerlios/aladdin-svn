@@ -10,8 +10,8 @@
 <property name="Aetology" type="java.lang.Integer"><column name="Aetology"/></property>
 <property name="TimeElapsedSinceDiagnose" type="java.lang.Integer"><column name="TimeElapsedSinceDiagnose"/></property>
 <property name="Severity" type="java.lang.Integer"><column name="Severity"/></property>
-<property name="RelevantPathologyAntecedents" type="String"><column name="RelevantPathologyAntecedents"/></property>
-<property name="Comorbidity" type="String"><column name="Comorbidity"/></property>
+<property name="RelevantPathologyAntecedents" type="string"><column name="RelevantPathologyAntecedents"/></property>
+<property name="Comorbidity" type="string"><column name="Comorbidity"/></property>
 <property name="CharlsonComobodityIndex" type="java.lang.Integer"><column name="CharlsonComobodityIndex"/></property>
 <property name="BarthelIndex" type="java.lang.Integer"><column name="BarthelIndex"/></property>
 <property name="LawtonIndex" type="java.lang.Integer"><column name="LawtonIndex"/></property>
@@ -29,8 +29,8 @@
 <property name="Delirium" type="java.lang.Boolean"><column name="Delirium"/></property>
 <property name="Immobility" type="java.lang.Boolean"><column name="Immobility"/></property>
 <property name="SensorialDeficits" type="java.lang.Boolean"><column name="SensorialDeficits"/></property>
-<property name="PharmacologyTreatment" type="String"><column name="PharmacologyTreatment"/></property>
-<many-to-one name="m_Patient" class="Patient" ><column name="patient" not-null="false" /></many-to-one>
+<property name="PharmacologyTreatment" type="string"><column name="PharmacologyTreatment"/></property>
+<many-to-one insert="false" update="false" name="m_Patient" class="Patient" ><column name="patient" not-null="false" /></many-to-one>
 <set name="Measurements" inverse="true" cascade="none"><key><column name="patientassessment" not-null="true" /></key><one-to-many class="Measurement"/></set>
 </class>
 </hibernate-mapping>

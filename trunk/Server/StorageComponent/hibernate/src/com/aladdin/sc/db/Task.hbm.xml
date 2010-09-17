@@ -9,15 +9,15 @@
 <property name="DateTimeAssigned" type="java.sql.Timestamp"><column name="DateTimeAssigned"/></property>
 <property name="DateTimeFulfilled" type="java.sql.Timestamp"><column name="DateTimeFulfilled"/></property>
 <property name="TaskStatus" type="java.lang.Integer"><column name="TaskStatus"/></property>
-<property name="url" type="String"><column name="url"/></property>
+<property name="url" type="string"><column name="url"/></property>
 <property name="questionnaire" type="java.lang.Integer"><column name="questionnaire"/></property>
 <property name="Executor" type="java.lang.Integer"><column name="Executor"/></property>
 <property name="Assigner" type="java.lang.Integer"><column name="Assigner"/></property>
 <property name="Object" type="java.lang.Integer"><column name="Object"/></property>
-<many-to-one name="m_Questionnaire" class="Questionnaire" ><column name="questionnaire" not-null="false" /></many-to-one>
-<many-to-one name="m_AladdinUser" class="AladdinUser" ><column name="Executor" not-null="false" /></many-to-one>
-<many-to-one name="m_AladdinUser1" class="AladdinUser" ><column name="Assigner" not-null="false" /></many-to-one>
-<many-to-one name="m_AladdinUser11" class="AladdinUser" ><column name="Object" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_Questionnaire" class="Questionnaire" ><column name="questionnaire" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_AladdinUser" class="AladdinUser" ><column name="Executor" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_AladdinUser1" class="AladdinUser" ><column name="Assigner" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_AladdinUser11" class="AladdinUser" ><column name="Object" not-null="false" /></many-to-one>
 <set name="Measurements" inverse="true" cascade="none"><key><column name="task" not-null="true" /></key><one-to-many class="Measurement"/></set>
 </class>
 </hibernate-mapping>

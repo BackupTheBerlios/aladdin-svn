@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Task extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Task.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s80EC67886967E3DACA6F9D6C5DCA6FD0").resolveHandle("taskda91type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Task.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("taskda91type");
     
     /**
      * Gets the "ID" element

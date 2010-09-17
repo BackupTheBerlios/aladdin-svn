@@ -211,7 +211,6 @@
 			<element name="Units" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="LowerLimit" type="double" maxOccurs="1" minOccurs="0"></element>
 			<element name="UpperLimit" type="double" maxOccurs="1" minOccurs="0"></element>
-			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="TaskID" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>

@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Measurement extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Measurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s80EC67886967E3DACA6F9D6C5DCA6FD0").resolveHandle("measurementf9d6type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Measurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("measurementf9d6type");
     
     /**
      * Gets the "Type" element
@@ -152,26 +152,6 @@ public interface Measurement extends org.apache.xmlbeans.XmlObject
      * Unsets the "UpperLimit" element
      */
     void unsetUpperLimit();
-    
-    /**
-     * Gets the "PatientID" element
-     */
-    java.lang.String getPatientID();
-    
-    /**
-     * Gets (as xml) the "PatientID" element
-     */
-    org.apache.xmlbeans.XmlString xgetPatientID();
-    
-    /**
-     * Sets the "PatientID" element
-     */
-    void setPatientID(java.lang.String patientID);
-    
-    /**
-     * Sets (as xml) the "PatientID" element
-     */
-    void xsetPatientID(org.apache.xmlbeans.XmlString patientID);
     
     /**
      * Gets the "TaskID" element

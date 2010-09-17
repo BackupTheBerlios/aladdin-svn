@@ -8,8 +8,8 @@
 <property name="patient" type="java.lang.Integer"><column name="patient"/></property>
 <property name="carer" type="java.lang.Integer"><column name="carer"/></property>
 <property name="isprimary" type="java.lang.Boolean"><column name="isprimary"/></property>
-<many-to-one name="m_Patient" class="Patient" ><column name="patient" not-null="false" /></many-to-one>
-<many-to-one name="m_Carer" class="Carer" ><column name="carer" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_Patient" class="Patient" ><column name="patient" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_Carer" class="Carer" ><column name="carer" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 
