@@ -58,9 +58,9 @@
 			
 			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, null, null, "42", userids, "43");
 			StorageComponentProxy proxy = new StorageComponentProxy();
-			System.out.println("HEHEHE");
 			try{
-				proxy.assignTask(ts,"43");
+				proxy.assignTask(ts,userids);
+				System.out.println("HEHEHE");
 			}catch(java.rmi.RemoteException re){
 				re.printStackTrace();
 			}finally{
@@ -75,9 +75,11 @@
 				Session ses = Sessions.getCurrent();
 				String uid = (String)ses.getAttribute("userid");
 				proxy.changeTaskStatus(Integer.parseInt(task),SystemDictionary.TASK_STATUS_CANCELLED_INT, uid);
-				create_my_entry.setVisible(false); 
+				 
 			}catch(java.rmi.RemoteException re){
 				re.printStackTrace();	
+			}finally{
+				Executions.getCurrent().sendRedirect("");
 			}
 		}
 		
