@@ -10,8 +10,10 @@ public class SystemDictionary {
 		switch(dictn){
 		case USERTYPE_ADMIN_INT:
 			ret= USERTYPE_ADMIN_LBL;
+			break;
 		case USERTYPE_CLINICIAN_INT:
 			ret= USERTYPE_CLINICIAN_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -22,10 +24,13 @@ public class SystemDictionary {
 		switch(dictn){
 		case TASK_STATUS_CANCELLED_INT:
 			ret= TASK_STATUS_CANCELLED_LBL;
+			break;
 		case TASK_STATUS_COMPLETED_INT:
 			ret= TASK_STATUS_COMPLETED_LBL;
+			break;
 		case TASK_STATUS_PENDING_INT:
 			ret= TASK_STATUS_PENDING_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -35,18 +40,25 @@ public class SystemDictionary {
 		switch(dictn){
 		case TASK_TYPE_ACTMONITOR_INT:
 			ret= TASK_TYPE_ACTMONITOR_LBL;
+			break;
 		case TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT:
 			ret= TASK_TYPE_BLOODPRESSURE_MEASUREMENT_LBL;
+			break;
 		case TASK_TYPE_CARERQS_INT:
 			ret= TASK_TYPE_CARERQS_LBL;
+			break;
 		case TASK_TYPE_COGGAME_INT:
 			ret= TASK_TYPE_COGGAME_LBL;
+			break;
 		case TASK_TYPE_EXERCISE_INT:
 			ret= TASK_TYPE_EXERCISE_LBL;
+			break;
 		case TASK_TYPE_PATIENTQS_INT:
 			ret= TASK_TYPE_PATIENTQS_LBL;
+			break;
 		case TASK_TYPE_WEIGHT_MEASUREMENT_INT:
 			ret= TASK_TYPE_WEIGHT_MEASUREMENT_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -57,8 +69,10 @@ public class SystemDictionary {
 		switch(dictn){
 		case GENDER_MALE_INT:
 			ret= GENDER_MALE_LBL;
+			break;
 		case GENDER_FEMALE_INT:
 			ret= GENDER_FEMALE_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -68,12 +82,16 @@ public class SystemDictionary {
 		switch(dictn){
 		case MARITAL_DIVORCED_INT:
 			ret= MARITAL_DIVORCED_LBL;
+			break;
 		case MARITAL_MARRIED_INT:
 			ret= MARITAL_MARRIED_LBL;
+			break;
 		case MARITAL_SINGLE_INT:
 			ret= MARITAL_SINGLE_LBL;
+			break;
 		case MARITAL_WIDOW_INT:
 			ret= MARITAL_WIDOW_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -83,16 +101,22 @@ public class SystemDictionary {
 		switch(dictn){
 		case LIVING_ALONE_INT:
 			ret= LIVING_ALONE_LBL;
+			break;
 		case LIVING_PARTER_SONDAUGHTER_INT:
 			ret= LIVING_PARTER_SONDAUGHTER_LBL;
+			break;
 		case LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_INT:
 			ret= LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
+			break;
 		case LIVING_PARTER_SONDAUGHTER_SDLAW_INT:
 			ret= LIVING_PARTER_SONDAUGHTER_SDLAW_LBL;
+			break;
 		case LIVING_PARTNER_INT:
 			ret= LIVING_PARTNER_LBL;
+			break;
 		case LIVING_SONDAUGHTER_INT:
 			ret= LIVING_SONDAUGHTER_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -102,8 +126,10 @@ public class SystemDictionary {
 		switch(dictn){
 		case WARNING_AUTO_INT:
 			ret= WARNING_AUTO_LBL;
+			break;
 		case WARNING_MANUAL_INT:
 			ret= WARNING_MANUAL_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -113,6 +139,7 @@ public class SystemDictionary {
 		switch(dictn){
 		case EFFECT_WARNING_STROKE_INT:
 			ret= EFFECT_WARNING_STROKE_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -122,8 +149,10 @@ public class SystemDictionary {
 		switch(dictn){
 		case INDICATOR_WARNING_BLODDPRESSURE_INT:
 			ret= INDICATOR_WARNING_BLODDPRESSURE_LBL;
+			break;
 		case INDICATOR_WARNING_WEIGHT_INT:
 			ret= INDICATOR_WARNING_WEIGHT_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -133,8 +162,10 @@ public class SystemDictionary {
 		switch(dictn){
 		case EMERGENCYLEVEL_WARNING_ATTENTION_INT:
 			ret= EMERGENCYLEVEL_WARNING_ATTENTION_LBL;
+			break;
 		case EMERGENCYLEVEL_WARNING_IMMEDIATE_INT:
 			ret= EMERGENCYLEVEL_WARNING_IMMEDIATE_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -145,8 +176,10 @@ public class SystemDictionary {
 		switch(dictn){
 		case MEASUREMENT_BLODDPRESSURE_INT:
 			ret= MEASUREMENT_BLODDPRESSURE_LBL;
+			break;
 		case MEASUREMENT_WEIGHT_INT:
 			ret= MEASUREMENT_WEIGHT_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}

@@ -7,6 +7,7 @@
 		import org.zkoss.util.resource.Labels;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.CarerInfo;
+		import eu.aladdin_project.xsd.SearchCriteria;
 		
 		String title = Labels.getLabel("carers.title");
 		page.setTitle(title);
@@ -23,8 +24,12 @@
 		Session ses = Sessions.getCurrent();
 		String id = (String)ses.getAttribute("userid");
 		try{
-			plist = proxy.listOfCarers(null,id);
+			plist = proxy.listOfCarers(new SearchCriteria[0],id);
+			if(plist == null){
+				plist = new CarerInfo[0];
+			}
 			System.out.println("**** List SIZE: "+plist.length);
+			
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}
@@ -41,7 +46,19 @@
 			<column width="80px" align="center" />
 			<column width="80px" align="center" />
 		</columns>
-		<rows>
+		<rows id="rowscarers" onCreate="insertNoCarersAvailable()">
+			<zscript>
+				public void insertNoCarersAvailable(){
+					if(plist== null || plist.length == 0){
+						Row some = new Row();
+						some.setSpans("6");
+						Label somelbl = new Label();
+						somelbl.setValue("There are no carers available at this moment. Please, try again later");
+						some.appendChild(somelbl);
+						rowscarers.appendChild(some);
+					}
+				}
+			</zscript>
 			<row forEach="${plist }" id="${each.ID }">
 				<label value="${each.ID }"/>
 				<label value="${each.surname }"/>

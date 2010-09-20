@@ -68,8 +68,21 @@
 			}
 		}
 		
+		public void cancelTask(){
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			try{
+				String task = ((Textbox)create_my_entry.getFellow("taskidfield")).getValue();
+				Session ses = Sessions.getCurrent();
+				String uid = (String)ses.getAttribute("userid");
+				proxy.changeTaskStatus(Integer.parseInt(task),SystemDictionary.TASK_STATUS_CANCELLED_INT, uid);
+				create_my_entry.setVisible(false); 
+			}catch(java.rmi.RemoteException re){
+				re.printStackTrace();	
+			}
+		}
+		
 	</zscript>
-	<window id="create_my_entry" title="New Task" border="normal" visible="false" width="70%" closable="true" position="center,center">
+	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center">
 		<label value="${objstr}"/>
 		<grid>
 			<columns>
@@ -77,16 +90,27 @@
 				<column/>
 			</columns>
 			<rows>
+				<row id="rowtaskid" visible="false">
+					<label value="Task ID"/>
+					<textbox id="taskidfield" value="" readonly="true"/>
+				</row>
 				<row>
 					<label value="Task type"/>
-					<listbox id="tasktypesel" mold="select" onSelect="changeTaskType()">
-						<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
-						<listitem label="${ttblood }" value="${ttbloodi }"/>
-						<listitem label="${ttweight }" value="${ttweighti }"/>
-						<listitem label="${ttcoggame }" value="${ttcoggamei }"/>
-						<listitem label="${ttact }" value="${ttacti }"/>
-						<listitem label="${ttex }" value="${ttexi }"/>
-					</listbox>
+					<hbox>
+						<listbox id="tasktypesel" mold="select" onSelect="changeTaskType()">
+							<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
+							<listitem label="${ttblood }" value="${ttbloodi }"/>
+							<listitem label="${ttweight }" value="${ttweighti }"/>
+							<listitem label="${ttcoggame }" value="${ttcoggamei }"/>
+							<listitem label="${ttact }" value="${ttacti }"/>
+							<listitem label="${ttex }" value="${ttexi }"/>
+						</listbox>
+						<textbox id="tasktypetext" visible="false" readonly="true"/>
+					</hbox>
+				</row>
+				<row id="rowtaskstatus" visible="false">
+					<label value="Task Status"/>
+					<textbox id="taskstatusfield" value="" readonly="true"/>
 				</row>
 				<row id="qsrow" visible="false">
 					<label value="Questionnaire"/>
@@ -114,10 +138,17 @@
 				</row>
 				<row>
 					<label value="Object"/>
+					<textbox id="addressedid" readonly="true"/>
+				</row>
+				<row>
 					<label value=""/>
+					<hbox>
+						<button id="savebutton" label="Assign task" onClick="saveTask()" visible="false"/>
+						<button id="cancelbutton" label="Cancel task" onClick="cancelTask()" visible="false"/>
+					</hbox>
 				</row>
 			</rows>
 		</grid>
-		<button label="Assign task" onClick="saveTask()"/>
+		
 	</window>
 </zk>

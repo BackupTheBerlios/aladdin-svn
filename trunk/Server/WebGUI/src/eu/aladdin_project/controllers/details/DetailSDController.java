@@ -3,6 +3,8 @@ package eu.aladdin_project.controllers.details;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
@@ -34,6 +36,7 @@ public class DetailSDController extends DetailPersonController{
 		super.setControllerData(id, data, sddata, responsible, carers);
 		this.calendars = (Calendars)this.getFellow("cal");
 		
+		/*
 		Listbox listgui = (Listbox)getFellow("taskrows");
 		Label listlabel = (Label)getFellow("taskrowslbl");
 		
@@ -46,9 +49,9 @@ public class DetailSDController extends DetailPersonController{
 			listgui.setVisible(true);
 			listlabel.setVisible(true);
 		}
+		*/
 		
-		Calendars calendar = (Calendars)getFellow("cal");
-		calendar.setModel(this.calmodel);
+		this.refreshCalendarData();
 	}
 	
 	protected Listitem getSDItem(){
@@ -150,16 +153,6 @@ public class DetailSDController extends DetailPersonController{
 				item.appendChild(lab5);
 				ret[i]=item;
 				
-				SimpleCalendarEvent clevent = new SimpleCalendarEvent();
-				clevent.setBeginDate(calendar1.getTime());
-				clevent.setContent("");
-				clevent.setEndDate(new Date(calendar2.getTime().getTime()+3600000));
-				clevent.setLocked(true);
-				clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-				clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-				clevent.setHeaderColor("black");
-				clevent.setContentColor("black");
-				this.calmodel.add(clevent);
 			}
 			return ret;
 		}catch(Exception e){
@@ -199,8 +192,30 @@ public class DetailSDController extends DetailPersonController{
 				clevent.setLocked(true);
 				clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
 				clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-				clevent.setHeaderColor("black");
-				clevent.setContentColor("black");
+				switch(Integer.parseInt(tasklist[i].getTaskStatus().getCode())){
+				case SystemDictionary.TASK_STATUS_CANCELLED_INT:
+					clevent.setHeaderColor("red");
+					clevent.setContentColor("red");
+					break;
+				case SystemDictionary.TASK_STATUS_COMPLETED_INT:
+					clevent.setHeaderColor("blue");
+					clevent.setContentColor("blue");
+					break;
+				case SystemDictionary.TASK_STATUS_PENDING_INT:
+					clevent.setHeaderColor("black");
+					clevent.setContentColor("black");
+					break;
+				default:
+					clevent.setHeaderColor("yellow");
+					clevent.setContentColor("yellow");
+					break;
+				}
+				Map<String, String> params = new HashMap<String,String>();
+				params.put("user", userid);
+				params.put("objid", tasklist[i].getObjectID());
+				params.put("task", tasklist[i].getID());
+				params.put("status", tasklist[i].getTaskStatus().getCode());
+				clevent.setParams(params);
 				this.calmodel.add(clevent);
 			}
 			

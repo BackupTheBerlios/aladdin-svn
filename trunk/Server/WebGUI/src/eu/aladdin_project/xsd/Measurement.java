@@ -20,8 +20,6 @@ public class Measurement  implements java.io.Serializable {
 
     private java.lang.Double upperLimit;
 
-    private java.lang.String patientID;
-
     private java.lang.String taskID;
 
     public Measurement() {
@@ -34,7 +32,6 @@ public class Measurement  implements java.io.Serializable {
            java.lang.String units,
            java.lang.Double lowerLimit,
            java.lang.Double upperLimit,
-           java.lang.String patientID,
            java.lang.String taskID) {
            this.type = type;
            this.value = value;
@@ -42,7 +39,6 @@ public class Measurement  implements java.io.Serializable {
            this.units = units;
            this.lowerLimit = lowerLimit;
            this.upperLimit = upperLimit;
-           this.patientID = patientID;
            this.taskID = taskID;
     }
 
@@ -168,26 +164,6 @@ public class Measurement  implements java.io.Serializable {
 
 
     /**
-     * Gets the patientID value for this Measurement.
-     * 
-     * @return patientID
-     */
-    public java.lang.String getPatientID() {
-        return patientID;
-    }
-
-
-    /**
-     * Sets the patientID value for this Measurement.
-     * 
-     * @param patientID
-     */
-    public void setPatientID(java.lang.String patientID) {
-        this.patientID = patientID;
-    }
-
-
-    /**
      * Gets the taskID value for this Measurement.
      * 
      * @return taskID
@@ -234,9 +210,6 @@ public class Measurement  implements java.io.Serializable {
             ((this.upperLimit==null && other.getUpperLimit()==null) || 
              (this.upperLimit!=null &&
               this.upperLimit.equals(other.getUpperLimit()))) &&
-            ((this.patientID==null && other.getPatientID()==null) || 
-             (this.patientID!=null &&
-              this.patientID.equals(other.getPatientID()))) &&
             ((this.taskID==null && other.getTaskID()==null) || 
              (this.taskID!=null &&
               this.taskID.equals(other.getTaskID())));
@@ -266,9 +239,6 @@ public class Measurement  implements java.io.Serializable {
         }
         if (getUpperLimit() != null) {
             _hashCode += getUpperLimit().hashCode();
-        }
-        if (getPatientID() != null) {
-            _hashCode += getPatientID().hashCode();
         }
         if (getTaskID() != null) {
             _hashCode += getTaskID().hashCode();
@@ -319,12 +289,6 @@ public class Measurement  implements java.io.Serializable {
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "UpperLimit"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
         elemField.setMinOccurs(0);
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("patientID");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientID"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

@@ -20,8 +20,6 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
 
     private org.apache.axis.types.UnsignedByte condition;  // attribute
 
-    private boolean deleted;  // attribute
-
     public QuestionnaireQuestion() {
     }
 
@@ -31,15 +29,13 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
            eu.aladdin_project.xsd.QuestionnaireQuestion[] questions,
            java.lang.String id,
            java.lang.String type,
-           org.apache.axis.types.UnsignedByte condition,
-           boolean deleted) {
+           org.apache.axis.types.UnsignedByte condition) {
            this.title = title;
            this.answers = answers;
            this.questions = questions;
            this.id = id;
            this.type = type;
            this.condition = condition;
-           this.deleted = deleted;
     }
 
 
@@ -162,26 +158,6 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         this.condition = condition;
     }
 
-
-    /**
-     * Gets the deleted value for this QuestionnaireQuestion.
-     * 
-     * @return deleted
-     */
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-
-    /**
-     * Sets the deleted value for this QuestionnaireQuestion.
-     * 
-     * @param deleted
-     */
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof QuestionnaireQuestion)) return false;
@@ -211,8 +187,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
               this.type.equals(other.getType()))) &&
             ((this.condition==null && other.getCondition()==null) || 
              (this.condition!=null &&
-              this.condition.equals(other.getCondition()))) &&
-            this.deleted == other.isDeleted();
+              this.condition.equals(other.getCondition())));
         __equalsCalc = null;
         return _equals;
     }
@@ -258,7 +233,6 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         if (getCondition() != null) {
             _hashCode += getCondition().hashCode();
         }
-        _hashCode += (isDeleted() ? Boolean.TRUE : Boolean.FALSE).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -283,11 +257,6 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         attrField.setFieldName("condition");
         attrField.setXmlName(new javax.xml.namespace.QName("", "condition"));
         attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "unsignedByte"));
-        typeDesc.addFieldDesc(attrField);
-        attrField = new org.apache.axis.description.AttributeDesc();
-        attrField.setFieldName("deleted");
-        attrField.setXmlName(new javax.xml.namespace.QName("", "deleted"));
-        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
         typeDesc.addFieldDesc(attrField);
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("title");

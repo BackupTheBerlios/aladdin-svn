@@ -16,7 +16,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[52];
+        _operations = new org.apache.axis.description.OperationDesc[54];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -737,6 +737,30 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[51] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("GetSystemParameterList");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "type"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "language"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        oper.setReturnClass(eu.aladdin_project.xsd.SystemParameter[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[52] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("GetUser");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "id"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "User"));
+        oper.setReturnClass(eu.aladdin_project.xsd.User.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[53] = oper;
 
     }
 
@@ -2864,6 +2888,74 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
                 return (eu.aladdin_project.xsd.OperationResult) _resp;
             } catch (java.lang.Exception _exception) {
                 return (eu.aladdin_project.xsd.OperationResult) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.OperationResult.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, int language) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[52]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/GetSystemParameterList");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetSystemParameterList"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(type), new java.lang.Integer(language)});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.SystemParameter[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.SystemParameter[]) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.SystemParameter[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public eu.aladdin_project.xsd.User getUser(java.lang.String id) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[53]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/GetUser");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetUser"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {id});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.User) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.User) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.User.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

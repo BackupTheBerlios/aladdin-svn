@@ -12,10 +12,6 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
 
     private org.apache.axis.types.UnsignedByte value;  // attribute
 
-    private boolean deleted;  // attribute
-
-    private int id;  // attribute
-
     public QuestionnaireQuestionAnswer() {
     }
 
@@ -68,46 +64,6 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
         this.value = value;
     }
 
-
-    /**
-     * Gets the deleted value for this QuestionnaireQuestionAnswer.
-     * 
-     * @return deleted
-     */
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-
-    /**
-     * Sets the deleted value for this QuestionnaireQuestionAnswer.
-     * 
-     * @param deleted
-     */
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
-
-    /**
-     * Gets the id value for this QuestionnaireQuestionAnswer.
-     * 
-     * @return id
-     */
-    public int getId() {
-        return id;
-    }
-
-
-    /**
-     * Sets the id value for this QuestionnaireQuestionAnswer.
-     * 
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof QuestionnaireQuestionAnswer)) return false;
@@ -125,9 +81,7 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
               this._value.equals(other.get_value()))) &&
             ((this.value==null && other.getValue()==null) || 
              (this.value!=null &&
-              this.value.equals(other.getValue()))) &&
-            this.deleted == other.isDeleted() &&
-            this.id == other.getId();
+              this.value.equals(other.getValue())));
         __equalsCalc = null;
         return _equals;
     }
@@ -145,8 +99,6 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
         if (getValue() != null) {
             _hashCode += getValue().hashCode();
         }
-        _hashCode += (isDeleted() ? Boolean.TRUE : Boolean.FALSE).hashCode();
-        _hashCode += getId();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -161,16 +113,6 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
         attrField.setFieldName("value");
         attrField.setXmlName(new javax.xml.namespace.QName("", "value"));
         attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "unsignedByte"));
-        typeDesc.addFieldDesc(attrField);
-        attrField = new org.apache.axis.description.AttributeDesc();
-        attrField.setFieldName("deleted");
-        attrField.setXmlName(new javax.xml.namespace.QName("", "deleted"));
-        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
-        typeDesc.addFieldDesc(attrField);
-        attrField = new org.apache.axis.description.AttributeDesc();
-        attrField.setFieldName("id");
-        attrField.setXmlName(new javax.xml.namespace.QName("", "id"));
-        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         typeDesc.addFieldDesc(attrField);
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("_value");

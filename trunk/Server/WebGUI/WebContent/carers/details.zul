@@ -93,7 +93,8 @@
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		try{
-			Carer userobj = proxy.getCarer(objid,userid);
+			//Carer userobj = proxy.getCarer(objid,userid);
+			Carer userobj = proxy.getCarer(objid,null);
 			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),null,null);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
