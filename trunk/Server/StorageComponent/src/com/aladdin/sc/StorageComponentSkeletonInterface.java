@@ -351,6 +351,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getPatientsForCaregiver
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument getPatientsForCaregiver
+                (
+                  eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument getPatientsForCaregiver
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getPatientMeasurement
          */
 

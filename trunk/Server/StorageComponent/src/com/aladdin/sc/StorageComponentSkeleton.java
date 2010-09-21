@@ -73,6 +73,9 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserDocument;
+import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument;
+import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument;
+import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.xsd.*;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
@@ -660,6 +663,9 @@ import eu.aladdin_project.xsd.*;
     			
     			SearchCriteria[] sc = req.getListOfCarers().getFilterArray();
     			for (int i = 0; i < sc.length; i++) {
+    				
+    				if (sc[i].getFieldName() == null) continue;
+    				
     				for (int j = 0; j < fl.size(); j++) {
     					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
     						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
@@ -709,6 +715,9 @@ import eu.aladdin_project.xsd.*;
     			
     			SearchCriteria[] sc = req.getListOfClinicians().getFilterArray();
     			for (int i = 0; i < sc.length; i++) {
+    				
+    				if (sc[i].getFieldName() == null) continue;
+    				
     				for (int j = 0; j < fl.size(); j++) {
     					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
     						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
@@ -2389,14 +2398,22 @@ import eu.aladdin_project.xsd.*;
     			System.out.println (sc.length);
     			System.out.println (fl.size());
     			for (int i = 0; i < sc.length; i++) {
+    				
+    				if (sc[i].getFieldName() == null) continue;
+    				
+    				System.out.println (sc[i].getFieldName());
     				for (int j = 0; j < fl.size(); j++) {
+    					System.out.println (fl.get(j).getName());
     					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+    						System.out.println ("1");
     						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
     						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
     						sql += " AND ";
-    					}
+    					} else System.out.println ("0");
     				}
+    				System.out.println ("if");
     				if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
+    					System.out.println ("carer");
 						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
 						sql += String.format(op.get(opnum), "patientcarer.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
 						sql += " AND ";
@@ -2772,7 +2789,7 @@ import eu.aladdin_project.xsd.*;
 				}
 				
 			} catch (Exception e) {
-				
+				System.out.println (e.toString());
 			}
 			
 			return respdoc;
@@ -2797,6 +2814,34 @@ import eu.aladdin_project.xsd.*;
 				
 			} catch (Exception e) {
 				
+			}
+			
+			return respdoc;
+        }
+		
+		public GetPatientsForCaregiverResponseDocument getPatientsForCaregiver (GetPatientsForCaregiverDocument req) {
+			GetPatientsForCaregiverResponseDocument respdoc = GetPatientsForCaregiverResponseDocument.Factory.newInstance();
+			GetPatientsForCaregiverResponse resp = respdoc.addNewGetPatientsForCaregiverResponse();
+			
+			try {
+				Integer uid = new Integer (req.getGetPatientsForCaregiver().getUserId());
+				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
+        		SQLQuery q = s.createSQLQuery(sql);
+        		if (q.list().size() == 1) {
+        			sql = "SELECT id FROM patientcarer WHERE carer = '" + q.list().get(0).toString() + "'";
+        			
+        			Object[] ql = s.createSQLQuery(sql).list().toArray();
+        			for (int i = 0; i < ql.length; i++) {
+        				Integer id = (Integer) ql[i];
+        				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)s.load(com.aladdin.sc.db.Patient.class, id);
+        				PatientInfo qi = resp.addNewOut();
+        				qi.setID(p.getId().toString());
+        				qi.setSurname(p.getM_PersonData().getSurname());
+        				qi.setName(p.getM_PersonData().getName());
+        			}
+        		}
+			} catch (Exception e) {
+				System.out.println (e.toString());
 			}
 			
 			return respdoc;

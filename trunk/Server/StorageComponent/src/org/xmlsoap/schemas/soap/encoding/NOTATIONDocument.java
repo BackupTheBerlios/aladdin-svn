@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NOTATIONDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NOTATIONDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("notation4718doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NOTATIONDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("notation4718doctype");
     
     /**
      * Gets the "NOTATION" element

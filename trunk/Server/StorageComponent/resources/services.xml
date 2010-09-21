@@ -105,6 +105,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/CreateQuestionnaire</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/CreateQuestionnaireResponse</outputActionMapping>
         </operation>
+        <operation name="GetPatientsForCaregiver" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetPatientsForCaregiver</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetPatientsForCaregiverResponse</outputActionMapping>
+        </operation>
         <operation name="GetPatientMeasurement" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetPatientMeasurement</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetPatientMeasurementResponse</outputActionMapping>

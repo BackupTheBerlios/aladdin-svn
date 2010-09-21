@@ -822,6 +822,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetPatientsForCaregiver">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPatientsForCaregiverResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:PatientInfo" maxOccurs="unbounded" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1148,6 +1162,12 @@
   <wsdl:message name="GetUserResponse">
   	<wsdl:part name="parameters" element="tns:GetUserResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetPatientsForCaregiverRequest">
+  	<wsdl:part name="parameters" element="tns:GetPatientsForCaregiver"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPatientsForCaregiverResponse">
+  	<wsdl:part name="parameters" element="tns:GetPatientsForCaregiverResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1364,6 +1384,10 @@
         <wsdl:operation name="GetUser">
         	<wsdl:input message="tns:GetUserRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPatientsForCaregiver">
+        	<wsdl:input message="tns:GetPatientsForCaregiverRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetPatientsForCaregiverResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -1908,6 +1932,17 @@
   		</wsdl:input>
   		<wsdl:output>
   			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetPatientsForCaregiver">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientsForCaregiver">
+  		</soap:operation>
+  		<wsdl:input>
+  			<soap:body use="literal"></soap:body>
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal"></soap:body>
   		</wsdl:output>
   	</wsdl:operation>
   </wsdl:binding>

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface StoreMeasurementsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurementsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("storemeasurements6a86doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurementsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("storemeasurements6a86doctype");
     
     /**
      * Gets the "StoreMeasurements" element
@@ -42,7 +42,7 @@ public interface StoreMeasurementsDocument extends org.apache.xmlbeans.XmlObject
     public interface StoreMeasurements extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurements.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("storemeasurements648aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StoreMeasurements.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("storemeasurements648aelemtype");
         
         /**
          * Gets array of all "data" elements

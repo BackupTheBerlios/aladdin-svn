@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateQuestionnaireDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateQuestionnaireDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("createquestionnaire8095doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateQuestionnaireDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("createquestionnaire8095doctype");
     
     /**
      * Gets the "CreateQuestionnaire" element
@@ -42,7 +42,7 @@ public interface CreateQuestionnaireDocument extends org.apache.xmlbeans.XmlObje
     public interface CreateQuestionnaire extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateQuestionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("createquestionnaire3e28elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateQuestionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("createquestionnaire3e28elemtype");
         
         /**
          * Gets the "data" element

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateClinicianDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateClinicianDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("createclinician3460doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateClinicianDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("createclinician3460doctype");
     
     /**
      * Gets the "CreateClinician" element
@@ -42,7 +42,7 @@ public interface CreateClinicianDocument extends org.apache.xmlbeans.XmlObject
     public interface CreateClinician extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateClinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("createclinician32feelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateClinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("createclinician32feelemtype");
         
         /**
          * Gets the "data" element

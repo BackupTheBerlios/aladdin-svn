@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserTypeDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserTypeDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("getusertypea2a9doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserTypeDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("getusertypea2a9doctype");
     
     /**
      * Gets the "GetUserType" element
@@ -42,7 +42,7 @@ public interface GetUserTypeDocument extends org.apache.xmlbeans.XmlObject
     public interface GetUserType extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("getusertype6350elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("getusertype6350elemtype");
         
         /**
          * Gets the "id" element

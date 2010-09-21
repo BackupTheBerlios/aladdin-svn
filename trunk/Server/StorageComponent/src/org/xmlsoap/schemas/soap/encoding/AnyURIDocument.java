@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface AnyURIDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnyURIDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("anyuri77b6doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnyURIDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("anyuri77b6doctype");
     
     /**
      * Gets the "anyURI" element

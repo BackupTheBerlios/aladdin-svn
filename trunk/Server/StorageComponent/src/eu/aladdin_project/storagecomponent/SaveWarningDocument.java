@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface SaveWarningDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveWarningDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("savewarning4ceddoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveWarningDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("savewarning4ceddoctype");
     
     /**
      * Gets the "SaveWarning" element
@@ -42,7 +42,7 @@ public interface SaveWarningDocument extends org.apache.xmlbeans.XmlObject
     public interface SaveWarning extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveWarning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("savewarning70d8elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SaveWarning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("savewarning70d8elemtype");
         
         /**
          * Gets the "warn" element

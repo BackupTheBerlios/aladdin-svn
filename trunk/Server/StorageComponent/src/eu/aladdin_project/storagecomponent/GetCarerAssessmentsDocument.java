@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetCarerAssessmentsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarerAssessmentsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("getcarerassessments3734doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarerAssessmentsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("getcarerassessments3734doctype");
     
     /**
      * Gets the "GetCarerAssessments" element
@@ -42,7 +42,7 @@ public interface GetCarerAssessmentsDocument extends org.apache.xmlbeans.XmlObje
     public interface GetCarerAssessments extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarerAssessments.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4205CCDBCDECC51961AD0D38A138281D").resolveHandle("getcarerassessments5a26elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetCarerAssessments.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("getcarerassessments5a26elemtype");
         
         /**
          * Gets the "carerId" element
