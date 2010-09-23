@@ -4,7 +4,11 @@
 		import eu.aladdin_project.SystemDictionary;
 		import eu.aladdin_project.xsd.SystemParameter;
 		import eu.aladdin_project.xsd.Task;
+		import eu.aladdin_project.xsd.QuestionnaireInfo;
+		import eu.aladdin_project.xsd.SearchCriteria;;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import org.zkoss.zul.SimpleListModel;
+		
 		
 		String ttcarerqs = Labels.getLabel("dic.task.type.carers");
 		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
@@ -20,71 +24,12 @@
 		int ttacti = SystemDictionary.TASK_TYPE_ACTMONITOR_INT;
 		int ttexi = SystemDictionary.TASK_TYPE_EXERCISE_INT;
 		
-		public void changeTaskType(){
-			Listbox listbox = (Listbox)create_my_entry.getFellow("tasktypesel");
-			Listitem listitem = listbox.getSelectedItem();
-			int comp = ((Integer)listitem.getValue()).intValue(); 
-			if(comp == SystemDictionary.TASK_TYPE_COGGAME_INT){
-				create_my_entry.getFellow("urlrow").setVisible(true);
-				create_my_entry.getFellow("qsrow").setVisible(false);
-				System.out.println("IEEE");
-			}else if(comp == SystemDictionary.TASK_TYPE_CARERQS_INT){
-				create_my_entry.getFellow("urlrow").setVisible(false);
-				create_my_entry.getFellow("qsrow").setVisible(true);
-				System.out.println("EEEI");
-			}else{
-				create_my_entry.getFellow("urlrow").setVisible(false);
-				create_my_entry.getFellow("qsrow").setVisible(false);
-				System.out.println("IEEI");
-			}
-		}
+		Session ses = Sessions.getCurrent();
+		String petusid = (String)ses.getAttribute("userid");
 		
-		public void saveTask(){
-			Listbox listbox = (Listbox)create_my_entry.getFellow("tasktypesel");
-			Listitem listitem = listbox.getSelectedItem();
-			SystemParameter tastype = new SystemParameter(listitem.getValue().toString(), listitem.getLabel());
-			
-			Datebox dbox = (Datebox)create_my_entry.getFellow("datetask");
-			Timebox tbox = (Timebox)create_my_entry.getFellow("timetask");
-			GregorianCalendar caltas = new GregorianCalendar();
-			caltas.setTime(new Date(dbox.getValue().getTime()));
-			GregorianCalendar caltas2 = new GregorianCalendar();
-			caltas2.setTime(new Date(dbox.getValue().getTime()+3600000));
-			
-			SystemParameter tasstatus = new SystemParameter(SystemDictionary.TASK_STATUS_PENDING,SystemDictionary.TASK_STATUS_PENDING_LBL);
-			
-			String objids = ((Textbox)create_my_entry.getFellow("objid")).getValue();
-			String userids = ((Textbox)create_my_entry.getFellow("userid")).getValue();
-			
-			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, null, null, "42", userids, "43");
-			StorageComponentProxy proxy = new StorageComponentProxy();
-			try{
-				proxy.assignTask(ts,userids);
-				System.out.println("HEHEHE");
-			}catch(java.rmi.RemoteException re){
-				re.printStackTrace();
-			}finally{
-				Executions.getCurrent().sendRedirect("");
-			}
-		}
-		
-		public void cancelTask(){
-			StorageComponentProxy proxy = new StorageComponentProxy();
-			try{
-				String task = ((Textbox)create_my_entry.getFellow("taskidfield")).getValue();
-				Session ses = Sessions.getCurrent();
-				String uid = (String)ses.getAttribute("userid");
-				proxy.changeTaskStatus(Integer.parseInt(task),SystemDictionary.TASK_STATUS_CANCELLED_INT, uid);
-				 
-			}catch(java.rmi.RemoteException re){
-				re.printStackTrace();	
-			}finally{
-				Executions.getCurrent().sendRedirect("");
-			}
-		}
 		
 	</zscript>
-	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center">
+	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.task.CalendarWindowController">
 		<label value="${objstr}"/>
 		<grid>
 			<columns>
@@ -99,7 +44,7 @@
 				<row>
 					<label value="Task type"/>
 					<hbox>
-						<listbox id="tasktypesel" mold="select" onSelect="changeTaskType()">
+						<listbox id="tasktypesel" mold="select" onSelect="create_my_entry.changeTaskType()">
 							<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
 							<listitem label="${ttblood }" value="${ttbloodi }"/>
 							<listitem label="${ttweight }" value="${ttweighti }"/>
@@ -116,11 +61,30 @@
 				</row>
 				<row id="qsrow" visible="false">
 					<label value="Questionnaire"/>
-					<textbox/>
+					<hbox>
+						<textbox id="questidfield" readonly="true" width="35px"/>
+						<combobox id="questnamefield" autodrop="true" buttonVisible="false">
+							<attribute name="onSelect">
+								QuestionnaireInfo qinfo = (QuestionnaireInfo)questnamefield.getSelectedItem().getValue();
+								questidfield.setValue(qinfo.getID());
+							</attribute>
+							<attribute name="onCreate">
+								StorageComponentProxy proxy = new StorageComponentProxy();
+								try{
+									eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(petusid);
+									SimpleListModel qsssmodel = new SimpleListModel(qsss);
+									questnamefield.setModel(qsssmodel);
+								}catch(java.rmi.RemoteException re){
+									re.printStackTrace();
+								}
+							</attribute>
+						</combobox>
+						
+					</hbox>
 				</row>
 				<row id="urlrow" visible="false">
 					<label value="URL"/>
-					<textbox/>
+					<textbox id="urlfield"/>
 				</row>
 				<row>
 					<label value="Assigned Date"/>
@@ -132,21 +96,39 @@
 				</row>
 				<row>
 					<label value="Executor"/>
-					<textbox id="objid" value="${objid }" readonly="true"/>
+					<textbox id="objid" value="${objid }" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label value="Assigner"/>
-					<textbox id="userid" value="${userid }" readonly="true"/>
+					<textbox id="userid" value="${userid }" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label value="Object"/>
-					<textbox id="addressedid" readonly="true"/>
+					<hbox>
+					<textbox id="addressedid" readonly="true" width="35px"/>
+					<combobox id="addressedtext" autodrop="true" buttonVisible="false" >
+						<attribute name="onSelect">
+							eu.aladdin_project.xsd.PatientInfo pinfo = (eu.aladdin_project.xsd.PatientInfo)addressedtext.getSelectedItem().getValue();
+							addressedid.setValue(pinfo.getID());
+						</attribute>
+						<attribute name="onCreate">
+							StorageComponentProxy proxy = new StorageComponentProxy();
+							try{
+								eu.aladdin_project.xsd.PatientInfo[] patients = proxy.listOfPatients(new SearchCriteria[0],petusid);
+								SimpleListModel patmodel = new SimpleListModel(patients);
+								addressedtext.setModel(patmodel);
+							}catch(java.rmi.RemoteException re){
+								re.printStackTrace();
+							}
+						</attribute>
+					</combobox>
+					</hbox>
 				</row>
 				<row>
 					<label value=""/>
 					<hbox>
-						<button id="savebutton" label="Assign task" onClick="saveTask()" visible="false"/>
-						<button id="cancelbutton" label="Cancel task" onClick="cancelTask()" visible="false"/>
+						<button id="savebutton" label="Assign task" onClick="create_my_entry.saveTask()" visible="false"/>
+						<button id="cancelbutton" label="Cancel task" onClick="create_my_entry.cancelTask()" visible="false"/>
 					</hbox>
 				</row>
 			</rows>

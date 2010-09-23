@@ -1,0 +1,31 @@
+<zk>
+	<window id="service_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.externalservices.ExternalServicesPopupController">
+		<grid>
+			<columns>
+				<column width="200px" align="right"/>
+				<column/>
+			</columns>
+			<rows>
+				<row id="srvid" visible="false">
+					<label value="Service ID"/>
+					<textbox id="srvidfield" value="" readonly="true"/>
+				</row>
+				<row>
+					<label value="Service Description"/>
+					<textbox id="srvdescfield"/>
+				</row>
+				<row>
+					<label value="Service URI"/>
+					<textbox id="srvuricfield"/>
+				</row>
+				<row>
+					<label value=""/>
+					<hbox>
+						<button id="savebutton" label="Save Service" onClick="service_form.createExternalServiceToStorage()" visible="false"/>
+						<button id="cancelbutton" label="Update Service" onClick="service_form.modifyExternalServiceToStorage()" visible="false"/>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

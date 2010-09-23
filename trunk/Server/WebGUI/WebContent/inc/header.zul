@@ -38,7 +38,8 @@
 		<menuitem label="${carers}" href="/carers/"/>
 		<menuitem label="${clinicians}" href="/clinicians/"/>
 		<menuitem label="${qm}" href="/qm/"/>
-		<menuitem label="${calendar}" />
+		<!--  <menuitem label="${calendar}" />  -->
+		<menuitem label="External Services" href="/extsrv/"/>
 	</menubar>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>

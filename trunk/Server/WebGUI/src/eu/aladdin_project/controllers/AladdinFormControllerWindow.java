@@ -255,7 +255,7 @@ public class AladdinFormControllerWindow extends Window{
 		cols.appendChild(col1);
 
 		Column col2 = new Column();
-		col2.setWidth("250px");
+		//col2.setWidth("250px");
 		col2.setAlign("left");
 		cols.appendChild(col2);
 		
