@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NMTOKENDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NMTOKENDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("nmtoken80fedoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NMTOKENDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("nmtoken80fedoctype");
     
     /**
      * Gets the "NMTOKEN" element

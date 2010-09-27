@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface SavePatientAssessmentDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SavePatientAssessmentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("savepatientassessment8ff8doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SavePatientAssessmentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("savepatientassessment8ff8doctype");
     
     /**
      * Gets the "SavePatientAssessment" element
@@ -42,7 +42,7 @@ public interface SavePatientAssessmentDocument extends org.apache.xmlbeans.XmlOb
     public interface SavePatientAssessment extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SavePatientAssessment.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("savepatientassessmentceeeelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SavePatientAssessment.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("savepatientassessmentceeeelemtype");
         
         /**
          * Gets the "assessment" element

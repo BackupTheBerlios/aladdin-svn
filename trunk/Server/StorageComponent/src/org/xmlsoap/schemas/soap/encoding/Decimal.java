@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Decimal extends org.apache.xmlbeans.XmlDecimal
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Decimal.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("decimalbc25type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Decimal.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("decimalbc25type");
     
     /**
      * Gets the "id" attribute

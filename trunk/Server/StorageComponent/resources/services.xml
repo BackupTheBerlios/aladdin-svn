@@ -93,6 +93,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/DeleteClinician</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/DeleteClinicianResponse</outputActionMapping>
         </operation>
+        <operation name="GetUserIdByPersonId" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetUserIdByPersonId</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetUserIdByPersonIdResponse</outputActionMapping>
+        </operation>
         <operation name="ChangePassword" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/ChangePassword</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/ChangePasswordResponse</outputActionMapping>

@@ -309,6 +309,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getUserIdByPersonId
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument getUserIdByPersonId
+                (
+                  eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument getUserIdByPersonId
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param changePassword
          */
 

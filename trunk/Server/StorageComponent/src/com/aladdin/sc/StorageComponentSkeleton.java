@@ -43,6 +43,7 @@ import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument
 import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument.GetUserIdByPersonIdResponse;
 import eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument.GetUserPlannedTasksResponse;
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument.GetUserResponse;
 import eu.aladdin_project.storagecomponent.GetWarningsResponseDocument.GetWarningsResponse;
@@ -71,6 +72,8 @@ import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTy
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserDocument;
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument;
@@ -2813,7 +2816,7 @@ import eu.aladdin_project.xsd.*;
 				ru.setUsername(user.getUsername());
 				
 			} catch (Exception e) {
-				
+				System.out.println (e.toString());
 			}
 			
 			return respdoc;
@@ -2861,6 +2864,45 @@ import eu.aladdin_project.xsd.*;
     		
     		return respdoc;
     	}
+
+		public GetUserIdByPersonIdResponseDocument getUserIdByPersonId (GetUserIdByPersonIdDocument req) {
+			GetUserIdByPersonIdResponseDocument respdoc = GetUserIdByPersonIdResponseDocument.Factory.newInstance();
+			GetUserIdByPersonIdResponse resp = respdoc.addNewGetUserIdByPersonIdResponse();
+			OperationResult res = resp.addNewOut();
+			
+			try {
+				Integer uid = new Integer (req.getGetUserIdByPersonId().getId());
+				Integer type = req.getGetUserIdByPersonId().getType();
+				
+				String sql = "SELECT id FROM aladdinuser WHERE personid like '" + uid.toString() + "' AND type = '" + type.toString() + "'";
+				System.out.println (sql);
+				System.out.println (1);
+				SQLQuery q = s.createSQLQuery(sql);
+				System.out.println (2);
+				List list = q.list();
+				System.out.println (list.size());
+				System.out.println (3);
+				Object[] obj = list.toArray();
+				System.out.println (obj.length);
+				System.out.println (4);
+				if (obj.length == 1) {
+					res.setCode(obj[0].toString());
+					res.setStatus((short)1);
+					res.setDescription("ok");
+				} else {
+					res.setCode("0");
+        			res.setDescription("none");
+        			res.setStatus((short) 0);
+				}
+			} catch (Exception e) {
+				res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				System.out.println (e.toString());
+				res.setStatus((short) 0);
+			}
+			
+			return respdoc;
+		}
 
     
     }

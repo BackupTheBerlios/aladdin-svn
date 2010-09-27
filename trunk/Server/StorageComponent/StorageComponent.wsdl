@@ -836,6 +836,21 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetUserIdByPersonId">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"></xsd:element>
+      			<xsd:element name="type" type="xsd:int"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetUserIdByPersonIdResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1168,6 +1183,12 @@
   <wsdl:message name="GetPatientsForCaregiverResponse">
   	<wsdl:part name="parameters" element="tns:GetPatientsForCaregiverResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetUserIdByPersonIdRequest">
+  	<wsdl:part name="parameters" element="tns:GetUserIdByPersonId"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetUserIdByPersonIdResponse">
+  	<wsdl:part name="parameters" element="tns:GetUserIdByPersonIdResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1388,6 +1409,10 @@
         <wsdl:operation name="GetPatientsForCaregiver">
         	<wsdl:input message="tns:GetPatientsForCaregiverRequest"></wsdl:input>
         	<wsdl:output message="tns:GetPatientsForCaregiverResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetUserIdByPersonId">
+        	<wsdl:input message="tns:GetUserIdByPersonIdRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetUserIdByPersonIdResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -1943,6 +1968,16 @@
   		</wsdl:input>
   		<wsdl:output>
   			<soap:body use="literal"></soap:body>
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetUserIdByPersonId">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetUserIdByPersonId" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
   </wsdl:binding>

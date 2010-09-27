@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface ExternalService extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExternalService.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4CE0FE1EBB82DAF11A1CC1AED6A153A8").resolveHandle("externalservicec684type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExternalService.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("externalservicec684type");
     
     /**
      * Gets the "ID" element
