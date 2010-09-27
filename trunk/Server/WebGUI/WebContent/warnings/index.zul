@@ -1,0 +1,69 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.Warning;
+		import eu.aladdin_project.xsd.SearchCriteria;
+		import eu.aladdin_project.xsd.SystemParameter;
+		import eu.aladdin_project.SystemDictionary;
+		import eu.aladdin_project.controllers.warnings.WarningInfo;
+		
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		Session ses = Sessions.getCurrent();
+		String id = (String)ses.getAttribute("userid");
+		WarningInfo[] plist = null;
+		try{
+			Warning[] olist = proxy.getWarnings(new SearchCriteria[0], id);
+			plist = new WarningInfo[olist.length];
+			System.out.println("Warning list: "+olist.length);
+			for(int i = 0; olist.length > i ; i++){
+				plist[i]=new WarningInfo(olist[i]); 
+			}
+			System.out.println("Warning list: "+plist.length);
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+		
+	</zscript>
+	<window border="none" width="80%" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
+	<?component name="warningModal" macroURI="form.zul"?>
+	<warningModal id="warningModal" />
+	<vbox>
+	<label value="Clinical Warnings"/>
+	<grid>
+		<columns>
+			<column label="ID" width="35px" sort="auto"/>
+			<column label="Type"/>
+			<column label="Date/Time" sort="auto"/>
+			<column label="Effect" sort="auto"/>
+			<column label="Indicator" sort="auto"/>
+			<column label="Risk Level" sort="auto"/>
+			<column label="Emergency Level" sort="auto"/>
+			<column label="Patient ID" sort="auto"/>
+			<column label="Delivered" sort="auto"/>
+		</columns>
+		<rows>
+			<row forEach="${plist }" id="${each.ID }">
+				<label value="${each.ID }"/>
+				<label value="${each.type}" onClick="warningswin.readWarning()"/>
+				<label value="${each.date }"/>
+				<label value="${each.effect }"/>
+				<label value="${each.indicator }"/>
+				<label value="${each.riskLevel }"/>
+				<label value="${each.emergencyLevel }"/>
+				<label value="${each.patientID }"/>
+				<label value="${each.delivered }"/>
+			</row>
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>

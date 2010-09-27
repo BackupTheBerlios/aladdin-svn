@@ -11,3 +11,15 @@ QuestionnaireInfo
 public String toString(){
     return this.getTitle();
 }
+
+PatientInfo
+
+public String toString(){
+	return surname+", "+name;
+}
+    
+SystemParameter
+
+public String toString(){
+	return description;
+}

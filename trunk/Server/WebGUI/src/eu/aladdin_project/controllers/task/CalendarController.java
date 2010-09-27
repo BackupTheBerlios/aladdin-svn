@@ -19,6 +19,7 @@ import org.zkoss.zul.Window;
 import org.zkoss.zul.Row;
 
 import eu.aladdin_project.SystemDictionary;
+import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 
 public class CalendarController extends GenericForwardComposer {
 	
@@ -47,7 +48,6 @@ public class CalendarController extends GenericForwardComposer {
 		bookEventWin.setAttribute("calevent", event);
 		Date setting = event.getCalendarEvent().getBeginDate();
 		SimpleCalendarEvent scevent = (SimpleCalendarEvent)event.getCalendarEvent();
-		System.out.println("CCCCC");
 		((Datebox)bookEventWin.getFellow("datetask")).setValue(setting);
 		((Datebox)bookEventWin.getFellow("datetask")).setReadonly(true);
 		((Datebox)bookEventWin.getFellow("datetask")).setButtonVisible(false);
@@ -64,6 +64,7 @@ public class CalendarController extends GenericForwardComposer {
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);
 		((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
 		((Listbox)bookEventWin.getFellow("tasktypesel")).setVisible(false);
+		
 		bookEventWin.setTitle("View Task");
 		bookEventWin.setVisible(true);
 		bookEventWin.doModal();

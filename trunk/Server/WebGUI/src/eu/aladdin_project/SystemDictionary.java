@@ -184,6 +184,20 @@ public class SystemDictionary {
 		return Labels.getLabel(ret);
 	}
 	
+	public static String getWarningRiskLevel(String dic){
+		int dictn = Integer.parseInt(dic);
+		String ret="error.no";
+		switch(dictn){
+		case RISKLEVEL_WARNING_HIGH_INT:
+			ret= RISKLEVEL_WARNING_HIGH_LBL;
+			break;
+		case RISKLEVEL_WARNING_LOW_INT:
+			ret= RISKLEVEL_WARNING_LOW_LBL;
+			break;
+		}
+		return Labels.getLabel(ret);
+	}
+	
 	public final static String USERTYPE_ADMIN = "1";
 	public final static int USERTYPE_ADMIN_INT = 1;
 	public final static String USERTYPE_ADMIN_LBL = "dic.usertype.admin";

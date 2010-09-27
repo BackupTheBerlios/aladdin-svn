@@ -62,4 +62,6 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.OperationResult getUserType(java.lang.String id) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, int language) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.User getUser(java.lang.String id) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.PatientInfo[] getPatientsForCaregiver(java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult getUserIdByPersonId(java.lang.String id, int type) throws java.rmi.RemoteException;
 }
