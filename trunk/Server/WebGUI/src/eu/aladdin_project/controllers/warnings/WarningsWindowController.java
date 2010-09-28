@@ -5,9 +5,12 @@ import java.rmi.RemoteException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Button;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
@@ -17,7 +20,7 @@ import eu.aladdin_project.xsd.Warning;
 
 public class WarningsWindowController extends Window {
 
-	public Window warningPopup;
+	public WarningsPopupController warningPopup;
 	
 	public void readWarning(String warningid) throws InterruptedException, RemoteException{
 		StorageComponentProxy proxy = new StorageComponentProxy();
@@ -32,7 +35,8 @@ public class WarningsWindowController extends Window {
 		if(warning.length != 1){
 			//TODO stop execution and show error
 		}
-		warningPopup = (Window)Executions.createComponents("form.zul", this, null);
+		warningPopup = (WarningsPopupController)Executions.createComponents("form.zul", this, null);
+		warningPopup.setWarningid(warningid);
 		((Textbox)warningPopup.getFellow("wid")).setValue(warning[0].getID());
 		((Textbox)warningPopup.getFellow("typefield")).setValue(SystemDictionary.getWarningTypeLabel(warning[0].getTypeOfWarning().getCode()));
 		((Textbox)warningPopup.getFellow("datefield")).setValue(((Label)getFellow("date"+warningid)).getValue());

@@ -2,7 +2,7 @@
 	<zscript>
 	
 	</zscript>
-	<window id="warning_form" border="normal" visible="false" width="70%" closable="true" position="center,center" >
+	<window id="warning_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.warnings.WarningsPopupController">
 		<grid>
 			<columns>
 				<column width="200px" align="right"/>
@@ -52,7 +52,7 @@
 				<row>
 					<label value=""/>
 					<hbox>
-						<button id="readbutton" label="Mark Warning as Read" onClick="" />
+						<button id="readbutton" label="Mark Warning as Read" onClick="warning_form.markWarningAsRead()" />
 					</hbox>
 				</row>
 			</rows>
