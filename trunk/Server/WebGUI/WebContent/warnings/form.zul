@@ -15,44 +15,44 @@
 				</row>
 				<row>
 					<label value="Type"/>
-					<textbox/>
+					<textbox id="typefield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Date/Time"/>
-					<textbox/>
+					<textbox id="datefield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Effect"/>
-					<textbox/>
+					<textbox id="effectfield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Indicator"/>
-					<textbox/>
+					<textbox id="indfield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Risk Level"/>
-					<textbox/>
+					<textbox id="riskfield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Justification"/>
-					<textbox/>
+					<textbox id="justfield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Emergency Level"/>
-					<textbox/>
+					<textbox id="emergencyfield" readonly="true"/>
 				</row>
 				<row>
 					<label value="Patient"/>
-					<hbox><textbox/><textbox/></hbox>
+					<hbox><textbox id="patientfield" readonly="true"/><textbox/></hbox>
 				</row>
 				<row>
 					<label value="Delivered"/>
-					<textbox/>
+					<textbox id="delivfield" readonly="true"/>
 				</row>
 				<row>
 					<label value=""/>
 					<hbox>
-						<button id="readbutton" label="Mark Warning as Read" onClick="service_form.createExternalServiceToStorage()" />
+						<button id="readbutton" label="Mark Warning as Read" onClick="" />
 					</hbox>
 				</row>
 			</rows>

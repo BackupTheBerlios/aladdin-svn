@@ -1,4 +1,14 @@
 <zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		
+		String srvidlbl = Labels.getLabel("extsrv.id");
+		String desc = Labels.getLabel("common.description");
+		String urilbl = Labels.getLabel("common.URI");
+		String savelb = Labels.getLabel("extsrv.save");
+		String updatelbl = Labels.getLabel("extsrv.update");
+		
+	</zscript>
 	<window id="service_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.externalservices.ExternalServicesPopupController">
 		<grid>
 			<columns>
@@ -7,22 +17,22 @@
 			</columns>
 			<rows>
 				<row id="srvid" visible="false">
-					<label value="Service ID"/>
+					<label value="${srvidlbl }"/>
 					<textbox id="srvidfield" value="" readonly="true"/>
 				</row>
 				<row>
-					<label value="Service Description"/>
+					<label value="${desc }"/>
 					<textbox id="srvdescfield"/>
 				</row>
 				<row>
-					<label value="Service URI"/>
+					<label value="${urilbl }"/>
 					<textbox id="srvuricfield"/>
 				</row>
 				<row>
 					<label value=""/>
 					<hbox>
-						<button id="savebutton" label="Save Service" onClick="service_form.createExternalServiceToStorage()" visible="false"/>
-						<button id="cancelbutton" label="Update Service" onClick="service_form.modifyExternalServiceToStorage()" visible="false"/>
+						<button id="savebutton" label="${savelb }" onClick="service_form.createExternalServiceToStorage()" visible="false"/>
+						<button id="cancelbutton" label="${updatelbl }" onClick="service_form.modifyExternalServiceToStorage()" visible="false"/>
 					</hbox>
 				</row>
 			</rows>

@@ -14,6 +14,16 @@
 		
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
+		String idlbl = Labels.getLabel("common.id");
+		String typelbl = Labels.getLabel("common.type");
+		String datelbl = Labels.getLabel("common.date");
+		String efectlbl = Labels.getLabel("cwarn.effect");
+		String indclbl = Labels.getLabel("cwarn.ind");
+		String risklbl = Labels.getLabel("cwarn.risklvl");
+		String emerglbl = Labels.getLabel("cwarn.emergencylvl");
+		String patidlbl = Labels.getLabel("cwarn.patientid");
+		String delivlbl = Labels.getLabel("cwarn.deliver");
+		String titlelbl = Labels.getLabel("menu.warnings");
 
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
@@ -36,30 +46,32 @@
 	<?component name="warningModal" macroURI="form.zul"?>
 	<warningModal id="warningModal" />
 	<vbox>
-	<label value="Clinical Warnings"/>
+	<label value="${titlelbl }" sclass="newitem"/>
 	<grid>
 		<columns>
-			<column label="ID" width="35px" sort="auto"/>
-			<column label="Type"/>
-			<column label="Date/Time" sort="auto"/>
-			<column label="Effect" sort="auto"/>
-			<column label="Indicator" sort="auto"/>
-			<column label="Risk Level" sort="auto"/>
-			<column label="Emergency Level" sort="auto"/>
-			<column label="Patient ID" sort="auto"/>
-			<column label="Delivered" sort="auto"/>
+			<column label="${idlbl }" width="35px" sort="auto"/>
+			<column label="${typelbl }"/>
+			<column label="${datelbl }" sort="auto"/>
+			<column label="${efectlbl }" sort="auto"/>
+			<column label="${indclbl }" sort="auto"/>
+			<column label="${risklbl }" sort="auto"/>
+			<column label="${emerglbl }" sort="auto"/>
+			<column label="${patidlbl }" sort="auto"/>
+			<column label="${delivlbl }" sort="auto"/>
+			<column width="80px" align="center" />
 		</columns>
 		<rows>
 			<row forEach="${plist }" id="${each.ID }">
 				<label value="${each.ID }"/>
-				<label value="${each.type}" onClick="warningswin.readWarning()"/>
-				<label value="${each.date }"/>
+				<label value="${each.type}" />
+				<label id="date${each.ID }" value="${each.date }"/>
 				<label value="${each.effect }"/>
 				<label value="${each.indicator }"/>
 				<label value="${each.riskLevel }"/>
 				<label value="${each.emergencyLevel }"/>
 				<label value="${each.patientID }"/>
 				<label value="${each.delivered }"/>
+				<label value="Details" onClick="warningswin.readWarning(self.getParent().getId())" sclass="link"/>
 			</row>
 		</rows>
 	</grid>

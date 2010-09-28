@@ -10,6 +10,10 @@
 		
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
+		String idlbl = Labels.getLabel("common.id");
+		String desc = Labels.getLabel("common.description");
+		String urilbl = Labels.getLabel("common.URI");
+		String newextrsrv = Labels.getLabel("extsrv.new");
 
 		ExternalService[] plist = null;
 		StorageComponentProxy proxy = new StorageComponentProxy();
@@ -28,12 +32,12 @@
 	<?component name="serviceModal" macroURI="form.zul"?>
 	<serviceModal id="serviceModal" />
 	<vbox>
-	<button label="+ Add new external service" onClick="extservices.createService()" sclass="newitem" />
+	<button label="${newextrsrv }" onClick="extservices.createService()" sclass="newitem" />
 	<grid>
 		<columns>
-			<column label="ID" width="35px" sort="auto"/>
-			<column label="Description"/>
-			<column label="URI" sort="auto"/>
+			<column label="${idlbl }" width="35px" sort="auto"/>
+			<column label="${desc }"/>
+			<column label="${urilbl }" sort="auto"/>
 			<column width="80px" align="center" />
 			<column width="80px" align="center" />
 		</columns>

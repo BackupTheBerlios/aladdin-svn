@@ -23,8 +23,8 @@
 			try{
  				OperationResult result = proxy.auth(user,password);
  				System.out.println("RESULT CODE: "+result.getCode());
- 				System.out.println("RESULT DESC: "+result.getDescription());
- 				System.out.println("RESULT STATUS: "+result.getStatus());
+ 				//System.out.println("RESULT DESC: "+result.getDescription());
+ 				//System.out.println("RESULT STATUS: "+result.getStatus());
  				
  				//Check if getCode() function return error code (0)
  				if(result.getCode().equals("0")){
@@ -39,7 +39,6 @@
 						System.out.println("Welcome Administrator");
 						usertype = SystemDictionary.USERTYPE_ADMIN;
 						Administrator admin = proxy.getAdministrator(result.getCode(),result.getCode());
-					//	System.out.println("Welcome Administrator2 "+admin);
 					//	username = admin.getPersonData().getName();
 					//	usersname = admin.getPersonData().getSurname();
 						
@@ -54,13 +53,11 @@
  						//TODO Return not allowed user type
  						throw new eu.aladdin_project.exceptions.InvalidUserTypeException();
  					}
- 					System.out.println("Welcome Administrator3");
  					session.setAttribute("user",user);
  					session.setAttribute("userid",result.getCode());
  					session.setAttribute("usertype",usertype);
  					//session.setAttribute("username",username);
  					//session.setAttribute("usersname",usersname);
- 					System.out.println("Welcome Administrator4");
  				}
  			}catch(java.rmi.RemoteException re){
  				System.out.println("Server failed");

@@ -12,7 +12,10 @@
 		String carers = Labels.getLabel("menu.carers");
 		String clinicians = Labels.getLabel("menu.clinicians");
 		String calendar = Labels.getLabel("menu.calendar");
+		String extsrv = Labels.getLabel("menu.extsrv");
+		String warnings = Labels.getLabel("menu.warnings");
 		String qm = Labels.getLabel("qm.menu");
+		
 		
 		String hello = Labels.getLabel("menu.hello");
 		String lout = Labels.getLabel("menu.logout");
@@ -38,9 +41,8 @@
 		<menuitem label="${carers}" href="/carers/"/>
 		<menuitem label="${clinicians}" href="/clinicians/"/>
 		<menuitem label="${qm}" href="/qm/"/>
-		<!--  <menuitem label="${calendar}" />  -->
-		<menuitem label="External Services" href="/extsrv/"/>
-		<menuitem label="Clinical Warnings" href="/warnings/"/>
+		<menuitem label="${extsrv }" href="/extsrv/"/>
+		<menuitem label="${warnings }" href="/warnings/"/>
 	</menubar>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>

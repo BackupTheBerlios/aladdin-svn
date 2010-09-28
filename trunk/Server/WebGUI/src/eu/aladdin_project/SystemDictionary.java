@@ -14,6 +14,12 @@ public class SystemDictionary {
 		case USERTYPE_CLINICIAN_INT:
 			ret= USERTYPE_CLINICIAN_LBL;
 			break;
+		case USERTYPE_CARER_INT:
+			ret= USERTYPE_CARER_LBL;
+			break;
+		case USERTYPE_PATIENT_INT:
+			ret= USERTYPE_PATIENT_LBL;
+			break;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -204,6 +210,12 @@ public class SystemDictionary {
 	public final static String USERTYPE_CLINICIAN = "2";
 	public final static int USERTYPE_CLINICIAN_INT = 2;
 	public final static String USERTYPE_CLINICIAN_LBL = "dic.usertype.clinician";
+	public final static String USERTYPE_CARER = "3";
+	public final static int USERTYPE_CARER_INT = 3;
+	public final static String USERTYPE_CARER_LBL = "dic.usertype.carer";
+	public final static String USERTYPE_PATIENT = "4";
+	public final static int USERTYPE_PATIENT_INT = 4;
+	public final static String USERTYPE_PATIENT_LBL = "dic.usertype.patient";
 	
 	public final static String TASK_STATUS_PENDING = "1";
 	public final static int TASK_STATUS_PENDING_INT = 1;

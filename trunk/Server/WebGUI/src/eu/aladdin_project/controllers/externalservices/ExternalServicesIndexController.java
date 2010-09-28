@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers.externalservices;
 
 import java.rmi.RemoteException;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Textbox;
@@ -21,7 +22,8 @@ public class ExternalServicesIndexController extends Window {
 	public void createService() throws InterruptedException{
 		servicePopup = (Window)Executions.createComponents("form.zul", this, null);
 		((Button)servicePopup.getFellow("savebutton")).setVisible(true);
-		servicePopup.setTitle("New Service");
+		String title = Labels.getLabel("extsrv.new");
+		servicePopup.setTitle(title);
 		servicePopup.setVisible(true);
 		servicePopup.doModal();
 	}
@@ -43,7 +45,8 @@ public class ExternalServicesIndexController extends Window {
 		((Textbox)servicePopup.getFellow("srvidfield")).setValue(srvid);
 		((Textbox)servicePopup.getFellow("srvdescfield")).setValue(defserv.getDescription());
 		((Textbox)servicePopup.getFellow("srvuricfield")).setValue(defserv.getAddress());
-		servicePopup.setTitle("Update Service");
+		String title = Labels.getLabel("extsrv.update");
+		servicePopup.setTitle(title);
 		servicePopup.setVisible(true);
 		servicePopup.doModal();
 	}
@@ -55,6 +58,7 @@ public class ExternalServicesIndexController extends Window {
 			System.out.println("Deleting... ");
 			OperationResult result = proxy.deleteExternalService(srvid, userid);
 			System.out.println("Delete result: "+result.getDescription());
+			Executions.getCurrent().sendRedirect("");
 		}catch(RemoteException re){
 			re.printStackTrace();
 		}catch(Exception e){

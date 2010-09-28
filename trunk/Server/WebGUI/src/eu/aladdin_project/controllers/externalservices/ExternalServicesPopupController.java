@@ -11,6 +11,7 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.ExternalService;
 
+@SuppressWarnings("serial")
 public class ExternalServicesPopupController extends Window {
 
 	public void createExternalServiceToStorage(){
