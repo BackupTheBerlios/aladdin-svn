@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateUserDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("createuserf907doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("createuserf907doctype");
     
     /**
      * Gets the "CreateUser" element
@@ -42,7 +42,7 @@ public interface CreateUserDocument extends org.apache.xmlbeans.XmlObject
     public interface CreateUser extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("createusera8c4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("createusera8c4elemtype");
         
         /**
          * Gets the "user" element

@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface SearchCriteria extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SearchCriteria.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("searchcriteria9773type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SearchCriteria.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("searchcriteria9773type");
     
     /**
      * Gets the "FieldName" element

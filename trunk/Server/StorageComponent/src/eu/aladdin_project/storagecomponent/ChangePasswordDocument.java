@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ChangePasswordDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePasswordDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("changepassword8e0bdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePasswordDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("changepassword8e0bdoctype");
     
     /**
      * Gets the "ChangePassword" element
@@ -42,7 +42,7 @@ public interface ChangePasswordDocument extends org.apache.xmlbeans.XmlObject
     public interface ChangePassword extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePassword.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("changepassword4244elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePassword.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("changepassword4244elemtype");
         
         /**
          * Gets the "userId" element

@@ -116,11 +116,18 @@ import eu.aladdin_project.xsd.*;
     		op.put(OP_LIKE, "%s like '%s' ");
     		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
     	}
-
+    	
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
     		CreateClinicianResponseDocument respdoc = CreateClinicianResponseDocument.Factory.newInstance();
     		CreateClinicianResponse resp = respdoc.addNewCreateClinicianResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreateClinician().setUserId (nc.check(req.getCreateClinician().getUserId(), String.class));
+    			req.getCreateClinician().setData(nc.check(req.getCreateClinician().getData(), Clinician.class));
+    		}
     		
     		if (!checkUser(req.getCreateClinician().getUserId(), U_ADMIN)) {
     			res.setCode("-1");
@@ -233,6 +240,13 @@ import eu.aladdin_project.xsd.*;
     		CreatePatientResponse resp = respdoc.addNewCreatePatientResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreatePatient().setUserId (nc.check(req.getCreatePatient().getUserId(), String.class));
+    			req.getCreatePatient().setData(nc.check (req.getCreatePatient().getData(), Patient.class));
+    		}
+    		
     		if (
     				!checkUser(req.getCreatePatient().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getCreatePatient().getUserId(), U_ADMIN)
@@ -306,6 +320,13 @@ import eu.aladdin_project.xsd.*;
     		CreateCarerResponse resp = respdoc.addNewCreateCarerResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreateCarer().setUserId (nc.check(req.getCreateCarer().getUserId(), String.class));
+    			req.getCreateCarer().setData(nc.check (req.getCreateCarer().getData(), Carer.class));
+    		}
+    		
     		if (
     				!checkUser(req.getCreateCarer().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getCreateCarer().getUserId(), U_ADMIN)
@@ -348,6 +369,13 @@ import eu.aladdin_project.xsd.*;
     		UpdateQuestionnaireResponseDocument respdoc = UpdateQuestionnaireResponseDocument.Factory.newInstance();
     		UpdateQuestionnaireResponse resp = respdoc.addNewUpdateQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdateQuestionnaire().setUserId (nc.check(req.getUpdateQuestionnaire().getUserId(), String.class));
+    			req.getUpdateQuestionnaire().setData(nc.check (req.getUpdateQuestionnaire().getData(), Questionnaire.class));
+    		}
     		
     		if (
     				!checkUser(req.getUpdateQuestionnaire().getUserId(), U_CLINICIAN) &&
@@ -474,6 +502,13 @@ import eu.aladdin_project.xsd.*;
     		SaveWarningResponse resp = respdoc.addNewSaveWarningResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getSaveWarning().setUserId (nc.check(req.getSaveWarning().getUserId(), String.class));
+    			req.getSaveWarning().setWarn(nc.check (req.getSaveWarning().getWarn(), Warning.class));
+    		}
+    		
     		if (
     				!checkUser(req.getSaveWarning().getUserId(), U_CARER) &&
     				!checkUser(req.getSaveWarning().getUserId(), U_CLINICIAN) &&
@@ -524,6 +559,13 @@ import eu.aladdin_project.xsd.*;
     		UpdateCarerResponse resp = respdoc.addNewUpdateCarerResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdateCarer().setUserId (nc.check(req.getUpdateCarer().getUserId(), String.class));
+    			req.getUpdateCarer().setData(nc.check (req.getUpdateCarer().getData(), Carer.class));
+    		}
+    		
     		if (
     				!checkUser(req.getUpdateCarer().getUserId(), U_CLINICIAN) && 
     				!checkUser(req.getUpdateCarer().getUserId(), U_ADMIN)
@@ -563,6 +605,13 @@ import eu.aladdin_project.xsd.*;
     		DeleteAdministratorResponseDocument respdoc = DeleteAdministratorResponseDocument.Factory.newInstance();
     		DeleteAdministratorResponse resp = respdoc.addNewDeleteAdministratorResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteAdministrator().setUserId (nc.check(req.getDeleteAdministrator().getUserId(), String.class));
+    			req.getDeleteAdministrator().setId(nc.check (req.getDeleteAdministrator().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getDeleteAdministrator().getUserId(), U_ADMIN)
@@ -609,6 +658,13 @@ import eu.aladdin_project.xsd.*;
     		UpdatePatientResponse resp = respdoc.addNewUpdatePatientResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdatePatient().setUserId (nc.check(req.getUpdatePatient().getUserId(), String.class));
+    			req.getUpdatePatient().setData(nc.check (req.getUpdatePatient().getData(), Patient.class));
+    		}
+    		
     		if (
     				!checkUser(req.getUpdatePatient().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getUpdatePatient().getUserId(), U_ADMIN)
@@ -645,6 +701,16 @@ import eu.aladdin_project.xsd.*;
     	public ListOfCarersResponseDocument listOfCarers (ListOfCarersDocument req) {
     		ListOfCarersResponseDocument respdoc = ListOfCarersResponseDocument.Factory.newInstance();
     		ListOfCarersResponse resp = respdoc.addNewListOfCarersResponse();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getListOfCarers().setUserId (nc.check(req.getListOfCarers().getUserId(), String.class));
+    			
+    			for (int i = 0; i < req.getListOfCarers().getFilterArray().length; i++) {
+    				req.getListOfCarers().setFilterArray(i, nc.check(req.getListOfCarers().getFilterArray(i), SearchCriteria.class));
+    			}
+    		}
     		
     		if (
     				!checkUser(req.getListOfCarers().getUserId(), U_CLINICIAN) &&
@@ -699,6 +765,16 @@ import eu.aladdin_project.xsd.*;
     		ListOfCliniciansResponseDocument respdoc = ListOfCliniciansResponseDocument.Factory.newInstance();
     		ListOfCliniciansResponse resp = respdoc.addNewListOfCliniciansResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getListOfClinicians().setUserId (nc.check(req.getListOfClinicians().getUserId(), String.class));
+    			
+    			for (int i = 0; i < req.getListOfClinicians().getFilterArray().length; i++) {
+    				req.getListOfClinicians().setFilterArray(i, nc.check(req.getListOfClinicians().getFilterArray(i), SearchCriteria.class));
+    			}
+    		}
+    		
     		if (
     				!checkUser(req.getListOfClinicians().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getListOfClinicians().getUserId(), U_ADMIN)
@@ -750,6 +826,13 @@ import eu.aladdin_project.xsd.*;
     		SavePatientAssessmentResponseDocument respdoc = SavePatientAssessmentResponseDocument.Factory.newInstance();
     		SavePatientAssessmentResponse resp = respdoc.addNewSavePatientAssessmentResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getSavePatientAssessment().setUserId (nc.check(req.getSavePatientAssessment().getUserId(), String.class));
+    			req.getSavePatientAssessment().setAssessment(nc.check(req.getSavePatientAssessment().getAssessment(), PatientAssessment.class));
+    		}
     		
     		if (
     				!checkUser(req.getSavePatientAssessment().getUserId(), U_CLINICIAN) &&
@@ -839,6 +922,16 @@ import eu.aladdin_project.xsd.*;
     		StoreMeasurementsResponse resp = respdoc.addNewStoreMeasurementsResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getStoreMeasurements().setUserId (nc.check(req.getStoreMeasurements().getUserId(), String.class));
+    			
+    			for (int i = 0; i < req.getStoreMeasurements().getDataArray().length; i++) {
+    				req.getStoreMeasurements().setDataArray(i, nc.check(req.getStoreMeasurements().getDataArray(i), Measurement.class));
+    			}
+    		}
+    		
     		if (
     				!checkUser(req.getStoreMeasurements().getUserId(), U_CARER) &&
     				!checkUser(req.getStoreMeasurements().getUserId(), U_CLINICIAN) &&
@@ -875,6 +968,13 @@ import eu.aladdin_project.xsd.*;
     	public GetPatientResponseDocument getPatient (GetPatientDocument req) {
     		GetPatientResponseDocument respdoc = GetPatientResponseDocument.Factory.newInstance();
     		GetPatientResponse resp = respdoc.addNewGetPatientResponse();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetPatient().setUserId (nc.check(req.getGetPatient().getUserId(), String.class));
+    			req.getGetPatient().setId (nc.check(req.getGetPatient().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getGetPatient().getUserId(), U_CLINICIAN) &&
@@ -926,20 +1026,17 @@ import eu.aladdin_project.xsd.*;
 			
 			SystemParameter gender = SystemParameter.Factory.newInstance();
 			gender.setCode(SDData.getGender().toString());
-			//gender.setDescription(Dict.getGenderDescription(gender.getCode(), s));
 			
 			sd.setGender(gender);
 			
 			SystemParameter maritalStatus = SystemParameter.Factory.newInstance();
 			maritalStatus.setCode(SDData.getMaritalStatus().toString());
-			//maritalStatus.setDescription(Dict.getMaritalStatusDescription(maritalStatus.getCode(), s));
 			
 			sd.setMaritalStatus(maritalStatus);
 			sd.setChildren(SDData.getChildren().shortValue());
 			
 			SystemParameter livingWith = SystemParameter.Factory.newInstance();
 			livingWith.setCode(SDData.getLivingWith().toString());
-			//livingWith.setDescription(Dict.getLivingWithDescription(livingWith.getCode(), s));
 			
 			sd.setLivingWith(livingWith);
 			return sd;
@@ -1005,6 +1102,13 @@ import eu.aladdin_project.xsd.*;
     		DeleteCarerAssessmentResponse resp = respdoc.addNewDeleteCarerAssessmentResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteCarerAssessment().setUserId (nc.check(req.getDeleteCarerAssessment().getUserId(), String.class));
+    			req.getDeleteCarerAssessment().setAssessmentId (nc.check(req.getDeleteCarerAssessment().getAssessmentId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getDeleteCarerAssessment().getUserId(), U_CARER)
@@ -1016,8 +1120,9 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			s.createSQLQuery("DELETE FROM carerassessment WHERE id = " + req.getDeleteCarerAssessment().getAssessmentId()).executeUpdate();
-    			res.setCode(req.getDeleteCarerAssessment().getAssessmentId());
+    			Integer assessmentId = new Integer (req.getDeleteCarerAssessment().getAssessmentId());
+    			s.createSQLQuery("DELETE FROM carerassessment WHERE id = " + assessmentId.toString()).executeUpdate();
+    			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
@@ -1030,10 +1135,19 @@ import eu.aladdin_project.xsd.*;
     		return respdoc;
     	}
     	
-    	@SuppressWarnings("deprecation")
+    	//@SuppressWarnings("deprecation")
 		public GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswers (GetQuestionnaireAnswersDocument req) {
     		GetQuestionnaireAnswersResponseDocument respdoc = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
     		GetQuestionnaireAnswersResponse resp = respdoc.addNewGetQuestionnaireAnswersResponse();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetQuestionnaireAnswers().setUserId (nc.check(req.getGetQuestionnaireAnswers().getUserId(), String.class));
+    			req.getGetQuestionnaireAnswers().setObjectId (nc.check(req.getGetQuestionnaireAnswers().getObjectId(), String.class));
+    			req.getGetQuestionnaireAnswers().setFromDate (nc.check(req.getGetQuestionnaireAnswers().getFromDate(), Calendar.class));
+    			req.getGetQuestionnaireAnswers().setToDate (nc.check(req.getGetQuestionnaireAnswers().getToDate(), Calendar.class));
+    		}
     		
     		if (
     				!checkUser(req.getGetQuestionnaireAnswers().getUserId(), U_CLINICIAN) &&
@@ -1094,6 +1208,13 @@ import eu.aladdin_project.xsd.*;
     		DeleteExternalServiceResponse resp = respdoc.addNewDeleteExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteExternalService().setUserId (nc.check(req.getDeleteExternalService().getUserId(), String.class));
+    			req.getDeleteExternalService().setId (nc.check(req.getDeleteExternalService().getId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getDeleteExternalService().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getDeleteExternalService().getUserId(), U_ADMIN)
@@ -1124,6 +1245,13 @@ import eu.aladdin_project.xsd.*;
     		DeleteClinicianResponseDocument respdoc = DeleteClinicianResponseDocument.Factory.newInstance();
     		DeleteClinicianResponse resp = respdoc.addNewDeleteClinicianResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteClinician().setUserId (nc.check(req.getDeleteClinician().getUserId(), String.class));
+    			req.getDeleteClinician().setId (nc.check(req.getDeleteClinician().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getDeleteClinician().getUserId(), U_ADMIN)
@@ -1169,6 +1297,13 @@ import eu.aladdin_project.xsd.*;
     		DeletePatientResponseDocument respdoc = DeletePatientResponseDocument.Factory.newInstance();
     		DeletePatientResponse resp = respdoc.addNewDeletePatientResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeletePatient().setUserId (nc.check(req.getDeletePatient().getUserId(), String.class));
+    			req.getDeletePatient().setId (nc.check(req.getDeletePatient().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getDeletePatient().getUserId(), U_CLINICIAN) &&
@@ -1219,6 +1354,13 @@ import eu.aladdin_project.xsd.*;
     		CreateQuestionnaireResponse resp = respdoc.addNewCreateQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreateQuestionnaire().setUserId (nc.check(req.getCreateQuestionnaire().getUserId(), String.class));
+    			req.getCreateQuestionnaire().setData(nc.check(req.getCreateQuestionnaire().getData(), Questionnaire.class));
+    		}
+    		
     		if (
     				!checkUser(req.getCreateQuestionnaire().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getCreateQuestionnaire().getUserId(), U_ADMIN)
@@ -1235,7 +1377,7 @@ import eu.aladdin_project.xsd.*;
     			
     			Questionnaire rq = req.getCreateQuestionnaire().getData();
     			rq.setID(null);
-			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq);
+    			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq);
     			
     			s.getTransaction().commit();
     			
@@ -1285,6 +1427,15 @@ import eu.aladdin_project.xsd.*;
     		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetPatientMeasurement().setUserId (nc.check(req.getGetPatientMeasurement().getUserId(), String.class));
+    			req.getGetPatientMeasurement().setPatientId (nc.check(req.getGetPatientMeasurement().getPatientId(), String.class));
+    			req.getGetPatientMeasurement().setFromData (nc.check(req.getGetPatientMeasurement().getFromData(), Calendar.class));
+    			req.getGetPatientMeasurement().setToData (nc.check(req.getGetPatientMeasurement().getToData(), Calendar.class));
+    		}
+    		
     		if (
     				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CARER) &&
@@ -1327,7 +1478,7 @@ import eu.aladdin_project.xsd.*;
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
 			System.out.println ("3");
 			rmeasurementType.setCode(m.getType());
-			//rmeasurementType.setDescription ( Dict.getMeasurementType ( rmeasurementType.getCode(), s ) );
+
 			System.out.println ("4");
 			rm.setType(rmeasurementType);
 			System.out.println ("5");
@@ -1354,6 +1505,13 @@ import eu.aladdin_project.xsd.*;
     		DeleteQuestionnaireResponseDocument respdoc = DeleteQuestionnaireResponseDocument.Factory.newInstance();
     		DeleteQuestionnaireResponse resp = respdoc.addNewDeleteQuestionnaireResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteQuestionnaire().setUserId (nc.check(req.getDeleteQuestionnaire().getUserId(), String.class));
+    			req.getDeleteQuestionnaire().setId (nc.check(req.getDeleteQuestionnaire().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getDeleteQuestionnaire().getUserId(), U_CLINICIAN) &&
@@ -1402,6 +1560,13 @@ import eu.aladdin_project.xsd.*;
     		AssignTaskResponseDocument respdoc = AssignTaskResponseDocument.Factory.newInstance();
     		AssignTaskResponse resp = respdoc.addNewAssignTaskResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getAssignTask().setUserId (nc.check(req.getAssignTask().getUserId(), String.class));
+    			req.getAssignTask().setTask(nc.check(req.getAssignTask().getTask(), Task.class));
+    		}
     		
     		if (
     				!checkUser(req.getAssignTask().getUserId(), U_CLINICIAN) &&
@@ -1467,6 +1632,16 @@ import eu.aladdin_project.xsd.*;
     		ListOfAdministratorsResponseDocument respdoc = ListOfAdministratorsResponseDocument.Factory.newInstance();
     		ListOfAdministratorsResponse resp = respdoc.addNewListOfAdministratorsResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getListOfAdministrators().setUserId (nc.check(req.getListOfAdministrators().getUserId(), String.class));
+    			
+    			for (int i = 0; i < req.getListOfAdministrators().getFilterArray().length; i++) {
+    				req.getListOfAdministrators().setFilterArray(i, nc.check(req.getListOfAdministrators().getFilterArray(i), SearchCriteria.class));
+    			}
+    		}
+    		
     		if (
     				!checkUser(req.getListOfAdministrators().getUserId(), U_ADMIN)
 				) {
@@ -1520,6 +1695,15 @@ import eu.aladdin_project.xsd.*;
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetUserPlannedTasks().setUserId (nc.check(req.getGetUserPlannedTasks().getUserId(), String.class));
+    			req.getGetUserPlannedTasks().setRequesterId (nc.check(req.getGetUserPlannedTasks().getRequesterId(), String.class));
+    			req.getGetUserPlannedTasks().setFromDate (nc.check(req.getGetUserPlannedTasks().getFromDate(), Calendar.class));
+    			req.getGetUserPlannedTasks().setToDate (nc.check(req.getGetUserPlannedTasks().getToDate(), Calendar.class));
+    		}
+    		
     		if (
     				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CLINICIAN) &&
     				!checkUser(req.getGetUserPlannedTasks().getRequesterId(), U_CARER) &&
@@ -1543,7 +1727,7 @@ import eu.aladdin_project.xsd.*;
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
     				taskType.setCode(t.getTaskType().toString());
-    				//taskType.setDescription(Dict.getTaskDescription (taskType.getCode(), s));
+
     				rt.setTaskType(taskType);
     				Calendar c1 = Calendar.getInstance();
     				c1.setTimeInMillis(t.getDateTimeAssigned().getTime());
@@ -1553,7 +1737,7 @@ import eu.aladdin_project.xsd.*;
     				rt.setDateTimeFulfilled(c2);
     				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
     				taskStatus.setCode(t.getTaskStatus().toString());
-    				//taskStatus.setDescription ( Dict.getTaskStatusType ( taskStatus.getCode(), s ) );
+
     				rt.setTaskStatus(taskStatus);
     				rt.setURL(t.getUrl());
     				rt.setExecutorID(t.getExecutor().toString());
@@ -1716,6 +1900,13 @@ import eu.aladdin_project.xsd.*;
     		CreateExternalServiceResponse resp = respdoc.addNewCreateExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreateExternalService().setUserId (nc.check(req.getCreateExternalService().getUserId(), String.class));
+    			req.getCreateExternalService().setData (nc.check(req.getCreateExternalService().getData(), ExternalService.class));
+    		}
+    		
     		if (
     				!checkUser(req.getCreateExternalService().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getCreateExternalService().getUserId(), U_ADMIN)
@@ -1754,6 +1945,13 @@ import eu.aladdin_project.xsd.*;
     		SaveCarerAssessmentResponseDocument respdoc = SaveCarerAssessmentResponseDocument.Factory.newInstance();
     		SaveCarerAssessmentResponse resp = respdoc.addNewSaveCarerAssessmentResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getSaveCarerAssessment().setUserId (nc.check(req.getSaveCarerAssessment().getUserId(), String.class));
+    			req.getSaveCarerAssessment().setAssessment (nc.check(req.getSaveCarerAssessment().getAssessment(), CarerAssessment.class));
+    		}
     		
     		if (
     				!checkUser(req.getSaveCarerAssessment().getUserId(), U_CARER) &&
@@ -1800,6 +1998,13 @@ import eu.aladdin_project.xsd.*;
     		DeleteCarerResponseDocument respdoc = DeleteCarerResponseDocument.Factory.newInstance();
     		DeleteCarerResponse resp = respdoc.addNewDeleteCarerResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteCarer().setUserId (nc.check(req.getDeleteCarer().getUserId(), String.class));
+    			req.getDeleteCarer().setId (nc.check(req.getDeleteCarer().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getDeleteCarer().getUserId(), U_CLINICIAN) &&
@@ -1849,6 +2054,13 @@ import eu.aladdin_project.xsd.*;
     		CreateAdministratorResponse resp = respdoc.addNewCreateAdministratorResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreateAdministrator().setUserId (nc.check(req.getCreateAdministrator().getUserId(), String.class));
+    			req.getCreateAdministrator().setData (nc.check(req.getCreateAdministrator().getData(), Administrator.class));
+    		}
+    		
     		if (
     				!checkUser(req.getCreateAdministrator().getUserId(), U_ADMIN)
 				) {
@@ -1888,6 +2100,13 @@ import eu.aladdin_project.xsd.*;
     		UpdateExternalServiceResponseDocument respdoc = UpdateExternalServiceResponseDocument.Factory.newInstance();
     		UpdateExternalServiceResponse resp = respdoc.addNewUpdateExternalServiceResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdateExternalService().setUserId (nc.check(req.getUpdateExternalService().getUserId(), String.class));
+    			req.getUpdateExternalService().setData (nc.check(req.getUpdateExternalService().getData(), ExternalService.class));
+    		}
     		
     		if (
     				!checkUser(req.getUpdateExternalService().getUserId(), U_CLINICIAN) &&
@@ -1929,6 +2148,13 @@ import eu.aladdin_project.xsd.*;
     		GetClinicianResponseDocument respdoc = GetClinicianResponseDocument.Factory.newInstance();
     		GetClinicianResponse resp = respdoc.addNewGetClinicianResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetClinician().setUserId (nc.check(req.getGetClinician().getUserId(), String.class));
+    			req.getGetClinician().setId (nc.check(req.getGetClinician().getId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getGetClinician().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetClinician().getUserId(), U_ADMIN)
@@ -1959,6 +2185,13 @@ import eu.aladdin_project.xsd.*;
     		DeletePatientAssessmentResponse resp = respdoc.addNewDeletePatientAssessmentResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeletePatientAssessment().setUserId (nc.check(req.getDeletePatientAssessment().getUserId(), String.class));
+    			req.getDeletePatientAssessment().setAssessmentId (nc.check(req.getDeletePatientAssessment().getAssessmentId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getDeletePatientAssessment().getUserId(), U_CARER) &&
@@ -1971,9 +2204,10 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			s.createSQLQuery("DELETE FROM measurement WHERE patientassessment = " + req.getDeletePatientAssessment().getAssessmentId()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM patientassessment WHERE id = " + req.getDeletePatientAssessment().getAssessmentId()).executeUpdate();
-    			res.setCode(req.getDeletePatientAssessment().getAssessmentId());
+    			Integer assessmentId = new Integer (req.getDeletePatientAssessment().getAssessmentId());
+				s.createSQLQuery("DELETE FROM measurement WHERE patientassessment = " + assessmentId.toString()).executeUpdate();
+    			s.createSQLQuery("DELETE FROM patientassessment WHERE id = " + assessmentId.toString()).executeUpdate();
+    			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
@@ -2018,6 +2252,13 @@ import eu.aladdin_project.xsd.*;
     		GetCarerResponseDocument respdoc = GetCarerResponseDocument.Factory.newInstance();
     		GetCarerResponse resp = respdoc.addNewGetCarerResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetCarer().setUserId (nc.check(req.getGetCarer().getUserId(), String.class));
+    			req.getGetCarer().setId (nc.check(req.getGetCarer().getId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getGetCarer().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetCarer().getUserId(), U_ADMIN)
@@ -2039,6 +2280,13 @@ import eu.aladdin_project.xsd.*;
     	public GetAdministratorResponseDocument getAdministrator (GetAdministratorDocument req) {
     		GetAdministratorResponseDocument respdoc = GetAdministratorResponseDocument.Factory.newInstance();
     		GetAdministratorResponse resp = respdoc.addNewGetAdministratorResponse();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetAdministrator().setUserId (nc.check(req.getGetAdministrator().getUserId(), String.class));
+    			req.getGetAdministrator().setId (nc.check(req.getGetAdministrator().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getGetAdministrator().getUserId(), U_ADMIN)
@@ -2068,6 +2316,13 @@ import eu.aladdin_project.xsd.*;
     		UpdateAdministratorResponseDocument respdoc = UpdateAdministratorResponseDocument.Factory.newInstance();
     		UpdateAdministratorResponse resp = respdoc.addNewUpdateAdministratorResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdateAdministrator().setUserId (nc.check(req.getUpdateAdministrator().getUserId(), String.class));
+    			req.getUpdateAdministrator().setData (nc.check(req.getUpdateAdministrator().getData(), Administrator.class));
+    		}
     		
     		if (
     				!checkUser(req.getUpdateAdministrator().getUserId(), U_ADMIN)
@@ -2105,6 +2360,12 @@ import eu.aladdin_project.xsd.*;
     		GetQuestionnaireResponseDocument respdoc = GetQuestionnaireResponseDocument.Factory.newInstance();
     		GetQuestionnaireResponse resp = respdoc.addNewGetQuestionnaireResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetQuestionnaire().setId (nc.check(req.getGetQuestionnaire().getId(), String.class));
+    		}
+    		
     		try {
     			Integer id = new Integer (req.getGetQuestionnaire().getId());
     			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) s.load(com.aladdin.sc.db.Questionnaire.class, id);
@@ -2120,6 +2381,13 @@ import eu.aladdin_project.xsd.*;
     		StoreQuestionnaireAnswersResponseDocument respdoc = StoreQuestionnaireAnswersResponseDocument.Factory.newInstance();
     		StoreQuestionnaireAnswersResponse resp = respdoc.addNewStoreQuestionnaireAnswersResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getStoreQuestionnaireAnswers().setUserId (nc.check(req.getStoreQuestionnaireAnswers().getUserId(), String.class));
+    			req.getStoreQuestionnaireAnswers().setData (nc.check(req.getStoreQuestionnaireAnswers().getData(), QuestionnaireAnswers.class));
+    		}
     		
     		if (
     				!checkUser(req.getStoreQuestionnaireAnswers().getUserId(), U_CARER) &&
@@ -2190,6 +2458,13 @@ import eu.aladdin_project.xsd.*;
     	public GetPatientAssessmentsResponseDocument getPatientAssessments (GetPatientAssessmentsDocument req) {
     		GetPatientAssessmentsResponseDocument respdoc = GetPatientAssessmentsResponseDocument.Factory.newInstance();
     		GetPatientAssessmentsResponse resp = respdoc.addNewGetPatientAssessmentsResponse();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetPatientAssessments().setUserId (nc.check(req.getGetPatientAssessments().getUserId(), String.class));
+    			req.getGetPatientAssessments().setPatientId (nc.check(req.getGetPatientAssessments().getPatientId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getGetPatientAssessments().getUserId(), U_CLINICIAN) &&
@@ -2301,6 +2576,13 @@ import eu.aladdin_project.xsd.*;
     		GetCarerAssessmentsResponseDocument respdoc = GetCarerAssessmentsResponseDocument.Factory.newInstance();
     		GetCarerAssessmentsResponse resp = respdoc.addNewGetCarerAssessmentsResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetCarerAssessments().setUserId (nc.check(req.getGetCarerAssessments().getUserId(), String.class));
+    			req.getGetCarerAssessments().setCarerId (nc.check(req.getGetCarerAssessments().getCarerId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getGetCarerAssessments().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetCarerAssessments().getUserId(), U_ADMIN)
@@ -2341,6 +2623,12 @@ import eu.aladdin_project.xsd.*;
     		ChangeTaskStatusResponse resp = respdoc.addNewChangeTaskStatusResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getChangeTaskStatus().setUserId (nc.check(req.getChangeTaskStatus().getUserId(), String.class));
+    		}
+    		
     		if (
     				!checkUser(req.getChangeTaskStatus().getUserId(), U_CARER) &&
     				!checkUser(req.getChangeTaskStatus().getUserId(), U_CLINICIAN) &&
@@ -2376,6 +2664,16 @@ import eu.aladdin_project.xsd.*;
     	public ListOfPatientsResponseDocument listOfPatients (ListOfPatientsDocument req) {
     		ListOfPatientsResponseDocument respdoc = ListOfPatientsResponseDocument.Factory.newInstance();
     		ListOfPatientsResponse resp = respdoc.addNewListOfPatientsResponse();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getListOfPatients().setUserId (nc.check(req.getListOfPatients().getUserId(), String.class));
+    			
+    			for (int i = 0; i < req.getListOfPatients().getFilterArray().length; i++) {
+    				req.getListOfPatients().setFilterArray(i, nc.check(req.getListOfPatients().getFilterArray(i), SearchCriteria.class));
+    			}
+    		}
     		
     		if (
     				!checkUser(req.getListOfPatients().getUserId(), U_CLINICIAN) &&
@@ -2444,6 +2742,16 @@ import eu.aladdin_project.xsd.*;
     		GetWarningsResponseDocument respdoc = GetWarningsResponseDocument.Factory.newInstance();
     		GetWarningsResponse resp = respdoc.addNewGetWarningsResponse();
     		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetWarnings().setUserId (nc.check(req.getGetWarnings().getUserId(), String.class));
+    			
+    			for (int i = 0; i < req.getGetWarnings().getWarnArray().length; i++) {
+    				req.getGetWarnings().setWarnArray(i, nc.check(req.getGetWarnings().getWarnArray(i), SearchCriteria.class));
+    			}
+    		}
+    		
     		if (
     				!checkUser(req.getGetWarnings().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetWarnings().getUserId(), U_ADMIN)
@@ -2476,7 +2784,6 @@ import eu.aladdin_project.xsd.*;
     				
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
     				typeOfWarning.setCode(w.getTypeOfWarning().toString());
-    				//typeOfWarning.setDescription(Dict.getTypeOfWarningDesciption(typeOfWarning.getCode(), s));
     				
     				rw.setTypeOfWarning(typeOfWarning);
     				Calendar c1 = Calendar.getInstance();
@@ -2485,26 +2792,22 @@ import eu.aladdin_project.xsd.*;
     				
     				SystemParameter effect = SystemParameter.Factory.newInstance();
     				effect.setCode(w.getEffect().toString());
-    				//effect.setDescription(Dict.getEffectOfWarningDesciption(effect.getCode(), s));
     				
     				rw.setEffect(effect);
     				
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
     				indicator.setCode(w.getIndicator().toString());
-    				//indicator.setDescription(Dict.getIndicatorOfWarningDesciption(indicator.getCode(), s));
     				
     				rw.setIndicator(indicator);
     				
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
     				riskLevel.setCode(w.getRiskLevel().toString());
-    				//riskLevel.setDescription(Dict.getRisklevelOfWarningDesciption(riskLevel.getCode(), s));
     				
     				rw.setRiskLevel(riskLevel);
     				rw.setJustificationText(w.getJustificationText());
     				
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
-    				//emergencyLevel.setDescription(Dict.getEmergencylevelOfWarningDesciption(emergencyLevel.getCode(), s));
     				
     				rw.setEmergencyLevel(emergencyLevel);
     				rw.setPatientID(w.getPatientID());
@@ -2521,6 +2824,13 @@ import eu.aladdin_project.xsd.*;
     		UpdateClinicianResponseDocument respdoc = UpdateClinicianResponseDocument.Factory.newInstance();
     		UpdateClinicianResponse resp = respdoc.addNewUpdateClinicianResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdateClinician().setUserId (nc.check(req.getUpdateClinician().getUserId(), String.class));
+    			req.getUpdateClinician().setData (nc.check(req.getUpdateClinician().getData(), Clinician.class));
+    		}
     		
     		if (
     				!checkUser(req.getUpdateClinician().getUserId(), U_ADMIN)
@@ -2559,6 +2869,13 @@ import eu.aladdin_project.xsd.*;
     		MarkWarningAsReadResponseDocument respdoc = MarkWarningAsReadResponseDocument.Factory.newInstance();
     		MarkWarningAsReadResponse resp = respdoc.addNewMarkWarningAsReadResponse();
     		OperationResult res = resp.addNewOut();
+    		
+    		{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getMarkWarningAsRead().setUserId (nc.check(req.getMarkWarningAsRead().getUserId(), String.class));
+    			req.getMarkWarningAsRead().setId (nc.check(req.getMarkWarningAsRead().getId(), String.class));
+    		}
     		
     		if (
     				!checkUser(req.getMarkWarningAsRead().getUserId(), U_CLINICIAN) &&
@@ -2600,6 +2917,12 @@ import eu.aladdin_project.xsd.*;
         	UpdateUserResponse resp = respdoc.addNewUpdateUserResponse();
         	OperationResult res = resp.addNewOut();
         	
+        	{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getUpdateUser().setUser (nc.check(req.getUpdateUser().getUser(), User.class));
+    		}
+        	
         	try {
         		User ru = req.getUpdateUser().getUser();
         		if (existUser(ru.getUsername(), new Integer (ru.getID())) == 1) {
@@ -2638,6 +2961,12 @@ import eu.aladdin_project.xsd.*;
         	DeleteUserResponse resp = respdoc.addNewDeleteUserResponse();
         	OperationResult res = resp.addNewOut();
         	
+        	{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getDeleteUser().setId (nc.check(req.getDeleteUser().getId(), String.class));
+    		}
+        	
         	try {
         		s.beginTransaction();
         		Integer id = new Integer (req.getDeleteUser().getId());
@@ -2660,6 +2989,13 @@ import eu.aladdin_project.xsd.*;
         	AuthResponseDocument respdoc = AuthResponseDocument.Factory.newInstance();
         	AuthResponse resp = respdoc.addNewAuthResponse();
         	OperationResult res = resp.addNewOut();
+        	
+        	{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getAuth().setLogin (nc.check(req.getAuth().getLogin(), String.class));
+    			req.getAuth().setPassword (nc.check(req.getAuth().getPassword(), String.class));
+    		}
         	
         	String sql = "";
         	
@@ -2691,6 +3027,13 @@ import eu.aladdin_project.xsd.*;
         	ChangePasswordResponse resp = respdoc.addNewChangePasswordResponse();
         	OperationResult res = resp.addNewOut();
         	
+        	{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getChangePassword().setUserId (nc.check(req.getChangePassword().getUserId(), String.class));
+    			req.getChangePassword().setPassword (nc.check(req.getChangePassword().getPassword(), String.class));
+    		}
+        	
         	try {
         		Integer id = new Integer (req.getChangePassword().getUserId());
         		String password = req.getChangePassword().getPassword();
@@ -2714,6 +3057,12 @@ import eu.aladdin_project.xsd.*;
         	CreateUserResponseDocument respdoc = CreateUserResponseDocument.Factory.newInstance();
         	CreateUserResponse resp = respdoc.addNewCreateUserResponse();
         	OperationResult res = resp.addNewOut();
+        	
+        	{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getCreateUser().setUser (nc.check(req.getCreateUser().getUser(), User.class));
+    		}
         	
         	try {
         		User ru = req.getCreateUser().getUser();
@@ -2750,10 +3099,16 @@ import eu.aladdin_project.xsd.*;
 			GetUserTypeResponseDocument respdoc = GetUserTypeResponseDocument.Factory.newInstance();
 			GetUserTypeResponse resp = respdoc.addNewGetUserTypeResponse();
 			OperationResult res = resp.addNewOut();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetUserType().setId (nc.check(req.getGetUserType().getId(), String.class));
+    		}
 				 
 			try {
 				Integer id = new Integer (req.getGetUserType().getId());
-				String sql = "SELECT type FROM aladdinuser WHERE id = '" + id + "'";
+				String sql = "SELECT type FROM aladdinuser WHERE id = '" + id.toString() + "'";
         		SQLQuery q = s.createSQLQuery(sql);
         		if (q.list().size() == 1) {
         			res.setCode(q.list().get(0).toString());
@@ -2802,6 +3157,12 @@ import eu.aladdin_project.xsd.*;
 			GetUserResponseDocument respdoc = GetUserResponseDocument.Factory.newInstance();
 			GetUserResponse resp = respdoc.addNewGetUserResponse();
 			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetUser().setId (nc.check(req.getGetUser().getId(), String.class));
+    		}
+			
 			try {
 				Integer id = new Integer (req.getGetUser().getId());
 				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
@@ -2825,6 +3186,18 @@ import eu.aladdin_project.xsd.*;
 		public GetPatientsForCaregiverResponseDocument getPatientsForCaregiver (GetPatientsForCaregiverDocument req) {
 			GetPatientsForCaregiverResponseDocument respdoc = GetPatientsForCaregiverResponseDocument.Factory.newInstance();
 			GetPatientsForCaregiverResponse resp = respdoc.addNewGetPatientsForCaregiverResponse();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetPatientsForCaregiver().setUserId (nc.check(req.getGetPatientsForCaregiver().getUserId(), String.class));
+    		}
+			
+			if (
+    				!checkUser(req.getGetPatientsForCaregiver().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
 			
 			try {
 				Integer uid = new Integer (req.getGetPatientsForCaregiver().getUserId());
@@ -2859,7 +3232,6 @@ import eu.aladdin_project.xsd.*;
     		for (Integer i = 1; i < getTaskTypesCount() + 1; i++) {
     			SystemParameter pt = resp.addNewOut();
         		pt.setCode(i.toString());
-        		//pt.setDescription(Dict.getTaskDescription(i.toString(), s));
     		}
     		
     		return respdoc;
@@ -2870,6 +3242,21 @@ import eu.aladdin_project.xsd.*;
 			GetUserIdByPersonIdResponse resp = respdoc.addNewGetUserIdByPersonIdResponse();
 			OperationResult res = resp.addNewOut();
 			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetUserIdByPersonId().setId (nc.check(req.getGetUserIdByPersonId().getId(), String.class));
+    			req.getGetUserIdByPersonId().setUserId (nc.check(req.getGetUserIdByPersonId().getUserId(), String.class));
+    		}
+			
+			if (
+    				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_CLINICIAN) &&
+    				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
+			
 			try {
 				Integer uid = new Integer (req.getGetUserIdByPersonId().getId());
 				Integer type = req.getGetUserIdByPersonId().getType();
@@ -2879,12 +3266,9 @@ import eu.aladdin_project.xsd.*;
 				System.out.println (1);
 				SQLQuery q = s.createSQLQuery(sql);
 				System.out.println (2);
-				List list = q.list();
-				System.out.println (list.size());
-				System.out.println (3);
-				Object[] obj = list.toArray();
+				Object[] obj = q.list().toArray();
 				System.out.println (obj.length);
-				System.out.println (4);
+				System.out.println (3);
 				if (obj.length == 1) {
 					res.setCode(obj[0].toString());
 					res.setStatus((short)1);

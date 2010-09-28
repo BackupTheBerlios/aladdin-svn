@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface AssignTaskDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTaskDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("assigntask21b4doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTaskDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("assigntask21b4doctype");
     
     /**
      * Gets the "AssignTask" element
@@ -42,7 +42,7 @@ public interface AssignTaskDocument extends org.apache.xmlbeans.XmlObject
     public interface AssignTask extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTask.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("assigntaske9e4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTask.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("assigntaske9e4elemtype");
         
         /**
          * Gets the "task" element

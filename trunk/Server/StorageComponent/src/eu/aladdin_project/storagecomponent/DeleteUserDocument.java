@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteUserDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("deleteuser23b6doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("deleteuser23b6doctype");
     
     /**
      * Gets the "DeleteUser" element
@@ -42,7 +42,7 @@ public interface DeleteUserDocument extends org.apache.xmlbeans.XmlObject
     public interface DeleteUser extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s17C56F3955581C3EC65A29EDC6201AEA").resolveHandle("deleteuserbd24elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("deleteuserbd24elemtype");
         
         /**
          * Gets the "id" element

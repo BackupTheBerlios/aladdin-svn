@@ -832,6 +832,7 @@
       		<xsd:sequence>
       			<xsd:element name="id" type="xsd:string"/>
       			<xsd:element name="type" type="xsd:int"/>
+      			<xsd:element name="userId" type="xsd:string"/>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>

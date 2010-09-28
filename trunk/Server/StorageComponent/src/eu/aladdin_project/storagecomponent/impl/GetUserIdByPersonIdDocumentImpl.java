@@ -90,6 +90,8 @@ public class GetUserIdByPersonIdDocumentImpl extends org.apache.xmlbeans.impl.va
             new javax.xml.namespace.QName("", "id");
         private static final javax.xml.namespace.QName TYPE$2 = 
             new javax.xml.namespace.QName("", "type");
+        private static final javax.xml.namespace.QName USERID$4 = 
+            new javax.xml.namespace.QName("", "userId");
         
         
         /**
@@ -225,6 +227,74 @@ public class GetUserIdByPersonIdDocumentImpl extends org.apache.xmlbeans.impl.va
                     target = (org.apache.xmlbeans.XmlInt)get_store().add_element_user(TYPE$2);
                 }
                 target.set(type);
+            }
+        }
+        
+        /**
+         * Gets the "userId" element
+         */
+        public java.lang.String getUserId()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$4, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target.getStringValue();
+            }
+        }
+        
+        /**
+         * Gets (as xml) the "userId" element
+         */
+        public org.apache.xmlbeans.XmlString xgetUserId()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$4, 0);
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "userId" element
+         */
+        public void setUserId(java.lang.String userId)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$4, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(USERID$4);
+                }
+                target.setStringValue(userId);
+            }
+        }
+        
+        /**
+         * Sets (as xml) the "userId" element
+         */
+        public void xsetUserId(org.apache.xmlbeans.XmlString userId)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$4, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(USERID$4);
+                }
+                target.set(userId);
             }
         }
     }
