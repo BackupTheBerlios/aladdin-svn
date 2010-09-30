@@ -117,6 +117,12 @@ import eu.aladdin_project.xsd.*;
     		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
     	}
     	
+    	protected void finalize () throws Throwable {
+    		s.flush();
+    		s.close();
+    		super.finalize();
+    	}
+    	
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
     		CreateClinicianResponseDocument respdoc = CreateClinicianResponseDocument.Factory.newInstance();
     		CreateClinicianResponse resp = respdoc.addNewCreateClinicianResponse();
@@ -3002,7 +3008,7 @@ import eu.aladdin_project.xsd.*;
         	try {
         		String username = req.getAuth().getLogin();
         		String password = req.getAuth().getPassword();
-        		sql = "SELECT id FROM aladdinuser WHERE username like '" + username + "' AND password like '" + password + "'";
+        		sql = "SELECT id FROM aladdinuser WHERE username = '" + username + "' AND password = '" + password + "'";
         		SQLQuery q = s.createSQLQuery(sql);
         		if (q.list().size() == 1) {
         			res.setCode(q.list().get(0).toString());
