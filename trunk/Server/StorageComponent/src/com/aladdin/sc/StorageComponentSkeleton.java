@@ -100,14 +100,22 @@ import eu.aladdin_project.xsd.*;
     	public final static int U_ADMIN = 1;
     	
     	private boolean checkUser (String userId, Integer userType) {
-    		if (userId == null) return true;
-    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
-			return (s.createSQLQuery(sql).list().size() > 0);
+    		if (userId == null || userId == "") return false;
+    		try {
+    			s.beginTransaction();
+	    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
+				int size = s.createSQLQuery(sql).list().size();
+				s.getTransaction().commit();
+				return (size > 0);
+    		} catch (Exception e) {
+    			s.getTransaction().rollback();
+				return false;
+			}
     	}
     	
     	public StorageComponentSkeleton () {
     		s = HibernateUtil.getSessionFactory().openSession();
-
+    		
     		op = new HashMap<Integer, String>();
     		op.put(OP_LESS, " %s < '%s' ");
     		op.put(OP_GREAT, " %s > '%s' ");
@@ -118,6 +126,11 @@ import eu.aladdin_project.xsd.*;
     	}
     	
     	protected void finalize () throws Throwable {
+    		
+    		if (s.getTransaction().isActive()) {
+    			s.getTransaction().rollback();
+    		}
+    		
     		s.flush();
     		s.close();
     		super.finalize();
@@ -160,6 +173,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -296,6 +312,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -364,6 +383,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -406,6 +428,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -480,7 +505,6 @@ import eu.aladdin_project.xsd.*;
     		System.out.println (" uQQ 20");
     	}
     	
-    	
     	public ListOfQuestionnairesResponseDocument listOfQuestionnaires (ListOfQuestionnairesDocument req) {
     		ListOfQuestionnairesResponseDocument respdoc = ListOfQuestionnairesResponseDocument.Factory.newInstance();
     		ListOfQuestionnairesResponse resp = respdoc.addNewListOfQuestionnairesResponse();
@@ -488,6 +512,7 @@ import eu.aladdin_project.xsd.*;
     		// TODO: auth
     		
     		try {
+    			s.beginTransaction();
     			Object[] ql = s.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Object[] quest = (Object[]) ql[i];
@@ -496,7 +521,9 @@ import eu.aladdin_project.xsd.*;
     				qi.setTitle((String)quest[1]);
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -546,11 +573,16 @@ import eu.aladdin_project.xsd.*;
     			warn.setDelivered(rwarn.getDelivered());
 
     			s.save (warn);
+    			
     			s.getTransaction().commit();
+    			
     			res.setCode(warn.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
    				System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -599,6 +631,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println(e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -651,6 +686,9 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     			
     		}  catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -692,10 +730,14 @@ import eu.aladdin_project.xsd.*;
     			storeSocioDemographic(data.getSDData(), p.getSd());
     			s.update(p);
     			s.getTransaction().commit();
+    			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println(e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -751,6 +793,7 @@ import eu.aladdin_project.xsd.*;
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata, p.sd";
     			
+    			s.beginTransaction();
     			Object[] ql = s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
@@ -760,7 +803,9 @@ import eu.aladdin_project.xsd.*;
     				qi.setSurname(p.getM_PersonData().getSurname());
     				qi.setName(p.getM_PersonData().getName());
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -813,6 +858,7 @@ import eu.aladdin_project.xsd.*;
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata";
     			
+    			s.beginTransaction();
     			Object[] ql = s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
@@ -822,7 +868,10 @@ import eu.aladdin_project.xsd.*;
     				qi.setSurname(p.getM_PersonData().getSurname());
     				qi.setName(p.getM_PersonData().getName());
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
+    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -898,6 +947,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -963,6 +1015,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -992,9 +1047,12 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer id = new Integer (req.getGetPatient().getId());
-        		com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
+        		s.beginTransaction();
+    			com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
         		resp.setOut (exportPatient (patient));
+        		s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -1127,11 +1185,14 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer assessmentId = new Integer (req.getDeleteCarerAssessment().getAssessmentId());
+    			s.beginTransaction();
     			s.createSQLQuery("DELETE FROM carerassessment WHERE id = " + assessmentId.toString()).executeUpdate();
+    			s.getTransaction().commit();
     			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -1166,6 +1227,8 @@ import eu.aladdin_project.xsd.*;
     			Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
     			Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
     			Integer objectId  = new Integer (req.getGetQuestionnaireAnswers().getObjectId());
+    			
+    			s.beginTransaction();
     			
     			String sql = "SELECT qa.timestamp, qq.quest, qa.objectid, qa.userid FROM questionnaireanswer qa inner join questionnairequestion qq on (qq.id = qa.question) WHERE qa.objectid = '" + objectId.toString() + "' AND qa.timestamp BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY qa.timestamp, qq.quest, qa.objectid, qa.userid";
     			Object[] questionids = s.createSQLQuery(sql).list().toArray();
@@ -1202,7 +1265,12 @@ import eu.aladdin_project.xsd.*;
 	    			}
     			}
     			
+    			s.getTransaction().commit();
+    			
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     		}
 
@@ -1233,11 +1301,14 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer id = new Integer (req.getDeleteExternalService().getId());
+    			s.beginTransaction();
     			s.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString());
+    			s.getTransaction().commit();
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 				res.setCode("-2");
         		res.setDescription("database error");
@@ -1290,6 +1361,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		}  catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -1346,6 +1420,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -1391,6 +1468,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -1451,12 +1531,15 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
-    			s.beginTransaction();
     			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
     			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
     			Calendar fromDate = req.getGetPatientMeasurement().getFromData();
     			Calendar toDate = req.getGetPatientMeasurement().getToData();
-    			Object[] ml = s.createSQLQuery("SELECT id FROM measurement WHERE patient = " + patientId.toString() + " AND datetime BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString() + "' AND type = '" + measurementType.toString() + "'").list().toArray();
+    			
+    			s.beginTransaction();
+    			
+    			Object[] ml = s.createSQLQuery("SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString() + "' AND m.type = '" + measurementType.toString() + "'").list().toArray();
+    			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
     			for (int i = 0; i < ml.length; i++) {
     				System.out.println ("1");
@@ -1469,8 +1552,11 @@ import eu.aladdin_project.xsd.*;
     				System.out.println ("4");
     			}
     			resp.setOutArray((Measurement[]) export.toArray(new Measurement[0]));
+    			
     			s.getTransaction().commit();
+    			
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 			}
     		
@@ -1537,12 +1623,16 @@ import eu.aladdin_project.xsd.*;
     				dropQQ ((Integer)qq[i]);
     			}
     			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString());
+    			
     			s.getTransaction().commit();
     			
     			res.setCode(id.toString());
     			res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -1625,6 +1715,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error ");
@@ -1677,6 +1770,7 @@ import eu.aladdin_project.xsd.*;
     			sql += " 1=1 GROUP BY p.id,p.persondata";
     			System.out.println (sql);
     			
+    			s.beginTransaction();
     			Object[] ql = s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
@@ -1686,7 +1780,9 @@ import eu.aladdin_project.xsd.*;
     				ai.setSurname(a.getM_PersonData().getSurname());
     				ai.setName(a.getM_PersonData().getName());
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -1722,6 +1818,8 @@ import eu.aladdin_project.xsd.*;
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
     			String fromDate  = req.getGetUserPlannedTasks().getFromDate().toString();
     			String toDate = req.getGetUserPlannedTasks().getToDate().toString();
+    			
+    			s.beginTransaction();
     			
     			String sql = "SELECT id FROM task WHERE datetimefulfilled BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			Object[] tl = s.createSQLQuery(sql).list().toArray();
@@ -1759,7 +1857,9 @@ import eu.aladdin_project.xsd.*;
     					System.out.println ();
     				}
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println(e.toString());
 			}
     		
@@ -1939,6 +2039,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -1991,6 +2094,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -2047,6 +2153,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -2094,6 +2203,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -2141,6 +2253,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2170,9 +2285,12 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer id = new Integer (req.getGetClinician().getId());
+    			s.beginTransaction();
     			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) s.load(com.aladdin.sc.db.Clinician.class, id);
         		resp.setOut (exportClinician (clinician));
+        		s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -2210,13 +2328,22 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
+    			
+    			s.getTransaction().begin();
+    			
     			Integer assessmentId = new Integer (req.getDeletePatientAssessment().getAssessmentId());
 				s.createSQLQuery("DELETE FROM measurement WHERE patientassessment = " + assessmentId.toString()).executeUpdate();
     			s.createSQLQuery("DELETE FROM patientassessment WHERE id = " + assessmentId.toString()).executeUpdate();
+    			
+    			s.getTransaction().commit();
+    			
     			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2232,7 +2359,9 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			System.out.println ("1");
+    			s.beginTransaction();
     			Object[] esl = s.createQuery("from ExternalService").list().toArray();
+    			s.getTransaction().commit();
     			System.out.println ("2");
     			for (int i = 0; i < esl.length; i++) {
     				System.out.println ("3");
@@ -2248,6 +2377,7 @@ import eu.aladdin_project.xsd.*;
     				System.out.println ("8");
     			}
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 			}
     		
@@ -2274,9 +2404,12 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer id = new Integer (req.getGetCarer().getId());
+    			s.beginTransaction();
         		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, id);
+        		s.getTransaction().commit();
         		resp.setOut (exportCarer (carer));
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -2302,8 +2435,11 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer id = new Integer (req.getGetAdministrator().getId());
+    			s.beginTransaction();
 				com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) s.load(com.aladdin.sc.db.Administrator.class, id);
         		resp.setOut (exportAdministrator (administrator));
+        		s.getTransaction().commit();
+        		s.getTransaction().rollback();
     		} catch (Exception e) {
     			System.out.println (e.toString());
     		}
@@ -2354,6 +2490,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -2374,9 +2513,12 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer id = new Integer (req.getGetQuestionnaire().getId());
+    			s.beginTransaction();
     			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) s.load(com.aladdin.sc.db.Questionnaire.class, id);
     			resp.setOut(exportQuestionnaire(q));
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 			}
 
@@ -2452,6 +2594,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2481,6 +2626,7 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
+    			s.beginTransaction();
     			System.out.println ("1");
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
     			System.out.println ("2");
@@ -2570,8 +2716,9 @@ import eu.aladdin_project.xsd.*;
 	    			rpa.setClinicalDataArray((Measurement[]) rml.toArray(new Measurement[0]));
 	    			System.out.println ("42");
     			}
-    			
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 			}
     		
@@ -2597,6 +2744,7 @@ import eu.aladdin_project.xsd.*;
     		}
     		
     		try {
+    			s.beginTransaction();
     			Integer carerId = new Integer (req.getGetCarerAssessments().getCarerId());
     			Object[] cal = s.createSQLQuery("SELECT id FROM carerassessment WHERE carer = " + carerId.toString()).list().toArray();
     			
@@ -2617,7 +2765,9 @@ import eu.aladdin_project.xsd.*;
         			rca.setPsychoactiveDrugs(ca.getPsychoactiveDrugs());
         			rca.setQualityOfLife(ca.getQualityOfLife().shortValue());
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 			}
     		
@@ -2659,6 +2809,7 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     			
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -2728,6 +2879,7 @@ import eu.aladdin_project.xsd.*;
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata, p.clinician, p.sd";
 
+    			s.beginTransaction();
     			Object[] ql = s.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
@@ -2737,7 +2889,9 @@ import eu.aladdin_project.xsd.*;
     				qi.setSurname(p.getM_PersonData().getSurname());
     				qi.setName(p.getM_PersonData().getName());
     			}
+    			s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     		}
     		
@@ -2781,6 +2935,7 @@ import eu.aladdin_project.xsd.*;
     			}
     			sql += "1=1";
     			
+    			s.beginTransaction();
     			Object[] list = s.createSQLQuery(sql).list().toArray();
 				for (int i = 0; i < list.length; i++) {
     				Integer id = (Integer) list[i];
@@ -2819,7 +2974,9 @@ import eu.aladdin_project.xsd.*;
     				rw.setPatientID(w.getPatientID());
     				rw.setDelivered(w.getDelivered());
     			}
+				s.getTransaction().commit();
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
 			}
     		
@@ -2863,6 +3020,9 @@ import eu.aladdin_project.xsd.*;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
+    			
+    			s.getTransaction().rollback();
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error");
@@ -2904,6 +3064,7 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
+    			s.getTransaction().rollback();
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2930,14 +3091,14 @@ import eu.aladdin_project.xsd.*;
     		}
         	
         	try {
+        		s.beginTransaction();
+        		
         		User ru = req.getUpdateUser().getUser();
         		if (existUser(ru.getUsername(), new Integer (ru.getID())) == 1) {
         			res.setCode("-2");
             		res.setDescription("user with same username exist");
             		res.setStatus((short) 0);
         		}
-        		
-        		s.beginTransaction();
         		
         		com.aladdin.sc.db.AladdinUser u = new com.aladdin.sc.db.AladdinUser ();
         		
@@ -2954,6 +3115,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (Exception e) {
+        		
+        		s.getTransaction().rollback();
+        		
         		res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -2974,8 +3138,9 @@ import eu.aladdin_project.xsd.*;
     		}
         	
         	try {
-        		s.beginTransaction();
         		Integer id = new Integer (req.getDeleteUser().getId());
+        		
+        		s.beginTransaction();
         		s.createSQLQuery("DELETE FROM aladdinuser WHERE id = " + id.toString()).executeUpdate();
         		s.getTransaction().commit();
         		
@@ -2983,6 +3148,7 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (Exception e) {
+        		s.getTransaction().rollback();
         		res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -3008,6 +3174,7 @@ import eu.aladdin_project.xsd.*;
         	try {
         		String username = req.getAuth().getLogin();
         		String password = req.getAuth().getPassword();
+        		s.beginTransaction();
         		sql = "SELECT id FROM aladdinuser WHERE username = '" + username + "' AND password = '" + password + "'";
         		SQLQuery q = s.createSQLQuery(sql);
         		if (q.list().size() == 1) {
@@ -3019,7 +3186,9 @@ import eu.aladdin_project.xsd.*;
         			res.setDescription("none");
         			res.setStatus((short) 0);
         		}
+        		s.getTransaction().commit();
         	} catch (Exception e) {
+        		s.getTransaction().rollback();
         		res.setCode("-2");
         		res.setDescription("database error sql = " + sql + " ex = " + e.toString());
         		res.setStatus((short) 0);
@@ -3043,6 +3212,7 @@ import eu.aladdin_project.xsd.*;
         	try {
         		Integer id = new Integer (req.getChangePassword().getUserId());
         		String password = req.getChangePassword().getPassword();
+        		
         		s.beginTransaction();
         		s.createSQLQuery("UPDATE aladdinuser SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
         		s.getTransaction().commit();
@@ -3051,6 +3221,7 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     			res.setStatus((short) 1);
         	} catch (Exception e) {
+        		s.getTransaction().rollback();
         		res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -3071,14 +3242,14 @@ import eu.aladdin_project.xsd.*;
     		}
         	
         	try {
+        		s.beginTransaction();
+        		
         		User ru = req.getCreateUser().getUser();
         		if (existUser(ru.getUsername(), 0) == 1) {
         			res.setCode("-2");
             		res.setDescription("user with same username exist");
             		res.setStatus((short) 0);
         		}
-        		
-        		s.beginTransaction();
         		
         		com.aladdin.sc.db.AladdinUser u = new com.aladdin.sc.db.AladdinUser ();
         		
@@ -3094,6 +3265,9 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (Exception e) {
+        		
+        		s.getTransaction().rollback();
+        		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
@@ -3113,6 +3287,7 @@ import eu.aladdin_project.xsd.*;
     		}
 				 
 			try {
+				s.beginTransaction();
 				Integer id = new Integer (req.getGetUserType().getId());
 				String sql = "SELECT type FROM aladdinuser WHERE id = '" + id.toString() + "'";
         		SQLQuery q = s.createSQLQuery(sql);
@@ -3125,7 +3300,9 @@ import eu.aladdin_project.xsd.*;
         			res.setDescription("none");
         			res.setStatus((short) 0);
         		}
+        		s.getTransaction().commit();
 			} catch (Exception e) {
+				s.getTransaction().rollback();
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
@@ -3142,6 +3319,8 @@ import eu.aladdin_project.xsd.*;
 				Integer type = new Integer (req.getGetSystemParameterList().getType());
 				Integer language = new Integer (req.getGetSystemParameterList().getLanguage());
 				
+				s.beginTransaction();
+				
 				String sql = "SELECT code, description FROM dict WHERE type = '" + type.toString() + "' AND language = '" + language.toString() + "'";
 				Object[] ret = s.createSQLQuery(sql).list().toArray();
 				
@@ -3152,7 +3331,10 @@ import eu.aladdin_project.xsd.*;
 					sp.setDescription(obj[1].toString());
 				}
 				
+				s.getTransaction().commit();
+				
 			} catch (Exception e) {
+				s.getTransaction().rollback();
 				System.out.println (e.toString());
 			}
 			
@@ -3170,6 +3352,9 @@ import eu.aladdin_project.xsd.*;
     		}
 			
 			try {
+				
+				s.beginTransaction();
+				
 				Integer id = new Integer (req.getGetUser().getId());
 				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
 				
@@ -3182,7 +3367,10 @@ import eu.aladdin_project.xsd.*;
 				ru.setType(spType);
 				ru.setUsername(user.getUsername());
 				
+				s.getTransaction().commit();
+				
 			} catch (Exception e) {
+				s.getTransaction().rollback();
 				System.out.println (e.toString());
 			}
 			
@@ -3206,6 +3394,7 @@ import eu.aladdin_project.xsd.*;
     		}
 			
 			try {
+				s.beginTransaction();
 				Integer uid = new Integer (req.getGetPatientsForCaregiver().getUserId());
 				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
         		SQLQuery q = s.createSQLQuery(sql);
@@ -3222,13 +3411,14 @@ import eu.aladdin_project.xsd.*;
         				qi.setName(p.getM_PersonData().getName());
         			}
         		}
+        		s.getTransaction().commit();
 			} catch (Exception e) {
+				s.getTransaction().rollback();
 				System.out.println (e.toString());
 			}
 			
 			return respdoc;
         }
-        
         
     	// TODO:
     	public ListOfPossibleTasksResponseDocument listOfPossibleTasks (ListOfPossibleTasksDocument listOfPossibleTasks48) {
@@ -3267,6 +3457,8 @@ import eu.aladdin_project.xsd.*;
 				Integer uid = new Integer (req.getGetUserIdByPersonId().getId());
 				Integer type = req.getGetUserIdByPersonId().getType();
 				
+				s.beginTransaction();
+				
 				String sql = "SELECT id FROM aladdinuser WHERE personid like '" + uid.toString() + "' AND type = '" + type.toString() + "'";
 				System.out.println (sql);
 				System.out.println (1);
@@ -3284,7 +3476,13 @@ import eu.aladdin_project.xsd.*;
         			res.setDescription("none");
         			res.setStatus((short) 0);
 				}
+				
+				s.getTransaction().commit();
+				
 			} catch (Exception e) {
+				
+				s.getTransaction().rollback();
+				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				System.out.println (e.toString());
