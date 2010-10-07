@@ -240,12 +240,18 @@
     	</sequence>
     </complexType>
 
-    <complexType name="dict">
+    <complexType name="translate">
     	<sequence>
-    		<element name="code" type="int"></element>
-    		<element name="description" type="string"></element>
-    		<element name="type" type="int"></element>
-    		<element name="language" type="int"></element>
+    		<element name="entityid" type="int"></element>
+    		<element name="entity" type="string"></element>
+    		<element name="locale" type="tns:locale"></element>
+    		<element name="value" type="string"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="locale">
+    	<sequence>
+    		<element name="name" type="string"></element>
     	</sequence>
     </complexType>
 </schema>
