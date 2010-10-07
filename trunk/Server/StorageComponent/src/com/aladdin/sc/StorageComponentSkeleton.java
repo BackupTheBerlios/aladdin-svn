@@ -5,12 +5,16 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.TransactionException;
+import org.hibernate.cfg.Configuration;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
@@ -92,6 +96,7 @@ import eu.aladdin_project.xsd.*;
     	
     	private HashMap<Integer, String> op;
     	
+    	//private SessionFactory sessionFactory;
     	private Session s;
     	
     	public final static int U_CARER = 3;
@@ -108,12 +113,24 @@ import eu.aladdin_project.xsd.*;
 				s.getTransaction().commit();
 				return (size > 0);
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
 				return false;
 			}
     	}
     	
     	public StorageComponentSkeleton () {
+    		
+    		/*try {
+    			sessionFactory = new Configuration().configure("/hibernate-aladdin-sc.cfg.xml").buildSessionFactory();
+    		} catch (Throwable ex) {
+    			System.err.println("Initial SessionFactory creation failed." + ex);
+    			throw new ExceptionInInitializerError(ex);
+    		}*/
+    		
+    		//s = sessionFactory.openSession();
     		s = HibernateUtil.getSessionFactory().openSession();
     		
     		op = new HashMap<Integer, String>();
@@ -127,12 +144,14 @@ import eu.aladdin_project.xsd.*;
     	
     	protected void finalize () throws Throwable {
     		
-    		if (s.getTransaction().isActive()) {
-    			s.getTransaction().rollback();
-    		}
+    		try {
+				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+			} catch (TransactionException e2) {
+			}
     		
     		s.flush();
     		s.close();
+    		//sessionFactory.close();
     		super.finalize();
     	}
     	
@@ -174,7 +193,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -313,7 +335,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -384,7 +409,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -429,7 +457,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -445,7 +476,13 @@ import eu.aladdin_project.xsd.*;
     		System.out.println (" uQQ 2");
     		qq.setType(rqq.getType());
     		System.out.println (" uQQ 3");
-    		if (rqq.getId() != null) qq.setId(new Integer (rqq.getId()));
+    		try {
+    			qq.setId(new Integer (rqq.getId()));
+    		} catch (NumberFormatException e) {
+    			qq.setId(null);
+    		} catch (Exception e) {
+				qq.setId(null);
+			}
     		System.out.println (" uQQ 4");
     		qq.setCondition(new Integer(rqq.getCondition()));
     		System.out.println (" uQQ 5");
@@ -523,7 +560,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -558,17 +600,37 @@ import eu.aladdin_project.xsd.*;
     			
     			Warning rwarn = req.getSaveWarning().getWarn();
     			com.aladdin.sc.db.Warning warn = new com.aladdin.sc.db.Warning ();
-    			warn.setTypeOfWarning(new Integer (rwarn.getTypeOfWarning().getCode()));
+    			try {
+    				warn.setTypeOfWarning(new Integer (rwarn.getTypeOfWarning().getCode()));
+    			} catch (NumberFormatException e) {
+				}
     			
     			long timeInMillis = 0;
     			if (rwarn.getDateTimeOfWarning() != null) timeInMillis = rwarn.getDateTimeOfWarning().getTimeInMillis();
     			warn.setDateTimeOfWarning(new Timestamp(timeInMillis));
     			
-    			warn.setEffect(new Integer (rwarn.getEffect().getCode()));
-    			warn.setIndicator(new Integer (rwarn.getIndicator().getCode()));
-    			warn.setRiskLevel(new Integer(rwarn.getRiskLevel().getCode()));
+    			try {
+    				warn.setEffect(new Integer (rwarn.getEffect().getCode()));
+    			} catch (NumberFormatException e) {
+				}
+    			
+    			try {
+    				warn.setIndicator(new Integer (rwarn.getIndicator().getCode()));
+    			} catch (NumberFormatException e) {
+				}
+    			
+    			try {
+    				warn.setRiskLevel(new Integer(rwarn.getRiskLevel().getCode()));
+    			} catch (NumberFormatException e) {
+				}
+    			
     			warn.setJustificationText(rwarn.getJustificationText());
-    			warn.setEmergencyLevel(new Integer(rwarn.getEmergencyLevel().getCode()));
+    			
+    			try {
+    				warn.setEmergencyLevel(new Integer(rwarn.getEmergencyLevel().getCode()));
+    			} catch (NumberFormatException e) {
+				}
+    			
     			warn.setPatientID(rwarn.getPatientID());
     			warn.setDelivered(rwarn.getDelivered());
 
@@ -581,7 +643,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
    				System.out.println (e.toString());
     			res.setCode("-2");
@@ -632,7 +697,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println(e.toString());
     			res.setCode("-2");
@@ -687,7 +755,10 @@ import eu.aladdin_project.xsd.*;
     			
     		}  catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -736,7 +807,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println(e.toString());
     			res.setCode("-2");
@@ -805,7 +879,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -870,7 +949,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -948,7 +1032,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -1016,7 +1103,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -1052,7 +1142,12 @@ import eu.aladdin_project.xsd.*;
         		resp.setOut (exportPatient (patient));
         		s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -1192,7 +1287,12 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -1269,7 +1369,10 @@ import eu.aladdin_project.xsd.*;
     			
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     		}
@@ -1308,7 +1411,12 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 				res.setCode("-2");
         		res.setDescription("database error");
@@ -1362,7 +1470,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		}  catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -1421,7 +1532,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -1469,7 +1583,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -1482,6 +1599,20 @@ import eu.aladdin_project.xsd.*;
 
 		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq) {
 			System.out.println (" ===============================");
+			
+			if (rq.getID() != null) {
+				try {
+					Integer id = new Integer (rq.getID());
+				} catch (NumberFormatException e) {
+					System.out.println ("NumberFormatException");
+					return null;
+				} catch (Exception e) {
+					System.out.println ("Exception");
+					return null;				
+				}
+			}
+			
+			
 			System.out.println (" sQ 1");
 			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
 			System.out.println (" sQ 2");
@@ -1492,8 +1623,13 @@ import eu.aladdin_project.xsd.*;
 			q.setVersion(new BigDecimal (rq.getVersion()));
 			System.out.println (" sQ 4");
 			if (rq.getID() != null) {
-				System.out.println (" id " + rq.getID());
-				q.setId(new Integer (rq.getID()));
+				try {
+					q.setId(new Integer (rq.getID()));
+				} catch (Exception e) {
+					System.out.println (e.toString());
+					q = null;
+					return null;
+				}
 			}
 			s.saveOrUpdate(q);
 			System.out.println (" sQ 5");
@@ -1533,12 +1669,20 @@ import eu.aladdin_project.xsd.*;
     		try {
     			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
     			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
-    			Calendar fromDate = req.getGetPatientMeasurement().getFromData();
-    			Calendar toDate = req.getGetPatientMeasurement().getToData();
+    			String fromDate = req.getGetPatientMeasurement().getFromData().toString();
+    			String toDate = req.getGetPatientMeasurement().getToData().toString();
+    			
+    			if (fromDate.compareTo(toDate) == 0) {
+    				Date time = req.getGetPatientMeasurement().getFromData().getTime();
+    				time.setHours(time.getHours() + 23);
+    				time.setMinutes(time.getMinutes() + 59);
+    				time.setSeconds(time.getSeconds() + 59);
+    				toDate = time.toString();
+    			}
     			
     			s.beginTransaction();
     			
-    			Object[] ml = s.createSQLQuery("SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString() + "' AND m.type = '" + measurementType.toString() + "'").list().toArray();
+    			Object[] ml = s.createSQLQuery("SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'").list().toArray();
     			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
     			for (int i = 0; i < ml.length; i++) {
@@ -1556,7 +1700,12 @@ import eu.aladdin_project.xsd.*;
     			s.getTransaction().commit();
     			
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 			}
     		
@@ -1631,7 +1780,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -1701,7 +1853,8 @@ import eu.aladdin_project.xsd.*;
     			
     			if (rtask.getQuestionnaire() != null) {
     				System.out.println (12);
-    				task.setQuestionnaire(storeQuestionnaire(rtask.getQuestionnaire()).getId());
+    				com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire());
+    				if (storedQuestionnaire != null) task.setQuestionnaire(storedQuestionnaire.getId());
     				System.out.println (13);
     			}
     			System.out.println (14);
@@ -1716,7 +1869,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -1782,7 +1938,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -1818,6 +1979,14 @@ import eu.aladdin_project.xsd.*;
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
     			String fromDate  = req.getGetUserPlannedTasks().getFromDate().toString();
     			String toDate = req.getGetUserPlannedTasks().getToDate().toString();
+    			
+    			if (fromDate.compareTo(toDate) == 0) {
+    				Date time = req.getGetUserPlannedTasks().getFromDate().getTime();
+    				time.setHours(time.getHours() + 23);
+    				time.setMinutes(time.getMinutes() + 59);
+    				time.setSeconds(time.getSeconds() + 59);
+    				toDate = time.toString();
+    			}
     			
     			s.beginTransaction();
     			
@@ -1859,7 +2028,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println(e.toString());
 			}
     		
@@ -2040,7 +2214,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2095,7 +2272,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2154,7 +2334,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -2204,7 +2387,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -2254,7 +2440,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -2290,7 +2479,12 @@ import eu.aladdin_project.xsd.*;
         		resp.setOut (exportClinician (clinician));
         		s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -2342,7 +2536,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -2377,7 +2574,12 @@ import eu.aladdin_project.xsd.*;
     				System.out.println ("8");
     			}
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 			}
     		
@@ -2409,7 +2611,12 @@ import eu.aladdin_project.xsd.*;
         		s.getTransaction().commit();
         		resp.setOut (exportCarer (carer));
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -2439,8 +2646,13 @@ import eu.aladdin_project.xsd.*;
 				com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) s.load(com.aladdin.sc.db.Administrator.class, id);
         		resp.setOut (exportAdministrator (administrator));
         		s.getTransaction().commit();
-        		s.getTransaction().rollback();
     		} catch (Exception e) {
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -2491,7 +2703,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -2518,7 +2733,12 @@ import eu.aladdin_project.xsd.*;
     			resp.setOut(exportQuestionnaire(q));
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 			}
 
@@ -2595,7 +2815,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
@@ -2718,7 +2941,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 			}
     		
@@ -2767,7 +2995,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 			}
     		
@@ -2809,7 +3042,12 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
     			
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -2891,7 +3129,12 @@ import eu.aladdin_project.xsd.*;
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     		}
     		
@@ -2976,7 +3219,12 @@ import eu.aladdin_project.xsd.*;
     			}
 				s.getTransaction().commit();
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
 			}
     		
@@ -3021,7 +3269,10 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     		} catch (Exception e) {
     			
-    			s.getTransaction().rollback();
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -3064,7 +3315,12 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (Exception e) {
-    			s.getTransaction().rollback();
+    			
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error");
@@ -3116,7 +3372,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
         	} catch (Exception e) {
         		
-        		s.getTransaction().rollback();
+        		try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
         		
         		res.setCode("-2");
         		res.setDescription("database error");
@@ -3148,7 +3407,12 @@ import eu.aladdin_project.xsd.*;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (Exception e) {
-        		s.getTransaction().rollback();
+        		
+        		try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+        		
         		res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -3188,7 +3452,12 @@ import eu.aladdin_project.xsd.*;
         		}
         		s.getTransaction().commit();
         	} catch (Exception e) {
-        		s.getTransaction().rollback();
+        		System.out.println ("1");
+        		try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+        		System.out.println ("2");
         		res.setCode("-2");
         		res.setDescription("database error sql = " + sql + " ex = " + e.toString());
         		res.setStatus((short) 0);
@@ -3221,7 +3490,12 @@ import eu.aladdin_project.xsd.*;
     			res.setDescription("ok");
     			res.setStatus((short) 1);
         	} catch (Exception e) {
-        		s.getTransaction().rollback();
+        		
+        		try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+        		
         		res.setCode("-2");
         		res.setDescription("database error");
         		res.setStatus((short) 0);
@@ -3266,7 +3540,10 @@ import eu.aladdin_project.xsd.*;
         		res.setStatus((short) 1);
         	} catch (Exception e) {
         		
-        		s.getTransaction().rollback();
+        		try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
         		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
@@ -3302,7 +3579,12 @@ import eu.aladdin_project.xsd.*;
         		}
         		s.getTransaction().commit();
 			} catch (Exception e) {
-				s.getTransaction().rollback();
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
@@ -3334,7 +3616,12 @@ import eu.aladdin_project.xsd.*;
 				s.getTransaction().commit();
 				
 			} catch (Exception e) {
-				s.getTransaction().rollback();
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+				
 				System.out.println (e.toString());
 			}
 			
@@ -3370,7 +3657,12 @@ import eu.aladdin_project.xsd.*;
 				s.getTransaction().commit();
 				
 			} catch (Exception e) {
-				s.getTransaction().rollback();
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+				
 				System.out.println (e.toString());
 			}
 			
@@ -3413,7 +3705,12 @@ import eu.aladdin_project.xsd.*;
         		}
         		s.getTransaction().commit();
 			} catch (Exception e) {
-				s.getTransaction().rollback();
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+				
 				System.out.println (e.toString());
 			}
 			
@@ -3481,7 +3778,10 @@ import eu.aladdin_project.xsd.*;
 				
 			} catch (Exception e) {
 				
-				s.getTransaction().rollback();
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
