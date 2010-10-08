@@ -31,7 +31,7 @@ namespace Aladdin.ClientApplication.Controls
             {
                 this.TaskPanel.Children.Clear();
                 aladdinService.StorageComponent sc = new aladdinService.StorageComponent();
-                App.ActiveTasks = sc.GetUserPlannedTasks(App.CurrentUserID, new DateTime(2010, 10, 1), new DateTime(2010, 10, 15), App.CurrentUserID).ToList();
+                App.ActiveTasks = sc.GetUserPlannedTasks(App.CurrentUserID, new DateTime(2010, 10, 1), new DateTime(2010, 10, 15), App.DefaultLanguage, App.CurrentUserID).ToList();
                 App.ActiveTasks = App.ActiveTasks.Where(c => Convert.ToInt32(c.TaskStatus.Code) != (int) TaskStatusEnum.Canceled).ToList();
 
                 foreach (aladdinService.Task task in App.ActiveTasks)

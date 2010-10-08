@@ -990,22 +990,23 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/GetUserPlannedTasks", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Task[] GetUserPlannedTasks([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] System.DateTime fromDate, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] System.DateTime toDate, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string requesterId) {
+        public Task[] GetUserPlannedTasks([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] System.DateTime fromDate, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] System.DateTime toDate, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string requesterId) {
             object[] results = this.Invoke("GetUserPlannedTasks", new object[] {
                         userId,
                         fromDate,
                         toDate,
+                        locale,
                         requesterId});
             return ((Task[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetUserPlannedTasksAsync(string userId, System.DateTime fromDate, System.DateTime toDate, string requesterId) {
-            this.GetUserPlannedTasksAsync(userId, fromDate, toDate, requesterId, null);
+        public void GetUserPlannedTasksAsync(string userId, System.DateTime fromDate, System.DateTime toDate, SystemParameter locale, string requesterId) {
+            this.GetUserPlannedTasksAsync(userId, fromDate, toDate, locale, requesterId, null);
         }
         
         /// <remarks/>
-        public void GetUserPlannedTasksAsync(string userId, System.DateTime fromDate, System.DateTime toDate, string requesterId, object userState) {
+        public void GetUserPlannedTasksAsync(string userId, System.DateTime fromDate, System.DateTime toDate, SystemParameter locale, string requesterId, object userState) {
             if ((this.GetUserPlannedTasksOperationCompleted == null)) {
                 this.GetUserPlannedTasksOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUserPlannedTasksOperationCompleted);
             }
@@ -1013,6 +1014,7 @@ namespace Aladdin.ClientApplication.aladdinService {
                         userId,
                         fromDate,
                         toDate,
+                        locale,
                         requesterId}, this.GetUserPlannedTasksOperationCompleted, userState);
         }
         
@@ -1130,25 +1132,27 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/AssignTask", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public OperationResult AssignTask([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] Task task, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
+        public OperationResult AssignTask([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] Task task, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
             object[] results = this.Invoke("AssignTask", new object[] {
                         task,
+                        locale,
                         userId});
             return ((OperationResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AssignTaskAsync(Task task, string userId) {
-            this.AssignTaskAsync(task, userId, null);
+        public void AssignTaskAsync(Task task, SystemParameter locale, string userId) {
+            this.AssignTaskAsync(task, locale, userId, null);
         }
         
         /// <remarks/>
-        public void AssignTaskAsync(Task task, string userId, object userState) {
+        public void AssignTaskAsync(Task task, SystemParameter locale, string userId, object userState) {
             if ((this.AssignTaskOperationCompleted == null)) {
                 this.AssignTaskOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAssignTaskOperationCompleted);
             }
             this.InvokeAsync("AssignTask", new object[] {
                         task,
+                        locale,
                         userId}, this.AssignTaskOperationCompleted, userState);
         }
         
@@ -1224,23 +1228,25 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/ListOfQuestionnaires", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public QuestionnaireInfo[] ListOfQuestionnaires([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
+        public QuestionnaireInfo[] ListOfQuestionnaires([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
             object[] results = this.Invoke("ListOfQuestionnaires", new object[] {
+                        locale,
                         userId});
             return ((QuestionnaireInfo[])(results[0]));
         }
         
         /// <remarks/>
-        public void ListOfQuestionnairesAsync(string userId) {
-            this.ListOfQuestionnairesAsync(userId, null);
+        public void ListOfQuestionnairesAsync(SystemParameter locale, string userId) {
+            this.ListOfQuestionnairesAsync(locale, userId, null);
         }
         
         /// <remarks/>
-        public void ListOfQuestionnairesAsync(string userId, object userState) {
+        public void ListOfQuestionnairesAsync(SystemParameter locale, string userId, object userState) {
             if ((this.ListOfQuestionnairesOperationCompleted == null)) {
                 this.ListOfQuestionnairesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnListOfQuestionnairesOperationCompleted);
             }
             this.InvokeAsync("ListOfQuestionnaires", new object[] {
+                        locale,
                         userId}, this.ListOfQuestionnairesOperationCompleted, userState);
         }
         
@@ -1254,25 +1260,27 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/GetQuestionnaire", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Questionnaire GetQuestionnaire([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string id, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
+        public Questionnaire GetQuestionnaire([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string id, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
             object[] results = this.Invoke("GetQuestionnaire", new object[] {
                         id,
+                        locale,
                         userId});
             return ((Questionnaire)(results[0]));
         }
         
         /// <remarks/>
-        public void GetQuestionnaireAsync(string id, string userId) {
-            this.GetQuestionnaireAsync(id, userId, null);
+        public void GetQuestionnaireAsync(string id, SystemParameter locale, string userId) {
+            this.GetQuestionnaireAsync(id, locale, userId, null);
         }
         
         /// <remarks/>
-        public void GetQuestionnaireAsync(string id, string userId, object userState) {
+        public void GetQuestionnaireAsync(string id, SystemParameter locale, string userId, object userState) {
             if ((this.GetQuestionnaireOperationCompleted == null)) {
                 this.GetQuestionnaireOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetQuestionnaireOperationCompleted);
             }
             this.InvokeAsync("GetQuestionnaire", new object[] {
                         id,
+                        locale,
                         userId}, this.GetQuestionnaireOperationCompleted, userState);
         }
         
@@ -1286,25 +1294,27 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/UpdateQuestionnaire", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public OperationResult UpdateQuestionnaire([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] Questionnaire data, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
+        public OperationResult UpdateQuestionnaire([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] Questionnaire data, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
             object[] results = this.Invoke("UpdateQuestionnaire", new object[] {
                         data,
+                        locale,
                         userId});
             return ((OperationResult)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateQuestionnaireAsync(Questionnaire data, string userId) {
-            this.UpdateQuestionnaireAsync(data, userId, null);
+        public void UpdateQuestionnaireAsync(Questionnaire data, SystemParameter locale, string userId) {
+            this.UpdateQuestionnaireAsync(data, locale, userId, null);
         }
         
         /// <remarks/>
-        public void UpdateQuestionnaireAsync(Questionnaire data, string userId, object userState) {
+        public void UpdateQuestionnaireAsync(Questionnaire data, SystemParameter locale, string userId, object userState) {
             if ((this.UpdateQuestionnaireOperationCompleted == null)) {
                 this.UpdateQuestionnaireOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateQuestionnaireOperationCompleted);
             }
             this.InvokeAsync("UpdateQuestionnaire", new object[] {
                         data,
+                        locale,
                         userId}, this.UpdateQuestionnaireOperationCompleted, userState);
         }
         
@@ -1318,25 +1328,27 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/CreateQuestionnaire", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public OperationResult CreateQuestionnaire([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] Questionnaire data, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
+        public OperationResult CreateQuestionnaire([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] Questionnaire data, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] string userId) {
             object[] results = this.Invoke("CreateQuestionnaire", new object[] {
                         data,
+                        locale,
                         userId});
             return ((OperationResult)(results[0]));
         }
         
         /// <remarks/>
-        public void CreateQuestionnaireAsync(Questionnaire data, string userId) {
-            this.CreateQuestionnaireAsync(data, userId, null);
+        public void CreateQuestionnaireAsync(Questionnaire data, SystemParameter locale, string userId) {
+            this.CreateQuestionnaireAsync(data, locale, userId, null);
         }
         
         /// <remarks/>
-        public void CreateQuestionnaireAsync(Questionnaire data, string userId, object userState) {
+        public void CreateQuestionnaireAsync(Questionnaire data, SystemParameter locale, string userId, object userState) {
             if ((this.CreateQuestionnaireOperationCompleted == null)) {
                 this.CreateQuestionnaireOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateQuestionnaireOperationCompleted);
             }
             this.InvokeAsync("CreateQuestionnaire", new object[] {
                         data,
+                        locale,
                         userId}, this.CreateQuestionnaireOperationCompleted, userState);
         }
         
