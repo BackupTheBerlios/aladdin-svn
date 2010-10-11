@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.task;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 import org.zkoss.calendar.Calendars;
@@ -7,26 +8,32 @@ import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
 
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.api.Datebox;
 
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Row;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.xsd.OperationResult;
 
+@SuppressWarnings("serial")
 public class CalendarController extends GenericForwardComposer {
 	
 	public Window bookEventWin;
 	public Calendars cal;
 	
-	public void onEventCreate(CalendarsEvent event) throws InterruptedException{
+	public void onEventCreate(CalendarsEvent event) throws InterruptedException, RemoteException{
+		StorageComponentProxy proxy = new StorageComponentProxy();
 		bookEventWin = (Window)Executions.createComponents("bookEvent.zul", self.getParent(), null);
 		bookEventWin.setAttribute("calendars", cal);
 		bookEventWin.setAttribute("calevent", event);
@@ -37,6 +44,12 @@ public class CalendarController extends GenericForwardComposer {
 		((Timebox)bookEventWin.getFellow("timetask")).setValue(setting);
 		((Button)bookEventWin.getFellow("savebutton")).setVisible(true);
 		((Listbox)bookEventWin.getFellow("tasktypesel")).setSelectedIndex(0);
+		String userid = (String)Sessions.getCurrent().getAttribute("userid");
+		((Textbox)bookEventWin.getFellow("userid")).setValue(userid);
+		Toolbar toolbar = (Toolbar)self.getFellow("toolbar");
+		String currentexecutor = ((Label)toolbar.getFellow("exechelp")).getValue();
+		OperationResult opres = proxy.getUserIdByPersonId(currentexecutor, SystemDictionary.USERTYPE_CARER_INT, userid);
+		((Textbox)bookEventWin.getFellow("objid")).setValue(opres.getCode());
 		bookEventWin.setTitle("New Task");
 		bookEventWin.setVisible(true);
 		bookEventWin.doModal();
@@ -59,6 +72,8 @@ public class CalendarController extends GenericForwardComposer {
 		((Textbox)bookEventWin.getFellow("taskstatusfield")).setValue(SystemDictionary.getTaskStatusLabel(scevent.getParams().get("status")));
 		((Row)bookEventWin.getFellow("rowtaskstatus")).setVisible(true);
 		((Textbox)bookEventWin.getFellow("addressedid")).setValue(scevent.getParams().get("objid"));
+		((Textbox)bookEventWin.getFellow("objid")).setValue(scevent.getParams().get("exec"));
+		((Textbox)bookEventWin.getFellow("userid")).setValue(scevent.getParams().get("assign"));
 		((Button)bookEventWin.getFellow("cancelbutton")).setVisible(true);
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setValue(scevent.getContent());
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);

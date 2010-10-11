@@ -5,9 +5,15 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.PatientCarer;
 
+@SuppressWarnings("serial")
 public class DetailPatientController extends DetailSDController{
+	
+	public DetailPatientController(){
+		this.usertype = SystemDictionary.USERTYPE_PATIENT_INT;
+	}
 
 	public Button[] createActionButtons(){
 		Button btn = new Button();

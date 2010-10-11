@@ -10,21 +10,21 @@
 		import org.zkoss.zul.SimpleListModel;
 		
 		
-		String ttcarerqs = Labels.getLabel("dic.task.type.carers");
+		String ttcarerqs = Labels.getLabel("dic.task.type.patientqs");
 		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
 		String ttweight = Labels.getLabel("dic.task.type.weight.mes");
 		String ttcoggame = Labels.getLabel("dic.task.type.coggame");
 		String ttact = Labels.getLabel("dic.task.type.activity.mon");
 		String ttex = Labels.getLabel("dic.task.type.exercise");
 		
-		int ttcarerqsi = SystemDictionary.TASK_TYPE_CARERQS_INT;
+		int ttcarerqsi = SystemDictionary.TASK_TYPE_PATIENTQS_INT;
 		int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
 		int ttweighti = SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT_INT;
 		int ttcoggamei = SystemDictionary.TASK_TYPE_COGGAME_INT;
 		int ttacti = SystemDictionary.TASK_TYPE_ACTMONITOR_INT;
 		int ttexi = SystemDictionary.TASK_TYPE_EXERCISE_INT;
 		
-		int usertype = SystemDictionary.USERTYPE_CARER_INT;
+		int usertype = SystemDictionary.USERTYPE_PATIENT_INT;
 		
 		Session ses = Sessions.getCurrent();
 		String petusid = (String)ses.getAttribute("userid");
@@ -98,32 +98,16 @@
 				</row>
 				<row>
 					<label value="Executor"/>
-					<textbox id="objid" readonly="true" width="35px"/>
+					<textbox id="objid" value="${objid }" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label value="Assigner"/>
-					<textbox id="userid" readonly="true" width="35px"/>
+					<textbox id="userid" value="${userid }" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label value="Object"/>
 					<hbox>
-					<textbox id="addressedid" readonly="true" width="35px"/>
-					<combobox id="addressedtext" autodrop="true" buttonVisible="false" >
-						<attribute name="onSelect">
-							eu.aladdin_project.xsd.PatientInfo pinfo = (eu.aladdin_project.xsd.PatientInfo)addressedtext.getSelectedItem().getValue();
-							addressedid.setValue(pinfo.getID());
-						</attribute>
-						<attribute name="onCreate">
-							StorageComponentProxy proxy = new StorageComponentProxy();
-							try{
-								eu.aladdin_project.xsd.PatientInfo[] patients = proxy.listOfPatients(new SearchCriteria[0],petusid);
-								SimpleListModel patmodel = new SimpleListModel(patients);
-								addressedtext.setModel(patmodel);
-							}catch(java.rmi.RemoteException re){
-								re.printStackTrace();
-							}
-						</attribute>
-					</combobox>
+					<textbox id="addressedid" value="${objid }" readonly="true" width="35px"/>
 					</hbox>
 				</row>
 				<row>

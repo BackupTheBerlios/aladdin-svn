@@ -15,6 +15,7 @@ import org.zkoss.zul.Textbox;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.SystemParameter;
 
+@SuppressWarnings("serial")
 public class SDFormControllerWindow extends AladdinFormControllerWindow{
 
 	protected SocioDemographicData currentsd = null;

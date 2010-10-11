@@ -71,6 +71,7 @@ public class IndexPatientsWindow extends Window {
 		Executions.sendRedirect("/patients/details.zul?patid="+id);
 	}
 	
+	@SuppressWarnings("serial")
 	public class ConfirmDeletePatient extends Window{
 		
 		public ConfirmDeletePatient(String id){

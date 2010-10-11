@@ -1,8 +1,6 @@
 package eu.aladdin_project.controllers.warnings;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Warning;

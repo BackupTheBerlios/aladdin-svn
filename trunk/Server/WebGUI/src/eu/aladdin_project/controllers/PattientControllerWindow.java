@@ -18,7 +18,6 @@ import org.zkoss.zul.Textbox;
 
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Carer;
-import eu.aladdin_project.xsd.Identifier;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.PatientCarer;

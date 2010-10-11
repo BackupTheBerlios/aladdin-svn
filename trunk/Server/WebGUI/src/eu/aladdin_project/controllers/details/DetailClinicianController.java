@@ -3,8 +3,8 @@ package eu.aladdin_project.controllers.details;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Row;
 
+@SuppressWarnings("serial")
 public class DetailClinicianController extends DetailPersonController{
 
 	public Button[] createActionButtons() {

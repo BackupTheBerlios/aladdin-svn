@@ -71,6 +71,7 @@ public class IndexCarersWindow extends Window{
 		Executions.sendRedirect("/carers/details.zul?carerid="+id);
 	}
 	
+	@SuppressWarnings("serial")
 	public class ConfirmDeleteCarer extends Window{
 		
 		public ConfirmDeleteCarer(String id){

@@ -1,7 +1,4 @@
 <zk>
-	<zscript>
-	
-	</zscript>
 	<window id="warning_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.warnings.WarningsPopupController">
 		<grid>
 			<columns>
@@ -43,13 +40,13 @@
 				</row>
 				<row>
 					<label value="Patient"/>
-					<hbox><textbox id="patientfield" readonly="true"/><textbox/></hbox>
+					<hbox><textbox id="patientfield" readonly="true"/><textbox id="patientnamefield" readonly="true"/></hbox>
 				</row>
 				<row>
 					<label value="Delivered"/>
 					<textbox id="delivfield" readonly="true"/>
 				</row>
-				<row>
+				<row id="buttonrow">
 					<label value=""/>
 					<hbox>
 						<button id="readbutton" label="Mark Warning as Read" onClick="warning_form.markWarningAsRead()" />

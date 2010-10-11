@@ -24,6 +24,7 @@ import eu.aladdin_project.xsd.Communication;
 import eu.aladdin_project.xsd.Identifier;
 import eu.aladdin_project.xsd.PersonData;
 
+@SuppressWarnings("serial")
 public class AladdinFormControllerWindow extends Window{
 	
 	protected String currentid = null;

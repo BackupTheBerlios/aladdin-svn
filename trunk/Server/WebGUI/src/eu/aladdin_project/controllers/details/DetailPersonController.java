@@ -2,12 +2,10 @@ package eu.aladdin_project.controllers.details;
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Row;
-import org.zkoss.zul.Rows;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.xsd.Address;
@@ -16,6 +14,7 @@ import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
 
+@SuppressWarnings("serial")
 public abstract class DetailPersonController extends Window {
 
 	protected String currentid = null;

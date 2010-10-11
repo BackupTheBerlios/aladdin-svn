@@ -374,10 +374,10 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.getPatientsForCaregiver(userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult getUserIdByPersonId(java.lang.String id, int type) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult getUserIdByPersonId(java.lang.String id, int type, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.getUserIdByPersonId(id, type);
+    return storageComponent_PortType.getUserIdByPersonId(id, type, userId);
   }
   
   

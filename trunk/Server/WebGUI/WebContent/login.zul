@@ -23,8 +23,8 @@
 			try{
  				OperationResult result = proxy.auth(user,password);
  				System.out.println("RESULT CODE: "+result.getCode());
- 				//System.out.println("RESULT DESC: "+result.getDescription());
- 				//System.out.println("RESULT STATUS: "+result.getStatus());
+ 				System.out.println("RESULT DESC: "+result.getDescription());
+ 				System.out.println("RESULT STATUS: "+result.getStatus());
  				
  				//Check if getCode() function return error code (0)
  				if(result.getCode().equals("0")){

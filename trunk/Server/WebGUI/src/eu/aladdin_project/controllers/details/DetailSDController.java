@@ -18,38 +18,26 @@ import org.zkoss.zul.Listitem;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.Task;
 
+@SuppressWarnings("serial")
 public class DetailSDController extends DetailPersonController{
 	private SimpleCalendarModel calmodel = null;
 	private Calendars calendars = null;
+	protected int usertype;
 	
 	public DetailSDController(){
+		this.usertype = SystemDictionary.USERTYPE_CARER_INT;
 	}
 	
 	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
+		//this.calendars = (Calendars)this.getFellow("cal");
 		super.setControllerData(id, data, sddata, responsible, carers);
-		this.calendars = (Calendars)this.getFellow("cal");
-		
-		/*
-		Listbox listgui = (Listbox)getFellow("taskrows");
-		Label listlabel = (Label)getFellow("taskrowslbl");
-		
-		Listitem[] tasklist = this.createTaskRows();
-		if(tasklist != null){
-			for(int i = 0; i < tasklist.length; i++){
-				listgui.appendChild(tasklist[i]);
-				
-			}
-			listgui.setVisible(true);
-			listlabel.setVisible(true);
-		}
-		*/
-		
-		this.refreshCalendarData();
+		//this.refreshCalendarData();
 	}
 	
 	protected Listitem getSDItem(){
@@ -109,56 +97,6 @@ public class DetailSDController extends DetailPersonController{
 		return ret;
 	}
 	
-	public Listitem[] createTaskRows() {
-		StorageComponentProxy proxy = new StorageComponentProxy();
-		Session ses = Sessions.getCurrent();
-		String userid = (String)ses.getAttribute("userid");
-		if(this.calendars == null){
-			this.calendars = (Calendars)this.getFellow("cal");
-		}
-		Calendar calfrom = new GregorianCalendar();
-		calfrom.setTime(this.calendars.getBeginDate());
-		Calendar calto = new GregorianCalendar();
-		calto.setTime(this.calendars.getEndDate());
-		Listitem[] ret = null;
-		try{
-			//TODO Un-hardcore user ID to retrieve tasks
-			//Task[] tasklist = proxy.getUserPlannedTasks(this.currentid, calfrom, calto, userid);
-			Task[] tasklist = proxy.getUserPlannedTasks("42", calfrom, calto, userid);
-			System.out.println("TASKLIST SIZE: "+tasklist.length);
-			ret = new Listitem[tasklist.length];
-			this.calmodel = new SimpleCalendarModel();
-			
-			for(int i = 0; i<tasklist.length; i++){
-				Listitem item = new Listitem();
-				Listcell cell1 = new Listcell(tasklist[i].getID());
-				Listcell cell2 = new Listcell(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-				Listcell lab2 = new Listcell(tasklist[i].getTaskStatus().getCode());
-				Listcell lab3 = new Listcell(tasklist[i].getObjectID());
-				GregorianCalendar calendar1 = new GregorianCalendar();
-				calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
-				
-				GregorianCalendar calendar2 = new GregorianCalendar();
-				calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
-				
-				Listcell lab4 = new Listcell(calendar1.get(Calendar.DATE)+"-"+calendar1.get(Calendar.MONTH)+"-"+calendar1.get(Calendar.YEAR));
-				Listcell lab5 = new Listcell(calendar2.get(Calendar.DATE)+"-"+calendar2.get(Calendar.MONTH)+"-"+calendar2.get(Calendar.YEAR));
-				item.appendChild(cell1);
-				item.appendChild(cell2);
-				item.appendChild(lab2);
-				item.appendChild(lab3);
-				item.appendChild(lab4);
-				item.appendChild(lab5);
-				ret[i]=item;
-				
-			}
-			return ret;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ret;
-	}
-	
 	public void refreshCalendarData(){
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
@@ -171,57 +109,57 @@ public class DetailSDController extends DetailPersonController{
 		Calendar calto = new GregorianCalendar();
 		calto.setTime(this.calendars.getEndDate());
 		try{
-			//TODO Un-hardcore user ID to retrieve tasks
-			//Task[] tasklist = proxy.getUserPlannedTasks(this.currentid, calfrom, calto, userid);
-			Task[] tasklist = proxy.getUserPlannedTasks("42", calfrom, calto, userid);
-			System.out.println("TASKLIST CALENDAR SIZE: "+tasklist.length);
+			OperationResult currentor = proxy.getUserIdByPersonId(this.currentid, this.usertype, userid);
+			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto, userid);
 			this.calmodel = new SimpleCalendarModel();
-			for(int i = 0; i<tasklist.length; i++){
-				GregorianCalendar calendar1 = new GregorianCalendar();
-				calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
-				
-				GregorianCalendar calendar2 = new GregorianCalendar();
-				calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
-				
-				SimpleCalendarEvent clevent = new SimpleCalendarEvent();
-				clevent.setBeginDate(calendar1.getTime());
-				clevent.setContent("");
-				clevent.setEndDate(new Date(calendar2.getTime().getTime()+3600000));
-				clevent.setLocked(true);
-				clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-				clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-				switch(Integer.parseInt(tasklist[i].getTaskStatus().getCode())){
-				case SystemDictionary.TASK_STATUS_CANCELLED_INT:
-					clevent.setHeaderColor("red");
-					clevent.setContentColor("red");
-					break;
-				case SystemDictionary.TASK_STATUS_COMPLETED_INT:
-					clevent.setHeaderColor("blue");
-					clevent.setContentColor("blue");
-					break;
-				case SystemDictionary.TASK_STATUS_PENDING_INT:
-					clevent.setHeaderColor("black");
-					clevent.setContentColor("black");
-					break;
-				default:
-					clevent.setHeaderColor("yellow");
-					clevent.setContentColor("yellow");
-					break;
+			
+				for(int i = 0; i<tasklist.length; i++){
+					GregorianCalendar calendar1 = new GregorianCalendar();
+					calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
+					
+					GregorianCalendar calendar2 = new GregorianCalendar();
+					calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
+					
+					SimpleCalendarEvent clevent = new SimpleCalendarEvent();
+					clevent.setBeginDate(calendar1.getTime());
+					clevent.setContent("");
+					clevent.setEndDate(new Date(calendar1.getTime().getTime()+3600000));
+					clevent.setLocked(true);
+					clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+					clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+					switch(Integer.parseInt(tasklist[i].getTaskStatus().getCode())){
+					case SystemDictionary.TASK_STATUS_CANCELLED_INT:
+						clevent.setHeaderColor("red");
+						clevent.setContentColor("red");
+						break;
+					case SystemDictionary.TASK_STATUS_COMPLETED_INT:
+						clevent.setHeaderColor("blue");
+						clevent.setContentColor("blue");
+						break;
+					case SystemDictionary.TASK_STATUS_PENDING_INT:
+						clevent.setHeaderColor("black");
+						clevent.setContentColor("black");
+						break;
+					default:
+						clevent.setHeaderColor("yellow");
+						clevent.setContentColor("yellow");
+						break;
+					}
+					Map<String, String> params = new HashMap<String,String>();
+					params.put("user", userid);
+					params.put("objid", tasklist[i].getObjectID());
+					params.put("exec", tasklist[i].getExecutorID());
+					params.put("assign", tasklist[i].getAssignerID());
+					params.put("task", tasklist[i].getID());
+					params.put("status", tasklist[i].getTaskStatus().getCode());
+					clevent.setParams(params);
+					this.calmodel.add(clevent);
 				}
-				Map<String, String> params = new HashMap<String,String>();
-				params.put("user", userid);
-				params.put("objid", tasklist[i].getObjectID());
-				params.put("task", tasklist[i].getID());
-				params.put("status", tasklist[i].getTaskStatus().getCode());
-				clevent.setParams(params);
-				this.calmodel.add(clevent);
-			}
-			
-			Calendars calendar = (Calendars)getFellow("cal");
-			calendar.setModel(this.calmodel);
-			
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			Calendars calendar = (Calendars)getFellow("cal");
+			calendar.setModel(this.calmodel);
 		}
 	}
 

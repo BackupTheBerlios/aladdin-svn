@@ -779,6 +779,8 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "type"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "OperationResult"));
         oper.setReturnClass(eu.aladdin_project.xsd.OperationResult.class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
@@ -3021,7 +3023,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.OperationResult getUserIdByPersonId(java.lang.String id, int type) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.OperationResult getUserIdByPersonId(java.lang.String id, int type, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -3037,7 +3039,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {id, new java.lang.Integer(type)});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {id, new java.lang.Integer(type), userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

@@ -4,6 +4,9 @@
 <zk>
 	<zscript>
 		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.Carer;
+		
 		String tasks = Labels.getLabel("common.tasks");
 		String actions = Labels.getLabel("common.actions");
 		String data = Labels.getLabel("common.personal.data");
@@ -13,6 +16,12 @@
 		String personaddr = Labels.getLabel("common.addressed.person");
 		String assigned = Labels.getLabel("common.date.assigned");
 		String fulfilled = Labels.getLabel("common.date.fulfilled");
+		
+		
+		String title = Labels.getLabel("carers.update.title");
+		page.setTitle(title);	
+		
+		String objid = (String)Executions.getCurrent().getParameter("carerid");
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailSDController">
@@ -43,10 +52,11 @@
 		</listhead>
 	</listbox>
 	<separator height="10px"/>
-	<?component name="createDialog" macroURI="bookEvent.zul"?>
+	<?component name="createDialog" macroURI="bookEvent.zul"?>   
 	<createDialog id="createDialog" />
 	<calendars id="cal" mold="month" firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarController">
-		<toolbar>
+		<toolbar id="toolbar">
+			<label id="exechelp" visible="false" value="${objid }"/>
 			<div class="float-left">
 				<hbox>
 					<div sclass="arrow-left"><label value="Previous Month" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
@@ -58,8 +68,6 @@
 					<listitem forEach="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" label="${each}" />
 			    </listbox>
 			    </span>
-			    <separator orient="vertical"/>
-				
 				</div>
 				</hbox>
 			</div>
@@ -81,25 +89,15 @@
 		</toolbar>
 	</calendars>
 	</window>
-		<zscript>
-		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
-		import eu.aladdin_project.xsd.Carer;
-		
-		String title = Labels.getLabel("carers.update.title");
-		page.setTitle(title);	
-		
-		String objid = (String)Executions.getCurrent().getParameter("carerid");
+	<zscript>
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		try{
 			Carer userobj = proxy.getCarer(objid,userid);
-			//Carer userobj = proxy.getCarer(objid,null);
 			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),null,null);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}
-		
-		
 	</zscript>
 </zk>

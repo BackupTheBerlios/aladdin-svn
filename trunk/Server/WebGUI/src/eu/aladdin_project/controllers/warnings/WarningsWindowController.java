@@ -5,19 +5,19 @@ import java.rmi.RemoteException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
-import org.zkoss.zul.Button;
+import org.zkoss.zul.Row;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.SearchCriteria;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Warning;
 
+@SuppressWarnings("serial")
 public class WarningsWindowController extends Window {
 
 	public WarningsPopupController warningPopup;
@@ -33,8 +33,10 @@ public class WarningsWindowController extends Window {
 
 		Warning[] warning = proxy.getWarnings(new SearchCriteria[]{filter}, usid);
 		if(warning.length != 1){
-			//TODO stop execution and show error
+			Executions.getCurrent().sendRedirect("/warnings/index.zul?error=4");
 		}
+		Patient pinfo = proxy.getPatient(warning[0].getPatientID(), usid);
+		
 		warningPopup = (WarningsPopupController)Executions.createComponents("form.zul", this, null);
 		warningPopup.setWarningid(warningid);
 		((Textbox)warningPopup.getFellow("wid")).setValue(warning[0].getID());
@@ -46,7 +48,11 @@ public class WarningsWindowController extends Window {
 		((Textbox)warningPopup.getFellow("justfield")).setValue(warning[0].getJustificationText());
 		((Textbox)warningPopup.getFellow("emergencyfield")).setValue(SystemDictionary.getWarningEmergencyLevelLabel(warning[0].getEmergencyLevel().getCode()));
 		((Textbox)warningPopup.getFellow("patientfield")).setValue(warning[0].getID());
+		((Textbox)warningPopup.getFellow("patientnamefield")).setValue(pinfo.getPersonData().getSurname()+", "+pinfo.getPersonData().getName());
 		((Textbox)warningPopup.getFellow("delivfield")).setValue(warning[0].isDelivered()? Labels.getLabel("common.yes") : Labels.getLabel("common.no"));
+		if(warning[0].isDelivered()){
+			((Row)warningPopup.getFellow("buttonrow")).setVisible(false);
+		}
 		warningPopup.setTitle(Labels.getLabel("menu.warnings"));
 		warningPopup.setVisible(true);
 		warningPopup.doModal();

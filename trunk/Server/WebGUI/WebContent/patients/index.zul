@@ -24,7 +24,7 @@
 		Session ses = Sessions.getCurrent();
 		String id = (String)ses.getAttribute("userid");
 		try{
-			plist = proxy.listOfPatients(null,id);
+			plist = proxy.listOfPatients(new SearchCriteria[0],id);
 			System.out.println("**** List SIZE: "+plist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

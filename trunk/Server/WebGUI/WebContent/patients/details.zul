@@ -42,6 +42,43 @@
 			<listheader label="${fulfilled }" sort="auto" width="100px"/>
 		</listhead>
 	</listbox>
+	<separator height="10px"/>
+	<?component name="createDialog" macroURI="bookEvent.zul"?>
+	<calendars id="cal" mold="month" firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarController">
+		<toolbar>
+			<div class="float-left">
+				<hbox>
+					<div sclass="arrow-left"><label value="Previous Month" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
+					<div sclass="arrow-right"><label value="Next Month" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
+				<div>
+				<span id="FDOW">
+				First Day of Week:
+				<listbox mold="select" onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());" onCreate="self.setSelectedIndex(0)">
+					<listitem forEach="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" label="${each}" />
+			    </listbox>
+			    </span>
+			    <separator orient="vertical"/>
+				
+				</div>
+				</hbox>
+			</div>
+			<div sclass="float-right">
+				<hbox>
+					<label id="label" onCreate="printCalendarDate()"/>
+					<zscript>
+						public void printCalendarDate(){
+							Date b = cal.getBeginDate();
+							Date e = cal.getEndDate();
+							java.text.SimpleDateFormat sdfV = new java.text.SimpleDateFormat("dd/MM/yyyy", org.zkoss.util.Locales.getCurrent());
+							sdfV.setTimeZone(cal.getDefaultTimeZone());
+							label.setValue(sdfV.format(b) + " - " + sdfV.format(e));
+							detailswin.refreshCalendarData();
+						}
+					</zscript>
+				</hbox>
+			</div>
+		</toolbar>
+	</calendars>
 	</window>
 		<zscript>
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
@@ -56,6 +93,9 @@
 		String userid = (String)ses.getAttribute("userid");
 		try{
 			Patient userobj = proxy.getPatient(objid,userid);
+			eu.aladdin_project.xsd.OperationResult realusid = proxy.getUserIdByPersonId(objid,eu.aladdin_project.SystemDictionary.USERTYPE_PATIENT_INT,userid);
+			String robjid = realusid.getCode();
+			System.out.println(robjid);
 			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),userobj.getResponsibleClinicianID(),userobj.getPatientCarerList());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

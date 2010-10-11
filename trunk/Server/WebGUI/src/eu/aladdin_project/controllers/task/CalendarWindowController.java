@@ -16,10 +16,12 @@ import org.zkoss.zul.Listbox;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Task;
 
+@SuppressWarnings("serial")
 public class CalendarWindowController extends Window {
 	
 	public void changeTaskType(){
@@ -56,7 +58,6 @@ public class CalendarWindowController extends Window {
 				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
 					String qid = ((Textbox)getFellow("questidfield")).getValue();
 					questionnaire = proxy.getQuestionnaire(qid, userids);
-					//TODO set Questionnaire parameter;
 					break;
 				case SystemDictionary.TASK_TYPE_COGGAME_INT:
 					URL = ((Textbox)getFellow("urlfield")).getValue();
@@ -77,13 +78,15 @@ public class CalendarWindowController extends Window {
 			caltas2.setTime(new Date(dbox.getValue().getTime()+added));
 			
 			SystemParameter tasstatus = new SystemParameter(SystemDictionary.TASK_STATUS_PENDING,SystemDictionary.TASK_STATUS_PENDING_LBL);
+			//Object ID (Person ID)
 			String objids = ((Textbox)getFellow("objid")).getValue();
+			String addressedids = ((Textbox)getFellow("addressedid")).getValue();
+			OperationResult result = proxy.getUserIdByPersonId(addressedids, SystemDictionary.USERTYPE_PATIENT_INT, userids);
+			System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
 			
-			
-			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, "42", userids, "43");
-			
-			proxy.assignTask(ts,userids);
-			System.out.println("HEHEHE");
+			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, objids, userids, result.getCode());
+			OperationResult opres = proxy.assignTask(ts,userids);
+			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}catch(Exception e){
