@@ -31,7 +31,7 @@
 		
 		
 	</zscript>
-	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.task.CalendarWindowController">
+	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.task.CalendarWindowControllerPatients">
 		<label value="${objstr}"/>
 		<grid>
 			<columns>
@@ -98,17 +98,15 @@
 				</row>
 				<row>
 					<label value="Executor"/>
-					<textbox id="objid" value="${objid }" readonly="true" width="35px"/>
+					<textbox id="objid" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label value="Assigner"/>
-					<textbox id="userid" value="${userid }" readonly="true" width="35px"/>
+					<textbox id="userid" readonly="true" width="35px"/>
 				</row>
-				<row>
+				<row id="objectrow">
 					<label value="Object"/>
-					<hbox>
-					<textbox id="addressedid" value="${objid }" readonly="true" width="35px"/>
-					</hbox>
+					<textbox id="addressedid" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label id="usertype" value="${usertype }" visible="false"/>

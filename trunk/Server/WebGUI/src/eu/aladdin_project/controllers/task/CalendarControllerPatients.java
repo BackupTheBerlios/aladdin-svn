@@ -6,29 +6,26 @@ import java.util.Date;
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
-
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zul.api.Datebox;
-
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Row;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Button;
 import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.Window;
-import org.zkoss.zul.Row;
+import org.zkoss.zul.api.Datebox;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 
-@SuppressWarnings("serial")
-public class CalendarController extends GenericForwardComposer {
-	
+public class CalendarControllerPatients extends GenericForwardComposer {
+
 	public Window bookEventWin;
 	public Calendars cal;
 	
@@ -48,9 +45,11 @@ public class CalendarController extends GenericForwardComposer {
 		((Textbox)bookEventWin.getFellow("userid")).setValue(userid);
 		Toolbar toolbar = (Toolbar)self.getFellow("toolbar");
 		String currentexecutor = ((Label)toolbar.getFellow("exechelp")).getValue();
-		OperationResult opres = null;
-		opres = proxy.getUserIdByPersonId(currentexecutor, SystemDictionary.USERTYPE_CARER_INT, userid);
+		System.out.println("Executor: "+currentexecutor);
+		OperationResult opres = proxy.getUserIdByPersonId(currentexecutor, SystemDictionary.USERTYPE_PATIENT_INT, userid);
+		System.out.println("Executor req: "+opres.getCode()+":"+opres.getDescription());
 		((Textbox)bookEventWin.getFellow("objid")).setValue(opres.getCode());
+		bookEventWin.getFellow("objectrow").setVisible(false);
 		bookEventWin.setTitle("New Task");
 		bookEventWin.setVisible(true);
 		bookEventWin.doModal();
@@ -85,5 +84,4 @@ public class CalendarController extends GenericForwardComposer {
 		bookEventWin.setVisible(true);
 		bookEventWin.doModal();
 	}
-	
 }

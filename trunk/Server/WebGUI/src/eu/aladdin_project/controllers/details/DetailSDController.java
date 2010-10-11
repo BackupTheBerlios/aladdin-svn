@@ -26,8 +26,8 @@ import eu.aladdin_project.xsd.Task;
 
 @SuppressWarnings("serial")
 public class DetailSDController extends DetailPersonController{
-	private SimpleCalendarModel calmodel = null;
-	private Calendars calendars = null;
+	protected SimpleCalendarModel calmodel = null;
+	protected Calendars calendars = null;
 	protected int usertype;
 	
 	public DetailSDController(){
@@ -110,7 +110,9 @@ public class DetailSDController extends DetailPersonController{
 		calto.setTime(this.calendars.getEndDate());
 		try{
 			OperationResult currentor = proxy.getUserIdByPersonId(this.currentid, this.usertype, userid);
+			System.out.println("USER TASKS: "+currentor.getCode());
 			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto, userid);
+			System.out.println("TASKS LENGHT: "+tasklist.length);
 			this.calmodel = new SimpleCalendarModel();
 			
 				for(int i = 0; i<tasklist.length; i++){
