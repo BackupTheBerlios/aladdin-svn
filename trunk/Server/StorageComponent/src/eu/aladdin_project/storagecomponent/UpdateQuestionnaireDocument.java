@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateQuestionnaireDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateQuestionnaireDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("updatequestionnaire4d68doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateQuestionnaireDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("updatequestionnaire4d68doctype");
     
     /**
      * Gets the "UpdateQuestionnaire" element
@@ -42,7 +42,7 @@ public interface UpdateQuestionnaireDocument extends org.apache.xmlbeans.XmlObje
     public interface UpdateQuestionnaire extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateQuestionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("updatequestionnaire278eelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateQuestionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("updatequestionnaire278eelemtype");
         
         /**
          * Gets the "data" element
@@ -58,6 +58,21 @@ public interface UpdateQuestionnaireDocument extends org.apache.xmlbeans.XmlObje
          * Appends and returns a new empty "data" element
          */
         eu.aladdin_project.xsd.Questionnaire addNewData();
+        
+        /**
+         * Gets the "locale" element
+         */
+        eu.aladdin_project.xsd.SystemParameter getLocale();
+        
+        /**
+         * Sets the "locale" element
+         */
+        void setLocale(eu.aladdin_project.xsd.SystemParameter locale);
+        
+        /**
+         * Appends and returns a new empty "locale" element
+         */
+        eu.aladdin_project.xsd.SystemParameter addNewLocale();
         
         /**
          * Gets the "userId" element

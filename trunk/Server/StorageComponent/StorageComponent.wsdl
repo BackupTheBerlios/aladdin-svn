@@ -317,6 +317,7 @@
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       			<xsd:element name="fromDate" type="xsd:dateTime"></xsd:element>
       			<xsd:element name="toDate" type="xsd:dateTime"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       			<xsd:element name="requesterId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -381,6 +382,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="task" type="aladdin:Task"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -424,6 +426,7 @@
       <xsd:element name="ListOfQuestionnaires">
       	<xsd:complexType>
       		<xsd:sequence>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -439,6 +442,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="id" type="xsd:string"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -454,6 +458,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="data" type="aladdin:Questionnaire"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
@@ -469,6 +474,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="data" type="aladdin:Questionnaire"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       			<xsd:element name="userId" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>

@@ -96,7 +96,7 @@ import eu.aladdin_project.xsd.*;
     	
     	private HashMap<Integer, String> op;
     	
-    	//private SessionFactory sessionFactory;
+    	private SessionFactory sessionFactory;
     	private Session s;
     	
     	public final static int U_CARER = 3;
@@ -105,7 +105,7 @@ import eu.aladdin_project.xsd.*;
     	public final static int U_ADMIN = 1;
     	
     	private boolean checkUser (String userId, Integer userType) {
-    		if (userId == null || userId == "") return false;
+    		if (userId == null || userId == "") return true;
     		try {
     			s.beginTransaction();
 	    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
@@ -123,15 +123,15 @@ import eu.aladdin_project.xsd.*;
     	
     	public StorageComponentSkeleton () {
     		
-    		/*try {
+    		try {
     			sessionFactory = new Configuration().configure("/hibernate-aladdin-sc.cfg.xml").buildSessionFactory();
     		} catch (Throwable ex) {
     			System.err.println("Initial SessionFactory creation failed." + ex);
     			throw new ExceptionInInitializerError(ex);
-    		}*/
+    		}
     		
-    		//s = sessionFactory.openSession();
-    		s = HibernateUtil.getSessionFactory().openSession();
+    		s = sessionFactory.openSession();
+    		//s = HibernateUtil.getSessionFactory().openSession();
     		
     		op = new HashMap<Integer, String>();
     		op.put(OP_LESS, " %s < '%s' ");
@@ -151,7 +151,7 @@ import eu.aladdin_project.xsd.*;
     		
     		s.flush();
     		s.close();
-    		//sessionFactory.close();
+    		sessionFactory.close();
     		super.finalize();
     	}
     	
@@ -200,7 +200,7 @@ import eu.aladdin_project.xsd.*;
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error." + e.toString ());
     		}
     		
     		return respdoc;
@@ -448,7 +448,7 @@ import eu.aladdin_project.xsd.*;
     			
     			Questionnaire rquest = req.getUpdateQuestionnaire().getData();
     			
-    			storeQuestionnaire(rquest);
+    			storeQuestionnaire(rquest, req.getUpdateQuestionnaire().getLocale());
     			
     			s.getTransaction().commit();
     			
@@ -470,7 +470,7 @@ import eu.aladdin_project.xsd.*;
     		return respdoc;
     	}
 
-    	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId) {
+    	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId, SystemParameter locale) {
     		System.out.println (" uQQ 1");
     		com.aladdin.sc.db.QuestionnaireQuestion qq = new com.aladdin.sc.db.QuestionnaireQuestion ();
     		System.out.println (" uQQ 2");
@@ -486,7 +486,9 @@ import eu.aladdin_project.xsd.*;
     		System.out.println (" uQQ 4");
     		qq.setCondition(new Integer(rqq.getCondition()));
     		System.out.println (" uQQ 5");
-    		qq.setTitle(rqq.getTitle());
+    		
+    		//qq.setTitle(rqq.getTitle());
+    		
     		System.out.println (qq.getTitle());
     		System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
@@ -506,11 +508,17 @@ import eu.aladdin_project.xsd.*;
     		
     		
     		s.saveOrUpdate(qq);
+    		
+    		if (!setTranslate("questionnairequestion", qq.getId(), locale, rqq.getTitle())) {
+    			qq.setTitle(rqq.getTitle());
+    			s.saveOrUpdate(qq);
+    		}
+    		
     		System.out.println (" uQQ 8");
     		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
     			for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
         			System.out.println (" uQQ 9");
-        			updateQQ (rqq.getQuestions().getQuestionArray(i), questId, qq.getId());
+        			updateQQ (rqq.getQuestions().getQuestionArray(i), questId, qq.getId(), locale);
         			System.out.println (" uQQ 19");
         		}    			
     		}
@@ -525,7 +533,9 @@ import eu.aladdin_project.xsd.*;
         			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
         			qqa.setValue(new Integer(rqqa.getValue()));
         			qqa.setQuestion(qq.getId());
-        			qqa.setDescription(rqqa.getStringValue());
+        			
+        			//qqa.setDescription(rqqa.getStringValue());
+        			
 //        			if (rqqa.getDeleted() != true) rqqa.setDeleted(true);
 //        			qqa.setDeleted(rqqa.getDeleted());
 //        			if (rqqa.getId() > 0) qqa.setId(rqqa.getId());
@@ -537,9 +547,81 @@ import eu.aladdin_project.xsd.*;
         			System.out.println (qqa.getDescription());
         			
         			s.saveOrUpdate(qqa);
+        			
+        			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getStringValue())) {
+            			qqa.setDescription(rqqa.getStringValue());
+            			s.saveOrUpdate(qq);
+            		}
+        			
         		}    			
     		}
     		System.out.println (" uQQ 20");
+    	}
+    	
+    	private String getTranslate (String object, String id, String locale, String def) {
+			if (locale != null && locale.length() > 0) {
+				String sql = "SELECT value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id;
+				Object[] trans = s.createSQLQuery(sql).list().toArray();
+				if (trans.length > 0) {
+					System.out.println (trans.toString());
+					System.out.println (trans[0].toString());
+					return trans[0].toString();
+				}
+			}
+			return def;
+    	}
+    	
+    	private String getTranslate (String object, String id, SystemParameter locale, String def) {
+    		if (locale == null) return def;
+    		return getTranslate(object, id, locale.getCode(), def);
+    	}
+    	
+    	private boolean setTranslate (String object, Integer id, SystemParameter locale, String value) {
+    		if (locale == null) return false;
+    		return setTranslate(object, id, locale.getCode(), value);
+    	}
+    	
+    	private Integer getLocateId (String locale) {
+    		String sql = "SELECT id FROM locale WHERE name = '" + locale + "'";
+			Object[] loc = s.createSQLQuery(sql).list().toArray();
+			if (loc.length == 0) {
+				//s.createSQLQuery("INSERT INTO locale (name) VALUES ('" + locale + "')").executeUpdate();
+				//loc = s.createSQLQuery(sql).list().toArray();
+				//if (loc.length == 0) return new Integer(0);
+				
+				com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
+				l.setName(locale);
+				s.save(l);
+				return l.getId();
+				
+			}
+			return (Integer)((Object[])loc[0])[0];
+    	}
+    	
+    	private boolean setTranslate (String object, Integer id, String locale, String value) {
+			if (locale != null && locale.length() > 0) {
+				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id.toString();
+				Object[] trans = s.createSQLQuery(sql).list().toArray();
+				if (trans.length > 0) {
+					sql = "UPDATE translate SET value = '" + value + "' WHERE id = " + ( (Integer) ((Object[])trans[0])[0]).toString();
+					return (s.createSQLQuery(sql).executeUpdate() == 1);
+				}
+				Integer localeId = getLocateId(locale);
+				if (localeId == 0) return false;
+				
+				com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
+				t.setValue(value);
+				t.setLocale(localeId);
+				t.setEntity(object);
+				t.setEntityid(id);
+				s.save(t);
+				return t.getId() > 0;
+				
+				
+				//sql = "INSERT INTO translate (value, locale, entity, entityid) VALUES ('" + value + "', '" + localeId.toString() + "', '" + object +"', '" + id + "')";
+				//return (s.createSQLQuery(sql).executeUpdate() == 1);
+			}
+			return false;
     	}
     	
     	public ListOfQuestionnairesResponseDocument listOfQuestionnaires (ListOfQuestionnairesDocument req) {
@@ -555,7 +637,10 @@ import eu.aladdin_project.xsd.*;
     				Object[] quest = (Object[]) ql[i];
     				QuestionnaireInfo qi = resp.addNewOut();
     				qi.setID(((Integer)quest[0]).toString());
-    				qi.setTitle((String)quest[1]);
+//    				qi.setTitle((String)quest[1]);
+    				
+    				qi.setTitle(getTranslate("questionnaire", qi.getID(), req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
+    				
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
     			s.getTransaction().commit();
@@ -1574,7 +1659,7 @@ import eu.aladdin_project.xsd.*;
     			
     			Questionnaire rq = req.getCreateQuestionnaire().getData();
     			rq.setID(null);
-    			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq);
+    			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq, req.getCreateQuestionnaire().getLocale());
     			
     			s.getTransaction().commit();
     			
@@ -1591,13 +1676,13 @@ import eu.aladdin_project.xsd.*;
     			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error. " + e.toString());
     		}
     		
     		return respdoc;
     	}
 
-		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq) {
+		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq, SystemParameter locale) {
 			System.out.println (" ===============================");
 			
 			if (rq.getID() != null) {
@@ -1616,7 +1701,9 @@ import eu.aladdin_project.xsd.*;
 			System.out.println (" sQ 1");
 			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
 			System.out.println (" sQ 2");
-			q.setTitle(rq.getTitle());
+			
+			//if (setTranslate("questionnaire", q.getId().toString(), locale, rq.getTitle())) q.setTitle(rq.getTitle());
+			
 			System.out.println (rq.getTitle());
 			System.out.println (" sQ 3");
 			System.out.println (rq.getVersion());
@@ -1632,6 +1719,14 @@ import eu.aladdin_project.xsd.*;
 				}
 			}
 			s.saveOrUpdate(q);
+			
+			
+			if (!setTranslate("questionnaire", q.getId(), locale, rq.getTitle())) {
+				q.setTitle(rq.getTitle());
+				s.saveOrUpdate(q);
+			}
+			
+			
 			System.out.println (" sQ 5");
 			
 			QuestionnaireQuestion[] rqq = rq.getQuestionArray();
@@ -1639,7 +1734,7 @@ import eu.aladdin_project.xsd.*;
 			
 			for (int i = 0; i < rqq.length; i++) {
 				System.out.println (" sQ 7");
-				updateQQ(rqq[i], q.getId(), null);
+				updateQQ(rqq[i], q.getId(), null, locale);
 				System.out.println (" sQ 8");
 			}
 			return q;
@@ -1853,7 +1948,7 @@ import eu.aladdin_project.xsd.*;
     			
     			if (rtask.getQuestionnaire() != null) {
     				System.out.println (12);
-    				com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire());
+    				com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire(), req.getAssignTask().getLocale());
     				if (storedQuestionnaire != null) task.setQuestionnaire(storedQuestionnaire.getId());
     				System.out.println (13);
     			}
@@ -2017,7 +2112,7 @@ import eu.aladdin_project.xsd.*;
     				rt.setAssignerID(t.getAssigner().toString());
     				rt.setObjectID(t.getObject().toString());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
-    					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire()));
+    					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
     					System.out.println ();
     					System.out.println ();
     					System.out.println (" === QUESTIONNAIRE == ");
@@ -2040,13 +2135,17 @@ import eu.aladdin_project.xsd.*;
     		return respdoc;
     	}
     	
-    	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire q) {
+    	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire q, SystemParameter locale) {
     		System.out.println (" eQ 1");
     		Questionnaire rq = Questionnaire.Factory.newInstance();
     		System.out.println (" eQ 2");
     		rq.setID(q.getId().toString());
     		System.out.println (" eQ 3");
-    		rq.setTitle(q.getTitle());
+    		
+    		//rq.setTitle(q.getTitle());
+    		rq.setTitle(getTranslate("questionnaire", rq.getID(), locale, q.getTitle()));
+    		
+    		
     		System.out.println (" eQ 4");
     		rq.setVersion(q.getVersion().doubleValue ());
     		System.out.println (" eQ 5");
@@ -2068,7 +2167,7 @@ import eu.aladdin_project.xsd.*;
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
     				;
     			///if (!qq.getDeleted()) {
-    				rqql.add(exportQQ(qq, true));
+    				rqql.add(exportQQ(qq, true, locale));
     			//}
     			System.out.println (" eQ 9");
     		}
@@ -2078,7 +2177,7 @@ import eu.aladdin_project.xsd.*;
     		return rq;
     	}
     	
-    	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1) {
+    	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
     		System.out.println (" eQQ 1");
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
     		System.out.println (" eQQ 2");
@@ -2101,7 +2200,8 @@ import eu.aladdin_project.xsd.*;
     			System.out.println (" eQQ 5");
     		}
     		
-    		rqq.setTitle(qq.getTitle());
+    		//rqq.setTitle(qq.getTitle());
+    		rqq.setTitle(getTranslate("questionnairequestion", rqq.getId(), locale, qq.getTitle()));
     		
     		//rqq.setDeleted(qq.getDeleted());
     		
@@ -2115,7 +2215,7 @@ import eu.aladdin_project.xsd.*;
     			System.out.println (" eQQ 9");
     			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
     			System.out.println (" eQQ 91");
-				if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa));
+				if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
     			System.out.println (" eQQ 10");
     		}
     		System.out.println (" eQQ 11");
@@ -2144,7 +2244,7 @@ import eu.aladdin_project.xsd.*;
 				com.aladdin.sc.db.QuestionnaireQuestion _obj = 
 					(com.aladdin.sc.db.QuestionnaireQuestion)
 						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
-				rqql.add ( exportQQ ( _obj, false ) );
+				rqql.add ( exportQQ ( _obj, false, locale ) );
 
 //			if (qql.length > 1) rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
 //			else rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) (Object) qql));
@@ -2157,12 +2257,15 @@ import eu.aladdin_project.xsd.*;
     		return rqq;
     	}
     	
-    	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa) {
+    	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
     		System.out.println (" eQQA 1");
     		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
     		System.out.println (" eQQA 2");
     		
-    		rqqa.setStringValue(qqa.getDescription());
+    		//rqqa.setStringValue(qqa.getDescription());
+    		rqqa.setStringValue(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, qqa.getDescription()));
+    		
+    		
     		System.out.println (" eQQA 3");
     		rqqa.setValue(qqa.getValue().shortValue());
     		System.out.println (" eQQA 4");
@@ -2730,7 +2833,7 @@ import eu.aladdin_project.xsd.*;
     			Integer id = new Integer (req.getGetQuestionnaire().getId());
     			s.beginTransaction();
     			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) s.load(com.aladdin.sc.db.Questionnaire.class, id);
-    			resp.setOut(exportQuestionnaire(q));
+    			resp.setOut(exportQuestionnaire(q, req.getGetQuestionnaire().getLocale()));
     			s.getTransaction().commit();
     		} catch (Exception e) {
     			

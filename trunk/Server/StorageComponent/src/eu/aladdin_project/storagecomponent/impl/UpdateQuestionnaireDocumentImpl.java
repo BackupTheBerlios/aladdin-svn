@@ -88,7 +88,9 @@ public class UpdateQuestionnaireDocumentImpl extends org.apache.xmlbeans.impl.va
         
         private static final javax.xml.namespace.QName DATA$0 = 
             new javax.xml.namespace.QName("", "data");
-        private static final javax.xml.namespace.QName USERID$2 = 
+        private static final javax.xml.namespace.QName LOCALE$2 = 
+            new javax.xml.namespace.QName("", "locale");
+        private static final javax.xml.namespace.QName USERID$4 = 
             new javax.xml.namespace.QName("", "userId");
         
         
@@ -143,6 +145,56 @@ public class UpdateQuestionnaireDocumentImpl extends org.apache.xmlbeans.impl.va
         }
         
         /**
+         * Gets the "locale" element
+         */
+        public eu.aladdin_project.xsd.SystemParameter getLocale()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                eu.aladdin_project.xsd.SystemParameter target = null;
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(LOCALE$2, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "locale" element
+         */
+        public void setLocale(eu.aladdin_project.xsd.SystemParameter locale)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                eu.aladdin_project.xsd.SystemParameter target = null;
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(LOCALE$2, 0);
+                if (target == null)
+                {
+                    target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(LOCALE$2);
+                }
+                target.set(locale);
+            }
+        }
+        
+        /**
+         * Appends and returns a new empty "locale" element
+         */
+        public eu.aladdin_project.xsd.SystemParameter addNewLocale()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                eu.aladdin_project.xsd.SystemParameter target = null;
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(LOCALE$2);
+                return target;
+            }
+        }
+        
+        /**
          * Gets the "userId" element
          */
         public java.lang.String getUserId()
@@ -151,7 +203,7 @@ public class UpdateQuestionnaireDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$2, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$4, 0);
                 if (target == null)
                 {
                     return null;
@@ -169,7 +221,7 @@ public class UpdateQuestionnaireDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$2, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$4, 0);
                 return target;
             }
         }
@@ -183,10 +235,10 @@ public class UpdateQuestionnaireDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$2, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$4, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(USERID$2);
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(USERID$4);
                 }
                 target.setStringValue(userId);
             }
@@ -201,10 +253,10 @@ public class UpdateQuestionnaireDocumentImpl extends org.apache.xmlbeans.impl.va
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$2, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$4, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(USERID$2);
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(USERID$4);
                 }
                 target.set(userId);
             }

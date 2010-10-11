@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NegativeIntegerDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NegativeIntegerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("negativeinteger970ddoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NegativeIntegerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("negativeinteger970ddoctype");
     
     /**
      * Gets the "negativeInteger" element

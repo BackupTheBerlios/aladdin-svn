@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetPatientDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("getpatientc0efdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("getpatientc0efdoctype");
     
     /**
      * Gets the "GetPatient" element
@@ -42,7 +42,7 @@ public interface GetPatientDocument extends org.apache.xmlbeans.XmlObject
     public interface GetPatient extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("getpatientc1c4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("getpatientc1c4elemtype");
         
         /**
          * Gets the "id" element

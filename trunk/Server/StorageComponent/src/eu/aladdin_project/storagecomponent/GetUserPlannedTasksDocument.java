@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("getuserplannedtasks6799doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("getuserplannedtasks6799doctype");
     
     /**
      * Gets the "GetUserPlannedTasks" element
@@ -42,7 +42,7 @@ public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObje
     public interface GetUserPlannedTasks extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s1E4F270EA568D21B33A568F12249625F").resolveHandle("getuserplannedtasks3130elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("getuserplannedtasks3130elemtype");
         
         /**
          * Gets the "userId" element
@@ -103,6 +103,21 @@ public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObje
          * Sets (as xml) the "toDate" element
          */
         void xsetToDate(org.apache.xmlbeans.XmlDateTime toDate);
+        
+        /**
+         * Gets the "locale" element
+         */
+        eu.aladdin_project.xsd.SystemParameter getLocale();
+        
+        /**
+         * Sets the "locale" element
+         */
+        void setLocale(eu.aladdin_project.xsd.SystemParameter locale);
+        
+        /**
+         * Appends and returns a new empty "locale" element
+         */
+        eu.aladdin_project.xsd.SystemParameter addNewLocale();
         
         /**
          * Gets the "requesterId" element

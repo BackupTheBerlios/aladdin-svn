@@ -240,7 +240,7 @@
     	</sequence>
     </complexType>
 
-    <complexType name="translate">
+    <complexType name="Translate">
     	<sequence>
     		<element name="entityid" type="int"></element>
     		<element name="entity" type="string"></element>
@@ -249,7 +249,7 @@
     	</sequence>
     </complexType>
     
-    <complexType name="locale">
+    <complexType name="Locale">
     	<sequence>
     		<element name="name" type="string"></element>
     	</sequence>
