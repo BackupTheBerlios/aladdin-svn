@@ -1744,13 +1744,15 @@ import eu.aladdin_project.xsd.*;
     		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
     		
-    		{
+    		Calendar _fromDate = req.getGetPatientMeasurement().getFromData();
+			Calendar _toDate = req.getGetPatientMeasurement().getToData();
+			{
     			NullChecker nc = new NullChecker();
     			
     			req.getGetPatientMeasurement().setUserId (nc.check(req.getGetPatientMeasurement().getUserId(), String.class));
     			req.getGetPatientMeasurement().setPatientId (nc.check(req.getGetPatientMeasurement().getPatientId(), String.class));
-    			req.getGetPatientMeasurement().setFromData (nc.check(req.getGetPatientMeasurement().getFromData(), Calendar.class));
-    			req.getGetPatientMeasurement().setToData (nc.check(req.getGetPatientMeasurement().getToData(), Calendar.class));
+    			req.getGetPatientMeasurement().setFromData (nc.check(_fromDate, Calendar.class));
+    			req.getGetPatientMeasurement().setToData (nc.check(_toDate, Calendar.class));
     		}
     		
     		if (
@@ -1764,15 +1766,27 @@ import eu.aladdin_project.xsd.*;
     		try {
     			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
     			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
-    			String fromDate = req.getGetPatientMeasurement().getFromData().toString();
-    			String toDate = req.getGetPatientMeasurement().getToData().toString();
+    			String fromDate = _fromDate.toString();
+    			String toDate = _toDate.toString();
     			
     			if (fromDate.compareTo(toDate) == 0) {
-    				Date time = req.getGetPatientMeasurement().getFromData().getTime();
+    				Date time = _fromDate.getTime();
     				time.setHours(time.getHours() + 23);
     				time.setMinutes(time.getMinutes() + 59);
     				time.setSeconds(time.getSeconds() + 59);
     				toDate = time.toString();
+    			}  else {
+    				Date time1 = _toDate.getTime();
+    				time1.setHours(23);
+    				time1.setMinutes(59);
+    				time1.setSeconds(59);
+    				toDate = time1.toString();
+    				
+    				Date time2 = _fromDate.getTime();
+    				time2.setHours(0);
+    				time2.setMinutes(0);
+    				time2.setSeconds(0);
+    				fromDate = time2.toString();
     			}
     			
     			s.beginTransaction();
@@ -2053,13 +2067,15 @@ import eu.aladdin_project.xsd.*;
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
-    		{
+    		Calendar _fromDate = req.getGetUserPlannedTasks().getFromDate();
+			Calendar _toDate = req.getGetUserPlannedTasks().getToDate();
+			{
     			NullChecker nc = new NullChecker();
     			
     			req.getGetUserPlannedTasks().setUserId (nc.check(req.getGetUserPlannedTasks().getUserId(), String.class));
     			req.getGetUserPlannedTasks().setRequesterId (nc.check(req.getGetUserPlannedTasks().getRequesterId(), String.class));
-    			req.getGetUserPlannedTasks().setFromDate (nc.check(req.getGetUserPlannedTasks().getFromDate(), Calendar.class));
-    			req.getGetUserPlannedTasks().setToDate (nc.check(req.getGetUserPlannedTasks().getToDate(), Calendar.class));
+    			req.getGetUserPlannedTasks().setFromDate (nc.check(_fromDate, Calendar.class));
+    			req.getGetUserPlannedTasks().setToDate (nc.check(_toDate, Calendar.class));
     		}
     		
     		if (
@@ -2072,15 +2088,27 @@ import eu.aladdin_project.xsd.*;
     		
     		try {
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
-    			String fromDate  = req.getGetUserPlannedTasks().getFromDate().toString();
-    			String toDate = req.getGetUserPlannedTasks().getToDate().toString();
+    			String fromDate  = _fromDate.toString();
+    			String toDate = _toDate.toString();
     			
     			if (fromDate.compareTo(toDate) == 0) {
-    				Date time = req.getGetUserPlannedTasks().getFromDate().getTime();
+    				Date time = _fromDate.getTime();
     				time.setHours(time.getHours() + 23);
     				time.setMinutes(time.getMinutes() + 59);
     				time.setSeconds(time.getSeconds() + 59);
     				toDate = time.toString();
+    			} else {
+    				Date time1 = _toDate.getTime();
+    				time1.setHours(23);
+    				time1.setMinutes(59);
+    				time1.setSeconds(59);
+    				toDate = time1.toString();
+    				
+    				Date time2 = _fromDate.getTime();
+    				time2.setHours(0);
+    				time2.setMinutes(0);
+    				time2.setSeconds(0);
+    				fromDate = time2.toString();
     			}
     			
     			s.beginTransaction();
