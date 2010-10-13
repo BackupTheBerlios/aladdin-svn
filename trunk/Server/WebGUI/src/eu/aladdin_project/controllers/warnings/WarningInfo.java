@@ -7,15 +7,15 @@ import eu.aladdin_project.xsd.Warning;
 
 public class WarningInfo {
 	private String ID;
-	private String type;
-	private String date;
-	private String effect;
-	private String indicator;
-	private String riskLevel;
-	private String justification;
-	private String emergencyLevel;
-	private String patientID;
-	private String delivered;
+	private String type = "";
+	private String date = "";
+	private String effect = "";
+	private String indicator = "";
+	private String riskLevel = "";
+	private String justification = "";
+	private String emergencyLevel = "";
+	private String patientID = "";
+	private String delivered = "";
 	
 	
 	public WarningInfo(String iD, String type, String date, String effect, String indicator, String riskLevel, String justification, String emergencyLevel, String patientID, String delivered) {
@@ -41,12 +41,12 @@ public class WarningInfo {
 		this.ID = input.getID(); 
 		this.type = SystemDictionary.getWarningTypeLabel(aux1.getCode());
 		Calendar cal = input.getDateTimeOfWarning();
-		this.date = cal.get(Calendar.DAY_OF_MONTH) +"/"+ cal.get(Calendar.MONTH) +"/"+ cal.get(Calendar.YEAR) +" "+ cal.get(Calendar.HOUR_OF_DAY) +":"+ cal.get(Calendar.MINUTE);  
-		this.effect = SystemDictionary.getWarningEffectLabel(aux2.getCode()); 
-		this.indicator = SystemDictionary.getWarningIndicatorLabel(aux3.getCode());  
-		this.riskLevel = SystemDictionary.getWarningRiskLevel(aux4.getCode());  
+		this.date = cal.get(Calendar.DAY_OF_MONTH) +"/"+ cal.get(Calendar.MONTH) +"/"+ cal.get(Calendar.YEAR) +" "+ cal.get(Calendar.HOUR_OF_DAY) +":"+ cal.get(Calendar.MINUTE);
+		this.effect = aux2 == null ? "not set" : SystemDictionary.getWarningEffectLabel(aux2.getCode());
+		this.indicator = aux3 == null ? "not set" : SystemDictionary.getWarningIndicatorLabel(aux3.getCode());
+		this.riskLevel = aux4==null ? "not set" : SystemDictionary.getWarningRiskLevel(aux4.getCode());
 		this.justification = input.getJustificationText();
-		this.emergencyLevel = SystemDictionary.getWarningEmergencyLevelLabel(aux5.getCode()); 
+		this.emergencyLevel = aux5 == null? "not set" : SystemDictionary.getWarningEmergencyLevelLabel(aux5.getCode());
 		this.patientID = input.getPatientID();
 		this.delivered = new Boolean(input.isDelivered()).toString();
 		

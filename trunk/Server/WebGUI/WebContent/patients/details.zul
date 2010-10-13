@@ -87,6 +87,7 @@
 			</div>
 		</toolbar>
 	</calendars>
+	<label value="Assessments" visible="false"/>
 	</window>
 		<zscript>
 		

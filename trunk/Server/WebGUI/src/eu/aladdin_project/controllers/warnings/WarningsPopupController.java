@@ -16,10 +16,17 @@ public class WarningsPopupController extends Window {
 	
 	public void markWarningAsRead() throws RemoteException{
 		StorageComponentProxy proxy = new StorageComponentProxy();
-		String uid = (String)Sessions.getCurrent().getAttribute("userid"); 
-		OperationResult op = proxy.markWarningAsRead(this.warningid, uid);
-		System.out.println("MARK AS READ: "+op.getDescription());
-		Executions.getCurrent().sendRedirect("");
+		String uid = (String)Sessions.getCurrent().getAttribute("userid");
+		try{
+			OperationResult op = proxy.markWarningAsRead(this.warningid, uid);
+			System.out.println("Mark as read: "+op.getCode()+":"+op.getDescription());
+		}catch(RemoteException re){
+			this.setVisible(false);
+			this.detach();
+		}finally{
+			Executions.getCurrent().sendRedirect("");
+		}
+		
 	}
 
 	public String getWarningid() {

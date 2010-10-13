@@ -20,6 +20,7 @@
 		String hello = Labels.getLabel("menu.hello");
 		String lout = Labels.getLabel("menu.logout");
 		String contact = Labels.getLabel("menu.contact");
+		String close = Labels.getLabel("error.close");
 		
 		public void aladdinLogout(){
 			session.removeAttribute("user");
@@ -46,6 +47,7 @@
 	</menubar>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>
+		<label value="${close }" sclass="link" onClick="mainerror.setVisible(false)"/>
 	</window>
 	<zscript>
 		public void setErrorLabel(){
