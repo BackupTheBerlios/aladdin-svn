@@ -326,4 +326,8 @@ public class SystemDictionary {
 	public final static String MEASUREMENT_WEIGHT = "2";
 	public final static int MEASUREMENT_WEIGHT_INT = 2;
 	public final static String MEASUREMENT_WEIGHT_LBL = "dic.task.type.weight.mes";
+	
+	public static final String QUESTION_TYPE_ONE_ANSWER = "OneAnswer";
+	public static final String QUESTION_TYPE_MANY_ANSWERS = "ManyAnswers";
+	public static final String QUESTION_TYPE_FREE_TEXT = "FreeText";
 }

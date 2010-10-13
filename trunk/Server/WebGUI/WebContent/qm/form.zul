@@ -22,7 +22,9 @@
 		page.setTitle(title);
 		
 	</zscript>
-	<window id="qm_sketch" sclass="centerwin" width="70%" title="${title}" border="normal" use="eu.aladdin_project.qm.QuestionnaireFormWindow">
+	<window id="qm_sketch" sclass="centerwin" width="80%" use="eu.aladdin_project.qm.QuestionnaireFormWindow">
+	<vbox>
+	<label value="${title}" sclass="newitem" />
 		<grid>
 			<columns>
 				<column align="right" width="200px"/>
@@ -49,6 +51,8 @@
 							<column label="${typel}" width="80px"/>
 							<column label="${textl}"/>
 							<column label="#${ansl}" width="80px"/>
+							<column label="Parent Q." width="80px"/>
+							<column label="Add child" width="80px"/>
 							<column  width="30px"/>
 						</columns>
 						<rows id="rows_questions">
@@ -58,13 +62,12 @@
 				<row>
 					<label value=""/>
 					<hbox>
-						<button label="${btnyesno}" onClick="qm_sketch.showOneAnswerWindow()"/>
-						<button label="${btnmany}" onClick="qm_sketch.showManyAnswersWindow()"/>
-						<button label="${btnfree}" onClick="qm_sketch.showFreeTextWindow()"/>	
+						<button label="Add question" onClick="qm_sketch.showAnswerWindow()"/>
 					</hbox>
 				</row>
 			</rows>
 		</grid>
 		<button label="Save Questionnaire" onClick="qm_sketch.saveQuestionnaire()"/>
+		</vbox>
 	</window>
 </zk>

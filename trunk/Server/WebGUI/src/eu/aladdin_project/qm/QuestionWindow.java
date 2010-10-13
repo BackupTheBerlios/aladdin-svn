@@ -12,11 +12,14 @@ import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import eu.aladdin_project.SystemDictionary;
+import eu.aladdin_project.xsd.QuestionnaireAnswer;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
 
@@ -26,6 +29,7 @@ public class QuestionWindow extends Window{
 	private QuestionnaireFormWindow pform = null;
 	private String ID = null;
 	private String type = null;
+	private String parent = null;
 	private ArrayList<QuestionnaireQuestionAnswer> answers = new ArrayList<QuestionnaireQuestionAnswer>();
 
 	/**
@@ -35,19 +39,17 @@ public class QuestionWindow extends Window{
 	 * @param String ID question id
 	 * @param String type question type 
 	 */
-	public QuestionWindow(QuestionnaireFormWindow pform, String ID, String type){
+	public QuestionWindow(QuestionnaireFormWindow pform, String ID, String parent){
 		this.pform = pform;
 		this.ID = ID;
-		this.type = type;
+		this.parent = parent;
+		this.type = SystemDictionary.QUESTION_TYPE_ONE_ANSWER;
 		this.setTitle(Labels.getLabel("qm.ans.title.new"));
 		this.setClosable(true);
+		this.setBorder("normal");
 		this.setWidth("650px");
 		this.addMainQuestionGrid();
-		if(this.type.equals(QuestionnaireFormWindow.ONE_ANSWER_QUESTION_TYPE) || this.type.equals(QuestionnaireFormWindow.MANY_ANSWERS_QUESTION_TYPE)){
-			this.addAnswersRow();
-		}else{
-			this.addFreeAnswerRow();
-		}
+		this.getFellow("freeanswrow").setVisible(false);
 	}
 	
 	public QuestionWindow(QuestionnaireFormWindow pform, QuestionnaireQuestion question){
@@ -62,15 +64,14 @@ public class QuestionWindow extends Window{
 		
 		this.setTitle(Labels.getLabel("qm.ans.title.update"));
 		this.setClosable(true);
+		this.setBorder("normal");
 		this.setWidth("650px");
 		this.addMainQuestionGrid();
 		this.setMainGridFields(question);
-		if(this.type.equals(QuestionnaireFormWindow.ONE_ANSWER_QUESTION_TYPE) || this.type.equals(QuestionnaireFormWindow.MANY_ANSWERS_QUESTION_TYPE)){
-			this.addAnswersRow();
+		if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
 			this.setAnswersRows();
-		}else{
-			this.addFreeAnswerRow();
 		}
+		this.getFellow("freeanswrow").setVisible(false);
 	}
 	
 	public void saveQuestion(){
@@ -80,18 +81,20 @@ public class QuestionWindow extends Window{
 		
 		String title = ((Textbox)getFellow("question_text")).getValue();
 		q.setTitle(title);
+		q.setQuestions(new QuestionnaireQuestion[0]);
 		
-		if(this.type.equals(QuestionnaireFormWindow.ONE_ANSWER_QUESTION_TYPE) || this.type.equals(QuestionnaireFormWindow.MANY_ANSWERS_QUESTION_TYPE)){
+		if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
 			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
 			for(int i = 0; i<this.answers.size(); i++){
 				answersvec[i]=this.answers.get(i);
 			}
 			q.setAnswers(answersvec);
 		}else{
-			q.setAnswers(null);
+			q.setAnswers(new QuestionnaireQuestionAnswer[0]);
 		}
 		System.out.println("Added");
-		this.pform.addQuestion(q);
+		//TODO fix this
+		this.pform.addQuestion(q,parent);
 		this.setVisible(false);
 	}
 	
@@ -181,8 +184,39 @@ public class QuestionWindow extends Window{
 	 */
 	private void addMainQuestionGrid(){
 		Grid grid = new Grid();
+		
+			Columns cols = new Columns();
+			Column col1 = new Column();
+			col1.setWidth("150px");
+			col1.setAlign("right");
+			Column col2 = new Column();
+			cols.appendChild(col1);
+			cols.appendChild(col2);
+			grid.appendChild(cols);
 			Rows rows = new Rows();
 			rows.setId("answersrows");
+			
+			Row row00 = new Row();
+				Label lab00 = new Label();
+				lab00.setValue(Labels.getLabel("qm.ans.fields.type"));
+				row00.appendChild(lab00);
+	
+				Listbox lbox00 = new Listbox();
+				lbox00.setId("question_typesel");
+				lbox00.setMold("select");
+				lbox00.setRows(1);
+					lbox00.appendItem("One answer", "1");
+					lbox00.appendItem("Multiple answers", "2");
+					lbox00.appendItem("Free text", "3");
+					lbox00.setSelectedIndex(0);
+					lbox00.addEventListener("onSelect", new EventListener() {
+						
+						public void onEvent(Event arg0) throws Exception {
+							changeQuestionType();
+						}
+					});
+				row00.appendChild(lbox00);
+			rows.appendChild(row00);
 			
 			Row row0 = new Row();
 				Label lab0 = new Label();
@@ -195,6 +229,7 @@ public class QuestionWindow extends Window{
 				tbox0.setReadonly(true);
 				row0.appendChild(tbox0);
 			rows.appendChild(row0);
+			/*
 			Row row01 = new Row();
 				Label lab01 = new Label();
 				lab01.setValue(Labels.getLabel("qm.ans.fields.type"));
@@ -206,6 +241,7 @@ public class QuestionWindow extends Window{
 				tbox01.setReadonly(true);
 				row01.appendChild(tbox01);
 			rows.appendChild(row01);
+			*/
 				Row row1 = new Row();
 					Label lab1 = new Label();
 					lab1.setValue(Labels.getLabel("qm.ans.fields.text"));
@@ -219,6 +255,8 @@ public class QuestionWindow extends Window{
 			grid.appendChild(rows);
 			
 		this.appendChild(grid);
+		this.addFreeAnswerRow();
+		this.addAnswersRow();
 		Button btn = new Button();
 		btn.setLabel(Labels.getLabel("qm.ans.fields.addans"));
 		btn.addEventListener("onClick", new EventListener() {
@@ -238,6 +276,7 @@ public class QuestionWindow extends Window{
 	private void addFreeAnswerRow(){
 		Rows rows = (Rows)getFellow("answersrows");
 		Row row2 = new Row();
+		row2.setId("freeanswrow");
 		
 		Label lab2 = new Label();
 		lab2.setValue(Labels.getLabel("qm.ans.fields.grid.answers"));
@@ -253,6 +292,7 @@ public class QuestionWindow extends Window{
 	private void addAnswersRow(){
 		Rows rows = (Rows)getFellow("answersrows");
 		Row row2 = new Row();
+		row2.setId("multipleanswrow");
 		
 		Label lab2 = new Label();
 		lab2.setValue(Labels.getLabel("qm.ans.fields.grid.answers"));
@@ -265,6 +305,7 @@ public class QuestionWindow extends Window{
 		Column cola2 = new Column();
 		cola2.setLabel(Labels.getLabel("qm.ans.fields.grid.text"));
 		Column cola3 = new Column();
+		cola3.setWidth("45px");
 		
 		columns2.appendChild(cola1);
 		columns2.appendChild(cola2);
@@ -335,6 +376,27 @@ public class QuestionWindow extends Window{
 			rows.appendChild(rowRef);
 		}
 		
+	}
+	
+	public void changeQuestionType(){
+		int selected = ((Listbox)this.getFellow("question_typesel")).getSelectedIndex();
+		switch(selected){
+		case 0:
+			this.type=SystemDictionary.QUESTION_TYPE_ONE_ANSWER;
+			this.getFellow("freeanswrow").setVisible(false);
+			this.getFellow("multipleanswrow").setVisible(true);
+			break;
+		case 1:
+			this.type=SystemDictionary.QUESTION_TYPE_MANY_ANSWERS;
+			this.getFellow("freeanswrow").setVisible(false);
+			this.getFellow("multipleanswrow").setVisible(true);
+			break;
+		case 2:
+			this.type=SystemDictionary.QUESTION_TYPE_FREE_TEXT;
+			this.getFellow("freeanswrow").setVisible(true);
+			this.getFellow("multipleanswrow").setVisible(false);
+			break;
+		}
 	}
 	
 }
