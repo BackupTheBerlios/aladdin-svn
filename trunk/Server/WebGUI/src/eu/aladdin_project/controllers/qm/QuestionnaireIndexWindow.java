@@ -9,6 +9,7 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 
+@SuppressWarnings("serial")
 public class QuestionnaireIndexWindow extends Window {
 	
 	public void removeQuestionnaire(String questid){

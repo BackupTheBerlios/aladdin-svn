@@ -19,7 +19,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.SystemDictionary;
-import eu.aladdin_project.xsd.QuestionnaireAnswer;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
 
