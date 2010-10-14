@@ -9,7 +9,7 @@
 <property name="entity" type="string"><column name="entity"/></property>
 <property name="locale" type="java.lang.Integer"><column name="locale"/></property>
 <property name="value" type="string"><column name="value"/></property>
-<many-to-one insert="false" update="false" name="m_locale" class="Locale" ><column name="locale" not-null="false" /></many-to-one>
+<many-to-one insert="false" update="false" name="m_Locale" class="Locale" ><column name="locale" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 
