@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface PatientCarerList extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PatientCarerList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("patientcarerlist4306type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PatientCarerList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("patientcarerlist4306type");
     
     /**
      * Gets array of all "PatientCarer" elements

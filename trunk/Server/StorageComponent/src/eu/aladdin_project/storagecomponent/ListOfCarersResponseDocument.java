@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfCarersResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarersResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("listofcarersresponse7b48doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarersResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("listofcarersresponse7b48doctype");
     
     /**
      * Gets the "ListOfCarersResponse" element
@@ -42,7 +42,7 @@ public interface ListOfCarersResponseDocument extends org.apache.xmlbeans.XmlObj
     public interface ListOfCarersResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarersResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("listofcarersresponseca24elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarersResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("listofcarersresponseca24elemtype");
         
         /**
          * Gets array of all "out" elements

@@ -803,7 +803,7 @@
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="type" type="xsd:int"></xsd:element>
-      			<xsd:element name="language" type="xsd:int"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -852,6 +852,22 @@
       	</xsd:complexType>
       </xsd:element>
       <xsd:element name="GetUserIdByPersonIdResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateSystemParameter">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="type" type="xsd:int"></xsd:element>
+      			<xsd:element name="value" type="aladdin:SystemParameter"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateSystemParameterResponse">
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
@@ -1196,6 +1212,12 @@
   <wsdl:message name="GetUserIdByPersonIdResponse">
   	<wsdl:part name="parameters" element="tns:GetUserIdByPersonIdResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="UpdateSystemParameterRequest">
+  	<wsdl:part name="parameters" element="tns:UpdateSystemParameter"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateSystemParameterResponse">
+  	<wsdl:part name="parameters" element="tns:UpdateSystemParameterResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1420,6 +1442,10 @@
         <wsdl:operation name="GetUserIdByPersonId">
         	<wsdl:input message="tns:GetUserIdByPersonIdRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserIdByPersonIdResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateSystemParameter">
+        	<wsdl:input message="tns:UpdateSystemParameterRequest"></wsdl:input>
+        	<wsdl:output message="tns:UpdateSystemParameterResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -1980,6 +2006,16 @@
   	<wsdl:operation name="GetUserIdByPersonId">
   		<soap:operation
   			soapAction="http://aladdin-project.eu/StorageComponent/GetUserIdByPersonId" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="UpdateSystemParameter">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateSystemParameter" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>

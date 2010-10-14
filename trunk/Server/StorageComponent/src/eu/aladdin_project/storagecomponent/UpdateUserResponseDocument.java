@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateUserResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUserResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("updateuserresponseb0b5doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUserResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("updateuserresponseb0b5doctype");
     
     /**
      * Gets the "UpdateUserResponse" element
@@ -42,7 +42,7 @@ public interface UpdateUserResponseDocument extends org.apache.xmlbeans.XmlObjec
     public interface UpdateUserResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUserResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("updateuserresponsec384elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateUserResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("updateuserresponsec384elemtype");
         
         /**
          * Gets the "out" element

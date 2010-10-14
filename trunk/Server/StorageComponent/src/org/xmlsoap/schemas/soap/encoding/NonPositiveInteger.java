@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NonPositiveInteger extends org.apache.xmlbeans.XmlNonPositiveInteger
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NonPositiveInteger.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("nonpositiveintegerccbetype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NonPositiveInteger.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("nonpositiveintegerccbetype");
     
     /**
      * Gets the "id" attribute

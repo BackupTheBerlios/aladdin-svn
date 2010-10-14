@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Float extends org.apache.xmlbeans.XmlFloat
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Float.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("float8f30type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Float.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("float8f30type");
     
     /**
      * Gets the "id" attribute

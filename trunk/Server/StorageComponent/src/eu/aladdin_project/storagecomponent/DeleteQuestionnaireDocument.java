@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteQuestionnaireDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteQuestionnaireDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("deletequestionnaireeac6doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteQuestionnaireDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("deletequestionnaireeac6doctype");
     
     /**
      * Gets the "DeleteQuestionnaire" element
@@ -42,7 +42,7 @@ public interface DeleteQuestionnaireDocument extends org.apache.xmlbeans.XmlObje
     public interface DeleteQuestionnaire extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteQuestionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("deletequestionnairee7caelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteQuestionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("deletequestionnairee7caelemtype");
         
         /**
          * Gets the "id" element

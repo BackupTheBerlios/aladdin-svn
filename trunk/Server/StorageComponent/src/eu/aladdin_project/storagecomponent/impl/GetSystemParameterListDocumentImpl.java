@@ -88,8 +88,8 @@ public class GetSystemParameterListDocumentImpl extends org.apache.xmlbeans.impl
         
         private static final javax.xml.namespace.QName TYPE$0 = 
             new javax.xml.namespace.QName("", "type");
-        private static final javax.xml.namespace.QName LANGUAGE$2 = 
-            new javax.xml.namespace.QName("", "language");
+        private static final javax.xml.namespace.QName LOCALE$2 = 
+            new javax.xml.namespace.QName("", "locale");
         
         
         /**
@@ -161,70 +161,52 @@ public class GetSystemParameterListDocumentImpl extends org.apache.xmlbeans.impl
         }
         
         /**
-         * Gets the "language" element
+         * Gets the "locale" element
          */
-        public int getLanguage()
+        public eu.aladdin_project.xsd.SystemParameter getLocale()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(LANGUAGE$2, 0);
+                eu.aladdin_project.xsd.SystemParameter target = null;
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(LOCALE$2, 0);
                 if (target == null)
                 {
-                    return 0;
+                    return null;
                 }
-                return target.getIntValue();
-            }
-        }
-        
-        /**
-         * Gets (as xml) the "language" element
-         */
-        public org.apache.xmlbeans.XmlInt xgetLanguage()
-        {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                org.apache.xmlbeans.XmlInt target = null;
-                target = (org.apache.xmlbeans.XmlInt)get_store().find_element_user(LANGUAGE$2, 0);
                 return target;
             }
         }
         
         /**
-         * Sets the "language" element
+         * Sets the "locale" element
          */
-        public void setLanguage(int language)
+        public void setLocale(eu.aladdin_project.xsd.SystemParameter locale)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(LANGUAGE$2, 0);
+                eu.aladdin_project.xsd.SystemParameter target = null;
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().find_element_user(LOCALE$2, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(LANGUAGE$2);
+                    target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(LOCALE$2);
                 }
-                target.setIntValue(language);
+                target.set(locale);
             }
         }
         
         /**
-         * Sets (as xml) the "language" element
+         * Appends and returns a new empty "locale" element
          */
-        public void xsetLanguage(org.apache.xmlbeans.XmlInt language)
+        public eu.aladdin_project.xsd.SystemParameter addNewLocale()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                org.apache.xmlbeans.XmlInt target = null;
-                target = (org.apache.xmlbeans.XmlInt)get_store().find_element_user(LANGUAGE$2, 0);
-                if (target == null)
-                {
-                    target = (org.apache.xmlbeans.XmlInt)get_store().add_element_user(LANGUAGE$2);
-                }
-                target.set(language);
+                eu.aladdin_project.xsd.SystemParameter target = null;
+                target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(LOCALE$2);
+                return target;
             }
         }
     }

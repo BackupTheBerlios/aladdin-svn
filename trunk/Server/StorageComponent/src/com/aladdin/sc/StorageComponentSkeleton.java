@@ -16,6 +16,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
 
+import com.aladdin.sc.db.Dict;
+import com.aladdin.sc.db.Locale;
+
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
@@ -69,6 +72,7 @@ import eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument.UpdateCar
 import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.UpdateClinicianResponse;
 import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument.UpdateSystemParameterResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
 import eu.aladdin_project.storagecomponent.GetUserTypeDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument;
@@ -84,6 +88,7 @@ import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocume
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument;
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.xsd.*;
+import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -581,7 +586,7 @@ import eu.aladdin_project.xsd.*;
     		return setTranslate(object, id, locale.getCode(), value);
     	}
     	
-    	private Integer getLocateId (String locale) {
+    	private Integer getLocaleId (String locale) {
     		String sql = "SELECT id FROM locale WHERE name = '" + locale + "'";
 			Object[] loc = s.createSQLQuery(sql).list().toArray();
 			if (loc.length == 0) {
@@ -595,7 +600,12 @@ import eu.aladdin_project.xsd.*;
 				return l.getId();
 				
 			}
-			return (Integer)((Object[])loc[0])[0];
+			return (Integer)loc[0];
+    	}
+    	
+    	private Integer getLocaleId (SystemParameter locale) {
+    		if (locale == null || locale.getCode() == null || locale.getCode() == "") return getLocaleId ("en_US");
+    		return getLocaleId(locale.getCode());
     	}
     	
     	private boolean setTranslate (String object, Integer id, String locale, String value) {
@@ -606,7 +616,7 @@ import eu.aladdin_project.xsd.*;
 					sql = "UPDATE translate SET value = '" + value + "' WHERE id = " + ( (Integer) ((Object[])trans[0])[0]).toString();
 					return (s.createSQLQuery(sql).executeUpdate() == 1);
 				}
-				Integer localeId = getLocateId(locale);
+				Integer localeId = getLocaleId(locale);
 				if (localeId == 0) return false;
 				
 				com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
@@ -3730,11 +3740,14 @@ import eu.aladdin_project.xsd.*;
 			
 			try {
 				Integer type = new Integer (req.getGetSystemParameterList().getType());
-				Integer language = new Integer (req.getGetSystemParameterList().getLanguage());
+				//Integer language = new Integer (req.getGetSystemParameterList().getLanguage());
+				SystemParameter locale = req.getGetSystemParameterList().getLocale();
+				if (locale == null) locale = SystemParameter.Factory.newInstance();
+				if (locale.getCode() == null || locale.getCode() == "") locale.setCode("en_US");
 				
 				s.beginTransaction();
 				
-				String sql = "SELECT code, description FROM dict WHERE type = '" + type.toString() + "' AND language = '" + language.toString() + "'";
+				String sql = "SELECT code, description FROM dict as d INNER JOIN locale as l ON (l.id = d.locale) WHERE d.type = '" + type.toString() + "' AND l.name = '" + locale.getCode() + "'";
 				Object[] ret = s.createSQLQuery(sql).list().toArray();
 				
 				for (int i = 0; i < ret.length; i++) {
@@ -3752,6 +3765,68 @@ import eu.aladdin_project.xsd.*;
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+				
+				System.out.println (e.toString());
+			}
+			
+			return respdoc;
+        }
+		
+		public UpdateSystemParameterResponseDocument updateSystemParameter (UpdateSystemParameterDocument req) {
+			UpdateSystemParameterResponseDocument respdoc = UpdateSystemParameterResponseDocument.Factory.newInstance();
+			UpdateSystemParameterResponse resp = respdoc.addNewUpdateSystemParameterResponse();
+			OperationResult res = resp.addNewOut();
+			
+			try {
+				
+				s.beginTransaction();
+				
+				Integer localeid = getLocaleId(req.getUpdateSystemParameter().getLocale());
+				Integer type = req.getUpdateSystemParameter().getType();
+				SystemParameter value = req.getUpdateSystemParameter().getValue();
+
+				if (
+						value == null ||
+						value.getCode() == null ||
+						value.getCode() == "" ||
+						value.getDescription() == null ||
+						value.getDescription() == "" ||
+						type == 0
+				) throw new Exception("null");
+				
+				String sql = "SELECT id FROM dict WHERE code = '" + value.getCode() + "' AND description LIKE '" + value.getDescription() + "' AND type = '" + type.toString() + "' AND locale = '" + localeid.toString() + "'";
+				Object[] exist = s.createSQLQuery(sql).list().toArray();
+				
+				com.aladdin.sc.db.Dict dict;
+				
+				if (exist.length == 1) {
+					Integer id = (Integer)((Object[])exist[0])[0];
+					dict = (Dict) s.load(com.aladdin.sc.db.Dict.class, id);
+				} else dict = new com.aladdin.sc.db.Dict();
+				
+				dict.setCode(value.getCode());
+				dict.setDescription(value.getDescription());
+				dict.setLocale(localeid);
+				dict.setType(type);
+				
+				s.saveOrUpdate(dict);
+				
+				res.setCode(dict.getId().toString());
+    			res.setDescription("ok");
+    			res.setStatus((short)1);
+    			
+    			s.getTransaction().commit();
+				
+			} catch (Exception e) {
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
+    			res.setCode("-2");
+    			res.setDescription("database error " + e.toString());
+    			res.setStatus((short)0);
 				
 				System.out.println (e.toString());
 			}

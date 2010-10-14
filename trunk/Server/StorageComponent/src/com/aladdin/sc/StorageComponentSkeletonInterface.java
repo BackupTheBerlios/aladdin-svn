@@ -309,6 +309,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param updateSystemParameter
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument updateSystemParameter
+                (
+                  eu.aladdin_project.storagecomponent.UpdateSystemParameterDocument updateSystemParameter
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getUserIdByPersonId
          */
 

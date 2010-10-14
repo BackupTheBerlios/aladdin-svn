@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetSystemParameterListDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterListDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("getsystemparameterlist76e2doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterListDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("getsystemparameterlist76e2doctype");
     
     /**
      * Gets the "GetSystemParameterList" element
@@ -42,7 +42,7 @@ public interface GetSystemParameterListDocument extends org.apache.xmlbeans.XmlO
     public interface GetSystemParameterList extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("getsystemparameterlistb824elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("getsystemparameterlistb824elemtype");
         
         /**
          * Gets the "type" element
@@ -65,24 +65,19 @@ public interface GetSystemParameterListDocument extends org.apache.xmlbeans.XmlO
         void xsetType(org.apache.xmlbeans.XmlInt type);
         
         /**
-         * Gets the "language" element
+         * Gets the "locale" element
          */
-        int getLanguage();
+        eu.aladdin_project.xsd.SystemParameter getLocale();
         
         /**
-         * Gets (as xml) the "language" element
+         * Sets the "locale" element
          */
-        org.apache.xmlbeans.XmlInt xgetLanguage();
+        void setLocale(eu.aladdin_project.xsd.SystemParameter locale);
         
         /**
-         * Sets the "language" element
+         * Appends and returns a new empty "locale" element
          */
-        void setLanguage(int language);
-        
-        /**
-         * Sets (as xml) the "language" element
-         */
-        void xsetLanguage(org.apache.xmlbeans.XmlInt language);
+        eu.aladdin_project.xsd.SystemParameter addNewLocale();
         
         /**
          * A factory class with static methods for creating instances

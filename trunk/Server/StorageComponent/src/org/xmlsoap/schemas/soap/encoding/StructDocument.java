@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface StructDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StructDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s9C9A96DC664DEBFDA8144744DA580F59").resolveHandle("struct8d8bdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(StructDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("struct8d8bdoctype");
     
     /**
      * Gets the "Struct" element
