@@ -20,9 +20,10 @@
 		page.setTitle(title);
 		
 		StorageComponentProxy proxy = new StorageComponentProxy();
+		String userid = (String)Sessions.getCurrent().getAttribute("userid");
 		eu.aladdin_project.xsd.QuestionnaireInfo[] qlist = null;
 		try{
-			qlist = proxy.listOfQuestionnaires("1");
+			qlist = proxy.listOfQuestionnaires(userid);
 			System.out.println("**** List SIZE: "+qlist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

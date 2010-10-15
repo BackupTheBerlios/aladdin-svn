@@ -20,13 +20,6 @@
 		String ansl = Labels.getLabel("qm.new.questions.answers");
 		
 		page.setTitle(title);
-		
-		System.out.println("Questionaire details: ");
-		String q = (String)Executions.getCurrent().getParameter("q");
-		if(q!=null){
-			System.out.println("Questionaire details: "+q);
-		}
-		
 	</zscript>
 	<window id="qm_sketch" sclass="centerwin" width="80%" use="eu.aladdin_project.qm.QuestionnaireFormWindow">
 	<vbox>
@@ -37,13 +30,15 @@
 				<column align="left"/>
 			</columns>
 			<rows>
+				<!-- 
 				<row>
 					<label value="${questid}"/>
 					<textbox readonly="true" value="ID-GENERATED"/>
 				</row>
+				 -->
 				<row>
 					<label value="${versionl}"/>
-					<textbox/>
+					<textbox id="versionfield"/>
 				</row>
 				<row>
 					<label value="${descl}"/>
@@ -76,4 +71,11 @@
 		<button label="Save Questionnaire" onClick="qm_sketch.saveQuestionnaire()"/>
 		</vbox>
 	</window>
+	<zscript>
+		String q = (String)Executions.getCurrent().getParameter("q");
+		if(q!=null){
+			//TODO set information on the questionnarie
+			qm_sketch.updatingQuestionnaire(q);
+		}
+	</zscript>
 </zk>

@@ -13,10 +13,12 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Textbox;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
+import eu.aladdin_project.xsd.QuestionnaireInfo;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 
 public class QuestionnaireFormWindow extends Window{
@@ -29,6 +31,51 @@ public class QuestionnaireFormWindow extends Window{
 	 * Default constructor. It's empty because ZUL page contains everything that is needed at this moment.
 	 */
 	public QuestionnaireFormWindow(){
+	}
+	
+	/**
+	 * Function to set parameters for Questionnaire update (new Questionnaire with different version)
+	 * 
+	 * @param String qid Questionnaire identificator
+	 */
+	public void updatingQuestionnaire(String qid){
+		try{
+			QuestionnaireInfo qinfo = null;
+			QuestionnaireQuestion[] questions = null;
+			String userid = (String)Sessions.getCurrent().getAttribute("userid");
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			QuestionnaireInfo[] qlist = proxy.listOfQuestionnaires(userid);
+			for(int i = 0 ; i < qlist.length ; i++){
+				if(qlist[i].getID().equals(qid)){
+					qinfo = qlist[i];
+					break;
+				}
+			}
+			if(qinfo == null){
+				//TODO Show error on page. Send redirect to index?
+				return; 
+			}
+			questions = proxy.getQuestionnaire(qid, userid);
+			Double version = new Double(qinfo.getVersion()+1);
+			((Textbox)getFellow("versionfield")).setValue(version.toString());
+			((Textbox)getFellow("versionfield")).setReadonly(true);
+			((Textbox)getFellow("qtitle")).setValue(qinfo.getTitle());
+			((Textbox)getFellow("qtitle")).setReadonly(true);
+			printQuestions(questions, "0");
+		}catch(RemoteException re){
+			
+		}catch (Exception e){
+			
+		}
+	}
+	
+	protected void printQuestions(QuestionnaireQuestion[] qs, String parentq){
+		for(int i = 0 ; i < qs.length ; i ++){
+			this.addQuestion(qs[i], parentq);
+			if(qs[i].getQuestions().length > 0){
+				printQuestions(qs[i].getQuestions(), qs[i].getId());
+			}
+		}
 	}
 	
 	public void saveQuestionnaire(){
