@@ -6,6 +6,9 @@
 		import org.zkoss.util.resource.Labels;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Patient;
+		import java.rmi.RemoteException;
+		import eu.aladdin_project.xsd.PatientAssessment;
+		import eu.aladdin_project.ErrorDictionary;
 		
 		String tasks = Labels.getLabel("common.tasks");
 		String actions = Labels.getLabel("common.actions");
@@ -21,6 +24,13 @@
 		page.setTitle(title);	
 		
 		String objid = (String)Executions.getCurrent().getParameter("patid");
+		PatientAssessment[] assessmentlist = null;
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		try{
+			assessmentlist = proxy.getPatientAssessments(objid,userid);
+		}catch(RemoteException re){
+			Executions.getCurrent().sendRedirect("/patients?error="+ErrorDictionary.PATIENT_ASSESSMENT_RETRIEVE);
+		}
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailPatientController">
@@ -87,11 +97,33 @@
 			</div>
 		</toolbar>
 	</calendars>
-	<label value="Assessments" visible="false"/>
+	<separator height="10px"/>
+	<label value="Assessments"/>
+	<separator height="5px"/>
+	<?component name="AssessmentDetail" macroURI="assessment.zul"?>
+	<grid>
+		<columns>
+			<column label="ID"/>
+			<column label="Date"/>
+			<column label="Aetiology"/>
+			<column label="Time since diagnosed"/>
+			<column label="Severity"/>
+			<column/>
+		</columns>
+		<rows>
+			<row forEach="${assessmentlist }" id="${each.ID }">
+				<label value="${each.ID }"/>
+				<label value="${each.dateOfAssessment }"/>
+				<label value="${each.aetology }"/>
+				<label value="${each.timeEllapsedSinceDiagnosed }"/>
+				<label value="${each.severity }"/>
+				<label value="Details" sclass="link" onClick="detailswin.viewAssessmentDetail(self.getParent().getId(), objid)"/>
+			</row>
+		</rows>
+	</grid>
+	<separator height="20px"/>
 	</window>
 		<zscript>
-		
-		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		try{

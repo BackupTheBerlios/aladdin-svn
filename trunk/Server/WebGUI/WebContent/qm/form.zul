@@ -21,6 +21,12 @@
 		
 		page.setTitle(title);
 		
+		System.out.println("Questionaire details: ");
+		String q = (String)Executions.getCurrent().getParameter("q");
+		if(q!=null){
+			System.out.println("Questionaire details: "+q);
+		}
+		
 	</zscript>
 	<window id="qm_sketch" sclass="centerwin" width="80%" use="eu.aladdin_project.qm.QuestionnaireFormWindow">
 	<vbox>

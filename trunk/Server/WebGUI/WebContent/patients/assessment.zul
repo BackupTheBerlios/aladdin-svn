@@ -1,0 +1,70 @@
+<zk>
+<window title="Assessment Details" closable="true" width="700px" border="normal" use="eu.aladdin_project.controllers.details.assessment.AssessmentPopupController">
+	<grid>
+		<columns>
+			<column width="100px" align="right"/>
+			<column width="240px" align="left"/>
+			<column width="100px" align="right"/>
+			<column width="240px" align="left"/>
+		</columns>
+		<rows>
+			<row>
+				<label value="ID"/><label id="field00"/>
+				<label value="Patient ID"/><label id="field01"/>
+			</row>
+			<row>
+				<label value="Date of Assessment"/><label id="field02"/>
+				<label value="Aetiology"/><label id="field03"/>
+			</row>
+			<row>
+				<label value="Months since diagnosed"/><label id="field04"/>
+				<label value="Severity"/><label id="field05"/>
+			</row>
+			<row>
+				<label value="Relevant antecedent pathologies"/><label id="field06"/>
+				<label value="Comorbidity"/><label id="field07"/>
+			</row>
+			<row>
+				<label value="Charlson c. index"/><label id="field08"/>
+				<label value="Barthel index"/><label id="field09"/>
+			</row>
+			<row>
+				<label value="Lawton index"/><label id="field10"/>
+				<label value="MMSE score"/><label id="field11"/>
+			</row>
+			<row>
+				<label value="MDRS score"/><label id="field12"/>
+				<label value="Blessed scale pt.1"/><label id="field13"/>
+			</row>
+			<row>
+				<label value="Blessed scale pt.2"/><label id="field14"/>
+				<label value="Blessed scale pt.3"/><label id="field15"/>
+			</row>
+			<row>
+				<label value="Checklist MBPC"/><label id="field16"/>
+				<label value="Neuropsychatric inventory severity"/><label id="field17"/>
+				
+			</row>
+			<row>
+				<label value="Neuropsychatric inventory stress"/><label id="field18"/>
+				<label value="Yesavage Geriatric Depression scale"/><label id="field19"/>
+			</row>
+			<row>
+				<label value="Falls"/><label id="field20"/>
+				<label value="Incontinence"/><label id="field21"/>
+			</row>
+			<row>
+				<label value="Delirium"/><label id="field22"/>
+				<label value="Immobility"/><label id="field23"/>
+				</row>
+			<row>
+				<label value="Sensorial Deficits"/><label id="field24"/>
+				<label value="Pharmacological treatment"/><label id="field25"/>
+			</row>
+			<row spans="1,3">
+				<label value="List of measurements"/><label id="field26"/>
+			</row>
+		</rows>
+	</grid>
+</window>
+</zk>

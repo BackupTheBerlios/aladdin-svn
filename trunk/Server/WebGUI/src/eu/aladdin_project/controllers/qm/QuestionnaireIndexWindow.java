@@ -28,7 +28,10 @@ public class QuestionnaireIndexWindow extends Window {
 			}
 			Executions.getCurrent().sendRedirect("");			
 		}
-		
+	}
+	
+	public void updateQuestionnaire(String questid){
+		Executions.getCurrent().sendRedirect("/qm/form.zul?q="+questid);
 	}
 
 }

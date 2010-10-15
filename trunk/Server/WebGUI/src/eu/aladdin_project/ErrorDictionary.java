@@ -7,6 +7,8 @@ public class ErrorDictionary {
 	public final static int EXPIRED_SESSION = 3;
 	public final static int UNKNOWN_SERVER_RESPONSE = 4;
 	public final static int WARNING_RETRIEVE_ERROR = 5;
+	public final static int PATIENT_ASSESSMENT_RETRIEVE = 6;
+	
 	
 	
 	public static String UNKOW_ERROR_LBL = "error.unknow";
@@ -15,6 +17,7 @@ public class ErrorDictionary {
 	public static String EXPIRED_SESSION_LBL = "error.expired.session";
 	public static String UNKNOWN_SERVER_RESPONSE_LBL = "error.unknow.response";
 	public static String WARNING_RETRIEVE_ERROR_LBL = "error.warning.retrieve";
+	public static String PATIENT_ASSESSMENT_RETRIEVE_LBL = "error.patient.assessment.retrieve";
 	
 	
 	public static String getErrorLabel(int errorcode){
