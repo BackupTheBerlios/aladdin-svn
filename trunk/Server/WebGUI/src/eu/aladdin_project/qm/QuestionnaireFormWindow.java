@@ -36,7 +36,7 @@ public class QuestionnaireFormWindow extends Window{
 	/**
 	 * Function to set parameters for Questionnaire update (new Questionnaire with different version)
 	 * 
-	 * @param String qid Questionnaire identificator
+	 * @param String qid QuestionnaireInfo identificator
 	 */
 	public void updatingQuestionnaire(String qid){
 		try{
@@ -69,6 +69,12 @@ public class QuestionnaireFormWindow extends Window{
 		}
 	}
 	
+	/**
+	 * Recursive function to show all the questions on the list, including the inner ones
+	 * 
+	 * @param qs QuestionnareQuestion array to show
+	 * @param parentq String setting parent (mandatory for recursive calls)
+	 */
 	protected void printQuestions(QuestionnaireQuestion[] qs, String parentq){
 		for(int i = 0 ; i < qs.length ; i ++){
 			this.addQuestion(qs[i], parentq);
@@ -78,8 +84,12 @@ public class QuestionnaireFormWindow extends Window{
 		}
 	}
 	
+	/**
+	 * This saves a Questionnaire.
+	 * 
+	 */
 	public void saveQuestionnaire(){
-		//TODO Manage parent questions, this is magic don't touch!
+		//related questions management, this is magic don't look at it or it would be self-destroyed!
 		int rootquestions = 0;
 		for(int ii = 0; ii<questionlist.size(); ii++){
 			RelatedQuestion rq = questionlist.get(ii);
@@ -105,6 +115,7 @@ public class QuestionnaireFormWindow extends Window{
 			}
 			
 		}
+		//End of parent questions management you can look from here
 		System.out.print("Root questions: "+rootquestions);
 		QuestionnaireQuestion[] qlist = new QuestionnaireQuestion[rootquestions];
 		System.out.println("Question LIST SIZE: "+questionlist.size());
@@ -115,9 +126,6 @@ public class QuestionnaireFormWindow extends Window{
 			if(relq.getParent().equals("0")){
 				qlist[i]=relq.getQuestion();
 				System.out.println("Sub-questions: "+qlist[i].getQuestions().length);
-				if(qlist[i].getQuestions().length>0){
-					System.out.println("Sub-sub-questions: "+qlist[i].getQuestions()[0].getQuestions().length);
-				}
 				i++;
 			}
 		}
@@ -175,7 +183,7 @@ public class QuestionnaireFormWindow extends Window{
 	}
 	
 	/**
-	 * Function used to insert a new row on the questions grid
+	 * Function to insert a new row on the questions grid. Do not call it directly, it's call by addQuestion
 	 * 
 	 * @param question QuestionnaireQuestion to be inserted
 	 * @return Row UI component
@@ -250,9 +258,9 @@ public class QuestionnaireFormWindow extends Window{
 	private void removeQuestionRow(Component comp){
 		Rows rows = (Rows)getFellow("rows_questions");
 		rows.removeChild(comp);
-		System.out.println("QSIZE before: "+this.questionlist.size());
+	//	System.out.println("QSIZE before: "+this.questionlist.size());
 		this.removeQuestion(comp.getId().substring(0, comp.getId().length()-8));
-		System.out.println("QSIZE after: "+this.questionlist.size());
+	//	System.out.println("QSIZE after: "+this.questionlist.size());
 	}
 	
 	/**
@@ -269,7 +277,7 @@ public class QuestionnaireFormWindow extends Window{
 	}
 	
 	/**
-	 * Helper function used to get a new ID for a new question
+	 * Helper function to get a new ID for a new question
 	 * 
 	 * @return String ID to be applied to a new question
 	 */
@@ -289,6 +297,12 @@ public class QuestionnaireFormWindow extends Window{
 		}
 	}
 	
+	/**
+	 * This opens a new modal window to update a question 
+	 * 
+	 * @param comp UI component whose id is the question ID. 
+	 * @throws InterruptedException
+	 */
 	private void modifyQuestion(Component comp) throws InterruptedException{
 		String id = comp.getId().substring(0, comp.getId().length()-8);
 		for(int i=0; i<this.questionlist.size(); i++){
@@ -300,6 +314,10 @@ public class QuestionnaireFormWindow extends Window{
 		}
 	}
 	
+	/**
+	 * Inner class to help the related questions management.
+	 *   
+	 */
 	private class RelatedQuestion{
 		private String parent;
 		private String id;
@@ -326,6 +344,10 @@ public class QuestionnaireFormWindow extends Window{
 		
 	}
 	
+	/**
+	 * Custom event listener to show the window to update question data.
+	 *
+	 */
 	private class AddChildListener implements EventListener{
 		
 		private String questionid = null;

@@ -2,8 +2,17 @@ package eu.aladdin_project;
 
 import org.zkoss.util.resource.Labels;
 
+/**
+ * Helper class to manage some system paramenters 
+ */
 public class SystemDictionary {
 	
+	/**
+	 * Static function which returns the user type label
+	 *  
+	 * @param dic Numerical id of the user type
+	 * @return Localized string with the user type value
+	 */
 	public static String getUsertypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -24,6 +33,12 @@ public class SystemDictionary {
 		return Labels.getLabel(ret);
 	}
 	
+	/**
+	 * Static function which returns the task status label
+	 *  
+	 * @param dic Numerical id of the task status
+	 * @return Localized string with the task status value
+	 */
 	public static String getTaskStatusLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -40,6 +55,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the task type label
+	 *  
+	 * @param dic Numerical id of the task type
+	 * @return Localized string with the task type value
+	 */
 	public static String getTaskTypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -68,6 +90,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the gender label
+	 *  
+	 * @param dic Numerical id of the gender
+	 * @return Localized string with the gender value
+	 */
 	public static String getGenderLabel(String dic){
 		System.out.println("GENDER: "+dic);
 		int dictn = Integer.parseInt(dic);
@@ -82,6 +111,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the marital status label
+	 *  
+	 * @param dic Numerical id of the marital status
+	 * @return Localized string with the marital status value
+	 */
 	public static String getMaritalStatuspeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -101,6 +137,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the "living with" label
+	 *  
+	 * @param dic Numerical id of the "living with"
+	 * @return Localized string with the "living with" value
+	 */
 	public static String getLivingWithLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -126,6 +169,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the warning type label
+	 *  
+	 * @param dic Numerical id of the warning type
+	 * @return Localized string with the warning type value
+	 */
 	public static String getWarningTypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -139,6 +189,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the warning effect label
+	 *  
+	 * @param dic Numerical id of the warning effect
+	 * @return Localized string with the warning effect value
+	 */
 	public static String getWarningEffectLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -149,6 +206,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the warning indicator label
+	 *  
+	 * @param dic Numerical id of the warning indicator
+	 * @return Localized string with the warning indicator value
+	 */
 	public static String getWarningIndicatorLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -162,6 +226,13 @@ public class SystemDictionary {
 		}
 		return Labels.getLabel(ret);
 	}
+	
+	/**
+	 * Static function which returns the emergency level of a warning
+	 *  
+	 * @param dic Numerical id of the emergency level
+	 * @return Localized string with the emergency level value
+	 */
 	public static String getWarningEmergencyLevelLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -176,6 +247,12 @@ public class SystemDictionary {
 		return Labels.getLabel(ret);
 	}
 	
+	/**
+	 * Static function which returns the measurement type label
+	 *  
+	 * @param dic Numerical id of the measurement type
+	 * @return Localized string with the measurement type value
+	 */
 	public static String getMeasurementTypeLabel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
@@ -190,6 +267,12 @@ public class SystemDictionary {
 		return Labels.getLabel(ret);
 	}
 	
+	/**
+	 * Static function which returns the risk level label
+	 *  
+	 * @param dic Numerical id of the risk level
+	 * @return Localized string with the risk level value
+	 */
 	public static String getWarningRiskLevel(String dic){
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";

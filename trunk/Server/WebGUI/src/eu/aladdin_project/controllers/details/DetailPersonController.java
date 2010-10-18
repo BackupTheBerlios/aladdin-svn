@@ -22,6 +22,9 @@ public abstract class DetailPersonController extends Window {
 	protected SocioDemographicData currentsd = null;
 	protected String currentresponsible = null;
 	protected PatientCarer[] currentcarers = null;
+	
+	public abstract Button[] createActionButtons();
+	public abstract Listitem[] createDataRows();
 
 	public DetailPersonController(){
 	}
@@ -46,9 +49,6 @@ public abstract class DetailPersonController extends Window {
 			datarows.appendChild(datar[i]);
 		}
 	}
-	
-	public abstract Button[] createActionButtons();
-	public abstract Listitem[] createDataRows();
 	
 	protected Listitem[] getPersonDataListItems(){
 		Listitem lst1 = new Listitem();

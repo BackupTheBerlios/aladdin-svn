@@ -228,19 +228,7 @@ public class QuestionWindow extends Window{
 				tbox0.setReadonly(true);
 				row0.appendChild(tbox0);
 			rows.appendChild(row0);
-			/*
-			Row row01 = new Row();
-				Label lab01 = new Label();
-				lab01.setValue(Labels.getLabel("qm.ans.fields.type"));
-				row01.appendChild(lab01);
-	
-				Textbox tbox01 = new Textbox();
-				tbox01.setId("question_type");
-				tbox01.setValue(this.type);
-				tbox01.setReadonly(true);
-				row01.appendChild(tbox01);
-			rows.appendChild(row01);
-			*/
+
 				Row row1 = new Row();
 					Label lab1 = new Label();
 					lab1.setValue(Labels.getLabel("qm.ans.fields.text"));

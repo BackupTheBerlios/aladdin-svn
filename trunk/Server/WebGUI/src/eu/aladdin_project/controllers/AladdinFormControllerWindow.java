@@ -29,6 +29,7 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected String currentid = null;
 	protected PersonData currentdata = null;
+	
 	/**
 	 * Default constructor
 	 */
@@ -256,7 +257,6 @@ public class AladdinFormControllerWindow extends Window{
 		cols.appendChild(col1);
 
 		Column col2 = new Column();
-		//col2.setWidth("250px");
 		col2.setAlign("left");
 		cols.appendChild(col2);
 		
@@ -291,8 +291,6 @@ public class AladdinFormControllerWindow extends Window{
 			
 			Textbox tboxe = new Textbox();
 			tboxe.setId(elem.getId());
-			//tboxe.setRows(4);
-			//tboxe.setWidth("70%");
 			rowe.appendChild(tboxe);
 			
 			rows.appendChild(rowe); 

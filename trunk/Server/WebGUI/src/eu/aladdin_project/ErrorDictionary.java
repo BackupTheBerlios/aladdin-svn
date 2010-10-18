@@ -1,5 +1,8 @@
 package eu.aladdin_project;
 
+/**
+ * Helper class to manage error codes
+ */
 public class ErrorDictionary {
 	public final static int UNKOW_ERROR = 0;
 	public final static int USERTYPE_NOT_ALLOWED = 1;
@@ -9,8 +12,6 @@ public class ErrorDictionary {
 	public final static int WARNING_RETRIEVE_ERROR = 5;
 	public final static int PATIENT_ASSESSMENT_RETRIEVE = 6;
 	
-	
-	
 	public static String UNKOW_ERROR_LBL = "error.unknow";
 	public static String USERTYPE_NOT_ALLOWED_LBL = "error.wrong.type";
 	public static String INVALID_CREDENTIALS_LBL = "error.invalid.credentials";
@@ -19,7 +20,12 @@ public class ErrorDictionary {
 	public static String WARNING_RETRIEVE_ERROR_LBL = "error.warning.retrieve";
 	public static String PATIENT_ASSESSMENT_RETRIEVE_LBL = "error.patient.assessment.retrieve";
 	
-	
+	/**
+	 * Static function which returns a string with human-readable error messages
+	 * 
+	 * @param errorcode Error code retrieved from requests
+	 * @return String cointaing error messages
+	 */
 	public static String getErrorLabel(int errorcode){
 		switch(errorcode){
 		case UNKOW_ERROR:
@@ -38,5 +44,4 @@ public class ErrorDictionary {
 			return UNKOW_ERROR_LBL;
 		}
 	}
-
 }

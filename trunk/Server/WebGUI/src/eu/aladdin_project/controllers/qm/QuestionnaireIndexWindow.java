@@ -12,6 +12,11 @@ import eu.aladdin_project.xsd.OperationResult;
 @SuppressWarnings("serial")
 public class QuestionnaireIndexWindow extends Window {
 	
+	/**
+	 * Function to remove Questionnaires from questionnaire manager index page.
+	 * 
+	 * @param questid Questionnaire id to delete it
+	 */
 	public void removeQuestionnaire(String questid){
 		OperationResult result = null;
 		String userId = (String)Sessions.getCurrent().getAttribute("userid");
@@ -30,6 +35,11 @@ public class QuestionnaireIndexWindow extends Window {
 		}
 	}
 	
+	/**
+	 * Simple redirection to update a Questionnaire
+	 * 
+	 * @param questid Questionnaire id to update it
+	 */
 	public void updateQuestionnaire(String questid){
 		Executions.getCurrent().sendRedirect("/qm/form.zul?q="+questid);
 	}

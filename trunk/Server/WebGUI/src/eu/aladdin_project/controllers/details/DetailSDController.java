@@ -35,9 +35,7 @@ public class DetailSDController extends DetailPersonController{
 	}
 	
 	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
-		//this.calendars = (Calendars)this.getFellow("cal");
 		super.setControllerData(id, data, sddata, responsible, carers);
-		//this.refreshCalendarData();
 	}
 	
 	protected Listitem getSDItem(){
@@ -55,7 +53,6 @@ public class DetailSDController extends DetailPersonController{
 			sddatavalue += " "+text3;
 		}else{
 			String text4 = Labels.getLabel("common.children.more",new String[]{this.currentsd.getChildren().toString()});
-			//sddatavalue += " with "+this.currentsd.getChildren().toString()+" children";
 			sddatavalue += " "+text4;
 		}
 		String text5 = Labels.getLabel("patients.form.sd.living");
