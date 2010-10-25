@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 
+import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Clinician;
 import eu.aladdin_project.xsd.Identifier;
@@ -63,7 +64,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			String id = (String)ses.getAttribute("userid");
 			proxy.createClinician(clinic, id);
 		}catch (RemoteException re) {
-			//TODO Set message to "Unable to create user. Server is not responding"
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CLINICIAN_SERVER);
 		}catch (Exception e){
 			//TODO Set message to "Unknow error creating clinician"
 		}finally{

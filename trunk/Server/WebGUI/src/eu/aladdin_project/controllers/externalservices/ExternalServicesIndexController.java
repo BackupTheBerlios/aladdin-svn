@@ -8,7 +8,6 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Row;
 
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.ExternalService;
@@ -41,7 +40,8 @@ public class ExternalServicesIndexController extends Window {
 		}
 		servicePopup = (Window)Executions.createComponents("form.zul", this, null);
 		((Button)servicePopup.getFellow("cancelbutton")).setVisible(true);
-		((Row)servicePopup.getFellow("srvid")).setVisible(true);
+		//ID Row hidden, It had read-only set to true but Andrey requested to hide the whole Row
+		//((Row)servicePopup.getFellow("srvid")).setVisible(true);
 		((Textbox)servicePopup.getFellow("srvidfield")).setValue(srvid);
 		((Textbox)servicePopup.getFellow("srvdescfield")).setValue(defserv.getDescription());
 		((Textbox)servicePopup.getFellow("srvuricfield")).setValue(defserv.getAddress());

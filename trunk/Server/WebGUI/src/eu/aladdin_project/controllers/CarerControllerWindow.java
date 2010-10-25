@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 
+import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.PersonData;
@@ -64,8 +65,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			String id = (String)ses.getAttribute("userid");
 			proxy.createCarer(carer, id);
 		}catch (RemoteException re) {
-			//TODO Set message to "Unable to create user. Server is not responding"
-			re.printStackTrace();
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
 		}catch (Exception e){
 			//TODO Set message to "Unknow error creating carer"
 			e.printStackTrace();
@@ -87,8 +87,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			String id = (String)ses.getAttribute("userid");
 			proxy.updateCarer(carer, id);
 		}catch (RemoteException re) {
-			//TODO Set message to "Unable to create user. Server is not responding"
-			re.printStackTrace();
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
 		}catch (Exception e){
 			//TODO Set message to "Unknow error creating carer"
 			e.printStackTrace();

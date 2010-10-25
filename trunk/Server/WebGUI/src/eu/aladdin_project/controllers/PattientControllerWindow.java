@@ -3,6 +3,7 @@ package eu.aladdin_project.controllers;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.zkoss.zhtml.Tbody;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -11,11 +12,13 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Textbox;
 
+import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.OperationResult;
@@ -92,7 +95,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			Patient patient = new Patient("",personData,sdData, resClinic, listcarers);
 			 result = proxy.createPatient(patient, id);
 		}catch (RemoteException re) {
-			//TODO Set message to "Unable to create user. Server is not responding"
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
 			re.printStackTrace();
 		}catch (Exception e){
 			//TODO Set message to "Unknow error creating patient"
@@ -123,6 +126,11 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		}
 	}
 	
+	public void createClinicianDialog() throws InterruptedException{
+		ClinicianListForPatients respolist = (ClinicianListForPatients)Executions.getCurrent().createComponents("/patients/clinlist.zul", this, null);
+		respolist.doModal();
+	}
+	
 	/**
 	 * This method is used to set Carer form fields with information from the modal dialog fields
 	 * 
@@ -134,6 +142,11 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		((Textbox)this.getFellow("pat_carname")).setValue(carerName);
 	}
 	
+	public void setResponsibleClinician(String clinID, String clinName){
+		((Textbox)this.getFellow("pat_respo")).setValue(clinID);
+		((Textbox)this.getFellow("pat_respo_lbl")).setValue(clinName);
+	}
+	
 	/**
 	 * Protected function to add a responsible clinician field to the window.
 	 */
@@ -141,14 +154,40 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		String respo = Labels.getLabel("patients.form.responsible");
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
-		rowsA.add(new SimpleFieldData(respo, "pat_respo"));
+		rowsA.add(new SimpleFieldData(respo, "pat_respo_lbl"));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");
 		this.appendColumns(pgrid);
 			
 		Rows rows = new Rows();
-		this.appendTextboxFields(rowsA, rows);
+		//this.appendTextboxFields(rowsA, rows);
+		
+		Row rowhidf = new Row();
+		//Textbox tboxhid = new Textbox();
+		//tboxhid.setId("pat_respo");
+		//tboxhid.setVisible(false);
+		Label lbl_ins = new Label(respo);
+		rowhidf.appendChild(lbl_ins);
+		Hbox hbox1 = new Hbox();
+		Textbox tbox1 = new Textbox();
+		tbox1.setId("pat_respo_lbl");
+		tbox1.setReadonly(true);
+		tbox1.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				createClinicianDialog();
+			}
+		});
+		
+		Textbox tbox2 = new Textbox();
+		tbox2.setVisible(false);
+		tbox2.setId("pat_respo");
+		
+		hbox1.appendChild(tbox1);
+		hbox1.appendChild(tbox2);
+		rowhidf.appendChild(hbox1);
+		rows.appendChild(rowhidf);
 		
 		pgrid.appendChild(rows);
 		this.appendChild(pgrid);
@@ -239,8 +278,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			Patient patient = new Patient(this.currentid,personData,sdData, resClinic, listcarers);
 			proxy.updatePatient(patient, id);
 		}catch (RemoteException re) {
-			//TODO Set message to "Unable to create user. Server is not responding"
-			re.printStackTrace();
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
 		}catch (Exception e){
 			//TODO Set message to "Unknow error creating carer"
 			e.printStackTrace();

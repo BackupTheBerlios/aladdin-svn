@@ -29,7 +29,7 @@
 		try{
 			assessmentlist = proxy.getPatientAssessments(objid,userid);
 		}catch(RemoteException re){
-			Executions.getCurrent().sendRedirect("/patients?error="+ErrorDictionary.PATIENT_ASSESSMENT_RETRIEVE);
+			ErrorDictionary.redirectWithError("/patients?error="+ErrorDictionary.PATIENT_ASSESSMENT_RETRIEVE);
 		}
 	</zscript>
 	<include src="/inc/header.zul"/>

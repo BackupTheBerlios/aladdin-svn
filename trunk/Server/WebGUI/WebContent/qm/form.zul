@@ -18,6 +18,7 @@
 		String typel = Labels.getLabel("qm.new.questions.type");
 		String textl = Labels.getLabel("qm.new.questions.text");
 		String ansl = Labels.getLabel("qm.new.questions.answers");
+		String errorno = Labels.getLabel("error.no.empty");
 		
 		page.setTitle(title);
 	</zscript>
@@ -30,19 +31,13 @@
 				<column align="left"/>
 			</columns>
 			<rows>
-				<!-- 
-				<row>
-					<label value="${questid}"/>
-					<textbox readonly="true" value="ID-GENERATED"/>
-				</row>
-				 -->
 				<row>
 					<label value="${versionl}"/>
 					<textbox id="versionfield"/>
 				</row>
 				<row>
 					<label value="${descl}"/>
-					<textbox id="qtitle"/>
+					<textbox id="qtitle" constraint="no empty: ${errorno }"/>
 				</row>
 				<row>
 					<label value="${questionsl}"/>

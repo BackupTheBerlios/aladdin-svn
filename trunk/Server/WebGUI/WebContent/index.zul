@@ -9,13 +9,38 @@
 		page.setTitle(title);
 		String newprof = Labels.getLabel("home.newprofile");
 	</zscript>
-	<borderlayout>
-		<north size="100%" splittable="false" collapsible="false" border="0">
-			<button label="+ ${newprof}" href="/patients/new.zul" sclass="newitem" />
-		</north>
-		<center border="0">
-		
-		</center>
-	</borderlayout>
+	<style dynamic="true">
+		.gridnolayout tr.z-row td.z-row-inner, tr.z-row .z-cell,div.z-grid{
+			border: none;
+			overflow:hidden;
+			zoom: 1;
+			background: white; 
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			border-bottom: none; 
+		}
+	</style>
+	<window width="80%" sclass="centerwin" border="none">
+		<grid sclass="gridnolayout" >
+			<columns>
+				<column width="33%" align="center"/>
+				<column width="33%" align="center"/>
+				<column width="34%" align="center"/>
+			</columns>
+			<rows>
+				<row height="200px">
+					<button href="/patients/" label="Go to Patients" height="180px" width="80%" image="/inc/icons/patient-icon2.png"/>
+					<button href="/carers/" label="Go to Carers" height="180px" width="80%" image="/inc/icons/carer.png"/>
+					<button href="/clinicians/" label="Go to Clinicians" height="180px" width="80%" image="/inc/icons/clinician.png"/>
+				</row>
+				<row height="200px">
+					<button href="/qm/" label="Open question manager" height="180px" width="80%" image="/inc/icons/qm.png"/>
+					<button href="/extsrv/" label="Manage external services" height="180px" width="80%" image="/inc/icons/services.png"/>
+					<button  href="/warnings/" label="View clinical warnings" height="180px" width="80%" image="/inc/icons/warning.png"/>
+				</row>
+			</rows>
+		</grid>
+	</window>
 	<include src="/inc/footer.zul"/>
 </zk>

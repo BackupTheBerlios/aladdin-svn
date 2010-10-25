@@ -9,16 +9,6 @@
 		String save = Labels.getLabel("patients.save");
 		page.setTitle(title);	
 		
-		public void openDialog(){
-			try{
-				Window win = (Window)Executions.createComponents("/carers/list.zul", page.getFellow("patientform"), null);
-				win.setClosable(true);
-				win.doModal();
-			}catch(InterruptedException ie){
-			
-			}
-		}
-		
 	</zscript>
 	<window title="${title}" id="patientform" sclass="centerwin" use="eu.aladdin_project.controllers.PattientControllerWindow" width="70%">
 	<button label="${save }" onClick="patientform.createPatient()"/>

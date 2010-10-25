@@ -91,8 +91,6 @@ public class QuestionWindow extends Window{
 		}else{
 			q.setAnswers(new QuestionnaireQuestionAnswer[0]);
 		}
-		System.out.println("Added");
-		//TODO fix this
 		this.pform.addQuestion(q,parent);
 		this.setVisible(false);
 	}

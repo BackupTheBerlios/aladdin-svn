@@ -1,0 +1,29 @@
+<zk>
+	<window title="Select Clinician" closable="true" border="normal" width="300px" id="rclinlistwin" use="eu.aladdin_project.controllers.ClinicianListForPatients">
+		<zscript>
+			import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+			import eu.aladdin_project.xsd.ClinicianInfo;
+			import eu.aladdin_project.xsd.SearchCriteria;
+			
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			String userid = (String)Sessions.getCurrent().getAttribute("userid");
+			ClinicianInfo[] clinlist = new ClinicianInfo[0];
+			try{
+				clinlist = proxy.listOfClinicians(new SearchCriteria[0],userid);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		</zscript>
+		<radiogroup id="respo_rgroup"><grid>
+			<columns>
+			</columns>
+			<rows>
+				<row forEach="${clinlist }">
+					<radio label="${each.surname }, ${each.surname }" value="${each.ID }"/>
+				</row>
+			</rows>
+		</grid>
+		<button label="Select Clinician" onClick="rclinlistwin.setClinician()"/>
+		</radiogroup>
+	</window>
+</zk>

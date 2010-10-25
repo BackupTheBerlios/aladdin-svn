@@ -7,7 +7,7 @@
 		String urilbl = Labels.getLabel("common.URI");
 		String savelb = Labels.getLabel("extsrv.save");
 		String updatelbl = Labels.getLabel("extsrv.update");
-		
+		String errorno = Labels.getLabel("error.no.empty");
 	</zscript>
 	<window id="service_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.externalservices.ExternalServicesPopupController">
 		<grid>
@@ -26,7 +26,7 @@
 				</row>
 				<row>
 					<label value="${urilbl }"/>
-					<textbox id="srvuricfield"/>
+					<textbox id="srvuricfield" constraint="no empty: ${errorno }"/>
 				</row>
 				<row>
 					<label value=""/>

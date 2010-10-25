@@ -33,7 +33,7 @@ public class WarningsWindowController extends Window {
 		try{
 			Warning[] warning = proxy.getWarnings(new SearchCriteria[]{filter}, usid);
 			if(warning.length != 1){
-				Executions.getCurrent().sendRedirect("/warnings/index.zul?error=4");
+				ErrorDictionary.redirectWithError("/warnings/index.zul?error=4");
 			}
 			Patient pinfo = proxy.getPatient(warning[0].getPatientID(), usid);
 			
@@ -50,6 +50,8 @@ public class WarningsWindowController extends Window {
 			((Textbox)warningPopup.getFellow("patientfield")).setValue(warning[0].getID());
 			((Textbox)warningPopup.getFellow("patientnamefield")).setValue(pinfo.getPersonData().getSurname()+", "+pinfo.getPersonData().getName());
 			((Textbox)warningPopup.getFellow("delivfield")).setValue(warning[0].isDelivered()? Labels.getLabel("common.yes") : Labels.getLabel("common.no"));
+			//ID Row hidden. It had read-only set to true but Andrey requested to hide the whole Row.
+			((Row)warningPopup.getFellow("warningid")).setVisible(false);
 			if(warning[0].isDelivered()){
 				((Row)warningPopup.getFellow("buttonrow")).setVisible(false);
 			}
@@ -57,7 +59,7 @@ public class WarningsWindowController extends Window {
 			warningPopup.setVisible(true);
 			warningPopup.doModal();
 		}catch(Exception e){
-			Executions.getCurrent().sendRedirect("?error="+ErrorDictionary.WARNING_RETRIEVE_ERROR);
+			ErrorDictionary.redirectWithError("?error="+ErrorDictionary.WARNING_RETRIEVE_ERROR);
 		}
 	}
 }
