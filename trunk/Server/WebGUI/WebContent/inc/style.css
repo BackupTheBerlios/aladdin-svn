@@ -11,9 +11,33 @@
 	background-color: #ED95A0;
 	padding: 10px 10px 10px 40px;
 	}
+.loginwin{
+	margin:0 auto;
+	}
+.logintext{
+	font-size: 16px;
+	font-weight: bold;
+	}
+.headerwin{
+	margin:0 auto;
+	border-left:1px solid #a6a6a6;
+	border-right:2px solid #a6a6a6;
+	padding: 0px 10px;
+	}
 .centerwin{
 	margin:0 auto;
 	text-align: left;
+	padding: 20px 10px;
+	border-left:1px solid #a6a6a6;
+	border-right:2px solid #a6a6a6;
+	min-height: 400px;
+	}
+.footer{
+	margin:0 auto;
+	border-left:1px solid #a6a6a6;
+	border-right:2px solid #a6a6a6;
+	border-bottom:2px solid #a6a6a6;
+	padding: 0px 10px;
 	}
 .left{
 	text-align:left;
@@ -47,10 +71,16 @@
 	cursor: pointer;
 	}
 .menubar{
-	font-size:32px;
+	font-size:16px;
 	font-weight:bold;
-	margin-bottom:10px;
 }
+.menubar table{
+	margin:0 auto;
+}
+.menubaritem{
+	font-size:16px;
+	font-weight:bold;
+	}
 .grid{
 	margin-bottom:10px;
 	}

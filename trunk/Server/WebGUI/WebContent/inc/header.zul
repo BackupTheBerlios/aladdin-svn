@@ -28,7 +28,9 @@
 		}
 	</zscript>
 	<style src="/inc/style.css"/>
-	<image src="/inc/logo.png" onClick='Executions.getCurrent().sendRedirect("/")' />
+	<window width="800px" sclass="headerwin">
+	
+	<image src="/inc/icons/logo-new.png" onClick='Executions.getCurrent().sendRedirect("/")' />
 	<vbox sclass="head-left">
 		<hbox>
 			<label value="${hello} ${user}, " />
@@ -36,8 +38,9 @@
 		</hbox>
 		<label value="Contact administrator"/>
 	</vbox>
+	</window>
 	<menubar id="menubar" width="100%" sclass="menubar">
-		<menuitem label="${home}" left="20" image="/inc/home2.png" height="32px" sclass="menubar" href="/"/>
+		<menuitem sclass="menubaritem" label="${home}" left="20" image="/inc/home2.png" height="32px" href="/"/>
 		<menuitem label="${patients}" href="/patients/"/>
 		<menuitem label="${carers}" href="/carers/"/>
 		<menuitem label="${clinicians}" href="/clinicians/"/>
@@ -64,4 +67,5 @@
 			}
 		}
 	</zscript>
+	
 </zk>
