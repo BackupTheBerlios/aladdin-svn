@@ -28,7 +28,7 @@
 		}
 		
 	</zscript>
-	<window border="none" width="80%" sclass="centerwin" id="extservices" use="eu.aladdin_project.controllers.externalservices.ExternalServicesIndexController">
+	<window border="none" width="800px" sclass="centerwin" id="extservices" use="eu.aladdin_project.controllers.externalservices.ExternalServicesIndexController">
 	<?component name="serviceModal" macroURI="form.zul"?>
 	<serviceModal id="serviceModal" />
 	<vbox>

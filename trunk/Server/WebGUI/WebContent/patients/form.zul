@@ -10,7 +10,8 @@
 		page.setTitle(title);	
 		
 	</zscript>
-	<window title="${title}" id="patientform" sclass="centerwin" use="eu.aladdin_project.controllers.PattientControllerWindow" width="70%">
+	<window title="${title}" id="patientform" width="800px" sclass="centerwin" use="eu.aladdin_project.controllers.PattientControllerWindow">
 	<button label="${save }" onClick="patientform.createPatient()"/>
 	</window>
+	<include src="/inc/footer.zul"/>
 </zk>

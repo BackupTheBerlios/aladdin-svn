@@ -21,7 +21,7 @@
 			border-bottom: none; 
 		}
 	</style>
-	<window width="80%" sclass="centerwin" border="none">
+	<window width="800px" sclass="centerwin" border="none">
 		<grid sclass="gridnolayout" >
 			<columns>
 				<column width="33%" align="center"/>

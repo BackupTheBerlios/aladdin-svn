@@ -33,7 +33,7 @@
 		}
 	</zscript>
 	<include src="/inc/header.zul"/>
-	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailPatientController">
+	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailPatientController">
 	<label value="${actions }"/>
 	<grid>
 		<rows>
@@ -137,4 +137,5 @@
 		
 		
 	</zscript>
+	<include src="/inc/footer.zul"/>
 </zk>

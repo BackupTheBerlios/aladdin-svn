@@ -29,7 +29,7 @@
 			re.printStackTrace();
 		}
 	</zscript>
-	<window border="none" width="80%" sclass="centerwin" id="qmwin" use="eu.aladdin_project.controllers.qm.QuestionnaireIndexWindow">
+	<window border="none" width="800px" sclass="centerwin" id="qmwin" use="eu.aladdin_project.controllers.qm.QuestionnaireIndexWindow">
 	<vbox>
 	<button label="+ ${newq}" href="/qm/form.zul" sclass="newitem" />
 	<grid mold="paging" pageSize="15">
@@ -52,4 +52,5 @@
 	</grid>
 	</vbox>
 	</window>
+	<include src="/inc/footer.zul"/>
 </zk>

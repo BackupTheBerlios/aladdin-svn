@@ -89,11 +89,11 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			String id = (String)ses.getAttribute("userid");
 			Carer car2set = proxy.getCarer(carerId, id);
 			
-			PatientCarer[] listcarers = new PatientCarer[0];
-			//listcarers[0]=new PatientCarer(car2set,true);
+			PatientCarer[] listcarers = new PatientCarer[1];
+			listcarers[0]=new PatientCarer(car2set,true);
 			
 			Patient patient = new Patient("",personData,sdData, resClinic, listcarers);
-			 result = proxy.createPatient(patient, id);
+			result = proxy.createPatient(patient, id);
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
 			re.printStackTrace();
@@ -206,7 +206,6 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	protected void addCarerField(){
 		String carertitle = Labels.getLabel("patients.carer.title");
 		String carerlabel = Labels.getLabel("patients.carer.label");
-		String carerbutton = Labels.getLabel("patients.carer.button");
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");
@@ -221,31 +220,28 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		lab.setValue(carerlabel);
 		row.appendChild(lab);
 		
+		Hbox hbox01 = new Hbox();
+		
 		Textbox tbox = new Textbox();
 		tbox.setId("pat_carname");
 		tbox.setReadonly(true);
-		row.appendChild(tbox);
-
-		Row row1 = new Row();
 		
 		Textbox tbox2 = new Textbox();
 		tbox2.setId("pat_carid");
 		tbox2.setVisible(false);
 		tbox2.setReadonly(true);
 		
-		Button ton = new Button();
-		ton.setLabel(carerbutton);
-		ton.addEventListener("onClick", new EventListener(){
+		tbox.addEventListener("onClick", new EventListener(){
 			public void onEvent(Event arg0) throws Exception {
 				createDialog();
 			}
 		});
 		
-		row1.appendChild(tbox2);
-		row1.appendChild(ton);
-		
+		hbox01.appendChild(tbox);
+		hbox01.appendChild(tbox2);
+		row.appendChild(hbox01);
+
 		rows.appendChild(row);
-		rows.appendChild(row1);
 		
 		pgrid.appendChild(rows);
 		this.appendChild(pgrid);

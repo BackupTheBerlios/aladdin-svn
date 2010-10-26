@@ -24,7 +24,7 @@
 		String objid = (String)Executions.getCurrent().getParameter("carerid");
 	</zscript>
 	<include src="/inc/header.zul"/>
-	<window id="detailswin" sclass="centerwin" width="80%" use="eu.aladdin_project.controllers.details.DetailSDController">
+	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailSDController">
 	<label value="${actions}"/>
 	<grid>
 		<rows>
@@ -100,4 +100,5 @@
 			re.printStackTrace();
 		}
 	</zscript>
+	<include src="/inc/footer.zul"/>
 </zk>

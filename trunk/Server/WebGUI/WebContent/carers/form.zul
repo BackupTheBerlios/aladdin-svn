@@ -9,7 +9,8 @@
 		String save = Labels.getLabel("carers.save");
 		page.setTitle(title);	
 	</zscript>
-	<window title="${title}" id="carerform" sclass="centerwin" use="eu.aladdin_project.controllers.CarerControllerWindow" width="70%">
+	<window title="${title}" id="carerform" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.CarerControllerWindow">
 	<button label="${save }" onClick="carerform.createCarer()"/>
 	</window>
+	<include src="/inc/footer.zul"/>
 </zk>

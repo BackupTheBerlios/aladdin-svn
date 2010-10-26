@@ -30,4 +30,5 @@
 			re.printStackTrace();
 		}
 	</zscript>
+	<include src="/inc/footer.zul"/>
 </zk>

@@ -42,7 +42,7 @@
 		}
 		
 	</zscript>
-	<window border="none" width="80%" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
+	<window border="none" width="800px" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
 	<?component name="warningModal" macroURI="form.zul"?>
 	<warningModal id="warningModal" />
 	<vbox>

@@ -30,7 +30,7 @@
 			re.printStackTrace();
 		}
 	</zscript>
-	<window id="patients" border="none" width="80%" sclass="centerwin" use="eu.aladdin_project.controllers.IndexPatientsWindow">
+	<window id="patients" border="none" width="800px" sclass="centerwin" use="eu.aladdin_project.controllers.IndexPatientsWindow">
 	<vbox>
 	<button label="+ ${newpat}" href="/patients/form.zul" sclass="newitem" />
 	<grid>
@@ -55,4 +55,5 @@
 	</grid>
 	</vbox>
 	</window>
+	<include src="/inc/footer.zul"/>
 </zk>

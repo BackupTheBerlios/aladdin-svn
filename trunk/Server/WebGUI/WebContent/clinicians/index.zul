@@ -29,7 +29,7 @@
 			re.printStackTrace();
 		}
 	</zscript>
-	<window border="none" width="80%" sclass="centerwin" id="clinics" use="eu.aladdin_project.controllers.IndexCliniciansWindow">
+	<window border="none" width="800px" sclass="centerwin" id="clinics" use="eu.aladdin_project.controllers.IndexCliniciansWindow">
 	<vbox>
 	<button label="+ ${newprof}" href="/clinicians/form.zul" sclass="newitem" />
 	<grid>

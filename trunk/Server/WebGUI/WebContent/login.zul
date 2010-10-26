@@ -83,36 +83,27 @@
 	</zscript>
 	<style src="/inc/style.css"/>
 	<separator height="120px"/>
-	<window border="none" sclass="centerwin" width="35%">
-		<image src="/inc/logo.png" />
+	<window border="none" sclass="loginwin" width="402px">
+		<image src="/inc/icons/login.png" />
 	</window>
 	<separator height="15px"/>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>
 	</window>
 	<separator height="15px"/>
-	<window title="${wintitle}" width="65%" sclass="centerwin" onCreate="alreadyLoggedIn()" >
-		<grid>
-			<columns>
-				<column align="right"/>
-				<column align="left"/>
-			</columns>
-			<rows>
-				<row>
-					<label value="${lguser}"/>
-					<textbox id="login_user" value="Admin"/>
-				</row>
-				<row>
-					<label value="${lgpwd}"/>
-					<textbox id="login_password" type="password" value="Admin"/>
-				</row>
-				<row>
-					<label value=""/>
-					<button label="${lgbtn}" onClick="authenticate(login_user.getValue(),login_password.getValue())"/>
-					<!-- <button label="${lgbtn}" onClick="login(login_user.getValue())"/> -->
-				</row>
-			</rows>	
-		</grid>
+	<window width="450px" sclass="loginwin" onCreate="alreadyLoggedIn()" >
+	<vbox>
+		<hbox>
+			<label value="${lguser}:" sclass="logintext"/>
+			<textbox id="login_user" value="Admin" width="120px"/>
+			<separator orient="horizontal" width="10px"/>
+			<label value="${lgpwd}:" sclass="logintext"/>
+			<textbox id="login_password" type="password" value="Admin" width="120px"/>
+		</hbox>
+		<separator height="5px"/>
+		<button label="${lgbtn}" width="100%" sclass="logintext" onClick="authenticate(login_user.getValue(),login_password.getValue())"/>
+		<!-- <button label="${lgbtn}" onClick="login(login_user.getValue())"/> -->
+	</vbox>
 	</window>
 	<zscript>
 		public void setErrorLabel(){

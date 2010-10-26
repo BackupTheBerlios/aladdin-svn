@@ -34,7 +34,7 @@
 			re.printStackTrace();
 		}
 	</zscript>
-	<window id="carers" border="none" width="80%" sclass="centerwin" use="eu.aladdin_project.controllers.IndexCarersWindow">
+	<window id="carers" border="none" width="800px" sclass="centerwin" use="eu.aladdin_project.controllers.IndexCarersWindow">
 	<vbox>
 	<button label="+ ${newprof}" href="/carers/form.zul" sclass="newitem" />
 	<grid>
