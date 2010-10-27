@@ -10,7 +10,7 @@ package eu.aladdin_project.xsd;
 public class SystemParameter  implements java.io.Serializable {
     private java.lang.String code;
 
-    private java.lang.String description;
+    private java.lang.String description = "";
 
     public SystemParameter() {
     }

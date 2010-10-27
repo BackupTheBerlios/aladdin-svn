@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.Iterator;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Column;
@@ -29,6 +33,10 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected String currentid = null;
 	protected PersonData currentdata = null;
+	protected Communication[] communications = null;
+	protected Address[] addresses = null;
+	protected Window popupaddresses = null;
+	
 	
 	/**
 	 * Default constructor
@@ -54,8 +62,10 @@ public class AladdinFormControllerWindow extends Window{
 		Identifier idarr[]=new Identifier[1];
 		idarr[0]=this.getIdentifierData();
 		
-		Address addresslist[] = new Address[1];
-		addresslist[0]=this.getNewAddressData();
+		Address addresslist[] = this.getNewAddressData();
+		if(this.addresses == null){
+			addresslist = new Address[0];
+		}
 		
 		Communication comlist[] = new Communication[1];
 		comlist[0]=this.getNewCommunicationData();
@@ -86,7 +96,8 @@ public class AladdinFormControllerWindow extends Window{
 	 * 
 	 * @return Address object (it is not an array at all)
 	 */
-	protected eu.aladdin_project.xsd.Address getNewAddressData(){
+	protected Address[] getNewAddressData(){
+		/*
 		String street = ((Textbox)getFellow("pat_street")).getValue();
 		String streetno = ((Textbox)getFellow("pat_streetno")).getValue();
 		String city = ((Textbox)getFellow("pat_city")).getValue();
@@ -98,8 +109,84 @@ public class AladdinFormControllerWindow extends Window{
 		Checkbox primarybox = (Checkbox)getFellow("pat_primadd");
 			boolean isPrimary = primarybox.isChecked();
 		
-		eu.aladdin_project.xsd.Address address = new eu.aladdin_project.xsd.Address(street,streetno,city,county,country,zipcode,notes,isPrimary);
+		Address address = new eu.aladdin_project.xsd.Address(street,streetno,city,county,country,zipcode,notes,isPrimary);
 		return address;
+		*/
+		return this.addresses;
+	}
+	
+	/**
+	 * 
+	 * @param windowAddress
+	 */
+	public void addAddressToList(Window windowAddress){
+		String street = ((Textbox)windowAddress.getFellow("pat_street")).getValue();
+		String streetno = ((Textbox)windowAddress.getFellow("pat_streetno")).getValue();
+		String city = ((Textbox)windowAddress.getFellow("pat_city")).getValue();
+		String county = ((Textbox)windowAddress.getFellow("pat_county")).getValue();
+		String country = ((Textbox)windowAddress.getFellow("pat_country")).getValue();
+		String zipcode = ((Textbox)windowAddress.getFellow("pat_zipcode")).getValue();
+		String notes = ((Textbox)windowAddress.getFellow("pat_notes")).getValue();
+		
+		Checkbox primarybox = (Checkbox)windowAddress.getFellow("pat_primadd");
+		boolean isPrimary = primarybox.isChecked();
+
+		Address newAddress = new Address(street,streetno,city,county,country,zipcode,notes,isPrimary);
+		if(this.addresses == null || this.addresses.length == 0){
+			System.out.println("Address List SIZE before: 0");
+			this.addresses = new Address[1];
+			this.addresses[0] = newAddress;
+		}else{
+			System.out.println("Address List SIZE before: "+this.addresses.length);
+			Address[] helperAddress = new Address[this.addresses.length+1];
+			for(int i = 0; i < this.addresses.length; i++){
+				helperAddress[i] = this.addresses[i];
+			}
+			helperAddress[this.addresses.length]=newAddress;
+			this.addresses = helperAddress;
+		}
+		System.out.println("Address List SIZE after: "+this.addresses.length);
+		this.insertAddressRow(newAddress);
+		this.removeChild(this.popupaddresses);
+	}
+	
+	protected void insertAddressRow(Address toInsert){
+		Rows rows = (Rows)getFellow("addressgridrows");
+		Row newrow = new Row();
+		
+		Label town = new Label(toInsert.getCity()+"("+toInsert.getCountry()+")");
+		Hbox hbox = new Hbox();
+		String thereststring = toInsert.getStreet()+" "+toInsert.getStreetNo();
+		if(toInsert.isIsPrimary()){
+			thereststring += "(*) ";
+		}else{
+			thereststring += " ";
+		}
+		Label therest = new Label(thereststring);
+		hbox.appendChild(therest);
+		Label remove = new Label("Remove address");
+		remove.setSclass("link");
+		remove.addEventListener("onClick", new RemoveAddressListener(newrow,toInsert));
+		hbox.appendChild(remove);
+		
+		newrow.appendChild(town);
+		newrow.appendChild(hbox);
+		rows.appendChild(newrow);
+	}
+	
+	public void removeAddress(Row rw, Address as){
+		Rows rows = (Rows)this.getFellow("addressgridrows");
+		rows.removeChild(rw);
+		Address[] sustitute = new Address[this.addresses.length-1];
+		int j = 0;
+		for(int i = 0; i < this.addresses.length-1; i++){
+			if(this.addresses[j].equals(as)){
+				j++;
+			}
+			sustitute[i]=this.addresses[j];
+			j++;
+		}
+		this.addresses = sustitute;
 	}
 	
 	/**
@@ -145,6 +232,32 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected void addAddressFields(){
 		String address = Labels.getLabel("patients.form.address");
+		Grid agrid = new Grid();
+		agrid.setSclass("grid");
+		this.appendColumns(agrid);
+			
+		Rows arows = new Rows();
+		arows.setId("addressgridrows");
+			this.appendSubFormTitleRow(address, arows);
+			Row buttonrw = new Row();
+			Label labelbtn = new Label(" ");
+			Button btnaddress = new Button("Add address");
+			btnaddress.addEventListener("onClick", new EventListener() {
+				
+				public void onEvent(Event arg0) throws Exception {
+					addAddressWindow();
+					popupaddresses.doModal();
+				}
+			});
+			buttonrw.appendChild(labelbtn);
+			buttonrw.appendChild(btnaddress);
+			arows.appendChild(buttonrw);
+		agrid.appendChild(arows);
+		this.appendChild(agrid);
+	}
+	
+	protected void addAddressWindow(){
+		String address = Labels.getLabel("patients.form.address");
 		String street = Labels.getLabel("patients.form.street");
 		String streetno = Labels.getLabel("patients.form.streetno");
 		String city = Labels.getLabel("patients.form.city");
@@ -153,6 +266,15 @@ public class AladdinFormControllerWindow extends Window{
 		String zipcode = Labels.getLabel("patients.form.zip");
 		String prim = Labels.getLabel("patients.form.primary");
 		String notes = Labels.getLabel("patients.form.notes");
+		
+		this.popupaddresses = new Window();
+		this.popupaddresses.setTitle(address);
+		this.popupaddresses.setClosable(true);
+		this.popupaddresses.setVisible(false);
+		this.popupaddresses.setWidth("800px");
+		this.popupaddresses.setPosition("center, center");
+		this.popupaddresses.setBorder("normal");
+		this.appendChild(this.popupaddresses);
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
 		rowsA.add(new SimpleFieldData(street, "pat_street"));
@@ -176,8 +298,16 @@ public class AladdinFormControllerWindow extends Window{
 			this.appendTextboxFields(rowsA, rows);
 			this.appendCheckboxFields(rowsB, rows);
 			
+			Row buttonrw = new Row();
+			Label empty = new Label("");
+			buttonrw.appendChild(empty);
+			Button insertAddress = new Button("Save address");
+			insertAddress.addEventListener("onClick", new AddressInsertListener(this.popupaddresses));
+			buttonrw.appendChild(insertAddress);
+			rows.appendChild(buttonrw);
+			
 		pgrid.appendChild(rows);
-		this.appendChild(pgrid);
+		this.popupaddresses.appendChild(pgrid);
 		
 		Textbox tboxe = (Textbox)rows.getFellow("pat_notes");
 		tboxe.setRows(4);
@@ -185,19 +315,11 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void addAddressFieldsValues(){
-		Address[] adresses = this.currentdata.getAddressList();
-		System.out.println("Addresses LENGTH: "+adresses.length);
-		for(int i = 0; i<adresses.length; i++){
-			Address addr= adresses[i];
-			if(addr.isIsPrimary()){
-				((Textbox)this.getFellow("pat_street")).setValue(addr.getStreet());
-				((Textbox)this.getFellow("pat_streetno")).setValue(addr.getStreetNo());
-				((Textbox)this.getFellow("pat_city")).setValue(addr.getCity());
-				((Textbox)this.getFellow("pat_county")).setValue(addr.getCounty());
-				((Textbox)this.getFellow("pat_country")).setValue(addr.getCountry());
-				((Textbox)this.getFellow("pat_zipcode")).setValue(addr.getZipCode());
-				((Textbox)this.getFellow("pat_notes")).setValue(addr.getNotes());
-				((Checkbox)this.getFellow("pat_primadd")).setChecked(true);
+		this.addresses = this.currentdata.getAddressList();
+		System.out.println("Addresses LENGTH: "+this.addresses.length);
+		for(int i = 0; i<this.addresses.length; i++){
+			if(this.addresses[i]!=null){
+				this.insertAddressRow(this.addresses[i]);
 			}
 		}
 	}
@@ -372,6 +494,28 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 		
 		public String getId(){
 			return this.id;
+		}
+	}
+	
+	protected class AddressInsertListener implements EventListener{
+		private Window win;
+		public AddressInsertListener(Window window){
+			this.win = window;
+		}
+		public void onEvent(Event arg0) throws Exception {
+			addAddressToList(this.win);
+		}
+	}
+	
+	protected class RemoveAddressListener implements EventListener{
+		private Row row;
+		private Address as;
+		public RemoveAddressListener(Row rowd, Address addressd){
+			this.row = rowd;
+			this.as = addressd;
+		}
+		public void onEvent(Event arg0) throws Exception {
+			removeAddress(this.row, this.as);
 		}
 	}
 	

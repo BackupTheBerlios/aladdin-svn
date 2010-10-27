@@ -1,7 +1,10 @@
 package eu.aladdin_project.controllers.details;
 
+import java.util.ArrayList;
+
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -51,45 +54,61 @@ public abstract class DetailPersonController extends Window {
 	}
 	
 	protected Listitem[] getPersonDataListItems(){
+		ArrayList<Listitem> listret = new ArrayList<Listitem>();
+		
 		Listitem lst1 = new Listitem();
 			String text = Labels.getLabel("common.name");
 			Listcell namecell = new Listcell(text);
 			Listcell namecell2 = new Listcell(this.currentdata.getSurname()+", "+this.currentdata.getName());
 		lst1.appendChild(namecell);
 		lst1.appendChild(namecell2);
+		listret.add(lst1);
 		
 		Listitem lst2 = new Listitem();
 		String text2 = Labels.getLabel("common.addresses");
 		Listcell addtitle = new Listcell(text2);
 		addtitle.setSpan(2);
 		lst2.appendChild(addtitle);
-		
-		Address addressdata = this.currentdata.getAddressList()[0];
-		String addressstring = addressdata.getStreet()+" "+addressdata.getStreetNo()+", "+addressdata.getCity();
-		if(addressdata.getCounty() != null && !addressdata.getCounty().equals("(none)")){
-			addressstring += "("+addressdata.getCounty()+")";
-		}
-		addressstring += "\n"+addressdata.getZipCode()+" "+addressdata.getCountry();
+		listret.add(lst2);
 		
 		Listitem lst3 = new Listitem();
-			String text3 = Labels.getLabel("common.address");
-			Listcell addcell = new Listcell(text3);
-			Listcell addcell2 = new Listcell(addressstring);
+			Listcell addcell = new Listcell(Labels.getLabel("common.address"));
 		lst3.appendChild(addcell);
-		lst3.appendChild(addcell2);
+		for(int i = 0; i < this.currentdata.getAddressList().length; i++){
+			Address addressdata = this.currentdata.getAddressList()[i];
+			String addressstring = addressdata.getStreet()+" "+addressdata.getStreetNo()+", "+addressdata.getCity();
+			if(addressdata.getCounty() != null && !addressdata.getCounty().equals("(none)")){
+				addressstring += "("+addressdata.getCounty()+")";
+			}
+			addressstring += "\n"+addressdata.getZipCode()+" "+addressdata.getCountry();
+			if(i == 0){
+				Listcell addcell2 = new Listcell(addressstring);
+				lst3.appendChild(addcell2);
+				listret.add(lst3);
+			}else{
+				Listitem addresstext = new Listitem();
+				addresstext.appendChild(new Listcell(""));
+				addresstext.appendChild(new Listcell(addressstring));
+				listret.add(addresstext);
+			}
+		}
 		
+		/* It's not necessary unless we want to show notes for each address
 		Listitem lst4 = new Listitem();
 			String text4 = Labels.getLabel("common.notes");
 			Listcell addcell3 = new Listcell(text4);
 			Listcell addcell4 = new Listcell(addressdata.getNotes());
 		lst4.appendChild(addcell3);
 		lst4.appendChild(addcell4);
+		listret.add(lst4);
+		*/
 		
 		Listitem lst5 = new Listitem();
 		String text5 = Labels.getLabel("common.communications");
 		Listcell comtitle = new Listcell(text5);
 		comtitle.setSpan(2);
 		lst5.appendChild(comtitle);
+		listret.add(lst5);
 		
 		Communication commdata = this.currentdata.getCommunicationList()[0];
 		
@@ -98,24 +117,21 @@ public abstract class DetailPersonController extends Window {
 			Listcell comcell2 = new Listcell(commdata.getValue());
 		lst6.appendChild(comcell);
 		lst6.appendChild(comcell2);
+		listret.add(lst6);
 	
+		String text4 = Labels.getLabel("common.notes");
 		Listitem lst7 = new Listitem();
 			Listcell comcell3 = new Listcell(text4);
 			Listcell comcell4 = new Listcell(commdata.getNotes());
 		lst7.appendChild(comcell3);
 		lst7.appendChild(comcell4);
+		listret.add(lst7);
 		
-		Listitem[] ret = new Listitem[7];
-		ret[0]=lst1;
-		ret[1]=lst2;
-		ret[2]=lst3;
-		ret[3]=lst4;
-		ret[4]=lst5;
-		ret[5]=lst6;
-		ret[6]=lst7;
-		
+		Listitem[] ret = new Listitem[listret.size()];
+		for(int i = 0 ; i < listret.size() ; i++){
+			ret[i] = listret.get(i);
+		}
 		return ret;
-		
 	}
 
 	// GETTERS AND SETTERS

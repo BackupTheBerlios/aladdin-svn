@@ -91,6 +91,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			
 			PatientCarer[] listcarers = new PatientCarer[1];
 			listcarers[0]=new PatientCarer(car2set,true);
+			//PatientCarer[] listcarers = new PatientCarer[0];
 			
 			Patient patient = new Patient("",personData,sdData, resClinic, listcarers);
 			result = proxy.createPatient(patient, id);
