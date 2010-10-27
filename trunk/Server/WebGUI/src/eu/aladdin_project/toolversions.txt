@@ -8,7 +8,6 @@ Icons from:
 http://www.iconarchive.com/category/people/medical-icons-by-aha-soft.html
 http://www.iconarchive.com/category/people/medical-icons-by-devcom.html
 
-
 Implemented methods on WSDL and XSD dependant Files:
 
 QuestionnaireInfo
@@ -28,3 +27,5 @@ SystemParameter
 public String toString(){
 	return description;
 }
+
+SystemParameter was also modified to set the "description" field to "" instead of null. 

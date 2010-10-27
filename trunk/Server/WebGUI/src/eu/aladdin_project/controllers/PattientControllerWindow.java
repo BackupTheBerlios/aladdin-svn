@@ -82,7 +82,6 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		SocioDemographicData sdData = this.getSocioDemographicData();
 		PersonData personData = this.getPersonData();
 		
-		//TODO isPrimary control on Communication and Addresses
 		try{
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			Session ses = Sessions.getCurrent();
@@ -91,7 +90,6 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			
 			PatientCarer[] listcarers = new PatientCarer[1];
 			listcarers[0]=new PatientCarer(car2set,true);
-			//PatientCarer[] listcarers = new PatientCarer[0];
 			
 			Patient patient = new Patient("",personData,sdData, resClinic, listcarers);
 			result = proxy.createPatient(patient, id);

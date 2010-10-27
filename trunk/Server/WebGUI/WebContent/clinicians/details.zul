@@ -6,17 +6,11 @@
 		import org.zkoss.util.resource.Labels;
 		String actions = Labels.getLabel("common.actions");
 		String data = Labels.getLabel("common.personal.data");
+		String clinid = (String)Executions.getCurrent().getParameter("clinid");
+		
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailClinicianController">
-	<label value="${actions }"/>
-	<grid>
-		<rows>
-			<row align="center" id="actionrow">
-			</row>
-		</rows>
-	</grid>
-	<separator height="10px"/>
 	<label value="${data }"/>
 	<listbox id="datarows">
 		<listhead>
@@ -24,6 +18,7 @@
 			<listheader/>
 		</listhead>
 	</listbox>
+	<button label="Update clinician data" href="/clinicians/update.zul?clinid=${clinid }"/>
 	</window>
 		<zscript>
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
@@ -32,7 +27,6 @@
 		String title = Labels.getLabel("clinicians.update.title");
 		page.setTitle(title);	
 		
-		String clinid = (String)Executions.getCurrent().getParameter("clinid");
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");

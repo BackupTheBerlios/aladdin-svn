@@ -36,6 +36,7 @@ public class AladdinFormControllerWindow extends Window{
 	protected Communication[] communications = null;
 	protected Address[] addresses = null;
 	protected Window popupaddresses = null;
+	protected Window popupcommunications = null;
 	
 	
 	/**
@@ -67,8 +68,10 @@ public class AladdinFormControllerWindow extends Window{
 			addresslist = new Address[0];
 		}
 		
-		Communication comlist[] = new Communication[1];
-		comlist[0]=this.getNewCommunicationData();
+		Communication comlist[] = this.getNewCommunicationData();
+		if(this.communications == null){
+			communications = new Communication[0];
+		}
 		
 		PersonData pdData = new PersonData(surname, name, idarr, addresslist, comlist);
 		return pdData;
@@ -97,21 +100,6 @@ public class AladdinFormControllerWindow extends Window{
 	 * @return Address object (it is not an array at all)
 	 */
 	protected Address[] getNewAddressData(){
-		/*
-		String street = ((Textbox)getFellow("pat_street")).getValue();
-		String streetno = ((Textbox)getFellow("pat_streetno")).getValue();
-		String city = ((Textbox)getFellow("pat_city")).getValue();
-		String county = ((Textbox)getFellow("pat_county")).getValue();
-		String country = ((Textbox)getFellow("pat_country")).getValue();
-		String zipcode = ((Textbox)getFellow("pat_zipcode")).getValue();
-		String notes = ((Textbox)getFellow("pat_notes")).getValue();
-
-		Checkbox primarybox = (Checkbox)getFellow("pat_primadd");
-			boolean isPrimary = primarybox.isChecked();
-		
-		Address address = new eu.aladdin_project.xsd.Address(street,streetno,city,county,country,zipcode,notes,isPrimary);
-		return address;
-		*/
 		return this.addresses;
 	}
 	
@@ -189,21 +177,76 @@ public class AladdinFormControllerWindow extends Window{
 		this.addresses = sustitute;
 	}
 	
+	public void addCommunicationToList(Window windowCom){
+		String type = ((Textbox)windowCom.getFellow("pat_comtype")).getValue();
+		String value = ((Textbox)windowCom.getFellow("pat_comval")).getValue();
+		String notes = ((Textbox)windowCom.getFellow("pat_comnote")).getValue();
+
+		Checkbox primarybox = (Checkbox)windowCom.getFellow("pat_comprim");
+			boolean isPrimary = primarybox.isChecked();
+		
+		Communication communication = new Communication(type,value,notes,isPrimary);
+		if(this.communications == null || this.communications.length == 0){
+			this.communications = new Communication[1];
+			this.communications[0] = communication;
+		}else{
+			Communication[] helpercom = new Communication[this.communications.length+1];
+			for(int i = 0; i<this.communications.length;i++){
+				helpercom[i] = this.communications[i];
+			}
+			helpercom[this.communications.length]=communication;
+			this.communications = helpercom;
+		}
+		this.insertComRow(communication);
+		this.removeChild(this.popupcommunications);
+	}
+	
+	protected void insertComRow(Communication com){
+		Rows rows = (Rows)getFellow("comgridrows");
+		Row newrow = new Row();
+		
+		Label town = new Label("");
+		Hbox hbox = new Hbox();
+		String thereststring = "("+com.getType()+") "+com.getValue();
+		if(com.isIsPrimary()){
+			thereststring += "* ";
+		}else{
+			thereststring += " ";
+		}
+		Label therest = new Label(thereststring);
+		hbox.appendChild(therest);
+		Label remove = new Label("Remove communication");
+		remove.setSclass("link");
+		remove.addEventListener("onClick", new RemoveComListener(newrow,com));
+		hbox.appendChild(remove);
+		
+		newrow.appendChild(town);
+		newrow.appendChild(hbox);
+		rows.appendChild(newrow);
+	}
+	
+	public void removeCommunication(Row rw, Communication com){
+		Rows rows = (Rows)this.getFellow("comgridrows");
+		rows.removeChild(rw);
+		Communication[] sustitute = new Communication[this.communications.length-1];
+		int j = 0;
+		for(int i = 0; i < this.communications.length-1; i++){
+			if(this.communications[j].equals(com)){
+				j++;
+			}
+			sustitute[i]=this.communications[j];
+			j++;
+		}
+		this.communications = sustitute;
+	}
+	
 	/**
 	 * Private method to generate a new Communication object
 	 * 
 	 * @return a Communication object, non an Array
 	 */
-	protected Communication getNewCommunicationData(){
-		String type = ((Textbox)getFellow("pat_comtype")).getValue();
-		String value = ((Textbox)getFellow("pat_comval")).getValue();
-		String notes = ((Textbox)getFellow("pat_comnote")).getValue();
-
-		Checkbox primarybox = (Checkbox)getFellow("pat_comprim");
-			boolean isPrimary = primarybox.isChecked();
-		
-		Communication communication = new Communication(type,value,notes,isPrimary);
-		return communication;
+	protected Communication[] getNewCommunicationData(){
+		return this.communications;
 	}
 	
 	protected void addPersonFields(){
@@ -325,11 +368,46 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void addCommunicationFields(){
+		String com = Labels.getLabel("patients.form.comunications");
+		Grid agrid = new Grid();
+		agrid.setSclass("grid");
+		this.appendColumns(agrid);
+			
+		Rows arows = new Rows();
+		arows.setId("comgridrows");
+			this.appendSubFormTitleRow(com, arows);
+			Row buttonrw = new Row();
+			Label labelbtn = new Label(" ");
+			Button btnaddress = new Button("Add communication");
+			btnaddress.addEventListener("onClick", new EventListener() {
+				
+				public void onEvent(Event arg0) throws Exception {
+					addCommunicationWindow();
+					popupcommunications.doModal();
+				}
+			});
+			buttonrw.appendChild(labelbtn);
+			buttonrw.appendChild(btnaddress);
+			arows.appendChild(buttonrw);
+		agrid.appendChild(arows);
+		this.appendChild(agrid);
+	}
+	
+	protected void addCommunicationWindow(){
 		String comtype = Labels.getLabel("patients.form.com.type");
 		String comval = Labels.getLabel("patients.form.com.value");
 		String com = Labels.getLabel("patients.form.comunications");
 		String prim = Labels.getLabel("patients.form.primary");
 		String notes = Labels.getLabel("patients.form.notes");
+		
+		this.popupcommunications = new Window();
+		this.popupcommunications.setTitle(com);
+		this.popupcommunications.setClosable(true);
+		this.popupcommunications.setVisible(false);
+		this.popupcommunications.setWidth("800px");
+		this.popupcommunications.setPosition("center, center");
+		this.popupcommunications.setBorder("normal");
+		this.appendChild(this.popupcommunications);
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
 		rowsA.add(new SimpleFieldData(comtype, "pat_comtype"));
@@ -349,27 +427,32 @@ public class AladdinFormControllerWindow extends Window{
 			this.appendTextboxFields(rowsA, rows);
 			this.appendCheckboxFields(rowsB, rows);
 			
+			Row buttonrw = new Row();
+			Label empty = new Label("");
+			buttonrw.appendChild(empty);
+			Button insertCom = new Button("Save communication");
+			insertCom.addEventListener("onClick", new CommunicationInsertListener(this.popupcommunications));
+			buttonrw.appendChild(insertCom);
+			rows.appendChild(buttonrw);
+			
 		pgrid.appendChild(rows);
-		this.appendChild(pgrid);
+		this.popupcommunications.appendChild(pgrid);
 		
 		Textbox tboxe = (Textbox)rows.getFellow("pat_comnote");
 		tboxe.setRows(4);
 		tboxe.setWidth("70%");
-		
 	}
+	
 	protected void addCommunicationFieldsValues(){
-		Communication[] communications = this.currentdata.getCommunicationList();
-		System.out.println("Communications LENGTH: "+communications.length);
-		for(int i = 0 ; i<communications.length; i++){
-			Communication comm = communications[i];
-			if(comm.isIsPrimary()){
-				((Textbox)this.getFellow("pat_comtype")).setValue(comm.getType());
-				((Textbox)this.getFellow("pat_comval")).setValue(comm.getValue());
-				((Textbox)this.getFellow("pat_comnote")).setValue(comm.getNotes());
-				((Checkbox)this.getFellow("pat_comprim")).setChecked(true);
+		this.communications = this.currentdata.getCommunicationList();
+		System.out.println("Communications LENGTH: "+ this.communications.length);
+		for(int i = 0 ; i<this.communications.length; i++){
+			if(this.communications[i] != null){
+				this.insertComRow(this.communications[i]);
 			}
 		}
 	}
+	
 	protected void appendColumns(Grid grid){
 		Columns cols = new Columns();
 		
@@ -507,6 +590,16 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 		}
 	}
 	
+	protected class CommunicationInsertListener implements EventListener{
+		private Window win;
+		public CommunicationInsertListener(Window window){
+			this.win = window;
+		}
+		public void onEvent(Event arg0) throws Exception {
+			addCommunicationToList(this.win);
+		}
+	}
+	
 	protected class RemoveAddressListener implements EventListener{
 		private Row row;
 		private Address as;
@@ -516,6 +609,18 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 		}
 		public void onEvent(Event arg0) throws Exception {
 			removeAddress(this.row, this.as);
+		}
+	}
+	
+	protected class RemoveComListener implements EventListener{
+		private Row row;
+		private Communication com;
+		public RemoveComListener(Row rowd, Communication comd){
+			this.row = rowd;
+			this.com = comd;
+		}
+		public void onEvent(Event arg0) throws Exception {
+			removeCommunication(this.row, this.com);
 		}
 	}
 	

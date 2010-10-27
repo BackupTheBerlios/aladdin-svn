@@ -34,13 +34,6 @@
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailPatientController">
-	<label value="${actions }"/>
-	<grid>
-		<rows>
-			<row align="center" id="actionrow"></row>
-		</rows>
-	</grid>
-	<separator height="10px"/>
 	<label value="${data }"/>
 	<listbox id="datarows">
 		<listhead>
@@ -48,6 +41,7 @@
 			<listheader/>
 		</listhead>
 	</listbox>
+	<button label="Update patient data" href="/patients/update.zul?patid=${objid }"/>
 	<separator height="10px"/>
 	<label id="taskrowslbl" value="${tasks }" visible="false"/>
 	<listbox id="taskrows" visible="false">
