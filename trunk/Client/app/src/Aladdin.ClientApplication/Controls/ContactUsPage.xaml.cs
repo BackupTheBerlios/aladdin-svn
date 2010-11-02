@@ -19,8 +19,36 @@ namespace Aladdin.ClientApplication.Controls
     /// </summary>
     public partial class ContactUsPage : UserControl
     {
+
+
+
+        public List<aladdinService.SystemParameter> ContactSituations
+        {
+            get { return (List<aladdinService.SystemParameter>)GetValue(ContactSituationsProperty); }
+            set { SetValue(ContactSituationsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ContactSituations.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContactSituationsProperty =
+            DependencyProperty.Register("ContactSituations", typeof(List<aladdinService.SystemParameter>), typeof(ContactUsPage));
+
+        
+
         public ContactUsPage()
         {
+            aladdinService.SystemParameter englishLocale = new aladdinService.SystemParameter();
+            englishLocale.Code = "en_US";
+            aladdinService.StorageComponent sc = new aladdinService.StorageComponent();
+            aladdinService.SystemParameter[] _contactSituations = sc.GetSystemParameterList((int)SystemParameterEnum.ContactReason, App.DefaultLocale);
+            if (_contactSituations != null)
+                this.ContactSituations = _contactSituations.ToList();
+            else
+            {
+                _contactSituations = sc.GetSystemParameterList((int)SystemParameterEnum.ContactReason, englishLocale);
+                if (_contactSituations != null)
+                    this.ContactSituations = _contactSituations.ToList();
+            }
+            this.DataContext = this;
             InitializeComponent();
         }
 
@@ -34,15 +62,15 @@ namespace Aladdin.ClientApplication.Controls
                 typeOfWarning.Code = "1";
                 typeOfWarning.Description = "Manual";
                 userWarning.TypeOfWarning = typeOfWarning;
-                string situation = "";
-                if (this.SituationComboBox.SelectedItem != null)
-                    situation = (this.SituationComboBox.SelectedItem as ComboBoxItem).Content.ToString();
-                userWarning.JustificationText = string.Format("Situation:{0}, Description:{1}", situation, this.DescriptionBox.Text);
+                aladdinService.SystemParameter situation = this.SituationComboBox.SelectedItem as aladdinService.SystemParameter;
+                string situationStr = "";
+                if (situation != null)
+                    situationStr = situation.Description;
+
+                userWarning.JustificationText = string.Format("Situation:{0}, Description:{1}", situationStr, this.DescriptionBox.Text);
                 userWarning.PatientID = App.PatientID;
                 aladdinService.OperationResult res = sc.SaveWarning(userWarning, App.CurrentUserID);
-
             }
-    
         }
     }
 }

@@ -87,6 +87,9 @@ namespace Aladdin.ClientApplication.Controls
                 App.ServerAddress = this.serverAddress.Text;
                 Settings.Default.Aladdin_ClientApplication_aladdinService_StorageComponent = App.ServerAddress;
                 Settings.Default.Save();
+
+                System.Windows.Forms.Application.Restart();
+                App.ThisApp.Shutdown();
             }
         }
 

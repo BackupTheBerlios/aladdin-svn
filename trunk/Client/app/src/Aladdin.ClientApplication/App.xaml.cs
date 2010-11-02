@@ -13,14 +13,22 @@ namespace Aladdin.ClientApplication
     public partial class App : Application
     {
 
+        public static App ThisApp { get; private set; }
         public static bool   IsUserAuthenticated;
         public static string CurrentUserID;
         public static string PatientID;
         public static aladdinService.SystemParameter DefaultLanguage;
+        public static aladdinService.SystemParameter DefaultLocale;
         public static string ServerAddress;
         public static string LoginErrorMessage { get; set; }
         public static List<aladdinService.Task> ActiveTasks { get; set; }
         public static string PatientQuestionnaireTempPath { get; set; }
+
+
+        public App()
+        {
+            App.ThisApp = this;
+        }
 
     }
 }

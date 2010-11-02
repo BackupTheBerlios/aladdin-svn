@@ -3,8 +3,8 @@
 
     <Style TargetType="{x:Type Button}" BasedOn="{x:Null}" x:Key="NormalButton">
         <Setter Property="Template" Value="{DynamicResource ButtonTemplate}" />
-        <Setter Property="MinWidth" Value="300"/>
-        <Setter Property="MaxWidth" Value="300"/>
+        <Setter Property="MinWidth" Value="350"/>
+        <Setter Property="MaxWidth" Value="350"/>
         <Setter Property="MinHeight" Value="100"/>
         <Setter Property="MaxHeight" Value="100"/>
         <Setter Property="FontSize" Value="48"/>
@@ -20,14 +20,14 @@
     </Style>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="LargeButton">
-        <Setter Property="MinWidth" Value="400"/>
-        <Setter Property="MaxWidth" Value="400"/>
-        <Setter Property="MinHeight" Value="250"/>
-        <Setter Property="MaxHeight" Value="250"/>
+        <Setter Property="MinWidth" Value="450"/>
+        <Setter Property="MaxWidth" Value="450"/>
+        <Setter Property="MinHeight" Value="300"/>
+        <Setter Property="MaxHeight" Value="300"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}" x:Key="LoginButton">
-        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MinWidth" Value="350"/>
         <Setter Property="MaxWidth" Value="500"/>
         <Setter Property="MinHeight" Value="130"/>
         <Setter Property="MaxHeight" Value="130"/>

@@ -31,4 +31,20 @@ namespace Aladdin.ClientApplication
         Weight = 2
     }
 
+    public enum SystemParameterEnum
+    {
+        Gender = 1,
+        MaritalStatus = 2,
+        LivingWith = 3,
+        MeasurementType = 4,
+        TaskType = 5,
+        TaskStatus = 6,
+        WarningType = 7,
+        WarningEffect = 8,
+        WarningIndicator = 9,
+        WarningRiskLevel = 10,
+        WarningEmergencyLevel = 11,
+        ContactReason = 12 
+    }
+
 }

@@ -141,6 +141,8 @@ namespace Aladdin.ClientApplication.aladdinService {
         
         private System.Threading.SendOrPostCallback GetUserIdByPersonIdOperationCompleted;
         
+        private System.Threading.SendOrPostCallback UpdateSystemParameterOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -346,6 +348,9 @@ namespace Aladdin.ClientApplication.aladdinService {
         
         /// <remarks/>
         public event GetUserIdByPersonIdCompletedEventHandler GetUserIdByPersonIdCompleted;
+        
+        /// <remarks/>
+        public event UpdateSystemParameterCompletedEventHandler UpdateSystemParameterCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/CreatePatient", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -2030,26 +2035,26 @@ namespace Aladdin.ClientApplication.aladdinService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/GetSystemParameterList", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public SystemParameter[] GetSystemParameterList([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int type, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int language) {
+        public SystemParameter[] GetSystemParameterList([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int type, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale) {
             object[] results = this.Invoke("GetSystemParameterList", new object[] {
                         type,
-                        language});
+                        locale});
             return ((SystemParameter[])(results[0]));
         }
         
         /// <remarks/>
-        public void GetSystemParameterListAsync(int type, int language) {
-            this.GetSystemParameterListAsync(type, language, null);
+        public void GetSystemParameterListAsync(int type, SystemParameter locale) {
+            this.GetSystemParameterListAsync(type, locale, null);
         }
         
         /// <remarks/>
-        public void GetSystemParameterListAsync(int type, int language, object userState) {
+        public void GetSystemParameterListAsync(int type, SystemParameter locale, object userState) {
             if ((this.GetSystemParameterListOperationCompleted == null)) {
                 this.GetSystemParameterListOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSystemParameterListOperationCompleted);
             }
             this.InvokeAsync("GetSystemParameterList", new object[] {
                         type,
-                        language}, this.GetSystemParameterListOperationCompleted, userState);
+                        locale}, this.GetSystemParameterListOperationCompleted, userState);
         }
         
         private void OnGetSystemParameterListOperationCompleted(object arg) {
@@ -2150,6 +2155,40 @@ namespace Aladdin.ClientApplication.aladdinService {
             if ((this.GetUserIdByPersonIdCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetUserIdByPersonIdCompleted(this, new GetUserIdByPersonIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://aladdin-project.eu/StorageComponent/UpdateSystemParameter", RequestNamespace="http://aladdin-project.eu/StorageComponent/", ResponseNamespace="http://aladdin-project.eu/StorageComponent/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("out", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public OperationResult UpdateSystemParameter([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] int type, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter value, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] SystemParameter locale) {
+            object[] results = this.Invoke("UpdateSystemParameter", new object[] {
+                        type,
+                        value,
+                        locale});
+            return ((OperationResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateSystemParameterAsync(int type, SystemParameter value, SystemParameter locale) {
+            this.UpdateSystemParameterAsync(type, value, locale, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateSystemParameterAsync(int type, SystemParameter value, SystemParameter locale, object userState) {
+            if ((this.UpdateSystemParameterOperationCompleted == null)) {
+                this.UpdateSystemParameterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateSystemParameterOperationCompleted);
+            }
+            this.InvokeAsync("UpdateSystemParameter", new object[] {
+                        type,
+                        value,
+                        locale}, this.UpdateSystemParameterOperationCompleted, userState);
+        }
+        
+        private void OnUpdateSystemParameterOperationCompleted(object arg) {
+            if ((this.UpdateSystemParameterCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateSystemParameterCompleted(this, new UpdateSystemParameterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -6098,6 +6137,32 @@ namespace Aladdin.ClientApplication.aladdinService {
         private object[] results;
         
         internal GetUserIdByPersonIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public OperationResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((OperationResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void UpdateSystemParameterCompletedEventHandler(object sender, UpdateSystemParameterCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateSystemParameterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateSystemParameterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

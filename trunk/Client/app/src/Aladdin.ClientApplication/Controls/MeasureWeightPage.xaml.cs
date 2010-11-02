@@ -46,5 +46,38 @@ namespace Aladdin.ClientApplication.Controls
             if (AppCommands.SendMeasurementCommand.Equals(e.Command))
                 e.CanExecute = this.ViewModel.CanSendMeasurements();
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            NumberPad pad = new NumberPad();
+            pad.NumberPadPressed += new NumberPadPressedEventHandler(pad_NumberPadPressed);
+            pad.NumberPadClosed += new NumberPadClosedEventHandler(pad_NumberPadClosed);
+            pad.ShowDialog();
+        }
+
+        void pad_NumberPadClosed(object sender)
+        {
+            this.SendBtn.Focus();
+        }
+
+        void pad_NumberPadPressed(object sender, string character)
+        {
+            bool insert = true;
+            if (character.Equals("BACKSPACE"))
+            {
+                if (this.ViewModel.WeightText.Length > 0)
+                {
+                    this.ViewModel.WeightText = this.ViewModel.WeightText.Substring(0, this.ViewModel.WeightText.Length - 1);
+                }
+                return;
+            } 
+            else if (character.Equals("."))
+                if (this.ViewModel.WeightText.Contains(character))
+                    insert = false;
+            if (insert)
+                this.ViewModel.WeightText += character;
+
+            
+        }
     }
 }

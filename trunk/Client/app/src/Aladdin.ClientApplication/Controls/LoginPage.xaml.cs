@@ -49,10 +49,14 @@ namespace Aladdin.ClientApplication.Controls
         {
             using (aladdinService.StorageComponent sc = new aladdinService.StorageComponent())
             {
+                Cursor = Cursors.Wait;
+
                 try
                 {
-                    aladdinService.OperationResult res = sc.Auth("Maria", "Maria");
-                    if (res.Code != "0")
+                    aladdinService.OperationResult res = sc.Auth(this.UserName, this.Password);
+                    if (res.Code == "-2")
+                        this.txtMessage.Text = res.Description;
+                    else if (res.Code != "0")
                     {
                         App.IsUserAuthenticated = true;
                         App.CurrentUserID = res.Code;
@@ -69,7 +73,7 @@ namespace Aladdin.ClientApplication.Controls
                     this.txtMessage.Text = ex.Message;
                 }
 
-                
+                Cursor = Cursors.Arrow;
             }
         }
 

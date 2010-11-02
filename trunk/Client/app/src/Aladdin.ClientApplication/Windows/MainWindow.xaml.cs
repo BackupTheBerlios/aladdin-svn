@@ -41,32 +41,41 @@ namespace Aladdin.ClientApplication.Windows
         {
             ResourceDictionary dict = new ResourceDictionary();
             aladdinService.SystemParameter defaultLanguage = new aladdinService.SystemParameter();
+            aladdinService.SystemParameter locale = new aladdinService.SystemParameter();
             defaultLanguage.Code = ConfigurationManager.AppSettings["DefaultLanguage"];
             App.DefaultLanguage = defaultLanguage; App.ServerAddress = Settings.Default.Aladdin_ClientApplication_aladdinService_StorageComponent;
             switch (App.DefaultLanguage.Code)
             {
                 case "1":
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    locale.Code = "en_US";
                     break;
                 case "2":
                     dict.Source = new Uri("..\\Resources\\StringResources.es-ES.xaml", UriKind.Relative);
+                    locale.Code = "es_ES";
                     break;
                 case "3":
                     dict.Source = new Uri("..\\Resources\\StringResources.el-GR.xaml", UriKind.Relative);
+                    locale.Code = "el_GR";
                     break;
                 case "4":
                     dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
+                    locale.Code = "it_IT";
                     break;
                 case "5":
-                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);                    
+                    dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);
+                    locale.Code = "de_DE";
                     break;
                 case "6":
                     dict.Source = new Uri("..\\Resources\\StringResources.ca-CA.xaml", UriKind.Relative);
+                    locale.Code = "ca_CA";
                     break;
                 default:
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    locale.Code = "en_US";
                     break;
             }
+            App.DefaultLocale = locale;
             this.Resources.MergedDictionaries.Add(dict);
         }
 

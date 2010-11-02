@@ -27,11 +27,42 @@ namespace Aladdin.ClientApplication.Controls
 
         private void GetMyTasks()
         {
+            Cursor = Cursors.Wait;
+
             try
             {
                 this.TaskPanel.Children.Clear();
                 aladdinService.StorageComponent sc = new aladdinService.StorageComponent();
-                App.ActiveTasks = sc.GetUserPlannedTasks(App.CurrentUserID, new DateTime(2010, 10, 1), new DateTime(2010, 10, 15), App.DefaultLanguage, App.CurrentUserID).ToList();
+                DateTime today = System.DateTime.Now;
+                DateTime dateFrom = new DateTime(today.Year, today.Month, today.Day);
+                DateTime dateTo = new DateTime(today.Year, today.Month, today.Day);
+
+                App.ActiveTasks = sc.GetUserPlannedTasks(App.CurrentUserID, dateFrom, dateTo, App.DefaultLanguage, App.CurrentUserID).ToList();
+
+                //#region testing code
+                //App.ActiveTasks = new List<aladdinService.Task>();
+
+                //aladdinService.Task weighttask = new aladdinService.Task();
+                //weighttask.ID = "111";
+                //aladdinService.SystemParameter _taskType1 = new aladdinService.SystemParameter();
+                //_taskType1.Code = Convert.ToString((int)TaskTypesEnum.WeightMeasurement);
+                //weighttask.TaskType = _taskType1;
+                //aladdinService.SystemParameter _taskStatus = new aladdinService.SystemParameter();
+                //_taskStatus.Code = Convert.ToString((int)TaskStatusEnum.Pending);
+                //weighttask.TaskStatus = _taskStatus;
+                //App.ActiveTasks.Add(weighttask);
+
+                //aladdinService.Task mtask = new aladdinService.Task();
+                //mtask.ID = "222";
+                //aladdinService.SystemParameter _taskType2 = new aladdinService.SystemParameter();
+                //_taskType2.Code = Convert.ToString((int)TaskTypesEnum.BloodPressureMeasurement);
+                //mtask.TaskType = _taskType2;
+                //_taskStatus.Code = Convert.ToString((int)TaskStatusEnum.Pending);
+                //mtask.TaskStatus = _taskStatus;
+                //App.ActiveTasks.Add(mtask);
+                //#endregion
+
+
                 App.ActiveTasks = App.ActiveTasks.Where(c => Convert.ToInt32(c.TaskStatus.Code) != (int) TaskStatusEnum.Canceled).ToList();
 
                 foreach (aladdinService.Task task in App.ActiveTasks)
@@ -91,7 +122,7 @@ namespace Aladdin.ClientApplication.Controls
                             taskControl.IsPending = true;
                             break;
                         case (int)TaskStatusEnum.Completed:
-                            taskControl.IsPending = false;
+                            taskControl.IsPending = false; 
                             break;
                         default:
                             break;
@@ -106,6 +137,8 @@ namespace Aladdin.ClientApplication.Controls
             {
                 string msg = ex.Message;
             }
+
+            Cursor = Cursors.Arrow;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

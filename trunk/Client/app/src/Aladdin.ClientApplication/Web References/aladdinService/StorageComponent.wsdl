@@ -795,7 +795,7 @@
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="type" type="xsd:int" />
-            <xsd:element name="language" type="xsd:int" />
+            <xsd:element name="locale" type="aladdin:SystemParameter" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -844,6 +844,22 @@
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="GetUserIdByPersonIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="aladdin:OperationResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateSystemParameter">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="type" type="xsd:int" />
+            <xsd:element name="value" type="aladdin:SystemParameter" />
+            <xsd:element name="locale" type="aladdin:SystemParameter" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateSystemParameterResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="out" type="aladdin:OperationResult" />
@@ -965,6 +981,9 @@
   </wsdl:message>
   <wsdl:message name="SaveWarningResponse">
     <wsdl:part name="parameters" element="tns:SaveWarningResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSystemParameterRequest">
+    <wsdl:part name="parameters" element="tns:UpdateSystemParameter" />
   </wsdl:message>
   <wsdl:message name="GetSystemParameterListResponse">
     <wsdl:part name="parameters" element="tns:GetSystemParameterListResponse" />
@@ -1133,6 +1152,9 @@
   </wsdl:message>
   <wsdl:message name="CreateClinicianRequest">
     <wsdl:part name="parameters" element="tns:CreateClinician" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSystemParameterResponse">
+    <wsdl:part name="parameters" element="tns:UpdateSystemParameterResponse" />
   </wsdl:message>
   <wsdl:message name="MarkWarningAsReadRequest">
     <wsdl:part name="parameters" element="tns:MarkWarningAsRead" />
@@ -1412,6 +1434,10 @@
     <wsdl:operation name="GetUserIdByPersonId">
       <wsdl:input message="tns:GetUserIdByPersonIdRequest" />
       <wsdl:output message="tns:GetUserIdByPersonIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSystemParameter">
+      <wsdl:input message="tns:UpdateSystemParameterRequest" />
+      <wsdl:output message="tns:UpdateSystemParameterResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP" type="tns:StorageComponent">
@@ -1913,6 +1939,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserIdByPersonId">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetUserIdByPersonId" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSystemParameter">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/UpdateSystemParameter" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

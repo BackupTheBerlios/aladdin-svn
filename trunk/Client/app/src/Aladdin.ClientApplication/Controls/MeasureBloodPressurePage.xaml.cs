@@ -48,6 +48,63 @@ namespace Aladdin.ClientApplication.Controls
                 e.CanExecute = this.ViewModel.CanSendMeasurements();
         }
 
+        private void DiastolicBloodPressure_GotFocus(object sender, RoutedEventArgs e)
+        {
+            NumberPad pad = new NumberPad();
+            pad.NumberPadPressed += new NumberPadPressedEventHandler(DiastolicBloodPressure_NumberPadPressed);
+            pad.NumberPadClosed += new NumberPadClosedEventHandler(pad_NumberPadClosed);
+            pad.ShowDialog();
+        }
+
+        private void SystolicBloodPressure_GotFocus(object sender, RoutedEventArgs e)
+        {
+            NumberPad pad = new NumberPad();
+            pad.NumberPadPressed += new NumberPadPressedEventHandler(SystolicBloodPressure_NumberPadPressed);
+            pad.NumberPadClosed += new NumberPadClosedEventHandler(pad_NumberPadClosed);
+            pad.ShowDialog();
+        }
+
+        void pad_NumberPadClosed(object sender)
+        {
+            this.SendBtn.Focus();
+        }
+
+        void DiastolicBloodPressure_NumberPadPressed(object sender, string character)
+        {
+            bool insert = true;
+            if (character.Equals("BACKSPACE"))
+            {
+                if (this.ViewModel.DiastolicBloodPressureText.Length > 0)
+                {
+                    this.ViewModel.DiastolicBloodPressureText = this.ViewModel.DiastolicBloodPressureText.Substring(0, this.ViewModel.DiastolicBloodPressureText.Length - 1);
+                }
+                return;
+            }
+            else if (character.Equals("."))
+                if (this.ViewModel.DiastolicBloodPressureText.Contains(character))
+                    insert = false;
+            if (insert)
+                this.ViewModel.DiastolicBloodPressureText += character;
+        }
+
+        void SystolicBloodPressure_NumberPadPressed(object sender, string character)
+        {
+            bool insert = true;
+            if (character.Equals("BACKSPACE"))
+            {
+                if (this.ViewModel.SystolicBloodPressureText.Length > 0)
+                {
+                    this.ViewModel.SystolicBloodPressureText = this.ViewModel.SystolicBloodPressureText.Substring(0, this.ViewModel.SystolicBloodPressureText.Length - 1);
+                }
+                return;
+            }
+            else if (character.Equals("."))
+                if (this.ViewModel.SystolicBloodPressureText.Contains(character))
+                    insert = false;
+            if (insert)
+                this.ViewModel.SystolicBloodPressureText += character;
+        }
+
 
     }
 }

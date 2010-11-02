@@ -192,7 +192,7 @@ namespace Aladdin.ClientApplication.ViewModels
                         break;
                     case "SocialNetwork":
                         page = this.ExternalServicePage;
-                        (page as ExternalServicePage).Url = "http://www.facebook.com";
+                        (page as ExternalServicePage).Url = "http://dafnis.atosorigin.es/aladdin/phpBB3/index.php";
                         break;
                     default:
                         break;

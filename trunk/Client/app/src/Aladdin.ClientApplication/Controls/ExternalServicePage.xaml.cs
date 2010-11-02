@@ -34,6 +34,8 @@ namespace Aladdin.ClientApplication.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            Cursor = Cursors.Wait;
+
             try
             {
                 Uri uri = new Uri(Url);
@@ -41,6 +43,8 @@ namespace Aladdin.ClientApplication.Controls
                     this.WebBrowser.Source = uri;
             }
             catch (Exception ex) { }
+
+            Cursor = Cursors.Arrow;
         }
     }
 }
