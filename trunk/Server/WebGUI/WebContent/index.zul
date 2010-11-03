@@ -8,6 +8,7 @@
 		String title = Labels.getLabel("home.title");
 		page.setTitle(title);
 		String newprof = Labels.getLabel("home.newprofile");
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 	</zscript>
 	<style dynamic="true">
 		.gridnolayout tr.z-row td.z-row-inner, tr.z-row .z-cell,div.z-grid{
@@ -37,7 +38,13 @@
 				<row height="200px">
 					<button href="/qm/" label="Open question manager" height="180px" width="80%" image="/inc/icons/qm.png"/>
 					<button href="/extsrv/" label="Manage external services" height="180px" width="80%" image="/inc/icons/services.png"/>
-					<button  href="/warnings/" label="View clinical warnings" height="180px" width="80%" image="/inc/icons/warning.png"/>
+					<button  href="/warnings/" label="View clinical warnings" height="180px" width="80%" image="/inc/icons/warning.png">
+						<attribute name="onCreate">
+							if(isadmin){
+								self.setDisabled(true);
+							}
+						</attribute>
+					</button>
 				</row>
 			</rows>
 		</grid>

@@ -11,6 +11,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Row;
@@ -71,6 +72,7 @@ public class QuestionWindow extends Window{
 			this.setAnswersRows();
 		}
 		this.getFellow("freeanswrow").setVisible(false);
+		
 	}
 	
 	public void saveQuestion(){
@@ -79,6 +81,10 @@ public class QuestionWindow extends Window{
 		q.setId(this.ID);
 		
 		String title = ((Textbox)getFellow("question_text")).getValue();
+		if(getFellow("question_condrow").isVisible()){
+			Integer condition = ((Intbox)getFellow("question_cond")).getValue();
+			q.setCondition(new UnsignedByte(condition));
+		}
 		q.setTitle(title);
 		q.setQuestions(new QuestionnaireQuestion[0]);
 		
@@ -108,8 +114,8 @@ public class QuestionWindow extends Window{
 		String text = txtbox.getValue();
 		
 		Row row = new Row();
-		String rowid = val+"-rowform";
-		row.setId(rowid);
+		//String rowid = val+"-rowform";
+		//row.setId(rowid);
 		Label lab1 = new Label();
 		lab1.setValue(val);
 		row.appendChild(lab1);
@@ -120,16 +126,7 @@ public class QuestionWindow extends Window{
 		
 		Button btn = new Button();
 		btn.setLabel("-");
-		btn.addEventListener("onClick", new EventListener() {
-			
-			public void onEvent(Event arg0) throws Exception {
-				Component comp = arg0.getTarget();
-				comp = comp.getParent();
-				System.out.println(comp.getId());
-				removeRow(comp);
-				
-			}
-		});
+		btn.addEventListener("onClick", new RemoveAnswerListener(row, text));
 		row.appendChild(btn);
 		
 		Rows rows = (Rows)getFellow("rows");
@@ -152,11 +149,11 @@ public class QuestionWindow extends Window{
 	 * 
 	 * @param comp Component to remove. It is a Row
 	 */
-	public void removeRow(Component comp){
+	public void removeRow(Component comp, String text){
 		Rows rows = (Rows)getFellow("rows");
 		rows.removeChild(comp);
 		System.out.println("SIZE before: "+this.answers.size());
-		this.removeAnswer(comp.getId().substring(0, comp.getId().length()-8));
+		this.removeAnswer(text);
 		System.out.println("SIZE after: "+this.answers.size());
 	}
 	
@@ -165,12 +162,12 @@ public class QuestionWindow extends Window{
 	 * 
 	 * @param ID String which can be parsed to an UnsignedByte
 	 */
-	private void removeAnswer(String ID){
-		UnsignedByte idbyte = new UnsignedByte(ID);
+	private void removeAnswer(String text){
 		for(int i=0;i<this.answers.size(); i++){
 			QuestionnaireQuestionAnswer elem = this.answers.get(i);
-			if(elem.getValue().equals(idbyte)){
+			if(elem.get_value().equals(text)){
 				this.answers.remove(i);
+				break;
 			}
 		}
 	}
@@ -237,6 +234,18 @@ public class QuestionWindow extends Window{
 					row1.appendChild(tbox1);
 				rows.appendChild(row1);
 				
+			Row row02 = new Row();
+				Label lab02 = new Label();
+				lab02.setValue("Condition (numeric)");
+				row02.appendChild(lab02);
+	
+				Intbox tbox02 = new Intbox();
+				tbox02.setId("question_cond");
+				row02.appendChild(tbox02);
+				row02.setVisible(false);
+				row02.setId("question_condrow");
+			rows.appendChild(row02);
+				
 			grid.appendChild(rows);
 			
 		this.appendChild(grid);
@@ -256,6 +265,9 @@ public class QuestionWindow extends Window{
 	
 	private void setMainGridFields(QuestionnaireQuestion q){
 		((Textbox)getFellow("question_text")).setValue(q.getTitle());
+		if(q.getCondition() != null){
+			((Intbox)getFellow("question_cond")).setValue(new Integer(q.getCondition().toString()));
+		}
 	}
 	
 	private void addFreeAnswerRow(){
@@ -330,8 +342,8 @@ public class QuestionWindow extends Window{
 		for(int i = 0; i<this.answers.size(); i++){
 			QuestionnaireQuestionAnswer answer = this.answers.get(i);
 			Row row = new Row();
-			String rowid = answer.getValue().toString()+"-rowform";
-			row.setId(rowid);
+			//String rowid = answer.getValue().toString()+"-rowform";
+			//row.setId(rowid);
 			Label lab1 = new Label();
 			lab1.setValue(answer.getValue().toString());
 			row.appendChild(lab1);
@@ -342,16 +354,7 @@ public class QuestionWindow extends Window{
 			
 			Button btn = new Button();
 			btn.setLabel("-");
-			btn.addEventListener("onClick", new EventListener() {
-				
-				public void onEvent(Event arg0) throws Exception {
-					Component comp = arg0.getTarget();
-					comp = comp.getParent();
-					System.out.println(comp.getId());
-					removeRow(comp);
-					
-				}
-			});
+			btn.addEventListener("onClick", new RemoveAnswerListener(row, answer.get_value()));
 			row.appendChild(btn);
 			
 			Rows rows = (Rows)getFellow("rows");
@@ -382,6 +385,22 @@ public class QuestionWindow extends Window{
 			this.getFellow("multipleanswrow").setVisible(false);
 			break;
 		}
+	}
+	
+	private class RemoveAnswerListener implements EventListener{
+		
+		private Component comp;
+		private String text;
+		
+		public RemoveAnswerListener(Component compR, String textR){
+			comp = compR;
+			textR = text;
+		}
+
+		public void onEvent(Event arg0) throws Exception {
+			removeRow(comp, text);
+		}
+		
 	}
 	
 }

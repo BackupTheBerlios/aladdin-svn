@@ -32,7 +32,7 @@ public class CalendarWindowController extends Window {
 			getFellow("urlrow").setVisible(true);
 			getFellow("qsrow").setVisible(false);
 			System.out.println("IEEE");
-		}else if(comp == SystemDictionary.TASK_TYPE_CARERQS_INT){
+		}else if(comp == SystemDictionary.TASK_TYPE_CARERQS_INT || comp == SystemDictionary.TASK_TYPE_PATIENTQS_INT){
 			getFellow("urlrow").setVisible(false);
 			getFellow("qsrow").setVisible(true);
 			System.out.println("EEEI");
@@ -83,7 +83,7 @@ public class CalendarWindowController extends Window {
 			String addressedids = ((Textbox)getFellow("addressedid")).getValue();
 			OperationResult result = proxy.getUserIdByPersonId(addressedids, SystemDictionary.USERTYPE_PATIENT_INT, userids);
 			System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
-			
+			System.out.println("QUESTIONNAIRE: "+questionnaire.length);
 			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, objids, userids, result.getCode());
 			OperationResult opres = proxy.assignTask(ts,userids);
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());

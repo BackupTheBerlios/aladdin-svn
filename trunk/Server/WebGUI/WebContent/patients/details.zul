@@ -19,9 +19,19 @@
 		String personaddr = Labels.getLabel("common.addressed.person");
 		String assigned = Labels.getLabel("common.date.assigned");
 		String fulfilled = Labels.getLabel("common.date.fulfilled");
+		String prevmonth = Labels.getLabel("common.month.next");
+		String nextmonth = Labels.getLabel("common.month.previous");
+		String datestr = Labels.getLabel("common.date");
+		
+		String aetio = Labels.getLabel("patients.ass.aetiology");
+		String timesinced = Labels.getLabel("patients.ass.time.sinced");
+		String sever = Labels.getLabel("patients.ass.severity");
+		String assmnts = Labels.getLabel("patients.ass");
+		String weekfirstd = Labels.getLabel("common.firstday.week");
 		
 		String title = Labels.getLabel("patients.update.title");
 		page.setTitle(title);	
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		
 		String objid = (String)Executions.getCurrent().getParameter("patid");
 		PatientAssessment[] assessmentlist = null;
@@ -41,7 +51,7 @@
 			<listheader/>
 		</listhead>
 	</listbox>
-	<button label="Update patient data" href="/patients/update.zul?patid=${objid }"/>
+	<button if="${!isadmin }" label="${title }" href="/patients/update.zul?patid=${objid }"/>
 	<separator height="10px"/>
 	<label id="taskrowslbl" value="${tasks }" visible="false"/>
 	<listbox id="taskrows" visible="false">
@@ -62,11 +72,11 @@
 			<label id="exechelp" visible="false" value="${objid }"/>
 			<div class="float-left">
 				<hbox>
-					<div sclass="arrow-left"><label value="Previous Month" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
-					<div sclass="arrow-right"><label value="Next Month" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
+					<div sclass="arrow-left"><label value="${prevmonth }" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
+					<div sclass="arrow-right"><label value="${nextmonth }" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
 				<div>
 				<span id="FDOW">
-				First Day of Week:
+				<label value="${weekfirstd }:"/>
 				<listbox mold="select" onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());" onCreate="self.setSelectedIndex(0)">
 					<listitem forEach="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" label="${each}" />
 			    </listbox>
@@ -92,16 +102,16 @@
 		</toolbar>
 	</calendars>
 	<separator height="10px"/>
-	<label value="Assessments"/>
+	<label value="${assmnts }"/>
 	<separator height="5px"/>
 	<?component name="AssessmentDetail" macroURI="assessment.zul"?>
 	<grid>
 		<columns>
-			<column label="ID"/>
-			<column label="Date"/>
-			<column label="Aetiology"/>
-			<column label="Time since diagnosed"/>
-			<column label="Severity"/>
+			<column label="${ids }"/>
+			<column label="${datestr }"/>
+			<column label="${aetio }"/>
+			<column label="${timesinced }"/>
+			<column label="${sever }"/>
 			<column/>
 		</columns>
 		<rows>

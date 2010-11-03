@@ -158,6 +158,7 @@ public class QuestionnaireFormWindow extends Window{
 	public void showAnswerWindow(String parent) throws InterruptedException{
 		System.out.println("Parent question: "+parent);
 		Window win = new QuestionWindow(this, this.getNewQuestionID(),parent);
+		win.getFellow("question_condrow").setVisible(true);
 		this.appendChild(win);
 		win.doModal();
 	}
@@ -240,7 +241,6 @@ public class QuestionnaireFormWindow extends Window{
 			public void onEvent(Event arg0) throws Exception {
 				Component comp = arg0.getTarget();
 				comp = comp.getParent();
-				System.out.println(comp.getId());
 				removeQuestionRow(comp);
 				
 			}
@@ -256,24 +256,27 @@ public class QuestionnaireFormWindow extends Window{
 	 * @param comp Row UI-component to be removed
 	 */
 	private void removeQuestionRow(Component comp){
+		System.out.println(comp.getId());
 		Rows rows = (Rows)getFellow("rows_questions");
+		String ID = comp.getId().substring(0, comp.getId().length()-8);
 		rows.removeChild(comp);
-	//	System.out.println("QSIZE before: "+this.questionlist.size());
-		this.removeQuestion(comp.getId().substring(0, comp.getId().length()-8));
-	//	System.out.println("QSIZE after: "+this.questionlist.size());
-	}
-	
-	/**
-	 * Helper methos to remove question from the instance ArrayList
-	 * 
-	 * @param ID String containing the ID of the question to be removed.
-	 */
-	private void removeQuestion(String ID){
 		for(int i=0;i<this.questionlist.size(); i++){
 			if(this.questionlist.get(i).getId().equals(ID)){
+				System.out.println("QSIZE before: "+this.questionlist.size());
 				this.questionlist.remove(i);
+				System.out.println("QSIZE after: "+this.questionlist.size());
 			}
 		}
+		
+		ArrayList<RelatedQuestion> copy = (ArrayList<RelatedQuestion>)this.questionlist.clone();
+		for(int i = 0 ; i < copy.size() ; i++){
+			if(copy.get(i).getParent().equals(ID)){
+				this.removeQuestionRow((Row)getFellow(copy.get(i).getId()+"-rowqstn"));
+			}
+		}
+		
+		//this.removeQuestion(ID);
+		
 	}
 	
 	/**
@@ -308,6 +311,9 @@ public class QuestionnaireFormWindow extends Window{
 		for(int i=0; i<this.questionlist.size(); i++){
 			if(this.questionlist.get(i).getId().equals(id)){
 				Window win = new QuestionWindow(this, this.questionlist.get(i).getQuestion());
+				if(!this.questionlist.get(i).getParent().equals("0")){
+					win.getFellow("question_condrow").setVisible(true);
+				}
 				this.appendChild(win);
 				win.doModal();
 			}

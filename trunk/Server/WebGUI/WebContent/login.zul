@@ -53,9 +53,12 @@
  						//TODO Return not allowed user type
  						throw new eu.aladdin_project.exceptions.InvalidUserTypeException();
  					}
+ 					String adminlbl = SystemDictionary.USERTYPE_ADMIN;
+ 					Boolean isadmin = adminlbl.equals(usertype);
  					session.setAttribute("user",user);
  					session.setAttribute("userid",result.getCode());
  					session.setAttribute("usertype",usertype);
+ 					session.setAttribute("isadmin",isadmin);
  					//session.setAttribute("username",username);
  					//session.setAttribute("usersname",usersname);
  				}

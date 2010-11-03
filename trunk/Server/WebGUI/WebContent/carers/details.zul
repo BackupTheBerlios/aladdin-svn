@@ -17,6 +17,10 @@
 		String assigned = Labels.getLabel("common.date.assigned");
 		String fulfilled = Labels.getLabel("common.date.fulfilled");
 		
+		String prevmonth = Labels.getLabel("common.month.next");
+		String nextmonth = Labels.getLabel("common.month.previous");
+		String weekfirstd = Labels.getLabel("common.firstday.week");
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		
 		String title = Labels.getLabel("carers.update.title");
 		page.setTitle(title);	
@@ -32,7 +36,7 @@
 			<listheader/>
 		</listhead>
 	</listbox>
-	<button label="Update carer data" href="/carers/update.zul?carerid=${objid }"/>
+	<button if="${!isadmin }" label="${title }" href="/carers/update.zul?carerid=${objid }"/>
 	<separator height="10px"/>
 	<label id="taskrowslbl" value="${tasks}" visible="false"/>
 	<listbox id="taskrows" visible="false">
@@ -53,11 +57,11 @@
 			<label id="exechelp" visible="false" value="${objid }"/>
 			<div class="float-left">
 				<hbox>
-					<div sclass="arrow-left"><label value="Previous Month" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
-					<div sclass="arrow-right"><label value="Next Month" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
+					<div sclass="arrow-left"><label value="${prevmonth }" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
+					<div sclass="arrow-right"><label value="${nextmonth }" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
 				<div>
 				<span id="FDOW">
-				First Day of Week:
+				<label value="${weekfirstd }:"/>
 				<listbox mold="select" onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());" onCreate="self.setSelectedIndex(0)">
 					<listitem forEach="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" label="${each}" />
 			    </listbox>

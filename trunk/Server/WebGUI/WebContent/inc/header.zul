@@ -21,7 +21,7 @@
 		String lout = Labels.getLabel("menu.logout");
 		String contact = Labels.getLabel("menu.contact");
 		String close = Labels.getLabel("error.close");
-		
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		public void aladdinLogout(){
 			session.removeAttribute("user");
 			Executions.getCurrent().sendRedirect("/login.zul");
@@ -46,7 +46,13 @@
 		<menuitem label="${clinicians}" href="/clinicians/"/>
 		<menuitem label="${qm}" href="/qm/"/>
 		<menuitem label="${extsrv }" href="/extsrv/"/>
-		<menuitem label="${warnings }" href="/warnings/"/>
+		<menuitem label="${warnings }" href="/warnings/">
+			<attribute name="onCreate">
+				if(isadmin){
+					self.setDisabled(true);
+				}
+			</attribute>
+		</menuitem>
 	</menubar>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>

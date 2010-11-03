@@ -12,6 +12,7 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Textbox;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.SystemParameter;
 
@@ -78,12 +79,13 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		String divorced = Labels.getLabel("patients.form.sd.marital.divorced");
 		String male = Labels.getLabel("patients.form.male");
 		String female = Labels.getLabel("patients.form.female");
-		String parents = Labels.getLabel("patients.form.sd.living.parents");
-		String sons = Labels.getLabel("patients.form.sd.living.sons");
-		String alone = Labels.getLabel("patients.form.sd.living.alone");
-		String carer = Labels.getLabel("patients.form.sd.living.carer");
-		String res = Labels.getLabel("patients.form.sd.living.res");
-		String health = Labels.getLabel("patients.form.sd.living.health");
+		
+		String alone = SystemDictionary.LIVING_ALONE_LBL; 
+		String sons = SystemDictionary.LIVING_SONDAUGHTER_LBL;
+		String partner = SystemDictionary.LIVING_PARTNER_LBL; 
+		String carer = SystemDictionary.LIVING_PARTER_SONDAUGHTER_LBL; 
+		String res = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_LBL;
+		String health = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
 		rowsA.add(new SimpleFieldData(age, "pat_age"));
@@ -100,12 +102,12 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		maritallist.add(new SimpleFieldData(divorced, "4"));
 		
 		ArrayList<SimpleFieldData> livinglist = new ArrayList<SimpleFieldData>();
-		livinglist.add(new SimpleFieldData(alone, "0"));
-		livinglist.add(new SimpleFieldData(sons, "1"));
-		livinglist.add(new SimpleFieldData(parents, "2"));
-		livinglist.add(new SimpleFieldData(carer, "3"));
-		livinglist.add(new SimpleFieldData(res, "4"));
-		livinglist.add(new SimpleFieldData(health, "5"));
+		livinglist.add(new SimpleFieldData(Labels.getLabel(alone), SystemDictionary.LIVING_ALONE));
+		livinglist.add(new SimpleFieldData(Labels.getLabel(sons), SystemDictionary.LIVING_SONDAUGHTER));
+		livinglist.add(new SimpleFieldData(Labels.getLabel(partner), SystemDictionary.LIVING_PARTNER));
+		livinglist.add(new SimpleFieldData(Labels.getLabel(carer), SystemDictionary.LIVING_PARTER_SONDAUGHTER));
+		livinglist.add(new SimpleFieldData(Labels.getLabel(res), SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW));
+		livinglist.add(new SimpleFieldData(Labels.getLabel(health), SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");

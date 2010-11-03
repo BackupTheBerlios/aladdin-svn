@@ -22,24 +22,31 @@
 		ClinicianInfo[] plist = null;
 		Session ses = Sessions.getCurrent();
 		String id = (String)ses.getAttribute("userid");
+		Boolean showif = (Boolean)ses.getAttribute("isadmin");
 		try{
-			plist = proxy.listOfClinicians(null,id);
-			System.out.println("**** List SIZE: "+plist.length);
+			plist = proxy.listOfClinicians(new eu.aladdin_project.xsd.SearchCriteria[0],id);
+			//System.out.println("**** List SIZE: "+plist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}
 	</zscript>
 	<window border="none" width="800px" sclass="centerwin" id="clinics" use="eu.aladdin_project.controllers.IndexCliniciansWindow">
 	<vbox>
-	<button label="+ ${newprof}" href="/clinicians/form.zul" sclass="newitem" />
+	<button label="+ ${newprof}" href="/clinicians/form.zul" sclass="newitem">
+		<attribute name="onCreate">
+			if(!showif){
+				self.setDisabled(true);
+			}
+		</attribute>
+	</button>
 	<grid>
 		<columns>
 			<column label="${idstr }" width="35px" sort="auto"/>
 			<column label="${surnlbl }" sort="auto"/>
 			<column label="${namelbl }" sort="auto"/>
 			<column width="80px" align="center" />
-			<column width="80px" align="center" />
-			<column width="80px" align="center" />
+			<column width="80px" align="center" if="${showif}"/>
+			<column width="80px" align="center" if="${showif}"/>
 		</columns>
 		<rows>
 			<row forEach="${plist }" id="${each.ID }">
@@ -47,8 +54,8 @@
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
 				<label value="${details }" sclass="link" onClick="clinics.detailsClinician(self.getParent().getId())" />
-				<label value="${updmsg }" sclass="link" onClick="clinics.updateClinician(self.getParent().getId())"/>
-				<label value="${delmsg }" sclass="link" onClick="clinics.deleteClinicianMsg(self.getParent().getId())"/>
+				<label if="${showif}" value="${updmsg }" sclass="link" onClick="clinics.updateClinician(self.getParent().getId())"/>
+				<label if="${showif}" value="${delmsg }" sclass="link" onClick="clinics.deleteClinicianMsg(self.getParent().getId())"/>
 			</row>
 		</rows>
 	</grid>

@@ -22,6 +22,7 @@
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		String userid = (String)Sessions.getCurrent().getAttribute("userid");
 		eu.aladdin_project.xsd.QuestionnaireInfo[] qlist = null;
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		try{
 			qlist = proxy.listOfQuestionnaires(userid);
 			System.out.println("**** List SIZE: "+qlist.length);
@@ -31,13 +32,19 @@
 	</zscript>
 	<window border="none" width="800px" sclass="centerwin" id="qmwin" use="eu.aladdin_project.controllers.qm.QuestionnaireIndexWindow">
 	<vbox>
-	<button label="+ ${newq}" href="/qm/form.zul" sclass="newitem" />
+	<button label="+ ${newq}" href="/qm/form.zul" sclass="newitem">
+		<attribute name="onCreate">
+			if(isadmin){
+				self.setDisabled(true);
+			}
+		</attribute>
+	</button>
 	<grid mold="paging" pageSize="15">
 		<columns>
 			<column label="${idstr }" width="35px" sort="auto"/>
 			<column label="${version }" sort="auto"/>
 			<column label="${qtitle }" sort="auto"/>
-			<column width="80px" align="center" />
+			<column width="80px" align="center" if="${!isadmin }" />
 			<column width="80px" align="center" />
 		</columns>
 		<rows>
@@ -45,7 +52,7 @@
 			<label value="${each.ID }"/>
 			<label value="${each.version }"/>
 			<label value="${each.title }"/>
-			<label value="${updmsg }" sclass="link" onClick="qmwin.updateQuestionnaire(self.getParent().getId())"/>
+			<label if="${!isadmin }" value="${updmsg }" sclass="link" onClick="qmwin.updateQuestionnaire(self.getParent().getId())"/>
 			<label value="${delmsg }" sclass="link" onClick="qmwin.removeQuestionnaire(self.getParent().getId())"/>
 		</row>
 		</rows>

@@ -9,13 +9,24 @@
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import org.zkoss.zul.SimpleListModel;
 		
-		
 		String ttcarerqs = Labels.getLabel("dic.task.type.patientqs");
 		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
 		String ttweight = Labels.getLabel("dic.task.type.weight.mes");
 		String ttcoggame = Labels.getLabel("dic.task.type.coggame");
 		String ttact = Labels.getLabel("dic.task.type.activity.mon");
 		String ttex = Labels.getLabel("dic.task.type.exercise");
+		
+		String tid = Labels.getLabel("common.id");
+		String ttype = Labels.getLabel("common.type");
+		String tstatus = Labels.getLabel("common.status");
+		String tquestion = Labels.getLabel("tasks.questionnaire");
+		String tobject = Labels.getLabel("tasks.object");
+		String turl = Labels.getLabel("common.URI");
+		String tassignd = Labels.getLabel("common.date.assigned");
+		String texecut = Labels.getLabel("tasks.executor");
+		String tassigner = Labels.getLabel("tasks.assigner");
+		String tassigntt = Labels.getLabel("tasks.asign");
+		String tcancelt = Labels.getLabel("tasks.cancel");
 		
 		int ttcarerqsi = SystemDictionary.TASK_TYPE_PATIENTQS_INT;
 		int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
@@ -40,11 +51,11 @@
 			</columns>
 			<rows>
 				<row id="rowtaskid" visible="false">
-					<label value="Task ID"/>
+					<label value="${tid }"/>
 					<textbox id="taskidfield" value="" readonly="true"/>
 				</row>
 				<row>
-					<label value="Task type"/>
+					<label value="${ttype }"/>
 					<hbox>
 						<listbox id="tasktypesel" mold="select" onSelect="create_my_entry.changeTaskType()">
 							<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
@@ -58,11 +69,11 @@
 					</hbox>
 				</row>
 				<row id="rowtaskstatus" visible="false">
-					<label value="Task Status"/>
+					<label value="${tstatus }"/>
 					<textbox id="taskstatusfield" value="" readonly="true"/>
 				</row>
 				<row id="qsrow" visible="false">
-					<label value="Questionnaire"/>
+					<label value="${tquestion }"/>
 					<hbox>
 						<textbox id="questidfield" readonly="true" width="35px"/>
 						<combobox id="questnamefield" autodrop="true" buttonVisible="false">
@@ -85,11 +96,11 @@
 					</hbox>
 				</row>
 				<row id="urlrow" visible="false">
-					<label value="URL"/>
+					<label value="${turl }"/>
 					<textbox id="urlfield"/>
 				</row>
 				<row>
-					<label value="Assigned Date"/>
+					<label value="${tassignd }"/>
 					<hbox>
 						<datebox id="datetask" cols="16" format="dd/MM/yyyy" compact="false"/>
 						<timebox id="timetask" cols="16"/>
@@ -97,22 +108,22 @@
 					
 				</row>
 				<row>
-					<label value="Executor"/>
+					<label value="${texecut }"/>
 					<textbox id="objid" readonly="true" width="35px"/>
 				</row>
 				<row>
-					<label value="Assigner"/>
+					<label value="${tassigner }"/>
 					<textbox id="userid" readonly="true" width="35px"/>
 				</row>
 				<row id="objectrow">
-					<label value="Object"/>
+					<label value="${tobject }"/>
 					<textbox id="addressedid" readonly="true" width="35px"/>
 				</row>
 				<row>
 					<label id="usertype" value="${usertype }" visible="false"/>
 					<hbox>
-						<button id="savebutton" label="Assign task" onClick="create_my_entry.saveTask()" visible="false"/>
-						<button id="cancelbutton" label="Cancel task" onClick="create_my_entry.cancelTask()" visible="false"/>
+						<button id="savebutton" label="${tassigntt }" onClick="create_my_entry.saveTask()" visible="false"/>
+						<button id="cancelbutton" label="${tcancelt }" onClick="create_my_entry.cancelTask()" visible="false"/>
 					</hbox>
 				</row>
 			</rows>

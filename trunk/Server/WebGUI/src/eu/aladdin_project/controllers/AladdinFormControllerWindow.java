@@ -139,6 +139,7 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void insertAddressRow(Address toInsert){
+		String removeadd = Labels.getLabel("common.address.remove");
 		Rows rows = (Rows)getFellow("addressgridrows");
 		Row newrow = new Row();
 		
@@ -152,7 +153,7 @@ public class AladdinFormControllerWindow extends Window{
 		}
 		Label therest = new Label(thereststring);
 		hbox.appendChild(therest);
-		Label remove = new Label("Remove address");
+		Label remove = new Label(removeadd);
 		remove.setSclass("link");
 		remove.addEventListener("onClick", new RemoveAddressListener(newrow,toInsert));
 		hbox.appendChild(remove);
@@ -202,6 +203,7 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void insertComRow(Communication com){
+		String removecom = Labels.getLabel("common.communications.remove");
 		Rows rows = (Rows)getFellow("comgridrows");
 		Row newrow = new Row();
 		
@@ -215,7 +217,7 @@ public class AladdinFormControllerWindow extends Window{
 		}
 		Label therest = new Label(thereststring);
 		hbox.appendChild(therest);
-		Label remove = new Label("Remove communication");
+		Label remove = new Label(removecom);
 		remove.setSclass("link");
 		remove.addEventListener("onClick", new RemoveComListener(newrow,com));
 		hbox.appendChild(remove);
@@ -275,6 +277,7 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected void addAddressFields(){
 		String address = Labels.getLabel("patients.form.address");
+		String addaddressstr = Labels.getLabel("common.address.add");
 		Grid agrid = new Grid();
 		agrid.setSclass("grid");
 		this.appendColumns(agrid);
@@ -284,7 +287,7 @@ public class AladdinFormControllerWindow extends Window{
 			this.appendSubFormTitleRow(address, arows);
 			Row buttonrw = new Row();
 			Label labelbtn = new Label(" ");
-			Button btnaddress = new Button("Add address");
+			Button btnaddress = new Button(addaddressstr);
 			btnaddress.addEventListener("onClick", new EventListener() {
 				
 				public void onEvent(Event arg0) throws Exception {
@@ -309,6 +312,7 @@ public class AladdinFormControllerWindow extends Window{
 		String zipcode = Labels.getLabel("patients.form.zip");
 		String prim = Labels.getLabel("patients.form.primary");
 		String notes = Labels.getLabel("patients.form.notes");
+		String addresssave = Labels.getLabel("common.address.save");
 		
 		this.popupaddresses = new Window();
 		this.popupaddresses.setTitle(address);
@@ -344,7 +348,7 @@ public class AladdinFormControllerWindow extends Window{
 			Row buttonrw = new Row();
 			Label empty = new Label("");
 			buttonrw.appendChild(empty);
-			Button insertAddress = new Button("Save address");
+			Button insertAddress = new Button(addresssave);
 			insertAddress.addEventListener("onClick", new AddressInsertListener(this.popupaddresses));
 			buttonrw.appendChild(insertAddress);
 			rows.appendChild(buttonrw);
@@ -369,6 +373,8 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected void addCommunicationFields(){
 		String com = Labels.getLabel("patients.form.comunications");
+		String comaddlbl = Labels.getLabel("common.communications.add");
+		
 		Grid agrid = new Grid();
 		agrid.setSclass("grid");
 		this.appendColumns(agrid);
@@ -378,7 +384,7 @@ public class AladdinFormControllerWindow extends Window{
 			this.appendSubFormTitleRow(com, arows);
 			Row buttonrw = new Row();
 			Label labelbtn = new Label(" ");
-			Button btnaddress = new Button("Add communication");
+			Button btnaddress = new Button(comaddlbl);
 			btnaddress.addEventListener("onClick", new EventListener() {
 				
 				public void onEvent(Event arg0) throws Exception {
@@ -399,6 +405,7 @@ public class AladdinFormControllerWindow extends Window{
 		String com = Labels.getLabel("patients.form.comunications");
 		String prim = Labels.getLabel("patients.form.primary");
 		String notes = Labels.getLabel("patients.form.notes");
+		String savecomm = Labels.getLabel("common.communications.save");
 		
 		this.popupcommunications = new Window();
 		this.popupcommunications.setTitle(com);
@@ -430,7 +437,7 @@ public class AladdinFormControllerWindow extends Window{
 			Row buttonrw = new Row();
 			Label empty = new Label("");
 			buttonrw.appendChild(empty);
-			Button insertCom = new Button("Save communication");
+			Button insertCom = new Button(savecomm);
 			insertCom.addEventListener("onClick", new CommunicationInsertListener(this.popupcommunications));
 			buttonrw.appendChild(insertCom);
 			rows.appendChild(buttonrw);

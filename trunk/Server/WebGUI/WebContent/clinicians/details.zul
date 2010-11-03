@@ -7,6 +7,8 @@
 		String actions = Labels.getLabel("common.actions");
 		String data = Labels.getLabel("common.personal.data");
 		String clinid = (String)Executions.getCurrent().getParameter("clinid");
+		String title = Labels.getLabel("clinicians.update.title");
+		page.setTitle(title);
 		
 	</zscript>
 	<include src="/inc/header.zul"/>
@@ -18,14 +20,11 @@
 			<listheader/>
 		</listhead>
 	</listbox>
-	<button label="Update clinician data" href="/clinicians/update.zul?clinid=${clinid }"/>
+	<button label="${title }" href="/clinicians/update.zul?clinid=${clinid }"/>
 	</window>
 		<zscript>
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Clinician;
-		
-		String title = Labels.getLabel("clinicians.update.title");
-		page.setTitle(title);	
 		
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();

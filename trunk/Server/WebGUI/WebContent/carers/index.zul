@@ -23,6 +23,7 @@
 		CarerInfo[] plist = null;
 		Session ses = Sessions.getCurrent();
 		String id = (String)ses.getAttribute("userid");
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		try{
 			plist = proxy.listOfCarers(new SearchCriteria[0],id);
 			if(plist == null){
@@ -43,7 +44,7 @@
 			<column label="${surnlbl }" sort="auto"/>
 			<column label="${namelbl }" sort="auto"/>
 			<column width="80px" align="center" />
-			<column width="80px" align="center" />
+			<column width="80px" align="center" if="${!isadmin }" />
 			<column width="80px" align="center" />
 		</columns>
 		<rows id="rowscarers" onCreate="insertNoCarersAvailable()">
@@ -64,7 +65,7 @@
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
 				<label value="${details }" sclass="link" onClick="carers.detailsCarer(self.getParent().getId())"/>
-				<label value="${updmsg }" sclass="link" onClick="carers.updateCarer(self.getParent().getId())"/>
+				<label if="${!isadmin }" value="${updmsg }" sclass="link" onClick="carers.updateCarer(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="carers.deleteCarerMsg(self.getParent().getId())"/>
 			</row>
 		</rows>

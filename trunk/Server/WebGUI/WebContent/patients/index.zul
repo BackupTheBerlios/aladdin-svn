@@ -23,6 +23,7 @@
 		PatientInfo[] plist = null;
 		Session ses = Sessions.getCurrent();
 		String id = (String)ses.getAttribute("userid");
+		Boolean isntadmin = !(Boolean)ses.getAttribute("isadmin");
 		try{
 			plist = proxy.listOfPatients(new SearchCriteria[0],id);
 			System.out.println("**** List SIZE: "+plist.length);
@@ -39,7 +40,7 @@
 			<column label="${surnlbl }" sort="auto"/>
 			<column label="${namelbl }" sort="auto"/>
 			<column width="80px" align="center" />
-			<column width="80px" align="center" />
+			<column width="80px" align="center" if="${isntadmin }"/>
 			<column width="80px" align="center" />
 		</columns>
 		<rows>
@@ -48,7 +49,7 @@
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
 				<label value="${details }" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
-				<label value="${updmsg }" sclass="link" onClick="patients.updatePatient(self.getParent().getId())"/>
+				<label if="${isntadmin }" value="${updmsg }" sclass="link" onClick="patients.updatePatient(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="patients.deletePatientMsg(self.getParent().getId())"/>
 			</row>
 		</rows>

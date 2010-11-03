@@ -3,6 +3,7 @@ package eu.aladdin_project.controllers;
 import java.rmi.RemoteException;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -69,6 +70,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			//TODO Set message to "Unknow error creating clinician"
 		}finally{
 			//TODO Show message on the following page.
+			Executions.getCurrent().sendRedirect("/clinicians");
 		}
 	}
 	
