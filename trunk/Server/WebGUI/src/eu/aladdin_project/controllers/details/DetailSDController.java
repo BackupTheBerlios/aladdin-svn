@@ -109,50 +109,52 @@ public class DetailSDController extends DetailPersonController{
 			OperationResult currentor = proxy.getUserIdByPersonId(this.currentid, this.usertype, userid);
 			System.out.println("USER TASKS: "+currentor.getCode());
 			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto, userid);
-			System.out.println("TASKS LENGHT: "+tasklist.length);
 			this.calmodel = new SimpleCalendarModel();
-			
-				for(int i = 0; i<tasklist.length; i++){
-					GregorianCalendar calendar1 = new GregorianCalendar();
-					calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
-					
-					GregorianCalendar calendar2 = new GregorianCalendar();
-					calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
-					
-					SimpleCalendarEvent clevent = new SimpleCalendarEvent();
-					clevent.setBeginDate(calendar1.getTime());
-					clevent.setContent("");
-					clevent.setEndDate(new Date(calendar1.getTime().getTime()+3600000));
-					clevent.setLocked(true);
-					clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-					clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
-					switch(Integer.parseInt(tasklist[i].getTaskStatus().getCode())){
-					case SystemDictionary.TASK_STATUS_CANCELLED_INT:
-						clevent.setHeaderColor("red");
-						clevent.setContentColor("red");
-						break;
-					case SystemDictionary.TASK_STATUS_COMPLETED_INT:
-						clevent.setHeaderColor("blue");
-						clevent.setContentColor("blue");
-						break;
-					case SystemDictionary.TASK_STATUS_PENDING_INT:
-						clevent.setHeaderColor("black");
-						clevent.setContentColor("black");
-						break;
-					default:
-						clevent.setHeaderColor("yellow");
-						clevent.setContentColor("yellow");
-						break;
+			if(tasklist != null){
+				System.out.println("TASKS LENGHT: "+tasklist.length);
+				
+					for(int i = 0; i<tasklist.length; i++){
+						GregorianCalendar calendar1 = new GregorianCalendar();
+						calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
+						
+						GregorianCalendar calendar2 = new GregorianCalendar();
+						calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
+						
+						SimpleCalendarEvent clevent = new SimpleCalendarEvent();
+						clevent.setBeginDate(calendar1.getTime());
+						clevent.setContent("");
+						clevent.setEndDate(new Date(calendar1.getTime().getTime()+3600000));
+						clevent.setLocked(true);
+						clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+						clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+						switch(Integer.parseInt(tasklist[i].getTaskStatus().getCode())){
+						case SystemDictionary.TASK_STATUS_CANCELLED_INT:
+							clevent.setHeaderColor("red");
+							clevent.setContentColor("red");
+							break;
+						case SystemDictionary.TASK_STATUS_COMPLETED_INT:
+							clevent.setHeaderColor("blue");
+							clevent.setContentColor("blue");
+							break;
+						case SystemDictionary.TASK_STATUS_PENDING_INT:
+							clevent.setHeaderColor("black");
+							clevent.setContentColor("black");
+							break;
+						default:
+							clevent.setHeaderColor("yellow");
+							clevent.setContentColor("yellow");
+							break;
+						}
+						Map<String, String> params = new HashMap<String,String>();
+						params.put("user", userid);
+						params.put("objid", tasklist[i].getObjectID());
+						params.put("exec", tasklist[i].getExecutorID());
+						params.put("assign", tasklist[i].getAssignerID());
+						params.put("task", tasklist[i].getID());
+						params.put("status", tasklist[i].getTaskStatus().getCode());
+						clevent.setParams(params);
+						this.calmodel.add(clevent);
 					}
-					Map<String, String> params = new HashMap<String,String>();
-					params.put("user", userid);
-					params.put("objid", tasklist[i].getObjectID());
-					params.put("exec", tasklist[i].getExecutorID());
-					params.put("assign", tasklist[i].getAssignerID());
-					params.put("task", tasklist[i].getID());
-					params.put("status", tasklist[i].getTaskStatus().getCode());
-					clevent.setParams(params);
-					this.calmodel.add(clevent);
 				}
 		}catch(Exception e){
 			e.printStackTrace();
