@@ -3339,41 +3339,73 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			s.beginTransaction();
     			Object[] list = s.createSQLQuery(sql).list().toArray();
 				for (int i = 0; i < list.length; i++) {
+					System.out.println ("gW 1");
     				Integer id = (Integer) list[i];
+    				System.out.println ("gW 2");
 					com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) s.load(com.aladdin.sc.db.Warning.class, id);
+					System.out.println ("gW 3");
 					Warning rw = resp.addNewOut();
+					System.out.println ("gW 4");
     				rw.setID(w.getId().toString());
+    				System.out.println ("gW 5");
     				
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
+    				System.out.println ("gW 6");
     				typeOfWarning.setCode(w.getTypeOfWarning().toString());
+    				System.out.println ("gW 7");
     				
     				rw.setTypeOfWarning(typeOfWarning);
+    				System.out.println ("gW 8");
     				Calendar c1 = Calendar.getInstance();
+    				System.out.println ("gW 9");
     				c1.setTimeInMillis(w.getDateTimeOfWarning().getTime());
+    				System.out.println ("gW 10");
     				rw.setDateTimeOfWarning(c1);
+    				System.out.println ("gW 11");
     				
     				SystemParameter effect = SystemParameter.Factory.newInstance();
+    				System.out.println ("gW 12");
+    				
+    				if (w.getEffect() == null) w.setEffect(0);
+    				
     				effect.setCode(w.getEffect().toString());
+    				System.out.println ("gW 13");
     				
     				rw.setEffect(effect);
+    				System.out.println ("gW 14");
     				
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
+    				System.out.println ("gW 15");
+    				if (w.getIndicator() == null) w.setIndicator(0);
     				indicator.setCode(w.getIndicator().toString());
+    				System.out.println ("gW 16");
     				
     				rw.setIndicator(indicator);
+    				System.out.println ("gW 17");
     				
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
+    				System.out.println ("gW 18");
+    				if (w.getRiskLevel() == null) w.setRiskLevel(0);
     				riskLevel.setCode(w.getRiskLevel().toString());
+    				System.out.println ("gW 19");
     				
     				rw.setRiskLevel(riskLevel);
+    				System.out.println ("gW 20");
     				rw.setJustificationText(w.getJustificationText());
+    				System.out.println ("gW 21");
     				
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
+    				System.out.println ("gW 22");
+    				if (w.getEmergencyLevel() == null) w.setEmergencyLevel(0);
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
+    				System.out.println ("gW 23");
     				
     				rw.setEmergencyLevel(emergencyLevel);
+    				System.out.println ("gW 24");
     				rw.setPatientID(w.getPatientID());
+    				System.out.println ("gW 25");
     				rw.setDelivered(w.getDelivered());
+    				System.out.println ("gW 26");
     			}
 				s.getTransaction().commit();
     		} catch (Exception e) {
