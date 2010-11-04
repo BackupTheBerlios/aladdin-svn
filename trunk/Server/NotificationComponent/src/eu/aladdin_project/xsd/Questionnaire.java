@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Questionnaire extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Questionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("questionnaire93bdtype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Questionnaire.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("questionnaire93bdtype");
     
     /**
      * Gets array of all "question" elements
@@ -61,12 +61,12 @@ public interface Questionnaire extends org.apache.xmlbeans.XmlObject
     /**
      * Gets the "version" attribute
      */
-    java.math.BigDecimal getVersion();
+    double getVersion();
     
     /**
      * Gets (as xml) the "version" attribute
      */
-    org.apache.xmlbeans.XmlDecimal xgetVersion();
+    org.apache.xmlbeans.XmlDouble xgetVersion();
     
     /**
      * True if has "version" attribute
@@ -76,12 +76,12 @@ public interface Questionnaire extends org.apache.xmlbeans.XmlObject
     /**
      * Sets the "version" attribute
      */
-    void setVersion(java.math.BigDecimal version);
+    void setVersion(double version);
     
     /**
      * Sets (as xml) the "version" attribute
      */
-    void xsetVersion(org.apache.xmlbeans.XmlDecimal version);
+    void xsetVersion(org.apache.xmlbeans.XmlDouble version);
     
     /**
      * Unsets the "version" attribute

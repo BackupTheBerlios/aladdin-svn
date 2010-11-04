@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Measurement extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Measurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("measurementf9d6type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Measurement.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("measurementf9d6type");
     
     /**
      * Gets the "Type" element
@@ -36,22 +36,22 @@ public interface Measurement extends org.apache.xmlbeans.XmlObject
     /**
      * Gets the "Value" element
      */
-    java.math.BigDecimal getValue();
+    double getValue();
     
     /**
      * Gets (as xml) the "Value" element
      */
-    org.apache.xmlbeans.XmlDecimal xgetValue();
+    org.apache.xmlbeans.XmlDouble xgetValue();
     
     /**
      * Sets the "Value" element
      */
-    void setValue(java.math.BigDecimal value);
+    void setValue(double value);
     
     /**
      * Sets (as xml) the "Value" element
      */
-    void xsetValue(org.apache.xmlbeans.XmlDecimal value);
+    void xsetValue(org.apache.xmlbeans.XmlDouble value);
     
     /**
      * Gets the "DateTime" element
@@ -96,12 +96,12 @@ public interface Measurement extends org.apache.xmlbeans.XmlObject
     /**
      * Gets the "LowerLimit" element
      */
-    java.math.BigDecimal getLowerLimit();
+    double getLowerLimit();
     
     /**
      * Gets (as xml) the "LowerLimit" element
      */
-    org.apache.xmlbeans.XmlDecimal xgetLowerLimit();
+    org.apache.xmlbeans.XmlDouble xgetLowerLimit();
     
     /**
      * True if has "LowerLimit" element
@@ -111,12 +111,12 @@ public interface Measurement extends org.apache.xmlbeans.XmlObject
     /**
      * Sets the "LowerLimit" element
      */
-    void setLowerLimit(java.math.BigDecimal lowerLimit);
+    void setLowerLimit(double lowerLimit);
     
     /**
      * Sets (as xml) the "LowerLimit" element
      */
-    void xsetLowerLimit(org.apache.xmlbeans.XmlDecimal lowerLimit);
+    void xsetLowerLimit(org.apache.xmlbeans.XmlDouble lowerLimit);
     
     /**
      * Unsets the "LowerLimit" element
@@ -126,12 +126,12 @@ public interface Measurement extends org.apache.xmlbeans.XmlObject
     /**
      * Gets the "UpperLimit" element
      */
-    java.math.BigDecimal getUpperLimit();
+    double getUpperLimit();
     
     /**
      * Gets (as xml) the "UpperLimit" element
      */
-    org.apache.xmlbeans.XmlDecimal xgetUpperLimit();
+    org.apache.xmlbeans.XmlDouble xgetUpperLimit();
     
     /**
      * True if has "UpperLimit" element
@@ -141,37 +141,17 @@ public interface Measurement extends org.apache.xmlbeans.XmlObject
     /**
      * Sets the "UpperLimit" element
      */
-    void setUpperLimit(java.math.BigDecimal upperLimit);
+    void setUpperLimit(double upperLimit);
     
     /**
      * Sets (as xml) the "UpperLimit" element
      */
-    void xsetUpperLimit(org.apache.xmlbeans.XmlDecimal upperLimit);
+    void xsetUpperLimit(org.apache.xmlbeans.XmlDouble upperLimit);
     
     /**
      * Unsets the "UpperLimit" element
      */
     void unsetUpperLimit();
-    
-    /**
-     * Gets the "PatientID" element
-     */
-    java.lang.String getPatientID();
-    
-    /**
-     * Gets (as xml) the "PatientID" element
-     */
-    org.apache.xmlbeans.XmlString xgetPatientID();
-    
-    /**
-     * Sets the "PatientID" element
-     */
-    void setPatientID(java.lang.String patientID);
-    
-    /**
-     * Sets (as xml) the "PatientID" element
-     */
-    void xsetPatientID(org.apache.xmlbeans.XmlString patientID);
     
     /**
      * Gets the "TaskID" element

@@ -25,7 +25,7 @@ public interface IDREFS extends org.apache.xmlbeans.XmlIDREFS
     /** @deprecated */
     void set(java.util.List list);
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IDREFS.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("idrefs0de1type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IDREFS.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("idrefs0de1type");
     
     /**
      * Gets the "id" attribute

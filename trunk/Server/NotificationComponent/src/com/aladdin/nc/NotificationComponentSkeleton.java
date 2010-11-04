@@ -3,6 +3,9 @@ package com.aladdin.nc;
 import eu.aladdin_project.notificationcomponent.*;
 import eu.aladdin_project.notificationcomponent.SendEventResponseDocument.SendEventResponse;
 import eu.aladdin_project.xsd.Event;
+import genSC.StorageComponentStub;
+import genSC.StorageComponentStub.Auth;
+import genSC.StorageComponentStub.AuthResponse;
 
 import org.apache.log4j.Logger;
 import java.util.Properties;
@@ -21,6 +24,23 @@ public class NotificationComponentSkeleton implements NotificationComponentSkele
 	public SendEventResponseDocument sendEvent (SendEventDocument req) {
 		SendEventResponseDocument respdoc = SendEventResponseDocument.Factory.newInstance();
 		SendEventResponse resp = respdoc.addNewSendEventResponse();
+		
+		try {
+			StorageComponentStub scs = new StorageComponentStub();
+			Auth authData = new Auth();
+			authData.setLogin(req.getSendEvent().getLogin());
+			authData.setPassword(req.getSendEvent().getPassword());
+			AuthResponse ar = scs.auth(authData);
+			if (ar.getOut().getCode().compareTo("0") == 0) {
+				System.out.println ("auth failed");
+				resp.addNewOut().setStatus((short) 0);
+				return respdoc;
+			}
+		} catch (Exception e) {
+			System.out.println (e.toString());
+			resp.addNewOut().setStatus((short) 0);
+			return respdoc;
+		}
 		
 		Properties prop = new Properties();
 		InputStream is = this.getClass().getClassLoader().getResourceAsStream("META-INF/email.properties");

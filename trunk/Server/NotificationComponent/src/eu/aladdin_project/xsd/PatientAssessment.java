@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface PatientAssessment extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PatientAssessment.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("patientassessment1f41type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PatientAssessment.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("patientassessment1f41type");
     
     /**
      * Gets the "ID" element
@@ -336,12 +336,12 @@ public interface PatientAssessment extends org.apache.xmlbeans.XmlObject
     /**
      * Gets the "BlessedScalePart1" element
      */
-    java.math.BigDecimal getBlessedScalePart1();
+    double getBlessedScalePart1();
     
     /**
      * Gets (as xml) the "BlessedScalePart1" element
      */
-    org.apache.xmlbeans.XmlDecimal xgetBlessedScalePart1();
+    org.apache.xmlbeans.XmlDouble xgetBlessedScalePart1();
     
     /**
      * True if has "BlessedScalePart1" element
@@ -351,12 +351,12 @@ public interface PatientAssessment extends org.apache.xmlbeans.XmlObject
     /**
      * Sets the "BlessedScalePart1" element
      */
-    void setBlessedScalePart1(java.math.BigDecimal blessedScalePart1);
+    void setBlessedScalePart1(double blessedScalePart1);
     
     /**
      * Sets (as xml) the "BlessedScalePart1" element
      */
-    void xsetBlessedScalePart1(org.apache.xmlbeans.XmlDecimal blessedScalePart1);
+    void xsetBlessedScalePart1(org.apache.xmlbeans.XmlDouble blessedScalePart1);
     
     /**
      * Unsets the "BlessedScalePart1" element

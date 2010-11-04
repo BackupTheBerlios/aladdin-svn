@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Carer extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Carer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("carer1c1btype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Carer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("carer1c1btype");
     
     /**
      * Gets the "ID" element

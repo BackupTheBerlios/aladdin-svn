@@ -17,7 +17,7 @@ package eu.aladdin_project.notificationcomponent;
 public interface SendEventResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEventResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("sendeventresponse6189doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEventResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("sendeventresponse6189doctype");
     
     /**
      * Gets the "sendEventResponse" element
@@ -42,7 +42,7 @@ public interface SendEventResponseDocument extends org.apache.xmlbeans.XmlObject
     public interface SendEventResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEventResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("sendeventresponseb02aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEventResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("sendeventresponseb02aelemtype");
         
         /**
          * Gets the "out" element

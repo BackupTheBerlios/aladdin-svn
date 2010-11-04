@@ -88,6 +88,10 @@ public class SendEventDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCo
         
         private static final javax.xml.namespace.QName EVENT$0 = 
             new javax.xml.namespace.QName("", "event");
+        private static final javax.xml.namespace.QName LOGIN$2 = 
+            new javax.xml.namespace.QName("", "login");
+        private static final javax.xml.namespace.QName PASSWORD$4 = 
+            new javax.xml.namespace.QName("", "password");
         
         
         /**
@@ -137,6 +141,142 @@ public class SendEventDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCo
                 eu.aladdin_project.xsd.Event target = null;
                 target = (eu.aladdin_project.xsd.Event)get_store().add_element_user(EVENT$0);
                 return target;
+            }
+        }
+        
+        /**
+         * Gets the "login" element
+         */
+        public java.lang.String getLogin()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(LOGIN$2, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target.getStringValue();
+            }
+        }
+        
+        /**
+         * Gets (as xml) the "login" element
+         */
+        public org.apache.xmlbeans.XmlString xgetLogin()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(LOGIN$2, 0);
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "login" element
+         */
+        public void setLogin(java.lang.String login)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(LOGIN$2, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(LOGIN$2);
+                }
+                target.setStringValue(login);
+            }
+        }
+        
+        /**
+         * Sets (as xml) the "login" element
+         */
+        public void xsetLogin(org.apache.xmlbeans.XmlString login)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(LOGIN$2, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(LOGIN$2);
+                }
+                target.set(login);
+            }
+        }
+        
+        /**
+         * Gets the "password" element
+         */
+        public java.lang.String getPassword()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PASSWORD$4, 0);
+                if (target == null)
+                {
+                    return null;
+                }
+                return target.getStringValue();
+            }
+        }
+        
+        /**
+         * Gets (as xml) the "password" element
+         */
+        public org.apache.xmlbeans.XmlString xgetPassword()
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PASSWORD$4, 0);
+                return target;
+            }
+        }
+        
+        /**
+         * Sets the "password" element
+         */
+        public void setPassword(java.lang.String password)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.SimpleValue target = null;
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PASSWORD$4, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(PASSWORD$4);
+                }
+                target.setStringValue(password);
+            }
+        }
+        
+        /**
+         * Sets (as xml) the "password" element
+         */
+        public void xsetPassword(org.apache.xmlbeans.XmlString password)
+        {
+            synchronized (monitor())
+            {
+                check_orphaned();
+                org.apache.xmlbeans.XmlString target = null;
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PASSWORD$4, 0);
+                if (target == null)
+                {
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(PASSWORD$4);
+                }
+                target.set(password);
             }
         }
     }

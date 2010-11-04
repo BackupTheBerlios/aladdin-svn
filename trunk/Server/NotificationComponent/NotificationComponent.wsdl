@@ -16,6 +16,8 @@
       	<xsd:complexType>
       		<xsd:sequence>
       			<xsd:element name="event" type="aladdin:Event"></xsd:element>
+      			<xsd:element name="login" type="xsd:string"></xsd:element>
+      			<xsd:element name="password" type="xsd:string"></xsd:element>
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
@@ -57,7 +59,7 @@
   </wsdl:binding>
   <wsdl:service name="NotificationComponent">
     <wsdl:port binding="tns:NotificationComponentSOAP" name="NotificationComponentSOAP">
-      <soap:address location="http://www.example.org/"/>
+      <soap:address location="http://193.174.152.114:28080/axis2/services/NotificationComponent"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

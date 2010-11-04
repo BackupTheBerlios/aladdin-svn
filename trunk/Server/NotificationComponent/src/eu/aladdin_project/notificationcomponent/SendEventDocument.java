@@ -17,7 +17,7 @@ package eu.aladdin_project.notificationcomponent;
 public interface SendEventDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEventDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("sendevent5ecadoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEventDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("sendevent5ecadoctype");
     
     /**
      * Gets the "sendEvent" element
@@ -42,7 +42,7 @@ public interface SendEventDocument extends org.apache.xmlbeans.XmlObject
     public interface SendEvent extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEvent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("sendevent512celemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SendEvent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("sendevent512celemtype");
         
         /**
          * Gets the "event" element
@@ -58,6 +58,46 @@ public interface SendEventDocument extends org.apache.xmlbeans.XmlObject
          * Appends and returns a new empty "event" element
          */
         eu.aladdin_project.xsd.Event addNewEvent();
+        
+        /**
+         * Gets the "login" element
+         */
+        java.lang.String getLogin();
+        
+        /**
+         * Gets (as xml) the "login" element
+         */
+        org.apache.xmlbeans.XmlString xgetLogin();
+        
+        /**
+         * Sets the "login" element
+         */
+        void setLogin(java.lang.String login);
+        
+        /**
+         * Sets (as xml) the "login" element
+         */
+        void xsetLogin(org.apache.xmlbeans.XmlString login);
+        
+        /**
+         * Gets the "password" element
+         */
+        java.lang.String getPassword();
+        
+        /**
+         * Gets (as xml) the "password" element
+         */
+        org.apache.xmlbeans.XmlString xgetPassword();
+        
+        /**
+         * Sets the "password" element
+         */
+        void setPassword(java.lang.String password);
+        
+        /**
+         * Sets (as xml) the "password" element
+         */
+        void xsetPassword(org.apache.xmlbeans.XmlString password);
         
         /**
          * A factory class with static methods for creating instances

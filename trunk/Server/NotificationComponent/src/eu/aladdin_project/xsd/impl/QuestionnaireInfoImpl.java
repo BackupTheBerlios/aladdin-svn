@@ -30,7 +30,7 @@ public class QuestionnaireInfoImpl extends org.apache.xmlbeans.impl.values.XmlCo
     /**
      * Gets the "version" attribute
      */
-    public java.math.BigDecimal getVersion()
+    public double getVersion()
     {
         synchronized (monitor())
         {
@@ -39,22 +39,22 @@ public class QuestionnaireInfoImpl extends org.apache.xmlbeans.impl.values.XmlCo
             target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VERSION$0);
             if (target == null)
             {
-                return null;
+                return 0.0;
             }
-            return target.getBigDecimalValue();
+            return target.getDoubleValue();
         }
     }
     
     /**
      * Gets (as xml) the "version" attribute
      */
-    public org.apache.xmlbeans.XmlDecimal xgetVersion()
+    public org.apache.xmlbeans.XmlDouble xgetVersion()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_attribute_user(VERSION$0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_attribute_user(VERSION$0);
             return target;
         }
     }
@@ -74,7 +74,7 @@ public class QuestionnaireInfoImpl extends org.apache.xmlbeans.impl.values.XmlCo
     /**
      * Sets the "version" attribute
      */
-    public void setVersion(java.math.BigDecimal version)
+    public void setVersion(double version)
     {
         synchronized (monitor())
         {
@@ -85,23 +85,23 @@ public class QuestionnaireInfoImpl extends org.apache.xmlbeans.impl.values.XmlCo
             {
                 target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(VERSION$0);
             }
-            target.setBigDecimalValue(version);
+            target.setDoubleValue(version);
         }
     }
     
     /**
      * Sets (as xml) the "version" attribute
      */
-    public void xsetVersion(org.apache.xmlbeans.XmlDecimal version)
+    public void xsetVersion(org.apache.xmlbeans.XmlDouble version)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlDecimal target = null;
-            target = (org.apache.xmlbeans.XmlDecimal)get_store().find_attribute_user(VERSION$0);
+            org.apache.xmlbeans.XmlDouble target = null;
+            target = (org.apache.xmlbeans.XmlDouble)get_store().find_attribute_user(VERSION$0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlDecimal)get_store().add_attribute_user(VERSION$0);
+                target = (org.apache.xmlbeans.XmlDouble)get_store().add_attribute_user(VERSION$0);
             }
             target.set(version);
         }

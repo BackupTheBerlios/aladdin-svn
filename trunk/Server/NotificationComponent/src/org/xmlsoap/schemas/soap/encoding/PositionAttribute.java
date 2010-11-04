@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface PositionAttribute extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PositionAttribute.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDF119D2FBB2138BBB5A778CF504F32A9").resolveHandle("positiona4b1attrtypetype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PositionAttribute.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s37DBF676EA3C3C1153C3AC3213C95D45").resolveHandle("positiona4b1attrtypetype");
     
     /**
      * Gets the "position" attribute
