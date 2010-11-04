@@ -93,7 +93,7 @@ create table PatientCarer (id int4 not null, patient int4, carer int4, isprimary
 create table PersonData (id int4 not null, Surname varchar(255), Name varchar(255), primary key (id));
 create table Questionnaire (id int4 not null, version numeric(19, 2), title varchar(255), primary key (id));
 create table QuestionnaireAnswer (id int4 not null, question int4, value varchar(255), UserId int4, timestamp timestamp, objectId int4, primary key (id));
-create table QuestionnaireQuestion (id int4 not null, type varchar(255), isPrimary bool, parentid int4, title varchar(255), quest int4, condition int4, deleted bool, primary key (id));
+create table QuestionnaireQuestion (id int4 not null, type varchar(255), isPrimary bool, parentid int4, title varchar(255), quest int4, condition int4, deleted bool, globalid int4, primary key (id));
 create table QuestionnaireQuestionAnswer (id int4 not null, value int4, description varchar(255), question int4, deleted bool, primary key (id));
 create table SocioDemographicData (id int4 not null, Age int4, Gender int4, MaritalStatus int4, Children int4, LivingWith int4, primary key (id));
 create table SystemParameter (id int4 not null, Code varchar(255), Description varchar(255), primary key (id));

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetClinicianDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinicianDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("getclinicianf818doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinicianDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEC54A837D0EA302424AC346E0881D77C").resolveHandle("getclinicianf818doctype");
     
     /**
      * Gets the "GetClinician" element
@@ -42,7 +42,7 @@ public interface GetClinicianDocument extends org.apache.xmlbeans.XmlObject
     public interface GetClinician extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("getclinicianbd24elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEC54A837D0EA302424AC346E0881D77C").resolveHandle("getclinicianbd24elemtype");
         
         /**
          * Gets the "id" element

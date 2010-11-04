@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("questionnairequestion0b43type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEC54A837D0EA302424AC346E0881D77C").resolveHandle("questionnairequestion0b43type");
     
     /**
      * Gets the "title" element
@@ -37,6 +37,26 @@ public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
      * Sets (as xml) the "title" element
      */
     void xsetTitle(org.apache.xmlbeans.XmlString title);
+    
+    /**
+     * Gets the "GlobalID" element
+     */
+    int getGlobalID();
+    
+    /**
+     * Gets (as xml) the "GlobalID" element
+     */
+    org.apache.xmlbeans.XmlInt xgetGlobalID();
+    
+    /**
+     * Sets the "GlobalID" element
+     */
+    void setGlobalID(int globalID);
+    
+    /**
+     * Sets (as xml) the "GlobalID" element
+     */
+    void xsetGlobalID(org.apache.xmlbeans.XmlInt globalID);
     
     /**
      * Gets the "answers" element

@@ -11,6 +11,7 @@
     <complexType name="QuestionnaireQuestion">
         <sequence>
             <element name="title" type="string"/>
+            <element name="GlobalID" type="int"/>
             <element name="answers" type="tns:QuestionnaireQuestionAnswerList"/>
             <element name="questions" type="tns:QuestionnaireQuestionList"/>
         </sequence>

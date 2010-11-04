@@ -14,6 +14,9 @@
     		<element name="title" type="string" maxOccurs="1"
     			minOccurs="1">
     		</element>
+    		<element name="GlobalID" type="int" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
     		<element name="answers"
     			type="tns:QuestionnaireQuestionAnswerList" maxOccurs="1"
     			minOccurs="1">

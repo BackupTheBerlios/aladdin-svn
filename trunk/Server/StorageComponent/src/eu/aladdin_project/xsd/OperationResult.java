@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface OperationResult extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(OperationResult.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s29944A69A16AFA0FE7DAAD18119ADA6B").resolveHandle("operationresult84fetype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(OperationResult.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEC54A837D0EA302424AC346E0881D77C").resolveHandle("operationresult84fetype");
     
     /**
      * Gets the "Code" element

@@ -499,6 +499,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
+    		qq.setGlobalID(rqq.getGlobalID());
     		System.out.println (" uQQ 7");
 /*    		if (rqq.getDeleted() != true) {
     			rqq.setDeleted(false);
@@ -2238,6 +2239,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		rqq.setType(qq.getType());
     		System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
+    		rqq.setGlobalID(qq.getGlobalID());
     		System.out.println (" eQQ 4");
     		
     		System.out.println ("");
