@@ -347,7 +347,8 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
+    			System.out.println(e.toString());
     		}
     		
     		return respdoc;
@@ -1886,11 +1887,17 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			s.beginTransaction();
     			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
+    			System.out.println ("dQ 1");
     			Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
+    			System.out.println ("dQ 2");
     			for (int i = 0; i < qq.length; i++) {
+    				System.out.println ("dQ 3");
     				dropQQ ((Integer)qq[i]);
+    				System.out.println ("dQ 4");
     			}
-    			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString());
+    			System.out.println ("dQ 5");
+    			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString()).executeUpdate();
+    			System.out.println ("dQ 6");
     			
     			s.getTransaction().commit();
     			
@@ -1914,13 +1921,21 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	}
     	
     	private void dropQQ (Integer id) {
+    		System.out.println ("dQQ 1");
     		Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
+    		System.out.println ("dQQ 2");
 			for (int i = 0; i < qq.length; i++) {
+				System.out.println ("dQQ 3");
 				dropQQ ((Integer) qq[i]);
+				System.out.println ("dQQ 4");
 			}
+			System.out.println ("dQQ 5");
 			s.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
+			System.out.println ("dQQ 6");
 			s.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
+			System.out.println ("dQQ 7");
 			s.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
+			System.out.println ("dQQ 8");
     	}
     	
     	public AssignTaskResponseDocument assignTask (AssignTaskDocument req) {
