@@ -1502,7 +1502,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			Integer id = new Integer (req.getDeleteExternalService().getId());
     			s.beginTransaction();
-    			s.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString());
+    			s.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString()).executeUpdate();
     			s.getTransaction().commit();
     			res.setCode(id.toString());
         		res.setDescription("ok");
