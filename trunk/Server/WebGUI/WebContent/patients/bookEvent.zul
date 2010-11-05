@@ -84,7 +84,7 @@
 							<attribute name="onCreate">
 								StorageComponentProxy proxy = new StorageComponentProxy();
 								try{
-									eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(petusid);
+									eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(), petusid);
 									SimpleListModel qsssmodel = new SimpleListModel(qsss);
 									questnamefield.setModel(qsssmodel);
 								}catch(java.rmi.RemoteException re){

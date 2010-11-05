@@ -72,8 +72,8 @@ public abstract class DetailPersonController extends Window {
 		lst2.appendChild(addtitle);
 		listret.add(lst2);
 		
-		for(int i = 0; i < this.currentdata.getAddressList().length; i++){
-			Address addressdata = this.currentdata.getAddressList()[i];
+		for(int i = 0; i < this.currentdata.getAddressList().getAddress().length; i++){
+			Address addressdata = this.currentdata.getAddressList().getAddress()[i];
 			String addressstring = addressdata.getStreet()+" "+addressdata.getStreetNo()+", "+addressdata.getCity();
 			if(addressdata.getCounty() != null && !addressdata.getCounty().equals("(none)")){
 				addressstring += "("+addressdata.getCounty()+")";
@@ -92,7 +92,7 @@ public abstract class DetailPersonController extends Window {
 		lst5.appendChild(comtitle);
 		listret.add(lst5);
 		
-		Communication[] commdata = this.currentdata.getCommunicationList();
+		Communication[] commdata = this.currentdata.getCommunicationList().getCommunication();
 		for(int i = 0; i < commdata.length ; i++){
 			Listitem lst6 = new Listitem();
 			Listcell comcell = new Listcell("");

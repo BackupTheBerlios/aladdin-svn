@@ -164,10 +164,10 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.listOfClinicians(filter, userId);
   }
   
-  public eu.aladdin_project.xsd.Task[] getUserPlannedTasks(java.lang.String userId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String requesterId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.Task[] getUserPlannedTasks(java.lang.String userId, java.util.Calendar fromDate, java.util.Calendar toDate, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String requesterId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.getUserPlannedTasks(userId, fromDate, toDate, requesterId);
+    return storageComponent_PortType.getUserPlannedTasks(userId, fromDate, toDate, locale, requesterId);
   }
   
   public eu.aladdin_project.xsd.OperationResult storeMeasurements(eu.aladdin_project.xsd.Measurement[] data, java.lang.String userId) throws java.rmi.RemoteException{
@@ -188,10 +188,10 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.changeTaskStatus(taskId, taskStatus, userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult assignTask(eu.aladdin_project.xsd.Task task, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult assignTask(eu.aladdin_project.xsd.Task task, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.assignTask(task, userId);
+    return storageComponent_PortType.assignTask(task, locale, userId);
   }
   
   public eu.aladdin_project.xsd.SystemParameter[] listOfPossibleTasks(int userType) throws java.rmi.RemoteException{
@@ -200,34 +200,34 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.listOfPossibleTasks(userType);
   }
   
-  public eu.aladdin_project.xsd.OperationResult storeQuestionnaireAnswers(eu.aladdin_project.xsd.QuestionnaireAnswer[] data, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult storeQuestionnaireAnswers(eu.aladdin_project.xsd.QuestionnaireAnswers data, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
     return storageComponent_PortType.storeQuestionnaireAnswers(data, userId);
   }
   
-  public eu.aladdin_project.xsd.QuestionnaireInfo[] listOfQuestionnaires(java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.QuestionnaireInfo[] listOfQuestionnaires(eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.listOfQuestionnaires(userId);
+    return storageComponent_PortType.listOfQuestionnaires(locale, userId);
   }
   
-  public eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestionnaire(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.Questionnaire getQuestionnaire(java.lang.String id, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.getQuestionnaire(id, userId);
+    return storageComponent_PortType.getQuestionnaire(id, locale, userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult updateQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] data, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult updateQuestionnaire(eu.aladdin_project.xsd.Questionnaire data, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.updateQuestionnaire(data, userId);
+    return storageComponent_PortType.updateQuestionnaire(data, locale, userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult createQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] data, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult createQuestionnaire(eu.aladdin_project.xsd.Questionnaire data, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.createQuestionnaire(data, userId);
+    return storageComponent_PortType.createQuestionnaire(data, locale, userId);
   }
   
   public eu.aladdin_project.xsd.OperationResult deleteQuestionnaire(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException{
@@ -236,7 +236,7 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.deleteQuestionnaire(id, userId);
   }
   
-  public eu.aladdin_project.xsd.QuestionnaireAnswer[][] getQuestionnaireAnswers(java.lang.String objectId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.QuestionnaireAnswers[] getQuestionnaireAnswers(java.lang.String objectId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
     return storageComponent_PortType.getQuestionnaireAnswers(objectId, fromDate, toDate, userId);
@@ -356,10 +356,10 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.getUserType(id);
   }
   
-  public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, int language) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.getSystemParameterList(type, language);
+    return storageComponent_PortType.getSystemParameterList(type, locale);
   }
   
   public eu.aladdin_project.xsd.User getUser(java.lang.String id) throws java.rmi.RemoteException{
@@ -378,6 +378,12 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
     return storageComponent_PortType.getUserIdByPersonId(id, type, userId);
+  }
+  
+  public eu.aladdin_project.xsd.OperationResult updateSystemParameter(int type, eu.aladdin_project.xsd.SystemParameter value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.updateSystemParameter(type, value, locale);
   }
   
   

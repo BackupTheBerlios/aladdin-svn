@@ -13,6 +13,10 @@ public class QuestionnaireInfo  implements java.io.Serializable {
     private java.lang.String ID;  // attribute
 
     private java.lang.String title;  // attribute
+    
+    public String toString(){
+        return this.getTitle();
+    }
 
     public QuestionnaireInfo() {
     }
@@ -179,10 +183,6 @@ public class QuestionnaireInfo  implements java.io.Serializable {
         return 
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
-    }
-    
-    public String toString(){
-        return this.getTitle();
     }
 
 }

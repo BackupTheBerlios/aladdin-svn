@@ -14,6 +14,7 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
+import eu.aladdin_project.xsd.Questionnaire;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Task;
@@ -22,9 +23,9 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 
 	public void saveTask(){
 		String URL = "";
-		QuestionnaireQuestion[] questionnaire = new QuestionnaireQuestion[0];
+		Questionnaire questionnaire = new Questionnaire();
 		StorageComponentProxy proxy = new StorageComponentProxy();
-		
+		SystemParameter locale = new SystemParameter("en_US", "English");
 		try{
 			Listbox listbox = (Listbox)getFellow("tasktypesel");
 			org.zkoss.zul.api.Listitem listitem = listbox.getSelectedItemApi();
@@ -34,7 +35,7 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 				case SystemDictionary.TASK_TYPE_CARERQS_INT:
 				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
 					String qid = ((Textbox)getFellow("questidfield")).getValue();
-					questionnaire = proxy.getQuestionnaire(qid, userids);
+					questionnaire = proxy.getQuestionnaire(qid, locale, userids);
 					break;
 				case SystemDictionary.TASK_TYPE_COGGAME_INT:
 					URL = ((Textbox)getFellow("urlfield")).getValue();
@@ -61,7 +62,7 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 			System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
 			
 			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, objids, userids, objids);
-			OperationResult opres = proxy.assignTask(ts,userids);
+			OperationResult opres = proxy.assignTask(ts, locale, userids);
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

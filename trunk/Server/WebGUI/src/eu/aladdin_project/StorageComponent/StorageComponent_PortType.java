@@ -28,19 +28,19 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.OperationResult deleteClinician(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.Clinician getClinician(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.ClinicianInfo[] listOfClinicians(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.Task[] getUserPlannedTasks(java.lang.String userId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String requesterId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.Task[] getUserPlannedTasks(java.lang.String userId, java.util.Calendar fromDate, java.util.Calendar toDate, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String requesterId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult storeMeasurements(eu.aladdin_project.xsd.Measurement[] data, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.Measurement[] getPatientMeasurement(java.lang.String patientId, int measurementType, java.util.Calendar fromData, java.util.Calendar toData, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult changeTaskStatus(int taskId, int taskStatus, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult assignTask(eu.aladdin_project.xsd.Task task, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult assignTask(eu.aladdin_project.xsd.Task task, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.SystemParameter[] listOfPossibleTasks(int userType) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult storeQuestionnaireAnswers(eu.aladdin_project.xsd.QuestionnaireAnswer[] data, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.QuestionnaireInfo[] listOfQuestionnaires(java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestionnaire(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult updateQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] data, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult createQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] data, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult storeQuestionnaireAnswers(eu.aladdin_project.xsd.QuestionnaireAnswers data, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.QuestionnaireInfo[] listOfQuestionnaires(eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.Questionnaire getQuestionnaire(java.lang.String id, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult updateQuestionnaire(eu.aladdin_project.xsd.Questionnaire data, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult createQuestionnaire(eu.aladdin_project.xsd.Questionnaire data, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult deleteQuestionnaire(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.QuestionnaireAnswer[][] getQuestionnaireAnswers(java.lang.String objectId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.QuestionnaireAnswers[] getQuestionnaireAnswers(java.lang.String objectId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult savePatientAssessment(eu.aladdin_project.xsd.PatientAssessment assessment, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult saveCarerAssessment(eu.aladdin_project.xsd.CarerAssessment assessment, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult deletePatientAssessment(java.lang.String assessmentId, java.lang.String userId) throws java.rmi.RemoteException;
@@ -60,8 +60,9 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.OperationResult changePassword(java.lang.String userId, java.lang.String password, java.lang.String reqId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult auth(java.lang.String login, java.lang.String password) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult getUserType(java.lang.String id) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, int language) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.User getUser(java.lang.String id) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.PatientInfo[] getPatientsForCaregiver(java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult getUserIdByPersonId(java.lang.String id, int type, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult updateSystemParameter(int type, eu.aladdin_project.xsd.SystemParameter value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException;
 }

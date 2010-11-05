@@ -20,8 +20,11 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.SystemDictionary;
+import eu.aladdin_project.xsd.QuestionnaireAnswers;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
+import eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList;
+import eu.aladdin_project.xsd.QuestionnaireQuestionList;
 
 public class QuestionWindow extends Window{
 	
@@ -57,7 +60,7 @@ public class QuestionWindow extends Window{
 		this.ID = question.getId();
 		this.type = question.getType();
 		
-		QuestionnaireQuestionAnswer[] qans = question.getAnswers();
+		QuestionnaireQuestionAnswer[] qans = question.getAnswers().getAnswer();
 		for(int i = 0; i<qans.length; i++){
 			this.answers.add(qans[i]);
 		}
@@ -86,16 +89,16 @@ public class QuestionWindow extends Window{
 			q.setCondition(new UnsignedByte(condition));
 		}
 		q.setTitle(title);
-		q.setQuestions(new QuestionnaireQuestion[0]);
+		q.setQuestions(new QuestionnaireQuestionList(new QuestionnaireQuestion[0]));
 		
 		if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
 			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
 			for(int i = 0; i<this.answers.size(); i++){
 				answersvec[i]=this.answers.get(i);
 			}
-			q.setAnswers(answersvec);
+			q.setAnswers(new QuestionnaireQuestionAnswerList(answersvec));
 		}else{
-			q.setAnswers(new QuestionnaireQuestionAnswer[0]);
+			q.setAnswers(new QuestionnaireQuestionAnswerList(new QuestionnaireQuestionAnswer[0]));
 		}
 		this.pform.addQuestion(q,parent);
 		this.setVisible(false);

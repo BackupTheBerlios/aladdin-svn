@@ -10,9 +10,11 @@ package eu.aladdin_project.xsd;
 public class QuestionnaireQuestion  implements java.io.Serializable {
     private java.lang.String title;
 
-    private eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] answers;
+    private int globalID;
 
-    private eu.aladdin_project.xsd.QuestionnaireQuestion[] questions;
+    private eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList answers;
+
+    private eu.aladdin_project.xsd.QuestionnaireQuestionList questions;
 
     private java.lang.String id;  // attribute
 
@@ -25,12 +27,14 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
 
     public QuestionnaireQuestion(
            java.lang.String title,
-           eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] answers,
-           eu.aladdin_project.xsd.QuestionnaireQuestion[] questions,
+           int globalID,
+           eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList answers,
+           eu.aladdin_project.xsd.QuestionnaireQuestionList questions,
            java.lang.String id,
            java.lang.String type,
            org.apache.axis.types.UnsignedByte condition) {
            this.title = title;
+           this.globalID = globalID;
            this.answers = answers;
            this.questions = questions;
            this.id = id;
@@ -60,11 +64,31 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
 
 
     /**
+     * Gets the globalID value for this QuestionnaireQuestion.
+     * 
+     * @return globalID
+     */
+    public int getGlobalID() {
+        return globalID;
+    }
+
+
+    /**
+     * Sets the globalID value for this QuestionnaireQuestion.
+     * 
+     * @param globalID
+     */
+    public void setGlobalID(int globalID) {
+        this.globalID = globalID;
+    }
+
+
+    /**
      * Gets the answers value for this QuestionnaireQuestion.
      * 
      * @return answers
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] getAnswers() {
+    public eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList getAnswers() {
         return answers;
     }
 
@@ -74,7 +98,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
      * 
      * @param answers
      */
-    public void setAnswers(eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[] answers) {
+    public void setAnswers(eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList answers) {
         this.answers = answers;
     }
 
@@ -84,7 +108,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
      * 
      * @return questions
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestions() {
+    public eu.aladdin_project.xsd.QuestionnaireQuestionList getQuestions() {
         return questions;
     }
 
@@ -94,7 +118,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
      * 
      * @param questions
      */
-    public void setQuestions(eu.aladdin_project.xsd.QuestionnaireQuestion[] questions) {
+    public void setQuestions(eu.aladdin_project.xsd.QuestionnaireQuestionList questions) {
         this.questions = questions;
     }
 
@@ -173,12 +197,13 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
             ((this.title==null && other.getTitle()==null) || 
              (this.title!=null &&
               this.title.equals(other.getTitle()))) &&
+            this.globalID == other.getGlobalID() &&
             ((this.answers==null && other.getAnswers()==null) || 
              (this.answers!=null &&
-              java.util.Arrays.equals(this.answers, other.getAnswers()))) &&
+              this.answers.equals(other.getAnswers()))) &&
             ((this.questions==null && other.getQuestions()==null) || 
              (this.questions!=null &&
-              java.util.Arrays.equals(this.questions, other.getQuestions()))) &&
+              this.questions.equals(other.getQuestions()))) &&
             ((this.id==null && other.getId()==null) || 
              (this.id!=null &&
               this.id.equals(other.getId()))) &&
@@ -202,27 +227,12 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         if (getTitle() != null) {
             _hashCode += getTitle().hashCode();
         }
+        _hashCode += getGlobalID();
         if (getAnswers() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getAnswers());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getAnswers(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getAnswers().hashCode();
         }
         if (getQuestions() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getQuestions());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getQuestions(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getQuestions().hashCode();
         }
         if (getId() != null) {
             _hashCode += getId().hashCode();
@@ -265,18 +275,22 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("globalID");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "GlobalID"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("answers");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answers"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionAnswer"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionAnswerList"));
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answer"));
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("questions");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "questions"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestion"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionList"));
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question"));
         typeDesc.addFieldDesc(elemField);
     }
 

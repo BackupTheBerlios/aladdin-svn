@@ -16,7 +16,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[56];
+        _operations = new org.apache.axis.description.OperationDesc[57];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -306,6 +306,8 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "toDate"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"), java.util.Calendar.class, false, false);
         oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
+        oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "requesterId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Task"));
@@ -366,6 +368,8 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setName("AssignTask");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "task"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Task"), eu.aladdin_project.xsd.Task.class, false, false);
         oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
+        oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "OperationResult"));
@@ -388,8 +392,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("StoreQuestionnaireAnswers");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "data"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers"), eu.aladdin_project.xsd.QuestionnaireAnswer[].class, false, false);
-        param.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answer"));
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "data"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers"), eu.aladdin_project.xsd.QuestionnaireAnswers.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
@@ -402,6 +405,8 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("ListOfQuestionnaires");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
+        oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireInfo"));
@@ -415,21 +420,22 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setName("GetQuestionnaire");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "id"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
+        oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"));
-        oper.setReturnClass(eu.aladdin_project.xsd.QuestionnaireQuestion[].class);
+        oper.setReturnClass(eu.aladdin_project.xsd.Questionnaire.class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
-        param = oper.getReturnParamDesc();
-        param.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[28] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("UpdateQuestionnaire");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "data"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"), eu.aladdin_project.xsd.QuestionnaireQuestion[].class, false, false);
-        param.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question"));
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "data"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"), eu.aladdin_project.xsd.Questionnaire.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
@@ -447,8 +453,9 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("CreateQuestionnaire");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "data"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"), eu.aladdin_project.xsd.QuestionnaireQuestion[].class, false, false);
-        param.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question"));
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "data"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"), eu.aladdin_project.xsd.Questionnaire.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
@@ -483,7 +490,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers"));
-        oper.setReturnClass(eu.aladdin_project.xsd.QuestionnaireAnswer[][].class);
+        oper.setReturnClass(eu.aladdin_project.xsd.QuestionnaireAnswers[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -742,7 +749,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setName("GetSystemParameterList");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "type"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "language"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
         oper.setReturnClass(eu.aladdin_project.xsd.SystemParameter[].class);
@@ -788,6 +795,21 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[55] = oper;
 
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("UpdateSystemParameter");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "type"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "value"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "locale"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"), eu.aladdin_project.xsd.SystemParameter.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "OperationResult"));
+        oper.setReturnClass(eu.aladdin_project.xsd.OperationResult.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[56] = oper;
+
     }
 
     public StorageComponentSOAPStub() throws org.apache.axis.AxisFault {
@@ -828,12 +850,10 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "AddressList");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.Address[].class;
+            cls = eu.aladdin_project.xsd.AddressList.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Address");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Address");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Administrator");
             cachedSerQNames.add(qName);
@@ -893,12 +913,17 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "CommunicationList");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.Communication[].class;
+            cls = eu.aladdin_project.xsd.CommunicationList.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Communication");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Communication");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Event");
+            cachedSerQNames.add(qName);
+            cls = eu.aladdin_project.xsd.Event.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ExternalService");
             cachedSerQNames.add(qName);
@@ -916,12 +941,10 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "IdentifierList");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.Identifier[].class;
+            cls = eu.aladdin_project.xsd.IdentifierList.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Identifier");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Identifier");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Measurement");
             cachedSerQNames.add(qName);
@@ -960,12 +983,10 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.PatientCarer[].class;
+            cls = eu.aladdin_project.xsd.PatientCarerList.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarer");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarer");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientInfo");
             cachedSerQNames.add(qName);
@@ -983,12 +1004,10 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.QuestionnaireQuestion[].class;
+            cls = eu.aladdin_project.xsd.Questionnaire.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestion");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswer");
             cachedSerQNames.add(qName);
@@ -999,12 +1018,10 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.QuestionnaireAnswer[].class;
+            cls = eu.aladdin_project.xsd.QuestionnaireAnswers.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswer");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answer");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireInfo");
             cachedSerQNames.add(qName);
@@ -1029,21 +1046,24 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionAnswerList");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.QuestionnaireQuestionAnswer[].class;
+            cls = eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionAnswer");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "answer");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionAnswerType");
+            cachedSerQNames.add(qName);
+            cls = eu.aladdin_project.xsd.QuestionnaireQuestionAnswerType.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(enumsf);
+            cachedDeserFactories.add(enumdf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionList");
             cachedSerQNames.add(qName);
-            cls = eu.aladdin_project.xsd.QuestionnaireQuestion[].class;
+            cls = eu.aladdin_project.xsd.QuestionnaireQuestionList.class;
             cachedSerClasses.add(cls);
-            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestion");
-            qName2 = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question");
-            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
-            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SearchCriteria");
             cachedSerQNames.add(qName);
@@ -1833,7 +1853,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.Task[] getUserPlannedTasks(java.lang.String userId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String requesterId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.Task[] getUserPlannedTasks(java.lang.String userId, java.util.Calendar fromDate, java.util.Calendar toDate, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String requesterId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1849,7 +1869,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {userId, fromDate, toDate, requesterId});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {userId, fromDate, toDate, locale, requesterId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -1969,7 +1989,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.OperationResult assignTask(eu.aladdin_project.xsd.Task task, java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.OperationResult assignTask(eu.aladdin_project.xsd.Task task, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1985,7 +2005,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {task, userId});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {task, locale, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -2037,7 +2057,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.OperationResult storeQuestionnaireAnswers(eu.aladdin_project.xsd.QuestionnaireAnswer[] data, java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.OperationResult storeQuestionnaireAnswers(eu.aladdin_project.xsd.QuestionnaireAnswers data, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2071,7 +2091,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.QuestionnaireInfo[] listOfQuestionnaires(java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.QuestionnaireInfo[] listOfQuestionnaires(eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2087,7 +2107,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {userId});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {locale, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -2105,7 +2125,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestionnaire(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.Questionnaire getQuestionnaire(java.lang.String id, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2121,7 +2141,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {id, userId});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {id, locale, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -2129,9 +2149,9 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         else {
             extractAttachments(_call);
             try {
-                return (eu.aladdin_project.xsd.QuestionnaireQuestion[]) _resp;
+                return (eu.aladdin_project.xsd.Questionnaire) _resp;
             } catch (java.lang.Exception _exception) {
-                return (eu.aladdin_project.xsd.QuestionnaireQuestion[]) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.QuestionnaireQuestion[].class);
+                return (eu.aladdin_project.xsd.Questionnaire) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.Questionnaire.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -2139,7 +2159,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.OperationResult updateQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] data, java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.OperationResult updateQuestionnaire(eu.aladdin_project.xsd.Questionnaire data, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2155,7 +2175,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {data, userId});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {data, locale, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -2173,7 +2193,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.OperationResult createQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] data, java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.OperationResult createQuestionnaire(eu.aladdin_project.xsd.Questionnaire data, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2189,7 +2209,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {data, userId});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {data, locale, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -2241,7 +2261,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.QuestionnaireAnswer[][] getQuestionnaireAnswers(java.lang.String objectId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String userId) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.QuestionnaireAnswers[] getQuestionnaireAnswers(java.lang.String objectId, java.util.Calendar fromDate, java.util.Calendar toDate, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2265,9 +2285,9 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         else {
             extractAttachments(_call);
             try {
-                return (eu.aladdin_project.xsd.QuestionnaireAnswer[][]) _resp;
+                return (eu.aladdin_project.xsd.QuestionnaireAnswers[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (eu.aladdin_project.xsd.QuestionnaireAnswer[][]) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.QuestionnaireAnswer[][].class);
+                return (eu.aladdin_project.xsd.QuestionnaireAnswers[]) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.QuestionnaireAnswers[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -2921,7 +2941,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, int language) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.SystemParameter[] getSystemParameterList(int type, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -2937,7 +2957,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(type), new java.lang.Integer(language)});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(type), locale});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -3040,6 +3060,40 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         setRequestHeaders(_call);
         setAttachments(_call);
  try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {id, new java.lang.Integer(type), userId});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.OperationResult) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.OperationResult) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.OperationResult.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public eu.aladdin_project.xsd.OperationResult updateSystemParameter(int type, eu.aladdin_project.xsd.SystemParameter value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[56]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/UpdateSystemParameter");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "UpdateSystemParameter"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(type), value, locale});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

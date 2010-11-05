@@ -22,6 +22,7 @@ import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
+import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Task;
 
 @SuppressWarnings("serial")
@@ -108,7 +109,8 @@ public class DetailSDController extends DetailPersonController{
 		try{
 			OperationResult currentor = proxy.getUserIdByPersonId(this.currentid, this.usertype, userid);
 			System.out.println("USER TASKS: "+currentor.getCode());
-			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto, userid);
+			SystemParameter locale = new SystemParameter("en_UK", "English");
+			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto,locale ,userid);
 			this.calmodel = new SimpleCalendarModel();
 			if(tasklist != null){
 				System.out.println("TASKS LENGHT: "+tasklist.length);

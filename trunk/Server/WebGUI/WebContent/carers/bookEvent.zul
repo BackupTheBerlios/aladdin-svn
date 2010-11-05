@@ -84,7 +84,7 @@
 							StorageComponentProxy proxy = new StorageComponentProxy();
 							SimpleListModel qsssmodel = null;
 							try{
-								eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(petusid);
+								eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(),petusid);
 								qsssmodel = new SimpleListModel(qsss);
 							}catch(java.rmi.RemoteException re){
 								re.printStackTrace(); 

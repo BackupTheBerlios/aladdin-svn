@@ -24,6 +24,7 @@ import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.PatientCarer;
+import eu.aladdin_project.xsd.PatientCarerList;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
 
@@ -45,7 +46,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.currentdata = current.getPersonData();
 		this.currentsd = current.getSD_Data();
 		this.currentresp = current.getResponsibleClinicianID();
-		this.currentcarers = current.getPatientCarerList();
+		this.currentcarers = current.getPatientCarerList().getPatientCarer();
 		
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();
@@ -90,8 +91,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			
 			PatientCarer[] listcarers = new PatientCarer[1];
 			listcarers[0]=new PatientCarer(car2set,true);
+			PatientCarerList oflist = new PatientCarerList(listcarers);
 			
-			Patient patient = new Patient("",personData,sdData, resClinic, listcarers);
+			Patient patient = new Patient("",personData,sdData, resClinic, oflist);
 			result = proxy.createPatient(patient, id);
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
@@ -269,8 +271,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			
 			PatientCarer[] listcarers = new PatientCarer[1];
 			listcarers[0]=new PatientCarer(car2set,true);
+			PatientCarerList oflist = new PatientCarerList(listcarers);
 			
-			Patient patient = new Patient(this.currentid,personData,sdData, resClinic, listcarers);
+			Patient patient = new Patient(this.currentid,personData,sdData, resClinic, oflist);
 			proxy.updatePatient(patient, id);
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);

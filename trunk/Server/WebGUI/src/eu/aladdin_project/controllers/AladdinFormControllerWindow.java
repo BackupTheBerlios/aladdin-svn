@@ -24,8 +24,11 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.xsd.Address;
+import eu.aladdin_project.xsd.AddressList;
 import eu.aladdin_project.xsd.Communication;
+import eu.aladdin_project.xsd.CommunicationList;
 import eu.aladdin_project.xsd.Identifier;
+import eu.aladdin_project.xsd.IdentifierList;
 import eu.aladdin_project.xsd.PersonData;
 
 @SuppressWarnings("serial")
@@ -62,18 +65,23 @@ public class AladdinFormControllerWindow extends Window{
 
 		Identifier idarr[]=new Identifier[1];
 		idarr[0]=this.getIdentifierData();
+		IdentifierList idlist = new IdentifierList();
+		idlist.setIdentifier(idarr);
 		
 		Address addresslist[] = this.getNewAddressData();
 		if(this.addresses == null){
 			addresslist = new Address[0];
 		}
+		AddressList adrlist = new AddressList(addresslist);
 		
 		Communication comlist[] = this.getNewCommunicationData();
 		if(this.communications == null){
 			communications = new Communication[0];
 		}
+		CommunicationList comilist = new CommunicationList(comlist);
 		
-		PersonData pdData = new PersonData(surname, name, idarr, addresslist, comlist);
+		//PersonData pdData = new PersonData(surname, name, idarr, addresslist, comlist);
+		PersonData pdData = new PersonData(name, surname, idlist, adrlist, comilist);
 		return pdData;
 	}
 	
@@ -362,7 +370,8 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void addAddressFieldsValues(){
-		this.addresses = this.currentdata.getAddressList();
+		
+		this.addresses = this.currentdata.getAddressList().getAddress();
 		System.out.println("Addresses LENGTH: "+this.addresses.length);
 		for(int i = 0; i<this.addresses.length; i++){
 			if(this.addresses[i]!=null){
@@ -451,7 +460,7 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void addCommunicationFieldsValues(){
-		this.communications = this.currentdata.getCommunicationList();
+		this.communications = this.currentdata.getCommunicationList().getCommunication();
 		System.out.println("Communications LENGTH: "+ this.communications.length);
 		for(int i = 0 ; i<this.communications.length; i++){
 			if(this.communications[i] != null){

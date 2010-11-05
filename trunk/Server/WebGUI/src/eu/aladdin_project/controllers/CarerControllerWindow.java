@@ -95,6 +95,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			e.printStackTrace();
 		}finally{
 			//TODO Show message on the following page.
+			Executions.getCurrent().sendRedirect("/carers");
 		}
 	}
 	

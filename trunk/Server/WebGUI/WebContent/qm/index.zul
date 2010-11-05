@@ -8,6 +8,7 @@
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.PatientInfo;
 		import eu.aladdin_project.xsd.SearchCriteria;
+		import eu.aladdin_project.xsd.SystemParameter;
 		
 		String title = Labels.getLabel("qm.title");
 		String newq = Labels.getLabel("qm.new");
@@ -24,7 +25,7 @@
 		eu.aladdin_project.xsd.QuestionnaireInfo[] qlist = null;
 		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		try{
-			qlist = proxy.listOfQuestionnaires(userid);
+			qlist = proxy.listOfQuestionnaires(eu.aladdin_project.SystemDictionary.getLocale(),userid);
 			System.out.println("**** List SIZE: "+qlist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

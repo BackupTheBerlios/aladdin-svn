@@ -53,7 +53,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		PersonData personData = this.getPersonData();
 		
 		//Create ID
-		Identifier ident = personData.getIdentifierList()[0];
+		Identifier ident = personData.getIdentifierList().getIdentifier()[0];
 		String clinID = ident.getType()+'-'+ident.getNumber();
 		
 		//TODO isPrimary control on Communication and Addresses
@@ -89,6 +89,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			//TODO Set message to "Unknown error updating clinician"
 		}finally{
 			//TODO Show message on the following page.
+			Executions.getCurrent().sendRedirect("/clinicians");
 		}
 	}
 	

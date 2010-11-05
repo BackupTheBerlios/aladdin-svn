@@ -13,6 +13,10 @@ public class PatientInfo  implements java.io.Serializable {
     private java.lang.String surname;
 
     private java.lang.String name;
+    
+    public String toString(){
+    	return surname+", "+name;
+    }
 
     public PatientInfo() {
     }
@@ -186,10 +190,6 @@ public class PatientInfo  implements java.io.Serializable {
         return 
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
-    }
-    
-    public String toString(){
-    	return surname+", "+name;
     }
 
 }

@@ -20,7 +20,7 @@ public class Task  implements java.io.Serializable {
 
     private java.lang.String URL;
 
-    private eu.aladdin_project.xsd.QuestionnaireQuestion[] questionnaire;
+    private eu.aladdin_project.xsd.Questionnaire questionnaire;
 
     private java.lang.String executorID;
 
@@ -38,7 +38,7 @@ public class Task  implements java.io.Serializable {
            java.util.Calendar dateTimeFulfilled,
            eu.aladdin_project.xsd.SystemParameter taskStatus,
            java.lang.String URL,
-           eu.aladdin_project.xsd.QuestionnaireQuestion[] questionnaire,
+           eu.aladdin_project.xsd.Questionnaire questionnaire,
            java.lang.String executorID,
            java.lang.String assignerID,
            java.lang.String objectID) {
@@ -180,7 +180,7 @@ public class Task  implements java.io.Serializable {
      * 
      * @return questionnaire
      */
-    public eu.aladdin_project.xsd.QuestionnaireQuestion[] getQuestionnaire() {
+    public eu.aladdin_project.xsd.Questionnaire getQuestionnaire() {
         return questionnaire;
     }
 
@@ -190,7 +190,7 @@ public class Task  implements java.io.Serializable {
      * 
      * @param questionnaire
      */
-    public void setQuestionnaire(eu.aladdin_project.xsd.QuestionnaireQuestion[] questionnaire) {
+    public void setQuestionnaire(eu.aladdin_project.xsd.Questionnaire questionnaire) {
         this.questionnaire = questionnaire;
     }
 
@@ -286,7 +286,7 @@ public class Task  implements java.io.Serializable {
               this.URL.equals(other.getURL()))) &&
             ((this.questionnaire==null && other.getQuestionnaire()==null) || 
              (this.questionnaire!=null &&
-              java.util.Arrays.equals(this.questionnaire, other.getQuestionnaire()))) &&
+              this.questionnaire.equals(other.getQuestionnaire()))) &&
             ((this.executorID==null && other.getExecutorID()==null) || 
              (this.executorID!=null &&
               this.executorID.equals(other.getExecutorID()))) &&
@@ -326,15 +326,7 @@ public class Task  implements java.io.Serializable {
             _hashCode += getURL().hashCode();
         }
         if (getQuestionnaire() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getQuestionnaire());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getQuestionnaire(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getQuestionnaire().hashCode();
         }
         if (getExecutorID() != null) {
             _hashCode += getExecutorID().hashCode();
@@ -395,10 +387,9 @@ public class Task  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("questionnaire");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestion"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "question"));
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("executorID");

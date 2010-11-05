@@ -16,7 +16,7 @@ public class Patient  implements java.io.Serializable {
 
     private java.lang.String responsibleClinicianID;
 
-    private eu.aladdin_project.xsd.PatientCarer[] patientCarerList;
+    private eu.aladdin_project.xsd.PatientCarerList patientCarerList;
 
     public Patient() {
     }
@@ -26,7 +26,7 @@ public class Patient  implements java.io.Serializable {
            eu.aladdin_project.xsd.PersonData personData,
            eu.aladdin_project.xsd.SocioDemographicData SD_Data,
            java.lang.String responsibleClinicianID,
-           eu.aladdin_project.xsd.PatientCarer[] patientCarerList) {
+           eu.aladdin_project.xsd.PatientCarerList patientCarerList) {
            this.ID = ID;
            this.personData = personData;
            this.SD_Data = SD_Data;
@@ -120,7 +120,7 @@ public class Patient  implements java.io.Serializable {
      * 
      * @return patientCarerList
      */
-    public eu.aladdin_project.xsd.PatientCarer[] getPatientCarerList() {
+    public eu.aladdin_project.xsd.PatientCarerList getPatientCarerList() {
         return patientCarerList;
     }
 
@@ -130,7 +130,7 @@ public class Patient  implements java.io.Serializable {
      * 
      * @param patientCarerList
      */
-    public void setPatientCarerList(eu.aladdin_project.xsd.PatientCarer[] patientCarerList) {
+    public void setPatientCarerList(eu.aladdin_project.xsd.PatientCarerList patientCarerList) {
         this.patientCarerList = patientCarerList;
     }
 
@@ -160,7 +160,7 @@ public class Patient  implements java.io.Serializable {
               this.responsibleClinicianID.equals(other.getResponsibleClinicianID()))) &&
             ((this.patientCarerList==null && other.getPatientCarerList()==null) || 
              (this.patientCarerList!=null &&
-              java.util.Arrays.equals(this.patientCarerList, other.getPatientCarerList())));
+              this.patientCarerList.equals(other.getPatientCarerList())));
         __equalsCalc = null;
         return _equals;
     }
@@ -185,15 +185,7 @@ public class Patient  implements java.io.Serializable {
             _hashCode += getResponsibleClinicianID().hashCode();
         }
         if (getPatientCarerList() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getPatientCarerList());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getPatientCarerList(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getPatientCarerList().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -232,9 +224,8 @@ public class Patient  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("patientCarerList");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarer"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList"));
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarer"));
         typeDesc.addFieldDesc(elemField);
     }
 

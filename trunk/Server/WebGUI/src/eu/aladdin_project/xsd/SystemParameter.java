@@ -11,6 +11,10 @@ public class SystemParameter  implements java.io.Serializable {
     private java.lang.String code;
 
     private java.lang.String description = "";
+    
+    public String toString(){
+    	return description;
+    }
 
     public SystemParameter() {
     }
@@ -150,10 +154,6 @@ public class SystemParameter  implements java.io.Serializable {
         return 
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
-    }
-    
-    public String toString(){
-    	return description;
     }
 
 }

@@ -2,10 +2,18 @@ package eu.aladdin_project;
 
 import org.zkoss.util.resource.Labels;
 
+import eu.aladdin_project.xsd.SystemParameter;
+
 /**
  * Helper class to manage some system paramenters 
  */
 public class SystemDictionary {
+	
+	private static SystemParameter locale = new SystemParameter("en_US","English");
+	
+	public static SystemParameter getLocale(){
+		return locale;
+	}
 	
 	/**
 	 * Static function which returns the user type label

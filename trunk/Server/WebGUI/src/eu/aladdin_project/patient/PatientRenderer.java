@@ -22,7 +22,7 @@ public class PatientRenderer implements ListitemRenderer{
 	}
 	
 	private Address getPrimaryAddress(PersonData data){
-		Address addresses[]=data.getAddressList();
+		Address addresses[]=data.getAddressList().getAddress();
 		for(int i=0;i<addresses.length;i++){
 			if(addresses[i].isIsPrimary()){
 				return addresses[i];

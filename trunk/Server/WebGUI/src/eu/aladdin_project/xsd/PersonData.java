@@ -12,11 +12,11 @@ public class PersonData  implements java.io.Serializable {
 
     private java.lang.String name;
 
-    private eu.aladdin_project.xsd.Identifier[] identifierList;
+    private eu.aladdin_project.xsd.IdentifierList identifierList;
 
-    private eu.aladdin_project.xsd.Address[] addressList;
+    private eu.aladdin_project.xsd.AddressList addressList;
 
-    private eu.aladdin_project.xsd.Communication[] communicationList;
+    private eu.aladdin_project.xsd.CommunicationList communicationList;
 
     public PersonData() {
     }
@@ -24,9 +24,9 @@ public class PersonData  implements java.io.Serializable {
     public PersonData(
            java.lang.String surname,
            java.lang.String name,
-           eu.aladdin_project.xsd.Identifier[] identifierList,
-           eu.aladdin_project.xsd.Address[] addressList,
-           eu.aladdin_project.xsd.Communication[] communicationList) {
+           eu.aladdin_project.xsd.IdentifierList identifierList,
+           eu.aladdin_project.xsd.AddressList addressList,
+           eu.aladdin_project.xsd.CommunicationList communicationList) {
            this.surname = surname;
            this.name = name;
            this.identifierList = identifierList;
@@ -80,7 +80,7 @@ public class PersonData  implements java.io.Serializable {
      * 
      * @return identifierList
      */
-    public eu.aladdin_project.xsd.Identifier[] getIdentifierList() {
+    public eu.aladdin_project.xsd.IdentifierList getIdentifierList() {
         return identifierList;
     }
 
@@ -90,7 +90,7 @@ public class PersonData  implements java.io.Serializable {
      * 
      * @param identifierList
      */
-    public void setIdentifierList(eu.aladdin_project.xsd.Identifier[] identifierList) {
+    public void setIdentifierList(eu.aladdin_project.xsd.IdentifierList identifierList) {
         this.identifierList = identifierList;
     }
 
@@ -100,7 +100,7 @@ public class PersonData  implements java.io.Serializable {
      * 
      * @return addressList
      */
-    public eu.aladdin_project.xsd.Address[] getAddressList() {
+    public eu.aladdin_project.xsd.AddressList getAddressList() {
         return addressList;
     }
 
@@ -110,7 +110,7 @@ public class PersonData  implements java.io.Serializable {
      * 
      * @param addressList
      */
-    public void setAddressList(eu.aladdin_project.xsd.Address[] addressList) {
+    public void setAddressList(eu.aladdin_project.xsd.AddressList addressList) {
         this.addressList = addressList;
     }
 
@@ -120,7 +120,7 @@ public class PersonData  implements java.io.Serializable {
      * 
      * @return communicationList
      */
-    public eu.aladdin_project.xsd.Communication[] getCommunicationList() {
+    public eu.aladdin_project.xsd.CommunicationList getCommunicationList() {
         return communicationList;
     }
 
@@ -130,7 +130,7 @@ public class PersonData  implements java.io.Serializable {
      * 
      * @param communicationList
      */
-    public void setCommunicationList(eu.aladdin_project.xsd.Communication[] communicationList) {
+    public void setCommunicationList(eu.aladdin_project.xsd.CommunicationList communicationList) {
         this.communicationList = communicationList;
     }
 
@@ -154,13 +154,13 @@ public class PersonData  implements java.io.Serializable {
               this.name.equals(other.getName()))) &&
             ((this.identifierList==null && other.getIdentifierList()==null) || 
              (this.identifierList!=null &&
-              java.util.Arrays.equals(this.identifierList, other.getIdentifierList()))) &&
+              this.identifierList.equals(other.getIdentifierList()))) &&
             ((this.addressList==null && other.getAddressList()==null) || 
              (this.addressList!=null &&
-              java.util.Arrays.equals(this.addressList, other.getAddressList()))) &&
+              this.addressList.equals(other.getAddressList()))) &&
             ((this.communicationList==null && other.getCommunicationList()==null) || 
              (this.communicationList!=null &&
-              java.util.Arrays.equals(this.communicationList, other.getCommunicationList())));
+              this.communicationList.equals(other.getCommunicationList())));
         __equalsCalc = null;
         return _equals;
     }
@@ -179,37 +179,13 @@ public class PersonData  implements java.io.Serializable {
             _hashCode += getName().hashCode();
         }
         if (getIdentifierList() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getIdentifierList());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getIdentifierList(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getIdentifierList().hashCode();
         }
         if (getAddressList() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getAddressList());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getAddressList(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getAddressList().hashCode();
         }
         if (getCommunicationList() != null) {
-            for (int i=0;
-                 i<java.lang.reflect.Array.getLength(getCommunicationList());
-                 i++) {
-                java.lang.Object obj = java.lang.reflect.Array.get(getCommunicationList(), i);
-                if (obj != null &&
-                    !obj.getClass().isArray()) {
-                    _hashCode += obj.hashCode();
-                }
-            }
+            _hashCode += getCommunicationList().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -236,23 +212,20 @@ public class PersonData  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("identifierList");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "IdentifierList"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Identifier"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "IdentifierList"));
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Identifier"));
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("addressList");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "AddressList"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Address"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "AddressList"));
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Address"));
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("communicationList");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "CommunicationList"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Communication"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "CommunicationList"));
         elemField.setNillable(false);
-        elemField.setItemQName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Communication"));
         typeDesc.addFieldDesc(elemField);
     }
 
