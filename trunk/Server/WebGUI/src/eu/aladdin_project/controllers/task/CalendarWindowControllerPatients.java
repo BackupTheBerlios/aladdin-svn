@@ -25,7 +25,6 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 		String URL = "";
 		Questionnaire questionnaire = new Questionnaire();
 		StorageComponentProxy proxy = new StorageComponentProxy();
-		SystemParameter locale = new SystemParameter("en_US", "English");
 		try{
 			Listbox listbox = (Listbox)getFellow("tasktypesel");
 			org.zkoss.zul.api.Listitem listitem = listbox.getSelectedItemApi();
@@ -35,7 +34,7 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 				case SystemDictionary.TASK_TYPE_CARERQS_INT:
 				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
 					String qid = ((Textbox)getFellow("questidfield")).getValue();
-					questionnaire = proxy.getQuestionnaire(qid, locale, userids);
+					questionnaire = proxy.getQuestionnaire(qid, SystemDictionary.getLocale(), userids);
 					break;
 				case SystemDictionary.TASK_TYPE_COGGAME_INT:
 					URL = ((Textbox)getFellow("urlfield")).getValue();
@@ -58,11 +57,12 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 			SystemParameter tasstatus = new SystemParameter(SystemDictionary.TASK_STATUS_PENDING,SystemDictionary.TASK_STATUS_PENDING_LBL);
 			//Object ID (Person ID)
 			String objids = ((Textbox)getFellow("objid")).getValue();
-			OperationResult result = proxy.getUserIdByPersonId(objids, SystemDictionary.USERTYPE_PATIENT_INT, userids);
-			System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
+			System.out.println("Getobjids result = " + objids);
+			//OperationResult result = proxy.getUserIdByPersonId(objids, SystemDictionary.USERTYPE_PATIENT_INT, userids);
+			//System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
 			
 			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, objids, userids, objids);
-			OperationResult opres = proxy.assignTask(ts, locale, userids);
+			OperationResult opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
