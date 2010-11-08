@@ -1964,6 +1964,9 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			s.beginTransaction();
     			
+    			System.out.println (" AssignTask ");
+    			System.out.println (" IDDQD ");
+    			
     			System.out.println (1);
     			com.aladdin.sc.db.Task task = new com.aladdin.sc.db.Task ();
     			System.out.println (2);
@@ -1987,10 +1990,23 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			System.out.println (11);
     			
     			if (rtask.getQuestionnaire() != null) {
-    				System.out.println (12);
-    				com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire(), req.getAssignTask().getLocale());
-    				if (storedQuestionnaire != null) task.setQuestionnaire(storedQuestionnaire.getId());
-    				System.out.println (13);
+    				
+    				if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") == 0) {
+    					System.out.println (12);
+        				System.out.println (rtask.getQuestionnaire().getID());
+        				try {
+        					System.out.println (121);
+        					task.setQuestionnaire(new Integer (rtask.getQuestionnaire().getID()));
+        					System.out.println (1211);
+        				} catch (Exception e) {
+        					System.out.println (122);
+							task.setQuestionnaire(null);
+							System.out.println (1221);
+						}
+        				//com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire(), req.getAssignTask().getLocale());
+        				//if (storedQuestionnaire != null) task.setQuestionnaire(storedQuestionnaire.getId());
+        				System.out.println (13);
+    				}
     			}
     			System.out.println (14);
     			
