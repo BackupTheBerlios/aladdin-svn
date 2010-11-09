@@ -43,13 +43,12 @@ public class QuestionnaireFormWindow extends Window{
 	 * @param String qid QuestionnaireInfo identificator
 	 */
 	public void updatingQuestionnaire(String qid){
-		SystemParameter locale = new SystemParameter("en_UK", "English");
 		try{
 			QuestionnaireInfo qinfo = null;
 			Questionnaire questions = null;
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
 			StorageComponentProxy proxy = new StorageComponentProxy();
-			QuestionnaireInfo[] qlist = proxy.listOfQuestionnaires(locale,userid);
+			QuestionnaireInfo[] qlist = proxy.listOfQuestionnaires(SystemDictionary.getLocale(),userid);
 			for(int i = 0 ; i < qlist.length ; i++){
 				if(qlist[i].getID().equals(qid)){
 					qinfo = qlist[i];
@@ -60,7 +59,7 @@ public class QuestionnaireFormWindow extends Window{
 				//TODO Show error on page. Send redirect to index?
 				return; 
 			}
-			questions = proxy.getQuestionnaire(qid, locale, userid);
+			questions = proxy.getQuestionnaire(qid, SystemDictionary.getLocale(), userid);
 			Double version = new Double(qinfo.getVersion()+1);
 			((Textbox)getFellow("versionfield")).setValue(version.toString());
 			((Textbox)getFellow("versionfield")).setReadonly(true);
@@ -94,7 +93,6 @@ public class QuestionnaireFormWindow extends Window{
 	 * 
 	 */
 	public void saveQuestionnaire(){
-		SystemParameter locale = new SystemParameter("en_UK", "English");
 		//related questions management, this is magic don't look at it or it would be self-destroyed!
 		int rootquestions = 0;
 		for(int ii = 0; ii<questionlist.size(); ii++){
@@ -108,7 +106,12 @@ public class QuestionnaireFormWindow extends Window{
 					RelatedQuestion rq2 = questionlist.get(j);
 					if(rq2.getId().equals(rq.getParent())){
 						//Save question on question list
-						QuestionnaireQuestion[] qqa = new QuestionnaireQuestion[rq2.getQuestion().getQuestions().getQuestion().length+1];
+						QuestionnaireQuestion[] qqa = null;
+						if(rq2.getQuestion().getQuestions()==null || rq2.getQuestion().getQuestions().getQuestion() == null){
+							qqa = new QuestionnaireQuestion[1];
+						}else{
+							qqa = new QuestionnaireQuestion[rq2.getQuestion().getQuestions().getQuestion().length+1];
+						}
 						if(qqa.length>1){
 							for(int k = 0; k<rq2.getQuestion().getQuestions().getQuestion().length; k++){
 								qqa[k]=rq2.getQuestion().getQuestions().getQuestion()[k];
@@ -132,7 +135,7 @@ public class QuestionnaireFormWindow extends Window{
 			relq.getQuestion().setId("");
 			if(relq.getParent().equals("0")){
 				qlist[i]=relq.getQuestion();
-				System.out.println("Sub-questions: "+qlist[i].getQuestions().getQuestion().length);
+				//System.out.println("Sub-questions: "+qlist[i].getQuestions().getQuestion().length);
 				i++;
 			}
 		}
@@ -143,7 +146,7 @@ public class QuestionnaireFormWindow extends Window{
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		try{
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
-			OperationResult result = proxy.createQuestionnaire(new Questionnaire(qlist, version, "", title), locale, userid);
+			OperationResult result = proxy.createQuestionnaire(new Questionnaire(qlist, version, "", title), SystemDictionary.getLocale(), userid);
 			System.out.println("Save Questionnaire: "+result.getCode()+":"+result.getDescription());
 		}catch (RemoteException e) {
 			e.printStackTrace();

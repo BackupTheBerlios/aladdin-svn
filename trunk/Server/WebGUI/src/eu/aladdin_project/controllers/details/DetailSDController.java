@@ -109,8 +109,7 @@ public class DetailSDController extends DetailPersonController{
 		try{
 			OperationResult currentor = proxy.getUserIdByPersonId(this.currentid, this.usertype, userid);
 			System.out.println("USER TASKS: "+currentor.getCode());
-			SystemParameter locale = new SystemParameter("en_UK", "English");
-			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto,locale ,userid);
+			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto,SystemDictionary.getLocale() ,userid);
 			this.calmodel = new SimpleCalendarModel();
 			if(tasklist != null){
 				System.out.println("TASKS LENGHT: "+tasklist.length);
