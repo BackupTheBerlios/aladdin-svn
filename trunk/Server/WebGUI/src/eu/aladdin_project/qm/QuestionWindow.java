@@ -89,7 +89,8 @@ public class QuestionWindow extends Window{
 			q.setCondition(new UnsignedByte(condition));
 		}
 		q.setTitle(title);
-		q.setQuestions(new QuestionnaireQuestionList(new QuestionnaireQuestion[0]));
+		QuestionnaireQuestionList qqqlist = new QuestionnaireQuestionList(new QuestionnaireQuestion[0]);
+		q.setQuestions(qqqlist);
 		
 		if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
 			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];

@@ -66,10 +66,13 @@ public class QuestionnaireFormWindow extends Window{
 			((Textbox)getFellow("qtitle")).setValue(qinfo.getTitle());
 			((Textbox)getFellow("qtitle")).setReadonly(true);
 			printQuestions(questions.getQuestion(), "0");
+			for(int i = 0 ; i < questionlist.size() ; i++){
+				questionlist.get(i).getQuestion().getQuestions().setQuestion(new QuestionnaireQuestion[0]);
+			}
 		}catch(RemoteException re){
-			
+			re.printStackTrace();
 		}catch (Exception e){
-			
+			e.printStackTrace();
 		}
 	}
 	
@@ -80,9 +83,13 @@ public class QuestionnaireFormWindow extends Window{
 	 * @param parentq String setting parent (mandatory for recursive calls)
 	 */
 	protected void printQuestions(QuestionnaireQuestion[] qs, String parentq){
+		System.out.println("Questionnaire lenght: "+qs.length);
 		for(int i = 0 ; i < qs.length ; i ++){
 			this.addQuestion(qs[i], parentq);
-			if(qs[i].getQuestions().getQuestion().length > 0){
+			//if(qs[i].getQuestions().getQuestion().length > 0){
+			//	printQuestions(qs[i].getQuestions().getQuestion(), qs[i].getId());
+			//}
+			if(qs[i].getQuestions() != null && qs[i].getQuestions().getQuestion() != null && qs[i].getQuestions().getQuestion().length > 0){
 				printQuestions(qs[i].getQuestions().getQuestion(), qs[i].getId());
 			}
 		}
@@ -94,6 +101,7 @@ public class QuestionnaireFormWindow extends Window{
 	 */
 	public void saveQuestionnaire(){
 		//related questions management, this is magic don't look at it or it would be self-destroyed!
+		/*
 		int rootquestions = 0;
 		for(int ii = 0; ii<questionlist.size(); ii++){
 			RelatedQuestion rq = questionlist.get(ii);
@@ -106,24 +114,22 @@ public class QuestionnaireFormWindow extends Window{
 					RelatedQuestion rq2 = questionlist.get(j);
 					if(rq2.getId().equals(rq.getParent())){
 						//Save question on question list
-						QuestionnaireQuestion[] qqa = null;
-						if(rq2.getQuestion().getQuestions()==null || rq2.getQuestion().getQuestions().getQuestion() == null){
-							qqa = new QuestionnaireQuestion[1];
-						}else{
-							qqa = new QuestionnaireQuestion[rq2.getQuestion().getQuestions().getQuestion().length+1];
-						}
+						QuestionnaireQuestion[] qqa = new QuestionnaireQuestion[rq2.getQuestion().getQuestions().getQuestion().length+1];
+						
 						if(qqa.length>1){
 							for(int k = 0; k<rq2.getQuestion().getQuestions().getQuestion().length; k++){
-								qqa[k]=rq2.getQuestion().getQuestions().getQuestion()[k];
+								qqa[k]=rq2.getQuestion().getQuestions().getQuestion(k);
 							}
 						}
 						qqa[qqa.length-1]=rq.getQuestion();
-						rq2.getQuestion().setQuestions(new QuestionnaireQuestionList(qqa));
+						QuestionnaireQuestionList qqalist = new QuestionnaireQuestionList(qqa);
+						rq2.getQuestion().setQuestions(qqalist);
 					}
 				}
 			}
 			
 		}
+		
 		//End of parent questions management you can look from here
 		System.out.print("Root questions: "+rootquestions);
 		QuestionnaireQuestion[] qlist = new QuestionnaireQuestion[rootquestions];
@@ -135,10 +141,42 @@ public class QuestionnaireFormWindow extends Window{
 			relq.getQuestion().setId("");
 			if(relq.getParent().equals("0")){
 				qlist[i]=relq.getQuestion();
-				//System.out.println("Sub-questions: "+qlist[i].getQuestions().getQuestion().length);
+				if(qlist[i].getQuestions().getQuestion() != null){
+					System.out.println("Sub-questions: "+qlist[i].getQuestions().getQuestion().length);
+				}
 				i++;
 			}
 		}
+		*/
+		ArrayList<QuestionnaireQuestion> rootQuestions = new ArrayList<QuestionnaireQuestion>();
+		for(int ii = 0 ; ii < questionlist.size() ; ii++){
+			if(questionlist.get(ii).getParent() == "0"){
+				rootQuestions.add(questionlist.get(ii).getQuestion());
+			}else{
+				for(int k = 0 ; k < questionlist.size() ; k++){
+					if(questionlist.get(k).getId().equals(questionlist.get(ii).getParent())){
+						QuestionnaireQuestion[] qqqa = null;
+						if(questionlist.get(k).getQuestion().getQuestions() == null || questionlist.get(k).getQuestion().getQuestions().getQuestion() == null || questionlist.get(k).getQuestion().getQuestions().getQuestion().length == 0){
+							qqqa = new QuestionnaireQuestion[1];
+						}else{
+							qqqa = new QuestionnaireQuestion[questionlist.get(k).getQuestion().getQuestions().getQuestion().length+1];
+							for(int j = 0 ; j < qqqa.length-1 ; j++){
+								qqqa[j]=questionlist.get(k).getQuestion().getQuestions().getQuestion(j);
+							}
+						}
+						qqqa[qqqa.length-1]=questionlist.get(ii).getQuestion();
+						questionlist.get(k).getQuestion().setQuestions(new QuestionnaireQuestionList(qqqa));
+					}
+				}
+			}
+			
+		}
+		QuestionnaireQuestion[] qlist = new QuestionnaireQuestion[rootQuestions.size()];
+		for(int l = 0 ; l<rootQuestions.size() ; l++){
+			qlist[l]=rootQuestions.get(l);
+		}
+		blankIds(qlist);
+		
 		String versionstr = ((Textbox)getFellow("versionfield")).getValue();
 		Double version = Double.valueOf(versionstr);
 		String title = ((Textbox)getFellow("qtitle")).getValue();
@@ -152,6 +190,15 @@ public class QuestionnaireFormWindow extends Window{
 			e.printStackTrace();
 		}finally{
 			Executions.getCurrent().sendRedirect("/qm");
+		}
+	}
+	
+	public void blankIds(QuestionnaireQuestion[] qlist){
+		for(int i = 0 ; i < qlist.length ; i++){
+			if(qlist[i].getQuestions() != null && qlist[i].getQuestions().getQuestion() != null && qlist[i].getQuestions().getQuestion().length > 0){
+				blankIds(qlist[i].getQuestions().getQuestion());
+			}
+			qlist[i].setId("");
 		}
 	}
 	
