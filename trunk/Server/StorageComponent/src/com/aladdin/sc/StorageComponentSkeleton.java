@@ -1988,10 +1988,11 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			System.out.println (10);
     			task.setObject(new Integer (rtask.getObjectID()));
     			System.out.println (11);
+    			System.out.println (rtask.getQuestionnaire());
     			
     			if (rtask.getQuestionnaire() != null) {
     				
-    				if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") == 0) {
+    				if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") != 0) {
     					System.out.println (12);
         				System.out.println (rtask.getQuestionnaire().getID());
         				try {
@@ -3073,19 +3074,34 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 	    			System.out.println ("22");
 	    			rpa.setMDRS(pa.getMDRS().shortValue());
 	    			System.out.println ("23");
-	    			rpa.setBlessedScalePart1(pa.getBlessedScalePart1().doubleValue());
+	    			
+	    			if (pa.getBlessedScalePart1() != null) rpa.setBlessedScalePart1(pa.getBlessedScalePart1().doubleValue());
+	    			else rpa.setBlessedScalePart1(0.0);
 	    			System.out.println ("24");
-	    			rpa.setBlessedScalePart2(pa.getBlessedScalePart2().shortValue());
+	    			
+	    			if (pa.getBlessedScalePart2() != null) rpa.setBlessedScalePart2(pa.getBlessedScalePart2().shortValue());
+	    			else rpa.setBlessedScalePart2((short)0);
+	    			
 	    			System.out.println ("25");
-	    			rpa.setBlessedScalePart3(pa.getBlessedScalePart3().shortValue());
+	    			if (pa.getBlessedScalePart3() != null) rpa.setBlessedScalePart3(pa.getBlessedScalePart3().shortValue());
+	    			else rpa.setBlessedScalePart3((short)0);
+	    			
 	    			System.out.println ("26");
-	    			rpa.setChecklistMBP(pa.getChecklistMBPC().shortValue());
+	    			if (pa.getChecklistMBPC() != null) rpa.setChecklistMBP(pa.getChecklistMBPC().shortValue());
+	    			else rpa.setChecklistMBP((short)0);
+	    			
 	    			System.out.println ("27");
-	    			rpa.setNPQISeverity(pa.getNPQISeverity().shortValue());
+	    			if (pa.getNPQISeverity() != null) rpa.setNPQISeverity(pa.getNPQISeverity().shortValue());
+	    			else rpa.setNPQISeverity((short)0);
+	    			
 	    			System.out.println ("28");
-	    			rpa.setNPQIStress(pa.getNPQIStress().shortValue());
+	    			if (pa.getNPQIStress() != null) rpa.setNPQIStress(pa.getNPQIStress().shortValue());
+	    			else rpa.setNPQIStress((short)0);
+	    			
 	    			System.out.println ("29");
-	    			rpa.setGDS(pa.getGDS().shortValue());
+	    			if (pa.getGDS() != null) rpa.setGDS(pa.getGDS().shortValue());
+	    			else rpa.setGDS((short)0);
+	    			
 	    			System.out.println ("30");
 	    			rpa.setFalls(pa.getFalls());
 	    			System.out.println ("31");
