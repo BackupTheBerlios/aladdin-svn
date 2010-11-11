@@ -16,13 +16,13 @@ namespace Aladdin.ClientApplication.ViewModels
         {
             this.ActiveTask = activeTask;
             if (this.ActiveTask != null && this.ActiveTask.URL != null)
-                this.Url = this.ActiveTask.URL;
-
-            using (aladdinService.StorageComponent sc = new aladdinService.StorageComponent())
             {
-                aladdinService.OperationResult taskChangeStatus = sc.ChangeTaskStatus(Convert.ToInt32(this.ActiveTask.ID), (int)TaskStatusEnum.Completed, App.CurrentUserID);
+                this.Url = this.ActiveTask.URL;
+                using (aladdinService.StorageComponent sc = new aladdinService.StorageComponent())
+                {
+                    aladdinService.OperationResult taskChangeStatus = sc.ChangeTaskStatus(Convert.ToInt32(this.ActiveTask.ID), (int)TaskStatusEnum.Completed, App.CurrentUserID);
+                }
             }
-
         }
     }
 }
