@@ -34,36 +34,36 @@ namespace Aladdin.ClientApplication.Controls
             this.DefaultLanguage = App.DefaultLanguage;
             this.Languages = new List<aladdinService.SystemParameter>();
             aladdinService.SystemParameter p1 = new aladdinService.SystemParameter();
-            p1.Code = "1";
+            p1.Code = "en_US";
             p1.Description = "English";
             Languages.Add(p1);
 
             aladdinService.SystemParameter p2 = new aladdinService.SystemParameter();
-            p2.Code = "2";
+            p2.Code = "es_ES";
             p2.Description = "Εspañol";
             Languages.Add(p2);
 
             aladdinService.SystemParameter p3 = new aladdinService.SystemParameter();
 
-            p3.Code = "3";
+            p3.Code = "el_GR";
             p3.Description = "Ελληνικά";
             Languages.Add(p3);
 
             aladdinService.SystemParameter p4 = new aladdinService.SystemParameter();
 
-            p4.Code = "4";
+            p4.Code = "it_IT";
             p4.Description = "Italiano";
             Languages.Add(p4);
 
             aladdinService.SystemParameter p5 = new aladdinService.SystemParameter();
 
-            p5.Code = "5";
+            p5.Code = "de_DE";
             p5.Description = "Deutsch";
             Languages.Add(p5);
 
             aladdinService.SystemParameter p6 = new aladdinService.SystemParameter();
 
-            p6.Code = "6";
+            p6.Code = "ca_CA";
             p6.Description = "Catalan";
             Languages.Add(p6);
 

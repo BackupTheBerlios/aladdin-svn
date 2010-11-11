@@ -65,20 +65,20 @@ namespace Aladdin.ClientApplication.Controls
 
                 App.ActiveTasks = App.ActiveTasks.Where(c => Convert.ToInt32(c.TaskStatus.Code) != (int) TaskStatusEnum.Canceled).ToList();
 
-                foreach (aladdinService.Task task in App.ActiveTasks)
-                {
+                //foreach (aladdinService.Task task in App.ActiveTasks)
+                //{
 
-                    string taskinfo = string.Format("ID={0} TaskType.Code={1} TaskType.Description={2} TaskStatus.Code={3} ", task.ID, task.TaskType.Code, task.TaskType.Description, task.TaskStatus.Code);
-                    System.Diagnostics.Trace.WriteLine(taskinfo);
-                }
+                //    string taskinfo = string.Format("ID={0} TaskType.Code={1} TaskType.Description={2} TaskStatus.Code={3} ", task.ID, task.TaskType.Code, task.TaskType.Description, task.TaskStatus.Code);
+                //    System.Diagnostics.Trace.WriteLine(taskinfo);
+                //}
 
-                aladdinService.Task patientQuestionnaireTask = App.ActiveTasks.SingleOrDefault(t => t.TaskType.Code == "1");
-                if (patientQuestionnaireTask != null)
-                {
-                    aladdinService.Questionnaire que = patientQuestionnaireTask.Questionnaire;
-                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(que.GetType());
-                    x.Serialize(Console.Out, que);
-                }
+                //aladdinService.Task patientQuestionnaireTask = App.ActiveTasks.SingleOrDefault(t => t.TaskType.Code == "1");
+                //if (patientQuestionnaireTask != null)
+                //{
+                //    aladdinService.Questionnaire que = patientQuestionnaireTask.Questionnaire;
+                //    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(que.GetType());
+                //    x.Serialize(Console.Out, que);
+                //}
 
                 int num = 1;
                 foreach (aladdinService.Task task in App.ActiveTasks)

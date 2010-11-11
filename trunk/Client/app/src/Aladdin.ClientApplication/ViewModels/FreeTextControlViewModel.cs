@@ -26,7 +26,11 @@ namespace Aladdin.ClientApplication.ViewModels
         string _FreeText;
         public string FreeText
         {
-            get { return _FreeText; }
+            get
+            {
+                _FreeText = this.Wizard.Answers.GetAnswer(this.Wizard.ActiveQuestion.ID).Value;
+                return _FreeText;
+            }
             set
             {
                 _FreeText = value;
@@ -39,6 +43,12 @@ namespace Aladdin.ClientApplication.ViewModels
         public FreeTextControlViewModel(QuestionnaireWizard wizard)
         {
             this.Wizard = wizard;
+            wizard.ActivePageChanged += new QuestionnaireWizard.ActivePageChangedEventHandler(wizard_ActivePageChanged);
+        }
+
+        void wizard_ActivePageChanged()
+        {
+            this.SendPropertyChanged("FreeText");
         }
     }
 }

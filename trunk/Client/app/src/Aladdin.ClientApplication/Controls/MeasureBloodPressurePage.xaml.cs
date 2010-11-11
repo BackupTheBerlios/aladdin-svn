@@ -84,7 +84,12 @@ namespace Aladdin.ClientApplication.Controls
                 if (this.ViewModel.DiastolicBloodPressureText.Contains(character))
                     insert = false;
             if (insert)
-                this.ViewModel.DiastolicBloodPressureText += character;
+            {
+                if (character.Equals("."))
+                    this.ViewModel.DiastolicBloodPressureText += System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+                else
+                    this.ViewModel.DiastolicBloodPressureText += character;
+            }
         }
 
         void SystolicBloodPressure_NumberPadPressed(object sender, string character)
@@ -102,7 +107,12 @@ namespace Aladdin.ClientApplication.Controls
                 if (this.ViewModel.SystolicBloodPressureText.Contains(character))
                     insert = false;
             if (insert)
-                this.ViewModel.SystolicBloodPressureText += character;
+            {
+                if (character.Equals("."))
+                    this.ViewModel.SystolicBloodPressureText += System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+                else
+                    this.ViewModel.SystolicBloodPressureText += character;
+            }
         }
 
 

@@ -41,8 +41,6 @@ namespace Aladdin.ClientApplication.Controls
         public LoginPage()
         {
             InitializeComponent();
-            this.UserName = "Maria";
-            this.Password = "Maria";
         }
 
         private void Authenticate()

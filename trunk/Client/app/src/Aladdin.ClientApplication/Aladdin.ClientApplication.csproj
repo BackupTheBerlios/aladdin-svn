@@ -368,6 +368,8 @@
     <Content Include="click.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\enter.png" />
+    <Resource Include="Resources\Images\undo.png" />
     <Resource Include="Resources\Images\question.ico" />
     <Page Include="Resources\StringResources.el-GR.xaml">
       <Generator>MSBuild:Compile</Generator>

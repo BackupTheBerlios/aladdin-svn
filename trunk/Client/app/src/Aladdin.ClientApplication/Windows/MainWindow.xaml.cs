@@ -46,27 +46,27 @@ namespace Aladdin.ClientApplication.Windows
             App.DefaultLanguage = defaultLanguage; App.ServerAddress = Settings.Default.Aladdin_ClientApplication_aladdinService_StorageComponent;
             switch (App.DefaultLanguage.Code)
             {
-                case "1":
+                case "en_US":
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
                     locale.Code = "en_US";
                     break;
-                case "2":
+                case "es_ES":
                     dict.Source = new Uri("..\\Resources\\StringResources.es-ES.xaml", UriKind.Relative);
                     locale.Code = "es_ES";
                     break;
-                case "3":
+                case "el_GR":
                     dict.Source = new Uri("..\\Resources\\StringResources.el-GR.xaml", UriKind.Relative);
                     locale.Code = "el_GR";
                     break;
-                case "4":
+                case "it_IT":
                     dict.Source = new Uri("..\\Resources\\StringResources.it-IT.xaml", UriKind.Relative);
                     locale.Code = "it_IT";
                     break;
-                case "5":
+                case "de_DE":
                     dict.Source = new Uri("..\\Resources\\StringResources.de-DE.xaml", UriKind.Relative);
                     locale.Code = "de_DE";
                     break;
-                case "6":
+                case "ca_CA":
                     dict.Source = new Uri("..\\Resources\\StringResources.ca-CA.xaml", UriKind.Relative);
                     locale.Code = "ca_CA";
                     break;

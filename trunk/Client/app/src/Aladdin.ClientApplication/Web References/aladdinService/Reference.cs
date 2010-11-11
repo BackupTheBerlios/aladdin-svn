@@ -3745,6 +3745,8 @@ namespace Aladdin.ClientApplication.aladdinService {
         
         private string titleField;
         
+        private int globalIDField;
+        
         private QuestionnaireQuestionAnswer[] answersField;
         
         private QuestionnaireQuestion[] questionsField;
@@ -3764,6 +3766,16 @@ namespace Aladdin.ClientApplication.aladdinService {
             }
             set {
                 this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int GlobalID {
+            get {
+                return this.globalIDField;
+            }
+            set {
+                this.globalIDField = value;
             }
         }
         

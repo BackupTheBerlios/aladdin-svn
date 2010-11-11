@@ -17,43 +17,43 @@
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Click="Button_Click">
-            <Label FontSize="36">7</Label>
+            <Label FontSize="36" FontWeight="Bold">7</Label>
         </Button>
         <Button Grid.Row="0" Grid.Column="1" Click="Button_Click">
-            <Label FontSize="36">8</Label>
+            <Label FontSize="36" FontWeight="Bold">8</Label>
         </Button>
         <Button Grid.Row="0" Grid.Column="2" Click="Button_Click">
-            <Label FontSize="36">9</Label>
+            <Label FontSize="36" FontWeight="Bold">9</Label>
         </Button>
         <Button Grid.Row="1" Grid.Column="0" Click="Button_Click">
-            <Label FontSize="36">4</Label>
+            <Label FontSize="36" FontWeight="Bold">4</Label>
         </Button>
         <Button Grid.Row="1" Grid.Column="1" Click="Button_Click">
-            <Label FontSize="36">5</Label>
+            <Label FontSize="36" FontWeight="Bold">5</Label>
         </Button>
         <Button Grid.Row="1" Grid.Column="2" Click="Button_Click">
-            <Label FontSize="36">6</Label>
+            <Label FontSize="36" FontWeight="Bold">6</Label>
         </Button>
         <Button Grid.Row="2" Grid.Column="0" Click="Button_Click">
-            <Label FontSize="36">1</Label>
+            <Label FontSize="36" FontWeight="Bold">1</Label>
         </Button>
         <Button Grid.Row="2" Grid.Column="1" Click="Button_Click">
-            <Label FontSize="36">2</Label>
+            <Label FontSize="36" FontWeight="Bold">2</Label>
         </Button>
         <Button Grid.Row="2" Grid.Column="2" Click="Button_Click">
-            <Label FontSize="36">3</Label>
+            <Label FontSize="36" FontWeight="Bold">3</Label>
         </Button>
         <Button Grid.Row="3" Grid.ColumnSpan="2" Click="Button_Click">
-            <Label FontSize="36">0</Label>
+            <Label FontSize="36" FontWeight="Bold">0</Label>
         </Button>
         <Button Grid.Row="3" Grid.Column="2" Click="Button_Click">
-            <Label FontSize="36">.</Label>
+            <Label FontSize="36" FontWeight="Bold">.</Label>
         </Button>
         <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Click="Undo_Click">
-            <Image Source="/Aladdin.ClientApplication;component/Resources/Images/Edit_UndoHS.png" Width="39" Height="39" />
+            <Image Source="/Aladdin.ClientApplication;component/Resources/Images/undo.png" Width="39" Height="39" />
         </Button>
         <Button Grid.Row="2" Grid.Column="3" Grid.RowSpan="2" Click="Exit_Button_Click" >
-            <Image Source="/Aladdin.ClientApplication;component/Resources/Images/icon_exit2.png" Width="39" Height="39" />
+            <Image Source="/Aladdin.ClientApplication;component/Resources/Images/enter.png" Width="39" Height="39" />
         </Button>
     </Grid>
 </Window>

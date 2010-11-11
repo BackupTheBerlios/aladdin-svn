@@ -206,7 +206,6 @@ namespace Aladdin.ClientApplication.ViewModels
         internal void UploadQuestionnaire()
         {
             string xml = this.QuestionnaireAnswers.ToXml();
-            MessageBox.Show(xml);
             aladdinService.StorageComponent sc = new aladdinService.StorageComponent();
             aladdinService.QuestionnaireAnswers answers = Utils.Convert(this.QuestionnaireAnswers);
             answers.DateTime = System.DateTime.Now;

@@ -75,7 +75,12 @@ namespace Aladdin.ClientApplication.Controls
                 if (this.ViewModel.WeightText.Contains(character))
                     insert = false;
             if (insert)
-                this.ViewModel.WeightText += character;
+            {
+                if (character.Equals("."))
+                    this.ViewModel.WeightText += System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+                else
+                    this.ViewModel.WeightText += character;
+            }
 
             
         }

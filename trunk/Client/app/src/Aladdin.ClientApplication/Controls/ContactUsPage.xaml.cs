@@ -70,6 +70,7 @@ namespace Aladdin.ClientApplication.Controls
                 userWarning.JustificationText = string.Format("Situation:{0}, Description:{1}", situationStr, this.DescriptionBox.Text);
                 userWarning.PatientID = App.PatientID;
                 aladdinService.OperationResult res = sc.SaveWarning(userWarning, App.CurrentUserID);
+                AppCommands.MoveToPageCommand.Execute("MyTasksPage", null);
             }
         }
     }
