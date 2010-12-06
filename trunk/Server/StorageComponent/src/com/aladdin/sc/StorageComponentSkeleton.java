@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -101,13 +102,28 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	
     	private HashMap<Integer, String> op;
     	
-    	private SessionFactory sessionFactory;
+    	private final static SessionFactory sessionFactory;
     	private Session s;
+    	
+    	
+    	static {
+    		try {
+    			sessionFactory = new Configuration().configure("/hibernate-aladdin-sc.cfg.xml").buildSessionFactory();
+    			System.out.println ("new sessionFactory");
+    		} catch (Throwable ex) {
+    			System.err.println("Initial SessionFactory creation failed." + ex);
+    			throw new ExceptionInInitializerError(ex);
+    		}
+    	}
     	
     	public final static int U_CARER = 3;
     	public final static int U_PATIENT = 4;
     	public final static int U_CLINICIAN = 2;
     	public final static int U_ADMIN = 1;
+    	
+    	private void printTimestamp () {
+    		System.out.println (new Timestamp (new Date().getTime ()).toString ());
+    	}
     	
     	private boolean checkUser (String userId, Integer userType) {
     		if (userId == null || userId == "") return true;
@@ -128,15 +144,13 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	
     	public StorageComponentSkeleton () {
     		
-    		try {
-    			sessionFactory = new Configuration().configure("/hibernate-aladdin-sc.cfg.xml").buildSessionFactory();
-    		} catch (Throwable ex) {
-    			System.err.println("Initial SessionFactory creation failed." + ex);
-    			throw new ExceptionInInitializerError(ex);
-    		}
+    		System.out.println (" ====StorageComponentSkeleton ");
+    		
+    		printTimestamp();
     		
     		s = sessionFactory.openSession();
-    		//s = HibernateUtil.getSessionFactory().openSession();
+    		
+    		printTimestamp();
     		
     		op = new HashMap<Integer, String>();
     		op.put(OP_LESS, " %s < '%s' ");
@@ -145,19 +159,26 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		op.put(OP_NOTEQ, " %s != '%s' ");
     		op.put(OP_LIKE, "%s like '%s' ");
     		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
+    		
+    		printTimestamp();
     	}
     	
     	protected void finalize () throws Throwable {
     		
-    		try {
-				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-			} catch (TransactionException e2) {
-			}
+    		printTimestamp();
     		
+    		System.out.println (" ====finalize ");
+    		
+    		printTimestamp();
+			System.out.println (" ====finalize 1 ");
+			printTimestamp();
     		s.flush();
+    		System.out.println (" ====finalize 2 ");
+    		printTimestamp();
     		s.close();
-    		sessionFactory.close();
-    		super.finalize();
+    		System.out.println (" ====finalize 3 ");
+    		printTimestamp();
+    		System.out.flush();
     	}
     	
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
@@ -477,11 +498,11 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	}
 
     	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId, SystemParameter locale) {
-    		System.out.println (" uQQ 1");
+    		//System.out.println (" uQQ 1");
     		com.aladdin.sc.db.QuestionnaireQuestion qq = new com.aladdin.sc.db.QuestionnaireQuestion ();
-    		System.out.println (" uQQ 2");
+    		//System.out.println (" uQQ 2");
     		qq.setType(rqq.getType());
-    		System.out.println (" uQQ 3");
+    		//System.out.println (" uQQ 3");
     		try {
     			qq.setId(new Integer (rqq.getId()));
     		} catch (NumberFormatException e) {
@@ -489,29 +510,29 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		} catch (Exception e) {
 				qq.setId(null);
 			}
-    		System.out.println (" uQQ 4");
+    		//System.out.println (" uQQ 4");
     		qq.setCondition(new Integer(rqq.getCondition()));
-    		System.out.println (" uQQ 5");
+    		//System.out.println (" uQQ 5");
     		
     		//qq.setTitle(rqq.getTitle());
     		
-    		System.out.println (qq.getTitle());
-    		System.out.println (" uQQ 6");
+    		//System.out.println (qq.getTitle());
+    		//System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
     		qq.setGlobalID(rqq.getGlobalID());
-    		System.out.println (" uQQ 7");
+    		//System.out.println (" uQQ 7");
 /*    		if (rqq.getDeleted() != true) {
     			rqq.setDeleted(false);
     		}
     		qq.setDeleted(rqq.getDeleted());*/
     		
-    		System.out.print (" question ");
-    		System.out.print (qq.getTitle());
-    		System.out.print (" ");
-    		System.out.print (qq.getType());
-    		System.out.print (" ");
-    		System.out.println (qq.getId());
+    		//System.out.print (" question ");
+    		//System.out.print (qq.getTitle());
+    		//System.out.print (" ");
+    		//System.out.print (qq.getType());
+    		//System.out.print (" ");
+    		//System.out.println (qq.getId());
     		
     		
     		s.saveOrUpdate(qq);
@@ -521,17 +542,17 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			s.saveOrUpdate(qq);
     		}
     		
-    		System.out.println (" uQQ 8");
+    		//System.out.println (" uQQ 8");
     		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
     			for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
-        			System.out.println (" uQQ 9");
+        			//System.out.println (" uQQ 9");
         			updateQQ (rqq.getQuestions().getQuestionArray(i), questId, qq.getId(), locale);
-        			System.out.println (" uQQ 19");
+        			//System.out.println (" uQQ 19");
         		}    			
     		}
     		
     		QuestionnaireQuestionAnswer rqqa = null;
-    		System.out.println (" uQQ 11");
+    		//System.out.println (" uQQ 11");
     		if (rqq.getAnswers() != null && rqq.getAnswers().getAnswerArray() != null) {
     			for (int i = 0; i < rqq.getAnswers().getAnswerArray().length; i++) {
         			rqqa = rqq.getAnswers().getAnswerArray(i);
@@ -548,10 +569,10 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 //        			if (rqqa.getId() > 0) qqa.setId(rqqa.getId());
         			
         			
-        			System.out.print (" answer ");
-        			System.out.print (qqa.getQuestion());
-        			System.out.print (" ");
-        			System.out.println (qqa.getDescription());
+        			//System.out.print (" answer ");
+        			//System.out.print (qqa.getQuestion());
+        			//System.out.print (" ");
+        			//System.out.println (qqa.getDescription());
         			
         			s.saveOrUpdate(qqa);
         			
@@ -562,7 +583,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
         			
         		}    			
     		}
-    		System.out.println (" uQQ 20");
+    		//System.out.println (" uQQ 20");
     	}
     	
     	private String getTranslate (String object, String id, String locale, String def) {
@@ -570,8 +591,8 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 				String sql = "SELECT value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id;
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
-					System.out.println (trans.toString());
-					System.out.println (trans[0].toString());
+					//System.out.println (trans.toString());
+					//System.out.println (trans[0].toString());
 					return trans[0].toString();
 				}
 			}
@@ -643,19 +664,24 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		// TODO: auth
     		
     		try {
+    			printTimestamp();
     			s.beginTransaction();
+    			printTimestamp();
     			Object[] ql = s.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
+    			printTimestamp();
     			for (int i = 0; i < ql.length; i++) {
     				Object[] quest = (Object[]) ql[i];
     				QuestionnaireInfo qi = resp.addNewOut();
     				qi.setID(((Integer)quest[0]).toString());
 //    				qi.setTitle((String)quest[1]);
-    				
+    				printTimestamp();
     				qi.setTitle(getTranslate("questionnaire", qi.getID(), req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
-    				
+    				printTimestamp();
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
+    			printTimestamp();
     			s.getTransaction().commit();
+    			printTimestamp();
     		} catch (Exception e) {
     			
     			try {
@@ -1695,37 +1721,37 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	}
 
 		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq, SystemParameter locale) {
-			System.out.println (" ===============================");
+			//System.out.println (" ===============================");
 			
 			if (rq.getID() != null) {
 				try {
 					Integer id = new Integer (rq.getID());
 				} catch (NumberFormatException e) {
-					System.out.println ("NumberFormatException");
+					//System.out.println ("NumberFormatException");
 					return null;
 				} catch (Exception e) {
-					System.out.println ("Exception");
+					//System.out.println ("Exception");
 					return null;				
 				}
 			}
 			
 			
-			System.out.println (" sQ 1");
+			//System.out.println (" sQ 1");
 			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
-			System.out.println (" sQ 2");
+			//System.out.println (" sQ 2");
 			
 			//if (setTranslate("questionnaire", q.getId().toString(), locale, rq.getTitle())) q.setTitle(rq.getTitle());
 			
-			System.out.println (rq.getTitle());
-			System.out.println (" sQ 3");
-			System.out.println (rq.getVersion());
+			//System.out.println (rq.getTitle());
+			//System.out.println (" sQ 3");
+			//System.out.println (rq.getVersion());
 			q.setVersion(new BigDecimal (rq.getVersion()));
-			System.out.println (" sQ 4");
+			//System.out.println (" sQ 4");
 			if (rq.getID() != null) {
 				try {
 					q.setId(new Integer (rq.getID()));
 				} catch (Exception e) {
-					System.out.println (e.toString());
+					//System.out.println (e.toString());
 					q = null;
 					return null;
 				}
@@ -1739,15 +1765,15 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 			}
 			
 			
-			System.out.println (" sQ 5");
+			//System.out.println (" sQ 5");
 			
 			QuestionnaireQuestion[] rqq = rq.getQuestionArray();
-			System.out.println (" sQ 6");
+			//System.out.println (" sQ 6");
 			
 			for (int i = 0; i < rqq.length; i++) {
-				System.out.println (" sQ 7");
+				//System.out.println (" sQ 7");
 				updateQQ(rqq[i], q.getId(), null, locale);
-				System.out.println (" sQ 8");
+				//System.out.println (" sQ 8");
 			}
 			return q;
 		}
@@ -1807,14 +1833,14 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
     			for (int i = 0; i < ml.length; i++) {
-    				System.out.println ("1");
+    				//System.out.println ("1");
     				Integer id = (Integer)ml[i];
-    				System.out.println ("id: " + id.toString());
-    				System.out.println ("2");
+    				//System.out.println ("id: " + id.toString());
+    				//System.out.println ("2");
     				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) s.load(com.aladdin.sc.db.Measurement.class, id);
-    				System.out.println ("3");
+    				//System.out.println ("3");
     				export.add(exportMeasurement(m));
-    				System.out.println ("4");
+    				//System.out.println ("4");
     			}
     			resp.setOutArray((Measurement[]) export.toArray(new Measurement[0]));
     			
@@ -1834,32 +1860,32 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	}
 
 		private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
-			System.out.println ("1");
+			//System.out.println ("1");
 			Measurement rm = Measurement.Factory.newInstance();
-			System.out.println ("2");
+			//System.out.println ("2");
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
-			System.out.println ("3");
+			//System.out.println ("3");
 			rmeasurementType.setCode(m.getType());
 
-			System.out.println ("4");
+			//System.out.println ("4");
 			rm.setType(rmeasurementType);
-			System.out.println ("5");
+			//System.out.println ("5");
 			rm.setValue(m.getValue().doubleValue ());
-			System.out.println ("6");
+			//System.out.println ("6");
 			Timestamp datetime = m.getDatetime();
-			System.out.println ("7");
+			//System.out.println ("7");
 			Calendar c = Calendar.getInstance();
-			System.out.println ("8");
+			//System.out.println ("8");
 			c.setTimeInMillis(datetime.getTime());
-			System.out.println ("9");
+			//System.out.println ("9");
 			rm.setDateTime(c);
-			System.out.println ("10");
+			//System.out.println ("10");
 			rm.setUnits(m.getUnits());
-			System.out.println ("11");
+			//System.out.println ("11");
 			rm.setLowerLimit(m.getLowerlimit().doubleValue ());
-			System.out.println ("12");
+			//System.out.println ("12");
 			rm.setUpperLimit(m.getUpperlimit().doubleValue ());
-			System.out.println ("13");
+			//System.out.println ("13");
 			return rm;
 		}
 		
@@ -1888,17 +1914,17 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			s.beginTransaction();
     			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
-    			System.out.println ("dQ 1");
+    			//System.out.println ("dQ 1");
     			Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
-    			System.out.println ("dQ 2");
+    			//System.out.println ("dQ 2");
     			for (int i = 0; i < qq.length; i++) {
-    				System.out.println ("dQ 3");
+    				//System.out.println ("dQ 3");
     				dropQQ ((Integer)qq[i]);
-    				System.out.println ("dQ 4");
+    				//System.out.println ("dQ 4");
     			}
-    			System.out.println ("dQ 5");
+    			//System.out.println ("dQ 5");
     			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString()).executeUpdate();
-    			System.out.println ("dQ 6");
+    			//System.out.println ("dQ 6");
     			
     			s.getTransaction().commit();
     			
@@ -1922,21 +1948,21 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	}
     	
     	private void dropQQ (Integer id) {
-    		System.out.println ("dQQ 1");
+    		//System.out.println ("dQQ 1");
     		Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
-    		System.out.println ("dQQ 2");
+    		//System.out.println ("dQQ 2");
 			for (int i = 0; i < qq.length; i++) {
-				System.out.println ("dQQ 3");
+				//System.out.println ("dQQ 3");
 				dropQQ ((Integer) qq[i]);
-				System.out.println ("dQQ 4");
+				//System.out.println ("dQQ 4");
 			}
-			System.out.println ("dQQ 5");
+			//System.out.println ("dQQ 5");
 			s.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
-			System.out.println ("dQQ 6");
+			//System.out.println ("dQQ 6");
 			s.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
-			System.out.println ("dQQ 7");
+			//System.out.println ("dQQ 7");
 			s.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
-			System.out.println ("dQQ 8");
+			//System.out.println ("dQQ 8");
     	}
     	
     	public AssignTaskResponseDocument assignTask (AssignTaskDocument req) {
@@ -1964,57 +1990,57 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			s.beginTransaction();
     			
-    			System.out.println (" AssignTask ");
-    			System.out.println (" IDDQD ");
+    			//System.out.println (" AssignTask ");
+    			//System.out.println (" IDDQD ");
     			
-    			System.out.println (1);
+    			//System.out.println (1);
     			com.aladdin.sc.db.Task task = new com.aladdin.sc.db.Task ();
-    			System.out.println (2);
+    			//System.out.println (2);
     			Task rtask = req.getAssignTask().getTask();
-    			System.out.println (3);
+    			//System.out.println (3);
     			task.setTaskType(new Integer (rtask.getTaskType().getCode()));
-    			System.out.println (4);
+    			//System.out.println (4);
     			task.setDateTimeAssigned(new Timestamp(rtask.getDateTimeAssigned().getTimeInMillis()));
-    			System.out.println (5);
+    			//System.out.println (5);
     			task.setDateTimeFulfilled(new Timestamp(rtask.getDateTimeFulfilled().getTimeInMillis()));
-    			System.out.println (6);
+    			//System.out.println (6);
     			task.setTaskStatus(new Integer (rtask.getTaskStatus().getCode()));
-    			System.out.println (7);
+    			//System.out.println (7);
     			task.setUrl(rtask.getURL());
-    			System.out.println (8);
+    			//System.out.println (8);
     			task.setExecutor(new Integer (rtask.getExecutorID()));
-    			System.out.println (9);
+    			//System.out.println (9);
     			task.setAssigner(new Integer (rtask.getAssignerID()));
-    			System.out.println (10);
+    			//System.out.println (10);
     			task.setObject(new Integer (rtask.getObjectID()));
-    			System.out.println (11);
-    			System.out.println (rtask.getQuestionnaire());
+    			//System.out.println (11);
+    			//System.out.println (rtask.getQuestionnaire());
     			
     			if (rtask.getQuestionnaire() != null) {
     				
     				if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") != 0) {
-    					System.out.println (12);
-        				System.out.println (rtask.getQuestionnaire().getID());
+    					//System.out.println (12);
+        				//System.out.println (rtask.getQuestionnaire().getID());
         				try {
-        					System.out.println (121);
+        					//System.out.println (121);
         					task.setQuestionnaire(new Integer (rtask.getQuestionnaire().getID()));
-        					System.out.println (1211);
+        					//System.out.println (1211);
         				} catch (Exception e) {
-        					System.out.println (122);
+        					//System.out.println (122);
 							task.setQuestionnaire(null);
-							System.out.println (1221);
+							//System.out.println (1221);
 						}
         				//com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire(), req.getAssignTask().getLocale());
         				//if (storedQuestionnaire != null) task.setQuestionnaire(storedQuestionnaire.getId());
-        				System.out.println (13);
+        				//System.out.println (13);
     				}
     			}
-    			System.out.println (14);
+    			//System.out.println (14);
     			
     			s.save (task);
-    			System.out.println (15);
+    			//System.out.println (15);
     			s.getTransaction().commit();
-    			System.out.println (16);
+    			//System.out.println (16);
     			
     			res.setCode(task.getId().toString());
         		res.setDescription("ok");
@@ -2076,7 +2102,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     				}
     			}
     			sql += " 1=1 GROUP BY p.id,p.persondata";
-    			System.out.println (sql);
+    			//System.out.println (sql);
     			
     			s.beginTransaction();
     			Object[] ql = s.createSQLQuery(sql).list().toArray();
@@ -2184,12 +2210,12 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     				rt.setObjectID(t.getObject().toString());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
-    					System.out.println ();
-    					System.out.println ();
-    					System.out.println (" === QUESTIONNAIRE == ");
-    					System.out.println (rt.toString());
-    					System.out.println ();
-    					System.out.println ();
+    					//System.out.println ();
+    					//System.out.println ();
+    					//System.out.println (" === QUESTIONNAIRE == ");
+    					//System.out.println (rt.toString());
+    					//System.out.println ();
+    					//System.out.println ();
     				}
     			}
     			s.getTransaction().commit();
@@ -2207,22 +2233,22 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	}
     	
     	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire q, SystemParameter locale) {
-    		System.out.println (" eQ 1");
+    		//System.out.println (" eQ 1");
     		Questionnaire rq = Questionnaire.Factory.newInstance();
-    		System.out.println (" eQ 2");
+    		//System.out.println (" eQ 2");
     		rq.setID(q.getId().toString());
-    		System.out.println (" eQ 3");
+    		//System.out.println (" eQ 3");
     		
     		//rq.setTitle(q.getTitle());
     		rq.setTitle(getTranslate("questionnaire", rq.getID(), locale, q.getTitle()));
     		
     		
-    		System.out.println (" eQ 4");
+    		//System.out.println (" eQ 4");
     		rq.setVersion(q.getVersion().doubleValue ());
-    		System.out.println (" eQ 5");
+    		//System.out.println (" eQ 5");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		System.out.println (" eQ 6");
+    		//System.out.println (" eQ 6");
     		
     		//Object[] qql = q.getQuestionnaireQuestions().toArray();
     		String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
@@ -2230,9 +2256,9 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		
     		
     		
-    		System.out.println (" eQ 7");
+    		//System.out.println (" eQ 7");
     		for (int i = 0; i < qql.length; i++) {
-    			System.out.println (" eQ 8");
+    			//System.out.println (" eQ 8");
     			com.aladdin.sc.db.QuestionnaireQuestion qq =
     				(com.aladdin.sc.db.QuestionnaireQuestion)
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
@@ -2240,36 +2266,36 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			///if (!qq.getDeleted()) {
     				rqql.add(exportQQ(qq, true, locale));
     			//}
-    			System.out.println (" eQ 9");
+    			//System.out.println (" eQ 9");
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
-    		System.out.println (" eQ 10");
+    		//System.out.println (" eQ 10");
     		
     		return rq;
     	}
     	
     	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
-    		System.out.println (" eQQ 1");
+    		//System.out.println (" eQQ 1");
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
-    		System.out.println (" eQQ 2");
+    		//System.out.println (" eQQ 2");
     		
     		rqq.setType(qq.getType());
-    		System.out.println (" eQQ 3");
+    		//System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
     		rqq.setGlobalID(qq.getGlobalID());
-    		System.out.println (" eQQ 4");
+    		//System.out.println (" eQQ 4");
     		
-    		System.out.println ("");
-			System.out.println ("");
-			System.out.println (" ======================== ");
-			System.out.println (qq.getId() + " " + (level1 ? "condition" : "empty"));
-			System.out.println (" ======================== ");
-			System.out.println ("");
-			System.out.println ("");
+    		//System.out.println ("");
+			//System.out.println ("");
+			//System.out.println (" ======================== ");
+			//System.out.println (qq.getId() + " " + (level1 ? "condition" : "empty"));
+			//System.out.println (" ======================== ");
+			//System.out.println ("");
+			//System.out.println ("");
     		
     		if (!level1) {
     			rqq.setCondition(qq.getCondition().shortValue());
-    			System.out.println (" eQQ 5");
+    			//System.out.println (" eQQ 5");
     		}
     		
     		//rqq.setTitle(qq.getTitle());
@@ -2277,42 +2303,42 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		
     		//rqq.setDeleted(qq.getDeleted());
     		
-    		System.out.println (" eQQ 6");
+    		//System.out.println (" eQQ 6");
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
-    		System.out.println (" eQQ 7");
+    		//System.out.println (" eQQ 7");
     		Object[] qqal = qq.getQuestionnaireQuestionAnswers().toArray();
-    		System.out.println (" eQQ 8");
+    		//System.out.println (" eQQ 8");
     		for (int i = 0; i < qqal.length; i++) {
-    			System.out.println (" eQQ 9");
+    			//System.out.println (" eQQ 9");
     			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
-    			System.out.println (" eQQ 91");
+    			//System.out.println (" eQQ 91");
 				if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
-    			System.out.println (" eQQ 10");
+    			//System.out.println (" eQQ 10");
     		}
-    		System.out.println (" eQQ 11");
+    		//System.out.println (" eQQ 11");
     		rqq.addNewAnswers();
-    		System.out.println (" eQQ 12");
+    		//System.out.println (" eQQ 12");
     		rqq.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) rqqal.toArray(new QuestionnaireQuestionAnswer[0]));
-    		System.out.println (" eQQ 13");
+    		//System.out.println (" eQQ 13");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		System.out.println (" eQQ 14");
+    		//System.out.println (" eQQ 14");
     		Object[] qql = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'").list().toArray();
-    		System.out.println (" eQQ 15");
+    		//System.out.println (" eQQ 15");
     		for (int i = 0; i < qql.length; i++) {
-    			System.out.println (" eQQ 16");
-//			System.out.println (qql[i].class.toString());
-				System.out.println (qql[i].toString());
-				System.out.println (qql.length);
+    			//System.out.println (" eQQ 16");
+//			//System.out.println (qql[i].class.toString());
+				//System.out.println (qql[i].toString());
+				//System.out.println (qql.length);
 
 
 //			Object[] _obj_ = qq
-				System.out.println ("b");
+				//System.out.println ("b");
 				Integer _id = (Integer) (qql[i]);
-				System.out.println ("c");
-				System.out.println (_id);
-				System.out.println ("load...");
+				//System.out.println ("c");
+				//System.out.println (_id);
+				//System.out.println ("load...");
 				com.aladdin.sc.db.QuestionnaireQuestion _obj = 
 					(com.aladdin.sc.db.QuestionnaireQuestion)
 						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
@@ -2320,32 +2346,32 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 
 //			if (qql.length > 1) rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
 //			else rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) (Object) qql));
-    			System.out.println (" eQQ 17");
+    			//System.out.println (" eQQ 17");
     		}
-    		System.out.println (" eQQ 18");
+    		//System.out.println (" eQQ 18");
     		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
-    		System.out.println (" eQQ 19");
+    		//System.out.println (" eQQ 19");
     		
     		return rqq;
     	}
     	
     	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
-    		System.out.println (" eQQA 1");
+    		//System.out.println (" eQQA 1");
     		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
-    		System.out.println (" eQQA 2");
+    		//System.out.println (" eQQA 2");
     		
     		//rqqa.setStringValue(qqa.getDescription());
     		rqqa.setStringValue(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, qqa.getDescription()));
     		
     		
-    		System.out.println (" eQQA 3");
+    		//System.out.println (" eQQA 3");
     		rqqa.setValue(qqa.getValue().shortValue());
-    		System.out.println (" eQQA 4");
+    		//System.out.println (" eQQA 4");
 //    		if (qqa.getDeleted() != null) rqqa.setDeleted(qqa.getDeleted());
 //    		else rqqa.setDeleted(false);
-    		System.out.println (" eQQA 5");
+    		//System.out.println (" eQQA 5");
 //    		rqqa.setId(qqa.getId());
-    		System.out.println (" eQQA 6");
+    		//System.out.println (" eQQA 6");
     		
     		return rqqa;
     	}
@@ -2730,23 +2756,23 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		GetAllExternalServicesResponse resp = respdoc.addNewGetAllExternalServicesResponse();
     		
     		try {
-    			System.out.println ("1");
+    			//System.out.println ("1");
     			s.beginTransaction();
     			Object[] esl = s.createQuery("from ExternalService").list().toArray();
     			s.getTransaction().commit();
-    			System.out.println ("2");
+    			//System.out.println ("2");
     			for (int i = 0; i < esl.length; i++) {
-    				System.out.println ("3");
+    				//System.out.println ("3");
     				com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService)esl[i];
-    				System.out.println ("4");
+    				//System.out.println ("4");
     				ExternalService re = resp.addNewOut();
-    				System.out.println ("5");
+    				//System.out.println ("5");
     				re.setAddress(es.getAddress());
-    				System.out.println ("6");
+    				//System.out.println ("6");
     				re.setDescription(es.getDescription());
-    				System.out.println ("7");
+    				//System.out.println ("7");
     				re.setID(es.getId().toString());
-    				System.out.println ("8");
+    				//System.out.println ("8");
     			}
     		} catch (Exception e) {
     			
@@ -2945,42 +2971,42 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		
     		try {
     			s.beginTransaction();
-    			System.out.println ("1");
+    			//System.out.println ("1");
     			
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
 				Timestamp datetime = new Timestamp(0);
-				//System.out.println (data.getDateTime().toString());
+				////System.out.println (data.getDateTime().toString());
 				if (data.getDateTime() != null) datetime = new Timestamp(data.getDateTime().getTimeInMillis());
-    			System.out.println ("2");
-    			System.out.println (data.getObjectID().toString());
+    			//System.out.println ("2");
+    			//System.out.println (data.getObjectID().toString());
     			Integer objectId = new Integer (data.getObjectID());
-    			System.out.println ("3");
-    			System.out.println (data.getUserID().toString());
+    			//System.out.println ("3");
+    			//System.out.println (data.getUserID().toString());
     			Integer userId = new Integer (data.getUserID());
-    			System.out.println ("4");
+    			//System.out.println ("4");
     			
     			Integer id = 0;
-    			System.out.println ("5");
+    			//System.out.println ("5");
     			QuestionnaireAnswer[] rqal = data.getAnswerArray();
-    			System.out.println ("6");
+    			//System.out.println ("6");
     			for (int i = 0; i < rqal.length; i++) {
-    				System.out.println ("7");
+    				//System.out.println ("7");
     				com.aladdin.sc.db.QuestionnaireAnswer qa = new com.aladdin.sc.db.QuestionnaireAnswer();
-    				System.out.println ("8");
+    				//System.out.println ("8");
     				if (rqal[i].getQuestionID() != null) qa.setQuestion(new Integer (rqal[i].getQuestionID()));
-    				System.out.println ("9");
+    				//System.out.println ("9");
     				qa.setValue(rqal[i].getValue());
-    				System.out.println ("10");
+    				//System.out.println ("10");
     				qa.setUserId(userId);
-    				System.out.println ("11");
+    				//System.out.println ("11");
     				qa.setObjectId(objectId);
-    				System.out.println ("12");
+    				//System.out.println ("12");
     				qa.setDateTime(datetime);
-    				System.out.println ("13");
+    				//System.out.println ("13");
     				s.save(qa);
-    				System.out.println ("14");
+    				//System.out.println ("14");
     				id = qa.getId();
-    				System.out.println ("15");
+    				//System.out.println ("15");
     			}
     			
     			s.getTransaction().commit();
@@ -3025,109 +3051,109 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		
     		try {
     			s.beginTransaction();
-    			System.out.println ("1");
+    			//System.out.println ("1");
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
-    			System.out.println ("2");
+    			//System.out.println ("2");
     			Object[] pal = s.createSQLQuery("SELECT id FROM patientassessment WHERE patient = " + patientId.toString()).list().toArray();
-    			System.out.println ("3");
+    			//System.out.println ("3");
     			
     			for (int i = 0; i < pal.length; i++) {
-    				System.out.println ("4");
+    				//System.out.println ("4");
     				Integer id = (Integer) pal[0];
     				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) s.load (com.aladdin.sc.db.PatientAssessment.class, id);
-    				System.out.println ("5");
+    				//System.out.println ("5");
     			
 	    			PatientAssessment rpa = resp.addNewOut();
-	    			System.out.println ("6");
+	    			//System.out.println ("6");
 	    			
 	    			rpa.setID(pa.getId().toString());
-	    			System.out.println ("7");
+	    			//System.out.println ("7");
 	    			rpa.setPatientID(pa.getPatient().toString());
-	    			System.out.println ("8");
+	    			//System.out.println ("8");
 	    			Calendar c1 = Calendar.getInstance();
-	    			System.out.println ("9");
+	    			//System.out.println ("9");
 	    			c1.setTimeInMillis(pa.getDateOfAssessment().getTime());
-	    			System.out.println ("10");
+	    			//System.out.println ("10");
 	    			rpa.setDateOfAssessment(c1);
-	    			System.out.println ("11");
+	    			//System.out.println ("11");
 	    			SystemParameter aetology = SystemParameter.Factory.newInstance();
-	    			System.out.println ("12");
+	    			//System.out.println ("12");
 	    			aetology.setCode(pa.getAetology().toString());
-	    			System.out.println ("13");
+	    			//System.out.println ("13");
 	    			rpa.setAetology(aetology);
-	    			System.out.println ("14");
+	    			//System.out.println ("14");
 	    			rpa.setTimeEllapsedSinceDiagnosed(pa.getTimeElapsedSinceDiagnose().shortValue());
-	    			System.out.println ("15");
+	    			//System.out.println ("15");
 	    			rpa.setSeverity(pa.getSeverity().shortValue());
-	    			System.out.println ("16");
+	    			//System.out.println ("16");
 	    			rpa.setRelevantPathologyAntecedents(pa.getRelevantPathologyAntecedents());
-	    			System.out.println ("17");
+	    			//System.out.println ("17");
 	    			rpa.setComorbidity(pa.getComorbidity());
-	    			System.out.println ("18");
+	    			//System.out.println ("18");
 	    			rpa.setCharlsonComorbidityIndex(pa.getCharlsonComobodityIndex().shortValue());
-	    			System.out.println ("19");
+	    			//System.out.println ("19");
 	    			rpa.setBarthelIndex(pa.getBarthelIndex().shortValue());
-	    			System.out.println ("20");
+	    			//System.out.println ("20");
 	    			rpa.setLawtonIndex(pa.getLawtonIndex().shortValue());
-	    			System.out.println ("21");
+	    			//System.out.println ("21");
 	    			rpa.setMMSE(pa.getMMSE().shortValue());
-	    			System.out.println ("22");
+	    			//System.out.println ("22");
 	    			rpa.setMDRS(pa.getMDRS().shortValue());
-	    			System.out.println ("23");
+	    			//System.out.println ("23");
 	    			
 	    			if (pa.getBlessedScalePart1() != null) rpa.setBlessedScalePart1(pa.getBlessedScalePart1().doubleValue());
 	    			else rpa.setBlessedScalePart1(0.0);
-	    			System.out.println ("24");
+	    			//System.out.println ("24");
 	    			
 	    			if (pa.getBlessedScalePart2() != null) rpa.setBlessedScalePart2(pa.getBlessedScalePart2().shortValue());
 	    			else rpa.setBlessedScalePart2((short)0);
 	    			
-	    			System.out.println ("25");
+	    			//System.out.println ("25");
 	    			if (pa.getBlessedScalePart3() != null) rpa.setBlessedScalePart3(pa.getBlessedScalePart3().shortValue());
 	    			else rpa.setBlessedScalePart3((short)0);
 	    			
-	    			System.out.println ("26");
+	    			//System.out.println ("26");
 	    			if (pa.getChecklistMBPC() != null) rpa.setChecklistMBP(pa.getChecklistMBPC().shortValue());
 	    			else rpa.setChecklistMBP((short)0);
 	    			
-	    			System.out.println ("27");
+	    			//System.out.println ("27");
 	    			if (pa.getNPQISeverity() != null) rpa.setNPQISeverity(pa.getNPQISeverity().shortValue());
 	    			else rpa.setNPQISeverity((short)0);
 	    			
-	    			System.out.println ("28");
+	    			//System.out.println ("28");
 	    			if (pa.getNPQIStress() != null) rpa.setNPQIStress(pa.getNPQIStress().shortValue());
 	    			else rpa.setNPQIStress((short)0);
 	    			
-	    			System.out.println ("29");
+	    			//System.out.println ("29");
 	    			if (pa.getGDS() != null) rpa.setGDS(pa.getGDS().shortValue());
 	    			else rpa.setGDS((short)0);
 	    			
-	    			System.out.println ("30");
+	    			//System.out.println ("30");
 	    			rpa.setFalls(pa.getFalls());
-	    			System.out.println ("31");
+	    			//System.out.println ("31");
 	    			rpa.setIncontinence(pa.getIncontinence());
-	    			System.out.println ("32");
+	    			//System.out.println ("32");
 	    			rpa.setDelirium(pa.getDelirium());
-	    			System.out.println ("33");
+	    			//System.out.println ("33");
 	    			rpa.setImmobility(pa.getImmobility());
-	    			System.out.println ("34");
+	    			//System.out.println ("34");
 	    			rpa.setSensorialDeficits(pa.getSensorialDeficits());
-	    			System.out.println ("35");
+	    			//System.out.println ("35");
 	    			rpa.setPharmacologicalTreatment(pa.getPharmacologyTreatment());
-	    			System.out.println ("36");
+	    			//System.out.println ("36");
 	    			
 	    			Object[] ml = pa.getMeasurements().toArray();
-	    			System.out.println ("37");
+	    			//System.out.println ("37");
 	    			List<Measurement> rml = new ArrayList<Measurement> ();
-	    			System.out.println ("38");
+	    			//System.out.println ("38");
 	    			for (int j = 0; j < ml.length; j++) {
-	    				System.out.println ("39");
+	    				//System.out.println ("39");
 	    				rml.add(exportMeasurement( (com.aladdin.sc.db.Measurement) ml[j]));
-	    				System.out.println ("40");
+	    				//System.out.println ("40");
 	    			}
-	    			System.out.println ("41");
+	    			//System.out.println ("41");
 	    			rpa.setClinicalDataArray((Measurement[]) rml.toArray(new Measurement[0]));
-	    			System.out.println ("42");
+	    			//System.out.println ("42");
     			}
     			s.getTransaction().commit();
     		} catch (Exception e) {
@@ -3280,26 +3306,26 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) LEFT JOIN patientcarer ON (patientcarer.patient = p.id) WHERE ";
     			
     			SearchCriteria[] sc = req.getListOfPatients().getFilterArray();
-    			System.out.println ("listOfPatients");
-    			System.out.println (sc.length);
-    			System.out.println (fl.size());
+    			//System.out.println ("listOfPatients");
+    			//System.out.println (sc.length);
+    			//System.out.println (fl.size());
     			for (int i = 0; i < sc.length; i++) {
     				
     				if (sc[i].getFieldName() == null) continue;
     				
-    				System.out.println (sc[i].getFieldName());
+    				//System.out.println (sc[i].getFieldName());
     				for (int j = 0; j < fl.size(); j++) {
-    					System.out.println (fl.get(j).getName());
+    					//System.out.println (fl.get(j).getName());
     					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
-    						System.out.println ("1");
+    						//System.out.println ("1");
     						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
     						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
     						sql += " AND ";
-    					} else System.out.println ("0");
+    					} // else //System.out.println ("0");
     				}
-    				System.out.println ("if");
+    				//System.out.println ("if");
     				if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
-    					System.out.println ("carer");
+    					//System.out.println ("carer");
 						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
 						sql += String.format(op.get(opnum), "patientcarer.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
 						sql += " AND ";
@@ -3371,73 +3397,73 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			s.beginTransaction();
     			Object[] list = s.createSQLQuery(sql).list().toArray();
 				for (int i = 0; i < list.length; i++) {
-					System.out.println ("gW 1");
+					//System.out.println ("gW 1");
     				Integer id = (Integer) list[i];
-    				System.out.println ("gW 2");
+    				//System.out.println ("gW 2");
 					com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) s.load(com.aladdin.sc.db.Warning.class, id);
-					System.out.println ("gW 3");
+					//System.out.println ("gW 3");
 					Warning rw = resp.addNewOut();
-					System.out.println ("gW 4");
+					//System.out.println ("gW 4");
     				rw.setID(w.getId().toString());
-    				System.out.println ("gW 5");
+    				//System.out.println ("gW 5");
     				
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
-    				System.out.println ("gW 6");
+    				//System.out.println ("gW 6");
     				typeOfWarning.setCode(w.getTypeOfWarning().toString());
-    				System.out.println ("gW 7");
+    				//System.out.println ("gW 7");
     				
     				rw.setTypeOfWarning(typeOfWarning);
-    				System.out.println ("gW 8");
+    				//System.out.println ("gW 8");
     				Calendar c1 = Calendar.getInstance();
-    				System.out.println ("gW 9");
+    				//System.out.println ("gW 9");
     				c1.setTimeInMillis(w.getDateTimeOfWarning().getTime());
-    				System.out.println ("gW 10");
+    				//System.out.println ("gW 10");
     				rw.setDateTimeOfWarning(c1);
-    				System.out.println ("gW 11");
+    				//System.out.println ("gW 11");
     				
     				SystemParameter effect = SystemParameter.Factory.newInstance();
-    				System.out.println ("gW 12");
+    				//System.out.println ("gW 12");
     				
     				if (w.getEffect() == null) w.setEffect(0);
     				
     				effect.setCode(w.getEffect().toString());
-    				System.out.println ("gW 13");
+    				//System.out.println ("gW 13");
     				
     				rw.setEffect(effect);
-    				System.out.println ("gW 14");
+    				//System.out.println ("gW 14");
     				
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
-    				System.out.println ("gW 15");
+    				//System.out.println ("gW 15");
     				if (w.getIndicator() == null) w.setIndicator(0);
     				indicator.setCode(w.getIndicator().toString());
-    				System.out.println ("gW 16");
+    				//System.out.println ("gW 16");
     				
     				rw.setIndicator(indicator);
-    				System.out.println ("gW 17");
+    				//System.out.println ("gW 17");
     				
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
-    				System.out.println ("gW 18");
+    				//System.out.println ("gW 18");
     				if (w.getRiskLevel() == null) w.setRiskLevel(0);
     				riskLevel.setCode(w.getRiskLevel().toString());
-    				System.out.println ("gW 19");
+    				//System.out.println ("gW 19");
     				
     				rw.setRiskLevel(riskLevel);
-    				System.out.println ("gW 20");
+    				//System.out.println ("gW 20");
     				rw.setJustificationText(w.getJustificationText());
-    				System.out.println ("gW 21");
+    				//System.out.println ("gW 21");
     				
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
-    				System.out.println ("gW 22");
+    				//System.out.println ("gW 22");
     				if (w.getEmergencyLevel() == null) w.setEmergencyLevel(0);
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
-    				System.out.println ("gW 23");
+    				//System.out.println ("gW 23");
     				
     				rw.setEmergencyLevel(emergencyLevel);
-    				System.out.println ("gW 24");
+    				//System.out.println ("gW 24");
     				rw.setPatientID(w.getPatientID());
-    				System.out.println ("gW 25");
+    				//System.out.println ("gW 25");
     				rw.setDelivered(w.getDelivered());
-    				System.out.println ("gW 26");
+    				//System.out.println ("gW 26");
     			}
 				s.getTransaction().commit();
     		} catch (Exception e) {
@@ -3674,7 +3700,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
         		}
         		s.getTransaction().commit();
         	} catch (Exception e) {
-        		System.out.println ("1");
+        		//System.out.println ("1");
         		try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4044,13 +4070,13 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 				s.beginTransaction();
 				
 				String sql = "SELECT id FROM aladdinuser WHERE personid like '" + uid.toString() + "' AND type = '" + type.toString() + "'";
-				System.out.println (sql);
-				System.out.println (1);
+				//System.out.println (sql);
+				//System.out.println (1);
 				SQLQuery q = s.createSQLQuery(sql);
-				System.out.println (2);
+				//System.out.println (2);
 				Object[] obj = q.list().toArray();
-				System.out.println (obj.length);
-				System.out.println (3);
+				//System.out.println (obj.length);
+				//System.out.println (3);
 				if (obj.length == 1) {
 					res.setCode(obj[0].toString());
 					res.setStatus((short)1);

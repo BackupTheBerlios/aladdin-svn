@@ -8,7 +8,7 @@
         </messageReceivers>
         <parameter name="ServiceClass">com.aladdin.sc.StorageComponentSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
-        <parameter name="modifyUserWSDLPortAddress">false</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
         <operation name="UpdateQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/UpdateQuestionnaire</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdateQuestionnaireResponse</outputActionMapping>
