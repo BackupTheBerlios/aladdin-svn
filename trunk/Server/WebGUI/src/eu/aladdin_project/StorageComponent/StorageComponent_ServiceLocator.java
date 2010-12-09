@@ -22,7 +22,7 @@ public class StorageComponent_ServiceLocator extends org.apache.axis.client.Serv
     }
 
     // Use to get a proxy class for StorageComponentSOAP
-    private java.lang.String StorageComponentSOAP_address = "http://193.174.152.114:28080/axis2/services/StorageComponent/";
+    private java.lang.String StorageComponentSOAP_address = "http://193.174.152.114:8080/axis2/services/StorageComponent/";
 
     public java.lang.String getStorageComponentSOAPAddress() {
         return StorageComponentSOAP_address;

@@ -77,7 +77,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		((Button)bookEventWin.getFellow("cancelbutton")).setVisible(true);
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setValue(scevent.getContent());
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);
-		((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
+		//((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
 		((Listbox)bookEventWin.getFellow("tasktypesel")).setVisible(false);
 		
 		bookEventWin.setTitle("View Task");
