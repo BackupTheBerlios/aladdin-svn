@@ -120,6 +120,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     	public final static int U_PATIENT = 4;
     	public final static int U_CLINICIAN = 2;
     	public final static int U_ADMIN = 1;
+    	public final static int U_SERVICE = 5;
     	
     	private void printTimestamp () {
     		System.out.println (new Timestamp (new Date().getTime ()).toString ());
@@ -150,7 +151,7 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		
     		s = sessionFactory.openSession();
     		
-    		printTimestamp();
+//    		printTimestamp();
     		
     		op = new HashMap<Integer, String>();
     		op.put(OP_LESS, " %s < '%s' ");
@@ -160,24 +161,24 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		op.put(OP_LIKE, "%s like '%s' ");
     		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
     		
-    		printTimestamp();
+//    		printTimestamp();
     	}
     	
     	protected void finalize () throws Throwable {
     		
-    		printTimestamp();
+//    		printTimestamp();
     		
-    		System.out.println (" ====finalize ");
+//    		System.out.println (" ====finalize ");
     		
-    		printTimestamp();
-			System.out.println (" ====finalize 1 ");
-			printTimestamp();
+//    		printTimestamp();
+//			System.out.println (" ====finalize 1 ");
+//			printTimestamp();
     		s.flush();
-    		System.out.println (" ====finalize 2 ");
-    		printTimestamp();
+//    		System.out.println (" ====finalize 2 ");
+//    		printTimestamp();
     		s.close();
-    		System.out.println (" ====finalize 3 ");
-    		printTimestamp();
+//    		System.out.println (" ====finalize 3 ");
+//    		printTimestamp();
     		System.out.flush();
     	}
     	
@@ -666,22 +667,22 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			printTimestamp();
     			s.beginTransaction();
-    			printTimestamp();
+//    			printTimestamp();
     			Object[] ql = s.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
-    			printTimestamp();
+//    			printTimestamp();
     			for (int i = 0; i < ql.length; i++) {
     				Object[] quest = (Object[]) ql[i];
     				QuestionnaireInfo qi = resp.addNewOut();
     				qi.setID(((Integer)quest[0]).toString());
 //    				qi.setTitle((String)quest[1]);
-    				printTimestamp();
+//    				printTimestamp();
     				qi.setTitle(getTranslate("questionnaire", qi.getID(), req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
-    				printTimestamp();
+//    				printTimestamp();
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
-    			printTimestamp();
+//    			printTimestamp();
     			s.getTransaction().commit();
-    			printTimestamp();
+//    			printTimestamp();
     		} catch (Exception e) {
     			
     			try {
@@ -691,6 +692,8 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			
     			System.out.println (e.toString());
     		}
+
+		printTimestamp();
     		
     		return respdoc;
     	}
@@ -1441,7 +1444,8 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		
     		if (
     				!checkUser(req.getGetQuestionnaireAnswers().getUserId(), U_CLINICIAN) &&
-    				!checkUser(req.getGetQuestionnaireAnswers().getUserId(), U_ADMIN)
+    				!checkUser(req.getGetQuestionnaireAnswers().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getGetQuestionnaireAnswers().getUserId(), U_SERVICE)
 				) {
     			return respdoc;
     		}
@@ -1796,7 +1800,8 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		if (
     				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetPatientMeasurement().getUserId(), U_CARER) &&
-    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_ADMIN)
+    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getGetPatientMeasurement().getUserId(), U_SERVICE)
 				) {
     			return respdoc;
     		}
