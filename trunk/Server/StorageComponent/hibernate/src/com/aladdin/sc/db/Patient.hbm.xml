@@ -8,6 +8,15 @@
 <property name="persondata" type="java.lang.Integer"><column name="persondata"/></property>
 <property name="sd" type="java.lang.Integer"><column name="sd"/></property>
 <property name="clinician" type="java.lang.Integer"><column name="clinician"/></property>
+<property name="swname" type="string"><column name="swname"/></property>
+<property name="swphone" type="string"><column name="swphone"/></property>
+<property name="swemail" type="string"><column name="swemail"/></property>
+<property name="ccname" type="string"><column name="ccname"/></property>
+<property name="ccphone" type="string"><column name="ccphone"/></property>
+<property name="ccemail" type="string"><column name="ccemail"/></property>
+<property name="gpname" type="string"><column name="gpname"/></property>
+<property name="gpphone" type="string"><column name="gpphone"/></property>
+<property name="gpemail" type="string"><column name="gpemail"/></property>
 <set name="PatientAssessments" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="PatientAssessment"/></set>
 <many-to-one insert="false" update="false" name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
 <many-to-one insert="false" update="false" name="m_SocioDemographicData" class="SocioDemographicData" ><column name="sd" not-null="false" /></many-to-one>
