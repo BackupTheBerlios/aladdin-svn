@@ -319,6 +319,33 @@
     		<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
     		<element name="ResponsibleClinicianID" type="string" maxOccurs="1" minOccurs="1"></element>
     		<element name="PatientCarerList" type="tns:PatientCarerList" maxOccurs="1" minOccurs="1"></element>
+    		<element name="SocialWorker" type="tns:SocialWorker" maxOccurs="1" minOccurs="1"></element>
+    		<element name="ConsulterInCharge" type="tns:Consulter" maxOccurs="1" minOccurs="1"></element>
+    		<element name="GeneralPractitioner" type="tns:GeneralPractitioner" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="SocialWorker">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="phone" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="email" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="Consulter">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="phone" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="email" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="GeneralPractitioner">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="phone" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="email" type="string" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     

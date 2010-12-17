@@ -210,6 +210,15 @@
     		<element name="persondata" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
     		<element name="sd" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
     		<element name="clinician" type="tns:Clinician" maxOccurs="1" minOccurs="1"></element>
+    		<element name="swname" type="string"></element>
+    		<element name="swphone" type="string"></element>
+    		<element name="swemail" type="string"></element>
+    		<element name="ccname" type="string"></element>
+    		<element name="ccphone" type="string"></element>
+    		<element name="ccemail" type="string"></element>
+    		<element name="gpname" type="string"></element>
+    		<element name="gpphone" type="string"></element>
+    		<element name="gpemail" type="string"></element>
     	</sequence>
     </complexType>
 
