@@ -4152,11 +4152,15 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 				BigInteger typeOfTask = req.getRemoveTaskMassively().getTypeOfTask();
 				Integer patientId = new Integer (req.getRemoveTaskMassively().getPatientId());
 				
-				String sql = "DELETE FROM task WHERE datetimeassigned > '" + startDate.toString() + "' AND datetimeassigned < '" + endDate.toString() + "' AND tasktype = '" + typeOfTask.toString() + "' AND object = '" + patientId.toString() + "'";
+				String sql = "DELETE FROM task WHERE datetimeassigned >= '" + startDate.toString() + "' AND datetimeassigned <= '" + endDate.toString() + "' AND tasktype = '" + typeOfTask.toString() + "' AND object = '" + patientId.toString() + "'";
 	    		
 				s.beginTransaction();
 				s.createSQLQuery(sql).executeUpdate();
 				s.getTransaction().commit();
+				
+				res.setCode("0");
+				res.setStatus((short)1);
+				res.setDescription("ok");
 				
 			} catch (Exception e) {
 				
@@ -4200,12 +4204,21 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 				int frequency = req.getAssignTasksMassively().getFrequency().intValue();
 				Task rtask = req.getAssignTasksMassively().getTask();
 				
+				s.beginTransaction();
+				
 				while (startDate.compareTo(endDate) < 0) {
 					rtask.setDateTimeAssigned(startDate);
 					com.aladdin.sc.db.Task task = taskToHibernate(rtask);
 	    			s.save (task);
 					startDate.add(Calendar.DAY_OF_YEAR, frequency);
+					System.out.println (task.getId());
 				}
+				
+				s.getTransaction().commit();
+				
+				res.setCode("0");
+				res.setStatus((short)1);
+				res.setDescription("ok");
         		
         	} catch (Exception e) {
 				
