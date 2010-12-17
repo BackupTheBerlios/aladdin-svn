@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Patient extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Patient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEC54A837D0EA302424AC346E0881D77C").resolveHandle("patient46dftype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Patient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5680CD1851D9D57B1BD013AD6BDF589B").resolveHandle("patient46dftype");
     
     /**
      * Gets the "ID" element
@@ -102,6 +102,51 @@ public interface Patient extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "PatientCarerList" element
      */
     eu.aladdin_project.xsd.PatientCarerList addNewPatientCarerList();
+    
+    /**
+     * Gets the "SocialWorker" element
+     */
+    eu.aladdin_project.xsd.SocialWorker getSocialWorker();
+    
+    /**
+     * Sets the "SocialWorker" element
+     */
+    void setSocialWorker(eu.aladdin_project.xsd.SocialWorker socialWorker);
+    
+    /**
+     * Appends and returns a new empty "SocialWorker" element
+     */
+    eu.aladdin_project.xsd.SocialWorker addNewSocialWorker();
+    
+    /**
+     * Gets the "ConsulterInCharge" element
+     */
+    eu.aladdin_project.xsd.Consulter getConsulterInCharge();
+    
+    /**
+     * Sets the "ConsulterInCharge" element
+     */
+    void setConsulterInCharge(eu.aladdin_project.xsd.Consulter consulterInCharge);
+    
+    /**
+     * Appends and returns a new empty "ConsulterInCharge" element
+     */
+    eu.aladdin_project.xsd.Consulter addNewConsulterInCharge();
+    
+    /**
+     * Gets the "GeneralPractitioner" element
+     */
+    eu.aladdin_project.xsd.GeneralPractitioner getGeneralPractitioner();
+    
+    /**
+     * Sets the "GeneralPractitioner" element
+     */
+    void setGeneralPractitioner(eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner);
+    
+    /**
+     * Appends and returns a new empty "GeneralPractitioner" element
+     */
+    eu.aladdin_project.xsd.GeneralPractitioner addNewGeneralPractitioner();
     
     /**
      * A factory class with static methods for creating instances

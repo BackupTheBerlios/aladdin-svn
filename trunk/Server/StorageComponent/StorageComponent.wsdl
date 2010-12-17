@@ -874,6 +874,42 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="AssignTasksMassively">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="task" type="aladdin:Task" />
+      			<xsd:element name="startDate" type="xsd:date" />
+      			<xsd:element name="endDate" type="xsd:date" />
+      			<xsd:element name="frequency" type="xsd:integer" />
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AssignTasksMassivelyResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RemoveTaskMassively">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="patientId" type="xsd:string" />
+      			<xsd:element name="typeOfTask" type="xsd:integer" />
+      			<xsd:element name="startDate" type="xsd:date" />
+      			<xsd:element name="endDate" type="xsd:date" />
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RemoveTaskMassivelyResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1218,6 +1254,18 @@
   <wsdl:message name="UpdateSystemParameterResponse">
   	<wsdl:part name="parameters" element="tns:UpdateSystemParameterResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="AssignTasksMassivelyRequest">
+  	<wsdl:part name="parameters" element="tns:AssignTasksMassively"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AssignTasksMassivelyResponse">
+  	<wsdl:part name="parameters" element="tns:AssignTasksMassivelyResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveTaskMassivelyRequest">
+  	<wsdl:part name="parameters" element="tns:RemoveTaskMassively"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RemoveTaskMassivelyResponse">
+  	<wsdl:part name="parameters" element="tns:RemoveTaskMassivelyResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1446,6 +1494,14 @@
         <wsdl:operation name="UpdateSystemParameter">
         	<wsdl:input message="tns:UpdateSystemParameterRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateSystemParameterResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AssignTasksMassively">
+        	<wsdl:input message="tns:AssignTasksMassivelyRequest"></wsdl:input>
+        	<wsdl:output message="tns:AssignTasksMassivelyResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveTaskMassively">
+        	<wsdl:input message="tns:RemoveTaskMassivelyRequest"></wsdl:input>
+        	<wsdl:output message="tns:RemoveTaskMassivelyResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -2021,6 +2077,28 @@
   		</wsdl:input>
   		<wsdl:output>
   			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="AssignTasksMassively">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/AssignTasksMassively">
+  		</soap:operation>
+  		<wsdl:input>
+  			<soap:body use="literal"></soap:body>
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal"></soap:body>
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="RemoveTaskMassively">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/RemoveTaskMassively">
+  		</soap:operation>
+  		<wsdl:input>
+  			<soap:body use="literal"></soap:body>
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal"></soap:body>
   		</wsdl:output>
   	</wsdl:operation>
   </wsdl:binding>

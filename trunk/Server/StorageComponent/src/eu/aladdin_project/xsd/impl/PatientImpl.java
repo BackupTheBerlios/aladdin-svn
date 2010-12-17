@@ -29,6 +29,12 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ResponsibleClinicianID");
     private static final javax.xml.namespace.QName PATIENTCARERLIST$8 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList");
+    private static final javax.xml.namespace.QName SOCIALWORKER$10 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SocialWorker");
+    private static final javax.xml.namespace.QName CONSULTERINCHARGE$12 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ConsulterInCharge");
+    private static final javax.xml.namespace.QName GENERALPRACTITIONER$14 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "GeneralPractitioner");
     
     
     /**
@@ -313,6 +319,156 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
             check_orphaned();
             eu.aladdin_project.xsd.PatientCarerList target = null;
             target = (eu.aladdin_project.xsd.PatientCarerList)get_store().add_element_user(PATIENTCARERLIST$8);
+            return target;
+        }
+    }
+    
+    /**
+     * Gets the "SocialWorker" element
+     */
+    public eu.aladdin_project.xsd.SocialWorker getSocialWorker()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.SocialWorker target = null;
+            target = (eu.aladdin_project.xsd.SocialWorker)get_store().find_element_user(SOCIALWORKER$10, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "SocialWorker" element
+     */
+    public void setSocialWorker(eu.aladdin_project.xsd.SocialWorker socialWorker)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.SocialWorker target = null;
+            target = (eu.aladdin_project.xsd.SocialWorker)get_store().find_element_user(SOCIALWORKER$10, 0);
+            if (target == null)
+            {
+                target = (eu.aladdin_project.xsd.SocialWorker)get_store().add_element_user(SOCIALWORKER$10);
+            }
+            target.set(socialWorker);
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty "SocialWorker" element
+     */
+    public eu.aladdin_project.xsd.SocialWorker addNewSocialWorker()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.SocialWorker target = null;
+            target = (eu.aladdin_project.xsd.SocialWorker)get_store().add_element_user(SOCIALWORKER$10);
+            return target;
+        }
+    }
+    
+    /**
+     * Gets the "ConsulterInCharge" element
+     */
+    public eu.aladdin_project.xsd.Consulter getConsulterInCharge()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.Consulter target = null;
+            target = (eu.aladdin_project.xsd.Consulter)get_store().find_element_user(CONSULTERINCHARGE$12, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "ConsulterInCharge" element
+     */
+    public void setConsulterInCharge(eu.aladdin_project.xsd.Consulter consulterInCharge)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.Consulter target = null;
+            target = (eu.aladdin_project.xsd.Consulter)get_store().find_element_user(CONSULTERINCHARGE$12, 0);
+            if (target == null)
+            {
+                target = (eu.aladdin_project.xsd.Consulter)get_store().add_element_user(CONSULTERINCHARGE$12);
+            }
+            target.set(consulterInCharge);
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty "ConsulterInCharge" element
+     */
+    public eu.aladdin_project.xsd.Consulter addNewConsulterInCharge()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.Consulter target = null;
+            target = (eu.aladdin_project.xsd.Consulter)get_store().add_element_user(CONSULTERINCHARGE$12);
+            return target;
+        }
+    }
+    
+    /**
+     * Gets the "GeneralPractitioner" element
+     */
+    public eu.aladdin_project.xsd.GeneralPractitioner getGeneralPractitioner()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.GeneralPractitioner target = null;
+            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().find_element_user(GENERALPRACTITIONER$14, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "GeneralPractitioner" element
+     */
+    public void setGeneralPractitioner(eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.GeneralPractitioner target = null;
+            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().find_element_user(GENERALPRACTITIONER$14, 0);
+            if (target == null)
+            {
+                target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().add_element_user(GENERALPRACTITIONER$14);
+            }
+            target.set(generalPractitioner);
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty "GeneralPractitioner" element
+     */
+    public eu.aladdin_project.xsd.GeneralPractitioner addNewGeneralPractitioner()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.GeneralPractitioner target = null;
+            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().add_element_user(GENERALPRACTITIONER$14);
             return target;
         }
     }

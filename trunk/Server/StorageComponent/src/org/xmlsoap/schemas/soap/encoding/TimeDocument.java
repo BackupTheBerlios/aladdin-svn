@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface TimeDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(TimeDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEC54A837D0EA302424AC346E0881D77C").resolveHandle("timea4a3doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(TimeDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5680CD1851D9D57B1BD013AD6BDF589B").resolveHandle("timea4a3doctype");
     
     /**
      * Gets the "time" element

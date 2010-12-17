@@ -2,6 +2,7 @@
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ import com.aladdin.sc.db.Locale;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
+import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.AssignTasksMassivelyResponse;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
 import eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument.ChangePasswordResponse;
 import eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument.ChangeTaskStatusResponse;
@@ -62,6 +64,7 @@ import eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument.ListOf
 import eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument.ListOfPossibleTasksResponse;
 import eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.ListOfQuestionnairesResponse;
 import eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument.MarkWarningAsReadResponse;
+import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument.RemoveTaskMassivelyResponse;
 import eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument.SaveCarerAssessmentResponse;
 import eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument.SavePatientAssessmentResponse;
 import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarningResponse;
@@ -90,6 +93,10 @@ import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument;
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.xsd.*;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument;
+import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument;
+import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument;
+import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument;
+import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -925,6 +932,19 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) s.load (com.aladdin.sc.db.Patient.class, id);
     			storePersondata(data.getPersonData(), p.getPersondata());
     			storeSocioDemographic(data.getSDData(), p.getSd());
+    			
+    			p.setCcname(data.getConsulterInCharge().getName());
+    			p.setCcphone(data.getConsulterInCharge().getPhone());
+    			p.setCcemail(data.getConsulterInCharge().getEmail());
+    			
+    			p.setSwname(data.getSocialWorker().getName());
+    			p.setSwphone(data.getSocialWorker().getPhone());
+    			p.setSwemail(data.getSocialWorker().getEmail());
+    			
+    			p.setGpname(data.getGeneralPractitioner().getName());
+    			p.setGpphone(data.getGeneralPractitioner().getPhone());
+    			p.setGpemail(data.getGeneralPractitioner().getEmail());
+    			
     			s.update(p);
     			s.getTransaction().commit();
     			
@@ -1286,6 +1306,24 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 			p.setPersonData(exportPersonData(patient.getM_PersonData()));
 			p.setSDData (exportSocioDemographicData(patient.getM_SocioDemographicData()));
 			p.setResponsibleClinicianID(patient.getClinician().toString());
+			
+			Consulter c = Consulter.Factory.newInstance();
+			c.setName(patient.getCcname());
+			c.setEmail(patient.getCcemail());
+			c.setPhone(patient.getCcphone());
+			p.setConsulterInCharge(c);
+			
+			SocialWorker sw = SocialWorker.Factory.newInstance();
+			sw.setName(patient.getSwname());
+			sw.setEmail(patient.getSwemail());
+			sw.setPhone(patient.getSwphone());
+			p.setSocialWorker(sw);
+			
+			GeneralPractitioner gp = GeneralPractitioner.Factory.newInstance();
+			gp.setName(patient.getGpname());
+			gp.setEmail(patient.getGpemail());
+			gp.setPhone(patient.getGpphone());
+			p.setGeneralPractitioner(gp);
 			
 			Object[] pc = patient.getPatientCarers().toArray();
 			PatientCarerList pcl = p.addNewPatientCarerList();
@@ -1970,6 +2008,30 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 			//System.out.println ("dQQ 8");
     	}
     	
+    	private com.aladdin.sc.db.Task taskToHibernate (Task rtask) {
+    		com.aladdin.sc.db.Task task = new com.aladdin.sc.db.Task ();
+			task.setTaskType(new Integer (rtask.getTaskType().getCode()));
+			task.setDateTimeAssigned(new Timestamp(rtask.getDateTimeAssigned().getTimeInMillis()));
+			task.setDateTimeFulfilled(new Timestamp(rtask.getDateTimeFulfilled().getTimeInMillis()));
+			task.setTaskStatus(new Integer (rtask.getTaskStatus().getCode()));
+			task.setUrl(rtask.getURL());
+			task.setExecutor(new Integer (rtask.getExecutorID()));
+			task.setAssigner(new Integer (rtask.getAssignerID()));
+			task.setObject(new Integer (rtask.getObjectID()));
+			
+			if (rtask.getQuestionnaire() != null) {
+				
+				if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") != 0) {
+    				try {
+    					task.setQuestionnaire(new Integer (rtask.getQuestionnaire().getID()));
+    				} catch (Exception e) {
+						task.setQuestionnaire(null);
+					}
+				}
+			}
+			return task;
+    	}
+    	
     	public AssignTaskResponseDocument assignTask (AssignTaskDocument req) {
     		AssignTaskResponseDocument respdoc = AssignTaskResponseDocument.Factory.newInstance();
     		AssignTaskResponse resp = respdoc.addNewAssignTaskResponse();
@@ -1995,57 +2057,10 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
     		try {
     			s.beginTransaction();
     			
-    			//System.out.println (" AssignTask ");
-    			//System.out.println (" IDDQD ");
-    			
-    			//System.out.println (1);
-    			com.aladdin.sc.db.Task task = new com.aladdin.sc.db.Task ();
-    			//System.out.println (2);
-    			Task rtask = req.getAssignTask().getTask();
-    			//System.out.println (3);
-    			task.setTaskType(new Integer (rtask.getTaskType().getCode()));
-    			//System.out.println (4);
-    			task.setDateTimeAssigned(new Timestamp(rtask.getDateTimeAssigned().getTimeInMillis()));
-    			//System.out.println (5);
-    			task.setDateTimeFulfilled(new Timestamp(rtask.getDateTimeFulfilled().getTimeInMillis()));
-    			//System.out.println (6);
-    			task.setTaskStatus(new Integer (rtask.getTaskStatus().getCode()));
-    			//System.out.println (7);
-    			task.setUrl(rtask.getURL());
-    			//System.out.println (8);
-    			task.setExecutor(new Integer (rtask.getExecutorID()));
-    			//System.out.println (9);
-    			task.setAssigner(new Integer (rtask.getAssignerID()));
-    			//System.out.println (10);
-    			task.setObject(new Integer (rtask.getObjectID()));
-    			//System.out.println (11);
-    			//System.out.println (rtask.getQuestionnaire());
-    			
-    			if (rtask.getQuestionnaire() != null) {
-    				
-    				if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") != 0) {
-    					//System.out.println (12);
-        				//System.out.println (rtask.getQuestionnaire().getID());
-        				try {
-        					//System.out.println (121);
-        					task.setQuestionnaire(new Integer (rtask.getQuestionnaire().getID()));
-        					//System.out.println (1211);
-        				} catch (Exception e) {
-        					//System.out.println (122);
-							task.setQuestionnaire(null);
-							//System.out.println (1221);
-						}
-        				//com.aladdin.sc.db.Questionnaire storedQuestionnaire = storeQuestionnaire(rtask.getQuestionnaire(), req.getAssignTask().getLocale());
-        				//if (storedQuestionnaire != null) task.setQuestionnaire(storedQuestionnaire.getId());
-        				//System.out.println (13);
-    				}
-    			}
-    			//System.out.println (14);
+    			com.aladdin.sc.db.Task task = taskToHibernate(req.getAssignTask().getTask());
     			
     			s.save (task);
-    			//System.out.println (15);
     			s.getTransaction().commit();
-    			//System.out.println (16);
     			
     			res.setCode(task.getId().toString());
         		res.setDescription("ok");
@@ -4109,6 +4124,104 @@ import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument
 			
 			return respdoc;
 		}
+		
+		public RemoveTaskMassivelyResponseDocument removeTaskMassively (RemoveTaskMassivelyDocument req) {
+			RemoveTaskMassivelyResponseDocument respdoc = RemoveTaskMassivelyResponseDocument.Factory.newInstance();
+			RemoveTaskMassivelyResponse resp = respdoc.addNewRemoveTaskMassivelyResponse();
+			OperationResult res = resp.addNewOut();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getRemoveTaskMassively().setPatientId(nc.check(req.getRemoveTaskMassively().getPatientId(), String.class));
+    			req.getRemoveTaskMassively().setUserId(nc.check(req.getRemoveTaskMassively().getUserId(), String.class));
+    		}
+			
+			if (
+    				!checkUser(req.getRemoveTaskMassively().getUserId(), U_CLINICIAN) &&
+    				!checkUser(req.getRemoveTaskMassively().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getRemoveTaskMassively().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
+			
+			try {
+				
+				Calendar startDate = req.getRemoveTaskMassively().getStartDate();
+				Calendar endDate = req.getRemoveTaskMassively().getEndDate();
+				BigInteger typeOfTask = req.getRemoveTaskMassively().getTypeOfTask();
+				Integer patientId = new Integer (req.getRemoveTaskMassively().getPatientId());
+				
+				String sql = "DELETE FROM task WHERE datetimeassigned > '" + startDate.toString() + "' AND datetimeassigned < '" + endDate.toString() + "' AND tasktype = '" + typeOfTask.toString() + "' AND object = '" + patientId.toString() + "'";
+	    		
+				s.beginTransaction();
+				s.createSQLQuery(sql).executeUpdate();
+				s.getTransaction().commit();
+				
+			} catch (Exception e) {
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+				
+				res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				System.out.println (e.toString());
+				res.setStatus((short) 0);
+			}
+			
+			return respdoc;
+		}
+		
+        public AssignTasksMassivelyResponseDocument assignTasksMassively (AssignTasksMassivelyDocument req) {
+        	AssignTasksMassivelyResponseDocument respdoc = AssignTasksMassivelyResponseDocument.Factory.newInstance();
+        	AssignTasksMassivelyResponse resp = respdoc.addNewAssignTasksMassivelyResponse();
+        	OperationResult res = resp.addNewOut();
+        	
+        	{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getAssignTasksMassively().setUserId(nc.check(req.getAssignTasksMassively().getUserId(), String.class));
+    		}
+        	
+        	if (
+    				!checkUser(req.getAssignTasksMassively().getUserId(), U_CLINICIAN) &&
+    				!checkUser(req.getAssignTasksMassively().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getAssignTasksMassively().getUserId(), U_CARER)
+				) {
+    			return respdoc;
+    		}
+        	
+        	try {
+        		
+        		Calendar startDate = req.getAssignTasksMassively().getStartDate();
+				Calendar endDate = req.getAssignTasksMassively().getEndDate();
+				int frequency = req.getAssignTasksMassively().getFrequency().intValue();
+				Task rtask = req.getAssignTasksMassively().getTask();
+				
+				while (startDate.compareTo(endDate) < 0) {
+					rtask.setDateTimeAssigned(startDate);
+					com.aladdin.sc.db.Task task = taskToHibernate(rtask);
+	    			s.save (task);
+					startDate.add(Calendar.DAY_OF_YEAR, frequency);
+				}
+        		
+        	} catch (Exception e) {
+				
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+				
+				res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				System.out.println (e.toString());
+				res.setStatus((short) 0);
+			}
+        	
+        	return respdoc;
+        }
 
     
     }

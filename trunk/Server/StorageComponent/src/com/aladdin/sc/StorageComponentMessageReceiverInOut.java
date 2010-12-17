@@ -36,1030 +36,1066 @@
 
         
 
-            if("updateQuestionnaire".equals(methodName)){
-                
-                eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaireResponse115 = null;
-	                        eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument wrappedParam =
-                                                             (eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument)fromOM(
-                                    msgContext.getEnvelope().getBody().getFirstElement(),
-                                    eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.class,
-                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
-                                                
-                                               updateQuestionnaireResponse115 =
-                                                   
-                                                   
-                                                         skel.updateQuestionnaire(wrappedParam)
-                                                    ;
-                                            
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateQuestionnaireResponse115, false);
-                                    } else 
-
-            if("listOfQuestionnaires".equals(methodName)){
-                
-                eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnairesResponse117 = null;
-	                        eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument wrappedParam =
-                                                             (eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument)fromOM(
-                                    msgContext.getEnvelope().getBody().getFirstElement(),
-                                    eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.class,
-                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
-                                                
-                                               listOfQuestionnairesResponse117 =
-                                                   
-                                                   
-                                                         skel.listOfQuestionnaires(wrappedParam)
-                                                    ;
-                                            
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfQuestionnairesResponse117, false);
-                                    } else 
-
-            if("saveWarning".equals(methodName)){
-                
-                eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarningResponse119 = null;
-	                        eu.aladdin_project.storagecomponent.SaveWarningDocument wrappedParam =
-                                                             (eu.aladdin_project.storagecomponent.SaveWarningDocument)fromOM(
-                                    msgContext.getEnvelope().getBody().getFirstElement(),
-                                    eu.aladdin_project.storagecomponent.SaveWarningDocument.class,
-                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
-                                                
-                                               saveWarningResponse119 =
-                                                   
-                                                   
-                                                         skel.saveWarning(wrappedParam)
-                                                    ;
-                                            
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveWarningResponse119, false);
-                                    } else 
-
             if("updateCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument updateCarerResponse121 = null;
+                eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument updateCarerResponse119 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateCarerResponse121 =
+                                               updateCarerResponse119 =
                                                    
                                                    
                                                          skel.updateCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateCarerResponse121, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateCarerResponse119, false);
                                     } else 
 
             if("updateUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateUserResponseDocument updateUserResponse123 = null;
+                eu.aladdin_project.storagecomponent.UpdateUserResponseDocument updateUserResponse121 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateUserResponse123 =
+                                               updateUserResponse121 =
                                                    
                                                    
                                                          skel.updateUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateUserResponse123, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateUserResponse121, false);
                                     } else 
 
             if("deleteAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument deleteAdministratorResponse125 = null;
+                eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument deleteAdministratorResponse123 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteAdministratorResponse125 =
+                                               deleteAdministratorResponse123 =
                                                    
                                                    
                                                          skel.deleteAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteAdministratorResponse125, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteAdministratorResponse123, false);
                                     } else 
 
             if("deleteUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteUserResponseDocument deleteUserResponse127 = null;
+                eu.aladdin_project.storagecomponent.DeleteUserResponseDocument deleteUserResponse125 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteUserResponse127 =
+                                               deleteUserResponse125 =
                                                    
                                                    
                                                          skel.deleteUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteUserResponse127, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteUserResponse125, false);
+                                    } else 
+
+            if("assignTasksMassively".equals(methodName)){
+                
+                eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument assignTasksMassivelyResponse127 = null;
+	                        eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument wrappedParam =
+                                                             (eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               assignTasksMassivelyResponse127 =
+                                                   
+                                                   
+                                                         skel.assignTasksMassively(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), assignTasksMassivelyResponse127, false);
+                                    } else 
+
+            if("updateQuestionnaire".equals(methodName)){
+                
+                eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaireResponse129 = null;
+	                        eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument wrappedParam =
+                                                             (eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               updateQuestionnaireResponse129 =
+                                                   
+                                                   
+                                                         skel.updateQuestionnaire(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateQuestionnaireResponse129, false);
+                                    } else 
+
+            if("listOfQuestionnaires".equals(methodName)){
+                
+                eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnairesResponse131 = null;
+	                        eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument wrappedParam =
+                                                             (eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               listOfQuestionnairesResponse131 =
+                                                   
+                                                   
+                                                         skel.listOfQuestionnaires(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfQuestionnairesResponse131, false);
+                                    } else 
+
+            if("saveWarning".equals(methodName)){
+                
+                eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarningResponse133 = null;
+	                        eu.aladdin_project.storagecomponent.SaveWarningDocument wrappedParam =
+                                                             (eu.aladdin_project.storagecomponent.SaveWarningDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.storagecomponent.SaveWarningDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               saveWarningResponse133 =
+                                                   
+                                                   
+                                                         skel.saveWarning(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveWarningResponse133, false);
                                     } else 
 
             if("getSystemParameterList".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument getSystemParameterListResponse129 = null;
+                eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument getSystemParameterListResponse135 = null;
 	                        eu.aladdin_project.storagecomponent.GetSystemParameterListDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetSystemParameterListDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetSystemParameterListDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getSystemParameterListResponse129 =
+                                               getSystemParameterListResponse135 =
                                                    
                                                    
                                                          skel.getSystemParameterList(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getSystemParameterListResponse129, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getSystemParameterListResponse135, false);
                                     } else 
 
             if("getCarerAssessments".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument getCarerAssessmentsResponse131 = null;
+                eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument getCarerAssessmentsResponse137 = null;
 	                        eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetCarerAssessmentsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getCarerAssessmentsResponse131 =
+                                               getCarerAssessmentsResponse137 =
                                                    
                                                    
                                                          skel.getCarerAssessments(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerAssessmentsResponse131, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerAssessmentsResponse137, false);
                                     } else 
 
             if("listOfCarers".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument listOfCarersResponse133 = null;
+                eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument listOfCarersResponse139 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfCarersDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfCarersDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfCarersDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfCarersResponse133 =
+                                               listOfCarersResponse139 =
                                                    
                                                    
                                                          skel.listOfCarers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCarersResponse133, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCarersResponse139, false);
                                     } else 
 
             if("listOfClinicians".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument listOfCliniciansResponse135 = null;
+                eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument listOfCliniciansResponse141 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfCliniciansDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfCliniciansDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfCliniciansDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfCliniciansResponse135 =
+                                               listOfCliniciansResponse141 =
                                                    
                                                    
                                                          skel.listOfClinicians(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCliniciansResponse135, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfCliniciansResponse141, false);
                                     } else 
 
             if("getUserType".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument getUserTypeResponse137 = null;
+                eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument getUserTypeResponse143 = null;
 	                        eu.aladdin_project.storagecomponent.GetUserTypeDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetUserTypeDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetUserTypeDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getUserTypeResponse137 =
+                                               getUserTypeResponse143 =
                                                    
                                                    
                                                          skel.getUserType(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserTypeResponse137, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserTypeResponse143, false);
                                     } else 
 
             if("savePatientAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument savePatientAssessmentResponse139 = null;
+                eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument savePatientAssessmentResponse145 = null;
 	                        eu.aladdin_project.storagecomponent.SavePatientAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.SavePatientAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.SavePatientAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               savePatientAssessmentResponse139 =
+                                               savePatientAssessmentResponse145 =
                                                    
                                                    
                                                          skel.savePatientAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), savePatientAssessmentResponse139, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), savePatientAssessmentResponse145, false);
                                     } else 
 
             if("storeMeasurements".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument storeMeasurementsResponse141 = null;
+                eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument storeMeasurementsResponse147 = null;
 	                        eu.aladdin_project.storagecomponent.StoreMeasurementsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.StoreMeasurementsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.StoreMeasurementsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               storeMeasurementsResponse141 =
+                                               storeMeasurementsResponse147 =
                                                    
                                                    
                                                          skel.storeMeasurements(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeMeasurementsResponse141, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeMeasurementsResponse147, false);
                                     } else 
 
             if("getPatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientResponseDocument getPatientResponse143 = null;
+                eu.aladdin_project.storagecomponent.GetPatientResponseDocument getPatientResponse149 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientResponse143 =
+                                               getPatientResponse149 =
                                                    
                                                    
                                                          skel.getPatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientResponse143, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientResponse149, false);
                                     } else 
 
             if("deleteCarerAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument deleteCarerAssessmentResponse145 = null;
+                eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument deleteCarerAssessmentResponse151 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteCarerAssessmentResponse145 =
+                                               deleteCarerAssessmentResponse151 =
                                                    
                                                    
                                                          skel.deleteCarerAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerAssessmentResponse145, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerAssessmentResponse151, false);
                                     } else 
 
             if("createClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateClinicianResponseDocument createClinicianResponse147 = null;
+                eu.aladdin_project.storagecomponent.CreateClinicianResponseDocument createClinicianResponse153 = null;
 	                        eu.aladdin_project.storagecomponent.CreateClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createClinicianResponse147 =
+                                               createClinicianResponse153 =
                                                    
                                                    
                                                          skel.createClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createClinicianResponse147, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createClinicianResponse153, false);
                                     } else 
 
             if("auth".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.AuthResponseDocument authResponse149 = null;
+                eu.aladdin_project.storagecomponent.AuthResponseDocument authResponse155 = null;
 	                        eu.aladdin_project.storagecomponent.AuthDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.AuthDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.AuthDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               authResponse149 =
+                                               authResponse155 =
                                                    
                                                    
                                                          skel.auth(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), authResponse149, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), authResponse155, false);
                                     } else 
 
             if("getQuestionnaireAnswers".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswersResponse151 = null;
+                eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswersResponse157 = null;
 	                        eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getQuestionnaireAnswersResponse151 =
+                                               getQuestionnaireAnswersResponse157 =
                                                    
                                                    
                                                          skel.getQuestionnaireAnswers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireAnswersResponse151, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireAnswersResponse157, false);
                                     } else 
 
             if("deleteExternalService".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument deleteExternalServiceResponse153 = null;
+                eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument deleteExternalServiceResponse159 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteExternalServiceDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteExternalServiceDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteExternalServiceDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteExternalServiceResponse153 =
+                                               deleteExternalServiceResponse159 =
                                                    
                                                    
                                                          skel.deleteExternalService(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteExternalServiceResponse153, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteExternalServiceResponse159, false);
                                     } else 
 
             if("deleteClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument deleteClinicianResponse155 = null;
+                eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument deleteClinicianResponse161 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteClinicianResponse155 =
+                                               deleteClinicianResponse161 =
                                                    
                                                    
                                                          skel.deleteClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteClinicianResponse155, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteClinicianResponse161, false);
                                     } else 
 
             if("updateSystemParameter".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument updateSystemParameterResponse157 = null;
+                eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument updateSystemParameterResponse163 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateSystemParameterDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateSystemParameterDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateSystemParameterDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateSystemParameterResponse157 =
+                                               updateSystemParameterResponse163 =
                                                    
                                                    
                                                          skel.updateSystemParameter(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateSystemParameterResponse157, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateSystemParameterResponse163, false);
                                     } else 
 
             if("getUserIdByPersonId".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument getUserIdByPersonIdResponse159 = null;
+                eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument getUserIdByPersonIdResponse165 = null;
 	                        eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getUserIdByPersonIdResponse159 =
+                                               getUserIdByPersonIdResponse165 =
                                                    
                                                    
                                                          skel.getUserIdByPersonId(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserIdByPersonIdResponse159, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserIdByPersonIdResponse165, false);
                                     } else 
 
             if("changePassword".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument changePasswordResponse161 = null;
+                eu.aladdin_project.storagecomponent.ChangePasswordResponseDocument changePasswordResponse167 = null;
 	                        eu.aladdin_project.storagecomponent.ChangePasswordDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ChangePasswordDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ChangePasswordDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               changePasswordResponse161 =
+                                               changePasswordResponse167 =
                                                    
                                                    
                                                          skel.changePassword(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), changePasswordResponse161, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), changePasswordResponse167, false);
                                     } else 
 
             if("deletePatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeletePatientResponseDocument deletePatientResponse163 = null;
+                eu.aladdin_project.storagecomponent.DeletePatientResponseDocument deletePatientResponse169 = null;
 	                        eu.aladdin_project.storagecomponent.DeletePatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeletePatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeletePatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deletePatientResponse163 =
+                                               deletePatientResponse169 =
                                                    
                                                    
                                                          skel.deletePatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientResponse163, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientResponse169, false);
                                     } else 
 
             if("createQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateQuestionnaireResponseDocument createQuestionnaireResponse165 = null;
+                eu.aladdin_project.storagecomponent.CreateQuestionnaireResponseDocument createQuestionnaireResponse171 = null;
 	                        eu.aladdin_project.storagecomponent.CreateQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createQuestionnaireResponse165 =
+                                               createQuestionnaireResponse171 =
                                                    
                                                    
                                                          skel.createQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createQuestionnaireResponse165, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createQuestionnaireResponse171, false);
                                     } else 
 
             if("getPatientsForCaregiver".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument getPatientsForCaregiverResponse167 = null;
+                eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument getPatientsForCaregiverResponse173 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientsForCaregiverResponse167 =
+                                               getPatientsForCaregiverResponse173 =
                                                    
                                                    
                                                          skel.getPatientsForCaregiver(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientsForCaregiverResponse167, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientsForCaregiverResponse173, false);
+                                    } else 
+
+            if("removeTaskMassively".equals(methodName)){
+                
+                eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument removeTaskMassivelyResponse175 = null;
+	                        eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument wrappedParam =
+                                                             (eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               removeTaskMassivelyResponse175 =
+                                                   
+                                                   
+                                                         skel.removeTaskMassively(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), removeTaskMassivelyResponse175, false);
                                     } else 
 
             if("getPatientMeasurement".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument getPatientMeasurementResponse169 = null;
+                eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument getPatientMeasurementResponse177 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientMeasurementResponse169 =
+                                               getPatientMeasurementResponse177 =
                                                    
                                                    
                                                          skel.getPatientMeasurement(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientMeasurementResponse169, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientMeasurementResponse177, false);
                                     } else 
 
             if("updatePatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument updatePatientResponse171 = null;
+                eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument updatePatientResponse179 = null;
 	                        eu.aladdin_project.storagecomponent.UpdatePatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdatePatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdatePatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updatePatientResponse171 =
+                                               updatePatientResponse179 =
                                                    
                                                    
                                                          skel.updatePatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updatePatientResponse171, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updatePatientResponse179, false);
                                     } else 
 
             if("deleteQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument deleteQuestionnaireResponse173 = null;
+                eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument deleteQuestionnaireResponse181 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteQuestionnaireResponse173 =
+                                               deleteQuestionnaireResponse181 =
                                                    
                                                    
                                                          skel.deleteQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteQuestionnaireResponse173, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteQuestionnaireResponse181, false);
                                     } else 
 
             if("assignTask".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.AssignTaskResponseDocument assignTaskResponse175 = null;
+                eu.aladdin_project.storagecomponent.AssignTaskResponseDocument assignTaskResponse183 = null;
 	                        eu.aladdin_project.storagecomponent.AssignTaskDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.AssignTaskDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.AssignTaskDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               assignTaskResponse175 =
+                                               assignTaskResponse183 =
                                                    
                                                    
                                                          skel.assignTask(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), assignTaskResponse175, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), assignTaskResponse183, false);
                                     } else 
 
             if("createPatient".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreatePatientResponseDocument createPatientResponse177 = null;
+                eu.aladdin_project.storagecomponent.CreatePatientResponseDocument createPatientResponse185 = null;
 	                        eu.aladdin_project.storagecomponent.CreatePatientDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreatePatientDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreatePatientDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createPatientResponse177 =
+                                               createPatientResponse185 =
                                                    
                                                    
                                                          skel.createPatient(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createPatientResponse177, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createPatientResponse185, false);
                                     } else 
 
             if("listOfAdministrators".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument listOfAdministratorsResponse179 = null;
+                eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument listOfAdministratorsResponse187 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfAdministratorsResponse179 =
+                                               listOfAdministratorsResponse187 =
                                                    
                                                    
                                                          skel.listOfAdministrators(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfAdministratorsResponse179, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfAdministratorsResponse187, false);
                                     } else 
 
             if("getUserPlannedTasks".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument getUserPlannedTasksResponse181 = null;
+                eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument getUserPlannedTasksResponse189 = null;
 	                        eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getUserPlannedTasksResponse181 =
+                                               getUserPlannedTasksResponse189 =
                                                    
                                                    
                                                          skel.getUserPlannedTasks(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserPlannedTasksResponse181, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserPlannedTasksResponse189, false);
                                     } else 
 
             if("listOfPossibleTasks".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument listOfPossibleTasksResponse183 = null;
+                eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument listOfPossibleTasksResponse191 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfPossibleTasksDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfPossibleTasksDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfPossibleTasksDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfPossibleTasksResponse183 =
+                                               listOfPossibleTasksResponse191 =
                                                    
                                                    
                                                          skel.listOfPossibleTasks(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPossibleTasksResponse183, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPossibleTasksResponse191, false);
                                     } else 
 
             if("createCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateCarerResponseDocument createCarerResponse185 = null;
+                eu.aladdin_project.storagecomponent.CreateCarerResponseDocument createCarerResponse193 = null;
 	                        eu.aladdin_project.storagecomponent.CreateCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createCarerResponse185 =
+                                               createCarerResponse193 =
                                                    
                                                    
                                                          skel.createCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createCarerResponse185, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createCarerResponse193, false);
                                     } else 
 
             if("createExternalService".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateExternalServiceResponseDocument createExternalServiceResponse187 = null;
+                eu.aladdin_project.storagecomponent.CreateExternalServiceResponseDocument createExternalServiceResponse195 = null;
 	                        eu.aladdin_project.storagecomponent.CreateExternalServiceDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateExternalServiceDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateExternalServiceDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createExternalServiceResponse187 =
+                                               createExternalServiceResponse195 =
                                                    
                                                    
                                                          skel.createExternalService(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createExternalServiceResponse187, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createExternalServiceResponse195, false);
                                     } else 
 
             if("saveCarerAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument saveCarerAssessmentResponse189 = null;
+                eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument saveCarerAssessmentResponse197 = null;
 	                        eu.aladdin_project.storagecomponent.SaveCarerAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.SaveCarerAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.SaveCarerAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               saveCarerAssessmentResponse189 =
+                                               saveCarerAssessmentResponse197 =
                                                    
                                                    
                                                          skel.saveCarerAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveCarerAssessmentResponse189, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), saveCarerAssessmentResponse197, false);
                                     } else 
 
             if("deleteCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument deleteCarerResponse191 = null;
+                eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument deleteCarerResponse199 = null;
 	                        eu.aladdin_project.storagecomponent.DeleteCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeleteCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeleteCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deleteCarerResponse191 =
+                                               deleteCarerResponse199 =
                                                    
                                                    
                                                          skel.deleteCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerResponse191, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deleteCarerResponse199, false);
                                     } else 
 
             if("createAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateAdministratorResponseDocument createAdministratorResponse193 = null;
+                eu.aladdin_project.storagecomponent.CreateAdministratorResponseDocument createAdministratorResponse201 = null;
 	                        eu.aladdin_project.storagecomponent.CreateAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createAdministratorResponse193 =
+                                               createAdministratorResponse201 =
                                                    
                                                    
                                                          skel.createAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createAdministratorResponse193, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createAdministratorResponse201, false);
                                     } else 
 
             if("updateExternalService".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument updateExternalServiceResponse195 = null;
+                eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument updateExternalServiceResponse203 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateExternalServiceDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateExternalServiceDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateExternalServiceDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateExternalServiceResponse195 =
+                                               updateExternalServiceResponse203 =
                                                    
                                                    
                                                          skel.updateExternalService(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateExternalServiceResponse195, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateExternalServiceResponse203, false);
                                     } else 
 
             if("getPatientAssessments".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument getPatientAssessmentsResponse197 = null;
+                eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument getPatientAssessmentsResponse205 = null;
 	                        eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetPatientAssessmentsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getPatientAssessmentsResponse197 =
+                                               getPatientAssessmentsResponse205 =
                                                    
                                                    
                                                          skel.getPatientAssessments(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientAssessmentsResponse197, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getPatientAssessmentsResponse205, false);
                                     } else 
 
             if("getClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetClinicianResponseDocument getClinicianResponse199 = null;
+                eu.aladdin_project.storagecomponent.GetClinicianResponseDocument getClinicianResponse207 = null;
 	                        eu.aladdin_project.storagecomponent.GetClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getClinicianResponse199 =
+                                               getClinicianResponse207 =
                                                    
                                                    
                                                          skel.getClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getClinicianResponse199, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getClinicianResponse207, false);
                                     } else 
 
             if("deletePatientAssessment".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument deletePatientAssessmentResponse201 = null;
+                eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument deletePatientAssessmentResponse209 = null;
 	                        eu.aladdin_project.storagecomponent.DeletePatientAssessmentDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.DeletePatientAssessmentDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.DeletePatientAssessmentDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               deletePatientAssessmentResponse201 =
+                                               deletePatientAssessmentResponse209 =
                                                    
                                                    
                                                          skel.deletePatientAssessment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientAssessmentResponse201, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), deletePatientAssessmentResponse209, false);
                                     } else 
 
             if("getAllExternalServices".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument getAllExternalServicesResponse203 = null;
+                eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument getAllExternalServicesResponse211 = null;
 	                        eu.aladdin_project.storagecomponent.GetAllExternalServicesDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetAllExternalServicesDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetAllExternalServicesDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getAllExternalServicesResponse203 =
+                                               getAllExternalServicesResponse211 =
                                                    
                                                    
                                                          skel.getAllExternalServices(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAllExternalServicesResponse203, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAllExternalServicesResponse211, false);
                                     } else 
 
             if("getCarer".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetCarerResponseDocument getCarerResponse205 = null;
+                eu.aladdin_project.storagecomponent.GetCarerResponseDocument getCarerResponse213 = null;
 	                        eu.aladdin_project.storagecomponent.GetCarerDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetCarerDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetCarerDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getCarerResponse205 =
+                                               getCarerResponse213 =
                                                    
                                                    
                                                          skel.getCarer(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerResponse205, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getCarerResponse213, false);
                                     } else 
 
             if("getAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministratorResponse207 = null;
+                eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministratorResponse215 = null;
 	                        eu.aladdin_project.storagecomponent.GetAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getAdministratorResponse207 =
+                                               getAdministratorResponse215 =
                                                    
                                                    
                                                          skel.getAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAdministratorResponse207, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getAdministratorResponse215, false);
                                     } else 
 
             if("updateAdministrator".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministratorResponse209 = null;
+                eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministratorResponse217 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateAdministratorDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateAdministratorDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateAdministratorDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateAdministratorResponse209 =
+                                               updateAdministratorResponse217 =
                                                    
                                                    
                                                          skel.updateAdministrator(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateAdministratorResponse209, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateAdministratorResponse217, false);
                                     } else 
 
             if("getQuestionnaire".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument getQuestionnaireResponse211 = null;
+                eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument getQuestionnaireResponse219 = null;
 	                        eu.aladdin_project.storagecomponent.GetQuestionnaireDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetQuestionnaireDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetQuestionnaireDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getQuestionnaireResponse211 =
+                                               getQuestionnaireResponse219 =
                                                    
                                                    
                                                          skel.getQuestionnaire(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireResponse211, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getQuestionnaireResponse219, false);
                                     } else 
 
             if("storeQuestionnaireAnswers".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswersResponse213 = null;
+                eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswersResponse221 = null;
 	                        eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               storeQuestionnaireAnswersResponse213 =
+                                               storeQuestionnaireAnswersResponse221 =
                                                    
                                                    
                                                          skel.storeQuestionnaireAnswers(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeQuestionnaireAnswersResponse213, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), storeQuestionnaireAnswersResponse221, false);
                                     } else 
 
             if("changeTaskStatus".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument changeTaskStatusResponse215 = null;
+                eu.aladdin_project.storagecomponent.ChangeTaskStatusResponseDocument changeTaskStatusResponse223 = null;
 	                        eu.aladdin_project.storagecomponent.ChangeTaskStatusDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ChangeTaskStatusDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ChangeTaskStatusDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               changeTaskStatusResponse215 =
+                                               changeTaskStatusResponse223 =
                                                    
                                                    
                                                          skel.changeTaskStatus(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), changeTaskStatusResponse215, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), changeTaskStatusResponse223, false);
                                     } else 
 
             if("listOfPatients".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument listOfPatientsResponse217 = null;
+                eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument listOfPatientsResponse225 = null;
 	                        eu.aladdin_project.storagecomponent.ListOfPatientsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.ListOfPatientsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.ListOfPatientsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               listOfPatientsResponse217 =
+                                               listOfPatientsResponse225 =
                                                    
                                                    
                                                          skel.listOfPatients(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPatientsResponse217, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), listOfPatientsResponse225, false);
                                     } else 
 
             if("getWarnings".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetWarningsResponseDocument getWarningsResponse219 = null;
+                eu.aladdin_project.storagecomponent.GetWarningsResponseDocument getWarningsResponse227 = null;
 	                        eu.aladdin_project.storagecomponent.GetWarningsDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetWarningsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetWarningsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getWarningsResponse219 =
+                                               getWarningsResponse227 =
                                                    
                                                    
                                                          skel.getWarnings(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getWarningsResponse219, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getWarningsResponse227, false);
                                     } else 
 
             if("createUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUserResponse221 = null;
+                eu.aladdin_project.storagecomponent.CreateUserResponseDocument createUserResponse229 = null;
 	                        eu.aladdin_project.storagecomponent.CreateUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.CreateUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.CreateUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               createUserResponse221 =
+                                               createUserResponse229 =
                                                    
                                                    
                                                          skel.createUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), createUserResponse221, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), createUserResponse229, false);
                                     } else 
 
             if("updateClinician".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinicianResponse223 = null;
+                eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinicianResponse231 = null;
 	                        eu.aladdin_project.storagecomponent.UpdateClinicianDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.UpdateClinicianDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.UpdateClinicianDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               updateClinicianResponse223 =
+                                               updateClinicianResponse231 =
                                                    
                                                    
                                                          skel.updateClinician(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateClinicianResponse223, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), updateClinicianResponse231, false);
                                     } else 
 
             if("getUser".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.GetUserResponseDocument getUserResponse225 = null;
+                eu.aladdin_project.storagecomponent.GetUserResponseDocument getUserResponse233 = null;
 	                        eu.aladdin_project.storagecomponent.GetUserDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.GetUserDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.GetUserDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getUserResponse225 =
+                                               getUserResponse233 =
                                                    
                                                    
                                                          skel.getUser(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserResponse225, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getUserResponse233, false);
                                     } else 
 
             if("markWarningAsRead".equals(methodName)){
                 
-                eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument markWarningAsReadResponse227 = null;
+                eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument markWarningAsReadResponse235 = null;
 	                        eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument wrappedParam =
                                                              (eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               markWarningAsReadResponse227 =
+                                               markWarningAsReadResponse235 =
                                                    
                                                    
                                                          skel.markWarningAsRead(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), markWarningAsReadResponse227, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), markWarningAsReadResponse235, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");
@@ -1075,414 +1111,6 @@
         }
         
         //
-
-            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault{
-
-            
-                    return toOM(param);
-                
-
-            }
-
-            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument param)
-                    throws org.apache.axis2.AxisFault {
-
-                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
-                while (!xmlReader.isStartElement()) {
-                    try {
-                        xmlReader.next();
-                    } catch (javax.xml.stream.XMLStreamException e) {
-                        throw org.apache.axis2.AxisFault.makeFault(e);
-                    }
-                }
-
-                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
-
-                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
-                            throws javax.xml.stream.XMLStreamException {
-                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
-                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
-                            mtomxmlStreamWriter.getOutputStream().flush();
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
-                        }
-                    }
-
-                    public javax.xml.stream.XMLStreamReader getReader()
-                            throws javax.xml.stream.XMLStreamException {
-                        return param.newXMLStreamReader();
-                    }
-                };
-            
-                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
-                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
-                        omDataSource);
-            }
-        
-
-            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault{
-
-            
-                    return toOM(param);
-                
-
-            }
-
-            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument param)
-                    throws org.apache.axis2.AxisFault {
-
-                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
-                while (!xmlReader.isStartElement()) {
-                    try {
-                        xmlReader.next();
-                    } catch (javax.xml.stream.XMLStreamException e) {
-                        throw org.apache.axis2.AxisFault.makeFault(e);
-                    }
-                }
-
-                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
-
-                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
-                            throws javax.xml.stream.XMLStreamException {
-                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
-                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
-                            mtomxmlStreamWriter.getOutputStream().flush();
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
-                        }
-                    }
-
-                    public javax.xml.stream.XMLStreamReader getReader()
-                            throws javax.xml.stream.XMLStreamException {
-                        return param.newXMLStreamReader();
-                    }
-                };
-            
-                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
-                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
-                        omDataSource);
-            }
-        
-
-            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault{
-
-            
-                    return toOM(param);
-                
-
-            }
-
-            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument param)
-                    throws org.apache.axis2.AxisFault {
-
-                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
-                while (!xmlReader.isStartElement()) {
-                    try {
-                        xmlReader.next();
-                    } catch (javax.xml.stream.XMLStreamException e) {
-                        throw org.apache.axis2.AxisFault.makeFault(e);
-                    }
-                }
-
-                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
-
-                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
-                            throws javax.xml.stream.XMLStreamException {
-                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
-                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
-                            mtomxmlStreamWriter.getOutputStream().flush();
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
-                        }
-                    }
-
-                    public javax.xml.stream.XMLStreamReader getReader()
-                            throws javax.xml.stream.XMLStreamException {
-                        return param.newXMLStreamReader();
-                    }
-                };
-            
-                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
-                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
-                        omDataSource);
-            }
-        
-
-            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault{
-
-            
-                    return toOM(param);
-                
-
-            }
-
-            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument param)
-                    throws org.apache.axis2.AxisFault {
-
-                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
-                while (!xmlReader.isStartElement()) {
-                    try {
-                        xmlReader.next();
-                    } catch (javax.xml.stream.XMLStreamException e) {
-                        throw org.apache.axis2.AxisFault.makeFault(e);
-                    }
-                }
-
-                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
-
-                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
-                            throws javax.xml.stream.XMLStreamException {
-                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
-                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
-                            mtomxmlStreamWriter.getOutputStream().flush();
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
-                        }
-                    }
-
-                    public javax.xml.stream.XMLStreamReader getReader()
-                            throws javax.xml.stream.XMLStreamException {
-                        return param.newXMLStreamReader();
-                    }
-                };
-            
-                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
-                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
-                        omDataSource);
-            }
-        
-
-            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.SaveWarningDocument param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault{
-
-            
-                    return toOM(param);
-                
-
-            }
-
-            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.SaveWarningDocument param)
-                    throws org.apache.axis2.AxisFault {
-
-                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
-                while (!xmlReader.isStartElement()) {
-                    try {
-                        xmlReader.next();
-                    } catch (javax.xml.stream.XMLStreamException e) {
-                        throw org.apache.axis2.AxisFault.makeFault(e);
-                    }
-                }
-
-                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
-
-                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
-                            throws javax.xml.stream.XMLStreamException {
-                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
-                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
-                            mtomxmlStreamWriter.getOutputStream().flush();
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
-                        }
-                    }
-
-                    public javax.xml.stream.XMLStreamReader getReader()
-                            throws javax.xml.stream.XMLStreamException {
-                        return param.newXMLStreamReader();
-                    }
-                };
-            
-                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
-                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
-                        omDataSource);
-            }
-        
-
-            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.SaveWarningResponseDocument param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault{
-
-            
-                    return toOM(param);
-                
-
-            }
-
-            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.SaveWarningResponseDocument param)
-                    throws org.apache.axis2.AxisFault {
-
-                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
-                while (!xmlReader.isStartElement()) {
-                    try {
-                        xmlReader.next();
-                    } catch (javax.xml.stream.XMLStreamException e) {
-                        throw org.apache.axis2.AxisFault.makeFault(e);
-                    }
-                }
-
-                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
-
-                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
-                            throws javax.xml.stream.XMLStreamException {
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
-                        }
-                    }
-
-                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
-                            throws javax.xml.stream.XMLStreamException {
-                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
-                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
-                        try {
-                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
-                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
-                            mtomxmlStreamWriter.getOutputStream().flush();
-                        } catch (java.io.IOException e) {
-                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
-                        }
-                    }
-
-                    public javax.xml.stream.XMLStreamReader getReader()
-                            throws javax.xml.stream.XMLStreamException {
-                        return param.newXMLStreamReader();
-                    }
-                };
-            
-                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
-                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
-                        omDataSource);
-            }
-        
 
             private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.UpdateCarerDocument param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault{
@@ -1970,6 +1598,550 @@
             }
 
             private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.DeleteUserResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.SaveWarningDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.SaveWarningDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.SaveWarningResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.SaveWarningResponseDocument param)
                     throws org.apache.axis2.AxisFault {
 
                 final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
@@ -4690,6 +4862,142 @@
             }
 
             private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument param)
                     throws org.apache.axis2.AxisFault {
 
                 final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
@@ -8827,33 +9135,6 @@
                         omDataSource);
             }
         
-                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument param, boolean optimizeContent)
-                            throws org.apache.axis2.AxisFault {
-                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
-                            if (param != null){
-                            envelope.getBody().addChild(toOM(param, optimizeContent));
-                            }
-                            return envelope;
-                            }
-                        
-                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument param, boolean optimizeContent)
-                            throws org.apache.axis2.AxisFault {
-                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
-                            if (param != null){
-                            envelope.getBody().addChild(toOM(param, optimizeContent));
-                            }
-                            return envelope;
-                            }
-                        
-                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.SaveWarningResponseDocument param, boolean optimizeContent)
-                            throws org.apache.axis2.AxisFault {
-                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
-                            if (param != null){
-                            envelope.getBody().addChild(toOM(param, optimizeContent));
-                            }
-                            return envelope;
-                            }
-                        
                             private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument param, boolean optimizeContent)
                             throws org.apache.axis2.AxisFault {
                             org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
@@ -8882,6 +9163,42 @@
                             }
                         
                             private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.DeleteUserResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.SaveWarningResponseDocument param, boolean optimizeContent)
                             throws org.apache.axis2.AxisFault {
                             org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
                             if (param != null){
@@ -9062,6 +9379,15 @@
                             }
                         
                             private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument param, boolean optimizeContent)
                             throws org.apache.axis2.AxisFault {
                             org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
                             if (param != null){
@@ -9356,84 +9682,6 @@
         try{
         
 
-            if (eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.class.equals(type)){
-            if (extraNamespaces!=null){
-            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching(),
-            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
-            }else{
-            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching());
-            }
-            }
-
-        
-
-            if (eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.class.equals(type)){
-            if (extraNamespaces!=null){
-            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching(),
-            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
-            }else{
-            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching());
-            }
-            }
-
-        
-
-            if (eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.class.equals(type)){
-            if (extraNamespaces!=null){
-            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching(),
-            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
-            }else{
-            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching());
-            }
-            }
-
-        
-
-            if (eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.class.equals(type)){
-            if (extraNamespaces!=null){
-            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching(),
-            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
-            }else{
-            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching());
-            }
-            }
-
-        
-
-            if (eu.aladdin_project.storagecomponent.SaveWarningDocument.class.equals(type)){
-            if (extraNamespaces!=null){
-            return eu.aladdin_project.storagecomponent.SaveWarningDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching(),
-            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
-            }else{
-            return eu.aladdin_project.storagecomponent.SaveWarningDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching());
-            }
-            }
-
-        
-
-            if (eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.class.equals(type)){
-            if (extraNamespaces!=null){
-            return eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching(),
-            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
-            }else{
-            return eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.Factory.parse(
-            param.getXMLStreamReaderWithoutCaching());
-            }
-            }
-
-        
-
             if (eu.aladdin_project.storagecomponent.UpdateCarerDocument.class.equals(type)){
             if (extraNamespaces!=null){
             return eu.aladdin_project.storagecomponent.UpdateCarerDocument.Factory.parse(
@@ -9532,6 +9780,110 @@
             new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
             }else{
             return eu.aladdin_project.storagecomponent.DeleteUserResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.SaveWarningDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.SaveWarningDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.SaveWarningDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.Factory.parse(
             param.getXMLStreamReaderWithoutCaching());
             }
             }
@@ -10052,6 +10404,32 @@
             new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
             }else{
             return eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument.Factory.parse(
             param.getXMLStreamReaderWithoutCaching());
             }
             }

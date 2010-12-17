@@ -15,48 +15,6 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param updateQuestionnaire
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaire
-                (
-                  eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument updateQuestionnaire
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param listOfQuestionnaires
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnaires
-                (
-                  eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument listOfQuestionnaires
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param saveWarning
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarning
-                (
-                  eu.aladdin_project.storagecomponent.SaveWarningDocument saveWarning
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
                                     * @param updateCarer
          */
 
@@ -106,6 +64,62 @@
                 public eu.aladdin_project.storagecomponent.DeleteUserResponseDocument deleteUser
                 (
                   eu.aladdin_project.storagecomponent.DeleteUserDocument deleteUser
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param assignTasksMassively
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument assignTasksMassively
+                (
+                  eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument assignTasksMassively
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updateQuestionnaire
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument updateQuestionnaire
+                (
+                  eu.aladdin_project.storagecomponent.UpdateQuestionnaireDocument updateQuestionnaire
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param listOfQuestionnaires
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument listOfQuestionnaires
+                (
+                  eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument listOfQuestionnaires
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param saveWarning
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.SaveWarningResponseDocument saveWarning
+                (
+                  eu.aladdin_project.storagecomponent.SaveWarningDocument saveWarning
                  )
             ;
         
@@ -386,6 +400,20 @@
                 public eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument getPatientsForCaregiver
                 (
                   eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument getPatientsForCaregiver
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param removeTaskMassively
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument removeTaskMassively
+                (
+                  eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument removeTaskMassively
                  )
             ;
         

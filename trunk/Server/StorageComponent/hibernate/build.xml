@@ -36,7 +36,7 @@
 </target>
 
     <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath" />
-    <target name="hbm2java" depends="generate.hbm">
+    <target name="hbm2java"><!-- depends="generate.hbm" -->
 	<mkdir dir="${build.dir}"/>
 	<mkdir dir="${build.dir}/src"/>
     	<hibernatetool destdir="${build.dir}/src">
