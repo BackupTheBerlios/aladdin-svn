@@ -2018,6 +2018,7 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 			task.setExecutor(new Integer (rtask.getExecutorID()));
 			task.setAssigner(new Integer (rtask.getAssignerID()));
 			task.setObject(new Integer (rtask.getObjectID()));
+			task.setText(rtask.getText());
 			
 			if (rtask.getQuestionnaire() != null) {
 				
@@ -2228,6 +2229,7 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
     				rt.setExecutorID(t.getExecutor().toString());
     				rt.setAssignerID(t.getAssigner().toString());
     				rt.setObjectID(t.getObject().toString());
+    				rt.setText(t.getText());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
     					//System.out.println ();
@@ -2426,6 +2428,7 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
     			
     			es.setAddress(re.getAddress());
     			es.setDescription(re.getDescription());
+    			es.setType(re.getType());
     			s.save(es);
     			
     			s.getTransaction().commit();
@@ -2652,6 +2655,7 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
     			com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService) s.load(com.aladdin.sc.db.ExternalService.class, id);
     			es.setAddress(re.getAddress());
     			es.setDescription(re.getDescription());
+    			es.setType(re.getType());
     			s.save(es);
     			
     			s.getTransaction().commit();
@@ -2776,23 +2780,16 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
     		GetAllExternalServicesResponse resp = respdoc.addNewGetAllExternalServicesResponse();
     		
     		try {
-    			//System.out.println ("1");
     			s.beginTransaction();
     			Object[] esl = s.createQuery("from ExternalService").list().toArray();
     			s.getTransaction().commit();
-    			//System.out.println ("2");
     			for (int i = 0; i < esl.length; i++) {
-    				//System.out.println ("3");
     				com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService)esl[i];
-    				//System.out.println ("4");
     				ExternalService re = resp.addNewOut();
-    				//System.out.println ("5");
     				re.setAddress(es.getAddress());
-    				//System.out.println ("6");
     				re.setDescription(es.getDescription());
-    				//System.out.println ("7");
     				re.setID(es.getId().toString());
-    				//System.out.println ("8");
+    				re.setType(es.getType());
     			}
     		} catch (Exception e) {
     			

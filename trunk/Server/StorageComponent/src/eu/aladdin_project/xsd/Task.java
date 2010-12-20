@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Task extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Task.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5680CD1851D9D57B1BD013AD6BDF589B").resolveHandle("taskda91type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Task.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("taskda91type");
     
     /**
      * Gets the "ID" element
@@ -137,6 +137,36 @@ public interface Task extends org.apache.xmlbeans.XmlObject
      * Unsets the "URL" element
      */
     void unsetURL();
+    
+    /**
+     * Gets the "Text" element
+     */
+    java.lang.String getText();
+    
+    /**
+     * Gets (as xml) the "Text" element
+     */
+    org.apache.xmlbeans.XmlString xgetText();
+    
+    /**
+     * True if has "Text" element
+     */
+    boolean isSetText();
+    
+    /**
+     * Sets the "Text" element
+     */
+    void setText(java.lang.String text);
+    
+    /**
+     * Sets (as xml) the "Text" element
+     */
+    void xsetText(org.apache.xmlbeans.XmlString text);
+    
+    /**
+     * Unsets the "Text" element
+     */
+    void unsetText();
     
     /**
      * Gets the "Questionnaire" element

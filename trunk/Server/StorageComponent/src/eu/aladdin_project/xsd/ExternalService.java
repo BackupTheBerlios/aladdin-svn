@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface ExternalService extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExternalService.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5680CD1851D9D57B1BD013AD6BDF589B").resolveHandle("externalservicec684type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExternalService.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("externalservicec684type");
     
     /**
      * Gets the "ID" element
@@ -77,6 +77,26 @@ public interface ExternalService extends org.apache.xmlbeans.XmlObject
      * Sets (as xml) the "Address" element
      */
     void xsetAddress(org.apache.xmlbeans.XmlString address);
+    
+    /**
+     * Gets the "Type" element
+     */
+    java.lang.String getType();
+    
+    /**
+     * Gets (as xml) the "Type" element
+     */
+    org.apache.xmlbeans.XmlString xgetType();
+    
+    /**
+     * Sets the "Type" element
+     */
+    void setType(java.lang.String type);
+    
+    /**
+     * Sets (as xml) the "Type" element
+     */
+    void xsetType(org.apache.xmlbeans.XmlString type);
     
     /**
      * A factory class with static methods for creating instances

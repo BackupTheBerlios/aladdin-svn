@@ -25,6 +25,8 @@ public class ExternalServiceImpl extends org.apache.xmlbeans.impl.values.XmlComp
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Description");
     private static final javax.xml.namespace.QName ADDRESS$4 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Address");
+    private static final javax.xml.namespace.QName TYPE$6 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Type");
     
     
     /**
@@ -228,6 +230,74 @@ public class ExternalServiceImpl extends org.apache.xmlbeans.impl.values.XmlComp
                 target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(ADDRESS$4);
             }
             target.set(address);
+        }
+    }
+    
+    /**
+     * Gets the "Type" element
+     */
+    public java.lang.String getType()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TYPE$6, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target.getStringValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "Type" element
+     */
+    public org.apache.xmlbeans.XmlString xgetType()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TYPE$6, 0);
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "Type" element
+     */
+    public void setType(java.lang.String type)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TYPE$6, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TYPE$6);
+            }
+            target.setStringValue(type);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "Type" element
+     */
+    public void xsetType(org.apache.xmlbeans.XmlString type)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TYPE$6, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TYPE$6);
+            }
+            target.set(type);
         }
     }
 }

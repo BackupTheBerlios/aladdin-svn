@@ -31,13 +31,15 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "TaskStatus");
     private static final javax.xml.namespace.QName URL$10 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "URL");
-    private static final javax.xml.namespace.QName QUESTIONNAIRE$12 = 
+    private static final javax.xml.namespace.QName TEXT$12 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Text");
+    private static final javax.xml.namespace.QName QUESTIONNAIRE$14 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Questionnaire");
-    private static final javax.xml.namespace.QName EXECUTORID$14 = 
+    private static final javax.xml.namespace.QName EXECUTORID$16 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ExecutorID");
-    private static final javax.xml.namespace.QName ASSIGNERID$16 = 
+    private static final javax.xml.namespace.QName ASSIGNERID$18 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "AssignerID");
-    private static final javax.xml.namespace.QName OBJECTID$18 = 
+    private static final javax.xml.namespace.QName OBJECTID$20 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ObjectID");
     
     
@@ -438,6 +440,98 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
     }
     
     /**
+     * Gets the "Text" element
+     */
+    public java.lang.String getText()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TEXT$12, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target.getStringValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "Text" element
+     */
+    public org.apache.xmlbeans.XmlString xgetText()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TEXT$12, 0);
+            return target;
+        }
+    }
+    
+    /**
+     * True if has "Text" element
+     */
+    public boolean isSetText()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(TEXT$12) != 0;
+        }
+    }
+    
+    /**
+     * Sets the "Text" element
+     */
+    public void setText(java.lang.String text)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(TEXT$12, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(TEXT$12);
+            }
+            target.setStringValue(text);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "Text" element
+     */
+    public void xsetText(org.apache.xmlbeans.XmlString text)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(TEXT$12, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TEXT$12);
+            }
+            target.set(text);
+        }
+    }
+    
+    /**
+     * Unsets the "Text" element
+     */
+    public void unsetText()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(TEXT$12, 0);
+        }
+    }
+    
+    /**
      * Gets the "Questionnaire" element
      */
     public eu.aladdin_project.xsd.Questionnaire getQuestionnaire()
@@ -446,7 +540,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             eu.aladdin_project.xsd.Questionnaire target = null;
-            target = (eu.aladdin_project.xsd.Questionnaire)get_store().find_element_user(QUESTIONNAIRE$12, 0);
+            target = (eu.aladdin_project.xsd.Questionnaire)get_store().find_element_user(QUESTIONNAIRE$14, 0);
             if (target == null)
             {
                 return null;
@@ -463,7 +557,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(QUESTIONNAIRE$12) != 0;
+            return get_store().count_elements(QUESTIONNAIRE$14) != 0;
         }
     }
     
@@ -476,10 +570,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             eu.aladdin_project.xsd.Questionnaire target = null;
-            target = (eu.aladdin_project.xsd.Questionnaire)get_store().find_element_user(QUESTIONNAIRE$12, 0);
+            target = (eu.aladdin_project.xsd.Questionnaire)get_store().find_element_user(QUESTIONNAIRE$14, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.xsd.Questionnaire)get_store().add_element_user(QUESTIONNAIRE$12);
+                target = (eu.aladdin_project.xsd.Questionnaire)get_store().add_element_user(QUESTIONNAIRE$14);
             }
             target.set(questionnaire);
         }
@@ -494,7 +588,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             eu.aladdin_project.xsd.Questionnaire target = null;
-            target = (eu.aladdin_project.xsd.Questionnaire)get_store().add_element_user(QUESTIONNAIRE$12);
+            target = (eu.aladdin_project.xsd.Questionnaire)get_store().add_element_user(QUESTIONNAIRE$14);
             return target;
         }
     }
@@ -507,7 +601,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_element(QUESTIONNAIRE$12, 0);
+            get_store().remove_element(QUESTIONNAIRE$14, 0);
         }
     }
     
@@ -520,7 +614,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(EXECUTORID$14, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(EXECUTORID$16, 0);
             if (target == null)
             {
                 return null;
@@ -538,7 +632,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(EXECUTORID$14, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(EXECUTORID$16, 0);
             return target;
         }
     }
@@ -552,10 +646,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(EXECUTORID$14, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(EXECUTORID$16, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(EXECUTORID$14);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(EXECUTORID$16);
             }
             target.setStringValue(executorID);
         }
@@ -570,10 +664,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(EXECUTORID$14, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(EXECUTORID$16, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(EXECUTORID$14);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(EXECUTORID$16);
             }
             target.set(executorID);
         }
@@ -588,7 +682,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ASSIGNERID$16, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ASSIGNERID$18, 0);
             if (target == null)
             {
                 return null;
@@ -606,7 +700,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ASSIGNERID$16, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ASSIGNERID$18, 0);
             return target;
         }
     }
@@ -620,10 +714,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ASSIGNERID$16, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ASSIGNERID$18, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(ASSIGNERID$16);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(ASSIGNERID$18);
             }
             target.setStringValue(assignerID);
         }
@@ -638,10 +732,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ASSIGNERID$16, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(ASSIGNERID$18, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(ASSIGNERID$16);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(ASSIGNERID$18);
             }
             target.set(assignerID);
         }
@@ -656,7 +750,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(OBJECTID$18, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(OBJECTID$20, 0);
             if (target == null)
             {
                 return null;
@@ -674,7 +768,7 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(OBJECTID$18, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(OBJECTID$20, 0);
             return target;
         }
     }
@@ -688,10 +782,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(OBJECTID$18, 0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(OBJECTID$20, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(OBJECTID$18);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(OBJECTID$20);
             }
             target.setStringValue(objectID);
         }
@@ -706,10 +800,10 @@ public class TaskImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentI
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(OBJECTID$18, 0);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(OBJECTID$20, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(OBJECTID$18);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(OBJECTID$20);
             }
             target.set(objectID);
         }
