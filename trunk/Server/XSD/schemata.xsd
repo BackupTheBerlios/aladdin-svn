@@ -108,6 +108,7 @@
 			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="Description" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="Address" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
 		</sequence>
 	</complexType>
 
@@ -147,6 +148,7 @@
 			<element name="DateTimeFulfilled" type="dateTime" maxOccurs="1" minOccurs="1"></element>
 			<element name="TaskStatus" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
 			<element name="URL" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Text" type="string" maxOccurs="1" minOccurs="0"></element>
 			<element name="Questionnaire" type="tns:Questionnaire" maxOccurs="1" minOccurs="0"></element>
 			<element name="ExecutorID" type="string" maxOccurs="1" minOccurs="1"></element>
 			<element name="AssignerID" type="string" maxOccurs="1" minOccurs="1"></element>

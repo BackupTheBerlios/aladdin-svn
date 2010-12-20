@@ -33,6 +33,7 @@
     	<sequence>
     		<element name="Address" type="string"></element>
     		<element name="Description" type="string"></element>
+    		<element name="Type" type="string"></element>
     	</sequence>
     </complexType>
 
@@ -153,6 +154,7 @@
     		<element name="DateTimeFulfilled" type="dateTime"></element>
     		<element name="TaskStatus" type="int"></element>
     		<element name="url" type="string"></element>
+    		<element name="text" type="string"></element>
     		<element name="questionnaire" type="tns:Questionnaire" maxOccurs="1" minOccurs="1"></element>
     		<element name="Executor" type="tns:AladdinUser" maxOccurs="1" minOccurs="1"></element>
     		<element name="Assigner" type="tns:AladdinUser" maxOccurs="1" minOccurs="1"></element>
