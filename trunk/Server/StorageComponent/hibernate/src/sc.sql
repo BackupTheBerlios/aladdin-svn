@@ -83,7 +83,7 @@ create table CarerAssessment (id int4 not null, carer int4, DateOfAssessment tim
 create table Clinician (id int4 not null, persondata int4, primary key (id));
 create table Communication (id int4 not null, Type varchar(255), Value varchar(255), Notes varchar(255), IsPrimary bool, persondata int4, primary key (id));
 create table Dict (id int4 not null, code varchar(255), description varchar(255), locale int4, type int4, primary key (id));
-create table ExternalService (id int4 not null, Address varchar(255), Description varchar(255), primary key (id));
+create table ExternalService (id int4 not null, Address varchar(255), Description varchar(255), Type varchar(255), primary key (id));
 create table Identifier (id int4 not null, Type varchar(255), Number varchar(255), IssueDate timestamp, IssueAuthority varchar(255), persondata int4, primary key (id));
 create table Locale (id int4 not null, name varchar(255), primary key (id));
 create table Measurement (id int4 not null, type varchar(255), value numeric(19, 2), datetime timestamp, units varchar(255), lowerlimit numeric(19, 2), upperlimit numeric(19, 2), patientassessment int4, task int4, primary key (id));
@@ -97,7 +97,7 @@ create table QuestionnaireQuestion (id int4 not null, type varchar(255), isPrima
 create table QuestionnaireQuestionAnswer (id int4 not null, value int4, description varchar(255), question int4, deleted bool, primary key (id));
 create table SocioDemographicData (id int4 not null, Age int4, Gender int4, MaritalStatus int4, Children int4, LivingWith int4, primary key (id));
 create table SystemParameter (id int4 not null, Code varchar(255), Description varchar(255), primary key (id));
-create table Task (id int4 not null, TaskType int4, DateTimeAssigned timestamp, DateTimeFulfilled timestamp, TaskStatus int4, url varchar(255), questionnaire int4, Executor int4, Assigner int4, Object int4, primary key (id));
+create table Task (id int4 not null, TaskType int4, DateTimeAssigned timestamp, DateTimeFulfilled timestamp, TaskStatus int4, url varchar(255), questionnaire int4, Executor int4, Assigner int4, Object int4, text varchar(255), primary key (id));
 create table Translate (id int4 not null, entityid int4, entity varchar(255), locale int4, value varchar(255), primary key (id));
 create table Warning (id int4 not null, TypeOfWarning int4, DateTimeOfWarning timestamp, Effect int4, Indicator int4, RiskLevel int4, JustificationText varchar(255), EmergencyLevel int4, PatientID varchar(255), Delivered bool, primary key (id));
 alter table Address add constraint FK1ED033D44EAC96B0 foreign key (persondata) references PersonData;

@@ -10,6 +10,7 @@
 <property name="DateTimeFulfilled" type="java.sql.Timestamp"><column name="DateTimeFulfilled"/></property>
 <property name="TaskStatus" type="java.lang.Integer"><column name="TaskStatus"/></property>
 <property name="url" type="string"><column name="url"/></property>
+<property name="text" type="string"><column name="text"/></property>
 <property name="questionnaire" type="java.lang.Integer"><column name="questionnaire"/></property>
 <property name="Executor" type="java.lang.Integer"><column name="Executor"/></property>
 <property name="Assigner" type="java.lang.Integer"><column name="Assigner"/></property>
