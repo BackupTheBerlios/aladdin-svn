@@ -3773,15 +3773,17 @@ import java.net.URL;
         	return respdoc;
         }
         
-        private char getURLChar (String url) {
+        private char getURLChar (String urlStr) {
         	try {
-                URL url = new URL ("http://127.0.0.1/phpBB3/sc.php");
+                URL url = new URL (urlStr);
+                System.out.println (urlStr);
                 URLConnection uc = url.openConnection ();
                 uc.connect ();
                 InputStream is = uc.getInputStream ();
                 byte[] b = new byte[5];
                 is.read (b, 0, 5);
-                return (char) byte[0];
+                System.out.println ((char)(b[0]));
+                return (char)(b[0]);
             } catch (java.net.MalformedURLException e){
                 return 0;
             } catch (java.io.IOException e){
@@ -3802,18 +3804,16 @@ import java.net.URL;
         	
         	try {
         		
-        		String url = "http://127.0.0.1/phpBB3/sc.php?none=1&username=" + ru.getUsername();
+                User ru = req.getCreateUser().getUser();
+
+        		String url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?none=1&password=***&type=***&username=" + ru.getUsername();
         		
-        		if (getURLChar(url) == "0") {
-        			res.setCode("-2");
-                    res.setDescription("The User with same name exists in Forum");
-                    res.setStatus((short) 0);
-                    return res;
+        		if (getURLChar(url) == '0') {
+                    throw new Exception ("The User with same name exists in Forum");
         		}
 
         		s.beginTransaction();
         		
-        		User ru = req.getCreateUser().getUser();
         		if (existUser(ru.getUsername(), 0) == 1) {
         			res.setCode("-2");
             		res.setDescription("user with same username exist");
@@ -3828,9 +3828,9 @@ import java.net.URL;
         		u.setPassword(ru.getPassword());
         		s.save (u);
         		
-        		url = "http://127.0.0.1/phpBB3/sc.php?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
+        		url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
         		
-        		if (getURLChar(url) == "0") {
+        		if (getURLChar(url) == '0') {
         			throw new Exception ("Can't create user in forum!");
         		}
         		
