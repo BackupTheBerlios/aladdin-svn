@@ -14,7 +14,7 @@ if (!isset($_REQUEST["username"]) || empty($_REQUEST["username"]) || !isset($_RE
 $user = array ();
 $user["username"] = trim ($_REQUEST["username"]);
 $user["username_clean"] = trim ($_REQUEST["username"]);
-$user["user_password"] = trim ($_REQUEST["password"]);
+$user["user_password"] = md5(trim ($_REQUEST["password"]));
 $user["user_type"] = intval($_REQUEST["type"]);
 $user["group_id"] = intval($_REQUEST["type"]);
 $user['user_email'] = "aladdin@fokus.fraunhofer.de";
