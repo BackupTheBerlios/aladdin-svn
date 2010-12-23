@@ -1,4 +1,4 @@
-    package com.aladdin.sc;
+package com.aladdin.sc;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -97,6 +97,10 @@ import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument;
 import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument;
 import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument;
 import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
+
+import java.io.InputStream;
+import java.net.URLConnection;
+import java.net.URL;
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -3768,6 +3772,22 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
         	
         	return respdoc;
         }
+        
+        private char getURLChar (String url) {
+        	try {
+                URL url = new URL ("http://127.0.0.1/phpBB3/sc.php");
+                URLConnection uc = url.openConnection ();
+                uc.connect ();
+                InputStream is = uc.getInputStream ();
+                byte[] b = new byte[5];
+                is.read (b, 0, 5);
+                return (char) byte[0];
+            } catch (java.net.MalformedURLException e){
+                return 0;
+            } catch (java.io.IOException e){
+                return 0;
+            }
+        }
 
         public CreateUserResponseDocument createUser (CreateUserDocument req) {
         	CreateUserResponseDocument respdoc = CreateUserResponseDocument.Factory.newInstance();
@@ -3781,6 +3801,16 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
     		}
         	
         	try {
+        		
+        		String url = "http://127.0.0.1/phpBB3/sc.php?none=1&username=" + ru.getUsername();
+        		
+        		if (getURLChar(url) == "0") {
+        			res.setCode("-2");
+                    res.setDescription("The User with same name exists in Forum");
+                    res.setStatus((short) 0);
+                    return res;
+        		}
+
         		s.beginTransaction();
         		
         		User ru = req.getCreateUser().getUser();
@@ -3797,6 +3827,12 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
         		u.setUsername(ru.getUsername());
         		u.setPassword(ru.getPassword());
         		s.save (u);
+        		
+        		url = "http://127.0.0.1/phpBB3/sc.php?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
+        		
+        		if (getURLChar(url) == "0") {
+        			throw new Exception ("Can't create user in forum!");
+        		}
         		
         		s.getTransaction().commit();
         		
