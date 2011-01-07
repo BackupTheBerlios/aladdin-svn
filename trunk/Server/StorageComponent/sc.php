@@ -16,7 +16,7 @@ $user["username"] = trim ($_REQUEST["username"]);
 $user["username_clean"] = trim ($_REQUEST["username"]);
 $user["user_password"] = md5(trim ($_REQUEST["password"]));
 $user["user_type"] = intval($_REQUEST["type"]);
-$user["group_id"] = intval($_REQUEST["type"]);
+$user["group_id"] = 2;// intval($_REQUEST["type"]);
 $user['user_email'] = "aladdin@fokus.fraunhofer.de";
 
 $sql = "SELECT COUNT(*) as cnt FROM {$table_prefix}users WHERE username like '" . mysql_escape_string ($user["username"]) . "'";
