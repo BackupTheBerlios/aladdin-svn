@@ -3351,6 +3351,11 @@ import java.net.URL;
 						sql += String.format(op.get(opnum), "patientcarer.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
 						sql += " AND ";
 					}
+                    if (sc[i].getFieldName ().compareToIgnoreCase("patient.id") == 0) {
+                        Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+                        sql += String.format(op.get(opnum), "p.id", sc[i].getFieldValue1(), sc[i].getFieldValue2());
+                        sql += " AND ";
+                    }
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata, p.clinician, p.sd";
 
