@@ -88,7 +88,9 @@ public class CalendarWindowController extends Window {
 			if(questionnaire != null){
 				System.out.println("QUESTIONNAIRE: "+questionnaire.getID());
 			}
-			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, objids, userids, result.getCode());
+			
+			//TODO Retrieve real task text
+			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL,"", questionnaire, objids, userids, result.getCode());
 			OperationResult opres = proxy.assignTask(ts,SystemDictionary.getLocale(),userids);
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){

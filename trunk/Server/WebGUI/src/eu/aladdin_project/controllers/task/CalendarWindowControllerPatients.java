@@ -61,7 +61,8 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 			//OperationResult result = proxy.getUserIdByPersonId(objids, SystemDictionary.USERTYPE_PATIENT_INT, userids);
 			//System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
 			
-			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, questionnaire, objids, userids, objids);
+			//TODO Retrieve real task text
+			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, "", questionnaire, objids, userids, objids);
 			OperationResult opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){

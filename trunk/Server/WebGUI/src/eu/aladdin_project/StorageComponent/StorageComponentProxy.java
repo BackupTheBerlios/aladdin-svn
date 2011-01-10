@@ -386,5 +386,17 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.updateSystemParameter(type, value, locale);
   }
   
+  public eu.aladdin_project.xsd.OperationResult assignTasksMassively(eu.aladdin_project.xsd.Task task, java.util.Date startDate, java.util.Date endDate, java.math.BigInteger frequency, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.assignTasksMassively(task, startDate, endDate, frequency, userId);
+  }
+  
+  public eu.aladdin_project.xsd.OperationResult removeTaskMassively(java.lang.String patientId, java.math.BigInteger typeOfTask, java.util.Date startDate, java.util.Date endDate, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.removeTaskMassively(patientId, typeOfTask, startDate, endDate, userId);
+  }
+  
   
 }

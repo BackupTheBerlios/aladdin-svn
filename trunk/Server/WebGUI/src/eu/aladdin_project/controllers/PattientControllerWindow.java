@@ -93,7 +93,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			listcarers[0]=new PatientCarer(car2set,true);
 			PatientCarerList oflist = new PatientCarerList(listcarers);
 			
-			Patient patient = new Patient("",personData,sdData, resClinic, oflist);
+			//TODO Set new profiles
+			Patient patient = new Patient("",personData,sdData, resClinic, oflist, null, null, null);
 			result = proxy.createPatient(patient, id);
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
@@ -273,7 +274,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			listcarers[0]=new PatientCarer(car2set,true);
 			PatientCarerList oflist = new PatientCarerList(listcarers);
 			
-			Patient patient = new Patient(this.currentid,personData,sdData, resClinic, oflist);
+			//TODO Set new profiles
+			Patient patient = new Patient(this.currentid,personData,sdData, resClinic, oflist, null, null, null);
 			proxy.updatePatient(patient, id);
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);

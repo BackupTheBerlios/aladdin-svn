@@ -14,16 +14,20 @@ public class ExternalService  implements java.io.Serializable {
 
     private java.lang.String address;
 
+    private java.lang.String type;
+
     public ExternalService() {
     }
 
     public ExternalService(
            java.lang.String ID,
            java.lang.String description,
-           java.lang.String address) {
+           java.lang.String address,
+           java.lang.String type) {
            this.ID = ID;
            this.description = description;
            this.address = address;
+           this.type = type;
     }
 
 
@@ -86,6 +90,26 @@ public class ExternalService  implements java.io.Serializable {
         this.address = address;
     }
 
+
+    /**
+     * Gets the type value for this ExternalService.
+     * 
+     * @return type
+     */
+    public java.lang.String getType() {
+        return type;
+    }
+
+
+    /**
+     * Sets the type value for this ExternalService.
+     * 
+     * @param type
+     */
+    public void setType(java.lang.String type) {
+        this.type = type;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof ExternalService)) return false;
@@ -106,7 +130,10 @@ public class ExternalService  implements java.io.Serializable {
               this.description.equals(other.getDescription()))) &&
             ((this.address==null && other.getAddress()==null) || 
              (this.address!=null &&
-              this.address.equals(other.getAddress())));
+              this.address.equals(other.getAddress()))) &&
+            ((this.type==null && other.getType()==null) || 
+             (this.type!=null &&
+              this.type.equals(other.getType())));
         __equalsCalc = null;
         return _equals;
     }
@@ -126,6 +153,9 @@ public class ExternalService  implements java.io.Serializable {
         }
         if (getAddress() != null) {
             _hashCode += getAddress().hashCode();
+        }
+        if (getType() != null) {
+            _hashCode += getType().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -152,6 +182,12 @@ public class ExternalService  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("address");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Address"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("type");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Type"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

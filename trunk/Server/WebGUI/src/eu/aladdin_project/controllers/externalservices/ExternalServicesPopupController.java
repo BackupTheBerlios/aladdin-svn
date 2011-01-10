@@ -20,7 +20,9 @@ public class ExternalServicesPopupController extends Window {
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
-		ExternalService extservice = new ExternalService("",description,uir);
+		
+		//TODO Retrieve real external service type
+		ExternalService extservice = new ExternalService("",description,uir,"");
 		try{
 			proxy.createExternalService(extservice, userid);
 		}catch(RemoteException re){
@@ -37,7 +39,9 @@ public class ExternalServicesPopupController extends Window {
  		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
-		ExternalService extservice = new ExternalService(srvid,description,uir);
+		
+		//TODO Retrieve real external service type
+		ExternalService extservice = new ExternalService(srvid,description,uir,"");
 		try{
 			proxy.updateExternalService(extservice, userid);
 		}catch(RemoteException re){

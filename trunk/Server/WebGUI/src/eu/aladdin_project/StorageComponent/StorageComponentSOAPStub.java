@@ -16,7 +16,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[57];
+        _operations = new org.apache.axis.description.OperationDesc[59];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -810,6 +810,44 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[56] = oper;
 
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("AssignTasksMassively");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "task"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Task"), eu.aladdin_project.xsd.Task.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "startDate"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"), java.util.Date.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "endDate"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"), java.util.Date.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "frequency"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "integer"), java.math.BigInteger.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "OperationResult"));
+        oper.setReturnClass(eu.aladdin_project.xsd.OperationResult.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[57] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("RemoveTaskMassively");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "patientId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "typeOfTask"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "integer"), java.math.BigInteger.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "startDate"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"), java.util.Date.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "endDate"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"), java.util.Date.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "OperationResult"));
+        oper.setReturnClass(eu.aladdin_project.xsd.OperationResult.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[58] = oper;
+
     }
 
     public StorageComponentSOAPStub() throws org.apache.axis.AxisFault {
@@ -918,6 +956,13 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Consulter");
+            cachedSerQNames.add(qName);
+            cls = eu.aladdin_project.xsd.Consulter.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Event");
             cachedSerQNames.add(qName);
             cls = eu.aladdin_project.xsd.Event.class;
@@ -928,6 +973,13 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ExternalService");
             cachedSerQNames.add(qName);
             cls = eu.aladdin_project.xsd.ExternalService.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "GeneralPractitioner");
+            cachedSerQNames.add(qName);
+            cls = eu.aladdin_project.xsd.GeneralPractitioner.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -1068,6 +1120,13 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SearchCriteria");
             cachedSerQNames.add(qName);
             cls = eu.aladdin_project.xsd.SearchCriteria.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SocialWorker");
+            cachedSerQNames.add(qName);
+            cls = eu.aladdin_project.xsd.SocialWorker.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -3094,6 +3153,74 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         setRequestHeaders(_call);
         setAttachments(_call);
  try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(type), value, locale});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.OperationResult) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.OperationResult) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.OperationResult.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public eu.aladdin_project.xsd.OperationResult assignTasksMassively(eu.aladdin_project.xsd.Task task, java.util.Date startDate, java.util.Date endDate, java.math.BigInteger frequency, java.lang.String userId) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[57]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/AssignTasksMassively");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "AssignTasksMassively"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {task, startDate, endDate, frequency, userId});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.OperationResult) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.OperationResult) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.OperationResult.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public eu.aladdin_project.xsd.OperationResult removeTaskMassively(java.lang.String patientId, java.math.BigInteger typeOfTask, java.util.Date startDate, java.util.Date endDate, java.lang.String userId) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[58]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/RemoveTaskMassively");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "RemoveTaskMassively"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {patientId, typeOfTask, startDate, endDate, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

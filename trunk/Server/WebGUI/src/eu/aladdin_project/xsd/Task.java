@@ -20,6 +20,8 @@ public class Task  implements java.io.Serializable {
 
     private java.lang.String URL;
 
+    private java.lang.String text;
+
     private eu.aladdin_project.xsd.Questionnaire questionnaire;
 
     private java.lang.String executorID;
@@ -38,6 +40,7 @@ public class Task  implements java.io.Serializable {
            java.util.Calendar dateTimeFulfilled,
            eu.aladdin_project.xsd.SystemParameter taskStatus,
            java.lang.String URL,
+           java.lang.String text,
            eu.aladdin_project.xsd.Questionnaire questionnaire,
            java.lang.String executorID,
            java.lang.String assignerID,
@@ -48,6 +51,7 @@ public class Task  implements java.io.Serializable {
            this.dateTimeFulfilled = dateTimeFulfilled;
            this.taskStatus = taskStatus;
            this.URL = URL;
+           this.text = text;
            this.questionnaire = questionnaire;
            this.executorID = executorID;
            this.assignerID = assignerID;
@@ -176,6 +180,26 @@ public class Task  implements java.io.Serializable {
 
 
     /**
+     * Gets the text value for this Task.
+     * 
+     * @return text
+     */
+    public java.lang.String getText() {
+        return text;
+    }
+
+
+    /**
+     * Sets the text value for this Task.
+     * 
+     * @param text
+     */
+    public void setText(java.lang.String text) {
+        this.text = text;
+    }
+
+
+    /**
      * Gets the questionnaire value for this Task.
      * 
      * @return questionnaire
@@ -284,6 +308,9 @@ public class Task  implements java.io.Serializable {
             ((this.URL==null && other.getURL()==null) || 
              (this.URL!=null &&
               this.URL.equals(other.getURL()))) &&
+            ((this.text==null && other.getText()==null) || 
+             (this.text!=null &&
+              this.text.equals(other.getText()))) &&
             ((this.questionnaire==null && other.getQuestionnaire()==null) || 
              (this.questionnaire!=null &&
               this.questionnaire.equals(other.getQuestionnaire()))) &&
@@ -324,6 +351,9 @@ public class Task  implements java.io.Serializable {
         }
         if (getURL() != null) {
             _hashCode += getURL().hashCode();
+        }
+        if (getText() != null) {
+            _hashCode += getText().hashCode();
         }
         if (getQuestionnaire() != null) {
             _hashCode += getQuestionnaire().hashCode();
@@ -380,6 +410,13 @@ public class Task  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("URL");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "URL"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("text");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Text"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
