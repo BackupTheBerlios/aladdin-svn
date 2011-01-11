@@ -21,6 +21,12 @@ PatientInfo
 public String toString(){
 	return surname+", "+name;
 }
+
+Patient
+
+public String toString(){
+    	return this.personData.getSurname()+", "+this.personData.getName();
+    }
     
 SystemParameter
 
@@ -28,4 +34,6 @@ public String toString(){
 	return description;
 }
 
-SystemParameter was also modified to set the "description" field to "" instead of null. 
+SystemParameter was also modified to set the "description" field to "" instead of null.
+
+ 

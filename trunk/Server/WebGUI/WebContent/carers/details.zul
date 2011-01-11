@@ -38,54 +38,6 @@
 	</listbox>
 	<button if="${!isadmin }" label="${title }" href="/carers/update.zul?carerid=${objid }"/>
 	<separator height="10px"/>
-	<label id="taskrowslbl" value="${tasks}" visible="false"/>
-	<listbox id="taskrows" visible="false">
-		<listhead>
-		<listheader label="${ids}" sort="auto" width="35px"/>
-			<listheader label="${types}" sort="auto" width="200px"/>
-			<listheader label="${statuss }" sort="auto"/>
-			<listheader label="${personaddr }" sort="auto"/>
-			<listheader label="${assigned }" sort="auto" width="100px"/>
-			<listheader label="${fulfilled }" sort="auto" width="100px"/>
-		</listhead>
-	</listbox>
-	<separator height="10px"/>
-	<?component name="createDialog" macroURI="bookEvent.zul"?>   
-	<createDialog id="createDialog" />
-	<calendars id="cal" mold="month" firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarController">
-		<toolbar id="toolbar">
-			<label id="exechelp" visible="false" value="${objid }"/>
-			<div class="float-left">
-				<hbox>
-					<div sclass="arrow-left"><label value="${prevmonth }" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
-					<div sclass="arrow-right"><label value="${nextmonth }" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
-				<div>
-				<span id="FDOW">
-				<label value="${weekfirstd }:"/>
-				<listbox mold="select" onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());" onCreate="self.setSelectedIndex(0)">
-					<listitem forEach="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" label="${each}" />
-			    </listbox>
-			    </span>
-				</div>
-				</hbox>
-			</div>
-			<div sclass="float-right">
-				<hbox>
-					<label id="label" onCreate="printCalendarDate()"/>
-					<zscript>
-						public void printCalendarDate(){
-							Date b = cal.getBeginDate();
-							Date e = cal.getEndDate();
-							java.text.SimpleDateFormat sdfV = new java.text.SimpleDateFormat("dd/MM/yyyy", org.zkoss.util.Locales.getCurrent());
-							sdfV.setTimeZone(cal.getDefaultTimeZone());
-							label.setValue(sdfV.format(b) + " - " + sdfV.format(e));
-							detailswin.refreshCalendarData();
-						}
-					</zscript>
-				</hbox>
-			</div>
-		</toolbar>
-	</calendars>
 	</window>
 	<zscript>
 		StorageComponentProxy proxy = new StorageComponentProxy();

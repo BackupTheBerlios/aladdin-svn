@@ -151,5 +151,9 @@ public class Clinician  implements java.io.Serializable {
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
+    
+    public String toString(){
+    	return this.personData.getSurname()+", "+this.personData.getName();
+    }
 
 }

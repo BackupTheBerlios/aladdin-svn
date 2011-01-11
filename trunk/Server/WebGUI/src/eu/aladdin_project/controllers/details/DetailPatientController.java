@@ -1,7 +1,17 @@
 package eu.aladdin_project.controllers.details;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.zkoss.calendar.Calendars;
+import org.zkoss.calendar.impl.SimpleCalendarEvent;
+import org.zkoss.calendar.impl.SimpleCalendarModel;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listcell;
@@ -11,16 +21,27 @@ import org.zkoss.zul.Label;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.controllers.details.assessment.AssessmentPopupController;
+import eu.aladdin_project.xsd.Carer;
+import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientAssessment;
 import eu.aladdin_project.xsd.PatientCarer;
+import eu.aladdin_project.xsd.PersonData;
+import eu.aladdin_project.xsd.SocioDemographicData;
+import eu.aladdin_project.xsd.Task;
 
 @SuppressWarnings("serial")
 public class DetailPatientController extends DetailSDController{
 	
 	public AssessmentPopupController assessmentWindow;
+	protected SimpleCalendarModel calmodel = null;
+	protected Calendars calendars = null;
 	
 	public DetailPatientController(){
 		this.usertype = SystemDictionary.USERTYPE_PATIENT_INT;
+	}
+	
+	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
+		super.setControllerData(id, data, sddata, responsible, carers);
 	}
 
 	public Button[] createActionButtons(){
@@ -148,5 +169,76 @@ public class DetailPatientController extends DetailSDController{
 		}
 		
 		return ret;
+	}
+	
+	public void refreshCalendarData(){
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		Session ses = Sessions.getCurrent();
+		String userid = (String)ses.getAttribute("userid");
+		if(this.calendars == null){
+			this.calendars = (Calendars)this.getFellow("cal");
+		}
+		Calendar calfrom = new GregorianCalendar();
+		calfrom.setTime(this.calendars.getBeginDate());
+		Calendar calto = new GregorianCalendar();
+		calto.setTime(this.calendars.getEndDate());
+		try{
+			Carer carer = this.currentcarers[0].getCarer();
+			OperationResult currentor = proxy.getUserIdByPersonId(carer.getID(), SystemDictionary.USERTYPE_CARER_INT, userid);
+			System.out.println("USER TASKS: "+currentor.getCode());
+			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto,SystemDictionary.getLocale() ,userid);
+			this.calmodel = new SimpleCalendarModel();
+			if(tasklist != null){
+				System.out.println("TASKS LENGHT: "+tasklist.length);
+				
+					for(int i = 0; i<tasklist.length; i++){
+						GregorianCalendar calendar1 = new GregorianCalendar();
+						calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
+						
+						GregorianCalendar calendar2 = new GregorianCalendar();
+						calendar2.setTimeInMillis(tasklist[i].getDateTimeFulfilled().getTimeInMillis());
+						
+						SimpleCalendarEvent clevent = new SimpleCalendarEvent();
+						clevent.setBeginDate(calendar1.getTime());
+						clevent.setContent("");
+						clevent.setEndDate(new Date(calendar1.getTime().getTime()+3600000));
+						clevent.setLocked(true);
+						clevent.setTitle(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+						clevent.setContent(SystemDictionary.getTaskTypeLabel(tasklist[i].getTaskType().getCode()));
+						switch(Integer.parseInt(tasklist[i].getTaskStatus().getCode())){
+						case SystemDictionary.TASK_STATUS_CANCELLED_INT:
+							clevent.setHeaderColor("red");
+							clevent.setContentColor("red");
+							break;
+						case SystemDictionary.TASK_STATUS_COMPLETED_INT:
+							clevent.setHeaderColor("blue");
+							clevent.setContentColor("blue");
+							break;
+						case SystemDictionary.TASK_STATUS_PENDING_INT:
+							clevent.setHeaderColor("black");
+							clevent.setContentColor("black");
+							break;
+						default:
+							clevent.setHeaderColor("yellow");
+							clevent.setContentColor("yellow");
+							break;
+						}
+						Map<String, String> params = new HashMap<String,String>();
+						params.put("user", userid);
+						params.put("objid", tasklist[i].getObjectID());
+						params.put("exec", tasklist[i].getExecutorID());
+						params.put("assign", tasklist[i].getAssignerID());
+						params.put("task", tasklist[i].getID());
+						params.put("status", tasklist[i].getTaskStatus().getCode());
+						clevent.setParams(params);
+						this.calmodel.add(clevent);
+					}
+				}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			Calendars calendar = (Calendars)getFellow("cal");
+			calendar.setModel(this.calmodel);
+		}
 	}
 }

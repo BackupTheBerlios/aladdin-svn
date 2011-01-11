@@ -44,14 +44,28 @@
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailPatientController">
-	<label value="${data }"/>
-	<listbox id="datarows">
+	<label value="${data }"/> <a id="showa" visible="true" onClick="showAnchor()">show</a> <a id="hidea" visible="false" onClick="hideAnchor()">hide</a>
+	<zscript>
+		public void showAnchor(){
+			showa.setVisible(false);
+			hidea.setVisible(true);
+			updatebuttonpat.setVisible(true);
+			datarows.setVisible(true);
+		}
+		public void hideAnchor(){
+			showa.setVisible(true);
+			hidea.setVisible(false);
+			updatebuttonpat.setVisible(false);
+			datarows.setVisible(false);
+		}
+	</zscript>
+	<listbox id="datarows" visible="false">
 		<listhead>
 			<listheader width="200px"/>
 			<listheader/>
 		</listhead>
 	</listbox>
-	<button if="${!isadmin }" label="${title }" href="/patients/update.zul?patid=${objid }"/>
+	<button id="updatebuttonpat" if="${!isadmin }" label="${title }" href="/patients/update.zul?patid=${objid }" visible="false"/>
 	<separator height="10px"/>
 	<label id="taskrowslbl" value="${tasks }" visible="false"/>
 	<listbox id="taskrows" visible="false">
@@ -67,13 +81,13 @@
 	<separator height="10px"/>
 	<?component name="createDialog" macroURI="bookEvent.zul"?>
 	<createDialog id="createDialog" />
-	<calendars id="cal" mold="month" firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarControllerPatients">
+	<calendars id="cal" mold="month"  firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarControllerPatients">
 		<toolbar id="toolbar">
 			<label id="exechelp" visible="false" value="${objid }"/>
 			<div class="float-left">
 				<hbox>
-					<div sclass="arrow-left"><label value="${prevmonth }" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
-					<div sclass="arrow-right"><label value="${nextmonth }" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
+					<div sclass="arrow-left"><label value="${nextmonth }" sclass="link" onClick="cal.previousPage();printCalendarDate();"/></div>
+					<div sclass="arrow-right"><label value="${prevmonth }" sclass="link" onClick="cal.nextPage();printCalendarDate();"/></div>
 				<div>
 				<span id="FDOW">
 				<label value="${weekfirstd }:"/>

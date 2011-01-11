@@ -40,7 +40,7 @@
 	<button label="+ ${newprof}" href="/carers/form.zul" sclass="newitem" />
 	<grid>
 		<columns>
-			<column label="${idstr }" width="35px" sort="auto"/>
+			<!-- <column label="${idstr }" width="35px" sort="auto"/> -->
 			<column label="${surnlbl }" sort="auto"/>
 			<column label="${namelbl }" sort="auto"/>
 			<column width="80px" align="center" />
@@ -61,7 +61,7 @@
 				}
 			</zscript>
 			<row forEach="${plist }" id="${each.ID }">
-				<label value="${each.ID }"/>
+				<!-- <label value="${each.ID }"/> -->
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
 				<label value="${details }" sclass="link" onClick="carers.detailsCarer(self.getParent().getId())"/>

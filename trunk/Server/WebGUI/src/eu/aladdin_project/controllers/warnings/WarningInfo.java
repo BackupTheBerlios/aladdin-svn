@@ -1,7 +1,16 @@
 package eu.aladdin_project.controllers.warnings;
 
+import java.rmi.RemoteException;
 import java.util.Calendar;
+
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
+
 import eu.aladdin_project.SystemDictionary;
+import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.xsd.Patient;
+import eu.aladdin_project.xsd.PatientInfo;
+import eu.aladdin_project.xsd.SearchCriteria;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Warning;
 
@@ -15,6 +24,7 @@ public class WarningInfo {
 	private String justification = "";
 	private String emergencyLevel = "";
 	private String patientID = "";
+	private String patientName = "";
 	private String delivered = "";
 	
 	
@@ -31,7 +41,7 @@ public class WarningInfo {
 		this.delivered = delivered;
 	}
 	
-	public WarningInfo(Warning input){
+	public WarningInfo(Warning input, String userId){
 		SystemParameter aux1 = input.getTypeOfWarning();
 		SystemParameter aux2 = input.getEffect();
 		SystemParameter aux3 = input.getIndicator();
@@ -45,10 +55,32 @@ public class WarningInfo {
 		this.effect = aux2 == null ? "not set" : SystemDictionary.getWarningEffectLabel(aux2.getCode());
 		this.indicator = aux3 == null ? "not set" : SystemDictionary.getWarningIndicatorLabel(aux3.getCode());
 		this.riskLevel = aux4==null ? "not set" : SystemDictionary.getWarningRiskLevel(aux4.getCode());
-		this.justification = input.getJustificationText();
+		this.justification = input.getJustificationText() == null ? "" : input.getJustificationText();
 		this.emergencyLevel = aux5 == null? "not set" : SystemDictionary.getWarningEmergencyLevelLabel(aux5.getCode());
 		this.patientID = input.getPatientID();
 		this.delivered = new Boolean(input.isDelivered()).toString();
+		String id="";
+		if(userId == null){
+			Session ses = Sessions.getCurrent();
+			id = (String)ses.getAttribute("userid");
+		}else{
+			id = userId;
+		}
+		try{
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			SearchCriteria filter = new SearchCriteria();
+            filter.setFieldName("patient.id");
+            filter.setFieldValue1(this.patientID);
+            SystemParameter compare = new SystemParameter();
+            compare.setCode("3");
+            filter.setCompareOp(compare);
+            
+            PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
+			System.out.println("NAME: "+pat[0].toString());
+			this.patientName = pat[0].toString();
+		}catch(RemoteException re){
+			this.patientName="Error retrieving name";
+		}
 		
 	}
 	
@@ -111,6 +143,14 @@ public class WarningInfo {
 	}
 	public void setDelivered(String delivered) {
 		this.delivered = delivered;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
 	}
 	
 }

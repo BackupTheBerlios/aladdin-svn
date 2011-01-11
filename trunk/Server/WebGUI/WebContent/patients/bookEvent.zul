@@ -109,15 +109,24 @@
 				</row>
 				<row>
 					<label value="${texecut }"/>
-					<textbox id="objid" readonly="true" width="35px"/>
+					<hbox>
+						<textbox id="objid" readonly="true" visible="false"/>
+						<textbox id="objstr" readonly="true"/>
+					</hbox>
 				</row>
-				<row>
+				<row id="assignerrow">
 					<label value="${tassigner }"/>
-					<textbox id="userid" readonly="true" width="35px"/>
+					<hbox>
+						<textbox id="userid" readonly="true" visible="false"/>
+						<textbox id="userstr" readonly="true"/>
+					</hbox>
 				</row>
 				<row id="objectrow">
 					<label value="${tobject }"/>
-					<textbox id="addressedid" readonly="true" width="35px"/>
+					<hbox>
+						<textbox id="addressedid" readonly="true" visible="false"/>
+						<textbox id="addressedstr" readonly="true"/>	
+					</hbox>
 				</row>
 				<row>
 					<label id="usertype" value="${usertype }" visible="false"/>

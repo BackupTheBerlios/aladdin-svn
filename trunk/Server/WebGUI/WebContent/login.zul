@@ -38,14 +38,14 @@
  					if(restype.getCode().equals(SystemDictionary.USERTYPE_ADMIN)){
 						System.out.println("Welcome Administrator");
 						usertype = SystemDictionary.USERTYPE_ADMIN;
-						Administrator admin = proxy.getAdministrator(result.getCode(),result.getCode());
+					//	Administrator admin = proxy.getAdministrator(result.getCode(),result.getCode());
 					//	username = admin.getPersonData().getName();
 					//	usersname = admin.getPersonData().getSurname();
 						
  					}else if(restype.getCode().equals(SystemDictionary.USERTYPE_CLINICIAN)){
  						System.out.println("Welcome Clinician");
  						usertype = SystemDictionary.USERTYPE_CLINICIAN;
- 						Clinician clinic = proxy.getClinician(result.getCode(),result.getCode());
+ 					//	Clinician clinic = proxy.getClinician(result.getCode(),result.getCode());
  					//	System.out.println("Welcome Clinician "+restype.getDescription());
  					//	username = clinic.getPersonData().getName();
 					//	usersname = clinic.getPersonData().getSurname();
@@ -98,10 +98,10 @@
 	<vbox>
 		<hbox>
 			<label value="${lguser}:" sclass="logintext"/>
-			<textbox id="login_user" value="Admin" width="120px"/>
+			<textbox id="login_user" value="Merkel" width="120px"/>
 			<separator orient="horizontal" width="10px"/>
 			<label value="${lgpwd}:" sclass="logintext"/>
-			<textbox id="login_password" type="password" value="Admin" width="120px"/>
+			<textbox id="login_password" type="password" value="Merkel" width="120px"/>
 		</hbox>
 		<separator height="5px"/>
 		<button label="${lgbtn}" width="100%" sclass="logintext" onClick="authenticate(login_user.getValue(),login_password.getValue())"/>

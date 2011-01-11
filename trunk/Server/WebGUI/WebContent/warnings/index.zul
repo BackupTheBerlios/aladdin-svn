@@ -34,7 +34,7 @@
 			plist = new WarningInfo[olist.length];
 			System.out.println("Warning list: "+olist.length);
 			for(int i = 0; olist.length > i ; i++){
-				plist[i]=new WarningInfo(olist[i]); 
+				plist[i]=new WarningInfo(olist[i],id); 
 			}
 			System.out.println("Warning list: "+plist.length);
 		}catch(java.rmi.RemoteException re){
@@ -49,28 +49,28 @@
 	<label value="${titlelbl }" sclass="newitem"/>
 	<grid>
 		<columns>
-			<column label="${idlbl }" width="35px" sort="auto"/>
-			<column label="${typelbl }"/>
-			<column label="${datelbl }" sort="auto"/>
-			<column label="${efectlbl }" sort="auto"/>
+			<!-- <column label="${idlbl }" width="35px" sort="auto"/> -->
+			<column label="${typelbl }" width="80px"/>
+			<column label="${datelbl }" sort="auto" width="120px"/>
+			<!-- <column label="${efectlbl }" sort="auto"/>
 			<column label="${indclbl }" sort="auto"/>
 			<column label="${risklbl }" sort="auto"/>
-			<column label="${emerglbl }" sort="auto"/>
+			<column label="${emerglbl }" sort="auto"/> -->
 			<column label="${patidlbl }" sort="auto"/>
-			<column label="${delivlbl }" sort="auto"/>
+			<column label="Justification"/>
 			<column width="80px" align="center" />
 		</columns>
 		<rows>
 			<row forEach="${plist }" id="${each.ID }">
-				<label value="${each.ID }"/>
+				<!-- <label value="${each.ID }"/> -->
 				<label value="${each.type}" />
 				<label id="date${each.ID }" value="${each.date }"/>
-				<label value="${each.effect }"/>
+				<!-- <label value="${each.effect }"/>
 				<label value="${each.indicator }"/>
 				<label value="${each.riskLevel }"/>
-				<label value="${each.emergencyLevel }"/>
-				<label value="${each.patientID }"/>
-				<label value="${each.delivered }"/>
+				<label value="${each.emergencyLevel }"/> -->
+				<label value="${each.patientName }"/>
+				<label value="${each.justification }"/>
 				<label value="Details" onClick="warningswin.readWarning(self.getParent().getId())" sclass="link"/>
 			</row>
 		</rows>

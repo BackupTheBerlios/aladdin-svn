@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
@@ -15,11 +18,30 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Questionnaire;
-import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Task;
 
-public class CalendarWindowControllerPatients extends CalendarWindowController {
+@SuppressWarnings("serial")
+public class CalendarWindowControllerPatients extends Window {
+	
+	public void changeTaskType(){
+		Listbox listbox = (Listbox)getFellow("tasktypesel");
+		Listitem listitem = listbox.getSelectedItem();
+		int comp = ((Integer)listitem.getValue()).intValue(); 
+		if(comp == SystemDictionary.TASK_TYPE_COGGAME_INT){
+			getFellow("urlrow").setVisible(true);
+			getFellow("qsrow").setVisible(false);
+			System.out.println("IEEE");
+		}else if(comp == SystemDictionary.TASK_TYPE_CARERQS_INT || comp == SystemDictionary.TASK_TYPE_PATIENTQS_INT){
+			getFellow("urlrow").setVisible(false);
+			getFellow("qsrow").setVisible(true);
+			System.out.println("EEEI");
+		}else{
+			getFellow("urlrow").setVisible(false);
+			getFellow("qsrow").setVisible(false);
+			System.out.println("IEEI");
+		}
+	}
 
 	public void saveTask(){
 		String URL = "";
@@ -69,6 +91,21 @@ public class CalendarWindowControllerPatients extends CalendarWindowController {
 			re.printStackTrace();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			Executions.getCurrent().sendRedirect("");
+		}
+	}
+	
+	public void cancelTask(){
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		try{
+			String task = ((Textbox)getFellow("taskidfield")).getValue();
+			Session ses = Sessions.getCurrent();
+			String uid = (String)ses.getAttribute("userid");
+			proxy.changeTaskStatus(Integer.parseInt(task),SystemDictionary.TASK_STATUS_CANCELLED_INT, uid);
+			 
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();	
 		}finally{
 			Executions.getCurrent().sendRedirect("");
 		}
