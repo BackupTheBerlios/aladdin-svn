@@ -55,9 +55,10 @@ public class QuestionWindow extends Window{
 		this.getFellow("freeanswrow").setVisible(false);
 	}
 	
-	public QuestionWindow(QuestionnaireFormWindow pform, QuestionnaireQuestion question){
+	public QuestionWindow(QuestionnaireFormWindow pform, QuestionnaireQuestion question, String parent){
 		this.pform = pform;
 		this.ID = question.getId();
+		this.parent = parent;
 		this.type = question.getType();
 		
 		QuestionnaireQuestionAnswer[] qans = question.getAnswers().getAnswer();

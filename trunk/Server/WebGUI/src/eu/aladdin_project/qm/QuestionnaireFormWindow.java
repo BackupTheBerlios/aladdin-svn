@@ -282,7 +282,7 @@ public class QuestionnaireFormWindow extends Window{
 		System.out.println("Adding4... Please wait");
 		
 		Label lab5 = new Label();
-		if(parent.equals("0")){	lab5.setValue("root");	}else{	lab5.setValue(parent);	}
+		if(parent == null || parent.equals("0")){	lab5.setValue("root");	}else{	lab5.setValue(parent);	}
 		
 		row.appendChild(lab1);
 		row.appendChild(lab2);
@@ -373,10 +373,10 @@ public class QuestionnaireFormWindow extends Window{
 		String id = comp.getId().substring(0, comp.getId().length()-8);
 		for(int i=0; i<this.questionlist.size(); i++){
 			if(this.questionlist.get(i).getId().equals(id)){
-				Window win = new QuestionWindow(this, this.questionlist.get(i).getQuestion());
-				if(!this.questionlist.get(i).getParent().equals("0")){
-					win.getFellow("question_condrow").setVisible(true);
-				}
+				Window win = new QuestionWindow(this, this.questionlist.get(i).getQuestion(), this.questionlist.get(i).getParent());
+					if(!this.questionlist.get(i).getParent().equals("0")){
+						win.getFellow("question_condrow").setVisible(true);
+					}
 				this.appendChild(win);
 				win.doModal();
 			}
