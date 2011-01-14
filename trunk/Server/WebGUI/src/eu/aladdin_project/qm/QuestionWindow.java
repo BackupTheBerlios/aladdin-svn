@@ -170,6 +170,7 @@ public class QuestionWindow extends Window{
 	private void removeAnswer(String text){
 		for(int i=0;i<this.answers.size(); i++){
 			QuestionnaireQuestionAnswer elem = this.answers.get(i);
+			System.out.println("TEXT: "+text+" VS. ANSWER VAL: "+elem.get_value());
 			if(elem.get_value().equals(text)){
 				this.answers.remove(i);
 				break;
@@ -399,7 +400,7 @@ public class QuestionWindow extends Window{
 		
 		public RemoveAnswerListener(Component compR, String textR){
 			comp = compR;
-			textR = text;
+			text = textR;
 		}
 
 		public void onEvent(Event arg0) throws Exception {
