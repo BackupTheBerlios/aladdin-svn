@@ -421,4 +421,11 @@ public class SystemDictionary {
 	public static final String QUESTION_TYPE_ONE_ANSWER = "OneAnswer";
 	public static final String QUESTION_TYPE_MANY_ANSWERS = "ManyAnswers";
 	public static final String QUESTION_TYPE_FREE_TEXT = "FreeText";
+	
+	public static final String COMPARE_LESS = "1";
+	public static final String COMPARE_GREAT = "2";
+	public static final String COMPARE_EQ = "3";
+	public static final String COMPARE_NOTEQ = "4";
+	public static final String COMPARE_LIKE = "5";
+	public static final String COMPARE_BETWEEN = "7";
 }

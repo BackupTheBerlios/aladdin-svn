@@ -24,7 +24,7 @@
 			window.setTitle(title);
 			window.setId("patientform");
 			window.setSclass("centerwin");
-			window.setWidth("80%");
+			window.setWidth("800px");
 			window.doEmbedded();
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.details;
 
+import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -22,6 +23,7 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.controllers.details.assessment.AssessmentPopupController;
 import eu.aladdin_project.xsd.Carer;
+import eu.aladdin_project.xsd.Clinician;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientAssessment;
 import eu.aladdin_project.xsd.PatientCarer;
@@ -72,12 +74,11 @@ public class DetailPatientController extends DetailSDController{
 		ret[1]=this.getSDItem();
 		ret[2]=this.getCurrentResponsibleListItem();
 		
-		for(int i = 0; i<rows.length-1; i++){
-			ret[i+3]=rows[i+1];
+		for(int i = 0 ; i < carerrows.length ; i++){
+			ret[i+3]=carerrows[i];
 		}
-		
-		for(int ii = 0; ii < carerrows.length; ii++ ){
-			ret[rows.length+2+ii]=carerrows[ii];
+		for( int ii = 1 ; ii < rows.length ; ii++){
+			ret[carerrows.length+2+ii]=rows[ii];
 		}
 		
 		return ret;
@@ -140,32 +141,31 @@ public class DetailPatientController extends DetailSDController{
 		Listitem lst = new Listitem();
 		String text = Labels.getLabel("patients.form.responsible");
 		Listcell cell1 = new Listcell(text);
-		Listcell cell2 = new Listcell(this.currentresponsible);
-		
-		lst.appendChild(cell1);
-		lst.appendChild(cell2);
-		
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		String id = (String)Sessions.getCurrent().getAttribute("userid");
+		try{
+			Clinician clinician = proxy.getClinician(this.currentresponsible, id);
+			Listcell cell2 = new Listcell(clinician.toString());
+			
+			lst.appendChild(cell1);
+			lst.appendChild(cell2);
+		}catch(RemoteException re){
+			
+		}
 		return lst;
-		
 	}
 	
 	protected Listitem[] getCarerListAsListItems(){
-		Listitem[] ret = new Listitem[this.currentcarers.length+1];
-		Listitem title = new Listitem();
-		String text = Labels.getLabel("menu.carers");
-		Listcell cell1 = new Listcell(text);
-		cell1.setSpan(2);
-		title.appendChild(cell1);
-		ret[0]=title;
-		
+		Listitem[] ret = new Listitem[this.currentcarers.length];
+		String text = "Carer";
 		for(int i = 0; i<this.currentcarers.length; i++){
 			PatientCarer carer = this.currentcarers[i];
 			Listitem careritem = new Listitem();
-			Listcell empty = new Listcell("");
+			Listcell empty = i==0 ? new Listcell(text) : new Listcell("");;
 			Listcell carername = new Listcell(carer.getCarer().getPersonData().getSurname()+", "+carer.getCarer().getPersonData().getName());
 			careritem.appendChild(empty);
 			careritem.appendChild(carername);
-			ret[i+1]=careritem;
+			ret[i]=careritem;
 		}
 		
 		return ret;

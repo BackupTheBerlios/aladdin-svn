@@ -48,14 +48,16 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 			SystemParameter gender = new SystemParameter(code, value);
 
 		Listbox maritallist = (Listbox)getFellow("pat_marital");
-			Listitem maritalitem = maritallist.getItemAtIndex(maritallist.getSelectedIndex());
+			//Listitem maritalitem = maritallist.getItemAtIndex(maritallist.getSelectedIndex());
+			Listitem maritalitem = maritallist.getSelectedItem();
 			String mcode = maritalitem.getValue().toString();
 			String mvalue = maritalitem.getLabel();
 			//Creating marital status object to save
 			SystemParameter marital = new SystemParameter(mcode, mvalue);
 
 		Listbox livinglist = (Listbox)getFellow("pat_living");
-			Listitem livingitem = livinglist.getItemAtIndex(livinglist.getSelectedIndex());
+			//Listitem livingitem = livinglist.getItemAtIndex(livinglist.getSelectedIndex());
+			Listitem livingitem = livinglist.getSelectedItem();
 			String lcode = livingitem.getValue().toString();
 			String lvalue = livingitem.getLabel();
 			//Creating living object to save
@@ -119,7 +121,6 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		this.appendRadioElement(genderlist, rows, gender, "pat_gender");
 		this.appendListboxElement(maritallist, rows, marital, "pat_marital");
 		this.appendListboxElement(livinglist, rows, living, "pat_living");
-		
 		
 		pgrid.appendChild(rows);
 		this.appendChild(pgrid);

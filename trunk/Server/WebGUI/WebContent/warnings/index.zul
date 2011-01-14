@@ -5,12 +5,7 @@
 	<include src="/inc/header.zul"/>
 	<zscript>
 		import org.zkoss.util.resource.Labels;
-		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
-		import eu.aladdin_project.xsd.Warning;
-		import eu.aladdin_project.xsd.SearchCriteria;
-		import eu.aladdin_project.xsd.SystemParameter;
 		import eu.aladdin_project.SystemDictionary;
-		import eu.aladdin_project.controllers.warnings.WarningInfo;
 		
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
@@ -24,22 +19,6 @@
 		String patidlbl = Labels.getLabel("cwarn.patientid");
 		String delivlbl = Labels.getLabel("cwarn.deliver");
 		String titlelbl = Labels.getLabel("menu.warnings");
-
-		StorageComponentProxy proxy = new StorageComponentProxy();
-		Session ses = Sessions.getCurrent();
-		String id = (String)ses.getAttribute("userid");
-		WarningInfo[] plist = null;
-		try{
-			Warning[] olist = proxy.getWarnings(new SearchCriteria[0], id);
-			plist = new WarningInfo[olist.length];
-			System.out.println("Warning list: "+olist.length);
-			for(int i = 0; olist.length > i ; i++){
-				plist[i]=new WarningInfo(olist[i],id); 
-			}
-			System.out.println("Warning list: "+plist.length);
-		}catch(java.rmi.RemoteException re){
-			re.printStackTrace();
-		}
 		
 	</zscript>
 	<window border="none" width="800px" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
@@ -47,7 +26,23 @@
 	<warningModal id="warningModal" />
 	<vbox>
 	<label value="${titlelbl }" sclass="newitem"/>
-	<grid>
+	<hbox>
+		<label value="Show only unread"/>
+		<checkbox id="readall" onCheck="warningswin.refreshWarnings()"/>
+		<label value="Only patient"/>
+		<textbox id="filterpatient" visible="false" readonly="true"/>
+		<textbox id="filterpatienttrigger" readonly="true" onClick="warningswin.createPatientsDialog()"/>
+		<button label="Show for all patients" onClick="warningswin.showForAllPatients()"/>
+	</hbox>
+	<hbox>
+		<label value="From"/>
+		<datebox id="datefromfilter" format="dd/MM/yyyy" onClick="self.open()" readonly="true"/>
+		<label value="to"/>
+		<datebox id="datetofilter" format="dd/MM/yyyy" onClick="self.open()" readonly="true"/>
+		<button label="Apply date filter" onClick="warningswin.refreshWarnings()"/>
+		<button label="Clear date filters" onClick="warningswin.clearDateFilters()"/>
+	</hbox>
+	<grid id="warningsgrid">
 		<columns>
 			<!-- <column label="${idlbl }" width="35px" sort="auto"/> -->
 			<column label="${typelbl }" width="80px"/>
@@ -60,22 +55,13 @@
 			<column label="Justification"/>
 			<column width="80px" align="center" />
 		</columns>
-		<rows>
-			<row forEach="${plist }" id="${each.ID }">
-				<!-- <label value="${each.ID }"/> -->
-				<label value="${each.type}" />
-				<label id="date${each.ID }" value="${each.date }"/>
-				<!-- <label value="${each.effect }"/>
-				<label value="${each.indicator }"/>
-				<label value="${each.riskLevel }"/>
-				<label value="${each.emergencyLevel }"/> -->
-				<label value="${each.patientName }"/>
-				<label value="${each.justification }"/>
-				<label value="Details" onClick="warningswin.readWarning(self.getParent().getId())" sclass="link"/>
-			</row>
+		<rows id="filteredrows">
 		</rows>
 	</grid>
 	</vbox>
 	</window>
+	<zscript>
+		warningswin.refreshWarnings();
+	</zscript>
 	<include src="/inc/footer.zul"/>
 </zk>

@@ -552,6 +552,7 @@ public class AladdinFormControllerWindow extends Window{
 			rad.setValue(elem.getId());
 			rgroup.appendChild(rad);
 		}
+		rgroup.setSelectedIndex(0);
 		rowe.appendChild(rgroup);
 		rows.appendChild(rowe);
 	}
@@ -574,6 +575,7 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 			li.setValue(elem.getId());
 			lbox.appendChild(li);
 		}
+		lbox.setSelectedIndex(0);
 		rowe.appendChild(lbox);
 		rows.appendChild(rowe);
 	}

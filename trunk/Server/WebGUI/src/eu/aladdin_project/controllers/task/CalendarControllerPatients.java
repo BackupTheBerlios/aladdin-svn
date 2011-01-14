@@ -84,7 +84,6 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		((Timebox)bookEventWin.getFellow("timetask")).setReadonly(true);
 		((Timebox)bookEventWin.getFellow("timetask")).setButtonVisible(false);
 		((Textbox)bookEventWin.getFellow("taskidfield")).setValue(scevent.getParams().get("task"));
-		((Row)bookEventWin.getFellow("rowtaskid")).setVisible(true);
 		((Textbox)bookEventWin.getFellow("taskstatusfield")).setValue(SystemDictionary.getTaskStatusLabel(scevent.getParams().get("status")));
 		((Row)bookEventWin.getFellow("rowtaskstatus")).setVisible(true);
 		User addressed = proxy.getUser(scevent.getParams().get("objid"));

@@ -20,12 +20,17 @@ import org.zkoss.zul.Textbox;
 
 import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.controllers.AladdinFormControllerWindow.SimpleFieldData;
 import eu.aladdin_project.xsd.Carer;
+import eu.aladdin_project.xsd.Clinician;
+import eu.aladdin_project.xsd.Consulter;
+import eu.aladdin_project.xsd.GeneralPractitioner;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PatientCarerList;
 import eu.aladdin_project.xsd.PersonData;
+import eu.aladdin_project.xsd.SocialWorker;
 import eu.aladdin_project.xsd.SocioDemographicData;
 
 public class PattientControllerWindow extends SDFormControllerWindow{
@@ -33,6 +38,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	private static final long serialVersionUID = 3014122995824061686L;
 	private CarerListWindowController clist = null;
 	private String currentresp = null;
+	private SocialWorker currentsocialworker = null;
+	private Consulter currentconsulter = null;
+	private GeneralPractitioner currentgeneralpracticioner = null;
 	private PatientCarer[] currentcarers = null;
 	
 	/**
@@ -46,6 +54,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.currentdata = current.getPersonData();
 		this.currentsd = current.getSD_Data();
 		this.currentresp = current.getResponsibleClinicianID();
+		this.currentsocialworker = current.getSocialWorker();
+		this.currentconsulter = current.getConsulterInCharge();
+		this.currentgeneralpracticioner = current.getGeneralPractitioner();
 		this.currentcarers = current.getPatientCarerList().getPatientCarer();
 		
 		this.addPersonFieldsValues();
@@ -54,6 +65,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.addSocioDemographicDataFieldsValue();
 		this.addResponsibleClinicianFieldValues();
 		this.addCarerFieldValues();
+		this.addSocialWorkerConsulterAndGPFieldsValues();
 		this.appendChild(this.createUpdateButton());
 	}
 	
@@ -64,9 +76,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.addResponsibleClinicianField();
 		this.addPersonFields();
 		this.addAddressFields();
-		this.addCarerField();
 		this.addCommunicationFields();
 		this.addSocioDemographicDataFields();
+		this.addCarerField();
+		this.addSocialWorkerConsulterAndGPFields();
 	}
 	
 	/**
@@ -74,7 +87,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 * 
 	 * @return void but saves a new Patient on the server
 	 */
-	public void createPatient(){
+	public void sendPatient(boolean newpatient){
 		OperationResult result = null;
 		String resClinic = ((Textbox)getFellow("pat_respo")).getValue();
 		String carerId = ((Textbox)getFellow("pat_carid")).getValue();
@@ -82,7 +95,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		//Getting information from form fields
 		SocioDemographicData sdData = this.getSocioDemographicData();
 		PersonData personData = this.getPersonData();
-		
+		SocialWorker socialw = this.getSocialWorkerData();
+		Consulter consulter = this.getConsulterData();
+		GeneralPractitioner gralprac = this.getGeneralPracticionerData();
 		try{
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			Session ses = Sessions.getCurrent();
@@ -92,10 +107,13 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			PatientCarer[] listcarers = new PatientCarer[1];
 			listcarers[0]=new PatientCarer(car2set,true);
 			PatientCarerList oflist = new PatientCarerList(listcarers);
-			
-			//TODO Set new profiles
-			Patient patient = new Patient("",personData,sdData, resClinic, oflist, null, null, null);
-			result = proxy.createPatient(patient, id);
+			Patient patient = new Patient("",personData,sdData, resClinic, oflist, socialw, consulter, gralprac);
+			if(newpatient){
+				result = proxy.createPatient(patient, id);
+			}else{
+				patient.setID(this.currentid);
+				result = proxy.updatePatient(patient, id);
+			}
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
 			re.printStackTrace();
@@ -196,7 +214,15 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	}
 	
 	protected void addResponsibleClinicianFieldValues(){
-		((Textbox)getFellow("pat_respo")).setValue(this.currentresp);
+		String id = (String)Sessions.getCurrent().getAttribute("userid");
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		try{
+			Clinician clinician = proxy.getClinician(this.currentresp, id);
+			((Textbox)getFellow("pat_respo")).setValue(this.currentresp);
+			((Textbox)getFellow("pat_respo_lbl")).setValue(clinician.toString());
+		}catch(RemoteException re){
+			((Textbox)getFellow("pat_respo_lbl")).setValue("Not available");
+		}
 	}
 	
 	/**
@@ -254,37 +280,83 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		((Textbox)getFellow("pat_carname")).setValue(this.currentcarers[0].getCarer().getPersonData().getName()+", "+this.currentcarers[0].getCarer().getPersonData().getSurname());
 	}
 	
-	public void updatePatient(){
-		//Getting information from form fields
-		PersonData personData = this.getPersonData();
-		SocioDemographicData sdData = this.getSocioDemographicData();
-		String resClinic = ((Textbox)getFellow("pat_respo")).getValue();
-		String carerId = ((Textbox)getFellow("pat_carid")).getValue();
-		
-		//TODO isPrimary control on Communication and Addresses
-		
-		
-		try{
-			StorageComponentProxy proxy = new StorageComponentProxy();
-			Session ses = Sessions.getCurrent();
-			String id = (String)ses.getAttribute("userid");
-			Carer car2set = proxy.getCarer(carerId, id);
+	protected void addSocialWorkerConsulterAndGPFields(){
+		Grid pgrid1 = new Grid();
+		Grid pgrid2 = new Grid();
+		Grid pgrid3 = new Grid();
+		pgrid1.setSclass("grid");
+		pgrid2.setSclass("grid");
+		pgrid3.setSclass("grid");
+		this.appendColumns(pgrid1);
+		this.appendColumns(pgrid2);
+		this.appendColumns(pgrid3);
 			
-			PatientCarer[] listcarers = new PatientCarer[1];
-			listcarers[0]=new PatientCarer(car2set,true);
-			PatientCarerList oflist = new PatientCarerList(listcarers);
-			
-			//TODO Set new profiles
-			Patient patient = new Patient(this.currentid,personData,sdData, resClinic, oflist, null, null, null);
-			proxy.updatePatient(patient, id);
-		}catch (RemoteException re) {
-			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
-		}catch (Exception e){
-			//TODO Set message to "Unknow error creating carer"
-			e.printStackTrace();
-		}finally{
-			//TODO Show message on the following page.
-		}
+		Rows rows1 = new Rows();
+		Rows rows2 = new Rows();
+		Rows rows3 = new Rows();
+
+		this.appendSubFormTitleRow("Social Workrer Info", rows1);
+		this.appendSubFormTitleRow("Consulter Info", rows2);
+		this.appendSubFormTitleRow("General Practicioner Info", rows3);
+		
+		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
+		rowsA.add(new SimpleFieldData("Name", "pat_swname"));
+		rowsA.add(new SimpleFieldData("E-mail", "pat_swmail"));
+		rowsA.add(new SimpleFieldData("Phone", "pat_swphone"));
+		
+		ArrayList<SimpleFieldData> rowsB = new ArrayList<SimpleFieldData>();
+		rowsB.add(new SimpleFieldData("Name", "pat_consname"));
+		rowsB.add(new SimpleFieldData("E-mail", "pat_consmail"));
+		rowsB.add(new SimpleFieldData("Phone", "pat_consphone"));
+		
+		ArrayList<SimpleFieldData> rowsC = new ArrayList<SimpleFieldData>();
+		rowsC.add(new SimpleFieldData("Name", "pat_gpname"));
+		rowsC.add(new SimpleFieldData("E-mail", "pat_gpmail"));
+		rowsC.add(new SimpleFieldData("Phone", "pat_gpphone"));
+		
+		this.appendTextboxFields(rowsA, rows1);
+		this.appendTextboxFields(rowsB, rows2);
+		this.appendTextboxFields(rowsC, rows3);
+		
+		pgrid1.appendChild(rows1);
+		pgrid2.appendChild(rows2);
+		pgrid3.appendChild(rows3);
+		this.appendChild(pgrid1);
+		this.appendChild(pgrid2);
+		this.appendChild(pgrid3);
+	}
+	
+	protected void addSocialWorkerConsulterAndGPFieldsValues(){
+		((Textbox)getFellow("pat_swname")).setValue(this.currentsocialworker.getName());
+		((Textbox)getFellow("pat_swmail")).setValue(this.currentsocialworker.getEmail());
+		((Textbox)getFellow("pat_swphone")).setValue(this.currentsocialworker.getPhone());
+		((Textbox)getFellow("pat_consname")).setValue(this.currentconsulter.getName());
+		((Textbox)getFellow("pat_consmail")).setValue(this.currentconsulter.getEmail());
+		((Textbox)getFellow("pat_consphone")).setValue(this.currentconsulter.getPhone());
+		((Textbox)getFellow("pat_gpname")).setValue(this.currentgeneralpracticioner.getName());
+		((Textbox)getFellow("pat_gpmail")).setValue(this.currentgeneralpracticioner.getEmail());
+		((Textbox)getFellow("pat_gpphone")).setValue(this.currentgeneralpracticioner.getPhone());
+	}
+	
+	protected SocialWorker getSocialWorkerData(){
+		String name = ((Textbox)getFellow("pat_swname")).getValue();
+		String mail = ((Textbox)getFellow("pat_swmail")).getValue();
+		String phone = ((Textbox)getFellow("pat_swphone")).getValue();
+		return new SocialWorker(name, phone, mail);
+	}
+	
+	protected Consulter getConsulterData(){
+		String name = ((Textbox)getFellow("pat_consname")).getValue();
+		String mail = ((Textbox)getFellow("pat_consmail")).getValue();
+		String phone = ((Textbox)getFellow("pat_consphone")).getValue();
+		return new Consulter(name, phone, mail);
+	}
+	
+	protected GeneralPractitioner getGeneralPracticionerData(){
+		String name = ((Textbox)getFellow("pat_gpname")).getValue();
+		String mail = ((Textbox)getFellow("pat_gpmail")).getValue();
+		String phone = ((Textbox)getFellow("pat_gpphone")).getValue();
+		return new GeneralPractitioner(name, phone, mail);
 	}
 	
 	public Button createUpdateButton(){
@@ -294,7 +366,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {
-				updatePatient();
+				sendPatient(false);
 			}
 		});
 		

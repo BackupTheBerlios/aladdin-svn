@@ -25,10 +25,11 @@ public class WarningInfo {
 	private String emergencyLevel = "";
 	private String patientID = "";
 	private String patientName = "";
+	private String clinicianResponsible = "";
 	private String delivered = "";
 	
 	
-	public WarningInfo(String iD, String type, String date, String effect, String indicator, String riskLevel, String justification, String emergencyLevel, String patientID, String delivered) {
+	public WarningInfo(String iD, String type, String date, String effect, String indicator, String riskLevel, String justification, String emergencyLevel, String patientID, String patientName, String responsibleClinician, String delivered) {
 		ID = iD;
 		this.type = type;
 		this.date = date;
@@ -38,6 +39,8 @@ public class WarningInfo {
 		this.justification = justification;
 		this.emergencyLevel = emergencyLevel;
 		this.patientID = patientID;
+		this.patientName = patientName;
+		this.setClinicianResponsible(responsibleClinician);
 		this.delivered = delivered;
 	}
 	
@@ -75,9 +78,11 @@ public class WarningInfo {
             compare.setCode("3");
             filter.setCompareOp(compare);
             
-            PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
-			System.out.println("NAME: "+pat[0].toString());
-			this.patientName = pat[0].toString();
+            //PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
+            Patient pat = proxy.getPatient(this.patientID, id);
+			System.out.println("NAME: "+pat.toString());
+			this.patientName = pat.toString();
+			this.setClinicianResponsible(pat.getResponsibleClinicianID());
 		}catch(RemoteException re){
 			this.patientName="Error retrieving name";
 		}
@@ -151,6 +156,14 @@ public class WarningInfo {
 
 	public void setPatientName(String patientName) {
 		this.patientName = patientName;
+	}
+
+	public void setClinicianResponsible(String clinicianResponsible) {
+		this.clinicianResponsible = clinicianResponsible;
+	}
+
+	public String getClinicianResponsible() {
+		return clinicianResponsible;
 	}
 	
 }

@@ -1,0 +1,28 @@
+<zk>
+	<window title="Select Patient" closable="true" border="normal" width="300px" id="patientlistwin" use="eu.aladdin_project.controllers.warnings.PatientListForWarnings">
+		<zscript>
+			import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+			import eu.aladdin_project.xsd.SearchCriteria;
+			import eu.aladdin_project.xsd.PatientInfo;
+			
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			String userid = (String)Sessions.getCurrent().getAttribute("userid");
+			PatientInfo[] palist = null;
+			try{
+				palist = proxy.listOfPatients(new SearchCriteria[0],userid);
+				System.out.println("Patient list: "+palist.length);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		</zscript>
+		<radiogroup id="respo_rgroup"><grid>
+			<rows>
+				<row forEach="${palist}">
+					<radio label="${each.surname}, ${each.name}" value="${each.ID }"/>
+				</row>
+			</rows>
+		</grid>
+		<button label="Select Patient" onClick="patientlistwin.setPatient()"/>
+		</radiogroup>
+	</window>
+</zk>

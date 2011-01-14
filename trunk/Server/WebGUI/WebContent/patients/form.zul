@@ -11,7 +11,7 @@
 		
 	</zscript>
 	<window title="${title}" id="patientform" width="800px" sclass="centerwin" use="eu.aladdin_project.controllers.PattientControllerWindow">
-	<button label="${save }" onClick="patientform.createPatient()"/>
+	<button label="${save }" onClick="patientform.sendPatient(true)"/>
 	</window>
 	<include src="/inc/footer.zul"/>
 </zk>
