@@ -24,16 +24,27 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 	 * Default constructor
 	 */
 	public ClinicianControllerWindow(){
+		this.buildForm();
 	}
 	
-	public ClinicianControllerWindow(Clinician current){
+	public ClinicianControllerWindow(Clinician current, boolean details){
 		this.currentid = current.getID();
 		this.currentdata = current.getPersonData();
+		this.detailsmode = details;
+		
+		this.buildForm();
 		
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
-		this.appendChild(this.createUpdateButton());
+		if(this.detailsmode){
+			Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
+			if(isadmin){
+				this.appendChild(this.createEditButton());
+			}
+		}else{
+			this.appendChild(this.createUpdateButton());
+		}
 	}
 	
 	/**
@@ -101,6 +112,20 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			
 			public void onEvent(Event arg0) throws Exception {
 				updateClinician();
+			}
+		});
+		
+		return btn;
+	}
+	
+	public Button createEditButton(){
+		Button btn = new Button();
+		String text = Labels.getLabel("clinicians.edit");
+		btn.setLabel(text);
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				Executions.getCurrent().sendRedirect("/clinicians/update.zul?clinid="+currentid);
 			}
 		});
 		

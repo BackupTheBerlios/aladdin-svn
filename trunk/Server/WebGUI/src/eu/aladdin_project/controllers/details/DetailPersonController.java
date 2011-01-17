@@ -44,11 +44,6 @@ public abstract class DetailPersonController extends Window {
 		Listbox datarows = (Listbox)getFellow("datarows");
 		//Button[] actions = this.createActionButtons();
 		Listitem[] datar = this.createDataRows();
-		/*
-		for(int i = 0; i<actions.length; i++){
-			acrows.appendChild(actions[i]);
-		}
-		*/
 		for(int i = 0; i<datar.length; i++){
 			datarows.appendChild(datar[i]);
 		}

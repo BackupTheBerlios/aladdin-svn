@@ -19,12 +19,12 @@
 		String userid = (String)ses.getAttribute("userid");
 		try{
 			Clinician clinicobj = proxy.getClinician(clinid,userid);
-			ClinicianControllerWindow window = new ClinicianControllerWindow(clinicobj);
+			ClinicianControllerWindow window = new ClinicianControllerWindow(clinicobj, false);
 			((Window)page.getFellow("paintitblack")).appendChild(window);
 			window.setTitle(title);
 			window.setId("clinicform");
 			window.setSclass("centerwin");
-			window.setWidth("80%");
+			window.setWidth("800px");
 			window.doEmbedded();
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();

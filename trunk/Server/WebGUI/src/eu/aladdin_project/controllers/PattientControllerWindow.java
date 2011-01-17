@@ -47,6 +47,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 * Default constructor
 	 */
 	public PattientControllerWindow(){
+		this.buildForm();
 	}
 	
 	public PattientControllerWindow(Patient current){
@@ -58,6 +59,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.currentconsulter = current.getConsulterInCharge();
 		this.currentgeneralpracticioner = current.getGeneralPractitioner();
 		this.currentcarers = current.getPatientCarerList().getPatientCarer();
+		
+		this.buildForm();
 		
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();

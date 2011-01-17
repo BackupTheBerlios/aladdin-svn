@@ -40,13 +40,13 @@ public class AladdinFormControllerWindow extends Window{
 	protected Address[] addresses = null;
 	protected Window popupaddresses = null;
 	protected Window popupcommunications = null;
+	protected boolean detailsmode = false;
 	
 	
 	/**
 	 * Default constructor
 	 */
 	public AladdinFormControllerWindow(){
-		this.buildForm();
 	}
 	
 	/**
@@ -161,11 +161,12 @@ public class AladdinFormControllerWindow extends Window{
 		}
 		Label therest = new Label(thereststring);
 		hbox.appendChild(therest);
-		Label remove = new Label(removeadd);
-		remove.setSclass("link");
-		remove.addEventListener("onClick", new RemoveAddressListener(newrow,toInsert));
-		hbox.appendChild(remove);
-		
+		if(!this.detailsmode){
+			Label remove = new Label(removeadd);
+			remove.setSclass("link");
+			remove.addEventListener("onClick", new RemoveAddressListener(newrow,toInsert));
+			hbox.appendChild(remove);
+		}
 		newrow.appendChild(town);
 		newrow.appendChild(hbox);
 		rows.appendChild(newrow);
@@ -225,11 +226,12 @@ public class AladdinFormControllerWindow extends Window{
 		}
 		Label therest = new Label(thereststring);
 		hbox.appendChild(therest);
-		Label remove = new Label(removecom);
-		remove.setSclass("link");
-		remove.addEventListener("onClick", new RemoveComListener(newrow,com));
-		hbox.appendChild(remove);
-		
+		if(!this.detailsmode){
+			Label remove = new Label(removecom);
+			remove.setSclass("link");
+			remove.addEventListener("onClick", new RemoveComListener(newrow,com));
+			hbox.appendChild(remove);
+		}
 		newrow.appendChild(town);
 		newrow.appendChild(hbox);
 		rows.appendChild(newrow);
@@ -293,19 +295,22 @@ public class AladdinFormControllerWindow extends Window{
 		Rows arows = new Rows();
 		arows.setId("addressgridrows");
 			this.appendSubFormTitleRow(address, arows);
-			Row buttonrw = new Row();
-			Label labelbtn = new Label(" ");
-			Button btnaddress = new Button(addaddressstr);
-			btnaddress.addEventListener("onClick", new EventListener() {
-				
-				public void onEvent(Event arg0) throws Exception {
-					addAddressWindow();
-					popupaddresses.doModal();
-				}
-			});
-			buttonrw.appendChild(labelbtn);
-			buttonrw.appendChild(btnaddress);
-			arows.appendChild(buttonrw);
+			if(!this.detailsmode){
+				Row buttonrw = new Row();
+				Label labelbtn = new Label(" ");
+				Button btnaddress = new Button(addaddressstr);
+				btnaddress.addEventListener("onClick", new EventListener() {
+					
+					public void onEvent(Event arg0) throws Exception {
+						addAddressWindow();
+						popupaddresses.doModal();
+					}
+				});
+				buttonrw.appendChild(labelbtn);
+				buttonrw.appendChild(btnaddress);
+				buttonrw.setId("createaddress-row");
+				arows.appendChild(buttonrw);
+			}
 		agrid.appendChild(arows);
 		this.appendChild(agrid);
 	}
@@ -391,19 +396,22 @@ public class AladdinFormControllerWindow extends Window{
 		Rows arows = new Rows();
 		arows.setId("comgridrows");
 			this.appendSubFormTitleRow(com, arows);
-			Row buttonrw = new Row();
-			Label labelbtn = new Label(" ");
-			Button btnaddress = new Button(comaddlbl);
-			btnaddress.addEventListener("onClick", new EventListener() {
-				
-				public void onEvent(Event arg0) throws Exception {
-					addCommunicationWindow();
-					popupcommunications.doModal();
-				}
-			});
-			buttonrw.appendChild(labelbtn);
-			buttonrw.appendChild(btnaddress);
-			arows.appendChild(buttonrw);
+			if(!this.detailsmode){
+				Row buttonrw = new Row();
+				Label labelbtn = new Label(" ");
+				Button btnaddress = new Button(comaddlbl);
+				btnaddress.addEventListener("onClick", new EventListener() {
+					
+					public void onEvent(Event arg0) throws Exception {
+						addCommunicationWindow();
+						popupcommunications.doModal();
+					}
+				});
+				buttonrw.appendChild(labelbtn);
+				buttonrw.appendChild(btnaddress);
+				buttonrw.setId("createcommunication-row");
+				arows.appendChild(buttonrw);
+			}
 		agrid.appendChild(arows);
 		this.appendChild(agrid);
 	}
@@ -512,6 +520,8 @@ public class AladdinFormControllerWindow extends Window{
 			
 			Textbox tboxe = new Textbox();
 			tboxe.setId(elem.getId());
+			System.out.println("DETAILS: "+this.detailsmode);
+			if(detailsmode){tboxe.setReadonly(true);}
 			rowe.appendChild(tboxe);
 			
 			rows.appendChild(rowe); 
@@ -550,6 +560,9 @@ public class AladdinFormControllerWindow extends Window{
 			Radio rad = new Radio();
 			rad.setLabel(elem.getLabel());
 			rad.setValue(elem.getId());
+			if(this.detailsmode){
+				rad.setDisabled(true);
+			}
 			rgroup.appendChild(rad);
 		}
 		rgroup.setSelectedIndex(0);
@@ -576,6 +589,9 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 			lbox.appendChild(li);
 		}
 		lbox.setSelectedIndex(0);
+		if(this.detailsmode){
+			lbox.setDisabled(true);
+		}
 		rowe.appendChild(lbox);
 		rows.appendChild(rowe);
 	}

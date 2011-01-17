@@ -2,50 +2,30 @@
 <?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
 <?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
 <zk>
+	<include src="/inc/header.zul"/>
+	<window id="paintitblack"></window>
 	<zscript>
 		import org.zkoss.util.resource.Labels;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import eu.aladdin_project.xsd.Carer;
-		
-		String tasks = Labels.getLabel("common.tasks");
-		String actions = Labels.getLabel("common.actions");
-		String data = Labels.getLabel("common.personal.data");
-		String ids = Labels.getLabel("common.id");
-		String types = Labels.getLabel("common.type");
-		String statuss = Labels.getLabel("common.status");
-		String personaddr = Labels.getLabel("common.addressed.person");
-		String assigned = Labels.getLabel("common.date.assigned");
-		String fulfilled = Labels.getLabel("common.date.fulfilled");
-		
-		String prevmonth = Labels.getLabel("common.month.next");
-		String nextmonth = Labels.getLabel("common.month.previous");
-		String weekfirstd = Labels.getLabel("common.firstday.week");
-		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
+		import eu.aladdin_project.controllers.CarerControllerWindow;
 		
 		String title = Labels.getLabel("carers.update.title");
 		page.setTitle(title);	
 		
-		String objid = (String)Executions.getCurrent().getParameter("carerid");
-	</zscript>
-	<include src="/inc/header.zul"/>
-	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailSDController">
-	<label value="${data}"/>
-	<listbox id="datarows">
-		<listhead>
-			<listheader width="200px"/>
-			<listheader/>
-		</listhead>
-	</listbox>
-	<button if="${!isadmin }" label="${title }" href="/carers/update.zul?carerid=${objid }"/>
-	<separator height="10px"/>
-	</window>
-	<zscript>
+		String updid = (String)Executions.getCurrent().getParameter("carerid");
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		try{
-			Carer userobj = proxy.getCarer(objid,userid);
-			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),null,null);
+			Carer userobj = proxy.getCarer(updid,userid);
+			CarerControllerWindow window = new CarerControllerWindow(userobj, true);
+			((Window)page.getFellow("paintitblack")).appendChild(window);
+			window.setTitle(title);
+			window.setId("carerform");
+			window.setSclass("centerwin");
+			window.setWidth("800px");
+			window.doEmbedded();
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

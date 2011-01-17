@@ -31,6 +31,7 @@ public class QuestionWindow extends Window{
 	private static final long serialVersionUID = 4976983401212316183L;
 	private QuestionnaireFormWindow pform = null;
 	private String ID = null;
+	private int globalID;
 	private String type = null;
 	private String parent = null;
 	private ArrayList<QuestionnaireQuestionAnswer> answers = new ArrayList<QuestionnaireQuestionAnswer>();
@@ -45,6 +46,7 @@ public class QuestionWindow extends Window{
 	public QuestionWindow(QuestionnaireFormWindow pform, String ID, String parent){
 		this.pform = pform;
 		this.ID = ID;
+		this.globalID = 0;
 		this.parent = parent;
 		this.type = SystemDictionary.QUESTION_TYPE_ONE_ANSWER;
 		this.setTitle(Labels.getLabel("qm.ans.title.new"));
@@ -58,6 +60,7 @@ public class QuestionWindow extends Window{
 	public QuestionWindow(QuestionnaireFormWindow pform, QuestionnaireQuestion question, String parent){
 		this.pform = pform;
 		this.ID = question.getId();
+		this.globalID = question.getGlobalID(); 
 		this.parent = parent;
 		this.type = question.getType();
 		
@@ -85,11 +88,13 @@ public class QuestionWindow extends Window{
 		q.setId(this.ID);
 		
 		String title = ((Textbox)getFellow("question_text")).getValue();
+		String globalid = ((Textbox)getFellow("question_idg")).getValue();
 		if(getFellow("question_condrow").isVisible()){
 			Integer condition = ((Intbox)getFellow("question_cond")).getValue();
 			q.setCondition(new UnsignedByte(condition));
 		}
 		q.setTitle(title);
+		q.setGlobalID(Integer.parseInt(globalid));
 		QuestionnaireQuestionList qqqlist = new QuestionnaireQuestionList(new QuestionnaireQuestion[0]);
 		q.setQuestions(qqqlist);
 		
@@ -229,6 +234,17 @@ public class QuestionWindow extends Window{
 				tbox0.setReadonly(true);
 				row0.appendChild(tbox0);
 			rows.appendChild(row0);
+			
+			Row row01 = new Row();
+				Label lab01 = new Label();
+				lab01.setValue(Labels.getLabel("qm.ans.fields.id.global"));
+				row01.appendChild(lab01);
+	
+				Textbox tbox01 = new Textbox();
+				tbox01.setId("question_idg");
+				tbox01.setValue("" + (this.globalID == 0 ? "" : this.globalID));
+				row01.appendChild(tbox01);
+			rows.appendChild(row01);
 
 				Row row1 = new Row();
 					Label lab1 = new Label();

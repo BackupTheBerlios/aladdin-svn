@@ -19,7 +19,7 @@
 		String userid = (String)ses.getAttribute("userid");
 		try{
 			Carer userobj = proxy.getCarer(updid,userid);
-			CarerControllerWindow window = new CarerControllerWindow(userobj);
+			CarerControllerWindow window = new CarerControllerWindow(userobj, false);
 			((Window)page.getFellow("paintitblack")).appendChild(window);
 			window.setTitle(title);
 			window.setId("carerform");

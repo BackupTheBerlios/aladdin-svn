@@ -81,7 +81,7 @@
 	<separator height="10px"/>
 	<?component name="createDialog" macroURI="bookEvent.zul"?>
 	<createDialog id="createDialog" />
-	<calendars id="cal" mold="month"  firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarControllerPatients">
+	<calendars id="cal" mold="month" height="600px" firstDayOfWeek="monday" apply="eu.aladdin_project.controllers.task.CalendarControllerPatients">
 		<toolbar id="toolbar">
 			<label id="exechelp" visible="false" value="${objid }"/>
 			<div class="float-left">

@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
 
+
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
@@ -24,18 +25,25 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	 * Default constructor
 	 */
 	public CarerControllerWindow(){
+		this.buildForm();
 	}
 	
-	public CarerControllerWindow(Carer current){
+	public CarerControllerWindow(Carer current, boolean details){
 		this.currentid = current.getID();
 		this.currentdata = current.getPersonData();
 		this.currentsd = current.getSD_Data();
+		this.detailsmode = details;
+		this.buildForm();
 		
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
 		this.addSocioDemographicDataFieldsValue();
-		this.appendChild(this.createUpdateButton());
+		if(this.detailsmode){
+			this.appendChild(this.createEditButton());
+		}else{
+			this.appendChild(this.createUpdateButton());
+		}
 	}
 	
 	/**
@@ -107,6 +115,20 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			
 			public void onEvent(Event arg0) throws Exception {
 				updateCarer();
+			}
+		});
+		
+		return btn;
+	}
+	
+	public Button createEditButton(){
+		Button btn = new Button();
+		String text = Labels.getLabel("carers.edit");
+		btn.setLabel(text);
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				Executions.getCurrent().sendRedirect("/carers/update.zul?carerid="+currentid);
 			}
 		});
 		

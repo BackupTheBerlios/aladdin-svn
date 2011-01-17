@@ -130,6 +130,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		((Textbox)this.getFellow("pat_age")).setValue(this.currentsd.getAge().toString());
 		((Textbox)this.getFellow("pat_children")).setValue(this.currentsd.getChildren().toString());
 		
+		
 		((Radiogroup)this.getFellow("pat_gender")).setSelectedIndex(Integer.parseInt(this.currentsd.getGender().getCode())-1);
 		((Listbox)this.getFellow("pat_marital")).setSelectedIndex(Integer.parseInt(this.currentsd.getMaritalStatus().getCode())-1);
 		((Listbox)this.getFellow("pat_living")).setSelectedIndex(Integer.parseInt(this.currentsd.getLivingWith().getCode()));
