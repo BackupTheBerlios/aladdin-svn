@@ -138,6 +138,36 @@
 					</hbox>
 				</row>
 				<row>
+					<label value=""/>
+					<label value="Do you want this task to be assigned for a period of time?"/>
+				</row>
+				<row>
+					<label value=""/>
+					<checkbox id="massivecheck" checked="false" label="Yes" onCheck="create_my_entry.showHidePeriodicFields(self.isChecked())"/>
+				</row>
+				<row id="freq1row" visible="false">
+					<label value=""/>
+					<hbox>
+						<label value="Once each"/>
+						<listbox id="massivelist" mold="select">
+							<listitem value="1" label="day" selected="true"/>
+							<listitem value="2" label="two days"/>
+							<listitem value="3" label="three days"/>
+							<listitem value="5" label="five days"/>
+							<listitem value="7" label="week"/>
+							<listitem value="14" label="two weeks"/>
+						</listbox>
+					</hbox>
+				</row>
+				<row id="till1row" visible="false">
+					<label value=""/>
+					<hbox>
+						<label value="Till day (not included)"/>
+						<datebox id="massivecal" format="dd/MM/yyyy"/>
+					</hbox>
+					
+				</row>
+				<row>
 					<label id="usertype" value="${usertype }" visible="false"/>
 					<hbox>
 						<button id="savebutton" label="${tassigntt }" onClick="create_my_entry.saveTask()" visible="false"/>

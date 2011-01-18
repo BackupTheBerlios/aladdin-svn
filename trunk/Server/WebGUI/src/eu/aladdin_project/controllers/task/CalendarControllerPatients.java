@@ -34,7 +34,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 	public Calendars cal;
 	
 	public void onEventCreate(CalendarsEvent event) throws InterruptedException, RemoteException{
-		StorageComponentProxy proxy = new StorageComponentProxy();
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 		bookEventWin = (Window)Executions.createComponents("bookEvent.zul", self.getParent(), null);
 		bookEventWin.setAttribute("calendars", cal);
 		bookEventWin.setAttribute("calevent", event);
@@ -69,7 +69,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 	}
 	
 	public void onEventEdit(CalendarsEvent event) throws InterruptedException, RemoteException{
-		StorageComponentProxy proxy = new StorageComponentProxy();
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		bookEventWin = (Window)Executions.createComponents("bookEvent.zul", self.getParent(), null);

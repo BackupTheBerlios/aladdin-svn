@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.task;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -7,6 +8,7 @@ import java.util.GregorianCalendar;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -64,12 +66,17 @@ public class CalendarWindowControllerPatients extends Window {
 		getFellow("qsrow").setVisible(qsrow);
 		getFellow("textrow").setVisible(txtrow);
 	}
+	
+	public void showHidePeriodicFields(boolean checked){
+		getFellow("freq1row").setVisible(checked);
+		getFellow("till1row").setVisible(checked);
+	}
 
 	public void saveTask(){
 		String URL = "";
 		String text = "";
 		Questionnaire questionnaire = new Questionnaire();
-		StorageComponentProxy proxy = new StorageComponentProxy();
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 		try{
 			Listbox listbox = (Listbox)getFellow("tasktypesel");
 			org.zkoss.zul.api.Listitem listitem = listbox.getSelectedItemApi();
@@ -111,7 +118,15 @@ public class CalendarWindowControllerPatients extends Window {
 			String objids = ((Textbox)getFellow("objid")).getValue();
 			System.out.println("Getobjids result = " + objids);
 			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, text, questionnaire, objids, userids, objids);
-			OperationResult opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);
+			boolean massive = ((Checkbox)getFellow("massivecheck")).isChecked();
+			OperationResult opres = null;
+			if(massive){
+				Integer freq = new Integer((String)((Listbox)getFellow("massivelist")).getSelectedItem().getValue());
+				Date tillday = (Date)((Datebox)getFellow("massivecal")).getValue();
+				opres = proxy.assignTasksMassively(ts, dbox.getValue(), tillday, BigInteger.valueOf(freq), userids);
+			}else{
+				opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);
+			}
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
