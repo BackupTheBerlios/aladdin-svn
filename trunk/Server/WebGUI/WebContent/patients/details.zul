@@ -148,7 +148,7 @@
 			Patient userobj = proxy.getPatient(objid,userid);
 			eu.aladdin_project.xsd.OperationResult realusid = proxy.getUserIdByPersonId(objid,eu.aladdin_project.SystemDictionary.USERTYPE_PATIENT_INT,userid);
 			String robjid = realusid.getCode();
-			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),userobj.getResponsibleClinicianID(),userobj.getPatientCarerList().getPatientCarer());
+			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),userobj.getResponsibleClinicianID(),userobj.getPatientCarerList().getPatientCarer(), userobj.getSocialWorker(), userobj.getConsulterInCharge(), userobj.getGeneralPractitioner());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

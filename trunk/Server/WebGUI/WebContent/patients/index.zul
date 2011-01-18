@@ -48,7 +48,7 @@
 				<!-- <label value="${each.ID }"/> -->
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
-				<label value="${details }" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
+				<label value="Tasks" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
 				<label if="${isntadmin }" value="${updmsg }" sclass="link" onClick="patients.updatePatient(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="patients.deletePatientMsg(self.getParent().getId())"/>
 			</row>

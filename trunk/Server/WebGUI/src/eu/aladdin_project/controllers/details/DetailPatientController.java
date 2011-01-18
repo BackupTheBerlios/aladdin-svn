@@ -24,10 +24,13 @@ import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.controllers.details.assessment.AssessmentPopupController;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.Clinician;
+import eu.aladdin_project.xsd.Consulter;
+import eu.aladdin_project.xsd.GeneralPractitioner;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientAssessment;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
+import eu.aladdin_project.xsd.SocialWorker;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.Task;
 
@@ -37,6 +40,9 @@ public class DetailPatientController extends DetailSDController{
 	public AssessmentPopupController assessmentWindow;
 	protected SimpleCalendarModel calmodel = null;
 	protected Calendars calendars = null;
+	protected SocialWorker currentsocialworker = null;
+	protected Consulter currentconsulter = null;
+	protected GeneralPractitioner currentgralprac = null;
 	
 	public DetailPatientController(){
 		this.usertype = SystemDictionary.USERTYPE_PATIENT_INT;
@@ -44,6 +50,14 @@ public class DetailPatientController extends DetailSDController{
 	
 	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
 		super.setControllerData(id, data, sddata, responsible, carers);
+	}
+	
+	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers, SocialWorker sw, Consulter consulter, GeneralPractitioner gralpract){
+		this.currentsocialworker = sw;
+		this.currentconsulter = consulter;
+		this.currentgralprac = gralpract;
+		
+		this.setControllerData(id, data, sddata, responsible, carers);
 	}
 
 	public Button[] createActionButtons(){
@@ -68,7 +82,7 @@ public class DetailPatientController extends DetailSDController{
 		Listitem[] rows = this.getPersonDataListItems();
 		Listitem[] carerrows = this.getCarerListAsListItems();
 		
-		Listitem[] ret = new Listitem[rows.length+carerrows.length+2];
+		Listitem[] ret = new Listitem[rows.length+carerrows.length+2+3];
 		
 		ret[0]=rows[0];
 		ret[1]=this.getSDItem();
@@ -80,6 +94,10 @@ public class DetailPatientController extends DetailSDController{
 		for( int ii = 1 ; ii < rows.length ; ii++){
 			ret[carerrows.length+2+ii]=rows[ii];
 		}
+		
+		ret[ret.length-3] = this.getSocialWorkerListitem();
+		ret[ret.length-2] = this.getConsulterListitem();
+		ret[ret.length-1] = this.getGeneralPracticionerListitem();
 		
 		return ret;
 	}
@@ -169,6 +187,51 @@ public class DetailPatientController extends DetailSDController{
 		}
 		
 		return ret;
+	}
+	
+	protected Listitem getSocialWorkerListitem(){
+		Listitem sw = new Listitem();
+		Listcell cell1 = new Listcell("Social worker");
+		Listcell cell2 = null;
+		if(this.currentsocialworker != null){
+			cell2 = new Listcell(this.currentsocialworker.getName() + " ("+this.currentsocialworker.getPhone()+"/"+this.currentsocialworker.getEmail()+")");
+		}else{
+			cell2 = new Listcell("Undefined");
+		}
+		sw.appendChild(cell1);
+		sw.appendChild(cell2);
+		
+		return sw;
+	}
+	
+	protected Listitem getConsulterListitem(){
+		Listitem sw = new Listitem();
+		Listcell cell1 = new Listcell("Consulter");
+		Listcell cell2 = null;
+		if(this.currentconsulter != null){
+			cell2 = new Listcell(this.currentconsulter.getName() + " ("+this.currentconsulter.getPhone()+"/"+this.currentconsulter.getEmail()+")");
+		}else{
+			cell2 = new Listcell("Undefined");
+		}
+		sw.appendChild(cell1);
+		sw.appendChild(cell2);
+		
+		return sw;
+	}
+	
+	protected Listitem getGeneralPracticionerListitem(){
+		Listitem sw = new Listitem();
+		Listcell cell1 = new Listcell("General Practicioner");
+		Listcell cell2 = null;
+		if(this.currentgralprac != null){
+			cell2 = new Listcell(this.currentgralprac.getName() + " ("+this.currentgralprac.getPhone()+"/"+this.currentgralprac.getEmail()+")");
+		}else{
+			cell2 = new Listcell("Undefined");
+		}
+		sw.appendChild(cell1);
+		sw.appendChild(cell2);
+		
+		return sw;
 	}
 	
 	public void refreshCalendarData(){
