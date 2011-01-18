@@ -293,6 +293,9 @@ public class DetailPatientController extends DetailSDController{
 						params.put("assign", tasklist[i].getAssignerID());
 						params.put("task", tasklist[i].getID());
 						params.put("status", tasklist[i].getTaskStatus().getCode());
+						params.put("url", tasklist[i].getURL());
+						params.put("text", tasklist[i].getText());
+						params.put("type", tasklist[i].getTaskType().getCode());
 						clevent.setParams(params);
 						this.calmodel.add(clevent);
 					}

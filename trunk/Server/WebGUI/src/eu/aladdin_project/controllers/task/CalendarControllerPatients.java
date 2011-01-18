@@ -102,10 +102,55 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setValue(scevent.getContent());
 		((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);
 		//((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
+		int tasktype = Integer.parseInt(scevent.getParams().get("type"));
+		this.showCustomFields(tasktype);
 		((Listbox)bookEventWin.getFellow("tasktypesel")).setVisible(false);
+		((Textbox)bookEventWin.getFellow("urlfield")).setValue(scevent.getParams().get("url"));
+		((Textbox)bookEventWin.getFellow("textfield")).setValue(scevent.getParams().get("text"));
 		
 		bookEventWin.setTitle("View Task");
 		bookEventWin.setVisible(true);
 		bookEventWin.doModal();
+	}
+	
+	private void showCustomFields(int tasktype){
+			boolean urlrow = false;
+			boolean qsrow = false;
+			boolean txtrow = false;
+			switch(tasktype){
+				case SystemDictionary.TASK_TYPE_COGGAME_INT:
+					urlrow = true;
+					qsrow = false;
+					txtrow = false;
+					break;
+				case SystemDictionary.TASK_TYPE_CARERQS_INT: 
+				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
+					urlrow = false;
+					qsrow = true;
+					txtrow = false;
+					break;
+				case SystemDictionary.TASK_TYPE_EXERCISE_INT:
+					txtrow = true;
+					urlrow = true;
+					qsrow = false;
+					break;
+				case SystemDictionary.TASK_TYPE_TXT_INT:
+					txtrow = true;
+					urlrow = false;
+					qsrow = false;
+					break;
+				default:
+					urlrow = false;
+					qsrow = false;
+					txtrow = false;
+					break;
+			};
+			bookEventWin.getFellow("urlrow").setVisible(urlrow);
+			//bookEventWin.getFellow("qsrow").setVisible(qsrow);
+			bookEventWin.getFellow("qsrow").setVisible(false);
+			bookEventWin.getFellow("textrow").setVisible(txtrow);
+			((Textbox)bookEventWin.getFellow("urlfield")).setReadonly(true);
+			//((Textbox)bookEventWin.getFellow("qsrow")).setReadonly(true);
+			((Textbox)bookEventWin.getFellow("textfield")).setReadonly(true);
 	}
 }

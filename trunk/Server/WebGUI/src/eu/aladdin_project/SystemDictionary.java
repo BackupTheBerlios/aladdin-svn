@@ -2,6 +2,7 @@ package eu.aladdin_project;
 
 import org.zkoss.util.resource.Labels;
 
+import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.SystemParameter;
 
 /**
@@ -11,8 +12,17 @@ public class SystemDictionary {
 	
 	private static SystemParameter locale = new SystemParameter("en_US","English");
 	
+	private static StorageComponentProxy proxy = null;
+	
 	public static SystemParameter getLocale(){
 		return locale;
+	}
+	
+	public static StorageComponentProxy getSCProxy(){
+		if(proxy == null){
+			proxy = new StorageComponentProxy();
+		}
+		return proxy;
 	}
 	
 	/**
@@ -95,6 +105,8 @@ public class SystemDictionary {
 		case TASK_TYPE_WEIGHT_MEASUREMENT_INT:
 			ret= TASK_TYPE_WEIGHT_MEASUREMENT_LBL;
 			break;
+		case TASK_TYPE_TXT_INT:
+			ret = TASK_TYPE_TXT_LBL;
 		}
 		return Labels.getLabel(ret);
 	}
@@ -339,6 +351,9 @@ public class SystemDictionary {
 	public final static String TASK_TYPE_EXERCISE = "7";
 	public final static int TASK_TYPE_EXERCISE_INT = 7;
 	public final static String TASK_TYPE_EXERCISE_LBL = "dic.task.type.exercise";
+	public final static String TASK_TYPE_TXT = "8";
+	public final static int TASK_TYPE_TXT_INT = 8;
+	public final static String TASK_TYPE_TXT_LBL = "dic.task.type.text";
 	
 	public final static String GENDER_MALE = "1";
 	public final static int GENDER_MALE_INT = 1;

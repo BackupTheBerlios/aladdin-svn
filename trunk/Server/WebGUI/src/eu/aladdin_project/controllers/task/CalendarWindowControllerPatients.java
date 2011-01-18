@@ -24,27 +24,50 @@ import eu.aladdin_project.xsd.Task;
 @SuppressWarnings("serial")
 public class CalendarWindowControllerPatients extends Window {
 	
-	public void changeTaskType(){
-		Listbox listbox = (Listbox)getFellow("tasktypesel");
-		Listitem listitem = listbox.getSelectedItem();
-		int comp = ((Integer)listitem.getValue()).intValue(); 
-		if(comp == SystemDictionary.TASK_TYPE_COGGAME_INT){
-			getFellow("urlrow").setVisible(true);
-			getFellow("qsrow").setVisible(false);
-			System.out.println("IEEE");
-		}else if(comp == SystemDictionary.TASK_TYPE_CARERQS_INT || comp == SystemDictionary.TASK_TYPE_PATIENTQS_INT){
-			getFellow("urlrow").setVisible(false);
-			getFellow("qsrow").setVisible(true);
-			System.out.println("EEEI");
-		}else{
-			getFellow("urlrow").setVisible(false);
-			getFellow("qsrow").setVisible(false);
-			System.out.println("IEEI");
-		}
+	public void changeTaskType(Object obj){
+		boolean urlrow = false;
+		boolean qsrow = false;
+		boolean txtrow = false;
+		//Listbox listbox = (Listbox)getFellow("tasktypesel");
+		//Listitem listitem = listbox.getSelectedItem();
+		//int comp = ((Integer)listitem.getValue()).intValue();
+		int comp = (Integer)obj;
+		switch(comp){
+			case SystemDictionary.TASK_TYPE_COGGAME_INT:
+				urlrow = true;
+				qsrow = false;
+				txtrow = false;
+				break;
+			case SystemDictionary.TASK_TYPE_CARERQS_INT: 
+			case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
+				urlrow = false;
+				qsrow = true;
+				txtrow = false;
+				break;
+			case SystemDictionary.TASK_TYPE_EXERCISE_INT:
+				txtrow = true;
+				urlrow = true;
+				qsrow = false;
+				break;
+			case SystemDictionary.TASK_TYPE_TXT_INT:
+				txtrow = true;
+				urlrow = false;
+				qsrow = false;
+				break;
+			default:
+				urlrow = false;
+				qsrow = false;
+				txtrow = false;
+				break;
+		};
+		getFellow("urlrow").setVisible(urlrow);
+		getFellow("qsrow").setVisible(qsrow);
+		getFellow("textrow").setVisible(txtrow);
 	}
 
 	public void saveTask(){
 		String URL = "";
+		String text = "";
 		Questionnaire questionnaire = new Questionnaire();
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		try{
@@ -60,6 +83,13 @@ public class CalendarWindowControllerPatients extends Window {
 					break;
 				case SystemDictionary.TASK_TYPE_COGGAME_INT:
 					URL = ((Textbox)getFellow("urlfield")).getValue();
+					break;
+				case SystemDictionary.TASK_TYPE_TXT_INT:
+					text = ((Textbox)getFellow("textfield")).getValue();
+					break;
+				case SystemDictionary.TASK_TYPE_EXERCISE_INT:
+					URL = ((Textbox)getFellow("urlfield")).getValue();
+					text = ((Textbox)getFellow("textfield")).getValue();
 					break;
 				default:
 					//do nothing
@@ -80,11 +110,7 @@ public class CalendarWindowControllerPatients extends Window {
 			//Object ID (Person ID)
 			String objids = ((Textbox)getFellow("objid")).getValue();
 			System.out.println("Getobjids result = " + objids);
-			//OperationResult result = proxy.getUserIdByPersonId(objids, SystemDictionary.USERTYPE_PATIENT_INT, userids);
-			//System.out.println("Getuser result = " + result.getCode()+ ":" +result.getDescription());
-			
-			//TODO Retrieve real task text
-			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, "", questionnaire, objids, userids, objids);
+			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, text, questionnaire, objids, userids, objids);
 			OperationResult opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);
 			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){

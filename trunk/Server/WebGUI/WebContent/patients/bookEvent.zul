@@ -9,12 +9,16 @@
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import org.zkoss.zul.SimpleListModel;
 		
+		int tttexti = SystemDictionary.TASK_TYPE_TXT_INT;
+		String tttexts = SystemDictionary.TASK_TYPE_TXT; 
+		
 		String ttcarerqs = Labels.getLabel("dic.task.type.patientqs");
 		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
 		String ttweight = Labels.getLabel("dic.task.type.weight.mes");
 		String ttcoggame = Labels.getLabel("dic.task.type.coggame");
 		String ttact = Labels.getLabel("dic.task.type.activity.mon");
 		String ttex = Labels.getLabel("dic.task.type.exercise");
+		String tttext = SystemDictionary.getTaskTypeLabel(tttexts);
 		
 		String tid = Labels.getLabel("common.id");
 		String ttype = Labels.getLabel("common.type");
@@ -57,13 +61,14 @@
 				<row>
 					<label value="${ttype }"/>
 					<hbox>
-						<listbox id="tasktypesel" mold="select" onSelect="create_my_entry.changeTaskType()">
+						<listbox id="tasktypesel" mold="select" onSelect="create_my_entry.changeTaskType(self.getSelectedItem().getValue())">
 							<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
 							<listitem label="${ttblood }" value="${ttbloodi }"/>
 							<listitem label="${ttweight }" value="${ttweighti }"/>
 							<listitem label="${ttcoggame }" value="${ttcoggamei }"/>
 							<listitem label="${ttact }" value="${ttacti }"/>
 							<listitem label="${ttex }" value="${ttexi }"/>
+							<listitem label="${tttext }" value="${tttexti }"/>
 						</listbox>
 						<textbox id="tasktypetext" visible="false" readonly="true"/>
 					</hbox>
@@ -98,6 +103,10 @@
 				<row id="urlrow" visible="false">
 					<label value="${turl }"/>
 					<textbox id="urlfield"/>
+				</row>
+				<row id="textrow" visible="false">
+					<label value="Text"/>
+					<textbox id="textfield"/>
 				</row>
 				<row>
 					<label value="${tassignd }"/>
