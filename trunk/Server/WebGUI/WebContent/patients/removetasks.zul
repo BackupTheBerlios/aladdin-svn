@@ -50,7 +50,7 @@
 			<row>
 				<label value="What kind of task do you want to remove massively?"/>
 				<listbox mold="select" id="removetasktype">
-					<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
+					<listitem label="${ttcarerqs }" value="${ttcarerqsi }" selected="true"/>
 					<listitem label="${ttblood }" value="${ttbloodi }"/>
 					<listitem label="${ttweight }" value="${ttweighti }"/>
 					<listitem label="${ttcoggame }" value="${ttcoggamei }"/>

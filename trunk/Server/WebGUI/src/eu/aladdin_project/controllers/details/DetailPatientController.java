@@ -291,7 +291,7 @@ public class DetailPatientController extends DetailSDController{
 							clevent.setContentColor("yellow");
 							break;
 						}
-						Map<String, String> params = new HashMap<String,String>();
+						Map<String, Object> params = new HashMap<String,Object>();
 						params.put("user", userid);
 						params.put("objid", tasklist[i].getObjectID());
 						params.put("exec", tasklist[i].getExecutorID());
@@ -301,6 +301,10 @@ public class DetailPatientController extends DetailSDController{
 						params.put("url", tasklist[i].getURL());
 						params.put("text", tasklist[i].getText());
 						params.put("type", tasklist[i].getTaskType().getCode());
+						if(tasklist[i].getTaskType().getCode().equals(SystemDictionary.TASK_TYPE_CARERQS) || tasklist[i].getTaskType().getCode().equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
+							params.put("qid", tasklist[i].getQuestionnaire().getID());
+							params.put("questionnaire", tasklist[i].getQuestionnaire());
+						}
 						clevent.setParams(params);
 						this.calmodel.add(clevent);
 					}

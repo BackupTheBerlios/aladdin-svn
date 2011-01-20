@@ -77,6 +77,10 @@
 					<label value="${tstatus }"/>
 					<textbox id="taskstatusfield" value="" readonly="true"/>
 				</row>
+				<row id="qsanswersrow" visible="false">
+					<label value="Answers"/>
+					<label id="qsanswersfield" width="95%" multiline="true"/>
+				</row>
 				<row id="qsrow" visible="false">
 					<label value="${tquestion }"/>
 					<hbox>
@@ -137,11 +141,11 @@
 						<textbox id="addressedstr" readonly="true"/>	
 					</hbox>
 				</row>
-				<row>
+				<row id="massivequestionrow" visible="false">
 					<label value=""/>
 					<label value="Do you want this task to be assigned for a period of time?"/>
 				</row>
-				<row>
+				<row id="massivecheckrow" visible="false">
 					<label value=""/>
 					<checkbox id="massivecheck" checked="false" label="Yes" onCheck="create_my_entry.showHidePeriodicFields(self.isChecked())"/>
 				</row>

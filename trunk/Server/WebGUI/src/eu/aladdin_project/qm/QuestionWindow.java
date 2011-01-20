@@ -109,6 +109,7 @@ public class QuestionWindow extends Window{
 		}
 		this.pform.addQuestion(q,parent);
 		this.setVisible(false);
+		this.getParent().removeChild(this);
 	}
 	
 	/**
@@ -253,6 +254,7 @@ public class QuestionWindow extends Window{
 		
 					Textbox tbox1 = new Textbox();
 					tbox1.setId("question_text");
+					tbox1.setWidth("350px");
 					row1.appendChild(tbox1);
 				rows.appendChild(row1);
 				

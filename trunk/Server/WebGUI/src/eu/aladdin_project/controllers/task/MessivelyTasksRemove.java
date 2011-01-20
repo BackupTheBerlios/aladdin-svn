@@ -29,6 +29,7 @@ public class MessivelyTasksRemove extends Window{
 		this.setVisible(false);
 		DetailPatientController parentwindow = ((DetailPatientController)this.getParent());
 		parentwindow.refreshCalendarData();
+		parentwindow.removeChild(this);
 	}
 
 }
