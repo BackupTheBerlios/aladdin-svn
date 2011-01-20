@@ -1,6 +1,7 @@
 package eu.aladdin_project.controllers.details;
 
 import java.rmi.RemoteException;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,10 +15,13 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
@@ -38,6 +42,7 @@ import eu.aladdin_project.xsd.Task;
 public class DetailPatientController extends DetailSDController{
 	
 	public AssessmentPopupController assessmentWindow;
+	private Window removeMassivelyDialog;
 	protected SimpleCalendarModel calmodel = null;
 	protected Calendars calendars = null;
 	protected SocialWorker currentsocialworker = null;
@@ -306,5 +311,13 @@ public class DetailPatientController extends DetailSDController{
 			Calendars calendar = (Calendars)getFellow("cal");
 			calendar.setModel(this.calmodel);
 		}
+	}
+	
+	public void createRemoveMassivelyDialog() throws SuspendNotAllowedException, InterruptedException{
+		removeMassivelyDialog = (Window)Executions.createComponents("removetasks.zul", this, null);
+		removeMassivelyDialog.setTitle("New Task");
+		removeMassivelyDialog.setVisible(true);
+		removeMassivelyDialog.doModal();
+		((Textbox)removeMassivelyDialog.getFellow("removepatientid")).setValue(this.currentid);
 	}
 }

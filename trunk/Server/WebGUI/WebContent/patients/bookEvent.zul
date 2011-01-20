@@ -43,7 +43,7 @@
 		
 		Session ses = Sessions.getCurrent();
 		String petusid = (String)ses.getAttribute("userid");
-		
+		Date date = new Date();
 		
 	</zscript>
 	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.task.CalendarWindowControllerPatients">
@@ -163,7 +163,7 @@
 					<label value=""/>
 					<hbox>
 						<label value="Till day (not included)"/>
-						<datebox id="massivecal" format="dd/MM/yyyy"/>
+						<datebox format="dd/MM/yyyy" value="${date }"/>
 					</hbox>
 					
 				</row>

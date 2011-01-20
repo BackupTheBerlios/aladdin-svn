@@ -115,6 +115,10 @@
 			</div>
 		</toolbar>
 	</calendars>
+	<separator height="5px"/>
+	<?component name="removemassively" macroURI="removetasks.zul"?>
+	<createDialog id="removemassively" />
+	<button label="Remove tasks massively" onClick="detailswin.createRemoveMassivelyDialog()"/>
 	<separator height="10px"/>
 	<label value="${assmnts }"/>
 	<separator height="5px"/>
