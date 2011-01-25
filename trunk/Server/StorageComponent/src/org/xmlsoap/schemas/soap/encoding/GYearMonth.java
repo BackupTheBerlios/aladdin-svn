@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface GYearMonth extends org.apache.xmlbeans.XmlGYearMonth
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GYearMonth.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("gyearmonth85e2type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GYearMonth.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("gyearmonth85e2type");
     
     /**
      * Gets the "id" attribute

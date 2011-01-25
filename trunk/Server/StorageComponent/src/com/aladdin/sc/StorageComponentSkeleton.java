@@ -22,6 +22,7 @@ import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
 
 import eu.aladdin_project.storagecomponent.*;
+import eu.aladdin_project.storagecomponent.AddEntertainmentContentResponseDocument.AddEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
 import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.AssignTasksMassivelyResponse;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
@@ -38,6 +39,7 @@ import eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument.D
 import eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument.DeleteCarerAssessmentResponse;
 import eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument.DeleteCarerResponse;
 import eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument.DeleteClinicianResponse;
+import eu.aladdin_project.storagecomponent.DeleteEntertainmentContentResponseDocument.DeleteEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument.DeleteExternalServiceResponse;
 import eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument.DeletePatientAssessmentResponse;
 import eu.aladdin_project.storagecomponent.DeletePatientResponseDocument.DeletePatientResponse;
@@ -48,11 +50,14 @@ import eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocumen
 import eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument.GetCarerAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetCarerResponseDocument.GetCarerResponse;
 import eu.aladdin_project.storagecomponent.GetClinicianResponseDocument.GetClinicianResponse;
+import eu.aladdin_project.storagecomponent.GetEntertainmentContentResponseDocument.GetEntertainmentContentResponse;
+import eu.aladdin_project.storagecomponent.GetMeasurementResponseDocument.GetMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.GetTaskResponseDocument.GetTaskResponse;
 import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument.GetUserIdByPersonIdResponse;
 import eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument.GetUserPlannedTasksResponse;
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument.GetUserResponse;
@@ -70,6 +75,7 @@ import eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument
 import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarningResponse;
 import eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument.StoreMeasurementsResponse;
 import eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument.StoreQuestionnaireAnswersResponse;
+import eu.aladdin_project.storagecomponent.UpdateEntertainmentContentResponseDocument.UpdateEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse;
 import eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument.UpdateAdministratorResponse;
 import eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument.UpdateCarerResponse;
@@ -78,18 +84,8 @@ import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument.UpdateSystemParameterResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
-import eu.aladdin_project.storagecomponent.GetUserTypeDocument;
-import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
-import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument;
-import eu.aladdin_project.storagecomponent.GetSystemParameterListDocument;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
-import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument;
-import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument;
-import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
-import eu.aladdin_project.storagecomponent.GetUserDocument;
-import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument;
-import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverDocument;
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.xsd.*;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument;
@@ -532,7 +528,7 @@ import java.net.URL;
     		//System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
-    		qq.setGlobalID(rqq.getGlobalID());
+    		qq.setGlobalId(rqq.getGlobalID());
     		//System.out.println (" uQQ 7");
 /*    		if (rqq.getDeleted() != true) {
     			rqq.setDeleted(false);
@@ -2308,7 +2304,7 @@ import java.net.URL;
     		rqq.setType(qq.getType());
     		//System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
-    		rqq.setGlobalID(qq.getGlobalID());
+    		rqq.setGlobalID(qq.getGlobalId());
     		//System.out.println (" eQQ 4");
     		
     		//System.out.println ("");
@@ -4274,6 +4270,271 @@ import java.net.URL;
         	
         	return respdoc;
         }
+
+		public GetMeasurementResponseDocument getMeasurement(GetMeasurementDocument req) {
+			GetMeasurementResponseDocument respdoc = GetMeasurementResponseDocument.Factory.newInstance();
+			GetMeasurementResponse resp = respdoc.addNewGetMeasurementResponse();
+			
+			String userId = req.getGetMeasurement().getUserId();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetMeasurement().setUserId (nc.check(userId, String.class));
+    			
+    			for (int i = 0; i < req.getGetMeasurement().getFilterArray().length; i++) {
+    				req.getGetMeasurement().setFilterArray(i, nc.check(req.getGetMeasurement().getFilterArray(i), SearchCriteria.class));
+    			}
+    		}
+			
+			if (
+    				!checkUser(userId, U_CLINICIAN) &&
+    				!checkUser(userId, U_CARER) &&
+    				!checkUser(userId, U_ADMIN) &&
+    				!checkUser(userId, U_SERVICE)
+				) {
+    			return respdoc;
+    		}
+			
+			Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
+			String sql = "SELECT id FROM measurement WHERE ";
+			
+			SearchCriteria[] sc = req.getGetMeasurement().getFilterArray();
+			for (int i = 0; i < sc.length; i++) {
+				for (int j = 0; j < field.length; j++) {
+					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+						sql += " AND ";
+					}
+				}
+			}
+			
+			sql += "1 = 1";
+			
+			Object[] list = s.createSQLQuery(sql).list().toArray();
+			List<Measurement> ml = new ArrayList<Measurement>();
+			for (int i = 0; i < list.length; i++) {
+				Integer id = (Integer) list[i];
+				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) s.load(com.aladdin.sc.db.Measurement.class, id);
+				ml.add(exportMeasurement(m));
+				//resp.setOutArray(i, exportMeasurement(m));
+			}
+			resp.setOutArray((Measurement[]) ml.toArray(new Measurement[0]));
+			
+			return respdoc;
+		}
+
+		public GetTaskResponseDocument getTask(GetTaskDocument req) {
+			GetTaskResponseDocument respdoc = GetTaskResponseDocument.Factory.newInstance();
+			GetTaskResponse resp = respdoc.addNewGetTaskResponse();
+			Task out = resp.addNewOut();
+			
+			String userId = req.getGetTask().getUserId();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetTask().setUserId(nc.check(req.getGetTask().getUserId(), String.class));
+    		}
+			
+			userId = req.getGetTask().getUserId();
+			
+			if (
+    				!checkUser(userId, U_CLINICIAN) &&
+    				!checkUser(userId, U_ADMIN) &&
+    				!checkUser(userId, U_CARER)
+				) {
+    			return respdoc;
+    		}
+			
+			try {
+				
+				String id = req.getGetTask().getId();
+				
+				com.aladdin.sc.db.Task dbTask = (com.aladdin.sc.db.Task) s.load(com.aladdin.sc.db.Task.class, new Integer (id));
+				
+				out.setID(dbTask.getId().toString());
+				
+				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
+				taskStatus.setCode(dbTask.getTaskStatus().toString());
+				out.setTaskStatus(taskStatus);
+				
+				SystemParameter taskType = SystemParameter.Factory.newInstance();
+				taskType.setCode(dbTask.getTaskType().toString());
+				out.setTaskType(taskType);
+				
+				Calendar c1 = Calendar.getInstance();
+				c1.setTimeInMillis(dbTask.getDateTimeAssigned().getTime());
+				out.setDateTimeAssigned(c1);
+				
+				Calendar c2 = Calendar.getInstance();
+				c2.setTimeInMillis(dbTask.getDateTimeFulfilled().getTime());
+				out.setDateTimeFulfilled(c2);
+				
+				out.setTaskStatus(taskStatus);
+				out.setURL(dbTask.getUrl());
+				out.setExecutorID(dbTask.getExecutor().toString());
+				out.setAssignerID(dbTask.getAssigner().toString());
+				out.setObjectID(dbTask.getObject().toString());
+				out.setText(dbTask.getText());
+				if (dbTask.getQuestionnaire() != null && dbTask.getQuestionnaire() > 0) {
+					out.setQuestionnaire(exportQuestionnaire(dbTask.getM_Questionnaire(), req.getGetTask().getLocale()));
+				}
+				
+        	} catch (Exception e) {
+				System.out.println (e.toString());
+			}
+			
+			
+			
+			return respdoc;
+		}
+		
+		public GetEntertainmentContentResponseDocument getEntertainmentContent(GetEntertainmentContentDocument req) {
+			GetEntertainmentContentResponseDocument respdoc = GetEntertainmentContentResponseDocument.Factory.newInstance();
+			GetEntertainmentContentResponse resp = respdoc.addNewGetEntertainmentContentResponse();
+			
+			Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
+			String sql = "SELECT id FROM entertainmentcontent WHERE ";
+			
+			SearchCriteria[] sc = req.getGetEntertainmentContent().getFilterArray();
+			for (int i = 0; i < sc.length; i++) {
+				for (int j = 0; j < field.length; j++) {
+					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+						sql += " AND ";
+					}
+				}
+			}
+			
+			sql += "1 = 1";
+			
+			Object[] list = s.createSQLQuery(sql).list().toArray();
+			for (int i = 0; i < list.length; i++) {
+				Integer id = (Integer) list[i];
+				com.aladdin.sc.db.EntertainmentContent ec = (com.aladdin.sc.db.EntertainmentContent) s.load(com.aladdin.sc.db.EntertainmentContent.class, id);
+				EntertainmentContent out = resp.addNewOut();
+				
+				out.setID(ec.getId().toString());
+				out.setCategory(ec.getCategory());
+				out.setText(ec.getText());
+				out.setTitle(ec.getTitle());
+				out.setType(ec.getType());
+				out.setUrl(ec.getUrl());
+			}
+			
+			return respdoc;
+		}
+		
+		private Integer storeEntertainmentContent (EntertainmentContent rEC, Integer id) {
+			com.aladdin.sc.db.EntertainmentContent ec = new com.aladdin.sc.db.EntertainmentContent();
+			ec.setCategory(rEC.getCategory());
+			ec.setText(rEC.getText());
+			ec.setTitle(rEC.getTitle());
+			ec.setType(rEC.getType());
+			ec.setUrl(rEC.getUrl());
+			if (id != null && id > 0) {
+				ec.setId(id);
+				s.merge(ec);
+			} else {
+				ec.setId(null);
+				s.save(ec);
+			}
+			
+			return ec.getId();
+		}
+
+
+		public AddEntertainmentContentResponseDocument addEntertainmentContent(AddEntertainmentContentDocument req) {
+			AddEntertainmentContentResponseDocument respdoc = AddEntertainmentContentResponseDocument.Factory.newInstance();
+			AddEntertainmentContentResponse resp = respdoc.addNewAddEntertainmentContentResponse();
+			
+			OperationResult res = resp.addNewOut();
+			
+			try {
+				s.beginTransaction();
+				
+				Integer savedId = storeEntertainmentContent(req.getAddEntertainmentContent().getIn(), null);
+				
+				s.getTransaction().commit();
+				
+				res.setCode(savedId.toString());
+        		res.setDescription("ok");
+        		res.setStatus((short) 1);
+			} catch (Exception e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			System.out.println (e.toString());
+    			res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				res.setStatus((short) 0);
+			}
+			
+			return respdoc;
+		}
+
+		public DeleteEntertainmentContentResponseDocument deleteEntertainmentContent(DeleteEntertainmentContentDocument req) {
+			DeleteEntertainmentContentResponseDocument respdoc = DeleteEntertainmentContentResponseDocument.Factory.newInstance();
+			DeleteEntertainmentContentResponse resp = respdoc.addNewDeleteEntertainmentContentResponse();
+			
+			OperationResult res = resp.addNewOut();
+			
+			try {
+				Integer id = new Integer (req.getDeleteEntertainmentContent().getId());
+    			s.beginTransaction();
+    			s.createSQLQuery("DELETE FROM entertainmentcontent WHERE id = " + id.toString()).executeUpdate();
+    			s.getTransaction().commit();
+    			res.setCode(id.toString());
+        		res.setDescription("ok");
+        		res.setStatus((short) 1);
+			} catch (Exception e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			System.out.println (e.toString());
+    			res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				res.setStatus((short) 0);
+			}
+			
+			return respdoc;
+		}
+
+		public UpdateEntertainmentContentResponseDocument updateEntertainmentContent(UpdateEntertainmentContentDocument req) {
+			UpdateEntertainmentContentResponseDocument respdoc = UpdateEntertainmentContentResponseDocument.Factory.newInstance();
+			UpdateEntertainmentContentResponse resp = respdoc.addNewUpdateEntertainmentContentResponse();
+			
+			OperationResult res = resp.addNewOut();
+			
+			try {
+				s.beginTransaction();
+				
+				final EntertainmentContent rEC = req.getUpdateEntertainmentContent().getEc();
+				Integer savedId = storeEntertainmentContent(rEC, new Integer (rEC.getID()));
+				
+				s.getTransaction().commit();
+				
+				res.setCode(savedId.toString());
+        		res.setDescription("ok");
+        		res.setStatus((short) 1);
+			} catch (Exception e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			System.out.println (e.toString());
+    			res.setCode("-2");
+				res.setDescription("database error " + e.toString());
+				res.setStatus((short) 0);
+			}
+			
+			return respdoc;
+		}
 
     
     }

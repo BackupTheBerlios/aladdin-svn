@@ -347,4 +347,14 @@
             <element minOccurs="0" name="Description" type="string"/>
         </sequence>
     </complexType>
+    <complexType name="EntertainmentContent">
+        <sequence>
+            <element name="ID" type="string"/>
+            <element name="title" type="string"/>
+            <element name="url" type="string"/>
+            <element name="type" type="string"/>
+            <element name="category" type="string"/>
+            <element name="text" type="string"/>
+        </sequence>
+    </complexType>
 </schema>

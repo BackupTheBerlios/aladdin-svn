@@ -901,6 +901,97 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetTask">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetTaskResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Task"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetMeasurement">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="filter" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetMeasurementResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="out" type="aladdin:Measurement"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddEntertainmentContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="aladdin:EntertainmentContent"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddEntertainmentContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteEntertainmentContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteEntertainmentContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateEntertainmentContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="ec" type="aladdin:EntertainmentContent"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateEntertainmentContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetEntertainmentContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="filter" type="aladdin:SearchCriteria"/>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetEntertainmentContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="out" type="aladdin:EntertainmentContent"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -967,6 +1058,10 @@
     <wsdl:part name="parameters" element="tns:GetCarerResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="UpdateEntertainmentContentRequest">
+    <wsdl:part name="parameters" element="tns:UpdateEntertainmentContent">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="ListOfPatientsResponse">
     <wsdl:part name="parameters" element="tns:ListOfPatientsResponse">
     </wsdl:part>
@@ -993,6 +1088,10 @@
   </wsdl:message>
   <wsdl:message name="CreateQuestionnaireResponse">
     <wsdl:part name="parameters" element="tns:CreateQuestionnaireResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetEntertainmentContentResponse">
+    <wsdl:part name="parameters" element="tns:GetEntertainmentContentResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="DeleteClinicianRequest">
@@ -1115,6 +1214,10 @@
     <wsdl:part name="parameters" element="tns:GetPatientsForCaregiver">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetMeasurementRequest">
+    <wsdl:part name="parameters" element="tns:GetMeasurement">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="DeleteAdministratorRequest">
     <wsdl:part name="parameters" element="tns:DeleteAdministrator">
     </wsdl:part>
@@ -1151,6 +1254,10 @@
     <wsdl:part name="parameters" element="tns:ListOfPossibleTasks">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetEntertainmentContentRequest">
+    <wsdl:part name="parameters" element="tns:GetEntertainmentContent">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="AssignTasksMassivelyRequest">
     <wsdl:part name="parameters" element="tns:AssignTasksMassively">
     </wsdl:part>
@@ -1173,6 +1280,10 @@
   </wsdl:message>
   <wsdl:message name="DeleteExternalServiceResponse">
     <wsdl:part name="parameters" element="tns:DeleteExternalServiceResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteEntertainmentContentResponse">
+    <wsdl:part name="parameters" element="tns:DeleteEntertainmentContentResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetPatientMeasurementRequest">
@@ -1247,6 +1358,10 @@
     <wsdl:part name="parameters" element="tns:GetCarerAssessments">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="DeleteEntertainmentContentRequest">
+    <wsdl:part name="parameters" element="tns:DeleteEntertainmentContent">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="GetPatientMeasurementResponse">
     <wsdl:part name="parameters" element="tns:GetPatientMeasurementResponse">
     </wsdl:part>
@@ -1263,6 +1378,10 @@
     <wsdl:part name="parameters" element="tns:CreateAdministratorResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetMeasurementResponse">
+    <wsdl:part name="parameters" element="tns:GetMeasurementResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="GetAdministratorRequest">
     <wsdl:part name="parameters" element="tns:GetAdministrator">
     </wsdl:part>
@@ -1277,6 +1396,14 @@
   </wsdl:message>
   <wsdl:message name="CreateQuestionnaireRequest">
     <wsdl:part name="parameters" element="tns:CreateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetTaskRequest">
+    <wsdl:part name="parameters" element="tns:GetTask">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateEntertainmentContentResponse">
+    <wsdl:part name="parameters" element="tns:UpdateEntertainmentContentResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetUserResponse">
@@ -1297,6 +1424,10 @@
   </wsdl:message>
   <wsdl:message name="UpdateSystemParameterResponse">
     <wsdl:part name="parameters" element="tns:UpdateSystemParameterResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddEntertainmentContentRequest">
+    <wsdl:part name="parameters" element="tns:AddEntertainmentContent">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="RemoveTaskMassivelyResponse">
@@ -1331,12 +1462,20 @@
     <wsdl:part name="parameters" element="tns:UpdateQuestionnaireResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="AddEntertainmentContentResponse">
+    <wsdl:part name="parameters" element="tns:AddEntertainmentContentResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="GetAllExternalServicesResponse">
     <wsdl:part name="parameters" element="tns:GetAllExternalServicesResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="ListOfCliniciansRequest">
     <wsdl:part name="parameters" element="tns:ListOfClinicians">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetTaskResponse">
+    <wsdl:part name="parameters" element="tns:GetTaskResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetPatientsForCaregiverResponse">
@@ -1728,6 +1867,42 @@
       <wsdl:input message="tns:RemoveTaskMassivelyRequest">
     </wsdl:input>
       <wsdl:output message="tns:RemoveTaskMassivelyResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <wsdl:input message="tns:GetTaskRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetTaskResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurement">
+      <wsdl:input message="tns:GetMeasurementRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetMeasurementResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEntertainmentContent">
+      <wsdl:input message="tns:AddEntertainmentContentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AddEntertainmentContentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEntertainmentContent">
+      <wsdl:input message="tns:DeleteEntertainmentContentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:DeleteEntertainmentContentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEntertainmentContent">
+      <wsdl:input message="tns:UpdateEntertainmentContentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateEntertainmentContentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntertainmentContent">
+      <wsdl:input message="tns:GetEntertainmentContentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetEntertainmentContentResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -2257,6 +2432,60 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveTaskMassively">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/RemoveTaskMassively"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetTask"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeasurement">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetMeasurement"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEntertainmentContent">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/AddEntertainmentContent"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEntertainmentContent">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/DeleteEntertainmentContent"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEntertainmentContent">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/UpdateEntertainmentContent"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntertainmentContent">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetEntertainmentContent"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

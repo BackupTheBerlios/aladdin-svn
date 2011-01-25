@@ -3,7 +3,7 @@
  * StorageComponentSkeletonInterface.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT)
+ * by the Apache Axis2 version: 1.5.3  Built on : Nov 12, 2010 (02:24:07 CET)
  */
     package com.aladdin.sc;
     /**
@@ -379,6 +379,34 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getEntertainmentContent
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetEntertainmentContentResponseDocument getEntertainmentContent
+                (
+                  eu.aladdin_project.storagecomponent.GetEntertainmentContentDocument getEntertainmentContent
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param getMeasurement
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetMeasurementResponseDocument getMeasurement
+                (
+                  eu.aladdin_project.storagecomponent.GetMeasurementDocument getMeasurement
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param createQuestionnaire
          */
 
@@ -498,6 +526,20 @@
                 public eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument listOfAdministrators
                 (
                   eu.aladdin_project.storagecomponent.ListOfAdministratorsDocument listOfAdministrators
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param getTask
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetTaskResponseDocument getTask
+                (
+                  eu.aladdin_project.storagecomponent.GetTaskDocument getTask
                  )
             ;
         
@@ -687,27 +729,13 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param getAdministrator
+                                    * @param addEntertainmentContent
          */
 
         
-                public eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministrator
+                public eu.aladdin_project.storagecomponent.AddEntertainmentContentResponseDocument addEntertainmentContent
                 (
-                  eu.aladdin_project.storagecomponent.GetAdministratorDocument getAdministrator
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param updateAdministrator
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministrator
-                (
-                  eu.aladdin_project.storagecomponent.UpdateAdministratorDocument updateAdministrator
+                  eu.aladdin_project.storagecomponent.AddEntertainmentContentDocument addEntertainmentContent
                  )
             ;
         
@@ -736,6 +764,34 @@
                 public eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswers
                 (
                   eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument storeQuestionnaireAnswers
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param getAdministrator
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministrator
+                (
+                  eu.aladdin_project.storagecomponent.GetAdministratorDocument getAdministrator
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updateAdministrator
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministrator
+                (
+                  eu.aladdin_project.storagecomponent.UpdateAdministratorDocument updateAdministrator
                  )
             ;
         
@@ -799,6 +855,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param deleteEntertainmentContent
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.DeleteEntertainmentContentResponseDocument deleteEntertainmentContent
+                (
+                  eu.aladdin_project.storagecomponent.DeleteEntertainmentContentDocument deleteEntertainmentContent
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param updateClinician
          */
 
@@ -806,6 +876,20 @@
                 public eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinician
                 (
                   eu.aladdin_project.storagecomponent.UpdateClinicianDocument updateClinician
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updateEntertainmentContent
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateEntertainmentContentResponseDocument updateEntertainmentContent
+                (
+                  eu.aladdin_project.storagecomponent.UpdateEntertainmentContentDocument updateEntertainmentContent
                  )
             ;
         

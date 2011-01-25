@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface IntDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IntDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("int2ab3doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IntDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("int2ab3doctype");
     
     /**
      * Gets the "int" element

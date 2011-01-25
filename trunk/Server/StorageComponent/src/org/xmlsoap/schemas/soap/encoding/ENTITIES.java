@@ -25,7 +25,7 @@ public interface ENTITIES extends org.apache.xmlbeans.XmlENTITIES
     /** @deprecated */
     void set(java.util.List list);
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ENTITIES.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("entitiesba07type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ENTITIES.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("entitiesba07type");
     
     /**
      * Gets the "id" attribute

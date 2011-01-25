@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("getuserplannedtasks6799doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("getuserplannedtasks6799doctype");
     
     /**
      * Gets the "GetUserPlannedTasks" element
@@ -42,7 +42,7 @@ public interface GetUserPlannedTasksDocument extends org.apache.xmlbeans.XmlObje
     public interface GetUserPlannedTasks extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("getuserplannedtasks3130elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserPlannedTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("getuserplannedtasks3130elemtype");
         
         /**
          * Gets the "userId" element

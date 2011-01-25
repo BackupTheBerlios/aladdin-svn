@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface IdentifierList extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IdentifierList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCC4019195266BA62C9A1F6BE69E0BB49").resolveHandle("identifierlist5b33type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IdentifierList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("identifierlist5b33type");
     
     /**
      * Gets array of all "Identifier" elements
