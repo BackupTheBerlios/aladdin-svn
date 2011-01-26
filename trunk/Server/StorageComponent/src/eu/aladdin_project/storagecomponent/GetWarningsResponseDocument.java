@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetWarningsResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarningsResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("getwarningsresponse693cdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarningsResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getwarningsresponse693cdoctype");
     
     /**
      * Gets the "GetWarningsResponse" element
@@ -42,7 +42,7 @@ public interface GetWarningsResponseDocument extends org.apache.xmlbeans.XmlObje
     public interface GetWarningsResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarningsResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("getwarningsresponse0836elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetWarningsResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getwarningsresponse0836elemtype");
         
         /**
          * Gets array of all "out" elements

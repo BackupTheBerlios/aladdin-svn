@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireAnswers extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireAnswers.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("questionnaireanswers439etype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireAnswers.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("questionnaireanswers439etype");
     
     /**
      * Gets array of all "answer" elements
@@ -147,6 +147,36 @@ public interface QuestionnaireAnswers extends org.apache.xmlbeans.XmlObject
      * Unsets the "ObjectID" attribute
      */
     void unsetObjectID();
+    
+    /**
+     * Gets the "TaskID" attribute
+     */
+    java.lang.String getTaskID();
+    
+    /**
+     * Gets (as xml) the "TaskID" attribute
+     */
+    org.apache.xmlbeans.XmlString xgetTaskID();
+    
+    /**
+     * True if has "TaskID" attribute
+     */
+    boolean isSetTaskID();
+    
+    /**
+     * Sets the "TaskID" attribute
+     */
+    void setTaskID(java.lang.String taskID);
+    
+    /**
+     * Sets (as xml) the "TaskID" attribute
+     */
+    void xsetTaskID(org.apache.xmlbeans.XmlString taskID);
+    
+    /**
+     * Unsets the "TaskID" attribute
+     */
+    void unsetTaskID();
     
     /**
      * Gets the "UserID" attribute

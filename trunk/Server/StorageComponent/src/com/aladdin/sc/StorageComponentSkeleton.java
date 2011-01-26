@@ -23,6 +23,7 @@ import com.aladdin.sc.db.Locale;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddEntertainmentContentResponseDocument.AddEntertainmentContentResponse;
+import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
 import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.AssignTasksMassivelyResponse;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
@@ -41,6 +42,7 @@ import eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument.DeleteCar
 import eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument.DeleteClinicianResponse;
 import eu.aladdin_project.storagecomponent.DeleteEntertainmentContentResponseDocument.DeleteEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument.DeleteExternalServiceResponse;
+import eu.aladdin_project.storagecomponent.DeleteMediaContentResponseDocument.DeleteMediaContentResponse;
 import eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument.DeletePatientAssessmentResponse;
 import eu.aladdin_project.storagecomponent.DeletePatientResponseDocument.DeletePatientResponse;
 import eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument.DeleteQuestionnaireResponse;
@@ -52,9 +54,11 @@ import eu.aladdin_project.storagecomponent.GetCarerResponseDocument.GetCarerResp
 import eu.aladdin_project.storagecomponent.GetClinicianResponseDocument.GetClinicianResponse;
 import eu.aladdin_project.storagecomponent.GetEntertainmentContentResponseDocument.GetEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.GetMeasurementResponseDocument.GetMeasurementResponse;
+import eu.aladdin_project.storagecomponent.GetMediaContentResponseDocument.GetMediaContentResponse;
 import eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskResponseDocument.GetQuestionnaireAnswersByTaskResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.GetTaskResponseDocument.GetTaskResponse;
@@ -76,6 +80,7 @@ import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarni
 import eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument.StoreMeasurementsResponse;
 import eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument.StoreQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.UpdateEntertainmentContentResponseDocument.UpdateEntertainmentContentResponse;
+import eu.aladdin_project.storagecomponent.UpdateMediaContentResponseDocument.UpdateMediaContentResponse;
 import eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse;
 import eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument.UpdateAdministratorResponse;
 import eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument.UpdateCarerResponse;
@@ -1521,6 +1526,12 @@ import java.net.URL;
 	    			rqas.setDateTime(cal);
 	    			rqas.setObjectID(((Integer)q[2]).toString());
 	    			rqas.setUserID(((Integer)q[3]).toString());
+	    			
+	    			String sqlTask = "SELECT id FROM task WHERE datetimefulfilled = '" + before.getTime().toString() + "'";
+	    			Object[] lt = s.createSQLQuery(sqlTask).list().toArray();
+	    			if (lt.length > 0) {
+	    				rqas.setTaskID(((Integer)lt[0]).toString());
+	    			}
 	    			
 	    			for (int j = 0; j < lqa.length; j++) {
 	    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
@@ -2988,43 +2999,29 @@ import java.net.URL;
     		
     		try {
     			s.beginTransaction();
-    			//System.out.println ("1");
     			
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
 				Timestamp datetime = new Timestamp(0);
-				////System.out.println (data.getDateTime().toString());
 				if (data.getDateTime() != null) datetime = new Timestamp(data.getDateTime().getTimeInMillis());
-    			//System.out.println ("2");
-    			//System.out.println (data.getObjectID().toString());
     			Integer objectId = new Integer (data.getObjectID());
-    			//System.out.println ("3");
-    			//System.out.println (data.getUserID().toString());
     			Integer userId = new Integer (data.getUserID());
-    			//System.out.println ("4");
+    			Integer taskId = new Integer (data.getTaskID());
     			
     			Integer id = 0;
-    			//System.out.println ("5");
     			QuestionnaireAnswer[] rqal = data.getAnswerArray();
-    			//System.out.println ("6");
     			for (int i = 0; i < rqal.length; i++) {
-    				//System.out.println ("7");
     				com.aladdin.sc.db.QuestionnaireAnswer qa = new com.aladdin.sc.db.QuestionnaireAnswer();
-    				//System.out.println ("8");
     				if (rqal[i].getQuestionID() != null) qa.setQuestion(new Integer (rqal[i].getQuestionID()));
-    				//System.out.println ("9");
     				qa.setValue(rqal[i].getValue());
-    				//System.out.println ("10");
     				qa.setUserId(userId);
-    				//System.out.println ("11");
     				qa.setObjectId(objectId);
-    				//System.out.println ("12");
     				qa.setDateTime(datetime);
-    				//System.out.println ("13");
     				s.save(qa);
-    				//System.out.println ("14");
     				id = qa.getId();
-    				//System.out.println ("15");
     			}
+    			
+    			String sql = "UPDATE task SET datetimefulfilled = " + datetime.toString() + " WHERE id = " + taskId.toString();
+    			s.createSQLQuery(sql).executeUpdate();
     			
     			s.getTransaction().commit();
     			
@@ -4391,14 +4388,14 @@ import java.net.URL;
 			return respdoc;
 		}
 		
-		public GetEntertainmentContentResponseDocument getEntertainmentContent(GetEntertainmentContentDocument req) {
-			GetEntertainmentContentResponseDocument respdoc = GetEntertainmentContentResponseDocument.Factory.newInstance();
-			GetEntertainmentContentResponse resp = respdoc.addNewGetEntertainmentContentResponse();
+		public GetMediaContentResponseDocument getMediaContent(GetMediaContentDocument req) {
+			GetMediaContentResponseDocument respdoc = GetMediaContentResponseDocument.Factory.newInstance();
+			GetMediaContentResponse resp = respdoc.addNewGetMediaContentResponse();
 			
 			Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
 			String sql = "SELECT id FROM entertainmentcontent WHERE ";
 			
-			SearchCriteria[] sc = req.getGetEntertainmentContent().getFilterArray();
+			SearchCriteria[] sc = req.getGetMediaContent().getFilterArray();
 			for (int i = 0; i < sc.length; i++) {
 				for (int j = 0; j < field.length; j++) {
 					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
@@ -4415,7 +4412,7 @@ import java.net.URL;
 			for (int i = 0; i < list.length; i++) {
 				Integer id = (Integer) list[i];
 				com.aladdin.sc.db.EntertainmentContent ec = (com.aladdin.sc.db.EntertainmentContent) s.load(com.aladdin.sc.db.EntertainmentContent.class, id);
-				EntertainmentContent out = resp.addNewOut();
+				MediaContent out = resp.addNewOut();
 				
 				out.setID(ec.getId().toString());
 				out.setCategory(ec.getCategory());
@@ -4428,7 +4425,7 @@ import java.net.URL;
 			return respdoc;
 		}
 		
-		private Integer storeEntertainmentContent (EntertainmentContent rEC, Integer id) {
+		private Integer storeEntertainmentContent (MediaContent rEC, Integer id) {
 			com.aladdin.sc.db.EntertainmentContent ec = new com.aladdin.sc.db.EntertainmentContent();
 			ec.setCategory(rEC.getCategory());
 			ec.setText(rEC.getText());
@@ -4447,16 +4444,16 @@ import java.net.URL;
 		}
 
 
-		public AddEntertainmentContentResponseDocument addEntertainmentContent(AddEntertainmentContentDocument req) {
-			AddEntertainmentContentResponseDocument respdoc = AddEntertainmentContentResponseDocument.Factory.newInstance();
-			AddEntertainmentContentResponse resp = respdoc.addNewAddEntertainmentContentResponse();
+		public AddMediaContentResponseDocument addMediaContent(AddMediaContentDocument req) {
+			AddMediaContentResponseDocument respdoc = AddMediaContentResponseDocument.Factory.newInstance();
+			AddMediaContentResponse resp = respdoc.addNewAddMediaContentResponse();
 			
 			OperationResult res = resp.addNewOut();
 			
 			try {
 				s.beginTransaction();
 				
-				Integer savedId = storeEntertainmentContent(req.getAddEntertainmentContent().getIn(), null);
+				Integer savedId = storeEntertainmentContent(req.getAddMediaContent().getIn(), null);
 				
 				s.getTransaction().commit();
 				
@@ -4477,14 +4474,14 @@ import java.net.URL;
 			return respdoc;
 		}
 
-		public DeleteEntertainmentContentResponseDocument deleteEntertainmentContent(DeleteEntertainmentContentDocument req) {
-			DeleteEntertainmentContentResponseDocument respdoc = DeleteEntertainmentContentResponseDocument.Factory.newInstance();
-			DeleteEntertainmentContentResponse resp = respdoc.addNewDeleteEntertainmentContentResponse();
+		public DeleteMediaContentResponseDocument deleteMediaContent(DeleteMediaContentDocument req) {
+			DeleteMediaContentResponseDocument respdoc = DeleteMediaContentResponseDocument.Factory.newInstance();
+			DeleteMediaContentResponse resp = respdoc.addNewDeleteMediaContentResponse();
 			
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				Integer id = new Integer (req.getDeleteEntertainmentContent().getId());
+				Integer id = new Integer (req.getDeleteMediaContent().getId());
     			s.beginTransaction();
     			s.createSQLQuery("DELETE FROM entertainmentcontent WHERE id = " + id.toString()).executeUpdate();
     			s.getTransaction().commit();
@@ -4505,16 +4502,16 @@ import java.net.URL;
 			return respdoc;
 		}
 
-		public UpdateEntertainmentContentResponseDocument updateEntertainmentContent(UpdateEntertainmentContentDocument req) {
-			UpdateEntertainmentContentResponseDocument respdoc = UpdateEntertainmentContentResponseDocument.Factory.newInstance();
-			UpdateEntertainmentContentResponse resp = respdoc.addNewUpdateEntertainmentContentResponse();
+		public UpdateMediaContentResponseDocument updateMediaContent(UpdateMediaContentDocument req) {
+			UpdateMediaContentResponseDocument respdoc = UpdateMediaContentResponseDocument.Factory.newInstance();
+			UpdateMediaContentResponse resp = respdoc.addNewUpdateMediaContentResponse();
 			
 			OperationResult res = resp.addNewOut();
 			
 			try {
 				s.beginTransaction();
 				
-				final EntertainmentContent rEC = req.getUpdateEntertainmentContent().getEc();
+				final MediaContent rEC = req.getUpdateMediaContent().getEc();
 				Integer savedId = storeEntertainmentContent(rEC, new Integer (rEC.getID()));
 				
 				s.getTransaction().commit();
@@ -4532,6 +4529,53 @@ import java.net.URL;
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
 			}
+			
+			return respdoc;
+		}
+
+		public GetQuestionnaireAnswersByTaskResponseDocument getQuestionnaireAnswersByTask(GetQuestionnaireAnswersByTaskDocument req) {
+			GetQuestionnaireAnswersByTaskResponseDocument respdoc = GetQuestionnaireAnswersByTaskResponseDocument.Factory.newInstance();
+			GetQuestionnaireAnswersByTaskResponse resp = respdoc.addNewGetQuestionnaireAnswersByTaskResponse();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetQuestionnaireAnswersByTask().setUserId (nc.check(req.getGetQuestionnaireAnswersByTask().getUserId(), String.class));
+    			req.getGetQuestionnaireAnswersByTask().setTaskId (nc.check(req.getGetQuestionnaireAnswersByTask().getTaskId(), String.class));
+    		}
+			
+    		if (
+    				!checkUser(req.getGetQuestionnaireAnswersByTask().getUserId(), U_CLINICIAN) &&
+    				!checkUser(req.getGetQuestionnaireAnswersByTask().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getGetQuestionnaireAnswersByTask().getUserId(), U_SERVICE)
+				) {
+    			return respdoc;
+    		}
+    		
+    		try {
+    			Integer taskId = new Integer (req.getGetQuestionnaireAnswersByTask().getTaskId());
+    			com.aladdin.sc.db.Task task = (com.aladdin.sc.db.Task) s.load(com.aladdin.sc.db.Task.class, taskId);
+    			
+    			String sql = "SELECT id FROM questionnaireanswer WHERE ";
+				sql += "timestamp = '" + task.getDateTimeFulfilled().toString() + "' ";
+				sql += " AND question in (select id from questionnairequestion where quest = " + task.getQuestionnaire().toString() + ")";
+				
+				Object[] lqa = s.createSQLQuery(sql).list().toArray();
+    			QuestionnaireAnswers rqas = resp.addNewOut();
+    			rqas.setTaskID(taskId.toString());
+    			
+    			for (int j = 0; j < lqa.length; j++) {
+    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
+    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[0]); 
+    				rqa.setQuestionID(qa.getQuestion().toString());
+    				rqa.setValue(qa.getValue());
+    				rqas.setObjectID(qa.getObjectId().toString());
+    				rqas.setUserID(qa.getUserId().toString());
+    			}
+    			
+    		} catch (Exception e) {
+    			System.out.println (e.toString());
+    		}
 			
 			return respdoc;
 		}

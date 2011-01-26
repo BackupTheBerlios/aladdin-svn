@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfAdministratorsResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministratorsResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("listofadministratorsresponsea97cdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministratorsResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("listofadministratorsresponsea97cdoctype");
     
     /**
      * Gets the "ListOfAdministratorsResponse" element
@@ -42,7 +42,7 @@ public interface ListOfAdministratorsResponseDocument extends org.apache.xmlbean
     public interface ListOfAdministratorsResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministratorsResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("listofadministratorsresponsed6a4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfAdministratorsResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("listofadministratorsresponsed6a4elemtype");
         
         /**
          * Gets array of all "out" elements

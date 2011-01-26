@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteExternalServiceResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalServiceResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("deleteexternalserviceresponsefceedoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalServiceResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("deleteexternalserviceresponsefceedoctype");
     
     /**
      * Gets the "DeleteExternalServiceResponse" element
@@ -42,7 +42,7 @@ public interface DeleteExternalServiceResponseDocument extends org.apache.xmlbea
     public interface DeleteExternalServiceResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalServiceResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("deleteexternalserviceresponsea9daelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteExternalServiceResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("deleteexternalserviceresponsea9daelemtype");
         
         /**
          * Gets the "out" element

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetMeasurementResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMeasurementResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("getmeasurementresponse8d87doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMeasurementResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getmeasurementresponse8d87doctype");
     
     /**
      * Gets the "GetMeasurementResponse" element
@@ -42,7 +42,7 @@ public interface GetMeasurementResponseDocument extends org.apache.xmlbeans.XmlO
     public interface GetMeasurementResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMeasurementResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("getmeasurementresponse0bc4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMeasurementResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getmeasurementresponse0bc4elemtype");
         
         /**
          * Gets array of all "out" elements

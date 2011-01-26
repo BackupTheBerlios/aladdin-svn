@@ -43,6 +43,7 @@
         <attribute name="ID" type="string"/>
         <attribute name="DateTime" type="dateTime"/>
         <attribute name="ObjectID" type="string"/>
+        <attribute name="TaskID" type="string"/>
         <attribute name="UserID" type="string"/>
     </complexType>
     <complexType name="QuestionnaireAnswer">
@@ -347,7 +348,7 @@
             <element minOccurs="0" name="Description" type="string"/>
         </sequence>
     </complexType>
-    <complexType name="EntertainmentContent">
+    <complexType name="MediaContent">
         <sequence>
             <element name="ID" type="string"/>
             <element name="title" type="string"/>

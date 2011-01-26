@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Short extends org.apache.xmlbeans.XmlShort
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Short.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sF5ED454D432D9E44C3703D7FE60139E3").resolveHandle("short4950type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Short.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("short4950type");
     
     /**
      * Gets the "id" attribute

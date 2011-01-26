@@ -27,7 +27,9 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         new javax.xml.namespace.QName("", "DateTime");
     private static final javax.xml.namespace.QName OBJECTID$6 = 
         new javax.xml.namespace.QName("", "ObjectID");
-    private static final javax.xml.namespace.QName USERID$8 = 
+    private static final javax.xml.namespace.QName TASKID$8 = 
+        new javax.xml.namespace.QName("", "TaskID");
+    private static final javax.xml.namespace.QName USERID$10 = 
         new javax.xml.namespace.QName("", "UserID");
     
     
@@ -424,6 +426,98 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
     }
     
     /**
+     * Gets the "TaskID" attribute
+     */
+    public java.lang.String getTaskID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TASKID$8);
+            if (target == null)
+            {
+                return null;
+            }
+            return target.getStringValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "TaskID" attribute
+     */
+    public org.apache.xmlbeans.XmlString xgetTaskID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TASKID$8);
+            return target;
+        }
+    }
+    
+    /**
+     * True if has "TaskID" attribute
+     */
+    public boolean isSetTaskID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().find_attribute_user(TASKID$8) != null;
+        }
+    }
+    
+    /**
+     * Sets the "TaskID" attribute
+     */
+    public void setTaskID(java.lang.String taskID)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(TASKID$8);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(TASKID$8);
+            }
+            target.setStringValue(taskID);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "TaskID" attribute
+     */
+    public void xsetTaskID(org.apache.xmlbeans.XmlString taskID)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(TASKID$8);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(TASKID$8);
+            }
+            target.set(taskID);
+        }
+    }
+    
+    /**
+     * Unsets the "TaskID" attribute
+     */
+    public void unsetTaskID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_attribute(TASKID$8);
+        }
+    }
+    
+    /**
      * Gets the "UserID" attribute
      */
     public java.lang.String getUserID()
@@ -432,7 +526,7 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(USERID$8);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(USERID$10);
             if (target == null)
             {
                 return null;
@@ -450,7 +544,7 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(USERID$8);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(USERID$10);
             return target;
         }
     }
@@ -463,7 +557,7 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().find_attribute_user(USERID$8) != null;
+            return get_store().find_attribute_user(USERID$10) != null;
         }
     }
     
@@ -476,10 +570,10 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(USERID$8);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(USERID$10);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(USERID$8);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(USERID$10);
             }
             target.setStringValue(userID);
         }
@@ -494,10 +588,10 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(USERID$8);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(USERID$10);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(USERID$8);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(USERID$10);
             }
             target.set(userID);
         }
@@ -511,7 +605,7 @@ public class QuestionnaireAnswersImpl extends org.apache.xmlbeans.impl.values.Xm
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_attribute(USERID$8);
+            get_store().remove_attribute(USERID$10);
         }
     }
 }

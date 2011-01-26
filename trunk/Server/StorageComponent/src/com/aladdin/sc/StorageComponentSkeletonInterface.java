@@ -71,6 +71,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getQuestionnaireAnswersByTask
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskResponseDocument getQuestionnaireAnswersByTask
+                (
+                  eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskDocument getQuestionnaireAnswersByTask
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param assignTasksMassively
          */
 
@@ -127,6 +141,34 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param listOfCarers
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument listOfCarers
+                (
+                  eu.aladdin_project.storagecomponent.ListOfCarersDocument listOfCarers
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updateMediaContent
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateMediaContentResponseDocument updateMediaContent
+                (
+                  eu.aladdin_project.storagecomponent.UpdateMediaContentDocument updateMediaContent
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getSystemParameterList
          */
 
@@ -155,13 +197,13 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param listOfCarers
+                                    * @param addMediaContent
          */
 
         
-                public eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument listOfCarers
+                public eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument addMediaContent
                 (
-                  eu.aladdin_project.storagecomponent.ListOfCarersDocument listOfCarers
+                  eu.aladdin_project.storagecomponent.AddMediaContentDocument addMediaContent
                  )
             ;
         
@@ -379,13 +421,13 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param getEntertainmentContent
+                                    * @param getMediaContent
          */
 
         
-                public eu.aladdin_project.storagecomponent.GetEntertainmentContentResponseDocument getEntertainmentContent
+                public eu.aladdin_project.storagecomponent.GetMediaContentResponseDocument getMediaContent
                 (
-                  eu.aladdin_project.storagecomponent.GetEntertainmentContentDocument getEntertainmentContent
+                  eu.aladdin_project.storagecomponent.GetMediaContentDocument getMediaContent
                  )
             ;
         
@@ -729,13 +771,27 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param addEntertainmentContent
+                                    * @param getAdministrator
          */
 
         
-                public eu.aladdin_project.storagecomponent.AddEntertainmentContentResponseDocument addEntertainmentContent
+                public eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministrator
                 (
-                  eu.aladdin_project.storagecomponent.AddEntertainmentContentDocument addEntertainmentContent
+                  eu.aladdin_project.storagecomponent.GetAdministratorDocument getAdministrator
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param updateAdministrator
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministrator
+                (
+                  eu.aladdin_project.storagecomponent.UpdateAdministratorDocument updateAdministrator
                  )
             ;
         
@@ -764,34 +820,6 @@
                 public eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument storeQuestionnaireAnswers
                 (
                   eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument storeQuestionnaireAnswers
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param getAdministrator
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument getAdministrator
-                (
-                  eu.aladdin_project.storagecomponent.GetAdministratorDocument getAdministrator
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param updateAdministrator
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument updateAdministrator
-                (
-                  eu.aladdin_project.storagecomponent.UpdateAdministratorDocument updateAdministrator
                  )
             ;
         
@@ -855,20 +883,6 @@
         /**
          * Auto generated method signature
          * 
-                                    * @param deleteEntertainmentContent
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.DeleteEntertainmentContentResponseDocument deleteEntertainmentContent
-                (
-                  eu.aladdin_project.storagecomponent.DeleteEntertainmentContentDocument deleteEntertainmentContent
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
                                     * @param updateClinician
          */
 
@@ -876,20 +890,6 @@
                 public eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument updateClinician
                 (
                   eu.aladdin_project.storagecomponent.UpdateClinicianDocument updateClinician
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param updateEntertainmentContent
-         */
-
-        
-                public eu.aladdin_project.storagecomponent.UpdateEntertainmentContentResponseDocument updateEntertainmentContent
-                (
-                  eu.aladdin_project.storagecomponent.UpdateEntertainmentContentDocument updateEntertainmentContent
                  )
             ;
         
@@ -918,6 +918,20 @@
                 public eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument markWarningAsRead
                 (
                   eu.aladdin_project.storagecomponent.MarkWarningAsReadDocument markWarningAsRead
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param deleteMediaContent
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.DeleteMediaContentResponseDocument deleteMediaContent
+                (
+                  eu.aladdin_project.storagecomponent.DeleteMediaContentDocument deleteMediaContent
                  )
             ;
         
