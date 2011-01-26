@@ -398,5 +398,41 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.removeTaskMassively(patientId, typeOfTask, startDate, endDate, userId);
   }
   
+  public eu.aladdin_project.xsd.Task getTask(java.lang.String id, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.getTask(id, locale, userId);
+  }
+  
+  public eu.aladdin_project.xsd.Measurement[] getMeasurement(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.getMeasurement(filter, userId);
+  }
+  
+  public eu.aladdin_project.xsd.OperationResult addEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent in, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.addEntertainmentContent(in, userId);
+  }
+  
+  public eu.aladdin_project.xsd.OperationResult deleteEntertainmentContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.deleteEntertainmentContent(id, userId);
+  }
+  
+  public eu.aladdin_project.xsd.OperationResult updateEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent ec, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.updateEntertainmentContent(ec, userId);
+  }
+  
+  public eu.aladdin_project.xsd.EntertainmentContent[] getEntertainmentContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.getEntertainmentContent(filter, userId);
+  }
+  
   
 }

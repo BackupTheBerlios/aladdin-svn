@@ -67,4 +67,10 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.OperationResult updateSystemParameter(int type, eu.aladdin_project.xsd.SystemParameter value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult assignTasksMassively(eu.aladdin_project.xsd.Task task, java.util.Date startDate, java.util.Date endDate, java.math.BigInteger frequency, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult removeTaskMassively(java.lang.String patientId, java.math.BigInteger typeOfTask, java.util.Date startDate, java.util.Date endDate, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.Task getTask(java.lang.String id, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.Measurement[] getMeasurement(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult addEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent in, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult deleteEntertainmentContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult updateEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent ec, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.EntertainmentContent[] getEntertainmentContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
 }

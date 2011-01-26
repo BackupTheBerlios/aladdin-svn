@@ -167,7 +167,7 @@
 					<label value=""/>
 					<hbox>
 						<label value="Till day (not included)"/>
-						<datebox format="dd/MM/yyyy" value="${date }"/>
+						<datebox id="massivecal" format="dd/MM/yyyy" value="${date }"/>
 					</hbox>
 					
 				</row>

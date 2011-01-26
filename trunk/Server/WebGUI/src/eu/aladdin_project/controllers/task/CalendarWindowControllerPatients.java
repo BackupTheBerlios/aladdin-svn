@@ -117,8 +117,9 @@ public class CalendarWindowControllerPatients extends Window {
 			SystemParameter tasstatus = new SystemParameter(SystemDictionary.TASK_STATUS_PENDING,SystemDictionary.TASK_STATUS_PENDING_LBL);
 			//Object ID (Person ID)
 			String objids = ((Textbox)getFellow("objid")).getValue();
+			String addressedid = ((Textbox)getFellow("addressedid")).getValue();
 			System.out.println("Getobjids result = " + objids);
-			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, text, questionnaire, objids, userids, objids);
+			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, text, questionnaire, objids, userids, addressedid);
 			boolean massive = ((Checkbox)getFellow("massivecheck")).isChecked();
 			OperationResult opres = null;
 			if(massive){
@@ -134,6 +135,7 @@ public class CalendarWindowControllerPatients extends Window {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
+			this.getParent().removeChild(this);
 			Executions.getCurrent().sendRedirect("");
 		}
 	}

@@ -13,6 +13,10 @@ public class Carer  implements java.io.Serializable {
     private eu.aladdin_project.xsd.PersonData personData;
 
     private eu.aladdin_project.xsd.SocioDemographicData SD_Data;
+    
+    public String toString(){
+    	return this.personData.getSurname()+", "+this.personData.getName();
+    }
 
     public Carer() {
     }
@@ -186,10 +190,6 @@ public class Carer  implements java.io.Serializable {
         return 
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
-    }
-    
-    public String toString(){
-    	return this.personData.getSurname()+", "+this.personData.getName();
     }
 
 }

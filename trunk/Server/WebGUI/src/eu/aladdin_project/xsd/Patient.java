@@ -23,6 +23,10 @@ public class Patient  implements java.io.Serializable {
     private eu.aladdin_project.xsd.Consulter consulterInCharge;
 
     private eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner;
+    
+    public String toString(){
+    	return this.personData.getSurname()+", "+this.personData.getName();
+    }
 
     public Patient() {
     }
@@ -366,10 +370,6 @@ public class Patient  implements java.io.Serializable {
         return 
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
-    }
-    
-    public String toString(){
-    	return this.personData.getSurname()+", "+this.personData.getName();
     }
 
 }

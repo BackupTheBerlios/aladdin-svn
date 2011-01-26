@@ -26,10 +26,12 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.controllers.details.assessment.AssessmentPopupController;
+import eu.aladdin_project.controllers.details.measurements.MeasurementPopupController;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.Clinician;
 import eu.aladdin_project.xsd.Consulter;
 import eu.aladdin_project.xsd.GeneralPractitioner;
+import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientAssessment;
 import eu.aladdin_project.xsd.PatientCarer;
@@ -43,6 +45,8 @@ public class DetailPatientController extends DetailSDController{
 	
 	public AssessmentPopupController assessmentWindow;
 	private Window removeMassivelyDialog;
+	private Window weightMeasurementDialog;
+	
 	protected SimpleCalendarModel calmodel = null;
 	protected Calendars calendars = null;
 	protected SocialWorker currentsocialworker = null;
@@ -258,8 +262,12 @@ public class DetailPatientController extends DetailSDController{
 			this.calmodel = new SimpleCalendarModel();
 			if(tasklist != null){
 				System.out.println("TASKS LENGHT: "+tasklist.length);
-				
+					OperationResult currentuserid = proxy.getUserIdByPersonId(this.currentid, SystemDictionary.USERTYPE_PATIENT_INT, userid);
 					for(int i = 0; i<tasklist.length; i++){
+						System.out.println("COMPARE: "+tasklist[i].getObjectID()+":"+currentuserid.getCode());
+						if(!tasklist[i].getObjectID().equals(currentuserid.getCode())){
+							continue;
+						}
 						GregorianCalendar calendar1 = new GregorianCalendar();
 						calendar1.setTimeInMillis(tasklist[i].getDateTimeAssigned().getTimeInMillis());
 						
@@ -323,5 +331,23 @@ public class DetailPatientController extends DetailSDController{
 		removeMassivelyDialog.setVisible(true);
 		removeMassivelyDialog.doModal();
 		((Textbox)removeMassivelyDialog.getFellow("removepatientid")).setValue(this.currentid);
+	}
+	
+	public void createWeightMeasurementDialog() throws SuspendNotAllowedException, InterruptedException{
+		weightMeasurementDialog = (Window)Executions.createComponents("measurement.zul", this, null);
+		weightMeasurementDialog.setVisible(true);
+		weightMeasurementDialog.doModal();
+		
+		Date bdate = this.calendars.getBeginDate();
+		Date edate = this.calendars.getEndDate();
+		
+		((MeasurementPopupController)weightMeasurementDialog).setPatientid(this.currentid);
+		((MeasurementPopupController)weightMeasurementDialog).setFrom(bdate);
+		((MeasurementPopupController)weightMeasurementDialog).setTo(edate);
+		
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		//TODO Continue working
+		//Measurement[] meas = proxy.getPatientMeasurement(this.currentid, measurementType, fromData, toData, userId)
+		
 	}
 }

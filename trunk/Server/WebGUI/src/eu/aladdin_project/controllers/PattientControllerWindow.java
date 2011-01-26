@@ -19,6 +19,7 @@ import org.zkoss.zul.Rows;
 import org.zkoss.zul.Textbox;
 
 import eu.aladdin_project.ErrorDictionary;
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.controllers.AladdinFormControllerWindow.SimpleFieldData;
 import eu.aladdin_project.xsd.Carer;
@@ -32,6 +33,8 @@ import eu.aladdin_project.xsd.PatientCarerList;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocialWorker;
 import eu.aladdin_project.xsd.SocioDemographicData;
+import eu.aladdin_project.xsd.SystemParameter;
+import eu.aladdin_project.xsd.User;
 
 public class PattientControllerWindow extends SDFormControllerWindow{
 
@@ -113,6 +116,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			Patient patient = new Patient("",personData,sdData, resClinic, oflist, socialw, consulter, gralprac);
 			if(newpatient){
 				result = proxy.createPatient(patient, id);
+				System.out.println("Patient ID: "+result.getCode());
+				User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_PATIENT, ""), result.getCode(), personData.getSurname(), personData.getSurname());
+				result = proxy.createUser(user);
 			}else{
 				patient.setID(this.currentid);
 				result = proxy.updatePatient(patient, id);

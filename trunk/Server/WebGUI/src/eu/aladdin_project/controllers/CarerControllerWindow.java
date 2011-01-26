@@ -12,10 +12,14 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 
 import eu.aladdin_project.ErrorDictionary;
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Carer;
+import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
+import eu.aladdin_project.xsd.SystemParameter;
+import eu.aladdin_project.xsd.User;
 
 public class CarerControllerWindow extends SDFormControllerWindow{
 
@@ -72,7 +76,8 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			Session ses = Sessions.getCurrent();
 			String id = (String)ses.getAttribute("userid");
-			proxy.createCarer(carer, id);
+			OperationResult result = proxy.createCarer(carer, id);
+			result = proxy.createUser(new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), carer.getPersonData().getSurname(), carer.getPersonData().getSurname()));
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
 		}catch (Exception e){

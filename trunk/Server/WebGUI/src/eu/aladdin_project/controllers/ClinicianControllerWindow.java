@@ -11,10 +11,14 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 
 import eu.aladdin_project.ErrorDictionary;
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Clinician;
 import eu.aladdin_project.xsd.Identifier;
+import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PersonData;
+import eu.aladdin_project.xsd.SystemParameter;
+import eu.aladdin_project.xsd.User;
 
 public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 
@@ -74,7 +78,8 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			Session ses = Sessions.getCurrent();
 			String id = (String)ses.getAttribute("userid");
-			proxy.createClinician(clinic, id);
+			OperationResult result = proxy.createClinician(clinic, id);
+			result = proxy.createUser(new User("", new SystemParameter(SystemDictionary.USERTYPE_CLINICIAN,""), result.getCode(), clinic.getPersonData().getSurname(), clinic.getPersonData().getSurname()));
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CLINICIAN_SERVER);
 		}catch (Exception e){

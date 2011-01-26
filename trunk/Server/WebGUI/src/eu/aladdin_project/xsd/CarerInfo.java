@@ -13,6 +13,10 @@ public class CarerInfo  implements java.io.Serializable {
     private java.lang.String surname;
 
     private java.lang.String name;
+    
+    public String toString(){
+    	return surname+", "+name;
+    }
 
     public CarerInfo() {
     }

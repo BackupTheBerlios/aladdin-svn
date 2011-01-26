@@ -28,7 +28,6 @@ import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.Questionnaire;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
-import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
 import eu.aladdin_project.xsd.User;
 
 public class CalendarControllerPatients extends GenericForwardComposer {
@@ -74,63 +73,69 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 	}
 	
 	public void onEventEdit(CalendarsEvent event) throws InterruptedException, RemoteException{
-		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
-		Session ses = Sessions.getCurrent();
-		String userid = (String)ses.getAttribute("userid");
-		bookEventWin = (Window)Executions.createComponents("bookEvent.zul", self.getParent(), null);
-		bookEventWin.setAttribute("calendars", cal);
-		bookEventWin.setAttribute("calevent", event);
-		Date setting = event.getCalendarEvent().getBeginDate();
-		SimpleCalendarEvent scevent = (SimpleCalendarEvent)event.getCalendarEvent();
-		((Datebox)bookEventWin.getFellow("datetask")).setValue(setting);
-		((Datebox)bookEventWin.getFellow("datetask")).setReadonly(true);
-		((Datebox)bookEventWin.getFellow("datetask")).setButtonVisible(false);
-		((Timebox)bookEventWin.getFellow("timetask")).setValue(setting);
-		((Timebox)bookEventWin.getFellow("timetask")).setReadonly(true);
-		((Timebox)bookEventWin.getFellow("timetask")).setButtonVisible(false);
-		((Textbox)bookEventWin.getFellow("taskidfield")).setValue((String)scevent.getParams().get("task"));
-		((Textbox)bookEventWin.getFellow("taskstatusfield")).setValue(SystemDictionary.getTaskStatusLabel((String)scevent.getParams().get("status")));
-		((Row)bookEventWin.getFellow("rowtaskstatus")).setVisible(true);
-		if(scevent.getParams().get("status").equals(SystemDictionary.TASK_STATUS_COMPLETED)){
-			String tasktype = (String)scevent.getParams().get("type");  
-			if(tasktype.equals(SystemDictionary.TASK_TYPE_CARERQS) || tasktype.equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
-				//TODO retrieve Questionnaire answers and show in the task window
-				Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
-				String responses = provideQuestionnaireResponse(q.getQuestion(), "");
-				System.out.println("RESPONSES: "+responses);
-				bookEventWin.getFellow("qsanswersrow").setVisible(true);
-				((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
+		try{
+			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+			Session ses = Sessions.getCurrent();
+			String userid = (String)ses.getAttribute("userid");
+			bookEventWin = (Window)Executions.createComponents("bookEvent.zul", self.getParent(), null);
+			bookEventWin.setAttribute("calendars", cal);
+			bookEventWin.setAttribute("calevent", event);
+			Date setting = event.getCalendarEvent().getBeginDate();
+			SimpleCalendarEvent scevent = (SimpleCalendarEvent)event.getCalendarEvent();
+			((Datebox)bookEventWin.getFellow("datetask")).setValue(setting);
+			((Datebox)bookEventWin.getFellow("datetask")).setReadonly(true);
+			((Datebox)bookEventWin.getFellow("datetask")).setButtonVisible(false);
+			((Timebox)bookEventWin.getFellow("timetask")).setValue(setting);
+			((Timebox)bookEventWin.getFellow("timetask")).setReadonly(true);
+			((Timebox)bookEventWin.getFellow("timetask")).setButtonVisible(false);
+			((Textbox)bookEventWin.getFellow("taskidfield")).setValue((String)scevent.getParams().get("task"));
+			((Textbox)bookEventWin.getFellow("taskstatusfield")).setValue(SystemDictionary.getTaskStatusLabel((String)scevent.getParams().get("status")));
+			((Row)bookEventWin.getFellow("rowtaskstatus")).setVisible(true);
+			if(scevent.getParams().get("status").equals(SystemDictionary.TASK_STATUS_COMPLETED)){
+				String tasktype = (String)scevent.getParams().get("type");  
+				if(tasktype.equals(SystemDictionary.TASK_TYPE_CARERQS) || tasktype.equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
+					//TODO retrieve Questionnaire answers and show in the task window
+					Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
+					String responses = provideQuestionnaireResponse(q.getQuestion(), "");
+					System.out.println("RESPONSES: "+responses);
+					bookEventWin.getFellow("qsanswersrow").setVisible(true);
+					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
+					
+				}else if(tasktype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT)){
+					//TODO retrieve measurements results and show in the task window
+				}
 				
-			}else if(tasktype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT)){
-				//TODO retrieve measurements results and show in the task window
 			}
+			User addressed = proxy.getUser((String)scevent.getParams().get("objid"));
+			Patient patient = proxy.getPatient(addressed.getPersonID(), userid);
+			((Textbox)bookEventWin.getFellow("addressedid")).setValue((String)scevent.getParams().get("objid"));
+			((Textbox)bookEventWin.getFellow("addressedstr")).setValue(patient.toString());
+			User object = proxy.getUser((String)scevent.getParams().get("exec"));
+			Carer executor = proxy.getCarer(object.getPersonID(), userid);
+			((Textbox)bookEventWin.getFellow("objid")).setValue((String)scevent.getParams().get("exec"));
+			((Textbox)bookEventWin.getFellow("objstr")).setValue(executor.toString());
+			User assigner = proxy.getUser((String)scevent.getParams().get("assign"));
+			Clinician assg = proxy.getClinician(assigner.getPersonID(), userid);
+			((Textbox)bookEventWin.getFellow("userid")).setValue((String)scevent.getParams().get("assign"));
+			((Textbox)bookEventWin.getFellow("userstr")).setValue(assg.toString());
+			((Button)bookEventWin.getFellow("cancelbutton")).setVisible(true);
+			((Textbox)bookEventWin.getFellow("tasktypetext")).setValue(scevent.getContent());
+			((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);
+			//((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
+			int tasktype2 = Integer.parseInt((String)scevent.getParams().get("type"));
+			this.showCustomFields(tasktype2);
+			((Listbox)bookEventWin.getFellow("tasktypesel")).setVisible(false);
+			((Textbox)bookEventWin.getFellow("urlfield")).setValue((String)scevent.getParams().get("url"));
+			((Textbox)bookEventWin.getFellow("textfield")).setValue((String)scevent.getParams().get("text"));
 			
+			bookEventWin.setTitle("View Task");
+			bookEventWin.setVisible(true);
+			bookEventWin.doModal();
+		}catch(Exception e){
+			e.printStackTrace();
+			Executions.sendRedirect("");
 		}
-		User addressed = proxy.getUser((String)scevent.getParams().get("objid"));
-		Patient patient = proxy.getPatient(addressed.getPersonID(), userid);
-		((Textbox)bookEventWin.getFellow("addressedid")).setValue((String)scevent.getParams().get("objid"));
-		((Textbox)bookEventWin.getFellow("addressedstr")).setValue(patient.toString());
-		User object = proxy.getUser((String)scevent.getParams().get("exec"));
-		Carer executor = proxy.getCarer(object.getPersonID(), userid);
-		((Textbox)bookEventWin.getFellow("objid")).setValue((String)scevent.getParams().get("exec"));
-		((Textbox)bookEventWin.getFellow("objstr")).setValue(executor.toString());
-		User assigner = proxy.getUser((String)scevent.getParams().get("assign"));
-		Clinician assg = proxy.getClinician(assigner.getPersonID(), userid);
-		((Textbox)bookEventWin.getFellow("userid")).setValue((String)scevent.getParams().get("assign"));
-		((Textbox)bookEventWin.getFellow("userstr")).setValue(assg.toString());
-		((Button)bookEventWin.getFellow("cancelbutton")).setVisible(true);
-		((Textbox)bookEventWin.getFellow("tasktypetext")).setValue(scevent.getContent());
-		((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);
-		//((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
-		int tasktype2 = Integer.parseInt((String)scevent.getParams().get("type"));
-		this.showCustomFields(tasktype2);
-		((Listbox)bookEventWin.getFellow("tasktypesel")).setVisible(false);
-		((Textbox)bookEventWin.getFellow("urlfield")).setValue((String)scevent.getParams().get("url"));
-		((Textbox)bookEventWin.getFellow("textfield")).setValue((String)scevent.getParams().get("text"));
 		
-		bookEventWin.setTitle("View Task");
-		bookEventWin.setVisible(true);
-		bookEventWin.doModal();
 	}
 	
 	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, String ret){

@@ -1,0 +1,24 @@
+<zk>
+	<zscript>
+		import eu.aladdin_project.SystemDictionary;
+		
+		String bloodt = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT;
+		String weightt = SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT;
+		
+	</zscript>
+<window id="measurementswin" title="Measurement Chart" border="normal" closable="true" position="center,center" use="eu.aladdin_project.controllers.details.measurements.MeasurementPopupController">
+	<vbox>
+		<hbox>
+			<listbox id="measurementtype" mold="select">
+				<listitem label="Weight measurement" value="${weightt }" selected="true"/>
+				<listitem label="Blood pressure measurement" value="${bloodt }"/>
+			</listbox>
+			<label value="from"/><datebox id="measurementfrom"/>
+			<label value="to"/><datebox id="measurementto"/>
+			<separator orient="horizontal" width="50px"/>
+			<button label="Show" onClick="measurementswin.generateImage()"/>
+		</hbox>
+	</vbox>
+	<image id="imagemeas"/>
+</window>
+</zk>
