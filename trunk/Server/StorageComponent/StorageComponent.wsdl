@@ -910,6 +910,112 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetTask">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"></xsd:element>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetTaskResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Task"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetMeasurement">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="filter" type="aladdin:SearchCriteria" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetMeasurementResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:Measurement" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddMediaContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="in" type="aladdin:MediaContent"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AddMediaContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteMediaContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="id" type="xsd:string"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteMediaContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMediaContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="ec" type="aladdin:MediaContent"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UpdateMediaContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetMediaContent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="filter" type="aladdin:SearchCriteria" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string" />
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetMediaContentResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:MediaContent" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionnaireAnswersByTask">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="taskId" type="xsd:string"></xsd:element>
+      			<xsd:element name="userId" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionnaireAnswersByTaskResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:QuestionnaireAnswers"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1266,6 +1372,54 @@
   <wsdl:message name="RemoveTaskMassivelyResponse">
   	<wsdl:part name="parameters" element="tns:RemoveTaskMassivelyResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="GetTaskRequest">
+  	<wsdl:part name="parameters" element="tns:GetTask"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetTaskResponse">
+  	<wsdl:part name="parameters" element="tns:GetTaskResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMeasurementRequest">
+  	<wsdl:part name="parameters" element="tns:GetMeasurement"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMeasurementResponse">
+  	<wsdl:part name="parameters" element="tns:GetMeasurementResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddMediaContentRequest">
+  	<wsdl:part name="parameters" element="tns:AddMediaContent"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddMediaContentResponse">
+  	<wsdl:part name="parameters" element="tns:AddMediaContentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteMediaContentRequest">
+  	<wsdl:part name="parameters" element="tns:DeleteMediaContent"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteMediaContentResponse">
+  	<wsdl:part name="parameters" element="tns:DeleteMediaContentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateMediaContentRequest">
+  	<wsdl:part name="parameters" element="tns:UpdateMediaContent"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateMediaContentResponse">
+  	<wsdl:part name="parameters" element="tns:UpdateMediaContentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMediaContentRequest">
+  	<wsdl:part name="parameters" element="tns:GetMediaContent"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMediaContentResponse">
+  	<wsdl:part name="parameters" element="tns:GetMediaContentResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersByTaskRequest">
+  	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTask"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersByTaskResponse">
+  	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersByTaskRequest">
+  	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTask"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionnaireAnswersByTaskResponse">
+  	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1502,6 +1656,34 @@
         <wsdl:operation name="RemoveTaskMassively">
         	<wsdl:input message="tns:RemoveTaskMassivelyRequest"></wsdl:input>
         	<wsdl:output message="tns:RemoveTaskMassivelyResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetTask">
+        	<wsdl:input message="tns:GetTaskRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetTaskResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetMeasurement">
+        	<wsdl:input message="tns:GetMeasurementRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetMeasurementResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AddMediaContent">
+        	<wsdl:input message="tns:AddMediaContentRequest"></wsdl:input>
+        	<wsdl:output message="tns:AddMediaContentResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteMediaContent">
+        	<wsdl:input message="tns:DeleteMediaContentRequest"></wsdl:input>
+        	<wsdl:output message="tns:DeleteMediaContentResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateMediaContent">
+        	<wsdl:input message="tns:UpdateMediaContentRequest"></wsdl:input>
+        	<wsdl:output message="tns:UpdateMediaContentResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetMediaContent">
+        	<wsdl:input message="tns:GetMediaContentRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetMediaContentResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetQuestionnaireAnswersByTask">
+        	<wsdl:input message="tns:GetQuestionnaireAnswersByTaskRequest"></wsdl:input>
+        	<wsdl:output message="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -2050,13 +2232,12 @@
   	</wsdl:operation>
   	<wsdl:operation name="GetPatientsForCaregiver">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientsForCaregiver">
-  		</soap:operation>
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetPatientsForCaregiver" />
   		<wsdl:input>
-  			<soap:body use="literal"></soap:body>
+  			<soap:body use="literal" />
   		</wsdl:input>
   		<wsdl:output>
-  			<soap:body use="literal"></soap:body>
+  			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
   	<wsdl:operation name="GetUserIdByPersonId">
@@ -2081,24 +2262,92 @@
   	</wsdl:operation>
   	<wsdl:operation name="AssignTasksMassively">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/StorageComponent/AssignTasksMassively">
-  		</soap:operation>
+  			soapAction="http://aladdin-project.eu/StorageComponent/AssignTasksMassively" />
   		<wsdl:input>
-  			<soap:body use="literal"></soap:body>
+  			<soap:body use="literal" />
   		</wsdl:input>
   		<wsdl:output>
-  			<soap:body use="literal"></soap:body>
+  			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
   	<wsdl:operation name="RemoveTaskMassively">
   		<soap:operation
-  			soapAction="http://aladdin-project.eu/StorageComponent/RemoveTaskMassively">
-  		</soap:operation>
+  			soapAction="http://aladdin-project.eu/StorageComponent/RemoveTaskMassively" />
   		<wsdl:input>
-  			<soap:body use="literal"></soap:body>
+  			<soap:body use="literal" />
   		</wsdl:input>
   		<wsdl:output>
-  			<soap:body use="literal"></soap:body>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetTask">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetTask" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetMeasurement">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetMeasurement" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="AddMediaContent">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/AddMediaContent" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="DeleteMediaContent">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/DeleteMediaContent" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="UpdateMediaContent">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/UpdateMediaContent" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetMediaContent">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetMediaContent" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetQuestionnaireAnswersByTask">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionnaireAnswersByTask" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
   		</wsdl:output>
   	</wsdl:operation>
   </wsdl:binding>
