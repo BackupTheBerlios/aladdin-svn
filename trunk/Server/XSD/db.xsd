@@ -122,7 +122,7 @@
     		</element>
     		<element name="condition" type="unsignedByte"></element>
     		<element name="deleted" type="boolean"></element>
-    		<element name="globalid" type="int" maxOccurs="1" minOccurs="1"/>
+    		<element name="GlobalId" type="int" maxOccurs="1" minOccurs="1"/>
     	</sequence>
     </complexType>
 
@@ -275,5 +275,16 @@
     		<element name="type" type="int"></element>
     	</sequence>
     </complexType>
+
+    <complexType name="EntertainmentContent">
+        <sequence>
+            <element name="title" type="string"></element>
+            <element name="url" type="string"></element>
+            <element name="type" type="string"></element>
+            <element name="category" type="string"></element>
+            <element name="text" type="string"></element>
+        </sequence>
+    </complexType>
+
     
 </schema>

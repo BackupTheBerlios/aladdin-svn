@@ -61,6 +61,7 @@
 		<attribute name="ID" type="string"></attribute>
 		<attribute name="DateTime" type="dateTime"></attribute>
 		<attribute name="ObjectID" type="string"></attribute>
+		<attribute name="TaskID" type="string"></attribute>
 		<attribute name="UserID" type="string"></attribute>
 	</complexType>
 	
@@ -409,5 +410,17 @@
 			<element name="Description" type="string" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
+
+    <complexType name="MediaContent">
+        <sequence>
+            <element name="ID" type="string"></element>
+            <element name="title" type="string"></element>
+            <element name="url" type="string"></element>
+            <element name="type" type="string"></element>
+            <element name="category" type="string"></element>
+            <element name="text" type="string"></element>
+        </sequence>
+    </complexType>
+
     
 </schema>
