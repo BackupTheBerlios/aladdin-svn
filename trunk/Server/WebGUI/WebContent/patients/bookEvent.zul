@@ -81,6 +81,10 @@
 					<label value="Answers"/>
 					<label id="qsanswersfield" width="95%" multiline="true"/>
 				</row>
+				<row id="mresultrow" visible="false">
+					<label value="Result"/>
+					<label id="mresultrowfield"/>
+				</row>
 				<row id="qsrow" visible="false">
 					<label value="${tquestion }"/>
 					<hbox>

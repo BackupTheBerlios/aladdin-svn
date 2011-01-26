@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers.details.measurements;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +20,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Datebox;
@@ -118,10 +123,31 @@ public class MeasurementPopupController extends Window{
 			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 			AImage image = new AImage("Line Chart", bytes);
 			((Image)getFellow("imagemeas")).setContent(image);
+			Button downbutton = (Button)getFellow("measurementdownloadbutton");
+			downbutton.addEventListener("onClick", new DownloadListener(image,"monitor.png"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private class DownloadListener implements EventListener{
+		
+		private AImage input;
+		private String filename;
+		
+		public DownloadListener(AImage in, String fname){
+			this.input = in;
+			this.filename = fname;
+		}
+		
+		public void onEvent(Event arg0) throws Exception {
+			if(this.input != null){
+				Filedownload.save(input,filename);
+			}
+		}
+		
+
 	}
 
 }

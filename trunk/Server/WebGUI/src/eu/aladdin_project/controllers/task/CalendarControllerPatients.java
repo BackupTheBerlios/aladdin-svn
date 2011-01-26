@@ -24,10 +24,13 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.Clinician;
+import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.Questionnaire;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
+import eu.aladdin_project.xsd.SearchCriteria;
+import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.User;
 
 public class CalendarControllerPatients extends GenericForwardComposer {
@@ -96,13 +99,24 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 				if(tasktype.equals(SystemDictionary.TASK_TYPE_CARERQS) || tasktype.equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
 					//TODO retrieve Questionnaire answers and show in the task window
 					Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
+					//proxy.getQuestionnaireAnswers(objectId, fromDate, toDate, userId)
+					
 					String responses = provideQuestionnaireResponse(q.getQuestion(), "");
 					System.out.println("RESPONSES: "+responses);
 					bookEventWin.getFellow("qsanswersrow").setVisible(true);
 					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
 					
 				}else if(tasktype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT)){
-					//TODO retrieve measurements results and show in the task window
+					String resultfieldvalue = "";
+					SearchCriteria searchc = new SearchCriteria("taskID", new SystemParameter(SystemDictionary.COMPARE_EQ, ""), (String)scevent.getParams().get("task"), "");
+					Measurement[] results = proxy.getMeasurement(new SearchCriteria[]{searchc}, userid);
+					if(results.length <= 0){
+						resultfieldvalue = "No measurement could be retrieved";
+					}else{
+						resultfieldvalue = results[0].getValue()+""+results[0].getUnits();
+					}
+					bookEventWin.getFellow("mresultrow").setVisible(true);
+					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(resultfieldvalue);
 				}
 				
 			}

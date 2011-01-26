@@ -18,7 +18,8 @@
 			<separator orient="horizontal" width="50px"/>
 			<button label="Show" onClick="measurementswin.generateImage()"/>
 		</hbox>
+		<image id="imagemeas"/>
+		<button label="Download" id="measurementdownloadbutton"/>
 	</vbox>
-	<image id="imagemeas"/>
 </window>
 </zk>
