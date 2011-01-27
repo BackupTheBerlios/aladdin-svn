@@ -47,7 +47,7 @@ public class QuestionnaireFormWindow extends Window{
 			QuestionnaireInfo qinfo = null;
 			Questionnaire questions = null;
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
-			StorageComponentProxy proxy = new StorageComponentProxy();
+			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 			QuestionnaireInfo[] qlist = proxy.listOfQuestionnaires(SystemDictionary.getLocale(),userid);
 			for(int i = 0 ; i < qlist.length ; i++){
 				if(qlist[i].getID().equals(qid)){

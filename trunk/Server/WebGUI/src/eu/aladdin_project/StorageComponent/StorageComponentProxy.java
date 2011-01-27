@@ -434,10 +434,10 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.getMediaContent(filter, userId);
   }
   
-  public void getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId, java.lang.String taskId2, java.lang.String userId2, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out2) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.QuestionnaireAnswers getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    storageComponent_PortType.getQuestionnaireAnswersByTask(taskId, userId, taskId2, userId2, out, out2);
+    return storageComponent_PortType.getQuestionnaireAnswersByTask(taskId, userId);
   }
   
   

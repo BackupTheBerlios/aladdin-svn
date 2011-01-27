@@ -942,15 +942,9 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "taskId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
-        oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "userId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
-        oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "out"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers"), eu.aladdin_project.xsd.QuestionnaireAnswers.class, false, false);
-        oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "out"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers"), eu.aladdin_project.xsd.QuestionnaireAnswers.class, false, false);
-        oper.addParameter(param);
-        oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireAnswers"));
+        oper.setReturnClass(eu.aladdin_project.xsd.QuestionnaireAnswers.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[65] = oper;
@@ -3556,7 +3550,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 }
     }
 
-    public void getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId, java.lang.String taskId2, java.lang.String userId2, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out2) throws java.rmi.RemoteException {
+    public eu.aladdin_project.xsd.QuestionnaireAnswers getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -3572,24 +3566,17 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {taskId, userId, taskId2, userId2});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {taskId, userId});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
         }
         else {
             extractAttachments(_call);
-            java.util.Map _output;
-            _output = _call.getOutputParams();
             try {
-                out.value = (eu.aladdin_project.xsd.QuestionnaireAnswers) _output.get(new javax.xml.namespace.QName("", "out"));
+                return (eu.aladdin_project.xsd.QuestionnaireAnswers) _resp;
             } catch (java.lang.Exception _exception) {
-                out.value = (eu.aladdin_project.xsd.QuestionnaireAnswers) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "out")), eu.aladdin_project.xsd.QuestionnaireAnswers.class);
-            }
-            try {
-                out2.value = (eu.aladdin_project.xsd.QuestionnaireAnswers) _output.get(new javax.xml.namespace.QName("", "out"));
-            } catch (java.lang.Exception _exception) {
-                out2.value = (eu.aladdin_project.xsd.QuestionnaireAnswers) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "out")), eu.aladdin_project.xsd.QuestionnaireAnswers.class);
+                return (eu.aladdin_project.xsd.QuestionnaireAnswers) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.QuestionnaireAnswers.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

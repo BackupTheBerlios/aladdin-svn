@@ -73,5 +73,5 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.OperationResult deleteMediaContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult updateMediaContent(eu.aladdin_project.xsd.MediaContent ec, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.MediaContent[] getMediaContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
-    public void getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId, java.lang.String taskId2, java.lang.String userId2, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out2) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.QuestionnaireAnswers getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId) throws java.rmi.RemoteException;
 }

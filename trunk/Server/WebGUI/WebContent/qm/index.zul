@@ -65,10 +65,11 @@
 	</zscript>
 	<grid mold="paging" pageSize="15">
 		<columns>
-			<column label="${idstr }" width="35px" sortAscending="${asc }" sortDescending="${desc }"/>
+			<column label="${idstr }" width="35px" sortAscending="${asc }" sortDescending="${desc }" sort="des"/>
 			<column label="${version }" sort="auto"/>
 			<column label="${qtitle }" sort="auto"/>
 			<column width="80px" align="center" if="${!isadmin }" />
+			<column width="80px" align="center" />
 			<column width="80px" align="center" />
 		</columns>
 		<rows>
@@ -77,6 +78,7 @@
 			<label value="${each.version }"/>
 			<label value="${each.title }"/>
 			<label if="${!isadmin }" value="${updmsg }" sclass="link" onClick="qmwin.updateQuestionnaire(self.getParent().getId())"/>
+			<label if="${!isadmin }" value="Translate" sclass="link" onClick="qmwin.translateQuestionnaire(self.getParent().getId())"/>
 			<label value="${delmsg }" sclass="link" onClick="qmwin.removeQuestionnaire(self.getParent().getId())"/>
 		</row>
 		</rows>

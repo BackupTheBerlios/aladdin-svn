@@ -43,5 +43,9 @@ public class QuestionnaireIndexWindow extends Window {
 	public void updateQuestionnaire(String questid){
 		Executions.getCurrent().sendRedirect("/qm/form.zul?q="+questid);
 	}
+	
+	public void translateQuestionnaire(String questid){
+		Executions.getCurrent().sendRedirect("/qm/translation.zul?q="+questid);
+	}
 
 }
