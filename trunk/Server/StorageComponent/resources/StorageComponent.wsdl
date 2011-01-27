@@ -1060,8 +1060,6 @@
   <wsdl:message name="GetQuestionnaireAnswersByTaskRequest">
     <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTask">
     </wsdl:part>
-    <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTask">
-    </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetUserTypeResponse">
     <wsdl:part name="parameters" element="tns:GetUserTypeResponse">
@@ -1404,8 +1402,6 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetQuestionnaireAnswersByTaskResponse">
-    <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse">
-    </wsdl:part>
     <wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse">
     </wsdl:part>
   </wsdl:message>

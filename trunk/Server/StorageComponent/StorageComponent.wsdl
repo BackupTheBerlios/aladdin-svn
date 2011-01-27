@@ -1414,12 +1414,6 @@
   <wsdl:message name="GetQuestionnaireAnswersByTaskResponse">
   	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:part>
   </wsdl:message>
-  <wsdl:message name="GetQuestionnaireAnswersByTaskRequest">
-  	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTask"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="GetQuestionnaireAnswersByTaskResponse">
-  	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:part>
-  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
