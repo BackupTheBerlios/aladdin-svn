@@ -69,8 +69,9 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.OperationResult removeTaskMassively(java.lang.String patientId, java.math.BigInteger typeOfTask, java.util.Date startDate, java.util.Date endDate, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.Task getTask(java.lang.String id, eu.aladdin_project.xsd.SystemParameter locale, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.Measurement[] getMeasurement(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult addEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent in, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult deleteEntertainmentContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.OperationResult updateEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent ec, java.lang.String userId) throws java.rmi.RemoteException;
-    public eu.aladdin_project.xsd.EntertainmentContent[] getEntertainmentContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult addMediaContent(eu.aladdin_project.xsd.MediaContent in, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult deleteMediaContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.OperationResult updateMediaContent(eu.aladdin_project.xsd.MediaContent ec, java.lang.String userId) throws java.rmi.RemoteException;
+    public eu.aladdin_project.xsd.MediaContent[] getMediaContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException;
+    public void getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId, java.lang.String taskId2, java.lang.String userId2, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out2) throws java.rmi.RemoteException;
 }

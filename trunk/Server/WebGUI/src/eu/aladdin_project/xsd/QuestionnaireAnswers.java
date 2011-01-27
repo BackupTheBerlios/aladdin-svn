@@ -16,6 +16,8 @@ public class QuestionnaireAnswers  implements java.io.Serializable {
 
     private java.lang.String objectID;  // attribute
 
+    private java.lang.String taskID;  // attribute
+
     private java.lang.String userID;  // attribute
 
     public QuestionnaireAnswers() {
@@ -26,11 +28,13 @@ public class QuestionnaireAnswers  implements java.io.Serializable {
            java.lang.String ID,
            java.util.Calendar dateTime,
            java.lang.String objectID,
+           java.lang.String taskID,
            java.lang.String userID) {
            this.answer = answer;
            this.ID = ID;
            this.dateTime = dateTime;
            this.objectID = objectID;
+           this.taskID = taskID;
            this.userID = userID;
     }
 
@@ -124,6 +128,26 @@ public class QuestionnaireAnswers  implements java.io.Serializable {
 
 
     /**
+     * Gets the taskID value for this QuestionnaireAnswers.
+     * 
+     * @return taskID
+     */
+    public java.lang.String getTaskID() {
+        return taskID;
+    }
+
+
+    /**
+     * Sets the taskID value for this QuestionnaireAnswers.
+     * 
+     * @param taskID
+     */
+    public void setTaskID(java.lang.String taskID) {
+        this.taskID = taskID;
+    }
+
+
+    /**
      * Gets the userID value for this QuestionnaireAnswers.
      * 
      * @return userID
@@ -166,6 +190,9 @@ public class QuestionnaireAnswers  implements java.io.Serializable {
             ((this.objectID==null && other.getObjectID()==null) || 
              (this.objectID!=null &&
               this.objectID.equals(other.getObjectID()))) &&
+            ((this.taskID==null && other.getTaskID()==null) || 
+             (this.taskID!=null &&
+              this.taskID.equals(other.getTaskID()))) &&
             ((this.userID==null && other.getUserID()==null) || 
              (this.userID!=null &&
               this.userID.equals(other.getUserID())));
@@ -200,6 +227,9 @@ public class QuestionnaireAnswers  implements java.io.Serializable {
         if (getObjectID() != null) {
             _hashCode += getObjectID().hashCode();
         }
+        if (getTaskID() != null) {
+            _hashCode += getTaskID().hashCode();
+        }
         if (getUserID() != null) {
             _hashCode += getUserID().hashCode();
         }
@@ -226,6 +256,11 @@ public class QuestionnaireAnswers  implements java.io.Serializable {
         attrField = new org.apache.axis.description.AttributeDesc();
         attrField.setFieldName("objectID");
         attrField.setXmlName(new javax.xml.namespace.QName("", "ObjectID"));
+        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        typeDesc.addFieldDesc(attrField);
+        attrField = new org.apache.axis.description.AttributeDesc();
+        attrField.setFieldName("taskID");
+        attrField.setXmlName(new javax.xml.namespace.QName("", "TaskID"));
         attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         typeDesc.addFieldDesc(attrField);
         attrField = new org.apache.axis.description.AttributeDesc();

@@ -410,28 +410,34 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.getMeasurement(filter, userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult addEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent in, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult addMediaContent(eu.aladdin_project.xsd.MediaContent in, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.addEntertainmentContent(in, userId);
+    return storageComponent_PortType.addMediaContent(in, userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult deleteEntertainmentContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult deleteMediaContent(java.lang.String id, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.deleteEntertainmentContent(id, userId);
+    return storageComponent_PortType.deleteMediaContent(id, userId);
   }
   
-  public eu.aladdin_project.xsd.OperationResult updateEntertainmentContent(eu.aladdin_project.xsd.EntertainmentContent ec, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.OperationResult updateMediaContent(eu.aladdin_project.xsd.MediaContent ec, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.updateEntertainmentContent(ec, userId);
+    return storageComponent_PortType.updateMediaContent(ec, userId);
   }
   
-  public eu.aladdin_project.xsd.EntertainmentContent[] getEntertainmentContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException{
+  public eu.aladdin_project.xsd.MediaContent[] getMediaContent(eu.aladdin_project.xsd.SearchCriteria[] filter, java.lang.String userId) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)
       _initStorageComponentProxy();
-    return storageComponent_PortType.getEntertainmentContent(filter, userId);
+    return storageComponent_PortType.getMediaContent(filter, userId);
+  }
+  
+  public void getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId, java.lang.String taskId2, java.lang.String userId2, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out, eu.aladdin_project.xsd.holders.QuestionnaireAnswersHolder out2) throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    storageComponent_PortType.getQuestionnaireAnswersByTask(taskId, userId, taskId2, userId2, out, out2);
   }
   
   

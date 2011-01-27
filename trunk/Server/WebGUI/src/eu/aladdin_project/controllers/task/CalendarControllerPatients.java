@@ -108,15 +108,19 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					
 				}else if(tasktype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT)){
 					String resultfieldvalue = "";
-					SearchCriteria searchc = new SearchCriteria("taskID", new SystemParameter(SystemDictionary.COMPARE_EQ, ""), (String)scevent.getParams().get("task"), "");
+					SearchCriteria searchc = new SearchCriteria("task", new SystemParameter(SystemDictionary.COMPARE_EQ, ""), (String)scevent.getParams().get("task"), "");
 					Measurement[] results = proxy.getMeasurement(new SearchCriteria[]{searchc}, userid);
 					if(results.length <= 0){
 						resultfieldvalue = "No measurement could be retrieved";
 					}else{
-						resultfieldvalue = results[0].getValue()+""+results[0].getUnits();
+						System.out.println("RESULTS LENGHT: "+results.length);
+						for(int ii = 0 ; ii < results.length ; ii++){
+							resultfieldvalue += results[ii].getValue()+""+results[ii].getUnits()+"\n";
+						}
+						
 					}
 					bookEventWin.getFellow("mresultrow").setVisible(true);
-					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(resultfieldvalue);
+					((Label)bookEventWin.getFellow("mresultrowfield")).setValue(resultfieldvalue);
 				}
 				
 			}
