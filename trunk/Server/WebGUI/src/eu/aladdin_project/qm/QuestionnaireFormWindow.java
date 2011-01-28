@@ -101,53 +101,6 @@ public class QuestionnaireFormWindow extends Window{
 	 */
 	public void saveQuestionnaire(){
 		//related questions management, this is magic don't look at it or it would be self-destroyed!
-		/*
-		int rootquestions = 0;
-		for(int ii = 0; ii<questionlist.size(); ii++){
-			RelatedQuestion rq = questionlist.get(ii);
-			if(rq.getParent().equals("0")){
-				rootquestions++;
-			}else{
-				System.out.println("Entering in subquestion");
-				//Search parent and insert question on it
-				for(int j=0;j<questionlist.size(); j++){
-					RelatedQuestion rq2 = questionlist.get(j);
-					if(rq2.getId().equals(rq.getParent())){
-						//Save question on question list
-						QuestionnaireQuestion[] qqa = new QuestionnaireQuestion[rq2.getQuestion().getQuestions().getQuestion().length+1];
-						
-						if(qqa.length>1){
-							for(int k = 0; k<rq2.getQuestion().getQuestions().getQuestion().length; k++){
-								qqa[k]=rq2.getQuestion().getQuestions().getQuestion(k);
-							}
-						}
-						qqa[qqa.length-1]=rq.getQuestion();
-						QuestionnaireQuestionList qqalist = new QuestionnaireQuestionList(qqa);
-						rq2.getQuestion().setQuestions(qqalist);
-					}
-				}
-			}
-			
-		}
-		
-		//End of parent questions management you can look from here
-		System.out.print("Root questions: "+rootquestions);
-		QuestionnaireQuestion[] qlist = new QuestionnaireQuestion[rootquestions];
-		System.out.println("Question LIST SIZE: "+questionlist.size());
-		Iterator<RelatedQuestion> it = questionlist.iterator();
-		int i = 0;
-		while(it.hasNext()){
-			RelatedQuestion relq = it.next();
-			relq.getQuestion().setId("");
-			if(relq.getParent().equals("0")){
-				qlist[i]=relq.getQuestion();
-				if(qlist[i].getQuestions().getQuestion() != null){
-					System.out.println("Sub-questions: "+qlist[i].getQuestions().getQuestion().length);
-				}
-				i++;
-			}
-		}
-		*/
 		ArrayList<QuestionnaireQuestion> rootQuestions = new ArrayList<QuestionnaireQuestion>();
 		for(int ii = 0 ; ii < questionlist.size() ; ii++){
 			if(questionlist.get(ii).getParent() == "0"){
@@ -171,12 +124,14 @@ public class QuestionnaireFormWindow extends Window{
 			}
 			
 		}
+		
 		QuestionnaireQuestion[] qlist = new QuestionnaireQuestion[rootQuestions.size()];
 		for(int l = 0 ; l<rootQuestions.size() ; l++){
 			qlist[l]=rootQuestions.get(l);
 		}
 		blankIds(qlist);
 		
+		//End of parent questions management you can look from here
 		String versionstr = ((Textbox)getFellow("versionfield")).getValue();
 		Double version = Double.valueOf(versionstr);
 		String title = ((Textbox)getFellow("qtitle")).getValue();

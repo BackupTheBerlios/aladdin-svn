@@ -264,6 +264,7 @@ public class DetailPatientController extends DetailSDController{
 				System.out.println("TASKS LENGHT: "+tasklist.length);
 					OperationResult currentuserid = proxy.getUserIdByPersonId(this.currentid, SystemDictionary.USERTYPE_PATIENT_INT, userid);
 					for(int i = 0; i<tasklist.length; i++){
+						boolean add = true;
 						System.out.println("COMPARE: "+tasklist[i].getObjectID()+":"+currentuserid.getCode());
 						if(!tasklist[i].getObjectID().equals(currentuserid.getCode())){
 							continue;
@@ -310,11 +311,17 @@ public class DetailPatientController extends DetailSDController{
 						params.put("text", tasklist[i].getText());
 						params.put("type", tasklist[i].getTaskType().getCode());
 						if(tasklist[i].getTaskType().getCode().equals(SystemDictionary.TASK_TYPE_CARERQS) || tasklist[i].getTaskType().getCode().equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
-							params.put("qid", tasklist[i].getQuestionnaire().getID());
-							params.put("questionnaire", tasklist[i].getQuestionnaire());
+							if(tasklist[i].getQuestionnaire() != null){
+								params.put("qid", tasklist[i].getQuestionnaire().getID());
+								params.put("questionnaire", tasklist[i].getQuestionnaire());
+							}else{
+								add = false;
+							}
 						}
 						clevent.setParams(params);
-						this.calmodel.add(clevent);
+						if(add){
+							this.calmodel.add(clevent);
+						}
 					}
 				}
 		}catch(Exception e){
