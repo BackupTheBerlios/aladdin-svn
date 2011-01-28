@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireAnswers extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireAnswers.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("questionnaireanswers439etype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireAnswers.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("questionnaireanswers439etype");
     
     /**
      * Gets array of all "answer" elements

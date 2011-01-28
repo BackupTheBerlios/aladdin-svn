@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getuserc24fdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("getuserc24fdoctype");
     
     /**
      * Gets the "GetUser" element
@@ -42,7 +42,7 @@ public interface GetUserDocument extends org.apache.xmlbeans.XmlObject
     public interface GetUser extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getuser3f1celemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUser.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("getuser3f1celemtype");
         
         /**
          * Gets the "id" element

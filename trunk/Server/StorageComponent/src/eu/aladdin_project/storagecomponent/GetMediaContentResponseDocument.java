@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetMediaContentResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContentResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getmediacontentresponseff5adoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContentResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("getmediacontentresponseff5adoctype");
     
     /**
      * Gets the "GetMediaContentResponse" element
@@ -42,7 +42,7 @@ public interface GetMediaContentResponseDocument extends org.apache.xmlbeans.Xml
     public interface GetMediaContentResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContentResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("getmediacontentresponse5572elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContentResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("getmediacontentresponse5572elemtype");
         
         /**
          * Gets array of all "out" elements

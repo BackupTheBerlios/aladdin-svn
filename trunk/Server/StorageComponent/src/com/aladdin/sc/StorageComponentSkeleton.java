@@ -72,6 +72,7 @@ import eu.aladdin_project.storagecomponent.ListOfCliniciansResponseDocument.List
 import eu.aladdin_project.storagecomponent.ListOfPatientsResponseDocument.ListOfPatientsResponse;
 import eu.aladdin_project.storagecomponent.ListOfPossibleTasksResponseDocument.ListOfPossibleTasksResponse;
 import eu.aladdin_project.storagecomponent.ListOfQuestionnairesResponseDocument.ListOfQuestionnairesResponse;
+import eu.aladdin_project.storagecomponent.ListOfSupportedLocalesResponseDocument.ListOfSupportedLocalesResponse;
 import eu.aladdin_project.storagecomponent.MarkWarningAsReadResponseDocument.MarkWarningAsReadResponse;
 import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument.RemoveTaskMassivelyResponse;
 import eu.aladdin_project.storagecomponent.SaveCarerAssessmentResponseDocument.SaveCarerAssessmentResponse;
@@ -4576,6 +4577,25 @@ import java.net.URL;
     		} catch (Exception e) {
     			System.out.println (e.toString());
     		}
+			
+			return respdoc;
+		}
+
+		public ListOfSupportedLocalesResponseDocument listOfSupportedLocales(ListOfSupportedLocalesDocument req) {
+			ListOfSupportedLocalesResponseDocument respdoc = ListOfSupportedLocalesResponseDocument.Factory.newInstance();
+			ListOfSupportedLocalesResponse resp = respdoc.addNewListOfSupportedLocalesResponse();
+			
+			try {
+				com.aladdin.sc.db.Locale[] locale = (Locale[]) s.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);
+				for (int i = 0; i < locale.length; i++) {
+					SystemParameter l = resp.addNewOut();
+					l.setCode(locale[i].getId().toString());
+					l.setDescription(locale[i].getName());
+				}
+				
+			} catch (Exception e) {
+				System.out.println (e.toString());
+			}
 			
 			return respdoc;
 		}

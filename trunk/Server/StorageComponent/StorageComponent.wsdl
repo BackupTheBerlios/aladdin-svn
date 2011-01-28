@@ -1016,6 +1016,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="ListOfSupportedLocales">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfSupportedLocalesResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:SystemParameter" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="CreatePatientRequest">
@@ -1414,6 +1428,12 @@
   <wsdl:message name="GetQuestionnaireAnswersByTaskResponse">
   	<wsdl:part name="parameters" element="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="ListOfSupportedLocalesRequest">
+  	<wsdl:part name="parameters" element="tns:ListOfSupportedLocales"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfSupportedLocalesResponse">
+  	<wsdl:part name="parameters" element="tns:ListOfSupportedLocalesResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
@@ -1678,6 +1698,10 @@
         <wsdl:operation name="GetQuestionnaireAnswersByTask">
         	<wsdl:input message="tns:GetQuestionnaireAnswersByTaskRequest"></wsdl:input>
         	<wsdl:output message="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ListOfSupportedLocales">
+        	<wsdl:input message="tns:ListOfSupportedLocalesRequest"></wsdl:input>
+        	<wsdl:output message="tns:ListOfSupportedLocalesResponse"></wsdl:output>
         </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StorageComponentSOAP"
@@ -2337,6 +2361,16 @@
   	<wsdl:operation name="GetQuestionnaireAnswersByTask">
   		<soap:operation
   			soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionnaireAnswersByTask" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="ListOfSupportedLocales">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/StorageComponent/ListOfSupportedLocales" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>

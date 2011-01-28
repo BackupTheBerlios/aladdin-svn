@@ -1007,6 +1007,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="ListOfSupportedLocales">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ListOfSupportedLocalesResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="out" type="aladdin:SystemParameter"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -1253,6 +1267,10 @@
     <wsdl:part name="parameters" element="tns:GetWarningsResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="ListOfSupportedLocalesRequest">
+    <wsdl:part name="parameters" element="tns:ListOfSupportedLocales">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="GetPatientAssessmentsResponse">
     <wsdl:part name="parameters" element="tns:GetPatientAssessmentsResponse">
     </wsdl:part>
@@ -1371,6 +1389,10 @@
   </wsdl:message>
   <wsdl:message name="MarkWarningAsReadResponse">
     <wsdl:part name="parameters" element="tns:MarkWarningAsReadResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListOfSupportedLocalesResponse">
+    <wsdl:part name="parameters" element="tns:ListOfSupportedLocalesResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="DeletePatientRequest">
@@ -1932,6 +1954,12 @@
       <wsdl:input message="tns:GetQuestionnaireAnswersByTaskRequest">
     </wsdl:input>
       <wsdl:output message="tns:GetQuestionnaireAnswersByTaskResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfSupportedLocales">
+      <wsdl:input message="tns:ListOfSupportedLocalesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListOfSupportedLocalesResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -2524,6 +2552,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetQuestionnaireAnswersByTask">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionnaireAnswersByTask"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListOfSupportedLocales">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/ListOfSupportedLocales"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

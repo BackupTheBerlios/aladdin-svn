@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateCarerResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarerResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("createcarerresponse1f54doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarerResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("createcarerresponse1f54doctype");
     
     /**
      * Gets the "CreateCarerResponse" element
@@ -42,7 +42,7 @@ public interface CreateCarerResponseDocument extends org.apache.xmlbeans.XmlObje
     public interface CreateCarerResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarerResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("createcarerresponse5266elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateCarerResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("createcarerresponse5266elemtype");
         
         /**
          * Gets the "out" element

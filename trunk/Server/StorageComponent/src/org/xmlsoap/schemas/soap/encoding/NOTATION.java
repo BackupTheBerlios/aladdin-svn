@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NOTATION extends org.apache.xmlbeans.XmlQName
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NOTATION.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("notationed08type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NOTATION.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("notationed08type");
     
     /**
      * Gets the "id" attribute

@@ -153,6 +153,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/UpdatePatient</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/UpdatePatientResponse</outputActionMapping>
         </operation>
+        <operation name="ListOfSupportedLocales" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/ListOfSupportedLocales</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/ListOfSupportedLocalesResponse</outputActionMapping>
+        </operation>
         <operation name="DeleteQuestionnaire" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/DeleteQuestionnaire</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/DeleteQuestionnaireResponse</outputActionMapping>

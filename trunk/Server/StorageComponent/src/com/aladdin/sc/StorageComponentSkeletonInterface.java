@@ -519,6 +519,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param listOfSupportedLocales
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.ListOfSupportedLocalesResponseDocument listOfSupportedLocales
+                (
+                  eu.aladdin_project.storagecomponent.ListOfSupportedLocalesDocument listOfSupportedLocales
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param deleteQuestionnaire
          */
 

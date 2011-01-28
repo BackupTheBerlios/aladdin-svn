@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateAdministratorResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministratorResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("createadministratorresponse51a0doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministratorResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("createadministratorresponse51a0doctype");
     
     /**
      * Gets the "CreateAdministratorResponse" element
@@ -42,7 +42,7 @@ public interface CreateAdministratorResponseDocument extends org.apache.xmlbeans
     public interface CreateAdministratorResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministratorResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sD8F0C6B3F134106339028104AFC328FC").resolveHandle("createadministratorresponsea6feelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministratorResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("createadministratorresponsea6feelemtype");
         
         /**
          * Gets the "out" element
