@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Warning extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("warning2936type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("warning2936type");
     
     /**
      * Gets the "ID" element
@@ -29,6 +29,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     org.apache.xmlbeans.XmlString xgetID();
     
     /**
+     * True if has "ID" element
+     */
+    boolean isSetID();
+    
+    /**
      * Sets the "ID" element
      */
     void setID(java.lang.String id);
@@ -39,9 +44,19 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     void xsetID(org.apache.xmlbeans.XmlString id);
     
     /**
+     * Unsets the "ID" element
+     */
+    void unsetID();
+    
+    /**
      * Gets the "TypeOfWarning" element
      */
     eu.aladdin_project.xsd.SystemParameter getTypeOfWarning();
+    
+    /**
+     * True if has "TypeOfWarning" element
+     */
+    boolean isSetTypeOfWarning();
     
     /**
      * Sets the "TypeOfWarning" element
@@ -54,6 +69,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewTypeOfWarning();
     
     /**
+     * Unsets the "TypeOfWarning" element
+     */
+    void unsetTypeOfWarning();
+    
+    /**
      * Gets the "DateTimeOfWarning" element
      */
     java.util.Calendar getDateTimeOfWarning();
@@ -62,6 +82,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
      * Gets (as xml) the "DateTimeOfWarning" element
      */
     org.apache.xmlbeans.XmlDateTime xgetDateTimeOfWarning();
+    
+    /**
+     * True if has "DateTimeOfWarning" element
+     */
+    boolean isSetDateTimeOfWarning();
     
     /**
      * Sets the "DateTimeOfWarning" element
@@ -74,9 +99,19 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     void xsetDateTimeOfWarning(org.apache.xmlbeans.XmlDateTime dateTimeOfWarning);
     
     /**
+     * Unsets the "DateTimeOfWarning" element
+     */
+    void unsetDateTimeOfWarning();
+    
+    /**
      * Gets the "Effect" element
      */
     eu.aladdin_project.xsd.SystemParameter getEffect();
+    
+    /**
+     * True if has "Effect" element
+     */
+    boolean isSetEffect();
     
     /**
      * Sets the "Effect" element
@@ -89,9 +124,19 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewEffect();
     
     /**
+     * Unsets the "Effect" element
+     */
+    void unsetEffect();
+    
+    /**
      * Gets the "Indicator" element
      */
     eu.aladdin_project.xsd.SystemParameter getIndicator();
+    
+    /**
+     * True if has "Indicator" element
+     */
+    boolean isSetIndicator();
     
     /**
      * Sets the "Indicator" element
@@ -104,9 +149,19 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewIndicator();
     
     /**
+     * Unsets the "Indicator" element
+     */
+    void unsetIndicator();
+    
+    /**
      * Gets the "RiskLevel" element
      */
     eu.aladdin_project.xsd.SystemParameter getRiskLevel();
+    
+    /**
+     * True if has "RiskLevel" element
+     */
+    boolean isSetRiskLevel();
     
     /**
      * Sets the "RiskLevel" element
@@ -119,6 +174,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewRiskLevel();
     
     /**
+     * Unsets the "RiskLevel" element
+     */
+    void unsetRiskLevel();
+    
+    /**
      * Gets the "JustificationText" element
      */
     java.lang.String getJustificationText();
@@ -127,6 +187,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
      * Gets (as xml) the "JustificationText" element
      */
     org.apache.xmlbeans.XmlString xgetJustificationText();
+    
+    /**
+     * True if has "JustificationText" element
+     */
+    boolean isSetJustificationText();
     
     /**
      * Sets the "JustificationText" element
@@ -139,9 +204,19 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     void xsetJustificationText(org.apache.xmlbeans.XmlString justificationText);
     
     /**
+     * Unsets the "JustificationText" element
+     */
+    void unsetJustificationText();
+    
+    /**
      * Gets the "EmergencyLevel" element
      */
     eu.aladdin_project.xsd.SystemParameter getEmergencyLevel();
+    
+    /**
+     * True if has "EmergencyLevel" element
+     */
+    boolean isSetEmergencyLevel();
     
     /**
      * Sets the "EmergencyLevel" element
@@ -154,6 +229,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewEmergencyLevel();
     
     /**
+     * Unsets the "EmergencyLevel" element
+     */
+    void unsetEmergencyLevel();
+    
+    /**
      * Gets the "PatientID" element
      */
     java.lang.String getPatientID();
@@ -162,6 +242,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
      * Gets (as xml) the "PatientID" element
      */
     org.apache.xmlbeans.XmlString xgetPatientID();
+    
+    /**
+     * True if has "PatientID" element
+     */
+    boolean isSetPatientID();
     
     /**
      * Sets the "PatientID" element
@@ -174,6 +259,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     void xsetPatientID(org.apache.xmlbeans.XmlString patientID);
     
     /**
+     * Unsets the "PatientID" element
+     */
+    void unsetPatientID();
+    
+    /**
      * Gets the "Delivered" element
      */
     boolean getDelivered();
@@ -184,6 +274,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     org.apache.xmlbeans.XmlBoolean xgetDelivered();
     
     /**
+     * True if has "Delivered" element
+     */
+    boolean isSetDelivered();
+    
+    /**
      * Sets the "Delivered" element
      */
     void setDelivered(boolean delivered);
@@ -192,6 +287,11 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
      * Sets (as xml) the "Delivered" element
      */
     void xsetDelivered(org.apache.xmlbeans.XmlBoolean delivered);
+    
+    /**
+     * Unsets the "Delivered" element
+     */
+    void unsetDelivered();
     
     /**
      * A factory class with static methods for creating instances

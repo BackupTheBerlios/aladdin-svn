@@ -74,6 +74,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * True if has "ID" element
+     */
+    public boolean isSetID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(ID$0) != 0;
+        }
+    }
+    
+    /**
      * Sets the "ID" element
      */
     public void setID(java.lang.String id)
@@ -110,6 +122,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "ID" element
+     */
+    public void unsetID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(ID$0, 0);
+        }
+    }
+    
+    /**
      * Gets the "TypeOfWarning" element
      */
     public eu.aladdin_project.xsd.SystemParameter getTypeOfWarning()
@@ -124,6 +148,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "TypeOfWarning" element
+     */
+    public boolean isSetTypeOfWarning()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(TYPEOFWARNING$2) != 0;
         }
     }
     
@@ -160,6 +196,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "TypeOfWarning" element
+     */
+    public void unsetTypeOfWarning()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(TYPEOFWARNING$2, 0);
+        }
+    }
+    
+    /**
      * Gets the "DateTimeOfWarning" element
      */
     public java.util.Calendar getDateTimeOfWarning()
@@ -188,6 +236,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
             org.apache.xmlbeans.XmlDateTime target = null;
             target = (org.apache.xmlbeans.XmlDateTime)get_store().find_element_user(DATETIMEOFWARNING$4, 0);
             return target;
+        }
+    }
+    
+    /**
+     * True if has "DateTimeOfWarning" element
+     */
+    public boolean isSetDateTimeOfWarning()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(DATETIMEOFWARNING$4) != 0;
         }
     }
     
@@ -228,6 +288,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "DateTimeOfWarning" element
+     */
+    public void unsetDateTimeOfWarning()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(DATETIMEOFWARNING$4, 0);
+        }
+    }
+    
+    /**
      * Gets the "Effect" element
      */
     public eu.aladdin_project.xsd.SystemParameter getEffect()
@@ -242,6 +314,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "Effect" element
+     */
+    public boolean isSetEffect()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(EFFECT$6) != 0;
         }
     }
     
@@ -278,6 +362,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "Effect" element
+     */
+    public void unsetEffect()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(EFFECT$6, 0);
+        }
+    }
+    
+    /**
      * Gets the "Indicator" element
      */
     public eu.aladdin_project.xsd.SystemParameter getIndicator()
@@ -292,6 +388,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "Indicator" element
+     */
+    public boolean isSetIndicator()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(INDICATOR$8) != 0;
         }
     }
     
@@ -328,6 +436,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "Indicator" element
+     */
+    public void unsetIndicator()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(INDICATOR$8, 0);
+        }
+    }
+    
+    /**
      * Gets the "RiskLevel" element
      */
     public eu.aladdin_project.xsd.SystemParameter getRiskLevel()
@@ -342,6 +462,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "RiskLevel" element
+     */
+    public boolean isSetRiskLevel()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(RISKLEVEL$10) != 0;
         }
     }
     
@@ -378,6 +510,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "RiskLevel" element
+     */
+    public void unsetRiskLevel()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(RISKLEVEL$10, 0);
+        }
+    }
+    
+    /**
      * Gets the "JustificationText" element
      */
     public java.lang.String getJustificationText()
@@ -406,6 +550,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
             org.apache.xmlbeans.XmlString target = null;
             target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(JUSTIFICATIONTEXT$12, 0);
             return target;
+        }
+    }
+    
+    /**
+     * True if has "JustificationText" element
+     */
+    public boolean isSetJustificationText()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(JUSTIFICATIONTEXT$12) != 0;
         }
     }
     
@@ -446,6 +602,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "JustificationText" element
+     */
+    public void unsetJustificationText()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(JUSTIFICATIONTEXT$12, 0);
+        }
+    }
+    
+    /**
      * Gets the "EmergencyLevel" element
      */
     public eu.aladdin_project.xsd.SystemParameter getEmergencyLevel()
@@ -460,6 +628,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "EmergencyLevel" element
+     */
+    public boolean isSetEmergencyLevel()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(EMERGENCYLEVEL$14) != 0;
         }
     }
     
@@ -496,6 +676,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "EmergencyLevel" element
+     */
+    public void unsetEmergencyLevel()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(EMERGENCYLEVEL$14, 0);
+        }
+    }
+    
+    /**
      * Gets the "PatientID" element
      */
     public java.lang.String getPatientID()
@@ -524,6 +716,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
             org.apache.xmlbeans.XmlString target = null;
             target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$16, 0);
             return target;
+        }
+    }
+    
+    /**
+     * True if has "PatientID" element
+     */
+    public boolean isSetPatientID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(PATIENTID$16) != 0;
         }
     }
     
@@ -564,6 +768,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
+     * Unsets the "PatientID" element
+     */
+    public void unsetPatientID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(PATIENTID$16, 0);
+        }
+    }
+    
+    /**
      * Gets the "Delivered" element
      */
     public boolean getDelivered()
@@ -592,6 +808,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
             org.apache.xmlbeans.XmlBoolean target = null;
             target = (org.apache.xmlbeans.XmlBoolean)get_store().find_element_user(DELIVERED$18, 0);
             return target;
+        }
+    }
+    
+    /**
+     * True if has "Delivered" element
+     */
+    public boolean isSetDelivered()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(DELIVERED$18) != 0;
         }
     }
     
@@ -628,6 +856,18 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
                 target = (org.apache.xmlbeans.XmlBoolean)get_store().add_element_user(DELIVERED$18);
             }
             target.set(delivered);
+        }
+    }
+    
+    /**
+     * Unsets the "Delivered" element
+     */
+    public void unsetDelivered()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(DELIVERED$18, 0);
         }
     }
 }

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateAdministratorDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("updateadministrator6b92doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("updateadministrator6b92doctype");
     
     /**
      * Gets the "UpdateAdministrator" element
@@ -42,7 +42,7 @@ public interface UpdateAdministratorDocument extends org.apache.xmlbeans.XmlObje
     public interface UpdateAdministrator extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sCEC703AFFB7BA3F0C7A25A18141AAC3F").resolveHandle("updateadministrator0862elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("updateadministrator0862elemtype");
         
         /**
          * Gets the "data" element

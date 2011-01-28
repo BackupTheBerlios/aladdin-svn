@@ -63,16 +63,16 @@
     </simpleType>
     <complexType name="Warning">
         <sequence>
-            <element name="ID" type="string"/>
-            <element name="TypeOfWarning" type="tns:SystemParameter"/>
-            <element name="DateTimeOfWarning" type="dateTime"/>
-            <element name="Effect" type="tns:SystemParameter"/>
-            <element name="Indicator" type="tns:SystemParameter"/>
-            <element name="RiskLevel" type="tns:SystemParameter"/>
-            <element name="JustificationText" type="string"/>
-            <element name="EmergencyLevel" type="tns:SystemParameter"/>
-            <element name="PatientID" type="string"/>
-            <element name="Delivered" type="boolean"/>
+            <element minOccurs="0" name="ID" type="string"/>
+            <element minOccurs="0" name="TypeOfWarning" type="tns:SystemParameter"/>
+            <element minOccurs="0" name="DateTimeOfWarning" type="dateTime"/>
+            <element minOccurs="0" name="Effect" type="tns:SystemParameter"/>
+            <element minOccurs="0" name="Indicator" type="tns:SystemParameter"/>
+            <element minOccurs="0" name="RiskLevel" type="tns:SystemParameter"/>
+            <element minOccurs="0" name="JustificationText" type="string"/>
+            <element minOccurs="0" name="EmergencyLevel" type="tns:SystemParameter"/>
+            <element minOccurs="0" name="PatientID" type="string"/>
+            <element minOccurs="0" name="Delivered" type="boolean"/>
         </sequence>
     </complexType>
     <complexType name="SystemParameter">

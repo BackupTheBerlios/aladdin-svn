@@ -84,16 +84,16 @@
 	
 	<complexType name="Warning">
 		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="TypeOfWarning" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="1"></element>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="TypeOfWarning" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
+			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="0"></element>
+			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
+			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
+			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
+			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
+			<element name="PatientID" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
 
