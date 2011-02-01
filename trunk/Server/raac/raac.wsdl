@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.aladdin-project.eu/raac/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="raac" targetNamespace="http://www.aladdin-project.eu/raac/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.aladdin-project.eu/raac/" xmlns:pref="http://aladdin-project.eu/xsd">
+    	<xsd:import schemaLocation="SC.xsd" namespace="http://aladdin-project.eu/xsd"></xsd:import>
+    	<xsd:element name="AnalyzeMeasurements">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element name="in" type="pref:Measurement"
+    					maxOccurs="1" minOccurs="1" />
+    				<xsd:element name="PatientID" type="xsd:string"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:complexType>
+    	</xsd:element>
+    	<xsd:element name="AnalyzeMeasurementsResponse">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element name="out" type="pref:Warning" />
+    			</xsd:sequence>
+    		</xsd:complexType>
+    	</xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AnalyzeMeasurementsRequest">
+    <wsdl:part element="tns:AnalyzeMeasurements" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AnalyzeMeasurementsResponse">
+    <wsdl:part element="tns:AnalyzeMeasurementsResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="raac">
+    <wsdl:operation name="AnalyzeMeasurements">
+      <wsdl:input message="tns:AnalyzeMeasurementsRequest"/>
+      <wsdl:output message="tns:AnalyzeMeasurementsResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="raacSOAP" type="tns:raac">
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="AnalyzeMeasurements">
+  		<soap:operation
+  			soapAction="http://www.aladdin-project.eu/raac/AnalyzeMeasurements" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="raac">
+    <wsdl:port binding="tns:raacSOAP" name="raacSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
