@@ -11,18 +11,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
 
+import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
 
 import eu.aladdin_project.storagecomponent.*;
-import eu.aladdin_project.storagecomponent.AddEntertainmentContentResponseDocument.AddEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
 import eu.aladdin_project.storagecomponent.AssignTaskResponseDocument.AssignTaskResponse;
 import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument.AssignTasksMassivelyResponse;
@@ -40,7 +39,6 @@ import eu.aladdin_project.storagecomponent.DeleteAdministratorResponseDocument.D
 import eu.aladdin_project.storagecomponent.DeleteCarerAssessmentResponseDocument.DeleteCarerAssessmentResponse;
 import eu.aladdin_project.storagecomponent.DeleteCarerResponseDocument.DeleteCarerResponse;
 import eu.aladdin_project.storagecomponent.DeleteClinicianResponseDocument.DeleteClinicianResponse;
-import eu.aladdin_project.storagecomponent.DeleteEntertainmentContentResponseDocument.DeleteEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.DeleteExternalServiceResponseDocument.DeleteExternalServiceResponse;
 import eu.aladdin_project.storagecomponent.DeleteMediaContentResponseDocument.DeleteMediaContentResponse;
 import eu.aladdin_project.storagecomponent.DeletePatientAssessmentResponseDocument.DeletePatientAssessmentResponse;
@@ -52,7 +50,6 @@ import eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocumen
 import eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument.GetCarerAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetCarerResponseDocument.GetCarerResponse;
 import eu.aladdin_project.storagecomponent.GetClinicianResponseDocument.GetClinicianResponse;
-import eu.aladdin_project.storagecomponent.GetEntertainmentContentResponseDocument.GetEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.GetMeasurementResponseDocument.GetMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetMediaContentResponseDocument.GetMediaContentResponse;
 import eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse;
@@ -80,7 +77,6 @@ import eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument
 import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarningResponse;
 import eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument.StoreMeasurementsResponse;
 import eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument.StoreQuestionnaireAnswersResponse;
-import eu.aladdin_project.storagecomponent.UpdateEntertainmentContentResponseDocument.UpdateEntertainmentContentResponse;
 import eu.aladdin_project.storagecomponent.UpdateMediaContentResponseDocument.UpdateMediaContentResponse;
 import eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse;
 import eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument.UpdateAdministratorResponse;
@@ -93,6 +89,8 @@ import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUser
 import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
+import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
+import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument.AnalyzeMeasurements;
 import eu.aladdin_project.xsd.*;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument;
 import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument;
@@ -726,7 +724,8 @@ import java.net.URL;
     		if (
     				!checkUser(req.getSaveWarning().getUserId(), U_CARER) &&
     				!checkUser(req.getSaveWarning().getUserId(), U_CLINICIAN) &&
-    				!checkUser(req.getSaveWarning().getUserId(), U_ADMIN)
+    				!checkUser(req.getSaveWarning().getUserId(), U_ADMIN) && 
+    				!checkUser(req.getSaveWarning().getUserId(), U_SERVICE)
 				) {
     			res.setCode("-1");
     			res.setStatus((short) 0);
@@ -1247,6 +1246,20 @@ import java.net.URL;
     			Integer id = 0;
     			for (int i = 0; i < rm.length; i++) {
     				id = storeMeasurement(rm[i], null);
+    				RaacStub rs = new RaacStub();
+    				AnalyzeMeasurementsDocument amd = AnalyzeMeasurementsDocument.Factory.newInstance();
+    				AnalyzeMeasurements am = amd.addNewAnalyzeMeasurements();
+    				am.setIn(rm[i]);
+    				
+    				String patientID = "";
+    				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
+    				List<Object> data = s.createSQLQuery(sql).list();
+    				if (data.size() > 0) {
+    					patientID = (String)data.get(0);
+    				}
+    				
+    				am.setPatientID(patientID);
+    				rs.analyzeMeasurements(amd);
     			}
     			
     			s.getTransaction().commit();
@@ -1260,9 +1273,10 @@ import java.net.URL;
     			} catch (TransactionException e2) {
 				}
     			
+    			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
