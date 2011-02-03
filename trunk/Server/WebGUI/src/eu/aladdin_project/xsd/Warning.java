@@ -26,7 +26,7 @@ public class Warning  implements java.io.Serializable {
 
     private java.lang.String patientID;
 
-    private boolean delivered;
+    private java.lang.Boolean delivered;
 
     public Warning() {
     }
@@ -41,7 +41,7 @@ public class Warning  implements java.io.Serializable {
            java.lang.String justificationText,
            eu.aladdin_project.xsd.SystemParameter emergencyLevel,
            java.lang.String patientID,
-           boolean delivered) {
+           java.lang.Boolean delivered) {
            this.ID = ID;
            this.typeOfWarning = typeOfWarning;
            this.dateTimeOfWarning = dateTimeOfWarning;
@@ -240,7 +240,7 @@ public class Warning  implements java.io.Serializable {
      * 
      * @return delivered
      */
-    public boolean isDelivered() {
+    public java.lang.Boolean getDelivered() {
         return delivered;
     }
 
@@ -250,7 +250,7 @@ public class Warning  implements java.io.Serializable {
      * 
      * @param delivered
      */
-    public void setDelivered(boolean delivered) {
+    public void setDelivered(java.lang.Boolean delivered) {
         this.delivered = delivered;
     }
 
@@ -293,7 +293,9 @@ public class Warning  implements java.io.Serializable {
             ((this.patientID==null && other.getPatientID()==null) || 
              (this.patientID!=null &&
               this.patientID.equals(other.getPatientID()))) &&
-            this.delivered == other.isDelivered();
+            ((this.delivered==null && other.getDelivered()==null) || 
+             (this.delivered!=null &&
+              this.delivered.equals(other.getDelivered())));
         __equalsCalc = null;
         return _equals;
     }
@@ -332,7 +334,9 @@ public class Warning  implements java.io.Serializable {
         if (getPatientID() != null) {
             _hashCode += getPatientID().hashCode();
         }
-        _hashCode += (isDelivered() ? Boolean.TRUE : Boolean.FALSE).hashCode();
+        if (getDelivered() != null) {
+            _hashCode += getDelivered().hashCode();
+        }
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -347,60 +351,70 @@ public class Warning  implements java.io.Serializable {
         elemField.setFieldName("ID");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ID"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("typeOfWarning");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "TypeOfWarning"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("dateTimeOfWarning");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "DateTimeOfWarning"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("effect");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Effect"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("indicator");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Indicator"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("riskLevel");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "RiskLevel"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("justificationText");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "JustificationText"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("emergencyLevel");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "EmergencyLevel"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("patientID");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientID"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("delivered");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Delivered"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

@@ -61,7 +61,8 @@ public class WarningInfo {
 		this.justification = input.getJustificationText() == null ? "" : input.getJustificationText();
 		this.emergencyLevel = aux5 == null? "not set" : SystemDictionary.getWarningEmergencyLevelLabel(aux5.getCode());
 		this.patientID = input.getPatientID();
-		this.delivered = new Boolean(input.isDelivered()).toString();
+		this.delivered = input.getDelivered().toString();
+		//this.delivered = new Boolean(input.isDelivered()).toString();
 		String id="";
 		if(userId == null){
 			Session ses = Sessions.getCurrent();

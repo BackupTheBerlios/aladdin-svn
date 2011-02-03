@@ -33,10 +33,13 @@
 			<rows id="rows_questions">
 				<row>
 					<label value="Language"/>
-					<listbox mold="select" id="trans_locale">
+					<listbox mold="select" id="trans_locale" onSelect="qm_sketch.changeSelectedLocale()">
+						<listitem value="none" label="Select one"/>
+						<!-- 
 						<listitem value="ca_ES" label="Català" selected="true"/>
 						<listitem value="en_UK" label="English(UK)"/>
 						<listitem value="it_IT" label="Italiano"/>
+						 -->
 					</listbox>
 				</row>
 				<row>
@@ -48,12 +51,24 @@
 				</row>
 				<row>
 					<label value="${descl}"/>
-					<textbox id="trans_title" constraint="no empty: ${errorno }"/>
+					<hbox>
+						<textbox id="trans_title_original" readonly="true"/>
+						<textbox id="trans_title"/>
+					</hbox>
+					
 				</row>
 			</rows>
 		</grid>
 		<button label="Save Translation" onClick="qm_sketch.saveTranslation()"/>
 		</vbox>
+		<window id="trans_alert" closable="false" visible="false" title="No language detected" border="normal" position="center">
+			<vbox align="center">
+				<label value="You must select a valid locale before trying to save the translation!"/>
+				<separator height="3px"/>
+				<label value="Otherwise you could lost all your work"/>
+				<button label="Close" onClick="trans_alert.setVisible(false)"/>
+			</vbox>
+		</window>
 	</window>
 	<zscript>
 		String q = (String)Executions.getCurrent().getParameter("q");

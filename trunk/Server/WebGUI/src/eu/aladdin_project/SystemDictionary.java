@@ -10,7 +10,7 @@ import eu.aladdin_project.xsd.SystemParameter;
  */
 public class SystemDictionary {
 	
-	private static SystemParameter locale = new SystemParameter("en_US","English");
+	private static SystemParameter locale = new SystemParameter("en_UK","English");
 	
 	private static StorageComponentProxy proxy = null;
 	

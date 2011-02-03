@@ -16,7 +16,7 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[66];
+        _operations = new org.apache.axis.description.OperationDesc[67];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -948,6 +948,15 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[65] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("ListOfSupportedLocales");
+        oper.setReturnType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        oper.setReturnClass(eu.aladdin_project.xsd.SystemParameter[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "out"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[66] = oper;
 
     }
 
@@ -3577,6 +3586,40 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
                 return (eu.aladdin_project.xsd.QuestionnaireAnswers) _resp;
             } catch (java.lang.Exception _exception) {
                 return (eu.aladdin_project.xsd.QuestionnaireAnswers) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.QuestionnaireAnswers.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public eu.aladdin_project.xsd.SystemParameter[] listOfSupportedLocales() throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[66]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/ListOfSupportedLocales");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "ListOfSupportedLocales"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.SystemParameter[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.SystemParameter[]) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.SystemParameter[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

@@ -64,10 +64,9 @@ public class WarningsWindowController extends Window {
 			((Textbox)warningPopup.getFellow("emergencyfield")).setValue(SystemDictionary.getWarningEmergencyLevelLabel(warning[0].getEmergencyLevel().getCode()));
 			((Textbox)warningPopup.getFellow("patientfield")).setValue(warning[0].getID());
 			((Textbox)warningPopup.getFellow("patientnamefield")).setValue(pinfo.getPersonData().getSurname()+", "+pinfo.getPersonData().getName());
-			((Textbox)warningPopup.getFellow("delivfield")).setValue(warning[0].isDelivered()? Labels.getLabel("common.yes") : Labels.getLabel("common.no"));
-			//ID Row hidden. It had read-only set to true but Andrey requested to hide the whole Row.
+			((Textbox)warningPopup.getFellow("delivfield")).setValue(warning[0].getDelivered()? Labels.getLabel("common.yes") : Labels.getLabel("common.no"));
 			((Row)warningPopup.getFellow("warningid")).setVisible(false);
-			if(warning[0].isDelivered()){
+			if(warning[0].getDelivered()){
 				((Row)warningPopup.getFellow("buttonrow")).setVisible(false);
 			}
 			warningPopup.setTitle(Labels.getLabel("menu.warnings"));

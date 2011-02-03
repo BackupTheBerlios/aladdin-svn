@@ -440,5 +440,11 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
     return storageComponent_PortType.getQuestionnaireAnswersByTask(taskId, userId);
   }
   
+  public eu.aladdin_project.xsd.SystemParameter[] listOfSupportedLocales() throws java.rmi.RemoteException{
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.listOfSupportedLocales();
+  }
+  
   
 }
