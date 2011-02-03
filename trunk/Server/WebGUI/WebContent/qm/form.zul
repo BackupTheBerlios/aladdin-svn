@@ -27,7 +27,7 @@
 	<label value="${title}" sclass="newitem" />
 		<grid>
 			<columns>
-				<column align="right" width="200px"/>
+				<column align="right" width="200px" valign="top"/>
 				<column align="left"/>
 			</columns>
 			<rows>
@@ -37,7 +37,7 @@
 				</row>
 				<row>
 					<label value="${descl}"/>
-					<textbox id="qtitle" constraint="no empty: ${errorno }"/>
+					<textbox id="qtitle" constraint="no empty: ${errorno }" multiline="true" rows="3" width="75%"/>
 				</row>
 				<row>
 					<label value="${questionsl}"/>

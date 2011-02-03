@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.rmi.RemoteException;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -90,8 +94,12 @@ public class MeasurementPopupController extends Window{
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		if(measures != null && measures.length > 0){
-			for(int i = 0; i < measures.length; i++){
-				dataset.addValue(measures[i].getValue(), measures[i].getType().getDescription(), measures[i].getDateTime().get(Calendar.DATE)+"/"+measures[i].getDateTime().get(Calendar.MONTH));
+			List<Measurement> measurementlist = Arrays.asList(measures);
+			Collections.sort(measurementlist, new MeasurementDateSort());
+			Iterator<Measurement> it = measurementlist.iterator();
+			while(it.hasNext()){
+				Measurement mnext = it.next();
+				dataset.addValue(mnext.getValue(), mnext.getType().getDescription(), mnext.getDateTime().get(Calendar.DATE)+"/"+(mnext.getDateTime().get(Calendar.MONTH)+1));
 			}
 		}else{
 			//TODO Sample data

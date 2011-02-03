@@ -85,6 +85,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			bookEventWin.setAttribute("calevent", event);
 			Date setting = event.getCalendarEvent().getBeginDate();
 			SimpleCalendarEvent scevent = (SimpleCalendarEvent)event.getCalendarEvent();
+			bookEventWin.getFellow("cancelbutton").setVisible(true);
 			((Datebox)bookEventWin.getFellow("datetask")).setValue(setting);
 			((Datebox)bookEventWin.getFellow("datetask")).setReadonly(true);
 			((Datebox)bookEventWin.getFellow("datetask")).setButtonVisible(false);
@@ -93,8 +94,9 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			((Timebox)bookEventWin.getFellow("timetask")).setButtonVisible(false);
 			((Textbox)bookEventWin.getFellow("taskidfield")).setValue((String)scevent.getParams().get("task"));
 			((Textbox)bookEventWin.getFellow("taskstatusfield")).setValue(SystemDictionary.getTaskStatusLabel((String)scevent.getParams().get("status")));
-			((Row)bookEventWin.getFellow("rowtaskstatus")).setVisible(true);
+			bookEventWin.getFellow("rowtaskstatus").setVisible(true);
 			if(scevent.getParams().get("status").equals(SystemDictionary.TASK_STATUS_COMPLETED)){
+				bookEventWin.getFellow("cancelbutton").setVisible(false);
 				String tasktype = (String)scevent.getParams().get("type");  
 				if(tasktype.equals(SystemDictionary.TASK_TYPE_CARERQS) || tasktype.equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
 					//TODO retrieve Questionnaire answers and show in the task window
@@ -136,13 +138,12 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			Clinician assg = proxy.getClinician(assigner.getPersonID(), userid);
 			((Textbox)bookEventWin.getFellow("userid")).setValue((String)scevent.getParams().get("assign"));
 			((Textbox)bookEventWin.getFellow("userstr")).setValue(assg.toString());
-			((Button)bookEventWin.getFellow("cancelbutton")).setVisible(true);
 			((Textbox)bookEventWin.getFellow("tasktypetext")).setValue(scevent.getContent());
-			((Textbox)bookEventWin.getFellow("tasktypetext")).setVisible(true);
+			bookEventWin.getFellow("tasktypetext").setVisible(true);
 			//((Combobox)bookEventWin.getFellow("addressedtext")).setVisible(false);
 			int tasktype2 = Integer.parseInt((String)scevent.getParams().get("type"));
 			this.showCustomFields(tasktype2);
-			((Listbox)bookEventWin.getFellow("tasktypesel")).setVisible(false);
+			bookEventWin.getFellow("tasktypesel").setVisible(false);
 			((Textbox)bookEventWin.getFellow("urlfield")).setValue((String)scevent.getParams().get("url"));
 			((Textbox)bookEventWin.getFellow("textfield")).setValue((String)scevent.getParams().get("text"));
 			

@@ -195,6 +195,7 @@ public class QuestionWindow extends Window{
 			Column col1 = new Column();
 			col1.setWidth("150px");
 			col1.setAlign("right");
+			col1.setValign("top");
 			Column col2 = new Column();
 			cols.appendChild(col1);
 			cols.appendChild(col2);
@@ -255,6 +256,8 @@ public class QuestionWindow extends Window{
 					Textbox tbox1 = new Textbox();
 					tbox1.setId("question_text");
 					tbox1.setWidth("350px");
+					tbox1.setMultiline(true);
+					tbox1.setRows(3);
 					row1.appendChild(tbox1);
 				rows.appendChild(row1);
 				
