@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfQuestionnairesResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnairesResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("listofquestionnairesresponse7866doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnairesResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("listofquestionnairesresponse7866doctype");
     
     /**
      * Gets the "ListOfQuestionnairesResponse" element
@@ -42,7 +42,7 @@ public interface ListOfQuestionnairesResponseDocument extends org.apache.xmlbean
     public interface ListOfQuestionnairesResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnairesResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("listofquestionnairesresponse7964elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnairesResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("listofquestionnairesresponse7964elemtype");
         
         /**
          * Gets array of all "out" elements

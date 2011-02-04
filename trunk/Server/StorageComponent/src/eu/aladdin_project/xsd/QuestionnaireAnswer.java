@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireAnswer extends org.apache.xmlbeans.XmlString
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireAnswer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("questionnaireanswer939btype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireAnswer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("questionnaireanswer939btype");
     
     /**
      * Gets the "value" attribute
@@ -77,6 +77,36 @@ public interface QuestionnaireAnswer extends org.apache.xmlbeans.XmlString
      * Unsets the "questionID" attribute
      */
     void unsetQuestionID();
+    
+    /**
+     * Gets the "globalID" attribute
+     */
+    java.lang.String getGlobalID();
+    
+    /**
+     * Gets (as xml) the "globalID" attribute
+     */
+    org.apache.xmlbeans.XmlString xgetGlobalID();
+    
+    /**
+     * True if has "globalID" attribute
+     */
+    boolean isSetGlobalID();
+    
+    /**
+     * Sets the "globalID" attribute
+     */
+    void setGlobalID(java.lang.String globalID);
+    
+    /**
+     * Sets (as xml) the "globalID" attribute
+     */
+    void xsetGlobalID(org.apache.xmlbeans.XmlString globalID);
+    
+    /**
+     * Unsets the "globalID" attribute
+     */
+    void unsetGlobalID();
     
     /**
      * A factory class with static methods for creating instances

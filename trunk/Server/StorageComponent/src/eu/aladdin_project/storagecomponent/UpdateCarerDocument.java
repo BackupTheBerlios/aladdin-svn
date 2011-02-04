@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateCarerDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("updatecarerb046doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("updatecarerb046doctype");
     
     /**
      * Gets the "UpdateCarer" element
@@ -42,7 +42,7 @@ public interface UpdateCarerDocument extends org.apache.xmlbeans.XmlObject
     public interface UpdateCarer extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("updatecarere7caelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("updatecarere7caelemtype");
         
         /**
          * Gets the "data" element

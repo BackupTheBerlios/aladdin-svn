@@ -28,6 +28,8 @@ public class QuestionnaireAnswerImpl extends org.apache.xmlbeans.impl.values.Jav
         new javax.xml.namespace.QName("", "value");
     private static final javax.xml.namespace.QName QUESTIONID$2 = 
         new javax.xml.namespace.QName("", "questionID");
+    private static final javax.xml.namespace.QName GLOBALID$4 = 
+        new javax.xml.namespace.QName("", "globalID");
     
     
     /**
@@ -211,6 +213,98 @@ public class QuestionnaireAnswerImpl extends org.apache.xmlbeans.impl.values.Jav
         {
             check_orphaned();
             get_store().remove_attribute(QUESTIONID$2);
+        }
+    }
+    
+    /**
+     * Gets the "globalID" attribute
+     */
+    public java.lang.String getGlobalID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(GLOBALID$4);
+            if (target == null)
+            {
+                return null;
+            }
+            return target.getStringValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "globalID" attribute
+     */
+    public org.apache.xmlbeans.XmlString xgetGlobalID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(GLOBALID$4);
+            return target;
+        }
+    }
+    
+    /**
+     * True if has "globalID" attribute
+     */
+    public boolean isSetGlobalID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().find_attribute_user(GLOBALID$4) != null;
+        }
+    }
+    
+    /**
+     * Sets the "globalID" attribute
+     */
+    public void setGlobalID(java.lang.String globalID)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(GLOBALID$4);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(GLOBALID$4);
+            }
+            target.setStringValue(globalID);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "globalID" attribute
+     */
+    public void xsetGlobalID(org.apache.xmlbeans.XmlString globalID)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(GLOBALID$4);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(GLOBALID$4);
+            }
+            target.set(globalID);
+        }
+    }
+    
+    /**
+     * Unsets the "globalID" attribute
+     */
+    public void unsetGlobalID()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_attribute(GLOBALID$4);
         }
     }
 }

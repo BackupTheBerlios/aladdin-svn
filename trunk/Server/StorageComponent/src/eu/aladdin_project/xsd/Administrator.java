@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Administrator extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Administrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("administrator6367type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Administrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("administrator6367type");
     
     /**
      * Gets the "ID" element

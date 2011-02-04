@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface GMonthDay extends org.apache.xmlbeans.XmlGMonthDay
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GMonthDay.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("gmonthday1f17type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GMonthDay.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("gmonthday1f17type");
     
     /**
      * Gets the "id" attribute

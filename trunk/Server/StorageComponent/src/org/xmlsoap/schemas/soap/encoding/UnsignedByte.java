@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface UnsignedByte extends org.apache.xmlbeans.XmlUnsignedByte
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UnsignedByte.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("unsignedbyteec63type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UnsignedByte.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("unsignedbyteec63type");
     
     /**
      * Gets the "id" attribute

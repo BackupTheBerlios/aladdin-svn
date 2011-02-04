@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetQuestionnaireAnswersByTaskDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetQuestionnaireAnswersByTaskDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("getquestionnaireanswersbytaskc0b2doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetQuestionnaireAnswersByTaskDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("getquestionnaireanswersbytaskc0b2doctype");
     
     /**
      * Gets the "GetQuestionnaireAnswersByTask" element
@@ -42,7 +42,7 @@ public interface GetQuestionnaireAnswersByTaskDocument extends org.apache.xmlbea
     public interface GetQuestionnaireAnswersByTask extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetQuestionnaireAnswersByTask.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("getquestionnaireanswersbytask2162elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetQuestionnaireAnswersByTask.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("getquestionnaireanswersbytask2162elemtype");
         
         /**
          * Gets the "taskId" element

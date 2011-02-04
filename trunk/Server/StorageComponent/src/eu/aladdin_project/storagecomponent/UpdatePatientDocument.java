@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdatePatientDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdatePatientDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("updatepatient164adoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdatePatientDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("updatepatient164adoctype");
     
     /**
      * Gets the "UpdatePatient" element
@@ -42,7 +42,7 @@ public interface UpdatePatientDocument extends org.apache.xmlbeans.XmlObject
     public interface UpdatePatient extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdatePatient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("updatepatient9e92elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdatePatient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("updatepatient9e92elemtype");
         
         /**
          * Gets the "data" element

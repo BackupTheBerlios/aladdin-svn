@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetTaskResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTaskResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("gettaskresponsea5eadoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTaskResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("gettaskresponsea5eadoctype");
     
     /**
      * Gets the "GetTaskResponse" element
@@ -42,7 +42,7 @@ public interface GetTaskResponseDocument extends org.apache.xmlbeans.XmlObject
     public interface GetTaskResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTaskResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("gettaskresponse8792elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTaskResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("gettaskresponse8792elemtype");
         
         /**
          * Gets the "out" element

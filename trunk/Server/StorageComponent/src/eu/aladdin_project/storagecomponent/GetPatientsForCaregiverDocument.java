@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetPatientsForCaregiverDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientsForCaregiverDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("getpatientsforcaregiver2ef9doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientsForCaregiverDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("getpatientsforcaregiver2ef9doctype");
     
     /**
      * Gets the "GetPatientsForCaregiver" element
@@ -42,7 +42,7 @@ public interface GetPatientsForCaregiverDocument extends org.apache.xmlbeans.Xml
     public interface GetPatientsForCaregiver extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientsForCaregiver.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("getpatientsforcaregiver5bf0elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientsForCaregiver.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("getpatientsforcaregiver5bf0elemtype");
         
         /**
          * Gets the "userId" element

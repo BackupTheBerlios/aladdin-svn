@@ -70,6 +70,7 @@
 			<extension base="string">
 				<attribute type="string" name="value"/>
 				<attribute type="string" name="questionID"/>
+				<attribute type="string" name="globalID"/>
 			</extension>
 		</simpleContent>
 	</complexType>

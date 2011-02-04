@@ -20,6 +20,7 @@ import org.hibernate.cfg.Configuration;
 import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
+import com.aladdin.sc.db.Translate;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -101,6 +102,15 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.net.URL;
+
+class CmpInt implements java.util.Comparator<Integer> {
+
+	@Override
+	public int compare(Integer arg0, Integer arg1) {
+		return arg0.compareTo(arg1);
+	}
+	
+}
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -482,12 +492,20 @@ import java.net.URL;
     			return respdoc;
     		}
     		
+    		Questionnaire rquest = req.getUpdateQuestionnaire().getData();
+    		SystemParameter locale = req.getUpdateQuestionnaire().getLocale();
+			
+			System.out.println ("============= updateQuestionnaire =============");
+			System.out.println ("locale: ");
+			System.out.println ("  code: " + locale.getCode());
+			System.out.println ("  desc: " + locale.getDescription());
+			System.out.println (" title: " + rquest.getTitle());
+			System.out.println ("   cnt: " + rquest.getQuestionArray().length);
+    		
     		try {
     			s.beginTransaction();
     			
-    			Questionnaire rquest = req.getUpdateQuestionnaire().getData();
-    			
-    			storeQuestionnaire(rquest, req.getUpdateQuestionnaire().getLocale());
+				storeQuestionnaire(rquest, locale);
     			
     			s.getTransaction().commit();
     			
@@ -501,20 +519,21 @@ import java.net.URL;
     			} catch (TransactionException e2) {
 				}
     			
+    			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
     	}
 
     	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId, SystemParameter locale) {
-    		//System.out.println (" uQQ 1");
+    		System.out.println (" uQQ 1");
     		com.aladdin.sc.db.QuestionnaireQuestion qq = new com.aladdin.sc.db.QuestionnaireQuestion ();
-    		//System.out.println (" uQQ 2");
+    		System.out.println (" uQQ 2");
     		qq.setType(rqq.getType());
-    		//System.out.println (" uQQ 3");
+    		System.out.println (" uQQ 3");
     		try {
     			qq.setId(new Integer (rqq.getId()));
     		} catch (NumberFormatException e) {
@@ -522,18 +541,18 @@ import java.net.URL;
     		} catch (Exception e) {
 				qq.setId(null);
 			}
-    		//System.out.println (" uQQ 4");
+    		System.out.println (" uQQ 4");
     		qq.setCondition(new Integer(rqq.getCondition()));
-    		//System.out.println (" uQQ 5");
+    		System.out.println (" uQQ 5");
     		
     		//qq.setTitle(rqq.getTitle());
     		
-    		//System.out.println (qq.getTitle());
-    		//System.out.println (" uQQ 6");
+    		System.out.println (qq.getTitle());
+    		System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
     		qq.setGlobalId(rqq.getGlobalID());
-    		//System.out.println (" uQQ 7");
+    		System.out.println (" uQQ 7");
 /*    		if (rqq.getDeleted() != true) {
     			rqq.setDeleted(false);
     		}
@@ -546,54 +565,112 @@ import java.net.URL;
     		//System.out.print (" ");
     		//System.out.println (qq.getId());
     		
-    		
     		s.saveOrUpdate(qq);
+    		System.out.println (" uQQ 71");
     		
     		if (!setTranslate("questionnairequestion", qq.getId(), locale, rqq.getTitle())) {
+    			System.out.println (" uQQ 72");
     			qq.setTitle(rqq.getTitle());
+    			System.out.println (" uQQ 73");
     			s.saveOrUpdate(qq);
+    			System.out.println (" uQQ 74");
     		}
     		
-    		//System.out.println (" uQQ 8");
+    		System.out.println (" uQQ 8");
     		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
     			for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
-        			//System.out.println (" uQQ 9");
+        			System.out.println (" uQQ 9");
         			updateQQ (rqq.getQuestions().getQuestionArray(i), questId, qq.getId(), locale);
-        			//System.out.println (" uQQ 19");
+        			System.out.println (" uQQ 10");
         		}    			
     		}
     		
-    		QuestionnaireQuestionAnswer rqqa = null;
-    		//System.out.println (" uQQ 11");
     		if (rqq.getAnswers() != null && rqq.getAnswers().getAnswerArray() != null) {
+
+    			System.out.println (" uQQ 11");
+    			QuestionnaireQuestionAnswer rqqa = null;
+    			System.out.println (" uQQ 12");
+        		List<Integer> qqaId = new ArrayList<Integer>();
+        		System.out.println (" uQQ 13");
+        		
     			for (int i = 0; i < rqq.getAnswers().getAnswerArray().length; i++) {
+    				System.out.println (" uQQ 14");
+    				
         			rqqa = rqq.getAnswers().getAnswerArray(i);
+        			System.out.println (" uQQ 15");
         			
+        			String sql = "SELECT id FROM questionnairequestionanswer WHERE question = '" + qq.getId().toString() + "' AND value = '" + new Integer (rqqa.getValue()).toString()  + "'";
+        			System.out.println (" uQQ 16");
+        			List<Object> _id = s.createSQLQuery(sql).list();
+        			System.out.println (" uQQ 17");
         			
-        			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
-        			qqa.setValue(new Integer(rqqa.getValue()));
-        			qqa.setQuestion(qq.getId());
+        			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = null;
+        			System.out.println (" uQQ 18");
         			
-        			//qqa.setDescription(rqqa.getStringValue());
+        			if (_id.size() > 0) {
+        				System.out.println (" uQQ 19");
+        				qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) s.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer)_id.get(0));
+        				System.out.println (" uQQ 20");
+        				qqa.setQuestion(qq.getId());
+        				System.out.println (" uQQ 21");
+        				qqa.setValue(new Integer(rqqa.getValue()));
+        				System.out.println (" uQQ 22");
+        				qqa.setDeleted(false);
+        				s.merge(qqa);
+        				System.out.println (" uQQ 23");
+        			} else {
+        				System.out.println (" uQQ 24");
+        				qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
+        				System.out.println (" uQQ 25");
+        				qqa.setValue(new Integer(rqqa.getValue()));
+        				System.out.println (" uQQ 26");
+        				qqa.setQuestion(qq.getId());
+        				qqa.setDeleted(false);
+        				s.saveOrUpdate(qqa);
+        				System.out.println (" uQQ 27");
+        			}
         			
-//        			if (rqqa.getDeleted() != true) rqqa.setDeleted(true);
-//        			qqa.setDeleted(rqqa.getDeleted());
-//        			if (rqqa.getId() > 0) qqa.setId(rqqa.getId());
-        			
-        			
-        			//System.out.print (" answer ");
-        			//System.out.print (qqa.getQuestion());
-        			//System.out.print (" ");
-        			//System.out.println (qqa.getDescription());
-        			
-        			s.saveOrUpdate(qqa);
+        			System.out.println (" uQQ 28");
+        			qqaId.add(qqa.getId());
+        			System.out.println (" uQQ 29");
         			
         			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getStringValue())) {
+        				System.out.println (" uQQ 30");
             			qqa.setDescription(rqqa.getStringValue());
+            			System.out.println (" uQQ 31");
             			s.saveOrUpdate(qq);
+            			System.out.println (" uQQ 32");
             		}
         			
-        		}    			
+        		}
+    			
+    			/*String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + qq.getId().toString();
+    			List<Object> qqal = s.createSQLQuery(sql).list();
+    			for (int i = 0; i < qqal.size(); i++) {
+    				boolean del = true;
+    				Integer qqaid = (Integer) qqal.get(i);
+    				for (int j = 0; j < qqaId.size(); j++) {
+    					if (qqaId.get(j) == qqal.get(i)) {
+    						del = false;
+    					}
+    				}
+    				if (del) {
+    					com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) s.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer) qqal.get(i));
+    					qqa.setDeleted(true);
+    					s.saveOrUpdate(qqa);
+    				}
+    			}*/
+    			
+    			/*System.out.println (" uQQ 33");
+    			String sql = "update questionnairequestionanswer set deleted = true where id in (";
+    			System.out.println (" uQQ 34");
+    			for (int i = 0; i < qqaId.size(); i++) {
+    				sql += qqaId.get(i).toString() + ",";
+    			}
+    			sql += "-1)";
+    			System.out.println (" uQQ 35");
+    			s.createSQLQuery(sql).executeUpdate();
+    			System.out.println (" uQQ 36");*/
     		}
     		//System.out.println (" uQQ 20");
     	}
@@ -648,8 +725,11 @@ import java.net.URL;
 				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id.toString();
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
-					sql = "UPDATE translate SET value = '" + value + "' WHERE id = " + ( (Integer) ((Object[])trans[0])[0]).toString();
-					return (s.createSQLQuery(sql).executeUpdate() == 1);
+					com.aladdin.sc.db.Translate t = (Translate) s.load(com.aladdin.sc.db.Translate.class, ( (Integer) ((Object[])trans[0])[0]));
+					t.setValue(value);
+					s.saveOrUpdate(t);
+					//sql = "UPDATE translate SET value = '" + value + "' WHERE id = " + ( (Integer) ((Object[])trans[0])[0]).toString();
+					//return (s.createSQLQuery(sql).executeUpdate() == 1);
 				}
 				Integer localeId = getLocaleId(locale);
 				if (localeId == 0) return false;
@@ -1553,6 +1633,12 @@ import java.net.URL;
 	    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[0]); 
 	    				rqa.setQuestionID(qa.getQuestion().toString());
 	    				rqa.setValue(qa.getValue());
+	    				
+	    				rqas.setObjectID(qa.getObjectId().toString());
+	    				rqas.setUserID(qa.getUserId().toString());
+	    				
+	    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
+	    				rqa.setGlobalID(qq.getGlobalId().toString());
 	    			}
     			}
     			
@@ -1789,59 +1875,63 @@ import java.net.URL;
     	}
 
 		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq, SystemParameter locale) {
-			//System.out.println (" ===============================");
+			System.out.println (" ================ storeQuestionnaire =============== ");
+			
+			System.out.println (rq.getID());
+			System.out.println (rq.getTitle());
+			System.out.println (rq.getVersion());
 			
 			if (rq.getID() != null) {
 				try {
 					Integer id = new Integer (rq.getID());
 				} catch (NumberFormatException e) {
-					//System.out.println ("NumberFormatException");
 					return null;
 				} catch (Exception e) {
-					//System.out.println ("Exception");
 					return null;				
 				}
 			}
 			
 			
-			//System.out.println (" sQ 1");
+			System.out.println (" sQ 1");
 			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
-			//System.out.println (" sQ 2");
+			System.out.println (" sQ 2");
 			
 			//if (setTranslate("questionnaire", q.getId().toString(), locale, rq.getTitle())) q.setTitle(rq.getTitle());
 			
 			//System.out.println (rq.getTitle());
-			//System.out.println (" sQ 3");
+			System.out.println (" sQ 3");
 			//System.out.println (rq.getVersion());
 			q.setVersion(new BigDecimal (rq.getVersion()));
-			//System.out.println (" sQ 4");
+			System.out.println (" sQ 4");
 			if (rq.getID() != null) {
 				try {
 					q.setId(new Integer (rq.getID()));
 				} catch (Exception e) {
-					//System.out.println (e.toString());
+					System.out.println (e.toString());
 					q = null;
 					return null;
 				}
 			}
 			s.saveOrUpdate(q);
 			
+			System.out.println (" sQ 41");
 			
 			if (!setTranslate("questionnaire", q.getId(), locale, rq.getTitle())) {
+				System.out.println (" sQ 42");
 				q.setTitle(rq.getTitle());
+				System.out.println (" sQ 43");
 				s.saveOrUpdate(q);
 			}
 			
-			
-			//System.out.println (" sQ 5");
+			System.out.println (" sQ 5");
 			
 			QuestionnaireQuestion[] rqq = rq.getQuestionArray();
-			//System.out.println (" sQ 6");
+			System.out.println (" sQ 6");
 			
 			for (int i = 0; i < rqq.length; i++) {
-				//System.out.println (" sQ 7");
+				System.out.println (" sQ 7");
 				updateQQ(rqq[i], q.getId(), null, locale);
-				//System.out.println (" sQ 8");
+				System.out.println (" sQ 8");
 			}
 			return q;
 		}
@@ -2974,7 +3064,12 @@ import java.net.URL;
     			Integer id = new Integer (req.getGetQuestionnaire().getId());
     			s.beginTransaction();
     			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) s.load(com.aladdin.sc.db.Questionnaire.class, id);
-    			resp.setOut(exportQuestionnaire(q, req.getGetQuestionnaire().getLocale()));
+    			final SystemParameter locale = req.getGetQuestionnaire().getLocale();
+    			
+    			System.out.println ("============== getQuestionnaire ===============");
+    			System.out.println ("locale: " + locale.getCode());
+    			
+				resp.setOut(exportQuestionnaire(q, locale));
     			s.getTransaction().commit();
     		} catch (Exception e) {
     			
@@ -3015,28 +3110,49 @@ import java.net.URL;
     		try {
     			s.beginTransaction();
     			
+    			System.out.println ("sqa 1");
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
+    			System.out.println ("sqa 2");
 				Timestamp datetime = new Timestamp(0);
+				System.out.println ("sqa 3");
 				if (data.getDateTime() != null) datetime = new Timestamp(data.getDateTime().getTimeInMillis());
+				System.out.println ("sqa 4");
     			Integer objectId = new Integer (data.getObjectID());
+    			System.out.println ("sqa 5");
     			Integer userId = new Integer (data.getUserID());
+    			System.out.println ("sqa 6");
     			Integer taskId = new Integer (data.getTaskID());
+    			System.out.println ("sqa 7");
     			
     			Integer id = 0;
+    			System.out.println ("sqa 8");
     			QuestionnaireAnswer[] rqal = data.getAnswerArray();
+    			System.out.println ("sqa 9");
     			for (int i = 0; i < rqal.length; i++) {
+    				System.out.println ("sqa 10");
     				com.aladdin.sc.db.QuestionnaireAnswer qa = new com.aladdin.sc.db.QuestionnaireAnswer();
+    				System.out.println ("sqa 11");
     				if (rqal[i].getQuestionID() != null) qa.setQuestion(new Integer (rqal[i].getQuestionID()));
+    				System.out.println ("sqa 12");
     				qa.setValue(rqal[i].getValue());
+    				System.out.println ("sqa 13");
     				qa.setUserId(userId);
+    				System.out.println ("sqa 14");
     				qa.setObjectId(objectId);
+    				System.out.println ("sqa 15");
     				qa.setDateTime(datetime);
+    				System.out.println ("sqa 16");
     				s.save(qa);
+    				System.out.println ("sqa 17");
     				id = qa.getId();
+    				System.out.println ("sqa 18");
     			}
     			
-    			String sql = "UPDATE task SET datetimefulfilled = " + datetime.toString() + " WHERE id = " + taskId.toString();
+    			System.out.println ("sqa 19");
+    			String sql = "UPDATE task SET datetimefulfilled = '" + datetime.toString() + "' WHERE id = " + taskId.toString();
+    			System.out.println ("sqa 20");
     			s.createSQLQuery(sql).executeUpdate();
+    			System.out.println ("sqa 21");
     			
     			s.getTransaction().commit();
     			
@@ -3052,7 +3168,7 @@ import java.net.URL;
     			
     			System.out.println (e.toString());
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -4586,6 +4702,9 @@ import java.net.URL;
     				rqa.setValue(qa.getValue());
     				rqas.setObjectID(qa.getObjectId().toString());
     				rqas.setUserID(qa.getUserId().toString());
+    				
+    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
+    				rqa.setGlobalID(qq.getGlobalId().toString());
     			}
     			
     		} catch (Exception e) {
@@ -4598,6 +4717,8 @@ import java.net.URL;
 		public ListOfSupportedLocalesResponseDocument listOfSupportedLocales(ListOfSupportedLocalesDocument req) {
 			ListOfSupportedLocalesResponseDocument respdoc = ListOfSupportedLocalesResponseDocument.Factory.newInstance();
 			ListOfSupportedLocalesResponse resp = respdoc.addNewListOfSupportedLocalesResponse();
+			
+			System.out.println ("================== listOfSupportedLocales ==================");
 			
 			try {
 				com.aladdin.sc.db.Locale[] locale = (Locale[]) s.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);

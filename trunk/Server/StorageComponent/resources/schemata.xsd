@@ -51,6 +51,7 @@
             <extension base="string">
                 <attribute name="value" type="string"/>
                 <attribute name="questionID" type="string"/>
+                <attribute name="globalID" type="string"/>
             </extension>
         </simpleContent>
     </complexType>

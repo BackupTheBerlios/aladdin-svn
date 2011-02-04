@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Long extends org.apache.xmlbeans.XmlLong
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Long.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("long2b82type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Long.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("long2b82type");
     
     /**
      * Gets the "id" attribute

@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface RootAttribute extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(RootAttribute.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("root42aaattrtypetype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(RootAttribute.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("root42aaattrtypetype");
     
     /**
      * Gets the "root" attribute
@@ -57,7 +57,7 @@ public interface RootAttribute extends org.apache.xmlbeans.XmlObject
     public interface Root extends org.apache.xmlbeans.XmlBoolean
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Root.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7709E7D98D6AD0068B83D77933098C84").resolveHandle("root27f8attrtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Root.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("root27f8attrtype");
         
         /**
          * A factory class with static methods for creating instances
