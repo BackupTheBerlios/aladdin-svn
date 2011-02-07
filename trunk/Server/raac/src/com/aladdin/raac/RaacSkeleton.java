@@ -175,14 +175,18 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 //				break;
 			}
 			
-			SaveWarningDocument swd = SaveWarningDocument.Factory.newInstance();
-			SaveWarning sw = swd.addNewSaveWarning();
-			sw.setWarn(generatedWarning);
-			sw.setUserId(UserID);
-			try {
-				sc.saveWarning(swd);
-			} catch (RemoteException e) {
-				e.printStackTrace();
+			if (generatedWarning != null) {
+
+				SaveWarningDocument swd = SaveWarningDocument.Factory
+						.newInstance();
+				SaveWarning sw = swd.addNewSaveWarning();
+				sw.setWarn(generatedWarning);
+				sw.setUserId(UserID);
+				try {
+					sc.saveWarning(swd);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 			}
 			resp.setOut(generatedWarning);
 		}
