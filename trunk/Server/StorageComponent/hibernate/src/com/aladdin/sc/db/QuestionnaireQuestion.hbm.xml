@@ -12,6 +12,7 @@
 <property name="quest" type="java.lang.Integer"><column name="quest"/></property>
 <property name="condition" type="java.lang.Integer"><column name="condition"/></property>
 <property name="deleted" type="java.lang.Boolean"><column name="deleted"/></property>
+<property name="position" type="java.lang.Integer"><column name="position"/></property>
 <property name="GlobalId" type="java.lang.Integer"><column name="GlobalId"/></property>
 <many-to-one insert="false" update="false" name="m_QuestionnaireQuestion" class="QuestionnaireQuestion" ><column name="parentid" not-null="false" /></many-to-one>
 <many-to-one insert="false" update="false" name="m_Questionnaire" class="Questionnaire" ><column name="quest" not-null="false" /></many-to-one>
