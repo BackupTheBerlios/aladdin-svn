@@ -9,6 +9,10 @@
         <parameter name="ServiceClass">com.aladdin.raac.RaacSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="AnalyzeQuestionnaires" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.aladdin-project.eu/raac/">
+            <actionMapping>http://www.aladdin-project.eu/raac/AnalyzeQuestionnaires</actionMapping>
+            <outputActionMapping>http://www.aladdin-project.eu/raac/raac/AnalyzeQuestionnairesResponse</outputActionMapping>
+        </operation>
         <operation name="AnalyzeMeasurements" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.aladdin-project.eu/raac/">
             <actionMapping>http://www.aladdin-project.eu/raac/AnalyzeMeasurements</actionMapping>
             <outputActionMapping>http://www.aladdin-project.eu/raac/raac/AnalyzeMeasurementsResponse</outputActionMapping>

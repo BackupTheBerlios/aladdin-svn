@@ -36,22 +36,40 @@
 
         
 
+            if("analyzeQuestionnaires".equals(methodName)){
+                
+                eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument analyzeQuestionnairesResponse5 = null;
+	                        eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument wrappedParam =
+                                                             (eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               analyzeQuestionnairesResponse5 =
+                                                   
+                                                   
+                                                         skel.analyzeQuestionnaires(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), analyzeQuestionnairesResponse5, false);
+                                    } else 
+
             if("analyzeMeasurements".equals(methodName)){
                 
-                eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument analyzeMeasurementsResponse3 = null;
+                eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument analyzeMeasurementsResponse7 = null;
 	                        eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument wrappedParam =
                                                              (eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               analyzeMeasurementsResponse3 =
+                                               analyzeMeasurementsResponse7 =
                                                    
                                                    
                                                          skel.analyzeMeasurements(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), analyzeMeasurementsResponse3, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), analyzeMeasurementsResponse7, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");
@@ -67,6 +85,142 @@
         }
         
         //
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
 
             private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault{
@@ -203,6 +357,15 @@
                         omDataSource);
             }
         
+                            private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument param, boolean optimizeContent)
+                            throws org.apache.axis2.AxisFault {
+                            org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                            if (param != null){
+                            envelope.getBody().addChild(toOM(param, optimizeContent));
+                            }
+                            return envelope;
+                            }
+                        
                             private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument param, boolean optimizeContent)
                             throws org.apache.axis2.AxisFault {
                             org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
@@ -226,6 +389,32 @@
         java.lang.Class type,
         java.util.Map extraNamespaces) throws org.apache.axis2.AxisFault{
         try{
+        
+
+            if (eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
         
 
             if (eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument.class.equals(type)){

@@ -15,6 +15,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param analyzeQuestionnaires
+         */
+
+        
+                public eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires
+                (
+                  eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument analyzeQuestionnaires
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param analyzeMeasurements
          */
 

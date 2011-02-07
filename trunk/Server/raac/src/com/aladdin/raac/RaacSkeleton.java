@@ -27,6 +27,8 @@ import eu.aladdin_project.storagecomponent.SaveWarningDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument.AnalyzeMeasurementsResponse;
+import eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument;
+import eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument;
 import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.SystemParameter;
@@ -279,6 +281,13 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 
 		return warning;
 
+	}
+
+	@Override
+	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
+			AnalyzeQuestionnairesDocument analyzeQuestionnaires) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
     

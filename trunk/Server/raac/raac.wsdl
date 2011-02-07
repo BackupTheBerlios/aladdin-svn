@@ -19,6 +19,21 @@
     			</xsd:sequence>
     		</xsd:complexType>
     	</xsd:element>
+    	<xsd:element name="AnalyzeQuestionnaires">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element name="PatientID" type="xsd:string"></xsd:element>
+    				<xsd:element name="answers" type="pref:QuestionnaireAnswer" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:complexType>
+    	</xsd:element>
+    	<xsd:element name="AnalyzeQuestionnairesResponse">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element name="out" type="pref:Warning"></xsd:element>
+    			</xsd:sequence>
+    		</xsd:complexType>
+    	</xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="AnalyzeMeasurementsRequest">
@@ -27,10 +42,20 @@
   <wsdl:message name="AnalyzeMeasurementsResponse">
     <wsdl:part element="tns:AnalyzeMeasurementsResponse" name="parameters"/>
   </wsdl:message>
+  <wsdl:message name="AnalyzeQuestionnairesRequest">
+  	<wsdl:part name="parameters" element="tns:AnalyzeQuestionnaires"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AnalyzeQuestionnairesResponse">
+  	<wsdl:part name="parameters" element="tns:AnalyzeQuestionnairesResponse"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="raac">
     <wsdl:operation name="AnalyzeMeasurements">
       <wsdl:input message="tns:AnalyzeMeasurementsRequest"/>
       <wsdl:output message="tns:AnalyzeMeasurementsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="AnalyzeQuestionnaires">
+    	<wsdl:input message="tns:AnalyzeQuestionnairesRequest"></wsdl:input>
+    	<wsdl:output message="tns:AnalyzeQuestionnairesResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="raacSOAP" type="tns:raac">
@@ -39,6 +64,16 @@
   	<wsdl:operation name="AnalyzeMeasurements">
   		<soap:operation
   			soapAction="http://www.aladdin-project.eu/raac/AnalyzeMeasurements" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="AnalyzeQuestionnaires">
+  		<soap:operation
+  			soapAction="http://www.aladdin-project.eu/raac/AnalyzeQuestionnaires" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>
