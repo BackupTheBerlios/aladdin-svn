@@ -11,12 +11,52 @@ package eu.aladdin_project.xsd;
 /**
  * An XML QuestionnaireQuestionAnswer(@http://aladdin-project.eu/xsd).
  *
- * This is an atomic type that is a restriction of eu.aladdin_project.xsd.QuestionnaireQuestionAnswer.
+ * This is a complex type.
  */
-public interface QuestionnaireQuestionAnswer extends org.apache.xmlbeans.XmlString
+public interface QuestionnaireQuestionAnswer extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestionAnswer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("questionnairequestionanswercea1type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestionAnswer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("questionnairequestionanswercea1type");
+    
+    /**
+     * Gets the "position" element
+     */
+    int getPosition();
+    
+    /**
+     * Gets (as xml) the "position" element
+     */
+    org.apache.xmlbeans.XmlInt xgetPosition();
+    
+    /**
+     * Sets the "position" element
+     */
+    void setPosition(int position);
+    
+    /**
+     * Sets (as xml) the "position" element
+     */
+    void xsetPosition(org.apache.xmlbeans.XmlInt position);
+    
+    /**
+     * Gets the "description" element
+     */
+    java.lang.String getDescription();
+    
+    /**
+     * Gets (as xml) the "description" element
+     */
+    org.apache.xmlbeans.XmlString xgetDescription();
+    
+    /**
+     * Sets the "description" element
+     */
+    void setDescription(java.lang.String description);
+    
+    /**
+     * Sets (as xml) the "description" element
+     */
+    void xsetDescription(org.apache.xmlbeans.XmlString description);
     
     /**
      * Gets the "value" attribute

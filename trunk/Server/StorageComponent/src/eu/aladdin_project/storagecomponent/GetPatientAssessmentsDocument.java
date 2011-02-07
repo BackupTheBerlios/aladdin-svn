@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetPatientAssessmentsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientAssessmentsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("getpatientassessmentsd3f0doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientAssessmentsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("getpatientassessmentsd3f0doctype");
     
     /**
      * Gets the "GetPatientAssessments" element
@@ -42,7 +42,7 @@ public interface GetPatientAssessmentsDocument extends org.apache.xmlbeans.XmlOb
     public interface GetPatientAssessments extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientAssessments.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("getpatientassessmentseedeelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetPatientAssessments.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("getpatientassessmentseedeelemtype");
         
         /**
          * Gets the "patientId" element

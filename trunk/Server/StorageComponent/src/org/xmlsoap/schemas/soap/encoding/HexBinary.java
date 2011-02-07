@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface HexBinary extends org.apache.xmlbeans.XmlHexBinary
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(HexBinary.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s23B3F2EE1EC45D27E644654AC98E643C").resolveHandle("hexbinary1c50type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(HexBinary.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("hexbinary1c50type");
     
     /**
      * Gets the "id" attribute

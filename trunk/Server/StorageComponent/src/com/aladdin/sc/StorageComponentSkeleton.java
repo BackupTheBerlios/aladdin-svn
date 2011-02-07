@@ -545,6 +545,8 @@ class CmpInt implements java.util.Comparator<Integer> {
     		qq.setCondition(new Integer(rqq.getCondition()));
     		System.out.println (" uQQ 5");
     		
+    		qq.setPosition(rqq.getPosition());
+    		
     		//qq.setTitle(rqq.getTitle());
     		
     		System.out.println (qq.getTitle());
@@ -616,6 +618,7 @@ class CmpInt implements java.util.Comparator<Integer> {
         				qqa.setValue(new Integer(rqqa.getValue()));
         				System.out.println (" uQQ 22");
         				qqa.setDeleted(false);
+        				qqa.setPosition(rqqa.getPosition());
         				s.merge(qqa);
         				System.out.println (" uQQ 23");
         			} else {
@@ -634,9 +637,9 @@ class CmpInt implements java.util.Comparator<Integer> {
         			qqaId.add(qqa.getId());
         			System.out.println (" uQQ 29");
         			
-        			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getStringValue())) {
+        			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getDescription())) {
         				System.out.println (" uQQ 30");
-            			qqa.setDescription(rqqa.getStringValue());
+            			qqa.setDescription(rqqa.getDescription());
             			System.out.println (" uQQ 31");
             			s.saveOrUpdate(qq);
             			System.out.println (" uQQ 32");
@@ -2380,7 +2383,6 @@ class CmpInt implements java.util.Comparator<Integer> {
     		//rq.setTitle(q.getTitle());
     		rq.setTitle(getTranslate("questionnaire", rq.getID(), locale, q.getTitle()));
     		
-    		
     		//System.out.println (" eQ 4");
     		rq.setVersion(q.getVersion().doubleValue ());
     		//System.out.println (" eQ 5");
@@ -2421,6 +2423,7 @@ class CmpInt implements java.util.Comparator<Integer> {
     		//System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
     		rqq.setGlobalID(qq.getGlobalId());
+    		rqq.setPosition(qq.getPosition());
     		//System.out.println (" eQQ 4");
     		
     		//System.out.println ("");
@@ -2499,7 +2502,9 @@ class CmpInt implements java.util.Comparator<Integer> {
     		//System.out.println (" eQQA 2");
     		
     		//rqqa.setStringValue(qqa.getDescription());
-    		rqqa.setStringValue(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, qqa.getDescription()));
+    		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, qqa.getDescription()));
+    		
+    		rqqa.setPosition(qqa.getPosition());
     		
     		
     		//System.out.println (" eQQA 3");
@@ -3110,6 +3115,8 @@ class CmpInt implements java.util.Comparator<Integer> {
     		try {
     			s.beginTransaction();
     			
+    			System.out.println (req.getStoreQuestionnaireAnswers().getData().toString());
+    			
     			System.out.println ("sqa 1");
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
     			System.out.println ("sqa 2");
@@ -3132,6 +3139,10 @@ class CmpInt implements java.util.Comparator<Integer> {
     				System.out.println ("sqa 10");
     				com.aladdin.sc.db.QuestionnaireAnswer qa = new com.aladdin.sc.db.QuestionnaireAnswer();
     				System.out.println ("sqa 11");
+    				System.out.println(i);
+    				System.out.println(rqal[i].toString());
+    				System.out.println(rqal[i].getValue());
+    				System.out.println(rqal[i].getQuestionID());
     				if (rqal[i].getQuestionID() != null) qa.setQuestion(new Integer (rqal[i].getQuestionID()));
     				System.out.println ("sqa 12");
     				qa.setValue(rqal[i].getValue());

@@ -25,6 +25,7 @@
     			type="tns:QuestionnaireQuestionList" maxOccurs="1"
     			minOccurs="1">
     		</element>
+    		<element name="position" type="int"></element>
     	</sequence>
     	<attribute name="id" type="string"></attribute>
     	<attribute name="type" type="string"></attribute>
@@ -47,11 +48,11 @@
     
 
 	<complexType name="QuestionnaireQuestionAnswer">
-		<simpleContent>
-			<extension base="string">
-				<attribute type="unsignedByte" name="value"/>
-			</extension>
-		</simpleContent>
+	    <sequence>
+	    	<element name="position" type="int"></element>
+	    	<element name="description" type="string"></element>
+	    </sequence>
+		<attribute type="unsignedByte" name="value"/>
 	</complexType>
 
 	<complexType name="QuestionnaireAnswers">

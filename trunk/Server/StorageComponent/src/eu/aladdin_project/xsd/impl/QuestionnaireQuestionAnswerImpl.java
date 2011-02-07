@@ -9,24 +9,159 @@ package eu.aladdin_project.xsd.impl;
 /**
  * An XML QuestionnaireQuestionAnswer(@http://aladdin-project.eu/xsd).
  *
- * This is an atomic type that is a restriction of eu.aladdin_project.xsd.QuestionnaireQuestionAnswer.
+ * This is a complex type.
  */
-public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.values.JavaStringHolderEx implements eu.aladdin_project.xsd.QuestionnaireQuestionAnswer
+public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements eu.aladdin_project.xsd.QuestionnaireQuestionAnswer
 {
     
     public QuestionnaireQuestionAnswerImpl(org.apache.xmlbeans.SchemaType sType)
     {
-        super(sType, true);
+        super(sType);
     }
     
-    protected QuestionnaireQuestionAnswerImpl(org.apache.xmlbeans.SchemaType sType, boolean b)
-    {
-        super(sType, b);
-    }
-    
-    private static final javax.xml.namespace.QName VALUE$0 = 
+    private static final javax.xml.namespace.QName POSITION$0 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "position");
+    private static final javax.xml.namespace.QName DESCRIPTION$2 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "description");
+    private static final javax.xml.namespace.QName VALUE$4 = 
         new javax.xml.namespace.QName("", "value");
     
+    
+    /**
+     * Gets the "position" element
+     */
+    public int getPosition()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(POSITION$0, 0);
+            if (target == null)
+            {
+                return 0;
+            }
+            return target.getIntValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "position" element
+     */
+    public org.apache.xmlbeans.XmlInt xgetPosition()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlInt target = null;
+            target = (org.apache.xmlbeans.XmlInt)get_store().find_element_user(POSITION$0, 0);
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "position" element
+     */
+    public void setPosition(int position)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(POSITION$0, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(POSITION$0);
+            }
+            target.setIntValue(position);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "position" element
+     */
+    public void xsetPosition(org.apache.xmlbeans.XmlInt position)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlInt target = null;
+            target = (org.apache.xmlbeans.XmlInt)get_store().find_element_user(POSITION$0, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlInt)get_store().add_element_user(POSITION$0);
+            }
+            target.set(position);
+        }
+    }
+    
+    /**
+     * Gets the "description" element
+     */
+    public java.lang.String getDescription()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(DESCRIPTION$2, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target.getStringValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "description" element
+     */
+    public org.apache.xmlbeans.XmlString xgetDescription()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(DESCRIPTION$2, 0);
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "description" element
+     */
+    public void setDescription(java.lang.String description)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(DESCRIPTION$2, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(DESCRIPTION$2);
+            }
+            target.setStringValue(description);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "description" element
+     */
+    public void xsetDescription(org.apache.xmlbeans.XmlString description)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlString target = null;
+            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(DESCRIPTION$2, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(DESCRIPTION$2);
+            }
+            target.set(description);
+        }
+    }
     
     /**
      * Gets the "value" attribute
@@ -37,7 +172,7 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VALUE$0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VALUE$4);
             if (target == null)
             {
                 return 0;
@@ -55,7 +190,7 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
         {
             check_orphaned();
             org.apache.xmlbeans.XmlUnsignedByte target = null;
-            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(VALUE$0);
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(VALUE$4);
             return target;
         }
     }
@@ -68,7 +203,7 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().find_attribute_user(VALUE$0) != null;
+            return get_store().find_attribute_user(VALUE$4) != null;
         }
     }
     
@@ -81,10 +216,10 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VALUE$0);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(VALUE$4);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(VALUE$0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(VALUE$4);
             }
             target.setShortValue(value);
         }
@@ -99,10 +234,10 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
         {
             check_orphaned();
             org.apache.xmlbeans.XmlUnsignedByte target = null;
-            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(VALUE$0);
+            target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_attribute_user(VALUE$4);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().add_attribute_user(VALUE$0);
+                target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().add_attribute_user(VALUE$4);
             }
             target.set(value);
         }
@@ -116,7 +251,7 @@ public class QuestionnaireQuestionAnswerImpl extends org.apache.xmlbeans.impl.va
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_attribute(VALUE$0);
+            get_store().remove_attribute(VALUE$4);
         }
     }
 }
