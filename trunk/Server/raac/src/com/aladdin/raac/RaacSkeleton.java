@@ -159,7 +159,7 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 				
 			    SortedMeasurements = new ArrayList<Measurement>(Arrays.asList(measurements));
 				if (SortedMeasurements.size() < 1)
-					return null;
+					return respdoc;
 				Collections.sort(SortedMeasurements, Date_Order);
 				Measurement[] Sorted = SortedMeasurements
 						.toArray(new Measurement[SortedMeasurements.size()]);
@@ -219,6 +219,7 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 			System.out.println("getrules 6");
 
 			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller.unmarshal(new File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
+			//DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller.unmarshal(new File("rules.xml"))).getValue().getRule();
 			System.out.println("getrules 7");
 		} catch (JAXBException e) {
 			System.out.println("getrules 8");
