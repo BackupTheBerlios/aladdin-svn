@@ -17,7 +17,7 @@ package eu.aladdin_project.www.raac;
 public interface AnalyzeQuestionnairesDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnairesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7666EF6F4E209B99B3F24ED95E3A9264").resolveHandle("analyzequestionnaires5a92doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnairesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7FB48A01A5B169EB7D85E761ED6D1831").resolveHandle("analyzequestionnaires5a92doctype");
     
     /**
      * Gets the "AnalyzeQuestionnaires" element
@@ -42,7 +42,7 @@ public interface AnalyzeQuestionnairesDocument extends org.apache.xmlbeans.XmlOb
     public interface AnalyzeQuestionnaires extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnaires.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7666EF6F4E209B99B3F24ED95E3A9264").resolveHandle("analyzequestionnaires007aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnaires.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7FB48A01A5B169EB7D85E761ED6D1831").resolveHandle("analyzequestionnaires007aelemtype");
         
         /**
          * Gets the "PatientID" element

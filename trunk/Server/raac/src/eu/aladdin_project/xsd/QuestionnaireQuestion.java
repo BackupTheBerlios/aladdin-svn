@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7666EF6F4E209B99B3F24ED95E3A9264").resolveHandle("questionnairequestion0b43type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QuestionnaireQuestion.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7FB48A01A5B169EB7D85E761ED6D1831").resolveHandle("questionnairequestion0b43type");
     
     /**
      * Gets the "title" element
@@ -87,6 +87,26 @@ public interface QuestionnaireQuestion extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "questions" element
      */
     eu.aladdin_project.xsd.QuestionnaireQuestionList addNewQuestions();
+    
+    /**
+     * Gets the "position" element
+     */
+    int getPosition();
+    
+    /**
+     * Gets (as xml) the "position" element
+     */
+    org.apache.xmlbeans.XmlInt xgetPosition();
+    
+    /**
+     * Sets the "position" element
+     */
+    void setPosition(int position);
+    
+    /**
+     * Sets (as xml) the "position" element
+     */
+    void xsetPosition(org.apache.xmlbeans.XmlInt position);
     
     /**
      * Gets the "id" attribute

@@ -14,6 +14,7 @@
             <element name="GlobalID" type="int"/>
             <element name="answers" type="tns:QuestionnaireQuestionAnswerList"/>
             <element name="questions" type="tns:QuestionnaireQuestionList"/>
+            <element name="position" type="int"/>
         </sequence>
         <attribute name="id" type="string"/>
         <attribute name="type" type="string"/>
@@ -30,11 +31,11 @@
         </sequence>
     </complexType>
     <complexType name="QuestionnaireQuestionAnswer">
-        <simpleContent>
-            <extension base="string">
-                <attribute name="value" type="unsignedByte"/>
-            </extension>
-        </simpleContent>
+        <sequence>
+            <element name="position" type="int"/>
+            <element name="description" type="string"/>
+        </sequence>
+        <attribute name="value" type="unsignedByte"/>
     </complexType>
     <complexType name="QuestionnaireAnswers">
         <sequence>
@@ -51,6 +52,7 @@
             <extension base="string">
                 <attribute name="value" type="string"/>
                 <attribute name="questionID" type="string"/>
+                <attribute name="globalID" type="string"/>
             </extension>
         </simpleContent>
     </complexType>
