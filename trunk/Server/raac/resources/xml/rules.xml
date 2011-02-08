@@ -19,10 +19,26 @@
 		<tns:HighRiskThresh>20</tns:HighRiskThresh>
 	</tns:Rule>
 	<tns:Rule>
-		<tns:DataType>Questionnaire1</tns:DataType>
+		<tns:DataType>1000</tns:DataType>
 		<tns:CallerID>3</tns:CallerID>
 		<tns:LowerLimit>1</tns:LowerLimit>
 		<tns:UpperLimit>0</tns:UpperLimit>
+		<tns:GetPrevious>true</tns:GetPrevious>
+		<tns:HighRiskThresh>2</tns:HighRiskThresh>
+	</tns:Rule>
+		<tns:Rule>
+		<tns:DataType>2000</tns:DataType>
+		<tns:CallerID>3</tns:CallerID>
+		<tns:LowerLimit>2</tns:LowerLimit>
+		<tns:UpperLimit>0</tns:UpperLimit>
+		<tns:GetPrevious>true</tns:GetPrevious>
+		<tns:HighRiskThresh>4</tns:HighRiskThresh>
+	</tns:Rule>
+	<tns:Rule>
+		<tns:DataType>3000</tns:DataType>
+		<tns:CallerID>1</tns:CallerID>
+		<tns:LowerLimit>1</tns:LowerLimit>
+		<tns:UpperLimit>1</tns:UpperLimit>
 		<tns:GetPrevious>true</tns:GetPrevious>
 		<tns:HighRiskThresh>2</tns:HighRiskThresh>
 	</tns:Rule>
@@ -34,15 +50,4 @@
 		<tns:GetPrevious>false</tns:GetPrevious>
 		<tns:HighRiskThresh>20</tns:HighRiskThresh>
 	</tns:Rule>
-
-	<tns:Rule>
-		<tns:DataType>Questionnaire2</tns:DataType>
-		<tns:CallerID>4</tns:CallerID>
-		<tns:LowerLimit>2</tns:LowerLimit>
-		<tns:UpperLimit>0</tns:UpperLimit>
-		<tns:GetPrevious>true</tns:GetPrevious>
-		<tns:HighRiskThresh>4</tns:HighRiskThresh>
-	</tns:Rule>
-
-
 </tns:RuleCollection>

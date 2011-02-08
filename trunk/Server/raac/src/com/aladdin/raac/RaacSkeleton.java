@@ -17,20 +17,27 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
 import eu.aladdin_project.storagecomponent.AuthDocument;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument;
 import eu.aladdin_project.storagecomponent.AuthDocument.Auth;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument.GetPatientMeasurement;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument.SaveWarning;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument.AnalyzeMeasurementsResponse;
 import eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument;
+import eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument.AnalyzeQuestionnaires;
 import eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument;
+import eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument.AnalyzeQuestionnairesResponse;
 import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
+import eu.aladdin_project.xsd.QuestionnaireAnswer;
+import eu.aladdin_project.xsd.QuestionnaireAnswers;
 import eu.aladdin_project.xsd.SystemParameter;
 
 import eu.aladdin_project.xsd.Warning;
@@ -40,141 +47,161 @@ import org.example.rulemap.*;
 
 import com.aladdin.sc.StorageComponentStub;
 
-public class RaacSkeleton implements RaacSkeletonInterface{
-	
+public class RaacSkeleton implements RaacSkeletonInterface {
+
 	static final int Weight = 2;
 	static final int SystolicBloodPressure = 11;
 	static final int DiastolicBloodPressure = 12;
-	
-	static final int LessThanRuleType = 1; 
+
+	static final int LessThanRuleType = 1;
 	static final int DoubleCompareRuleType = 2;
 	static final int GreaterThanRuleType = 3;
 
-	public AnalyzeMeasurementsResponseDocument analyzeMeasurements (AnalyzeMeasurementsDocument req) {
-		AnalyzeMeasurementsResponseDocument respdoc = AnalyzeMeasurementsResponseDocument.Factory.newInstance();
-		AnalyzeMeasurementsResponse resp = respdoc.addNewAnalyzeMeasurementsResponse();
+	QuestionnaireAnswer[] previousAnswerArray = null;
+
+	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
+			AnalyzeQuestionnairesDocument req) {
+
+		AnalyzeQuestionnairesResponseDocument respdoc = AnalyzeQuestionnairesResponseDocument.Factory
+				.newInstance();
+		AnalyzeQuestionnairesResponse resp = respdoc
+				.addNewAnalyzeQuestionnairesResponse();
 		
-		System.out.println("analyzeMeasurements called");
+		AnalyzeQuestionnaires analyzeQuestionnairesIn = req
+				.getAnalyzeQuestionnaires();
+		if (analyzeQuestionnairesIn == null)
+			return respdoc;
 		
+		String PatientID = analyzeQuestionnairesIn.getPatientID();
+
+		QuestionnaireAnswer[] currentAnswerArray = analyzeQuestionnairesIn
+				.getAnswersArray();
+		if (currentAnswerArray.length == 0)
+			return respdoc;
+
 		Warning generatedWarning = null;
-		
-		System.out.println("create stub");
+
 		StorageComponentStub sc;
 		try {
 			sc = new StorageComponentStub();
 		} catch (AxisFault e1) {
-			System.out.println("ex1");
 			e1.printStackTrace();
 			return respdoc;
 		}
-		System.out.println("auth");
+
 		AuthDocument authdoc = AuthDocument.Factory.newInstance();
-		System.out.println("auth1");
 		Auth auth = Auth.Factory.newInstance();
-		System.out.println("auth2");
 		auth.setLogin("raac");
-		System.out.println("auth3");
 		auth.setPassword("raac");
-		System.out.println("auth4");
 		authdoc.setAuth(auth);
-		System.out.println("auth5");
 		AuthResponseDocument res;
-		System.out.println("auth6");
 		try {
-			System.out.println("auth7");
 			res = sc.auth(authdoc);
-			System.out.println("auth8");
 		} catch (RemoteException e1) {
-			System.out.println("auth9");
-			System.out.println("ex2");
-			System.out.println("auth10");
 			e1.printStackTrace();
-			System.out.println("auth11");
 			return respdoc;
 		}
-		System.out.println("out1");
+
 		final AuthResponse authResponse = res.getAuthResponse();
-		System.out.println("out2");
 		final OperationResult out = authResponse.getOut();
-		System.out.println("out3");
 		String UserID = out.getCode();
-		System.out.println("out4");
-		System.out.println("UserID " + UserID);
-		
-		if (UserID.compareTo("-1") != 0) {
+
+		if (UserID == "-1")
+			return respdoc;
+
+		// get all questionnaire answers
+		GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
+				.getInstance();
+		currentDate.add(Calendar.DATE, -1);
+		GregorianCalendar oneWeekBefore = (GregorianCalendar) GregorianCalendar
+				.getInstance();
+		oneWeekBefore.add(Calendar.DATE, -60);
+
+		GetQuestionnaireAnswersDocument qDocument = GetQuestionnaireAnswersDocument.Factory
+				.newInstance();
+		GetQuestionnaireAnswersResponseDocument qResponseDocument = null;
+
+		try {
+			qResponseDocument = sc.getQuestionnaireAnswers(qDocument);
+			if (qResponseDocument == null)
+				return respdoc;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		GetQuestionnaireAnswersResponse gQuestAnsResp = qResponseDocument
+				.getGetQuestionnaireAnswersResponse();
+		QuestionnaireAnswers[] qanswers = gQuestAnsResp.getOutArray();
+		if (qanswers.length == 0)
+			return respdoc;
+
+		ArrayList<QuestionnaireAnswers> SortedAnswers = new ArrayList<QuestionnaireAnswers>(
+				Arrays.asList(qanswers));
+		Collections.sort(SortedAnswers, QDate_Order);
+
+		QuestionnaireAnswers previousQuestionnaireAnswers = SortedAnswers
+				.get(SortedAnswers.size() - 1);
+		previousAnswerArray = previousQuestionnaireAnswers.getAnswerArray();
+		// currentAnswerArray
+		List<RuleMap> DefinedRules = GetRules();
+		RuleMap currentRule = null;
+
+		for (int k = 0; k < currentAnswerArray.length; k++) {
+
+			QuestionnaireAnswer currentAnswer = currentAnswerArray[k];
+			QuestionnaireAnswer previousAnswer = getPreviousQuestionnaireAnswer(currentAnswer
+					.getQuestionID());
+			if (previousAnswer == null)
+				continue;
+			String currentValueStr = currentAnswer.getValue();
+			String previousValueStr = previousAnswer.getValue();
+			if ("9".equals(currentValueStr) || "9".equals(previousValueStr))
+				continue;
 			
-			System.out.println("out5");
-			Measurement measurement = req.getAnalyzeMeasurements().getIn();
-			System.out.println("out6");
-			String PatientID = req.getAnalyzeMeasurements().getPatientID();
-			System.out.println("out7");
+			double currentValue;
+			double previousValue;
 			
-			List<RuleMap> DefinedRules = GetRules();
-			System.out.println("out8");
-			String measurementType = "";
-			System.out.println("out9");
-			String measurementDescription = "";
-			System.out.println("out10");
+			try {
+				currentValue  = Double.valueOf(currentValueStr);
+				previousValue = Double.valueOf(previousValueStr);
+			}
+			catch (Exception ex) {
+				continue;
+			}
 			
-			boolean found = false;
-			RuleMap currentRule = null;
+
 			for (int count = 0; count < DefinedRules.size(); count++) {
-				if (found)
-					break;
-				measurementType = measurement.getType().getCode();
-				measurementDescription = measurement.getType().getDescription();
+				
+				String globaID = currentAnswer.getGlobalID();
+				
+				if (globaID == null || "".equals(globaID))
+					continue;
+				
+				String globalIDGroup = getglobalIDGroup(globaID);
+				if (globalIDGroup == null) continue;
+				
 				String ruleDataType = DefinedRules.get(count).getDataType();
-				if (measurementType.equals(ruleDataType))
-				{
+				if (globalIDGroup.equals(ruleDataType)) {
 					currentRule = DefinedRules.get(count);
 					break;
 				}
 			}
-			
+
 			if (currentRule == null) // Rule not found
 				return respdoc;
 			
-			switch (currentRule.getCallerID())
-			{
-			case LessThanRuleType: 
-				ArrayList<Measurement> SortedMeasurements = new ArrayList<Measurement>();
-				GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar.getInstance();
-				currentDate.add(Calendar.DATE, -1);
-				GregorianCalendar oneWeekBefore = (GregorianCalendar) GregorianCalendar.getInstance();
-				oneWeekBefore.add(Calendar.DATE	, -8);
-				
-				GetPatientMeasurementDocument getPatientMeasurement = GetPatientMeasurementDocument.Factory.newInstance();
-				GetPatientMeasurement gpa = getPatientMeasurement.addNewGetPatientMeasurement();
-				gpa.setPatientId(PatientID);
-				gpa.setUserId(UserID);
-				gpa.setFromData(oneWeekBefore);
-				gpa.setToData(currentDate);
-				gpa.setMeasurementType(Integer.valueOf(measurement.getType().getCode()));
-				
-				Measurement[] measurements = null;
-				try {
-					measurements = sc.getPatientMeasurement(getPatientMeasurement).getGetPatientMeasurementResponse().getOutArray();
-				} catch (RemoteException e) {
-					System.out.println("ex3");
-					e.printStackTrace();
-				}
-				
-			    SortedMeasurements = new ArrayList<Measurement>(Arrays.asList(measurements));
-				if (SortedMeasurements.size() < 1)
-					return respdoc;
-				Collections.sort(SortedMeasurements, Date_Order);
-				Measurement[] Sorted = SortedMeasurements
-						.toArray(new Measurement[SortedMeasurements.size()]);
-				generatedWarning = LessThanRule(PatientID, measurementDescription , measurement.getValue(), Sorted[0].getValue(), currentRule.getUpperLimit());
-				break;
-			case DoubleCompareRuleType:
-				generatedWarning = DoubleCompareRule(PatientID, measurementDescription, measurement.getValue(), currentRule.getUpperLimit(), currentRule.getLowerLimit());
-				break;
-			default:
-				return respdoc;
-//			case GreaterThanRuleType:
-//				generatedWarning = GreaterThanRule(PatientID, measurementDescription, measurement.getValue(), currentRule.getUpperLimit(), currentRule.getLowerLimit());
-//				break;
+			String description = String.format("Question {0}", currentAnswer.getQuestionID());
+			
+			switch (currentRule.getCallerID()) {
+				case GreaterThanRuleType:
+					generatedWarning = GreaterThanRule(PatientID, description,
+							currentValue, previousValue, currentRule.getLowerLimit());
+					break;
+				case LessThanRuleType:
+					generatedWarning = LessThanRule(PatientID, description,
+							currentValue, previousValue, currentRule.getLowerLimit());
+					break;
 			}
 			
 			if (generatedWarning != null) {
@@ -192,10 +219,179 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 			}
 			resp.setOut(generatedWarning);
 		}
-		
+
+
+		return null;
+	}
+
+	// returns the Global ID group (e.g. 1000, 2000, 3000 etc) based on GlobalID
+	String getglobalIDGroup(String globalID) {
+
+		try {
+			int globalIDInt = Integer.valueOf(globalID);
+			double res = java.lang.Math.floor(globalIDInt / 1000) * 1000;
+			return String.valueOf(res);
+		} catch (Exception ex) {
+			return null;
+		}
+
+	}
+
+	QuestionnaireAnswer getPreviousQuestionnaireAnswer(String QuestionID) {
+
+		for (int i = 0; i < previousAnswerArray.length; i++) {
+			if (previousAnswerArray[i].getQuestionID().equals(QuestionID))
+				return previousAnswerArray[i];
+		}
+		return null;
+	}
+
+	// Create Comparator for Sorting questionnaires
+	static final Comparator<QuestionnaireAnswers> QDate_Order = new Comparator<QuestionnaireAnswers>() {
+		public int compare(QuestionnaireAnswers a, QuestionnaireAnswers b) {
+			return a.getDateTime().compareTo(b.getDateTime());
+		}
+	};
+
+	public AnalyzeMeasurementsResponseDocument analyzeMeasurements(
+			AnalyzeMeasurementsDocument req) {
+		AnalyzeMeasurementsResponseDocument respdoc = AnalyzeMeasurementsResponseDocument.Factory
+				.newInstance();
+		AnalyzeMeasurementsResponse resp = respdoc
+				.addNewAnalyzeMeasurementsResponse();
+
+		Warning generatedWarning = null;
+
+		StorageComponentStub sc;
+		try {
+			sc = new StorageComponentStub();
+		} catch (AxisFault e1) {
+			e1.printStackTrace();
+			return respdoc;
+		}
+
+		AuthDocument authdoc = AuthDocument.Factory.newInstance();
+		Auth auth = Auth.Factory.newInstance();
+		auth.setLogin("raac");
+		auth.setPassword("raac");
+		authdoc.setAuth(auth);
+		AuthResponseDocument res;
+		try {
+			res = sc.auth(authdoc);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+			return respdoc;
+		}
+
+		final AuthResponse authResponse = res.getAuthResponse();
+		final OperationResult out = authResponse.getOut();
+		String UserID = out.getCode();
+
+		if (UserID.compareTo("-1") != 0) {
+
+			System.out.println("out5");
+			Measurement measurement = req.getAnalyzeMeasurements().getIn();
+			System.out.println("out6");
+			String PatientID = req.getAnalyzeMeasurements().getPatientID();
+			System.out.println("out7");
+
+			List<RuleMap> DefinedRules = GetRules();
+			System.out.println("out8");
+			String measurementType = "";
+			System.out.println("out9");
+			String measurementDescription = "";
+			System.out.println("out10");
+
+			RuleMap currentRule = null;
+			for (int count = 0; count < DefinedRules.size(); count++) {
+				measurementType = measurement.getType().getCode();
+				measurementDescription = measurement.getType().getDescription();
+				String ruleDataType = DefinedRules.get(count).getDataType();
+				if (measurementType.equals(ruleDataType)) {
+					currentRule = DefinedRules.get(count);
+					break;
+				}
+			}
+
+			if (currentRule == null) // Rule not found
+				return respdoc;
+
+			switch (currentRule.getCallerID()) {
+			case LessThanRuleType:
+				ArrayList<Measurement> SortedMeasurements = new ArrayList<Measurement>();
+				GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
+						.getInstance();
+				currentDate.add(Calendar.DATE, -1);
+				GregorianCalendar oneWeekBefore = (GregorianCalendar) GregorianCalendar
+						.getInstance();
+				oneWeekBefore.add(Calendar.DATE, -8);
+
+				GetPatientMeasurementDocument getPatientMeasurement = GetPatientMeasurementDocument.Factory
+						.newInstance();
+				GetPatientMeasurement gpa = getPatientMeasurement
+						.addNewGetPatientMeasurement();
+				gpa.setPatientId(PatientID);
+				gpa.setUserId(UserID);
+				gpa.setFromData(oneWeekBefore);
+				gpa.setToData(currentDate);
+				gpa.setMeasurementType(Integer.valueOf(measurement.getType()
+						.getCode()));
+
+				Measurement[] measurements = null;
+				try {
+					measurements = sc
+							.getPatientMeasurement(getPatientMeasurement)
+							.getGetPatientMeasurementResponse().getOutArray();
+				} catch (RemoteException e) {
+					System.out.println("ex3");
+					e.printStackTrace();
+				}
+
+				SortedMeasurements = new ArrayList<Measurement>(
+						Arrays.asList(measurements));
+				if (SortedMeasurements.size() < 1)
+					return respdoc;
+				Collections.sort(SortedMeasurements, Date_Order);
+				Measurement[] Sorted = SortedMeasurements
+						.toArray(new Measurement[SortedMeasurements.size()]);
+				generatedWarning = LessThanRule(PatientID,
+						measurementDescription, measurement.getValue(),
+						Sorted[0].getValue(), currentRule.getUpperLimit());
+				break;
+			case DoubleCompareRuleType:
+				generatedWarning = DoubleCompareRule(PatientID,
+						measurementDescription, measurement.getValue(),
+						currentRule.getUpperLimit(),
+						currentRule.getLowerLimit());
+				break;
+			default:
+				return respdoc;
+				// case GreaterThanRuleType:
+				// generatedWarning = GreaterThanRule(PatientID,
+				// measurementDescription, measurement.getValue(),
+				// currentRule.getUpperLimit(), currentRule.getLowerLimit());
+				// break;
+			}
+
+			if (generatedWarning != null) {
+
+				SaveWarningDocument swd = SaveWarningDocument.Factory
+						.newInstance();
+				SaveWarning sw = swd.addNewSaveWarning();
+				sw.setWarn(generatedWarning);
+				sw.setUserId(UserID);
+				try {
+					sc.saveWarning(swd);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+			resp.setOut(generatedWarning);
+		}
+
 		return respdoc;
-    }
-	
+	}
+
 	// Create Comparator for Sorting dates
 	static final Comparator<Measurement> Date_Order = new Comparator<Measurement>() {
 		public int compare(Measurement a, Measurement b) {
@@ -203,7 +399,7 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 		}
 
 	};
-	
+
 	// Get Ruleset from XML
 	@SuppressWarnings("unchecked")
 	private List<RuleMap> GetRules() {
@@ -213,15 +409,19 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 
 		try {
 			System.out.println("getrules 3");
-			JAXBContext jc = JAXBContext.newInstance(org.example.rulemap.ObjectFactory.class);
+			JAXBContext jc = JAXBContext
+					.newInstance(org.example.rulemap.ObjectFactory.class);
 			System.out.println("getrules 4");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			System.out.println("getrules 5");
 			unmarshaller.setEventHandler(new DefaultValidationEventHandler());
 			System.out.println("getrules 6");
 
-			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller.unmarshal(new File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
-			//DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller.unmarshal(new File("rules.xml"))).getValue().getRule();
+			// DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
+			// unmarshaller.unmarshal(new
+			// File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
+			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
+					.unmarshal(new File("rules.xml"))).getValue().getRule();
 			System.out.println("getrules 7");
 		} catch (JAXBException e) {
 			System.out.println("getrules 8");
@@ -231,13 +431,12 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 		System.out.println("getrules 10");
 		return DefinedRules;
 	}
-	
+
 	// Rule 1 - Less Than rule
 	static Warning LessThanRule(String PatientID, String description,
-			double Current, double Previous, double Threshold)
-			 {
+			double Current, double Previous, double Threshold) {
 		Warning warning;
-		if (Current <= Previous - Threshold) 
+		if (Current <= Previous - Threshold)
 			warning = GenerateWarning(PatientID, description, Current, Previous);
 		else
 			warning = null;
@@ -248,7 +447,7 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 	static Warning DoubleCompareRule(String PatientID, String description,
 			double Current, double Upper, double Lower) {
 		Warning warning;
-		if ((Current > Upper || Current < Lower)) 
+		if ((Current > Upper || Current < Lower))
 			warning = GenerateWarning(PatientID, description, Current, 0.0);
 		else
 			warning = null;
@@ -260,34 +459,30 @@ public class RaacSkeleton implements RaacSkeletonInterface{
 			double Current, double Previous, double Threshold) {
 		Warning warning;
 
-		if (Current > Previous + Threshold)
-				warning = GenerateWarning(PatientID, description, Current, Previous);
-		else	
+		if (Current >= Previous + Threshold)
+			warning = GenerateWarning(PatientID, description, Current, Previous);
+		else
 			warning = null;
 		return warning;
 	}
 
 	// Generate Warning
-	static Warning GenerateWarning(String PatientID, String description, double RiskValue, double PreviousValue) {
+	static Warning GenerateWarning(String PatientID, String description,
+			double RiskValue, double PreviousValue) {
 
-		Warning warning = Warning.Factory.newInstance(); 
+		Warning warning = Warning.Factory.newInstance();
 		warning.setPatientID(PatientID);
 		SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
 		typeOfWarning.setCode("2");
 		typeOfWarning.setDescription("autogenerated");
 		warning.setTypeOfWarning(typeOfWarning);
 		warning.setDateTimeOfWarning(Calendar.getInstance());
-		warning.setJustificationText(String.format("type = %s current value = %s, previous value = %s", description, RiskValue, PreviousValue));
+		warning.setJustificationText(String.format(
+				"type = %s current value = %s, previous value = %s",
+				description, RiskValue, PreviousValue));
 
 		return warning;
 
 	}
 
-	@Override
-	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
-			AnalyzeQuestionnairesDocument analyzeQuestionnaires) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
-    
