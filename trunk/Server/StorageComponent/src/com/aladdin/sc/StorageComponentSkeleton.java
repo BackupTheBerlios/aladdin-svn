@@ -360,6 +360,27 @@ class CmpInt implements java.util.Comparator<Integer> {
     			
     			Integer sdid = storeSocioDemographic(data.getSDData(), null);
     			
+    			GeneralPractitioner gp = data.getGeneralPractitioner();
+    			if (gp != null) {
+    				p.setGpemail(gp.getEmail());
+    				p.setGpname(gp.getName());
+    				p.setGpphone(gp.getPhone());
+    			}
+    			
+    			Consulter c = data.getConsulterInCharge();
+    			if (c != null) {
+    				p.setCcemail(c.getEmail());
+    				p.setCcname(c.getName());
+    				p.setCcphone(c.getPhone());
+    			}
+    			
+    			SocialWorker sw = data.getSocialWorker();
+    			if (sw != null) {
+    				p.setSwemail(sw.getEmail());
+    				p.setSwname(sw.getName());
+    				p.setSwphone(sw.getPhone());
+    			}
+    			
     			p.setPersondata(pdid);
     			p.setSd(sdid);
     			String responsibleClinicianID = data.getResponsibleClinicianID();
@@ -1282,17 +1303,29 @@ class CmpInt implements java.util.Comparator<Integer> {
 
     	private Integer storeMeasurement(Measurement rm, Integer paid) {
     		long timeInMillis = 0;
+    		System.out.println ("sm 1");
     		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
+    		System.out.println ("sm 2");
     		if (paid != null) m.setPatientassessment (paid);
+    		System.out.println ("sm 3");
     		m.setType(rm.getType().getCode());
+    		System.out.println ("sm 4");
     		m.setValue(new BigDecimal (rm.getValue()));
+    		System.out.println ("sm 5");
     		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
+    		System.out.println ("sm 6");
     		m.setDatetime(new Timestamp(timeInMillis));
+    		System.out.println ("sm 7");
     		m.setUnits(rm.getUnits());
+    		System.out.println ("sm 8");
     		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
+    		System.out.println ("sm 9");
     		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
+    		System.out.println ("sm 10");
     		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
+    		System.out.println ("sm 11");
     		s.save (m);
+    		System.out.println ("sm 12");
     		return m.getId();
     	}
     	
@@ -2374,31 +2407,29 @@ class CmpInt implements java.util.Comparator<Integer> {
     	}
     	
     	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire q, SystemParameter locale) {
-    		//System.out.println (" eQ 1");
+    		System.out.println (" eQ 1");
     		Questionnaire rq = Questionnaire.Factory.newInstance();
-    		//System.out.println (" eQ 2");
+    		System.out.println (" eQ 2");
     		rq.setID(q.getId().toString());
-    		//System.out.println (" eQ 3");
+    		System.out.println (" eQ 3");
     		
     		//rq.setTitle(q.getTitle());
     		rq.setTitle(getTranslate("questionnaire", rq.getID(), locale, q.getTitle()));
     		
-    		//System.out.println (" eQ 4");
+    		System.out.println (" eQ 4");
     		rq.setVersion(q.getVersion().doubleValue ());
-    		//System.out.println (" eQ 5");
+    		System.out.println (" eQ 5");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		//System.out.println (" eQ 6");
+    		System.out.println (" eQ 6");
     		
     		//Object[] qql = q.getQuestionnaireQuestions().toArray();
     		String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
     		Object[] qql = s.createSQLQuery(sql).list ().toArray(); 
     		
-    		
-    		
-    		//System.out.println (" eQ 7");
+    		System.out.println (" eQ 7");
     		for (int i = 0; i < qql.length; i++) {
-    			//System.out.println (" eQ 8");
+    			System.out.println (" eQ 8");
     			com.aladdin.sc.db.QuestionnaireQuestion qq =
     				(com.aladdin.sc.db.QuestionnaireQuestion)
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
@@ -2406,25 +2437,25 @@ class CmpInt implements java.util.Comparator<Integer> {
     			///if (!qq.getDeleted()) {
     				rqql.add(exportQQ(qq, true, locale));
     			//}
-    			//System.out.println (" eQ 9");
+    			System.out.println (" eQ 9");
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
-    		//System.out.println (" eQ 10");
+    		System.out.println (" eQ 10");
     		
     		return rq;
     	}
     	
     	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
-    		//System.out.println (" eQQ 1");
+    		System.out.println (" eQQ 1");
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
-    		//System.out.println (" eQQ 2");
+    		System.out.println (" eQQ 2");
     		
     		rqq.setType(qq.getType());
-    		//System.out.println (" eQQ 3");
+    		System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
     		rqq.setGlobalID(qq.getGlobalId());
     		rqq.setPosition(qq.getPosition());
-    		//System.out.println (" eQQ 4");
+    		System.out.println (" eQQ 4");
     		
     		//System.out.println ("");
 			//System.out.println ("");
@@ -2436,7 +2467,7 @@ class CmpInt implements java.util.Comparator<Integer> {
     		
     		if (!level1) {
     			rqq.setCondition(qq.getCondition().shortValue());
-    			//System.out.println (" eQQ 5");
+    			System.out.println (" eQQ 5");
     		}
     		
     		//rqq.setTitle(qq.getTitle());
@@ -2444,31 +2475,31 @@ class CmpInt implements java.util.Comparator<Integer> {
     		
     		//rqq.setDeleted(qq.getDeleted());
     		
-    		//System.out.println (" eQQ 6");
+    		System.out.println (" eQQ 6");
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
-    		//System.out.println (" eQQ 7");
+    		System.out.println (" eQQ 7");
     		Object[] qqal = qq.getQuestionnaireQuestionAnswers().toArray();
-    		//System.out.println (" eQQ 8");
+    		System.out.println (" eQQ 8");
     		for (int i = 0; i < qqal.length; i++) {
-    			//System.out.println (" eQQ 9");
+    			System.out.println (" eQQ 9");
     			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
-    			//System.out.println (" eQQ 91");
+    			System.out.println (" eQQ 91");
 				if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
-    			//System.out.println (" eQQ 10");
+    			System.out.println (" eQQ 10");
     		}
-    		//System.out.println (" eQQ 11");
+    		System.out.println (" eQQ 11");
     		rqq.addNewAnswers();
-    		//System.out.println (" eQQ 12");
+    		System.out.println (" eQQ 12");
     		rqq.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) rqqal.toArray(new QuestionnaireQuestionAnswer[0]));
-    		//System.out.println (" eQQ 13");
+    		System.out.println (" eQQ 13");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		//System.out.println (" eQQ 14");
+    		System.out.println (" eQQ 14");
     		Object[] qql = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'").list().toArray();
-    		//System.out.println (" eQQ 15");
+    		System.out.println (" eQQ 15");
     		for (int i = 0; i < qql.length; i++) {
-    			//System.out.println (" eQQ 16");
+    			System.out.println (" eQQ 16");
 //			//System.out.println (qql[i].class.toString());
 				//System.out.println (qql[i].toString());
 				//System.out.println (qql.length);
@@ -2487,11 +2518,11 @@ class CmpInt implements java.util.Comparator<Integer> {
 
 //			if (qql.length > 1) rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
 //			else rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) (Object) qql));
-    			//System.out.println (" eQQ 17");
+    			System.out.println (" eQQ 17");
     		}
-    		//System.out.println (" eQQ 18");
+    		System.out.println (" eQQ 18");
     		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
-    		//System.out.println (" eQQ 19");
+    		System.out.println (" eQQ 19");
     		
     		return rqq;
     	}
