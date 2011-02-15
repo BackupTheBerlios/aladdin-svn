@@ -195,7 +195,7 @@ public class NullChecker {
 	public QuestionnaireQuestionAnswer check (QuestionnaireQuestionAnswer v, Class<QuestionnaireQuestionAnswer> t) {
 		if (v == null) v = QuestionnaireQuestionAnswer.Factory.newInstance();
 		
-		v.setStringValue(this.check(v.getStringValue(), String.class));
+		v.setDescription(this.check(v.getDescription(), String.class));
 		
 		return v;
 	}
