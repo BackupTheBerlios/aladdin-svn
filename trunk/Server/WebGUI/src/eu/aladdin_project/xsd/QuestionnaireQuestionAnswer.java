@@ -7,41 +7,63 @@
 
 package eu.aladdin_project.xsd;
 
-public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.apache.axis.encoding.SimpleType {
-    private java.lang.String _value;
+public class QuestionnaireQuestionAnswer  implements java.io.Serializable {
+    private int position;
+
+    private java.lang.String description;
 
     private org.apache.axis.types.UnsignedByte value;  // attribute
 
     public QuestionnaireQuestionAnswer() {
     }
 
-    // Simple Types must have a String constructor
-    public QuestionnaireQuestionAnswer(java.lang.String _value) {
-        this._value = _value;
-    }
-    // Simple Types must have a toString for serializing the value
-    public java.lang.String toString() {
-        return _value;
-    }
-
-
-    /**
-     * Gets the _value value for this QuestionnaireQuestionAnswer.
-     * 
-     * @return _value
-     */
-    public java.lang.String get_value() {
-        return _value;
+    public QuestionnaireQuestionAnswer(
+           int position,
+           java.lang.String description,
+           org.apache.axis.types.UnsignedByte value) {
+           this.position = position;
+           this.description = description;
+           this.value = value;
     }
 
 
     /**
-     * Sets the _value value for this QuestionnaireQuestionAnswer.
+     * Gets the position value for this QuestionnaireQuestionAnswer.
      * 
-     * @param _value
+     * @return position
      */
-    public void set_value(java.lang.String _value) {
-        this._value = _value;
+    public int getPosition() {
+        return position;
+    }
+
+
+    /**
+     * Sets the position value for this QuestionnaireQuestionAnswer.
+     * 
+     * @param position
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+
+    /**
+     * Gets the description value for this QuestionnaireQuestionAnswer.
+     * 
+     * @return description
+     */
+    public java.lang.String getDescription() {
+        return description;
+    }
+
+
+    /**
+     * Sets the description value for this QuestionnaireQuestionAnswer.
+     * 
+     * @param description
+     */
+    public void setDescription(java.lang.String description) {
+        this.description = description;
     }
 
 
@@ -76,9 +98,10 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            ((this._value==null && other.get_value()==null) || 
-             (this._value!=null &&
-              this._value.equals(other.get_value()))) &&
+            this.position == other.getPosition() &&
+            ((this.description==null && other.getDescription()==null) || 
+             (this.description!=null &&
+              this.description.equals(other.getDescription()))) &&
             ((this.value==null && other.getValue()==null) || 
              (this.value!=null &&
               this.value.equals(other.getValue())));
@@ -93,8 +116,9 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        if (get_value() != null) {
-            _hashCode += get_value().hashCode();
+        _hashCode += getPosition();
+        if (getDescription() != null) {
+            _hashCode += getDescription().hashCode();
         }
         if (getValue() != null) {
             _hashCode += getValue().hashCode();
@@ -115,8 +139,14 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
         attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "unsignedByte"));
         typeDesc.addFieldDesc(attrField);
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("_value");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "_value"));
+        elemField.setFieldName("position");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "position"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("description");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "description"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
@@ -137,7 +167,7 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
            java.lang.Class _javaType,  
            javax.xml.namespace.QName _xmlType) {
         return 
-          new  org.apache.axis.encoding.ser.SimpleSerializer(
+          new  org.apache.axis.encoding.ser.BeanSerializer(
             _javaType, _xmlType, typeDesc);
     }
 
@@ -149,7 +179,7 @@ public class QuestionnaireQuestionAnswer  implements java.io.Serializable, org.a
            java.lang.Class _javaType,  
            javax.xml.namespace.QName _xmlType) {
         return 
-          new  org.apache.axis.encoding.ser.SimpleDeserializer(
+          new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
 

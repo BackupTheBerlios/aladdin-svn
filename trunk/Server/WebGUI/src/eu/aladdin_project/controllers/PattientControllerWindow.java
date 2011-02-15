@@ -58,8 +58,11 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.currentdata = current.getPersonData();
 		this.currentsd = current.getSD_Data();
 		this.currentresp = current.getResponsibleClinicianID();
+		SystemDictionary.webguiLog("DEBUG", "Social Worker: "+current.getSocialWorker().getName());
 		this.currentsocialworker = current.getSocialWorker();
+		SystemDictionary.webguiLog("DEBUG", "Consulter: "+current.getConsulterInCharge().getName());
 		this.currentconsulter = current.getConsulterInCharge();
+		SystemDictionary.webguiLog("DEBUG", "General Practicioner: "+current.getGeneralPractitioner().getName());
 		this.currentgeneralpracticioner = current.getGeneralPractitioner();
 		this.currentcarers = current.getPatientCarerList().getPatientCarer();
 		
@@ -113,6 +116,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			PatientCarer[] listcarers = new PatientCarer[1];
 			listcarers[0]=new PatientCarer(car2set,true);
 			PatientCarerList oflist = new PatientCarerList(listcarers);
+			SystemDictionary.webguiLog("DEBUG", "Social worker: "+socialw.getName());
+			SystemDictionary.webguiLog("DEBUG", "Consulter: "+consulter.getName());
+			SystemDictionary.webguiLog("DEBUG", "General practicioner: "+gralprac.getName());
 			Patient patient = new Patient("",personData,sdData, resClinic, oflist, socialw, consulter, gralprac);
 			if(newpatient){
 				result = proxy.createPatient(patient, id);
@@ -336,12 +342,15 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	}
 	
 	protected void addSocialWorkerConsulterAndGPFieldsValues(){
+		SystemDictionary.webguiLog("DEBUG", "this.currentsocialworker.getName()");
 		((Textbox)getFellow("pat_swname")).setValue(this.currentsocialworker.getName());
 		((Textbox)getFellow("pat_swmail")).setValue(this.currentsocialworker.getEmail());
 		((Textbox)getFellow("pat_swphone")).setValue(this.currentsocialworker.getPhone());
+		SystemDictionary.webguiLog("DEBUG", "this.currentconsulter.getName()");
 		((Textbox)getFellow("pat_consname")).setValue(this.currentconsulter.getName());
 		((Textbox)getFellow("pat_consmail")).setValue(this.currentconsulter.getEmail());
 		((Textbox)getFellow("pat_consphone")).setValue(this.currentconsulter.getPhone());
+		SystemDictionary.webguiLog("DEBUG", "this.currentgeneralpracticioner.getName()");
 		((Textbox)getFellow("pat_gpname")).setValue(this.currentgeneralpracticioner.getName());
 		((Textbox)getFellow("pat_gpmail")).setValue(this.currentgeneralpracticioner.getEmail());
 		((Textbox)getFellow("pat_gpphone")).setValue(this.currentgeneralpracticioner.getPhone());

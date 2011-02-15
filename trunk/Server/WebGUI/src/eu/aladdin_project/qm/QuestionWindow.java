@@ -102,6 +102,7 @@ public class QuestionWindow extends Window{
 			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
 			for(int i = 0; i<this.answers.size(); i++){
 				answersvec[i]=this.answers.get(i);
+				answersvec[i].setPosition(i+1);
 			}
 			q.setAnswers(new QuestionnaireQuestionAnswerList(answersvec));
 		}else{
@@ -150,7 +151,7 @@ public class QuestionWindow extends Window{
 		txtbox.setValue("");
 		//rows.beforeChildAdded(row, rowRef);
 		QuestionnaireQuestionAnswer qqanswer = new QuestionnaireQuestionAnswer();
-		qqanswer.set_value(text);
+		qqanswer.setDescription(text);
 		qqanswer.setValue(new UnsignedByte(val));
 		this.answers.add(qqanswer);
 	}
@@ -163,9 +164,9 @@ public class QuestionWindow extends Window{
 	public void removeRow(Component comp, String text){
 		Rows rows = (Rows)getFellow("rows");
 		rows.removeChild(comp);
-		System.out.println("SIZE before: "+this.answers.size());
+		SystemDictionary.webguiLog("INFO", "SIZE before: "+this.answers.size());
 		this.removeAnswer(text);
-		System.out.println("SIZE after: "+this.answers.size());
+		SystemDictionary.webguiLog("INFO", "SIZE after: "+this.answers.size());
 	}
 	
 	/**
@@ -176,8 +177,8 @@ public class QuestionWindow extends Window{
 	private void removeAnswer(String text){
 		for(int i=0;i<this.answers.size(); i++){
 			QuestionnaireQuestionAnswer elem = this.answers.get(i);
-			System.out.println("TEXT: "+text+" VS. ANSWER VAL: "+elem.get_value());
-			if(elem.get_value().equals(text)){
+			SystemDictionary.webguiLog("INFO", "TEXT: "+text+" VS. ANSWER VAL: "+elem.getDescription());
+			if(elem.getDescription().equals(text)){
 				this.answers.remove(i);
 				break;
 			}
@@ -376,12 +377,13 @@ public class QuestionWindow extends Window{
 			row.appendChild(lab1);
 			
 			Label lab2 = new Label();
-			lab2.setValue(answer.get_value());
+			//lab2.setValue(answer.get_value());
+			lab2.setValue(answer.getDescription());
 			row.appendChild(lab2);
 			
 			Button btn = new Button();
 			btn.setLabel("-");
-			btn.addEventListener("onClick", new RemoveAnswerListener(row, answer.get_value()));
+			btn.addEventListener("onClick", new RemoveAnswerListener(row, answer.getDescription()));
 			row.appendChild(btn);
 			
 			Rows rows = (Rows)getFellow("rows");

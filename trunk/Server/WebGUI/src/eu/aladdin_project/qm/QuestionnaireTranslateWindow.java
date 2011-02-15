@@ -135,9 +135,10 @@ public class QuestionnaireTranslateWindow extends Window{
 				QuestionnaireQuestionAnswer[] currentans = currentq.getQuestion().getAnswers().getAnswer(); 
 				for(int k = 1 ; k < vboxdata.length ; k++){
 					Hbox currenthbox = (Hbox)vboxdata[k];
-					System.out.println("Answer before: "+currentans[k-1].get_value());
-					currentans[k-1].set_value(((Textbox)currenthbox.getChildren().toArray()[1]).getValue());
-					System.out.println("Answer after: "+currentans[k-1].get_value());
+					//TODO _value == description??
+					SystemDictionary.webguiLog("INFO", "Answer before: "+currentans[k-1].getDescription());
+					currentans[k-1].setDescription(((Textbox)currenthbox.getChildren().toArray()[1]).getValue());
+					SystemDictionary.webguiLog("INFO", "Answer after: "+currentans[k-1].getDescription());
 				}
 				currentq.getQuestion().getAnswers().setAnswer(currentans);
 				this.questionlist.set(i-3, currentq);
@@ -243,7 +244,8 @@ public class QuestionnaireTranslateWindow extends Window{
 			Hbox anshbox = (Hbox)currentvbox.getChildren().get(i);
 			Textbox anstranslation = (Textbox)anshbox.getChildren().get(1);
 			if(transans[i-1]  != null){
-				anstranslation.setValue(transans[i-1].get_value());
+				//anstranslation.setValue(transans[i-1].get_value());
+				anstranslation.setValue(transans[i-1].getDescription());
 			}
 		}
 	}
@@ -275,7 +277,8 @@ public class QuestionnaireTranslateWindow extends Window{
 		System.out.println("Queston answers: "+question.getAnswers().getAnswer());
 		for(int i = 0; i < question.getAnswers().getAnswer().length ; i++){
 			Hbox hboxans = new Hbox();
-			Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].get_value());
+			//Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].get_value());
+			Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].getDescription());
 			qans.setReadonly(true);
 			Textbox qanstrans = new Textbox();
 			hboxans.appendChild(qans);

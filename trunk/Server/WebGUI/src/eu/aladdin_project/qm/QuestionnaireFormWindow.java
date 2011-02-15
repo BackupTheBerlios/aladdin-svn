@@ -154,6 +154,7 @@ public class QuestionnaireFormWindow extends Window{
 				blankIds(qlist[i].getQuestions().getQuestion());
 			}
 			qlist[i].setId("");
+			qlist[i].setPosition(i+1);
 		}
 	}
 	
@@ -198,7 +199,7 @@ public class QuestionnaireFormWindow extends Window{
 		Rows rows = (Rows)getFellow("rows_questions");
 
 		rows.appendChild(this.createQuestionRow(question, parent));
-		System.out.println("Question list size: "+this.questionlist.size());
+		SystemDictionary.webguiLog("INFO", "Question list size: "+this.questionlist.size());
 	}
 	
 	/**

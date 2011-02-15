@@ -16,6 +16,8 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
 
     private eu.aladdin_project.xsd.QuestionnaireQuestionList questions;
 
+    private int position;
+
     private java.lang.String id;  // attribute
 
     private java.lang.String type;  // attribute
@@ -30,6 +32,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
            int globalID,
            eu.aladdin_project.xsd.QuestionnaireQuestionAnswerList answers,
            eu.aladdin_project.xsd.QuestionnaireQuestionList questions,
+           int position,
            java.lang.String id,
            java.lang.String type,
            org.apache.axis.types.UnsignedByte condition) {
@@ -37,6 +40,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
            this.globalID = globalID;
            this.answers = answers;
            this.questions = questions;
+           this.position = position;
            this.id = id;
            this.type = type;
            this.condition = condition;
@@ -124,6 +128,26 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
 
 
     /**
+     * Gets the position value for this QuestionnaireQuestion.
+     * 
+     * @return position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+
+    /**
+     * Sets the position value for this QuestionnaireQuestion.
+     * 
+     * @param position
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+
+    /**
      * Gets the id value for this QuestionnaireQuestion.
      * 
      * @return id
@@ -204,6 +228,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
             ((this.questions==null && other.getQuestions()==null) || 
              (this.questions!=null &&
               this.questions.equals(other.getQuestions()))) &&
+            this.position == other.getPosition() &&
             ((this.id==null && other.getId()==null) || 
              (this.id!=null &&
               this.id.equals(other.getId()))) &&
@@ -234,6 +259,7 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         if (getQuestions() != null) {
             _hashCode += getQuestions().hashCode();
         }
+        _hashCode += getPosition();
         if (getId() != null) {
             _hashCode += getId().hashCode();
         }
@@ -290,6 +316,12 @@ public class QuestionnaireQuestion  implements java.io.Serializable {
         elemField.setFieldName("questions");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "questions"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionList"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("position");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "position"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

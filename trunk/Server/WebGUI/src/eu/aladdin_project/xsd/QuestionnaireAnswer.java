@@ -14,6 +14,8 @@ public class QuestionnaireAnswer  implements java.io.Serializable, org.apache.ax
 
     private java.lang.String questionID;  // attribute
 
+    private java.lang.String globalID;  // attribute
+
     public QuestionnaireAnswer() {
     }
 
@@ -86,6 +88,26 @@ public class QuestionnaireAnswer  implements java.io.Serializable, org.apache.ax
         this.questionID = questionID;
     }
 
+
+    /**
+     * Gets the globalID value for this QuestionnaireAnswer.
+     * 
+     * @return globalID
+     */
+    public java.lang.String getGlobalID() {
+        return globalID;
+    }
+
+
+    /**
+     * Sets the globalID value for this QuestionnaireAnswer.
+     * 
+     * @param globalID
+     */
+    public void setGlobalID(java.lang.String globalID) {
+        this.globalID = globalID;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof QuestionnaireAnswer)) return false;
@@ -106,7 +128,10 @@ public class QuestionnaireAnswer  implements java.io.Serializable, org.apache.ax
               this.value.equals(other.getValue()))) &&
             ((this.questionID==null && other.getQuestionID()==null) || 
              (this.questionID!=null &&
-              this.questionID.equals(other.getQuestionID())));
+              this.questionID.equals(other.getQuestionID()))) &&
+            ((this.globalID==null && other.getGlobalID()==null) || 
+             (this.globalID!=null &&
+              this.globalID.equals(other.getGlobalID())));
         __equalsCalc = null;
         return _equals;
     }
@@ -127,6 +152,9 @@ public class QuestionnaireAnswer  implements java.io.Serializable, org.apache.ax
         if (getQuestionID() != null) {
             _hashCode += getQuestionID().hashCode();
         }
+        if (getGlobalID() != null) {
+            _hashCode += getGlobalID().hashCode();
+        }
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -145,6 +173,11 @@ public class QuestionnaireAnswer  implements java.io.Serializable, org.apache.ax
         attrField = new org.apache.axis.description.AttributeDesc();
         attrField.setFieldName("questionID");
         attrField.setXmlName(new javax.xml.namespace.QName("", "questionID"));
+        attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        typeDesc.addFieldDesc(attrField);
+        attrField = new org.apache.axis.description.AttributeDesc();
+        attrField.setFieldName("globalID");
+        attrField.setXmlName(new javax.xml.namespace.QName("", "globalID"));
         attrField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         typeDesc.addFieldDesc(attrField);
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();

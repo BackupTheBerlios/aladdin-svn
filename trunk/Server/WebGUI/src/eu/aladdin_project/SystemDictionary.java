@@ -2,6 +2,11 @@ package eu.aladdin_project;
 
 import org.zkoss.util.resource.Labels;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
+
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.SystemParameter;
 
@@ -14,6 +19,10 @@ public class SystemDictionary {
 	
 	private static StorageComponentProxy proxy = null;
 	
+	private static Logger logger = null;
+	private static SimpleLayout loglayout = null;
+	private static ConsoleAppender logappender = null;
+	
 	public static SystemParameter getLocale(){
 		return locale;
 	}
@@ -23,6 +32,27 @@ public class SystemDictionary {
 			proxy = new StorageComponentProxy();
 		}
 		return proxy;
+	}
+	
+	public static void webguiLog(String type, String message){
+		if(logger == null){
+			logger = Logger.getLogger("WebGUILogger");
+			logger.setLevel(Level.DEBUG);
+			loglayout = new SimpleLayout();
+			logappender = new ConsoleAppender(loglayout);
+			logger.addAppender(logappender);
+		}
+		if(type.equals("INFO")){
+			logger.info(message);
+		}else if(type.equals("DEBUG")){
+			logger.debug(message);
+		}else if(type.equals("WARN")){
+			logger.warn(message);
+		}else if(type.equals("ERROR")){
+			logger.error(message);
+		}else if(type.equals("FATAL")){
+			logger.fatal(message);
+		}
 	}
 	
 	/**

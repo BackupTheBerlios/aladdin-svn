@@ -1210,8 +1210,8 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
             cachedSerQNames.add(qName);
             cls = eu.aladdin_project.xsd.QuestionnaireQuestionAnswer.class;
             cachedSerClasses.add(cls);
-            cachedSerFactories.add(org.apache.axis.encoding.ser.BaseSerializerFactory.createFactory(org.apache.axis.encoding.ser.SimpleSerializerFactory.class, cls, qName));
-            cachedDeserFactories.add(org.apache.axis.encoding.ser.BaseDeserializerFactory.createFactory(org.apache.axis.encoding.ser.SimpleDeserializerFactory.class, cls, qName));
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "QuestionnaireQuestionAnswerList");
             cachedSerQNames.add(qName);
