@@ -64,9 +64,12 @@ public class QuestionWindow extends Window{
 		this.parent = parent;
 		this.type = question.getType();
 		
-		QuestionnaireQuestionAnswer[] qans = question.getAnswers().getAnswer();
-		for(int i = 0; i<qans.length; i++){
-			this.answers.add(qans[i]);
+		SystemDictionary.webguiLog("DEBUG", "QUESTION TYPE: "+this.type+":"+SystemDictionary.QUESTION_TYPE_FREE_TEXT);
+		if(!this.type.equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
+			QuestionnaireQuestionAnswer[] qans = question.getAnswers().getAnswer();
+			for(int i = 0; i<qans.length; i++){
+				this.answers.add(qans[i]);
+			}
 		}
 		
 		this.setTitle(Labels.getLabel("qm.ans.title.update"));
@@ -75,10 +78,11 @@ public class QuestionWindow extends Window{
 		this.setWidth("650px");
 		this.addMainQuestionGrid();
 		this.setMainGridFields(question);
-		if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
+		if(!this.type.equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
 			this.setAnswersRows();
 		}
-		this.getFellow("freeanswrow").setVisible(false);
+		this.changeQuestionType();
+		//this.getFellow("freeanswrow").setVisible(false);
 		
 	}
 	
@@ -153,6 +157,7 @@ public class QuestionWindow extends Window{
 		QuestionnaireQuestionAnswer qqanswer = new QuestionnaireQuestionAnswer();
 		qqanswer.setDescription(text);
 		qqanswer.setValue(new UnsignedByte(val));
+		//qqanswer.setValue(val);
 		this.answers.add(qqanswer);
 	}
 	
@@ -296,6 +301,15 @@ public class QuestionWindow extends Window{
 		if(q.getCondition() != null){
 			((Intbox)getFellow("question_cond")).setValue(new Integer(q.getCondition().toString()));
 		}
+		int selindex = 0;
+		if(q.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
+			selindex = 2;
+		}else if(q.getType().equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
+			selindex = 1;
+		}else if(q.getType().equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER)){
+			selindex = 0;
+		}
+		((Listbox)getFellow("question_typesel")).setSelectedIndex(selindex);
 	}
 	
 	private void addFreeAnswerRow(){

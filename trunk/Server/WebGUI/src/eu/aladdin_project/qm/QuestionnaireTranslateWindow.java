@@ -238,14 +238,14 @@ public class QuestionnaireTranslateWindow extends Window{
 		if(question.getTitle()!=null && !question.getTitle().equals("null")){
 			translation.setValue(question.getTitle());
 		}
-		
-		QuestionnaireQuestionAnswer[] transans = question.getAnswers().getAnswer();
-		for(int i = 1; i <= transans.length ; i++){
-			Hbox anshbox = (Hbox)currentvbox.getChildren().get(i);
-			Textbox anstranslation = (Textbox)anshbox.getChildren().get(1);
-			if(transans[i-1]  != null){
-				//anstranslation.setValue(transans[i-1].get_value());
-				anstranslation.setValue(transans[i-1].getDescription());
+		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
+			QuestionnaireQuestionAnswer[] transans = question.getAnswers().getAnswer();
+			for(int i = 1; i <= transans.length ; i++){
+				Hbox anshbox = (Hbox)currentvbox.getChildren().get(i);
+				Textbox anstranslation = (Textbox)anshbox.getChildren().get(1);
+				if(transans[i-1]  != null){
+					anstranslation.setValue(transans[i-1].getDescription());
+				}
 			}
 		}
 	}
@@ -261,10 +261,13 @@ public class QuestionnaireTranslateWindow extends Window{
 		row.setId(question.getId()+"-rowqstn");
 		
 		Vbox vbox = new Vbox();
-		Label lab1 = new Label("Question");
-		Label lab2 = new Label("Answers");
+		Label lab1 =  !question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)? new Label("Question"):new Label("Free text Question");
 		vbox.appendChild(lab1);
-		vbox.appendChild(lab2);
+		
+		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
+			Label lab2 = new Label("Answers");
+			vbox.appendChild(lab2);
+		}
 		
 		Vbox vbox2 = new Vbox();
 		Hbox hboxtitle = new Hbox();
@@ -274,16 +277,19 @@ public class QuestionnaireTranslateWindow extends Window{
 		hboxtitle.appendChild(qtitle);
 		hboxtitle.appendChild(qtitletrans);
 		vbox2.appendChild(hboxtitle);
-		System.out.println("Queston answers: "+question.getAnswers().getAnswer());
-		for(int i = 0; i < question.getAnswers().getAnswer().length ; i++){
-			Hbox hboxans = new Hbox();
-			//Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].get_value());
-			Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].getDescription());
-			qans.setReadonly(true);
-			Textbox qanstrans = new Textbox();
-			hboxans.appendChild(qans);
-			hboxans.appendChild(qanstrans);
-			vbox2.appendChild(hboxans);
+		SystemDictionary.webguiLog("DEBUG", "Question type: "+ question.getType()+ ":" + SystemDictionary.QUESTION_TYPE_FREE_TEXT);
+		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
+			System.out.println("Queston answers: "+question.getAnswers().getAnswer());
+			for(int i = 0; i < question.getAnswers().getAnswer().length ; i++){
+				Hbox hboxans = new Hbox();
+				Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].getDescription());
+				qans.setReadonly(true);
+				Textbox qanstrans = new Textbox();
+				hboxans.appendChild(qans);
+				hboxans.appendChild(qanstrans);
+				vbox2.appendChild(hboxans);
+			}
+			
 		}
 		row.appendChild(vbox);
 		row.appendChild(vbox2);

@@ -36,9 +36,9 @@
 	</hbox>
 	<hbox>
 		<label value="From"/>
-		<datebox id="datefromfilter" format="dd/MM/yyyy" onClick="self.open()" readonly="true"/>
+		<datebox id="datefromfilter" format="dd/MM/yyyy" readonly="true"/>
 		<label value="to"/>
-		<datebox id="datetofilter" format="dd/MM/yyyy" onClick="self.open()" readonly="true"/>
+		<datebox id="datetofilter" format="dd/MM/yyyy" readonly="true"/>
 		<button label="Apply date filter" onClick="warningswin.refreshWarnings()"/>
 		<button label="Clear date filters" onClick="warningswin.clearDateFilters()"/>
 	</hbox>
