@@ -15,6 +15,10 @@ public class Questionnaire  implements java.io.Serializable {
     private java.lang.String ID;  // attribute
 
     private java.lang.String title;  // attribute
+    
+    public String toString(){
+    	return this.title;
+    }
 
     public Questionnaire() {
     }

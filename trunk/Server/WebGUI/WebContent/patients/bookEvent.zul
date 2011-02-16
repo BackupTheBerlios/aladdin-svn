@@ -89,21 +89,21 @@
 					<label value="${tquestion }"/>
 					<hbox>
 						<textbox id="questidfield" readonly="true" width="35px"/>
-						<combobox id="questnamefield" autodrop="true" buttonVisible="false">
+						<combobox id="questnamefield" autodrop="true">
 							<attribute name="onSelect">
 								QuestionnaireInfo qinfo = (QuestionnaireInfo)questnamefield.getSelectedItem().getValue();
 								questidfield.setValue(qinfo.getID());
 							</attribute>
 							<attribute name="onCreate">
-								StorageComponentProxy proxy = new StorageComponentProxy();
 								try{
 									eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(), petusid);
-									SimpleListModel qsssmodel = new SimpleListModel(qsss);
+									qsssmodel = new SimpleListModel(qsss);
 									questnamefield.setModel(qsssmodel);
 								}catch(java.rmi.RemoteException re){
 									re.printStackTrace();
 								}
 							</attribute>
+							
 						</combobox>
 						
 					</hbox>
