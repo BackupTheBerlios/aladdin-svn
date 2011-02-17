@@ -2,6 +2,7 @@ package com.aladdin.raac;
 
 import java.io.File;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ import eu.aladdin_project.storagecomponent.AuthResponseDocument.AuthResponse;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument.GetPatientMeasurement;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument.GetQuestionnaireAnswers;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument.SaveWarning;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument;
@@ -58,7 +60,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	static final int GreaterThanRuleType = 3;
 
 	QuestionnaireAnswer[] previousAnswerArray = null;
-
+	
 	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
 			AnalyzeQuestionnairesDocument req) {
 
@@ -88,7 +90,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			e1.printStackTrace();
 			return respdoc;
 		}
-
+	
 		AuthDocument authdoc = AuthDocument.Factory.newInstance();
 		Auth auth = Auth.Factory.newInstance();
 		auth.setLogin("raac");
@@ -109,23 +111,40 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		if (UserID == "-1")
 			return respdoc;
 
+		String DATE_FORMAT = "yyyy-MM-dd";
+	    SimpleDateFormat sdf =
+	          new SimpleDateFormat(DATE_FORMAT);
+		
 		// get all questionnaire answers
 		GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
 				.getInstance();
-		currentDate.add(Calendar.DATE, -1);
-		GregorianCalendar oneWeekBefore = (GregorianCalendar) GregorianCalendar
+		//currentDate.add(Calendar.DATE, 0);
+		GregorianCalendar twoMonthsBefore = (GregorianCalendar) GregorianCalendar
 				.getInstance();
-		oneWeekBefore.add(Calendar.DATE, -60);
+		twoMonthsBefore.add(Calendar.DATE, -60);
 
 		GetQuestionnaireAnswersDocument qDocument = GetQuestionnaireAnswersDocument.Factory
 				.newInstance();
+		
+		GetQuestionnaireAnswers getQuestionnaireAnswers = GetQuestionnaireAnswers.Factory.newInstance();
+		getQuestionnaireAnswers.setFromDate(twoMonthsBefore);
+		getQuestionnaireAnswers.setToDate(currentDate);
+		getQuestionnaireAnswers.setObjectId(PatientID);
+		getQuestionnaireAnswers.setUserId(UserID);
+		qDocument.set(getQuestionnaireAnswers);	
+		
+		System.out.println(PatientID);
+		System.out.println(UserID);
+		System.out.println(sdf.format(twoMonthsBefore.getTime()));
+		System.out.println(sdf.format(currentDate.getTime()));
+		
 		GetQuestionnaireAnswersResponseDocument qResponseDocument = null;
 
 		try {
 			qResponseDocument = sc.getQuestionnaireAnswers(qDocument);
 			if (qResponseDocument == null)
 				return respdoc;
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -152,8 +171,16 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			QuestionnaireAnswer currentAnswer = currentAnswerArray[k];
 			QuestionnaireAnswer previousAnswer = getPreviousQuestionnaireAnswer(currentAnswer
 					.getQuestionID());
-			if (previousAnswer == null)
-				continue;
+			
+			// For non-existant answers, create a new answer with "Never"
+			if (previousAnswer == null) {
+				QuestionnaireAnswer neverAnswer = QuestionnaireAnswer.Factory.newInstance();
+				neverAnswer.setQuestionID(currentAnswer.getQuestionID());
+				neverAnswer.setGlobalID(currentAnswer.getGlobalID());
+				neverAnswer.setValue("0");
+				previousAnswer = neverAnswer;
+			}
+			
 			String currentValueStr = currentAnswer.getValue();
 			String previousValueStr = previousAnswer.getValue();
 			if ("9".equals(currentValueStr) || "9".equals(previousValueStr))
@@ -169,13 +196,16 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			catch (Exception ex) {
 				continue;
 			}
-			
 
 			for (int count = 0; count < DefinedRules.size(); count++) {
 				
 				String globaID = currentAnswer.getGlobalID();
 				
 				if (globaID == null || "".equals(globaID))
+					continue;
+				
+				int globalIDasInteger = Integer.valueOf(globaID);
+				if (globalIDasInteger < 1000)
 					continue;
 				
 				String globalIDGroup = getglobalIDGroup(globaID);
@@ -213,6 +243,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 				sw.setUserId(UserID);
 				try {
 					sc.saveWarning(swd);
+					System.out.printf("%s", generatedWarning.getJustificationText());
+
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
