@@ -2528,19 +2528,18 @@ class CmpInt implements java.util.Comparator<Integer> {
     	}
     	
     	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
-    		//System.out.println (" eQQA 1");
+    		System.out.println (" eQQA 1");
     		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
-    		//System.out.println (" eQQA 2");
+    		System.out.println (" eQQA 2");
     		
-    		//rqqa.setStringValue(qqa.getDescription());
+    		
     		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, qqa.getDescription()));
+    		System.out.println (" eQQA 21");
+    		if (qqa.getPosition() != null) rqqa.setPosition(qqa.getPosition());
     		
-    		rqqa.setPosition(qqa.getPosition());
-    		
-    		
-    		//System.out.println (" eQQA 3");
+    		System.out.println (" eQQA 3");
     		rqqa.setValue(qqa.getValue().shortValue());
-    		//System.out.println (" eQQA 4");
+    		System.out.println (" eQQA 4");
 //    		if (qqa.getDeleted() != null) rqqa.setDeleted(qqa.getDeleted());
 //    		else rqqa.setDeleted(false);
     		//System.out.println (" eQQA 5");
