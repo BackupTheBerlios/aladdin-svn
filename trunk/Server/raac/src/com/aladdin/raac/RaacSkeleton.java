@@ -131,12 +131,14 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		getQuestionnaireAnswers.setToDate(currentDate);
 		getQuestionnaireAnswers.setObjectId(PatientID);
 		getQuestionnaireAnswers.setUserId(UserID);
-		qDocument.set(getQuestionnaireAnswers);	
 		
-		System.out.println(PatientID);
-		System.out.println(UserID);
-		System.out.println(sdf.format(twoMonthsBefore.getTime()));
-		System.out.println(sdf.format(currentDate.getTime()));
+		qDocument.addNewGetQuestionnaireAnswers();
+		qDocument.setGetQuestionnaireAnswers(getQuestionnaireAnswers);
+		
+//		System.out.println(PatientID);
+//		System.out.println(UserID);
+//		System.out.println(sdf.format(twoMonthsBefore.getTime()));
+//		System.out.println(sdf.format(currentDate.getTime()));
 		
 		GetQuestionnaireAnswersResponseDocument qResponseDocument = null;
 
@@ -435,32 +437,23 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	// Get Ruleset from XML
 	@SuppressWarnings("unchecked")
 	private List<RuleMap> GetRules() {
-		System.out.println("getrules 1");
+
 		List<RuleMap> DefinedRules = null;
-		System.out.println("getrules 2");
 
 		try {
-			System.out.println("getrules 3");
 			JAXBContext jc = JAXBContext
 					.newInstance(org.example.rulemap.ObjectFactory.class);
-			System.out.println("getrules 4");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			System.out.println("getrules 5");
 			unmarshaller.setEventHandler(new DefaultValidationEventHandler());
-			System.out.println("getrules 6");
 
 			// DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
 			// unmarshaller.unmarshal(new
 			// File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
 			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
 					.unmarshal(new File("rules.xml"))).getValue().getRule();
-			System.out.println("getrules 7");
 		} catch (JAXBException e) {
-			System.out.println("getrules 8");
 			e.printStackTrace();
-			System.out.println("getrules 8");
 		}
-		System.out.println("getrules 10");
 		return DefinedRules;
 	}
 
