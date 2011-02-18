@@ -111,10 +111,6 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		if (UserID == "-1")
 			return respdoc;
 
-		String DATE_FORMAT = "yyyy-MM-dd";
-	    SimpleDateFormat sdf =
-	          new SimpleDateFormat(DATE_FORMAT);
-		
 		// get all questionnaire answers
 		GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
 				.getInstance();
@@ -134,11 +130,6 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		
 		qDocument.addNewGetQuestionnaireAnswers();
 		qDocument.setGetQuestionnaireAnswers(getQuestionnaireAnswers);
-		
-//		System.out.println(PatientID);
-//		System.out.println(UserID);
-//		System.out.println(sdf.format(twoMonthsBefore.getTime()));
-//		System.out.println(sdf.format(currentDate.getTime()));
 		
 		GetQuestionnaireAnswersResponseDocument qResponseDocument = null;
 
@@ -198,23 +189,25 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			catch (Exception ex) {
 				continue;
 			}
+			
+			String globaID = currentAnswer.getGlobalID();
+			
+			if (globaID == null || "".equals(globaID))
+				continue;
+			
+			int globalIDasInteger = Integer.valueOf(globaID);
+			if (globalIDasInteger < 1000)
+				continue;
+			
+			String globalIDGroup = getglobalIDGroup(globaID);
+			if (globalIDGroup == null) continue;
 
 			for (int count = 0; count < DefinedRules.size(); count++) {
-				
-				String globaID = currentAnswer.getGlobalID();
-				
-				if (globaID == null || "".equals(globaID))
-					continue;
-				
-				int globalIDasInteger = Integer.valueOf(globaID);
-				if (globalIDasInteger < 1000)
-					continue;
-				
-				String globalIDGroup = getglobalIDGroup(globaID);
-				if (globalIDGroup == null) continue;
-				
+
 				String ruleDataType = DefinedRules.get(count).getDataType();
-				if (globalIDGroup.equals(ruleDataType)) {
+				double ruleDataTypeAsDouble = Double.valueOf(ruleDataType);
+				double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+				if (globalIDGroupAsDouble == ruleDataTypeAsDouble) {
 					currentRule = DefinedRules.get(count);
 					break;
 				}
@@ -223,7 +216,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			if (currentRule == null) // Rule not found
 				return respdoc;
 			
-			String description = String.format("Question {0}", currentAnswer.getQuestionID());
+			String description = String.format("Question %s", currentAnswer.getQuestionID());
 			
 			switch (currentRule.getCallerID()) {
 				case GreaterThanRuleType:
@@ -244,10 +237,10 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 				sw.setWarn(generatedWarning);
 				sw.setUserId(UserID);
 				try {
-					sc.saveWarning(swd);
-					System.out.printf("%s", generatedWarning.getJustificationText());
+					//sc.saveWarning(swd);
+					System.out.printf("%s\n", generatedWarning.getJustificationText());
 
-				} catch (RemoteException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -255,7 +248,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		}
 
 
-		return null;
+		return respdoc;
 	}
 
 	// returns the Global ID group (e.g. 1000, 2000, 3000 etc) based on GlobalID
