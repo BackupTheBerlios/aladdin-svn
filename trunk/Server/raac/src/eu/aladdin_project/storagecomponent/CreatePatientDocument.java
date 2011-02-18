@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreatePatientDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatientDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("createpatient6f37doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatientDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("createpatient6f37doctype");
     
     /**
      * Gets the "CreatePatient" element
@@ -42,7 +42,7 @@ public interface CreatePatientDocument extends org.apache.xmlbeans.XmlObject
     public interface CreatePatient extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("createpatientd66celemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("createpatientd66celemtype");
         
         /**
          * Gets the "data" element

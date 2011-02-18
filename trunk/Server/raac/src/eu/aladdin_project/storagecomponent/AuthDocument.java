@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface AuthDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AuthDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("auth6d08doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AuthDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("auth6d08doctype");
     
     /**
      * Gets the "Auth" element
@@ -42,7 +42,7 @@ public interface AuthDocument extends org.apache.xmlbeans.XmlObject
     public interface Auth extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Auth.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("authac24elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Auth.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("authac24elemtype");
         
         /**
          * Gets the "login" element

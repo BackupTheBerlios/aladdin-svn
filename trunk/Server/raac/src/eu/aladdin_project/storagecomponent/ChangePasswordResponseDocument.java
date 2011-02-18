@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ChangePasswordResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePasswordResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("changepasswordresponse34ecdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePasswordResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("changepasswordresponse34ecdoctype");
     
     /**
      * Gets the "ChangePasswordResponse" element
@@ -42,7 +42,7 @@ public interface ChangePasswordResponseDocument extends org.apache.xmlbeans.XmlO
     public interface ChangePasswordResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePasswordResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("changepasswordresponseb764elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ChangePasswordResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("changepasswordresponseb764elemtype");
         
         /**
          * Gets the "out" element

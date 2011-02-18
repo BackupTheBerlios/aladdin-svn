@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateMediaContentDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateMediaContentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("updatemediacontent71fedoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateMediaContentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("updatemediacontent71fedoctype");
     
     /**
      * Gets the "UpdateMediaContent" element
@@ -42,7 +42,7 @@ public interface UpdateMediaContentDocument extends org.apache.xmlbeans.XmlObjec
     public interface UpdateMediaContent extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateMediaContent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("updatemediacontent9b24elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateMediaContent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("updatemediacontent9b24elemtype");
         
         /**
          * Gets the "ec" element

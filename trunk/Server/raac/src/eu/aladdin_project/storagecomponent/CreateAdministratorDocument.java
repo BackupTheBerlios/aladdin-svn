@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreateAdministratorDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("createadministrator9ebfdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministratorDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("createadministrator9ebfdoctype");
     
     /**
      * Gets the "CreateAdministrator" element
@@ -42,7 +42,7 @@ public interface CreateAdministratorDocument extends org.apache.xmlbeans.XmlObje
     public interface CreateAdministrator extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s64E01CBC506EF70944F661FFDC0EA100").resolveHandle("createadministrator1efcelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreateAdministrator.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("createadministrator1efcelemtype");
         
         /**
          * Gets the "data" element

@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SocioDemographicData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7FB48A01A5B169EB7D85E761ED6D1831").resolveHandle("sociodemographicdata4e8etype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SocioDemographicData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s6E6AEF51E01EC245AB15E23DD1E77FA1").resolveHandle("sociodemographicdata4e8etype");
     
     /**
      * Gets the "Age" element
