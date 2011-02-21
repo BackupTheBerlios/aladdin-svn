@@ -30,10 +30,13 @@ import eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument.GetPati
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument.GetQuestionnaireAnswers;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
+import eu.aladdin_project.storagecomponent.GetUserDocument;
+import eu.aladdin_project.storagecomponent.GetUserDocument.GetUser;
 import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument;
 import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument.GetUserIdByPersonId;
 import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument;
 import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument.GetUserIdByPersonIdResponse;
+import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument.SaveWarning;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument;
@@ -48,6 +51,7 @@ import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.QuestionnaireAnswer;
 import eu.aladdin_project.xsd.QuestionnaireAnswers;
 import eu.aladdin_project.xsd.SystemParameter;
+import eu.aladdin_project.xsd.User;
 
 import eu.aladdin_project.xsd.Warning;
 
@@ -86,7 +90,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		if (analyzeQuestionnairesIn == null)
 			return respdoc;
 		
-		String PatientID = analyzeQuestionnairesIn.getPatientID();
+		String ObjectUserID = analyzeQuestionnairesIn.getUserID();
+		String ObjectPersonID;
 
 		QuestionnaireAnswer[] currentAnswerArray = analyzeQuestionnairesIn
 				.getAnswersArray();
@@ -125,23 +130,21 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		if (UserID == "-1")
 			return respdoc;
 		
-		
-		GetUserIdByPersonIdDocument getUserIdByPersonIdDocument = GetUserIdByPersonIdDocument.Factory.newInstance();
-		GetUserIdByPersonId getUserIdByPersonId =  GetUserIdByPersonId.Factory.newInstance();
-		getUserIdByPersonId.setUserId(UserID);
-		getUserIdByPersonId.setType(4);
-		getUserIdByPersonId.setId(PatientID);
-		getUserIdByPersonIdDocument.setGetUserIdByPersonId(getUserIdByPersonId);
-		GetUserIdByPersonIdResponseDocument getUserIdByPersonIdResponseDocument = null;
+		GetUserDocument getUserDocument = GetUserDocument.Factory.newInstance();
+		getUserDocument.addNewGetUser();
+		GetUser getUser = GetUser.Factory.newInstance();
+		getUser.setId(ObjectUserID);
+		getUserDocument.setGetUser(getUser);
+		GetUserResponseDocument getUserDocumentResponse = null;
 		try {
-			getUserIdByPersonIdResponseDocument = sc.getUserIdByPersonId(getUserIdByPersonIdDocument);
+			getUserDocumentResponse = sc.getUser(getUserDocument);
 		} catch (RemoteException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
-		GetUserIdByPersonIdResponse getUserIdByPersonIdResponse = getUserIdByPersonIdResponseDocument.getGetUserIdByPersonIdResponse();
-		//PatientID = getUserIdByPersonIdResponse.getOut().getCode();
+		User user = getUserDocumentResponse.getGetUserResponse().getOut();
+		ObjectPersonID = user.getPersonID();
 
 		// get all questionnaire answers
 		GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
@@ -157,7 +160,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		GetQuestionnaireAnswers getQuestionnaireAnswers = GetQuestionnaireAnswers.Factory.newInstance();
 		getQuestionnaireAnswers.setFromDate(twoMonthsBefore);
 		getQuestionnaireAnswers.setToDate(currentDate);
-		getQuestionnaireAnswers.setObjectId(PatientID);
+		getQuestionnaireAnswers.setObjectId(ObjectUserID);
 		getQuestionnaireAnswers.setUserId(UserID);
 		
 		qDocument.addNewGetQuestionnaireAnswers();
@@ -270,11 +273,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			
 			switch (currentRule.getCallerID()) {
 				case GreaterThanRuleType:
-					generatedWarning = GreaterThanRule(PatientID, description,
+					generatedWarning = GreaterThanRule(ObjectPersonID, description,
 							currentValue, previousValue, currentRule.getLowerLimit(), QuestionnaireAnalysis);
 					break;
 				case LessThanRuleType:
-					generatedWarning = LessThanRule(PatientID, description,
+					generatedWarning = LessThanRule(ObjectPersonID, description,
 							currentValue, previousValue, currentRule.getLowerLimit(), QuestionnaireAnalysis);
 					break;
 			}
@@ -287,7 +290,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 				sw.setWarn(generatedWarning);
 				sw.setUserId(UserID);
 				try {
-					//sc.saveWarning(swd);
+					sc.saveWarning(swd);
 					System.out.printf("%s\n", generatedWarning.getJustificationText());
 
 				} catch (Exception e) {
@@ -512,11 +515,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			unmarshaller.setEventHandler(new DefaultValidationEventHandler());
 
-			// DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
-			// unmarshaller.unmarshal(new
-			// File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
-			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
-					.unmarshal(new File("rules.xml"))).getValue().getRule();
+			 DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
+			 unmarshaller.unmarshal(new
+			 File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
+//			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
+//					.unmarshal(new File("rules.xml"))).getValue().getRule();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
