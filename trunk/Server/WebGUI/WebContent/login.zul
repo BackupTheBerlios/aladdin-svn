@@ -22,9 +22,9 @@
 			String page = "/";
 			try{
  				OperationResult result = proxy.auth(user,password);
- 				System.out.println("RESULT CODE: "+result.getCode());
- 				System.out.println("RESULT DESC: "+result.getDescription());
- 				System.out.println("RESULT STATUS: "+result.getStatus());
+ 				SystemDictionary.webguiLog("DEBUG", "LOGIN REQUEST CODE: "+result.getCode());
+ 				SystemDictionary.webguiLog("DEBUG", "LOGIN REQUEST DESC: "+result.getDescription());
+ 				SystemDictionary.webguiLog("DEBUG", "LOGIN REQUEST STATUS: "+result.getStatus());
  				
  				//Check if getCode() function return error code (0)
  				if(result.getCode().equals("0")){
@@ -36,14 +36,14 @@
  					String username = null;
  					String usersname = null;
  					if(restype.getCode().equals(SystemDictionary.USERTYPE_ADMIN)){
-						System.out.println("Welcome Administrator");
+ 						SystemDictionary.webguiLog("INFO", "Administrator logged in");
 						usertype = SystemDictionary.USERTYPE_ADMIN;
 					//	Administrator admin = proxy.getAdministrator(result.getCode(),result.getCode());
 					//	username = admin.getPersonData().getName();
 					//	usersname = admin.getPersonData().getSurname();
 						
  					}else if(restype.getCode().equals(SystemDictionary.USERTYPE_CLINICIAN)){
- 						System.out.println("Welcome Clinician");
+ 						SystemDictionary.webguiLog("INFO", "Clinician logged in");
  						usertype = SystemDictionary.USERTYPE_CLINICIAN;
  					//	Clinician clinic = proxy.getClinician(result.getCode(),result.getCode());
  					//	System.out.println("Welcome Clinician "+restype.getDescription());
@@ -63,7 +63,7 @@
  					//session.setAttribute("usersname",usersname);
  				}
  			}catch(java.rmi.RemoteException re){
- 				System.out.println("Server failed");
+ 				SystemDictionary.webguiLog("INFO", "Server failure");
  				re.printStackTrace();
  				page = "/login.zul?error="+eu.aladdin_project.ErrorDictionary.UNKOW_ERROR;
  			}catch(eu.aladdin_project.exceptions.InvalidUserTypeException ue){

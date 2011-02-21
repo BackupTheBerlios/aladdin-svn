@@ -53,6 +53,7 @@
 				}
 			</attribute>
 		</menuitem>
+		<menuitem label="Content Management" href="/cms/"/>
 	</menubar>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>

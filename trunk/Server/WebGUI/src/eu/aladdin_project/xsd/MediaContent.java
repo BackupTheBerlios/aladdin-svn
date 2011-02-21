@@ -20,6 +20,8 @@ public class MediaContent  implements java.io.Serializable {
 
     private java.lang.String text;
 
+    private boolean enabled;
+
     public MediaContent() {
     }
 
@@ -29,13 +31,15 @@ public class MediaContent  implements java.io.Serializable {
            java.lang.String url,
            java.lang.String type,
            java.lang.String category,
-           java.lang.String text) {
+           java.lang.String text,
+           boolean enabled) {
            this.ID = ID;
            this.title = title;
            this.url = url;
            this.type = type;
            this.category = category;
            this.text = text;
+           this.enabled = enabled;
     }
 
 
@@ -158,6 +162,26 @@ public class MediaContent  implements java.io.Serializable {
         this.text = text;
     }
 
+
+    /**
+     * Gets the enabled value for this MediaContent.
+     * 
+     * @return enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+
+    /**
+     * Sets the enabled value for this MediaContent.
+     * 
+     * @param enabled
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof MediaContent)) return false;
@@ -187,7 +211,8 @@ public class MediaContent  implements java.io.Serializable {
               this.category.equals(other.getCategory()))) &&
             ((this.text==null && other.getText()==null) || 
              (this.text!=null &&
-              this.text.equals(other.getText())));
+              this.text.equals(other.getText()))) &&
+            this.enabled == other.isEnabled();
         __equalsCalc = null;
         return _equals;
     }
@@ -217,6 +242,7 @@ public class MediaContent  implements java.io.Serializable {
         if (getText() != null) {
             _hashCode += getText().hashCode();
         }
+        _hashCode += (isEnabled() ? Boolean.TRUE : Boolean.FALSE).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -261,6 +287,12 @@ public class MediaContent  implements java.io.Serializable {
         elemField.setFieldName("text");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "text"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("enabled");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "enabled"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }
