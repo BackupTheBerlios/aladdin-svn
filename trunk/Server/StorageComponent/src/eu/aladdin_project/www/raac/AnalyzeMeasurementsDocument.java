@@ -17,7 +17,7 @@ package eu.aladdin_project.www.raac;
 public interface AnalyzeMeasurementsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeMeasurementsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s48162B0598A240B7345C5C72F15FC2A4").resolveHandle("analyzemeasurementsf8d9doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeMeasurementsDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDB708C2BB61F23493E9532DEF09D4CEE").resolveHandle("analyzemeasurementsf8d9doctype");
     
     /**
      * Gets the "AnalyzeMeasurements" element
@@ -42,7 +42,7 @@ public interface AnalyzeMeasurementsDocument extends org.apache.xmlbeans.XmlObje
     public interface AnalyzeMeasurements extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeMeasurements.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s48162B0598A240B7345C5C72F15FC2A4").resolveHandle("analyzemeasurements2408elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeMeasurements.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDB708C2BB61F23493E9532DEF09D4CEE").resolveHandle("analyzemeasurements2408elemtype");
         
         /**
          * Gets the "in" element

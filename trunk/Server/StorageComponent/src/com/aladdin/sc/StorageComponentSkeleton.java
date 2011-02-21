@@ -4277,7 +4277,8 @@ import java.net.URL;
 			if (
     				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_CLINICIAN) &&
     				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_ADMIN) &&
-    				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_CARER)
+    				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_CARER) &&
+    				!checkUser(req.getGetUserIdByPersonId().getUserId(), U_SERVICE)
 				) {
     			return respdoc;
     		}
@@ -4587,6 +4588,7 @@ import java.net.URL;
 				out.setTitle(ec.getTitle());
 				out.setType(ec.getType());
 				out.setUrl(ec.getUrl());
+				out.setEnabled(ec.getEnabled());
 			}
 			
 			return respdoc;
