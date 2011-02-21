@@ -4599,6 +4599,7 @@ import java.net.URL;
 			ec.setTitle(rEC.getTitle());
 			ec.setType(rEC.getType());
 			ec.setUrl(rEC.getUrl());
+			ec.setEnabled(rEC.getEnabled());
 			if (id != null && id > 0) {
 				ec.setId(id);
 				s.merge(ec);

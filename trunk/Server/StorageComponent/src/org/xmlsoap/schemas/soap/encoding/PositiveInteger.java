@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface PositiveInteger extends org.apache.xmlbeans.XmlPositiveInteger
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PositiveInteger.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("positiveintegera5d9type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PositiveInteger.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("positiveintegera5d9type");
     
     /**
      * Gets the "id" attribute

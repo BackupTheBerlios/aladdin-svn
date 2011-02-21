@@ -10,6 +10,7 @@
 <property name="type" type="string"><column name="type"/></property>
 <property name="category" type="string"><column name="category"/></property>
 <property name="text" type="string"><column name="text"/></property>
+<property name="enabled" type="java.lang.Boolean"><column name="enabled"/></property>
 </class>
 </hibernate-mapping>
 

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetMediaContentDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("getmediacontenta679doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("getmediacontenta679doctype");
     
     /**
      * Gets the "GetMediaContent" element
@@ -42,7 +42,7 @@ public interface GetMediaContentDocument extends org.apache.xmlbeans.XmlObject
     public interface GetMediaContent extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("getmediacontent22f0elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetMediaContent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("getmediacontent22f0elemtype");
         
         /**
          * Gets array of all "filter" elements

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface CreatePatientResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatientResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("createpatientresponse2a18doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatientResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("createpatientresponse2a18doctype");
     
     /**
      * Gets the "CreatePatientResponse" element
@@ -42,7 +42,7 @@ public interface CreatePatientResponseDocument extends org.apache.xmlbeans.XmlOb
     public interface CreatePatientResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatientResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("createpatientresponsea32eelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(CreatePatientResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("createpatientresponsea32eelemtype");
         
         /**
          * Gets the "out" element

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteCarerDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("deletecarer8ba4doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarerDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("deletecarer8ba4doctype");
     
     /**
      * Gets the "DeleteCarer" element
@@ -42,7 +42,7 @@ public interface DeleteCarerDocument extends org.apache.xmlbeans.XmlObject
     public interface DeleteCarer extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("deletecarer6206elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteCarer.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("deletecarer6206elemtype");
         
         /**
          * Gets the "id" element

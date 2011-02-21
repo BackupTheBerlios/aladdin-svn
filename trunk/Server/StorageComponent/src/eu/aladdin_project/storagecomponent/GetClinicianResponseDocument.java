@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetClinicianResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinicianResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("getclinicianresponse41f9doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinicianResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("getclinicianresponse41f9doctype");
     
     /**
      * Gets the "GetClinicianResponse" element
@@ -42,7 +42,7 @@ public interface GetClinicianResponseDocument extends org.apache.xmlbeans.XmlObj
     public interface GetClinicianResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinicianResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("getclinicianresponsed304elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetClinicianResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("getclinicianresponsed304elemtype");
         
         /**
          * Gets the "out" element

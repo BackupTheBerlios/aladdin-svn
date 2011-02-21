@@ -285,6 +285,7 @@
             <element name="type" type="string"></element>
             <element name="category" type="string"></element>
             <element name="text" type="string"></element>
+            <element name="enabled" type="boolean"></element>
         </sequence>
     </complexType>
 

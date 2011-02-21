@@ -358,6 +358,7 @@
             <element name="type" type="string"/>
             <element name="category" type="string"/>
             <element name="text" type="string"/>
+            <element name="enabled" type="boolean"/>
         </sequence>
     </complexType>
 </schema>

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteMediaContentResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteMediaContentResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("deletemediacontentresponseb2c1doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteMediaContentResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("deletemediacontentresponseb2c1doctype");
     
     /**
      * Gets the "DeleteMediaContentResponse" element
@@ -42,7 +42,7 @@ public interface DeleteMediaContentResponseDocument extends org.apache.xmlbeans.
     public interface DeleteMediaContentResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteMediaContentResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("deletemediacontentresponsebf04elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteMediaContentResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("deletemediacontentresponsebf04elemtype");
         
         /**
          * Gets the "out" element

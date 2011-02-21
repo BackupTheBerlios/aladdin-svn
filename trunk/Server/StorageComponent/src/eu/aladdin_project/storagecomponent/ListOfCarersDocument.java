@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfCarersDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarersDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("listofcarersf067doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarersDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("listofcarersf067doctype");
     
     /**
      * Gets the "ListOfCarers" element
@@ -42,7 +42,7 @@ public interface ListOfCarersDocument extends org.apache.xmlbeans.XmlObject
     public interface ListOfCarers extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarers.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("listofcarers3544elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfCarers.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("listofcarers3544elemtype");
         
         /**
          * Gets array of all "filter" elements
