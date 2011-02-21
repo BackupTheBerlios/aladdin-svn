@@ -56,6 +56,7 @@ import eu.aladdin_project.storagecomponent.GetMediaContentResponseDocument.GetMe
 import eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
+import eu.aladdin_project.storagecomponent.GetQuestionDescriptionResponseDocument.GetQuestionDescriptionResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskResponseDocument.GetQuestionnaireAnswersByTaskResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
@@ -102,15 +103,6 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 import java.io.InputStream;
 import java.net.URLConnection;
 import java.net.URL;
-
-class CmpInt implements java.util.Comparator<Integer> {
-
-	@Override
-	public int compare(Integer arg0, Integer arg1) {
-		return arg0.compareTo(arg1);
-	}
-	
-}
 
     public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
@@ -649,6 +641,7 @@ class CmpInt implements java.util.Comparator<Integer> {
         				qqa.setValue(new Integer(rqqa.getValue()));
         				System.out.println (" uQQ 26");
         				qqa.setQuestion(qq.getId());
+        				qqa.setPosition(rqqa.getPosition());
         				qqa.setDeleted(false);
         				s.saveOrUpdate(qqa);
         				System.out.println (" uQQ 27");
@@ -1664,9 +1657,11 @@ class CmpInt implements java.util.Comparator<Integer> {
 	    				rqas.setTaskID(((Integer)lt[0]).toString());
 	    			}
 	    			
-	    			for (int j = 0; j < lqa.length; j++) {
+                    System.out.print ("lsq.length + ");
+                    System.out.println (lqa.length);
+                    for (int j = 0; j < lqa.length; j++) {
 	    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
-	    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[0]); 
+	    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
 	    				rqa.setQuestionID(qa.getQuestion().toString());
 	    				rqa.setValue(qa.getValue());
 	    				
@@ -4768,6 +4763,26 @@ class CmpInt implements java.util.Comparator<Integer> {
 					l.setCode(locale[i].getId().toString());
 					l.setDescription(locale[i].getName());
 				}
+				
+			} catch (Exception e) {
+				System.out.println (e.toString());
+			}
+			
+			return respdoc;
+		}
+
+		public GetQuestionDescriptionResponseDocument getQuestionDescription(GetQuestionDescriptionDocument req) {
+			GetQuestionDescriptionResponseDocument respdoc = GetQuestionDescriptionResponseDocument.Factory.newInstance();
+			GetQuestionDescriptionResponse resp = respdoc.addNewGetQuestionDescriptionResponse();
+			
+			try {
+				String questionID = req.getGetQuestionDescription().getQuestionID();
+				SystemParameter locale = req.getGetQuestionDescription().getLocale();
+				
+				OperationResult res = resp.addNewOut();
+				
+				res.setDescription(getTranslate("questionnairequestion", questionID, locale, ""));
+				res.setCode(questionID);
 				
 			} catch (Exception e) {
 				System.out.println (e.toString());

@@ -1021,6 +1021,21 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="GetQuestionDescription">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="questionID" type="xsd:string"/>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetQuestionDescriptionResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -1185,6 +1200,10 @@
   </wsdl:message>
   <wsdl:message name="UpdateExternalServiceRequest">
     <wsdl:part name="parameters" element="tns:UpdateExternalService">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionDescriptionRequest">
+    <wsdl:part name="parameters" element="tns:GetQuestionDescription">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="SaveWarningResponse">
@@ -1389,6 +1408,10 @@
   </wsdl:message>
   <wsdl:message name="MarkWarningAsReadResponse">
     <wsdl:part name="parameters" element="tns:MarkWarningAsReadResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetQuestionDescriptionResponse">
+    <wsdl:part name="parameters" element="tns:GetQuestionDescriptionResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="ListOfSupportedLocalesResponse">
@@ -1960,6 +1983,12 @@
       <wsdl:input message="tns:ListOfSupportedLocalesRequest">
     </wsdl:input>
       <wsdl:output message="tns:ListOfSupportedLocalesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionDescription">
+      <wsdl:input message="tns:GetQuestionDescriptionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetQuestionDescriptionResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -2561,6 +2590,15 @@
     </wsdl:operation>
     <wsdl:operation name="ListOfSupportedLocales">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/ListOfSupportedLocales"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuestionDescription">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionDescription"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

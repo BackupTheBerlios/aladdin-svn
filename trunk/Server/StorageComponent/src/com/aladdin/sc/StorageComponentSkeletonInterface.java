@@ -141,6 +141,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getQuestionDescription
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetQuestionDescriptionResponseDocument getQuestionDescription
+                (
+                  eu.aladdin_project.storagecomponent.GetQuestionDescriptionDocument getQuestionDescription
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param listOfCarers
          */
 

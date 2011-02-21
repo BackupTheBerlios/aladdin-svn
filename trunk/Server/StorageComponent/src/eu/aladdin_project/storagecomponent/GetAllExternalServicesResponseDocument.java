@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetAllExternalServicesResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServicesResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("getallexternalservicesresponseacd5doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServicesResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("getallexternalservicesresponseacd5doctype");
     
     /**
      * Gets the "GetAllExternalServicesResponse" element
@@ -42,7 +42,7 @@ public interface GetAllExternalServicesResponseDocument extends org.apache.xmlbe
     public interface GetAllExternalServicesResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServicesResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("getallexternalservicesresponse0f84elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetAllExternalServicesResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("getallexternalservicesresponse0f84elemtype");
         
         /**
          * Gets array of all "out" elements

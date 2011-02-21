@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface MarkWarningAsReadDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(MarkWarningAsReadDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("markwarningasread9e25doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(MarkWarningAsReadDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("markwarningasread9e25doctype");
     
     /**
      * Gets the "MarkWarningAsRead" element
@@ -42,7 +42,7 @@ public interface MarkWarningAsReadDocument extends org.apache.xmlbeans.XmlObject
     public interface MarkWarningAsRead extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(MarkWarningAsRead.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDA880C67915CA9FCCF8BA43A6851BE38").resolveHandle("markwarningasreadc648elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(MarkWarningAsRead.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s524572A3BC75B5489A9460B6639B2821").resolveHandle("markwarningasreadc648elemtype");
         
         /**
          * Gets the "id" element

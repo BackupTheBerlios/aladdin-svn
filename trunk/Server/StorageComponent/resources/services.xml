@@ -45,6 +45,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/SaveWarning</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/SaveWarningResponse</outputActionMapping>
         </operation>
+        <operation name="GetQuestionDescription" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/GetQuestionDescription</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetQuestionDescriptionResponse</outputActionMapping>
+        </operation>
         <operation name="ListOfCarers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/ListOfCarers</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/ListOfCarersResponse</outputActionMapping>
