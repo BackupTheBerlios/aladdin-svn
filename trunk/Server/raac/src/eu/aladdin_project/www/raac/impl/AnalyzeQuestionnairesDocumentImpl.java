@@ -86,22 +86,22 @@ public class AnalyzeQuestionnairesDocumentImpl extends org.apache.xmlbeans.impl.
             super(sType);
         }
         
-        private static final javax.xml.namespace.QName PATIENTID$0 = 
-            new javax.xml.namespace.QName("", "PatientID");
+        private static final javax.xml.namespace.QName USERID$0 = 
+            new javax.xml.namespace.QName("", "userID");
         private static final javax.xml.namespace.QName ANSWERS$2 = 
             new javax.xml.namespace.QName("", "answers");
         
         
         /**
-         * Gets the "PatientID" element
+         * Gets the "userID" element
          */
-        public java.lang.String getPatientID()
+        public java.lang.String getUserID()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$0, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$0, 0);
                 if (target == null)
                 {
                     return null;
@@ -111,52 +111,52 @@ public class AnalyzeQuestionnairesDocumentImpl extends org.apache.xmlbeans.impl.
         }
         
         /**
-         * Gets (as xml) the "PatientID" element
+         * Gets (as xml) the "userID" element
          */
-        public org.apache.xmlbeans.XmlString xgetPatientID()
+        public org.apache.xmlbeans.XmlString xgetUserID()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$0, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$0, 0);
                 return target;
             }
         }
         
         /**
-         * Sets the "PatientID" element
+         * Sets the "userID" element
          */
-        public void setPatientID(java.lang.String patientID)
+        public void setUserID(java.lang.String userID)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.SimpleValue target = null;
-                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$0, 0);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(USERID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(PATIENTID$0);
+                    target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(USERID$0);
                 }
-                target.setStringValue(patientID);
+                target.setStringValue(userID);
             }
         }
         
         /**
-         * Sets (as xml) the "PatientID" element
+         * Sets (as xml) the "userID" element
          */
-        public void xsetPatientID(org.apache.xmlbeans.XmlString patientID)
+        public void xsetUserID(org.apache.xmlbeans.XmlString userID)
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 org.apache.xmlbeans.XmlString target = null;
-                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$0, 0);
+                target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(USERID$0, 0);
                 if (target == null)
                 {
-                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(PATIENTID$0);
+                    target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(USERID$0);
                 }
-                target.set(patientID);
+                target.set(userID);
             }
         }
         

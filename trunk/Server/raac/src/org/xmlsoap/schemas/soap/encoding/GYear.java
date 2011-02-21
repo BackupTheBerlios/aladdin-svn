@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface GYear extends org.apache.xmlbeans.XmlGYear
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GYear.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4F143EE3F2CD7E93697A385986EBF2F9").resolveHandle("gyearbc18type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GYear.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s16DC051792BA0A0778EF9752449FC2F0").resolveHandle("gyearbc18type");
     
     /**
      * Gets the "id" attribute

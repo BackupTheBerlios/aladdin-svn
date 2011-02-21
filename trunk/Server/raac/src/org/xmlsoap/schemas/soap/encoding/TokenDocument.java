@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface TokenDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(TokenDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4F143EE3F2CD7E93697A385986EBF2F9").resolveHandle("tokenb27ddoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(TokenDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s16DC051792BA0A0778EF9752449FC2F0").resolveHandle("tokenb27ddoctype");
     
     /**
      * Gets the "token" element

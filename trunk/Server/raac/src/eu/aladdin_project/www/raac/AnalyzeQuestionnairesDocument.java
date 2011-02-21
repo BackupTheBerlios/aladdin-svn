@@ -17,7 +17,7 @@ package eu.aladdin_project.www.raac;
 public interface AnalyzeQuestionnairesDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnairesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7FB48A01A5B169EB7D85E761ED6D1831").resolveHandle("analyzequestionnaires5a92doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnairesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s16DC051792BA0A0778EF9752449FC2F0").resolveHandle("analyzequestionnaires5a92doctype");
     
     /**
      * Gets the "AnalyzeQuestionnaires" element
@@ -42,27 +42,27 @@ public interface AnalyzeQuestionnairesDocument extends org.apache.xmlbeans.XmlOb
     public interface AnalyzeQuestionnaires extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnaires.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s7FB48A01A5B169EB7D85E761ED6D1831").resolveHandle("analyzequestionnaires007aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalyzeQuestionnaires.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s16DC051792BA0A0778EF9752449FC2F0").resolveHandle("analyzequestionnaires007aelemtype");
         
         /**
-         * Gets the "PatientID" element
+         * Gets the "userID" element
          */
-        java.lang.String getPatientID();
+        java.lang.String getUserID();
         
         /**
-         * Gets (as xml) the "PatientID" element
+         * Gets (as xml) the "userID" element
          */
-        org.apache.xmlbeans.XmlString xgetPatientID();
+        org.apache.xmlbeans.XmlString xgetUserID();
         
         /**
-         * Sets the "PatientID" element
+         * Sets the "userID" element
          */
-        void setPatientID(java.lang.String patientID);
+        void setUserID(java.lang.String userID);
         
         /**
-         * Sets (as xml) the "PatientID" element
+         * Sets (as xml) the "userID" element
          */
-        void xsetPatientID(org.apache.xmlbeans.XmlString patientID);
+        void xsetUserID(org.apache.xmlbeans.XmlString userID);
         
         /**
          * Gets array of all "answers" elements

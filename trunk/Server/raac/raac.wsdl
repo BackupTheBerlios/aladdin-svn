@@ -22,7 +22,7 @@
     	<xsd:element name="AnalyzeQuestionnaires">
     		<xsd:complexType>
     			<xsd:sequence>
-    				<xsd:element name="PatientID" type="xsd:string"></xsd:element>
+    				<xsd:element name="userID" type="xsd:string"></xsd:element>
     				<xsd:element name="answers" type="pref:QuestionnaireAnswer" maxOccurs="unbounded" minOccurs="0"></xsd:element>
     			</xsd:sequence>
     		</xsd:complexType>
