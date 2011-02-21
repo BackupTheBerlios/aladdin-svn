@@ -18,6 +18,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 
 import eu.aladdin_project.storagecomponent.AuthDocument;
+import eu.aladdin_project.storagecomponent.GetQuestionDescriptionDocument;
+import eu.aladdin_project.storagecomponent.GetQuestionDescriptionDocument.GetQuestionDescription;
+import eu.aladdin_project.storagecomponent.GetQuestionDescriptionResponseDocument;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument;
 import eu.aladdin_project.storagecomponent.AuthDocument.Auth;
 import eu.aladdin_project.storagecomponent.AuthResponseDocument;
@@ -27,6 +30,10 @@ import eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument.GetPati
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument.GetQuestionnaireAnswers;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdDocument.GetUserIdByPersonId;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument;
+import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument.GetUserIdByPersonIdResponse;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument.SaveWarning;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument;
@@ -58,6 +65,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	static final int LessThanRuleType = 1;
 	static final int DoubleCompareRuleType = 2;
 	static final int GreaterThanRuleType = 3;
+	
+	static final int MeasurementAnalysis = 1;
+	static final int QuestionnaireAnalysis = 2;
+	
+	
 
 	QuestionnaireAnswer[] previousAnswerArray = null;
 	
@@ -90,6 +102,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			e1.printStackTrace();
 			return respdoc;
 		}
+		
+	
 	
 		AuthDocument authdoc = AuthDocument.Factory.newInstance();
 		Auth auth = Auth.Factory.newInstance();
@@ -110,6 +124,24 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 		if (UserID == "-1")
 			return respdoc;
+		
+		
+		GetUserIdByPersonIdDocument getUserIdByPersonIdDocument = GetUserIdByPersonIdDocument.Factory.newInstance();
+		GetUserIdByPersonId getUserIdByPersonId =  GetUserIdByPersonId.Factory.newInstance();
+		getUserIdByPersonId.setUserId(UserID);
+		getUserIdByPersonId.setType(4);
+		getUserIdByPersonId.setId(PatientID);
+		getUserIdByPersonIdDocument.setGetUserIdByPersonId(getUserIdByPersonId);
+		GetUserIdByPersonIdResponseDocument getUserIdByPersonIdResponseDocument = null;
+		try {
+			getUserIdByPersonIdResponseDocument = sc.getUserIdByPersonId(getUserIdByPersonIdDocument);
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		GetUserIdByPersonIdResponse getUserIdByPersonIdResponse = getUserIdByPersonIdResponseDocument.getGetUserIdByPersonIdResponse();
+		//PatientID = getUserIdByPersonIdResponse.getOut().getCode();
 
 		// get all questionnaire answers
 		GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
@@ -201,12 +233,14 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			
 			String globalIDGroup = getglobalIDGroup(globaID);
 			if (globalIDGroup == null) continue;
+			
+			double globalIDGroupAsDouble = 0;
 
 			for (int count = 0; count < DefinedRules.size(); count++) {
 
 				String ruleDataType = DefinedRules.get(count).getDataType();
 				double ruleDataTypeAsDouble = Double.valueOf(ruleDataType);
-				double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+				globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
 				if (globalIDGroupAsDouble == ruleDataTypeAsDouble) {
 					currentRule = DefinedRules.get(count);
 					break;
@@ -216,16 +250,32 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			if (currentRule == null) // Rule not found
 				return respdoc;
 			
-			String description = String.format("Question %s", currentAnswer.getQuestionID());
+			GetQuestionDescriptionDocument getQuestionDescriptionDocument = GetQuestionDescriptionDocument.Factory.newInstance();
+			GetQuestionDescription getQuestionDescription = GetQuestionDescription.Factory.newInstance();
+			getQuestionDescription.setQuestionID(currentAnswer.getQuestionID());
+			SystemParameter locale =  SystemParameter.Factory.newInstance();
+			locale.setCode("en_UK");
+			getQuestionDescription.setLocale(locale);
+			getQuestionDescriptionDocument.addNewGetQuestionDescription();
+			getQuestionDescriptionDocument.setGetQuestionDescription(getQuestionDescription);
+			GetQuestionDescriptionResponseDocument getQuestionDescriptionResponseDocument = null;
+			try {
+				getQuestionDescriptionResponseDocument = sc.getQuestionDescription(getQuestionDescriptionDocument);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			OperationResult questionDescriptionResult = getQuestionDescriptionResponseDocument.getGetQuestionDescriptionResponse().getOut();
+			String description = String.format("Question '%s' changed from '%s' to '%s'", questionDescriptionResult.getDescription().replaceAll("\n", ""), GetAnswerDescription(globalIDGroupAsDouble, previousValue), GetAnswerDescription(globalIDGroupAsDouble, currentValue));
 			
 			switch (currentRule.getCallerID()) {
 				case GreaterThanRuleType:
 					generatedWarning = GreaterThanRule(PatientID, description,
-							currentValue, previousValue, currentRule.getLowerLimit());
+							currentValue, previousValue, currentRule.getLowerLimit(), QuestionnaireAnalysis);
 					break;
 				case LessThanRuleType:
 					generatedWarning = LessThanRule(PatientID, description,
-							currentValue, previousValue, currentRule.getLowerLimit());
+							currentValue, previousValue, currentRule.getLowerLimit(), QuestionnaireAnalysis);
 					break;
 			}
 			
@@ -248,8 +298,39 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		}
 
 
-		return respdoc;
+		return null;
 	}
+	
+	
+	private String GetAnswerDescription(double globalIDGroupAsDouble, double value) {
+		
+		if (globalIDGroupAsDouble == 1000 || globalIDGroupAsDouble == 3000)
+		{
+			if (value == 0)
+				return "YES";
+			else if (value == 1)
+				return "NO";
+		}
+		
+		if (globalIDGroupAsDouble == 2000) {
+			
+			if (value == 0)
+				return "Never";
+			else if (value == 1)
+				return "Happened but not in the last week";
+			else if (value == 2)
+				return "1 or 2 times in the last week";
+			else if (value == 3)
+				return "From 3 to 6 times in the last week";
+			else if (value == 4)
+				return "Everyday";
+		}
+		
+		return "";
+		
+	}
+	
+	
 
 	// returns the Global ID group (e.g. 1000, 2000, 3000 etc) based on GlobalID
 	String getglobalIDGroup(String globalID) {
@@ -316,18 +397,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 		if (UserID.compareTo("-1") != 0) {
 
-			System.out.println("out5");
 			Measurement measurement = req.getAnalyzeMeasurements().getIn();
-			System.out.println("out6");
 			String PatientID = req.getAnalyzeMeasurements().getPatientID();
-			System.out.println("out7");
-
 			List<RuleMap> DefinedRules = GetRules();
-			System.out.println("out8");
 			String measurementType = "";
-			System.out.println("out9");
 			String measurementDescription = "";
-			System.out.println("out10");
 
 			RuleMap currentRule = null;
 			for (int count = 0; count < DefinedRules.size(); count++) {
@@ -370,7 +444,6 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 							.getPatientMeasurement(getPatientMeasurement)
 							.getGetPatientMeasurementResponse().getOutArray();
 				} catch (RemoteException e) {
-					System.out.println("ex3");
 					e.printStackTrace();
 				}
 
@@ -383,13 +456,13 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 						.toArray(new Measurement[SortedMeasurements.size()]);
 				generatedWarning = LessThanRule(PatientID,
 						measurementDescription, measurement.getValue(),
-						Sorted[0].getValue(), currentRule.getUpperLimit());
+						Sorted[0].getValue(), currentRule.getUpperLimit(), MeasurementAnalysis);
 				break;
 			case DoubleCompareRuleType:
 				generatedWarning = DoubleCompareRule(PatientID,
 						measurementDescription, measurement.getValue(),
 						currentRule.getUpperLimit(),
-						currentRule.getLowerLimit());
+						currentRule.getLowerLimit(), MeasurementAnalysis);
 				break;
 			default:
 				return respdoc;
@@ -452,10 +525,10 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	// Rule 1 - Less Than rule
 	static Warning LessThanRule(String PatientID, String description,
-			double Current, double Previous, double Threshold) {
+			double Current, double Previous, double Threshold, int TypeOfAnalysis) {
 		Warning warning;
 		if (Current <= Previous - Threshold)
-			warning = GenerateWarning(PatientID, description, Current, Previous);
+			warning = GenerateWarning(PatientID, description, Current, Previous, TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
@@ -463,10 +536,10 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	// Rule 2 - Double Comparison Rule
 	static Warning DoubleCompareRule(String PatientID, String description,
-			double Current, double Upper, double Lower) {
+			double Current, double Upper, double Lower, int TypeOfAnalysis) {
 		Warning warning;
 		if ((Current > Upper || Current < Lower))
-			warning = GenerateWarning(PatientID, description, Current, 0.0);
+			warning = GenerateWarning(PatientID, description, Current, 0.0, TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
@@ -474,11 +547,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	// Rule 3 - Greater Than Rule()
 	static Warning GreaterThanRule(String PatientID, String description,
-			double Current, double Previous, double Threshold) {
+			double Current, double Previous, double Threshold, int TypeOfAnalysis) {
 		Warning warning;
 
 		if (Current >= Previous + Threshold)
-			warning = GenerateWarning(PatientID, description, Current, Previous);
+			warning = GenerateWarning(PatientID, description, Current, Previous, TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
@@ -486,7 +559,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	// Generate Warning
 	static Warning GenerateWarning(String PatientID, String description,
-			double RiskValue, double PreviousValue) {
+			double RiskValue, double PreviousValue, int TypeOfAnalysis) {
 
 		Warning warning = Warning.Factory.newInstance();
 		warning.setPatientID(PatientID);
@@ -495,9 +568,15 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		typeOfWarning.setDescription("autogenerated");
 		warning.setTypeOfWarning(typeOfWarning);
 		warning.setDateTimeOfWarning(Calendar.getInstance());
+		
+		if (TypeOfAnalysis == MeasurementAnalysis) {
+		
 		warning.setJustificationText(String.format(
-				"type = %s current value = %s, previous value = %s",
+				"Type {%s} Current value = %s, Previous value = %s",
 				description, RiskValue, PreviousValue));
+		}
+		else if (TypeOfAnalysis == QuestionnaireAnalysis)
+			warning.setJustificationText(description);
 
 		return warning;
 
