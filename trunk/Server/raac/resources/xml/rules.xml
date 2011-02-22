@@ -2,23 +2,23 @@
 <tns:RuleCollection xmlns:tns="http://www.example.org/RuleMap"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.example.org/RuleMap RuleMap.xsd">
-	<tns:Rule>
-		<tns:DataType>2</tns:DataType><!-- Weight -->
+	<tns:Rule><!-- Weight -->
+		<tns:DataType>2</tns:DataType>
 		<tns:CallerID>1</tns:CallerID>
 		<tns:LowerLimit>1</tns:LowerLimit>
 		<tns:UpperLimit>1</tns:UpperLimit>
 		<tns:GetPrevious>true</tns:GetPrevious>
 		<tns:HighRiskThresh>3</tns:HighRiskThresh>
 	</tns:Rule>
-	<tns:Rule>
-		<tns:DataType>12</tns:DataType><!-- Diastolic Blood Pressure -->
+	<tns:Rule><!-- Diastolic Blood Pressure -->
+		<tns:DataType>12</tns:DataType>
 		<tns:CallerID>2</tns:CallerID>
 		<tns:LowerLimit>50</tns:LowerLimit>
 		<tns:UpperLimit>90</tns:UpperLimit>
 		<tns:GetPrevious>false</tns:GetPrevious>
 		<tns:HighRiskThresh>20</tns:HighRiskThresh>
 	</tns:Rule>
-	<tns:Rule>
+	<tns:Rule><!-- Questionnaire: Generate warning if there exists a change of 0 to 1 -->
 		<tns:DataType>1000</tns:DataType>
 		<tns:CallerID>3</tns:CallerID>
 		<tns:LowerLimit>1</tns:LowerLimit>
@@ -26,7 +26,7 @@
 		<tns:GetPrevious>true</tns:GetPrevious>
 		<tns:HighRiskThresh>2</tns:HighRiskThresh>
 	</tns:Rule>
-		<tns:Rule>
+		<tns:Rule><!-- Questionnaire: Generate warning if there exists a rise of > 2 -->
 		<tns:DataType>2000</tns:DataType>
 		<tns:CallerID>3</tns:CallerID>
 		<tns:LowerLimit>2</tns:LowerLimit>
@@ -34,7 +34,7 @@
 		<tns:GetPrevious>true</tns:GetPrevious>
 		<tns:HighRiskThresh>4</tns:HighRiskThresh>
 	</tns:Rule>
-	<tns:Rule>
+	<tns:Rule><!-- Questionnaire: Generate warning if there exists a change of 1 to 0 -->
 		<tns:DataType>3000</tns:DataType>
 		<tns:CallerID>1</tns:CallerID>
 		<tns:LowerLimit>1</tns:LowerLimit>
@@ -42,8 +42,16 @@
 		<tns:GetPrevious>true</tns:GetPrevious>
 		<tns:HighRiskThresh>2</tns:HighRiskThresh>
 	</tns:Rule>
-	<tns:Rule>
-		<tns:DataType>11</tns:DataType><!-- Systolic Blood Pressure -->
+	<tns:Rule><!-- Questionnaire: Generate warning if previous total score <= LowerLimit and current total score > UpperLimit -->
+		<tns:DataType>4000</tns:DataType>
+		<tns:CallerID>1</tns:CallerID>
+		<tns:LowerLimit>40</tns:LowerLimit>
+		<tns:UpperLimit>40</tns:UpperLimit>
+		<tns:GetPrevious>true</tns:GetPrevious>
+		<tns:HighRiskThresh>2</tns:HighRiskThresh>
+	</tns:Rule>
+	<tns:Rule><!-- Systolic Blood Pressure -->
+		<tns:DataType>11</tns:DataType>
 		<tns:CallerID>2</tns:CallerID>
 		<tns:LowerLimit>80</tns:LowerLimit>
 		<tns:UpperLimit>150</tns:UpperLimit>

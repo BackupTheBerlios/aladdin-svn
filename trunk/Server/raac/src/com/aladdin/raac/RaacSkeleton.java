@@ -69,6 +69,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	static final int LessThanRuleType = 1;
 	static final int DoubleCompareRuleType = 2;
 	static final int GreaterThanRuleType = 3;
+	static final int CategoryChangeType = 4;
 	
 	static final int MeasurementAnalysis = 1;
 	static final int QuestionnaireAnalysis = 2;
@@ -193,6 +194,32 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		// currentAnswerArray
 		List<RuleMap> DefinedRules = GetRules();
 		RuleMap currentRule = null;
+		
+		double previousScore = 0;
+		double currentScore = 0;
+		
+		for (int j = 0; j < previousAnswerArray.length; j++) {
+			
+			String globalID = previousAnswerArray[j].getGlobalID();
+			String globalIDGroup = getglobalIDGroup(globalID);
+			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			if (globalIDGroupAsDouble == 4000) {
+				double previousScoreAsDouble = Double.valueOf(previousAnswerArray[j].getValue());
+				previousScore += previousScoreAsDouble;
+			}
+		}
+		
+		for (int j = 0; j < currentAnswerArray.length; j++) {
+			
+			String globalID = currentAnswerArray[j].getGlobalID();
+			String globalIDGroup = getglobalIDGroup(globalID);
+			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			if (globalIDGroupAsDouble == 4000) {
+				double currentScoreAsDouble = Double.valueOf(currentAnswerArray[j].getValue());
+				currentScore += currentScoreAsDouble;
+			}
+		}
+		
 
 		for (int k = 0; k < currentAnswerArray.length; k++) {
 
@@ -237,13 +264,13 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			String globalIDGroup = getglobalIDGroup(globaID);
 			if (globalIDGroup == null) continue;
 			
-			double globalIDGroupAsDouble = 0;
+			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			if (globalIDGroupAsDouble == 4000) continue;
 
 			for (int count = 0; count < DefinedRules.size(); count++) {
 
 				String ruleDataType = DefinedRules.get(count).getDataType();
 				double ruleDataTypeAsDouble = Double.valueOf(ruleDataType);
-				globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
 				if (globalIDGroupAsDouble == ruleDataTypeAsDouble) {
 					currentRule = DefinedRules.get(count);
 					break;
@@ -297,7 +324,40 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 					e.printStackTrace();
 				}
 			}
-			resp.setOut(generatedWarning);
+		}
+		
+		if (currentScore > 0) {
+			
+			String description = String.format("Change in Zarit Burden Interview from '%s' to '%s'", previousScore, currentScore);
+			
+			for (int count = 0; count < DefinedRules.size(); count++) {
+
+				String ruleDataType = DefinedRules.get(count).getDataType();
+				double ruleDataTypeAsDouble = Double.valueOf(ruleDataType);
+				if (ruleDataTypeAsDouble == 4000) {
+					currentRule = DefinedRules.get(count);
+					break;
+				}
+			}
+			
+			generatedWarning = CategoryChangeRule(ObjectPersonID, description,
+					currentScore, previousScore, currentRule.getLowerLimit(), currentRule.getUpperLimit(), QuestionnaireAnalysis);
+			
+			if (generatedWarning != null) {
+
+				SaveWarningDocument swd = SaveWarningDocument.Factory
+						.newInstance();
+				SaveWarning sw = swd.addNewSaveWarning();
+				sw.setWarn(generatedWarning);
+				sw.setUserId(UserID);
+				try {
+					sc.saveWarning(swd);
+					System.out.printf("%s\n", generatedWarning.getJustificationText());
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 
@@ -559,6 +619,19 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			warning = null;
 		return warning;
 	}
+	
+	// Rule 4 - Category Change Rule
+	static Warning CategoryChangeRule(String PatientID, String description,
+			double Current, double Previous, double LowerThreshold, double UpperThreshold, int TypeOfAnalysis) {
+		Warning warning;
+
+		if (Previous <= LowerThreshold && Current > UpperThreshold)
+			warning = GenerateWarning(PatientID, description, Current, Previous, TypeOfAnalysis);
+		else
+			warning = null;
+		return warning;
+	}
+	
 
 	// Generate Warning
 	static Warning GenerateWarning(String PatientID, String description,
