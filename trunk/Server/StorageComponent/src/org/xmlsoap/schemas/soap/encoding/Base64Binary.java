@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Base64Binary extends org.apache.xmlbeans.XmlBase64Binary
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Base64Binary.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDB708C2BB61F23493E9532DEF09D4CEE").resolveHandle("base64binarye936type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Base64Binary.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5920F14D721C35BCDF7184CED07755E6").resolveHandle("base64binarye936type");
     
     /**
      * Gets the "id" attribute

@@ -93,6 +93,7 @@ import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocumen
 import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument.AnalyzeMeasurements;
+import eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument;
 import eu.aladdin_project.xsd.*;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument;
 import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument;
@@ -3191,6 +3192,13 @@ import java.net.URL;
     			System.out.println ("sqa 21");
     			
     			s.getTransaction().commit();
+    			
+    			RaacStub rc = new RaacStub();
+    			AnalyzeQuestionnairesDocument analyzeQuestionnaires = AnalyzeQuestionnairesDocument.Factory.newInstance ();
+    			analyzeQuestionnaires.addNewAnalyzeQuestionnaires();
+    			analyzeQuestionnaires.getAnalyzeQuestionnaires().setAnswersArray(rqal);
+    			analyzeQuestionnaires.getAnalyzeQuestionnaires().setUserID(objectId.toString());
+    			rc.analyzeQuestionnaires(analyzeQuestionnaires);
     			
     			res.setCode(id.toString());
         		res.setDescription("ok");

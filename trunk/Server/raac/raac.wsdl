@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.aladdin-project.eu/raac/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="raac" targetNamespace="http://www.aladdin-project.eu/raac/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://www.aladdin-project.eu/raac/" xmlns:pref="http://aladdin-project.eu/xsd">
-    	<xsd:import schemaLocation="SC.xsd" namespace="http://aladdin-project.eu/xsd"></xsd:import>
+    	<xsd:import schemaLocation="../XSD/schemata.xsd" namespace="http://aladdin-project.eu/xsd"></xsd:import>
     	<xsd:element name="AnalyzeMeasurements">
     		<xsd:complexType>
     			<xsd:sequence>

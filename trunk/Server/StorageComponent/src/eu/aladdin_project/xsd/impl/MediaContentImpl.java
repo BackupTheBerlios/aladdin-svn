@@ -31,6 +31,8 @@ public class MediaContentImpl extends org.apache.xmlbeans.impl.values.XmlComplex
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "category");
     private static final javax.xml.namespace.QName TEXT$10 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "text");
+    private static final javax.xml.namespace.QName ENABLED$12 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "enabled");
     
     
     /**
@@ -438,6 +440,74 @@ public class MediaContentImpl extends org.apache.xmlbeans.impl.values.XmlComplex
                 target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(TEXT$10);
             }
             target.set(text);
+        }
+    }
+    
+    /**
+     * Gets the "enabled" element
+     */
+    public boolean getEnabled()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ENABLED$12, 0);
+            if (target == null)
+            {
+                return false;
+            }
+            return target.getBooleanValue();
+        }
+    }
+    
+    /**
+     * Gets (as xml) the "enabled" element
+     */
+    public org.apache.xmlbeans.XmlBoolean xgetEnabled()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlBoolean target = null;
+            target = (org.apache.xmlbeans.XmlBoolean)get_store().find_element_user(ENABLED$12, 0);
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "enabled" element
+     */
+    public void setEnabled(boolean enabled)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.SimpleValue target = null;
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(ENABLED$12, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(ENABLED$12);
+            }
+            target.setBooleanValue(enabled);
+        }
+    }
+    
+    /**
+     * Sets (as xml) the "enabled" element
+     */
+    public void xsetEnabled(org.apache.xmlbeans.XmlBoolean enabled)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            org.apache.xmlbeans.XmlBoolean target = null;
+            target = (org.apache.xmlbeans.XmlBoolean)get_store().find_element_user(ENABLED$12, 0);
+            if (target == null)
+            {
+                target = (org.apache.xmlbeans.XmlBoolean)get_store().add_element_user(ENABLED$12);
+            }
+            target.set(enabled);
         }
     }
 }

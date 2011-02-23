@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface PersonData extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PersonData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sDB708C2BB61F23493E9532DEF09D4CEE").resolveHandle("persondataed6btype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PersonData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5920F14D721C35BCDF7184CED07755E6").resolveHandle("persondataed6btype");
     
     /**
      * Gets the "Surname" element

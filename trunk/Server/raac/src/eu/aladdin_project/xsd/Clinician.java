@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Clinician extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Clinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s16DC051792BA0A0778EF9752449FC2F0").resolveHandle("clinicianccc8type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Clinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C897DC8CD4162BFFD5B54A474285309").resolveHandle("clinicianccc8type");
     
     /**
      * Gets the "ID" element
