@@ -12,7 +12,9 @@
 		int tttexti = SystemDictionary.TASK_TYPE_TXT_INT;
 		String tttexts = SystemDictionary.TASK_TYPE_TXT; 
 		
-		String ttcarerqs = Labels.getLabel("dic.task.type.patientqs");
+		
+		String ttpatqs = Labels.getLabel("dic.task.type.patientqs");
+		String ttcarerqs = Labels.getLabel("dic.task.type.carers");
 		String ttblood = Labels.getLabel("dic.task.type.bloodpressure.mes");
 		String ttweight = Labels.getLabel("dic.task.type.weight.mes");
 		String ttcoggame = Labels.getLabel("dic.task.type.coggame");
@@ -32,7 +34,8 @@
 		String tassigntt = Labels.getLabel("tasks.asign");
 		String tcancelt = Labels.getLabel("tasks.cancel");
 		
-		int ttcarerqsi = SystemDictionary.TASK_TYPE_PATIENTQS_INT;
+		int ttpatqsi = SystemDictionary.TASK_TYPE_PATIENTQS_INT;
+		int ttcarerqsi = SystemDictionary.TASK_TYPE_CARERQS_INT;
 		int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
 		int ttweighti = SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT_INT;
 		int ttcoggamei = SystemDictionary.TASK_TYPE_COGGAME_INT;
@@ -62,6 +65,7 @@
 					<label value="${ttype }"/>
 					<hbox>
 						<listbox id="tasktypesel" mold="select" onSelect="create_my_entry.changeTaskType(self.getSelectedItem().getValue())">
+							<listitem label="${ttpatqs }" value="${ttpatqsi }"/>
 							<listitem label="${ttcarerqs }" value="${ttcarerqsi }"/>
 							<listitem label="${ttblood }" value="${ttbloodi }"/>
 							<listitem label="${ttweight }" value="${ttweighti }"/>

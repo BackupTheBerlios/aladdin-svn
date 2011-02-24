@@ -18,7 +18,7 @@
 		page.setTitle(title);
 	
 		public void authenticate(String user, String password){
-			StorageComponentProxy proxy = new StorageComponentProxy();
+			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 			String page = "/";
 			try{
  				OperationResult result = proxy.auth(user,password);

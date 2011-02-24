@@ -43,7 +43,7 @@
 			<column label="${idlbl }" width="35px" sort="auto"/>
 			<column label="Title"/>
 			<column label="${urilbl }" sort="auto"/>
-			<column label="Type"/>
+			<!-- <column label="Type"/>  -->
 			<column label="Category"/>
 			<column label="Enabled"/>
 			<column width="80px" align="center" />
@@ -54,7 +54,7 @@
 				<label value="${each.ID }"/>
 				<label value="${each.title }"/>
 				<label value="${each.url }"/>
-				<label value="${each.type }"/>
+				<!-- <label value="${each.type }"/>  -->
 				<label value="${each.category }"/>
 				<label value="${each.enabled }"/>
 				<label value="${updmsg }" sclass="link" onClick="mediamanager.modifyContent(self.getParent().getId())"/>
