@@ -31,9 +31,6 @@ public class CalendarWindowControllerPatients extends Window {
 		boolean urlrow = false;
 		boolean qsrow = false;
 		boolean txtrow = false;
-		//Listbox listbox = (Listbox)getFellow("tasktypesel");
-		//Listitem listitem = listbox.getSelectedItem();
-		//int comp = ((Integer)listitem.getValue()).intValue();
 		int comp = (Integer)obj;
 		switch(comp){
 			case SystemDictionary.TASK_TYPE_COGGAME_INT:

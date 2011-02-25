@@ -1,6 +1,7 @@
 package eu.aladdin_project.controllers.warnings;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.zkoss.zk.ui.Session;
@@ -54,7 +55,9 @@ public class WarningInfo {
 		this.ID = input.getID(); 
 		this.type = SystemDictionary.getWarningTypeLabel(aux1.getCode());
 		Calendar cal = input.getDateTimeOfWarning();
-		this.date = cal.get(Calendar.DAY_OF_MONTH) +"/"+ cal.get(Calendar.MONTH) +"/"+ cal.get(Calendar.YEAR) +" "+ cal.get(Calendar.HOUR_OF_DAY) +":"+ cal.get(Calendar.MINUTE);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		//this.date = cal.get(Calendar.DAY_OF_MONTH) +"/"+ cal.get(Calendar.MONTH) +"/"+ cal.get(Calendar.YEAR) +" "+ cal.get(Calendar.HOUR_OF_DAY) +":"+ cal.get(Calendar.MINUTE);
+		this.date = cal == null ? "not set" : sdf.format(cal.getTime());
 		this.effect = aux2 == null ? "not set" : SystemDictionary.getWarningEffectLabel(aux2.getCode());
 		this.indicator = aux3 == null ? "not set" : SystemDictionary.getWarningIndicatorLabel(aux3.getCode());
 		this.riskLevel = aux4==null ? "not set" : SystemDictionary.getWarningRiskLevel(aux4.getCode());

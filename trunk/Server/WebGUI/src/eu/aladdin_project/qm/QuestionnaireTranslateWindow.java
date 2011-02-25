@@ -2,6 +2,11 @@ package eu.aladdin_project.qm;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Executions;
@@ -240,11 +245,13 @@ public class QuestionnaireTranslateWindow extends Window{
 		}
 		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
 			QuestionnaireQuestionAnswer[] transans = question.getAnswers().getAnswer();
-			for(int i = 1; i <= transans.length ; i++){
+			List<QuestionnaireQuestionAnswer> anslist = Arrays.asList(transans);
+			Collections.sort(anslist, new QuestionAnswerSort());
+			for(int i = 1; i <= anslist.size() ; i++){
 				Hbox anshbox = (Hbox)currentvbox.getChildren().get(i);
 				Textbox anstranslation = (Textbox)anshbox.getChildren().get(1);
-				if(transans[i-1]  != null){
-					anstranslation.setValue(transans[i-1].getDescription());
+				if(anslist.get(i-1) != null){
+					anstranslation.setValue(anslist.get(i-1).getDescription());
 				}
 			}
 		}
@@ -279,10 +286,11 @@ public class QuestionnaireTranslateWindow extends Window{
 		vbox2.appendChild(hboxtitle);
 		SystemDictionary.webguiLog("DEBUG", "Question type: "+ question.getType()+ ":" + SystemDictionary.QUESTION_TYPE_FREE_TEXT);
 		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
-			System.out.println("Queston answers: "+question.getAnswers().getAnswer());
-			for(int i = 0; i < question.getAnswers().getAnswer().length ; i++){
+			QuestionnaireQuestionAnswer[] answers = question.getAnswers().getAnswer();
+			List<QuestionnaireQuestionAnswer> anslist = Arrays.asList(answers);
+			for(int i = 0; i < anslist.size() ; i++){
 				Hbox hboxans = new Hbox();
-				Textbox qans = new Textbox(question.getAnswers().getAnswer()[i].getDescription());
+				Textbox qans = new Textbox(anslist.get(i).getDescription());
 				qans.setReadonly(true);
 				Textbox qanstrans = new Textbox();
 				hboxans.appendChild(qans);

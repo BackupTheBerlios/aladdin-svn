@@ -11,7 +11,9 @@ import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.SystemParameter;
 
 /**
- * Helper class to manage some system paramenters 
+ * Helper class to manage some system parameters and objects
+ * 
+ * @author Xavi Sarda (Atos Origin)
  */
 public class SystemDictionary {
 	
@@ -34,6 +36,12 @@ public class SystemDictionary {
 		return proxy;
 	}
 	
+	/**
+	 * Static method which allows the whole system to log messages without 
+	 * managing log4java objects
+	 * @param type Log level such as "DEBUG", "INFO", ...
+	 * @param message String containing log message
+	 */
 	public static void webguiLog(String type, String message){
 		if(logger == null){
 			logger = Logger.getLogger("WebGUILogger");
@@ -52,6 +60,8 @@ public class SystemDictionary {
 			logger.error(message);
 		}else if(type.equals("FATAL")){
 			logger.fatal(message);
+		}else if(type.equals("TRACE")){
+			logger.trace(message);
 		}
 	}
 	

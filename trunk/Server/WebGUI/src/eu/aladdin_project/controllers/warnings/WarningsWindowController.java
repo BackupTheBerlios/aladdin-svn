@@ -1,6 +1,6 @@
 package eu.aladdin_project.controllers.warnings;
 
-import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +23,6 @@ import org.zkoss.zul.Row;
 import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
-import eu.aladdin_project.controllers.ClinicianListForPatients;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.PatientInfo;
 import eu.aladdin_project.xsd.SearchCriteria;
@@ -133,11 +132,11 @@ public class WarningsWindowController extends Window {
 		if(dat != null){
 			Calendar cal = new GregorianCalendar();
 			cal.setTime(dat);
-			cal.set(Calendar.HOUR, 0);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 0);
-			//FIXME I don't know why the Calendar is returning one month less than selected
-			String dstr = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+2)+"-"+cal.get(Calendar.DAY_OF_MONTH)+" "+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String dstr = sdf.format(cal.getTime());
 			sc = new SearchCriteria();
 			sc.setFieldName("dateTimeOfWarning");
 			sc.setCompareOp(new SystemParameter(SystemDictionary.COMPARE_GREAT, ""));
@@ -154,11 +153,11 @@ public class WarningsWindowController extends Window {
 		if(dat != null){
 			Calendar cal = new GregorianCalendar();
 			cal.setTime(dat);
-			cal.set(Calendar.HOUR, 23);
+			cal.set(Calendar.HOUR_OF_DAY, 23);
 			cal.set(Calendar.MINUTE, 59);
 			cal.set(Calendar.SECOND, 59);
-			//FIXME I don't know why the Calendar is returning one month less than selected
-			String dstr = cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+2)+"-"+cal.get(Calendar.DAY_OF_MONTH)+" "+cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE)+":"+cal.get(Calendar.SECOND);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String dstr = sdf.format(cal.getTime());
 			sc = new SearchCriteria();
 			sc.setFieldName("dateTimeOfWarning");
 			sc.setCompareOp(new SystemParameter(SystemDictionary.COMPARE_LESS, ""));
@@ -173,6 +172,7 @@ public class WarningsWindowController extends Window {
 		dbox1.setValue(null);
 		Datebox dbox2 = (Datebox)this.getFellow("datetofilter");
 		dbox2.setValue(null);
+		this.refreshWarnings();
 	}
 	
 	public void refreshWarnings(){

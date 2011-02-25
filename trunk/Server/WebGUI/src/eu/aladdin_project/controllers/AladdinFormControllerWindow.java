@@ -31,6 +31,10 @@ import eu.aladdin_project.xsd.Identifier;
 import eu.aladdin_project.xsd.IdentifierList;
 import eu.aladdin_project.xsd.PersonData;
 
+/**
+ * General profile form controller for Aladdin. 
+ * @author Xavi Sarda (Atos Origin)
+ */
 @SuppressWarnings("serial")
 public class AladdinFormControllerWindow extends Window{
 	
@@ -112,8 +116,9 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	/**
-	 * 
-	 * @param windowAddress
+	 * This method allows form windows to add addresses to the current list. The
+	 * only parameter required is the Window that contains the needed Textboxes.
+	 * @param windowAddress Window where the address will be added
 	 */
 	public void addAddressToList(Window windowAddress){
 		String street = ((Textbox)windowAddress.getFellow("pat_street")).getValue();
@@ -146,6 +151,10 @@ public class AladdinFormControllerWindow extends Window{
 		this.removeChild(this.popupaddresses);
 	}
 	
+	/**
+	 * This method inserts an address to the main window
+	 * @param toInsert Address to be added on the Addresses section
+	 */
 	protected void insertAddressRow(Address toInsert){
 		String removeadd = Labels.getLabel("common.address.remove");
 		Rows rows = (Rows)getFellow("addressgridrows");
@@ -172,6 +181,11 @@ public class AladdinFormControllerWindow extends Window{
 		rows.appendChild(newrow);
 	}
 	
+	/**
+	 * This method removes an Address from the UI and the profile data model before saving it.
+	 * @param row Row object to be deleted, it is used to identify the UI element to be deleted
+	 * @param address Address to be deleted to identify which address should be deleted from the model
+	 */
 	public void removeAddress(Row rw, Address as){
 		Rows rows = (Rows)this.getFellow("addressgridrows");
 		rows.removeChild(rw);
@@ -187,6 +201,11 @@ public class AladdinFormControllerWindow extends Window{
 		this.addresses = sustitute;
 	}
 	
+	/**
+	 * This method adds a Communication from a Window that contains all the required
+	 * information
+	 * @param windowCom Window where all the information should be contained
+	 */
 	public void addCommunicationToList(Window windowCom){
 		String type = ((Textbox)windowCom.getFellow("pat_comtype")).getValue();
 		String value = ((Textbox)windowCom.getFellow("pat_comval")).getValue();
@@ -211,6 +230,11 @@ public class AladdinFormControllerWindow extends Window{
 		this.removeChild(this.popupcommunications);
 	}
 	
+	/**
+	 * Helper method which is in charge of adding Communications objects
+	 * to the UI.
+	 * @param com Communication object to be added to the UI
+	 */
 	protected void insertComRow(Communication com){
 		String removecom = Labels.getLabel("common.communications.remove");
 		Rows rows = (Rows)getFellow("comgridrows");
@@ -237,6 +261,11 @@ public class AladdinFormControllerWindow extends Window{
 		rows.appendChild(newrow);
 	}
 	
+	/**
+	 * This method removes a Communications from the UI and the data model.
+	 * @param row Row object to be removed from the UI
+	 * @param comnunication Communication object to be deleted from the data model
+	 */
 	public void removeCommunication(Row rw, Communication com){
 		Rows rows = (Rows)this.getFellow("comgridrows");
 		rows.removeChild(rw);
@@ -254,13 +283,16 @@ public class AladdinFormControllerWindow extends Window{
 	
 	/**
 	 * Private method to generate a new Communication object
-	 * 
 	 * @return a Communication object, non an Array
 	 */
 	protected Communication[] getNewCommunicationData(){
 		return this.communications;
 	}
 	
+	/**
+	 * Protected method that allows us to add input elements to be able to
+	 * add Person objects
+	 */
 	protected void addPersonFields(){
 		String name = Labels.getLabel("patients.form.name");
 		String surname = Labels.getLabel("patients.form.surname");

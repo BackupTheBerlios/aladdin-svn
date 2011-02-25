@@ -6,6 +6,8 @@ import org.zkoss.zk.ui.Sessions;
 
 /**
  * Helper class to manage error codes
+ * 
+ * @author Xavi Sarda (Atos Origin)
  */
 public class ErrorDictionary {
 	public final static int UNKOW_ERROR = 0;
