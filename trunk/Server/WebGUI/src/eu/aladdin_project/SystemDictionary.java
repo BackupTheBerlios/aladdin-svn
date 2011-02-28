@@ -158,7 +158,6 @@ public class SystemDictionary {
 	 * @return Localized string with the gender value
 	 */
 	public static String getGenderLabel(String dic){
-		System.out.println("GENDER: "+dic);
 		int dictn = Integer.parseInt(dic);
 		String ret="error.no";
 		switch(dictn){

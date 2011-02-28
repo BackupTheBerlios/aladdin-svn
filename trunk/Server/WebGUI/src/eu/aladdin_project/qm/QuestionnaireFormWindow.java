@@ -83,12 +83,9 @@ public class QuestionnaireFormWindow extends Window{
 	 * @param parentq String setting parent (mandatory for recursive calls)
 	 */
 	protected void printQuestions(QuestionnaireQuestion[] qs, String parentq){
-		System.out.println("Questionnaire lenght: "+qs.length);
+		SystemDictionary.webguiLog("INFO", "Questionnaire lenght: "+qs.length);
 		for(int i = 0 ; i < qs.length ; i ++){
 			this.addQuestion(qs[i], parentq);
-			//if(qs[i].getQuestions().getQuestion().length > 0){
-			//	printQuestions(qs[i].getQuestions().getQuestion(), qs[i].getId());
-			//}
 			if(qs[i].getQuestions() != null && qs[i].getQuestions().getQuestion() != null && qs[i].getQuestions().getQuestion().length > 0){
 				printQuestions(qs[i].getQuestions().getQuestion(), qs[i].getId());
 			}
@@ -140,7 +137,7 @@ public class QuestionnaireFormWindow extends Window{
 		try{
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
 			OperationResult result = proxy.createQuestionnaire(new Questionnaire(qlist, version, "", title), SystemDictionary.getLocale(), userid);
-			System.out.println("Save Questionnaire: "+result.getCode()+":"+result.getDescription());
+			SystemDictionary.webguiLog("DEBUG", "Save Questionnaire: "+result.getCode()+":"+result.getDescription());
 		}catch (RemoteException e) {
 			e.printStackTrace();
 		}finally{
@@ -154,7 +151,7 @@ public class QuestionnaireFormWindow extends Window{
 				blankIds(qlist[i].getQuestions().getQuestion());
 			}
 			qlist[i].setId("");
-			qlist[i].setPosition(i+1);
+			//qlist[i].setPosition(i+1);
 		}
 	}
 	
@@ -175,7 +172,7 @@ public class QuestionnaireFormWindow extends Window{
 	 * @throws InterruptedException
 	 */
 	public void showAnswerWindow(String parent) throws InterruptedException{
-		System.out.println("Parent question: "+parent);
+		SystemDictionary.webguiLog("TRACE", "Parent question: "+parent);
 		Window win = new QuestionWindow(this, this.getNewQuestionID(),parent);
 		win.getFellow("question_condrow").setVisible(true);
 		this.appendChild(win);
@@ -210,6 +207,9 @@ public class QuestionnaireFormWindow extends Window{
 	 */
 	private Row createQuestionRow(QuestionnaireQuestion question, String parent){
 		Row row = new Row();
+		Label lab0 = new Label();
+		lab0.setValue(question.getPosition()+"");
+		
 		Label lab1 = new Label();
 		lab1.setValue(question.getId());
 		row.setId(question.getId()+"-rowqstn");
@@ -235,12 +235,11 @@ public class QuestionnaireFormWindow extends Window{
 		}else{
 			lab4.setValue("1");
 		}
-		System.out.println("Adding4... Please wait");
-		
 		Label lab5 = new Label();
 		if(parent == null || parent.equals("0")){	lab5.setValue("root");	}else{	lab5.setValue(parent);	}
 		
 		row.appendChild(lab1);
+		row.appendChild(lab0);
 		row.appendChild(lab2);
 		row.appendChild(lab3);
 		row.appendChild(lab4);
@@ -275,15 +274,15 @@ public class QuestionnaireFormWindow extends Window{
 	 * @param comp Row UI-component to be removed
 	 */
 	private void removeQuestionRow(Component comp){
-		System.out.println(comp.getId());
+		SystemDictionary.webguiLog("TRACE", comp.getId());
 		Rows rows = (Rows)getFellow("rows_questions");
 		String ID = comp.getId().substring(0, comp.getId().length()-8);
 		rows.removeChild(comp);
 		for(int i=0;i<this.questionlist.size(); i++){
 			if(this.questionlist.get(i).getId().equals(ID)){
-				System.out.println("QSIZE before: "+this.questionlist.size());
+				SystemDictionary.webguiLog("TRACE", "QSIZE before: "+this.questionlist.size());
 				this.questionlist.remove(i);
-				System.out.println("QSIZE after: "+this.questionlist.size());
+				SystemDictionary.webguiLog("TRACE", "QSIZE after: "+this.questionlist.size());
 			}
 		}
 		

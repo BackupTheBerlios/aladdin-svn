@@ -10,7 +10,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Rows;
-import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Intbox;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.SocioDemographicData;
@@ -34,10 +34,10 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 */
 	protected SocioDemographicData getSocioDemographicData(){
 		//Getting fields from Social Demographic data
-		String ageStr = ((Textbox)getFellow("pat_age")).getValue();
+		Integer ageStr = ((Intbox)getFellow("pat_age")).getValue();
 		UnsignedByte age = new UnsignedByte(ageStr);
 		
-		String childrenStr = ((Textbox)getFellow("pat_children")).getValue();
+		Integer childrenStr = ((Intbox)getFellow("pat_children")).getValue();
 		UnsignedByte children = new UnsignedByte(childrenStr);
 
 		Radiogroup genderRadio = (Radiogroup)getFellow("pat_gender");
@@ -88,8 +88,8 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		String health = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
-		rowsA.add(new SimpleFieldData(age, "pat_age"));
-		rowsA.add(new SimpleFieldData(children, "pat_children"));
+		rowsA.add(new SimpleFieldData(age, "pat_age", "no empty"));
+		rowsA.add(new SimpleFieldData(children, "pat_children", "no empty"));
 		
 		ArrayList<SimpleFieldData> genderlist = new ArrayList<SimpleFieldData>();
 		genderlist.add(new SimpleFieldData(male, "1"));
@@ -115,7 +115,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 			
 		Rows rows = new Rows();
 		this.appendSubFormTitleRow(personal, rows);
-		this.appendTextboxFields(rowsA, rows);
+		this.appendIntboxFields(rowsA, rows);
 		this.appendRadioElement(genderlist, rows, gender, "pat_gender");
 		this.appendListboxElement(maritallist, rows, marital, "pat_marital");
 		this.appendListboxElement(livinglist, rows, living, "pat_living");
@@ -125,8 +125,8 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	}
 	
 	protected void addSocioDemographicDataFieldsValue(){
-		((Textbox)this.getFellow("pat_age")).setValue(this.currentsd.getAge().toString());
-		((Textbox)this.getFellow("pat_children")).setValue(this.currentsd.getChildren().toString());
+		((Intbox)this.getFellow("pat_age")).setValue(new Integer(this.currentsd.getAge().toString()));
+		((Intbox)this.getFellow("pat_children")).setValue(new Integer(this.currentsd.getChildren().toString()));
 		
 		
 		((Radiogroup)this.getFellow("pat_gender")).setSelectedIndex(Integer.parseInt(this.currentsd.getGender().getCode())-1);

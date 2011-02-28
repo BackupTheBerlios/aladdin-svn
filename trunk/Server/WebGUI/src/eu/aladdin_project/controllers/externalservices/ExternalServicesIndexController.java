@@ -9,6 +9,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Button;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.ExternalService;
 import eu.aladdin_project.xsd.OperationResult;
@@ -55,9 +56,9 @@ public class ExternalServicesIndexController extends Window {
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		String userid = (String)Sessions.getCurrent().getAttribute("userid");
 		try{
-			System.out.println("Deleting... ");
+			SystemDictionary.webguiLog("TRACE", "Deleting... ");
 			OperationResult result = proxy.deleteExternalService(srvid, userid);
-			System.out.println("Delete result: "+result.getDescription());
+			SystemDictionary.webguiLog("INFO", "Delete result: "+result.getDescription());
 			Executions.getCurrent().sendRedirect("");
 		}catch(RemoteException re){
 			re.printStackTrace();

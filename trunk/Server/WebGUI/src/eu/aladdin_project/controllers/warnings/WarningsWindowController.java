@@ -140,7 +140,7 @@ public class WarningsWindowController extends Window {
 			sc = new SearchCriteria();
 			sc.setFieldName("dateTimeOfWarning");
 			sc.setCompareOp(new SystemParameter(SystemDictionary.COMPARE_GREAT, ""));
-			System.out.println("DATE TO FILTER: "+dstr);
+			SystemDictionary.webguiLog("DEBUG", "DATE TO FILTER: "+dstr);
 			sc.setFieldValue1(dstr);
 		}
 		return sc;
@@ -161,7 +161,7 @@ public class WarningsWindowController extends Window {
 			sc = new SearchCriteria();
 			sc.setFieldName("dateTimeOfWarning");
 			sc.setCompareOp(new SystemParameter(SystemDictionary.COMPARE_LESS, ""));
-			System.out.println("DATE TO FILTER: "+dstr);
+			SystemDictionary.webguiLog("DEBUG", "DATE TO FILTER: "+dstr);
 			sc.setFieldValue1(dstr);
 		}
 		return sc;
@@ -198,7 +198,7 @@ public class WarningsWindowController extends Window {
 			if(datefrom!= null){ zerolist.add(datefrom); }
 			if(dateto!= null){ zerolist.add(dateto); }
 			SearchCriteria[] sc = new SearchCriteria[zerolist.size()];
-			System.out.println("ZEROLIST length: "+zerolist.size());
+			SystemDictionary.webguiLog("TRACE", "ZEROLIST length: "+zerolist.size());
 			for(int i = 0 ; i < zerolist.size() ; i++){
 				sc[i]=zerolist.get(i);
 			}
@@ -214,8 +214,7 @@ public class WarningsWindowController extends Window {
 					wi[i]=new WarningInfo(wli[i],id);
 				}
 			}
-			
-			System.out.println("Warning list: "+wi.length);
+			SystemDictionary.webguiLog("DEBUG", "Warning list: "+wi.length);
 			Grid warningsgrid = (Grid)this.getFellow("warningsgrid");
 			Rows newsrows = new Rows();
 			for( WarningInfo rowi : wi ){
@@ -251,7 +250,7 @@ public class WarningsWindowController extends Window {
 		}
 
 		public void onEvent(Event arg0) throws Exception {
-			System.out.println("Warnign ID: "+this.warning);
+			SystemDictionary.webguiLog("DEBUG", "Warnign ID: "+this.warning);
 			readWarning(this.warning);			
 		}
 		

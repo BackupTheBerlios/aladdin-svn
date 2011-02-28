@@ -13,7 +13,6 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Row;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Toolbar;
@@ -54,12 +53,12 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		((Textbox)bookEventWin.getFellow("userid")).setValue(userid);
 		Toolbar toolbar = (Toolbar)self.getFellow("toolbar");
 		String currentexecutor = ((Label)toolbar.getFellow("exechelp")).getValue();
-		System.out.println("Executor: "+currentexecutor);
+		SystemDictionary.webguiLog("DEBUG", "Executor: "+currentexecutor);
 		OperationResult opres = proxy.getUserIdByPersonId(currentexecutor, SystemDictionary.USERTYPE_PATIENT_INT, userid);
 		Patient patient = proxy.getPatient(currentexecutor, userid);
 		Carer carer = patient.getPatientCarerList().getPatientCarer(0).getCarer();
 		OperationResult realexecutor = proxy.getUserIdByPersonId(carer.getID(), SystemDictionary.USERTYPE_CARER_INT, userid);
-		System.out.println("Executor req: "+realexecutor.getCode()+":"+opres.getDescription());
+		SystemDictionary.webguiLog("DEBUG", "Executor req: "+realexecutor.getCode()+":"+opres.getDescription());
 		((Textbox)bookEventWin.getFellow("objid")).setValue(realexecutor.getCode());
 		((Textbox)bookEventWin.getFellow("addressedid")).setValue(opres.getCode());
 		((Textbox)bookEventWin.getFellow("objstr")).setValue(carer.toString());
@@ -104,7 +103,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					//proxy.getQuestionnaireAnswers(objectId, fromDate, toDate, userId)
 					
 					String responses = provideQuestionnaireResponse(q.getQuestion(), "");
-					System.out.println("RESPONSES: "+responses);
+					SystemDictionary.webguiLog("DEBUG", "RESPONSES: "+responses);
 					bookEventWin.getFellow("qsanswersrow").setVisible(true);
 					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
 					
@@ -115,11 +114,10 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					if(results.length <= 0){
 						resultfieldvalue = "No measurement could be retrieved";
 					}else{
-						System.out.println("RESULTS LENGHT: "+results.length);
+						SystemDictionary.webguiLog("DEBUG", "RESULTS LENGHT: "+results.length);
 						for(int ii = 0 ; ii < results.length ; ii++){
 							resultfieldvalue += results[ii].getValue()+""+results[ii].getUnits()+"\n";
 						}
-						
 					}
 					bookEventWin.getFellow("mresultrow").setVisible(true);
 					((Label)bookEventWin.getFellow("mresultrowfield")).setValue(resultfieldvalue);

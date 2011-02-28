@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Window;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 
@@ -19,7 +20,7 @@ public class WarningsPopupController extends Window {
 		String uid = (String)Sessions.getCurrent().getAttribute("userid");
 		try{
 			OperationResult op = proxy.markWarningAsRead(this.warningid, uid);
-			System.out.println("Mark as read: "+op.getCode()+":"+op.getDescription());
+			SystemDictionary.webguiLog("DEBUG", "Mark as read: "+op.getCode()+":"+op.getDescription());
 		}catch(RemoteException re){
 			this.setVisible(false);
 			this.detach();

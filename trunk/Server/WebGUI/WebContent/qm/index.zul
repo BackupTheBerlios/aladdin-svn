@@ -26,7 +26,7 @@
 		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 		try{
 			qlist = proxy.listOfQuestionnaires(eu.aladdin_project.SystemDictionary.getLocale(),userid);
-			System.out.println("**** List SIZE: "+qlist.length);
+			eu.aladdin_project.SystemDictionary.webguiLog("INFO", "List SIZE: "+qlist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

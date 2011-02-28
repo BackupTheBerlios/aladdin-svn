@@ -13,6 +13,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Window;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 
 public class IndexCliniciansWindow extends Window{
@@ -58,7 +59,7 @@ public class IndexCliniciansWindow extends Window{
 		try{
 			auxwin.doModal();
 		}catch (InterruptedException ee) {
-			System.out.println(ee.getMessage());
+			SystemDictionary.webguiLog("WARN", ee.getMessage());
 		}
 		
 	}

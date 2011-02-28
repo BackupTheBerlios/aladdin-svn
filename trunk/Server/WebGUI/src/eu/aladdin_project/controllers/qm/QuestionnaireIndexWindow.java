@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zul.Window;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 
@@ -27,9 +28,9 @@ public class QuestionnaireIndexWindow extends Window {
 			
 		}finally{
 			if(result != null){
-				System.out.println("Delete Questionnaire RESULT = "+result.getCode()+":"+result.getDescription());
+				SystemDictionary.webguiLog("DEBUG", "Delete Questionnaire RESULT = "+result.getCode()+":"+result.getDescription());
 			}else{
-				System.out.println("Delete Questionnaire not executed");
+				SystemDictionary.webguiLog("WARN", "Delete Questionnaire not executed");
 			}
 			Executions.getCurrent().sendRedirect("");			
 		}

@@ -16,6 +16,7 @@ import org.zkoss.zul.Rows;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Radio;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.CarerInfo;
 
@@ -40,7 +41,7 @@ public class CarerListWindowController extends Window{
 			String id = (String)ses.getAttribute("userid");
 
 			CarerInfo[] listcarer = proxy.listOfCarers(null,id);
-			System.out.println("Carer LIST SIZE: "+listcarer.length);
+			SystemDictionary.webguiLog("DEBUG", "Carer LIST SIZE: "+listcarer.length);
 
 			Radiogroup rgroup = new Radiogroup();
 			rgroup.setId("rgroup_carer");

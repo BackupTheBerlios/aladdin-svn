@@ -1,6 +1,9 @@
 package eu.aladdin_project.qm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.axis.types.UnsignedByte;
 import org.zkoss.util.resource.Labels;
@@ -32,6 +35,7 @@ public class QuestionWindow extends Window{
 	private QuestionnaireFormWindow pform = null;
 	private String ID = null;
 	private int globalID;
+	private int position;
 	private String type = null;
 	private String parent = null;
 	private ArrayList<QuestionnaireQuestionAnswer> answers = new ArrayList<QuestionnaireQuestionAnswer>();
@@ -63,12 +67,15 @@ public class QuestionWindow extends Window{
 		this.globalID = question.getGlobalID(); 
 		this.parent = parent;
 		this.type = question.getType();
+		this.position = question.getPosition();
 		
 		SystemDictionary.webguiLog("DEBUG", "QUESTION TYPE: "+this.type+":"+SystemDictionary.QUESTION_TYPE_FREE_TEXT);
 		if(!this.type.equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
 			QuestionnaireQuestionAnswer[] qans = question.getAnswers().getAnswer();
-			for(int i = 0; i<qans.length; i++){
-				this.answers.add(qans[i]);
+			List<QuestionnaireQuestionAnswer> anslist = Arrays.asList(qans);
+			Collections.sort(anslist,new QuestionAnswerSort());
+			for(int i = 0; i<anslist.size(); i++){
+				this.answers.add(anslist.get(i));
 			}
 		}
 		
@@ -93,11 +100,13 @@ public class QuestionWindow extends Window{
 		
 		String title = ((Textbox)getFellow("question_text")).getValue();
 		String globalid = ((Textbox)getFellow("question_idg")).getValue();
+		int position = ((Intbox)getFellow("question_position")).getValue();
 		if(getFellow("question_condrow").isVisible()){
 			Integer condition = ((Intbox)getFellow("question_cond")).getValue();
 			q.setCondition(new UnsignedByte(condition));
 		}
 		q.setTitle(title);
+		q.setPosition(position);
 		q.setGlobalID(Integer.parseInt(globalid));
 		QuestionnaireQuestionList qqqlist = new QuestionnaireQuestionList(new QuestionnaireQuestion[0]);
 		q.setQuestions(qqqlist);
@@ -106,7 +115,7 @@ public class QuestionWindow extends Window{
 			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
 			for(int i = 0; i<this.answers.size(); i++){
 				answersvec[i]=this.answers.get(i);
-				answersvec[i].setPosition(i+1);
+				//answersvec[i].setPosition(i+1);
 			}
 			q.setAnswers(new QuestionnaireQuestionAnswerList(answersvec));
 		}else{
@@ -123,6 +132,9 @@ public class QuestionWindow extends Window{
 	 * 
 	 */
 	public void apendAnswer(){
+		Intbox positionbox = (Intbox)getFellow("ans_pos");
+		int pos = positionbox.getValue();
+		
 		Textbox valuebox = (Textbox)getFellow("ans_val");
 		String val = valuebox.getValue();
 		
@@ -132,6 +144,10 @@ public class QuestionWindow extends Window{
 		Row row = new Row();
 		//String rowid = val+"-rowform";
 		//row.setId(rowid);
+		Label lab0 = new Label();
+		lab0.setValue(pos+"");
+		row.appendChild(lab0);
+		
 		Label lab1 = new Label();
 		lab1.setValue(val);
 		row.appendChild(lab1);
@@ -157,6 +173,7 @@ public class QuestionWindow extends Window{
 		QuestionnaireQuestionAnswer qqanswer = new QuestionnaireQuestionAnswer();
 		qqanswer.setDescription(text);
 		qqanswer.setValue(new UnsignedByte(val));
+		qqanswer.setPosition(pos);
 		//qqanswer.setValue(val);
 		this.answers.add(qqanswer);
 	}
@@ -243,6 +260,17 @@ public class QuestionWindow extends Window{
 				row0.appendChild(tbox0);
 			rows.appendChild(row0);
 			
+			Row row011 = new Row();
+				Label lab011 = new Label();
+				lab011.setValue("Position");
+				row011.appendChild(lab011);
+	
+				Intbox tbox011 = new Intbox();
+				tbox011.setId("question_position");
+				tbox011.setConstraint("no empty");
+				row011.appendChild(tbox011);
+			rows.appendChild(row011);
+			
 			Row row01 = new Row();
 				Label lab01 = new Label();
 				lab01.setValue(Labels.getLabel("qm.ans.fields.id.global"));
@@ -298,6 +326,7 @@ public class QuestionWindow extends Window{
 	
 	private void setMainGridFields(QuestionnaireQuestion q){
 		((Textbox)getFellow("question_text")).setValue(q.getTitle());
+		((Intbox)getFellow("question_position")).setValue(q.getPosition());
 		if(q.getCondition() != null){
 			((Intbox)getFellow("question_cond")).setValue(new Integer(q.getCondition().toString()));
 		}
@@ -339,13 +368,17 @@ public class QuestionWindow extends Window{
 
 		Grid answ = new Grid();
 		Columns columns2 = new Columns();
+		
 		Column cola1 = new Column();
 		cola1.setLabel(Labels.getLabel("qm.ans.fields.grid.value"));
 		Column cola2 = new Column();
 		cola2.setLabel(Labels.getLabel("qm.ans.fields.grid.text"));
 		Column cola3 = new Column();
 		cola3.setWidth("45px");
+		Column cola4 = new Column();
+		cola4.setLabel("Position");
 		
+		columns2.appendChild(cola4);
 		columns2.appendChild(cola1);
 		columns2.appendChild(cola2);
 		columns2.appendChild(cola3);
@@ -355,6 +388,9 @@ public class QuestionWindow extends Window{
 		arows.setId("rows");
 		Row rowa1 = new Row();
 		rowa1.setId("rowform");
+		Intbox tboxans0 = new Intbox();
+		tboxans0.setId("ans_pos");
+		tboxans0.setConstraint("no empty");
 		Textbox tboxans1 = new Textbox();
 		tboxans1.setId("ans_val");
 		Textbox tboxans2 = new Textbox();
@@ -369,6 +405,7 @@ public class QuestionWindow extends Window{
 			}
 		});
 
+		rowa1.appendChild(tboxans0);
 		rowa1.appendChild(tboxans1);
 		rowa1.appendChild(tboxans2);
 		rowa1.appendChild(butonans1);
@@ -386,6 +423,10 @@ public class QuestionWindow extends Window{
 			Row row = new Row();
 			//String rowid = answer.getValue().toString()+"-rowform";
 			//row.setId(rowid);
+			Label lab0 = new Label();
+			lab0.setValue(answer.getPosition()+"");
+			row.appendChild(lab0);
+			
 			Label lab1 = new Label();
 			lab1.setValue(answer.getValue().toString());
 			row.appendChild(lab1);

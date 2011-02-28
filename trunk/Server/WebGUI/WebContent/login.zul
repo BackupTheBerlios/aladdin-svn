@@ -46,7 +46,6 @@
  						SystemDictionary.webguiLog("INFO", "Clinician logged in");
  						usertype = SystemDictionary.USERTYPE_CLINICIAN;
  					//	Clinician clinic = proxy.getClinician(result.getCode(),result.getCode());
- 					//	System.out.println("Welcome Clinician "+restype.getDescription());
  					//	username = clinic.getPersonData().getName();
 					//	usersname = clinic.getPersonData().getSurname();
  					}else{

@@ -25,7 +25,7 @@ public class MessivelyTasksRemove extends Window{
 		String carer = pat.getPatientCarerList().getPatientCarer(0).getCarer().getID();
 		OperationResult careruser = proxy.getUserIdByPersonId(carer, SystemDictionary.USERTYPE_CARER_INT, userId);
 		OperationResult ores = proxy.removeTaskMassively(careruser.getCode(), tasktypedef, start, end, userId);
-		System.out.println("RESULTADO "+ores.getDescription()+":"+ores.getCode()+":"+ores.getStatus());
+		SystemDictionary.webguiLog("INFO", "RESULT: "+ores.getDescription()+"-"+ores.getCode()+"-"+ores.getStatus());
 		this.setVisible(false);
 		DetailPatientController parentwindow = ((DetailPatientController)this.getParent());
 		parentwindow.refreshCalendarData();

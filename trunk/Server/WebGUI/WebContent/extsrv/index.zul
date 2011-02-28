@@ -20,9 +20,8 @@
 		Session ses = Sessions.getCurrent();
 		String id = (String)ses.getAttribute("userid");
 		try{
-			//TODO retrieve external services
 			plist = proxy.getAllExternalServices(id);
-			System.out.println("SERVICES LIST LENGHT: "+plist.length);
+			eu.aladdin_project.SystemDictionary.webguiLog("INFO", "SERVICES LIST LENGHT: "+plist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

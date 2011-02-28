@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.Iterator;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Column;
@@ -23,6 +25,7 @@ import org.zkoss.zul.Rows;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.Address;
 import eu.aladdin_project.xsd.AddressList;
 import eu.aladdin_project.xsd.Communication;
@@ -109,7 +112,7 @@ public class AladdinFormControllerWindow extends Window{
 	/**
 	 * Private method to retrieve data to store a new Address object
 	 * 
-	 * @return Address object (it is not an array at all)
+	 * @return Address object
 	 */
 	protected Address[] getNewAddressData(){
 		return this.addresses;
@@ -134,11 +137,11 @@ public class AladdinFormControllerWindow extends Window{
 
 		Address newAddress = new Address(street,streetno,city,county,country,zipcode,notes,isPrimary);
 		if(this.addresses == null || this.addresses.length == 0){
-			System.out.println("Address List SIZE before: 0");
+			SystemDictionary.webguiLog("TRACE", "Address List SIZE before: 0");
 			this.addresses = new Address[1];
 			this.addresses[0] = newAddress;
 		}else{
-			System.out.println("Address List SIZE before: "+this.addresses.length);
+			SystemDictionary.webguiLog("TRACE", "Address List SIZE before: "+this.addresses.length);
 			Address[] helperAddress = new Address[this.addresses.length+1];
 			for(int i = 0; i < this.addresses.length; i++){
 				helperAddress[i] = this.addresses[i];
@@ -146,7 +149,7 @@ public class AladdinFormControllerWindow extends Window{
 			helperAddress[this.addresses.length]=newAddress;
 			this.addresses = helperAddress;
 		}
-		System.out.println("Address List SIZE after: "+this.addresses.length);
+		SystemDictionary.webguiLog("TRACE", "Address List SIZE after: "+this.addresses.length);
 		this.insertAddressRow(newAddress);
 		this.removeChild(this.popupaddresses);
 	}
@@ -289,6 +292,29 @@ public class AladdinFormControllerWindow extends Window{
 		return this.communications;
 	}
 	
+	protected void addErrorBox(){
+		Window errorwin = new Window();
+		errorwin.setId("patienterror");
+		errorwin.setWidth("50%");
+		errorwin.setSclass("mainerror");
+		errorwin.setBorder("none");
+		errorwin.setClosable(true);
+		errorwin.setVisible(false);
+		
+		Label errorlbl = new Label();
+		errorlbl.setId("errorlbl");
+		
+		Label errorclose = new Label();
+		errorclose.setValue(" Close");
+		errorclose.setSclass("link");
+		errorclose.addEventListener("onClick", new ErrorWindowListener(errorwin));
+		
+		errorwin.appendChild(errorlbl);
+		errorwin.appendChild(errorclose);
+		
+		this.appendChild(errorwin);
+	}
+	
 	/**
 	 * Protected method that allows us to add input elements to be able to
 	 * add Person objects
@@ -409,7 +435,7 @@ public class AladdinFormControllerWindow extends Window{
 	protected void addAddressFieldsValues(){
 		
 		this.addresses = this.currentdata.getAddressList().getAddress();
-		System.out.println("Addresses LENGTH: "+this.addresses.length);
+		SystemDictionary.webguiLog("DEBUG", "Addresses LENGTH: "+this.addresses.length);
 		for(int i = 0; i<this.addresses.length; i++){
 			if(this.addresses[i]!=null){
 				this.insertAddressRow(this.addresses[i]);
@@ -501,7 +527,7 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected void addCommunicationFieldsValues(){
 		this.communications = this.currentdata.getCommunicationList().getCommunication();
-		System.out.println("Communications LENGTH: "+ this.communications.length);
+		SystemDictionary.webguiLog("DEBUG", "Communications LENGTH: "+ this.communications.length);
 		for(int i = 0 ; i<this.communications.length; i++){
 			if(this.communications[i] != null){
 				this.insertComRow(this.communications[i]);
@@ -552,7 +578,32 @@ public class AladdinFormControllerWindow extends Window{
 			
 			Textbox tboxe = new Textbox();
 			tboxe.setId(elem.getId());
-			System.out.println("DETAILS: "+this.detailsmode);
+			SystemDictionary.webguiLog("TRACE", "DETAILS: "+this.detailsmode);
+			if(elem.getConstraints() != null){
+				tboxe.setConstraint(elem.getConstraints());
+			}
+			if(detailsmode){tboxe.setReadonly(true);}
+			rowe.appendChild(tboxe);
+			
+			rows.appendChild(rowe); 
+		}
+	}
+	
+	protected void appendIntboxFields(ArrayList<SimpleFieldData> list,Rows rows){
+		Iterator<SimpleFieldData> it = list.iterator();
+		while(it.hasNext()){
+			SimpleFieldData elem = it.next();
+			Row rowe = new Row();
+			Label labe = new Label();
+			labe.setValue(elem.getLabel());
+			rowe.appendChild(labe);
+			
+			Intbox tboxe = new Intbox();
+			tboxe.setId(elem.getId());
+			SystemDictionary.webguiLog("TRACE", "DETAILS: "+this.detailsmode);
+			if(elem.getConstraints() != null){
+				tboxe.setConstraint(elem.getConstraints());
+			}
 			if(detailsmode){tboxe.setReadonly(true);}
 			rowe.appendChild(tboxe);
 			
@@ -627,14 +678,21 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 		rowe.appendChild(lbox);
 		rows.appendChild(rowe);
 	}
-	
+
 	protected class SimpleFieldData{
 		private String label=null;
 		private String id=null;
+		private String contraints=null;
 		
 		SimpleFieldData(String label, String id){
 			this.label=label;
 			this.id=id;
+		}
+		
+		SimpleFieldData(String label, String id, String constraints){
+			this.label=label;
+			this.id=id;
+			this.contraints = constraints;
 		}
 		
 		public String getLabel(){
@@ -643,6 +701,10 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 		
 		public String getId(){
 			return this.id;
+		}
+		
+		public String getConstraints(){
+			return this.contraints;
 		}
 	}
 	
@@ -688,6 +750,19 @@ protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,St
 		public void onEvent(Event arg0) throws Exception {
 			removeCommunication(this.row, this.com);
 		}
+	}
+	
+	public class ErrorWindowListener implements EventListener{
+
+		private Window window;
+		
+		public ErrorWindowListener(Window win){
+			this.window = win;
+		}
+		public void onEvent(Event arg0) throws Exception {
+			this.window.setVisible(false);
+		}
+		
 	}
 	
 }

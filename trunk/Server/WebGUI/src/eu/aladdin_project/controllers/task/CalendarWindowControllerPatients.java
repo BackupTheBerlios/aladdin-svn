@@ -115,7 +115,7 @@ public class CalendarWindowControllerPatients extends Window {
 			//Object ID (Person ID)
 			String objids = ((Textbox)getFellow("objid")).getValue();
 			String addressedid = ((Textbox)getFellow("addressedid")).getValue();
-			System.out.println("Getobjids result = " + objids);
+			SystemDictionary.webguiLog("TRACE", "Getobjids result = " + objids);
 			Task ts = new Task("", tastype, caltas, caltas2, tasstatus, URL, text, questionnaire, objids, userids, addressedid);
 			boolean massive = ((Checkbox)getFellow("massivecheck")).isChecked();
 			OperationResult opres = null;
@@ -126,7 +126,7 @@ public class CalendarWindowControllerPatients extends Window {
 			}else{
 				opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);
 			}
-			System.out.println("Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
+			SystemDictionary.webguiLog("DEBUG", "Assign task result = " + opres.getCode()+ ":" +opres.getDescription());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}catch(Exception e){

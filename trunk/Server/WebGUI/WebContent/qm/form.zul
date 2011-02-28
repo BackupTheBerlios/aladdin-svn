@@ -44,6 +44,7 @@
 					<grid>
 						<columns>
 							<column label="${idl}" width="30px" sort="auto"/>
+							<column label="Position"/>
 							<column label="${typel}" width="80px"/>
 							<column label="${textl}"/>
 							<column label="#${ansl}" width="80px"/>

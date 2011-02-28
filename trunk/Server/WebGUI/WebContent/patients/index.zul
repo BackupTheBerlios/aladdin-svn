@@ -26,7 +26,7 @@
 		Boolean isntadmin = !(Boolean)ses.getAttribute("isadmin");
 		try{
 			plist = proxy.listOfPatients(new SearchCriteria[0],id);
-			System.out.println("**** List SIZE: "+plist.length);
+			eu.aladdin_project.SystemDictionary.webguiLog("INFO", "List SIZE: "+plist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

@@ -257,15 +257,15 @@ public class DetailPatientController extends DetailSDController{
 		try{
 			Carer carer = this.currentcarers[0].getCarer();
 			OperationResult currentor = proxy.getUserIdByPersonId(carer.getID(), SystemDictionary.USERTYPE_CARER_INT, userid);
-			System.out.println("USER TASKS: "+currentor.getCode());
+			SystemDictionary.webguiLog("INFO", "USER TASKS: "+currentor.getCode());
 			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto,SystemDictionary.getLocale() ,userid);
 			this.calmodel = new SimpleCalendarModel();
 			if(tasklist != null){
-				System.out.println("TASKS LENGHT: "+tasklist.length);
+					SystemDictionary.webguiLog("DEBUG", "TASKS LENGHT: "+tasklist.length);
 					OperationResult currentuserid = proxy.getUserIdByPersonId(this.currentid, SystemDictionary.USERTYPE_PATIENT_INT, userid);
 					for(int i = 0; i<tasklist.length; i++){
 						boolean add = true;
-						System.out.println("COMPARE: "+tasklist[i].getObjectID()+":"+currentuserid.getCode());
+						SystemDictionary.webguiLog("TRACE", "COMPARE: "+tasklist[i].getObjectID()+":"+currentuserid.getCode());
 						if(!tasklist[i].getObjectID().equals(currentuserid.getCode())){
 							continue;
 						}

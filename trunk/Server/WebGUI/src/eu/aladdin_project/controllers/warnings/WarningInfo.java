@@ -84,7 +84,7 @@ public class WarningInfo {
             
             //PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
             Patient pat = proxy.getPatient(this.patientID, id);
-			System.out.println("NAME: "+pat.toString());
+			SystemDictionary.webguiLog("TRACE", "NAME: "+pat.toString());
 			this.patientName = pat.toString();
 			this.setClinicianResponsible(pat.getResponsibleClinicianID());
 		}catch(RemoteException re){

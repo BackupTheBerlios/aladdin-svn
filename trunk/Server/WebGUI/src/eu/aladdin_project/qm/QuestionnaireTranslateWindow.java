@@ -92,15 +92,15 @@ public class QuestionnaireTranslateWindow extends Window{
 		}else{
 			try{
 				SystemParameter syslocale = new SystemParameter(locale.getLabel(), locale.getLabel());
-				System.out.println("LOCALE : "+syslocale.getCode());
+				SystemDictionary.webguiLog("TRACE", "LOCALE : "+syslocale.getCode());
 				Questionnaire questions = null;
 				String userid = (String)Sessions.getCurrent().getAttribute("userid");
 				StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 				questions = proxy.getQuestionnaire(this.currentquestionnaireid, syslocale, userid);
 				printQuestionsToTranslate(questions.getQuestion(), "0");
-				System.out.println("TRANSLATED QUESTIONNAIRE: "+questions.getTitle());
+				SystemDictionary.webguiLog("TRACE", "TRANSLATED QUESTIONNAIRE: "+questions.getTitle());
 				((Textbox)getFellow("trans_title")).setValue(questions.getTitle());
-				System.out.println("TRANSLATED QUESTIONNAIRE SIZE: "+this.localeqlist.size());
+				SystemDictionary.webguiLog("TRACE", "TRANSLATED QUESTIONNAIRE SIZE: "+this.localeqlist.size());
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -134,9 +134,9 @@ public class QuestionnaireTranslateWindow extends Window{
 				RelatedQuestion currentq = this.questionlist.get(i-3);
 				Hbox hboxdata = ((Hbox)vboxdata[0]);
 				String transquestion = ((Textbox)hboxdata.getChildren().toArray()[1]).getValue();
-				System.out.println("Question before: "+currentq.getQuestion().getTitle());
+				SystemDictionary.webguiLog("DEBUG", "Question before: "+currentq.getQuestion().getTitle());
 				currentq.getQuestion().setTitle(transquestion);
-				System.out.println("Question after: "+currentq.getQuestion().getTitle());
+				SystemDictionary.webguiLog("DEBUG", "Question after: "+currentq.getQuestion().getTitle());
 				QuestionnaireQuestionAnswer[] currentans = currentq.getQuestion().getAnswers().getAnswer(); 
 				for(int k = 1 ; k < vboxdata.length ; k++){
 					Hbox currenthbox = (Hbox)vboxdata[k];
@@ -186,10 +186,9 @@ public class QuestionnaireTranslateWindow extends Window{
 			Questionnaire transq = new Questionnaire(qlist, Double.parseDouble(version), this.currentquestionnaireid, ttitle);
 			try{
 				String userid = (String)Sessions.getCurrent().getAttribute("userid");
-				System.out.println("UPDATED LOCALE: "+localeitem.getLabel());
+				SystemDictionary.webguiLog("DEBUG", "UPDATED LOCALE: "+localeitem.getLabel());
 				OperationResult result = proxy.updateQuestionnaire(transq, new SystemParameter(localeitem.getLabel(), ""), userid);
-				//OperationResult result = proxy.createQuestionnaire(new Questionnaire(qlist, version, "", title), SystemDictionary.getLocale(), userid);
-				System.out.println("Translate Questionnaire: "+result.getCode()+":"+result.getDescription());
+				SystemDictionary.webguiLog("DEBUG", "Translate Questionnaire: "+result.getCode()+":"+result.getDescription());
 			}catch (RemoteException e) {
 				e.printStackTrace();
 			}finally{
@@ -205,7 +204,7 @@ public class QuestionnaireTranslateWindow extends Window{
 	 * @param parentq String setting parent (mandatory for recursive calls)
 	 */
 	protected void printQuestions(QuestionnaireQuestion[] qs, String parentq){
-		System.out.println("Questionnaire lenght: "+qs.length);
+		SystemDictionary.webguiLog("TRACE", "Questionnaire lenght: "+qs.length);
 		for(int i = 0 ; i < qs.length ; i ++){
 			this.addQuestion(qs[i], parentq);
 			if(qs[i].getQuestions() != null && qs[i].getQuestions().getQuestion() != null && qs[i].getQuestions().getQuestion().length > 0){

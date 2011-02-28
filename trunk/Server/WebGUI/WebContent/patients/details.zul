@@ -35,9 +35,16 @@
 		
 		String objid = (String)Executions.getCurrent().getParameter("patid");
 		PatientAssessment[] assessmentlist = null;
+		eu.aladdin_project.controllers.details.assessment.AssessmentInfo[] assinfolist = null;
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		try{
 			assessmentlist = proxy.getPatientAssessments(objid,userid);
+			if(assessmentlist != null){
+				assinfolist = new eu.aladdin_project.controllers.details.assessment.AssessmentInfo[assessmentlist.length];
+				for(int i = 0 ; assessmentlist.length > i ; i++){
+					assinfolist[i] = new eu.aladdin_project.controllers.details.assessment.AssessmentInfo(assessmentlist[i]);
+				}
+			}
 		}catch(RemoteException re){
 			ErrorDictionary.redirectWithError("/patients?error="+ErrorDictionary.PATIENT_ASSESSMENT_RETRIEVE);
 		}
@@ -136,7 +143,7 @@
 			<column/>
 		</columns>
 		<rows>
-			<row forEach="${assessmentlist }" id="${each.ID }">
+			<row forEach="${assinfolist }" id="${each.ID }">
 				<label value="${each.ID }"/>
 				<label value="${each.dateOfAssessment }"/>
 				<label value="${each.aetology }"/>

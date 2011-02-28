@@ -29,8 +29,7 @@
 			if(plist == null){
 				plist = new CarerInfo[0];
 			}
-			System.out.println("**** List SIZE: "+plist.length);
-			
+			eu.aladdin_project.SystemDictionary.webguiLog("DEBUG", "List SIZE: "+plist.length)
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}
