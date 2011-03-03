@@ -35,11 +35,6 @@
 					<label value="Language"/>
 					<listbox mold="select" id="trans_locale" onSelect="qm_sketch.changeSelectedLocale()">
 						<listitem value="none" label="Select one" selected="true"/>
-						<!-- 
-						<listitem value="ca_ES" label="Català" selected="true"/>
-						<listitem value="en_UK" label="English(UK)"/>
-						<listitem value="it_IT" label="Italiano"/>
-						 -->
 					</listbox>
 				</row>
 				<row>

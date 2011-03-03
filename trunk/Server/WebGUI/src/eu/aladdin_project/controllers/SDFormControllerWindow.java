@@ -16,7 +16,10 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.SystemParameter;
 
-@SuppressWarnings("serial")
+/**
+ * It is almost an "abstract" class to generalize some Patients and Carers operations
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class SDFormControllerWindow extends AladdinFormControllerWindow{
 
 	protected SocioDemographicData currentsd = null;
@@ -66,6 +69,9 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		return sdData;
 	}
 	
+	/**
+	 * This method adds all the SocioDemographic input fields into the form
+	 */
 	protected void addSocioDemographicDataFields(){
 		String personal = Labels.getLabel("patients.form.personal");
 		String age = Labels.getLabel("patients.form.sd.age");
@@ -124,6 +130,9 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		this.appendChild(pgrid);
 	}
 	
+	/**
+	 * This method sets all the SocioDemographic field values when updating Patients or Carers
+	 */
 	protected void addSocioDemographicDataFieldsValue(){
 		((Intbox)this.getFellow("pat_age")).setValue(new Integer(this.currentsd.getAge().toString()));
 		((Intbox)this.getFellow("pat_children")).setValue(new Integer(this.currentsd.getChildren().toString()));

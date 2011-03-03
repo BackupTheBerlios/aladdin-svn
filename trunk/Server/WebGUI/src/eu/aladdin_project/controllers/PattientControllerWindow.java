@@ -35,6 +35,10 @@ import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.User;
 
+/**
+ * This class handles the creation and the events of the Patient questionnaire.
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class PattientControllerWindow extends SDFormControllerWindow{
 
 	private static final long serialVersionUID = 3014122995824061686L;
@@ -52,16 +56,20 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.buildForm();
 	}
 	
+	/**
+	 * Constructor to change the create form into an update form
+	 * @param current Patient to be updated
+	 */
 	public PattientControllerWindow(Patient current){
 		this.currentid = current.getID();
 		this.currentdata = current.getPersonData();
 		this.currentsd = current.getSD_Data();
 		this.currentresp = current.getResponsibleClinicianID();
-		SystemDictionary.webguiLog("DEBUG", "Social Worker: "+current.getSocialWorker().getName());
+		SystemDictionary.webguiLog("TRACE", "Social Worker: "+current.getSocialWorker().getName());
 		this.currentsocialworker = current.getSocialWorker();
-		SystemDictionary.webguiLog("DEBUG", "Consulter: "+current.getConsulterInCharge().getName());
+		SystemDictionary.webguiLog("TRACE", "Consulter: "+current.getConsulterInCharge().getName());
 		this.currentconsulter = current.getConsulterInCharge();
-		SystemDictionary.webguiLog("DEBUG", "General Practicioner: "+current.getGeneralPractitioner().getName());
+		SystemDictionary.webguiLog("TRACE", "General Practicioner: "+current.getGeneralPractitioner().getName());
 		this.currentgeneralpracticioner = current.getGeneralPractitioner();
 		this.currentcarers = current.getPatientCarerList().getPatientCarer();
 		
@@ -97,9 +105,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 */
 	public void sendPatient(boolean newpatient){
 		if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
-			Window win = (Window)getFellow("patienterror");
+			Window win = (Window)getFellow("internalformerror");
 			((Label)win.getFellow("errorlbl")).setValue("You cannot create a patient without any address or any way to communicate with");
-			getFellow("patienterror").setVisible(true);
+			getFellow("internalformerror").setVisible(true);
 		}else{
 			OperationResult result = null;
 			String resClinic = ((Textbox)getFellow("pat_respo")).getValue();
@@ -135,10 +143,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 				}
 			}catch (RemoteException re) {
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
-				re.printStackTrace();
 			}catch (Exception e){
-				//TODO Set message to "Unknow error creating patient"
-				e.printStackTrace();
+				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
 			}finally{
 				//TODO Show message on the following page.
 				if(result != null){
@@ -165,6 +171,11 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		}
 	}
 	
+	/**
+	 * This method creates a clinician list for the patient form.
+	 * It is also in charge of attaching it to the form and showing it in a modal mode
+	 * @throws InterruptedException
+	 */
 	public void createClinicianDialog() throws InterruptedException{
 		ClinicianListForPatients respolist = (ClinicianListForPatients)Executions.getCurrent().createComponents("/patients/clinlist.zul", this, null);
 		respolist.doModal();
@@ -172,7 +183,6 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	
 	/**
 	 * This method is used to set Carer form fields with information from the modal dialog fields
-	 * 
 	 * @param carerID
 	 * @param carerName
 	 */
@@ -181,6 +191,12 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		((Textbox)this.getFellow("pat_carname")).setValue(carerName);
 	}
 	
+	/**
+	 * This method is used to set responsible clinician form fields with information 
+	 * from the modal dialog fields
+	 * @param clinID Id of the responsible clinician
+	 * @param clinName Name of the responsible clinician
+	 */
 	public void setResponsibleClinician(String clinID, String clinName){
 		((Textbox)this.getFellow("pat_respo")).setValue(clinID);
 		((Textbox)this.getFellow("pat_respo_lbl")).setValue(clinName);
@@ -228,6 +244,9 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.appendChild(pgrid);
 	}
 	
+	/**
+	 * This method sets the responsible clinician values when updating a form
+	 */
 	protected void addResponsibleClinicianFieldValues(){
 		String id = (String)Sessions.getCurrent().getAttribute("userid");
 		StorageComponentProxy proxy = new StorageComponentProxy();
@@ -290,11 +309,18 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.appendChild(pgrid);
 	}
 	
+	/**
+	 * This method sets the carer values when updating a patient
+	 */
 	protected void addCarerFieldValues(){
 		((Textbox)getFellow("pat_carid")).setValue(this.currentcarers[0].getCarer().getID());
 		((Textbox)getFellow("pat_carname")).setValue(this.currentcarers[0].getCarer().getPersonData().getName()+", "+this.currentcarers[0].getCarer().getPersonData().getSurname());
 	}
 	
+	/**
+	 * This method adds the social worker, consulter and general practicioner
+	 *  fields in the form
+	 */
 	protected void addSocialWorkerConsulterAndGPFields(){
 		Grid pgrid1 = new Grid();
 		Grid pgrid2 = new Grid();
@@ -341,6 +367,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.appendChild(pgrid3);
 	}
 	
+	/**
+	 * This method adds the social worker, consulter and general practicioner
+	 *  values when updating a patient
+	 */
 	protected void addSocialWorkerConsulterAndGPFieldsValues(){
 		SystemDictionary.webguiLog("DEBUG", "this.currentsocialworker.getName()");
 		((Textbox)getFellow("pat_swname")).setValue(this.currentsocialworker.getName());
@@ -356,6 +386,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		((Textbox)getFellow("pat_gpphone")).setValue(this.currentgeneralpracticioner.getPhone());
 	}
 	
+	/**
+	 * Method to retrieve a SocialWorker from the form 
+	 * @return SocialWorker defined on the patient form
+	 */
 	protected SocialWorker getSocialWorkerData(){
 		String name = ((Textbox)getFellow("pat_swname")).getValue();
 		String mail = ((Textbox)getFellow("pat_swmail")).getValue();
@@ -363,6 +397,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		return new SocialWorker(name, phone, mail);
 	}
 	
+	/**
+	 * Method to retrieve the consulter from the form 
+	 * @return Consulter defined on the patient form
+	 */
 	protected Consulter getConsulterData(){
 		String name = ((Textbox)getFellow("pat_consname")).getValue();
 		String mail = ((Textbox)getFellow("pat_consmail")).getValue();
@@ -370,6 +408,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		return new Consulter(name, phone, mail);
 	}
 	
+	/**
+	 * Method to retrieve a GeneralPracticioner from the form 
+	 * @return GeneralPracticioner defined on the patient form
+	 */
 	protected GeneralPractitioner getGeneralPracticionerData(){
 		String name = ((Textbox)getFellow("pat_gpname")).getValue();
 		String mail = ((Textbox)getFellow("pat_gpmail")).getValue();
@@ -377,6 +419,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		return new GeneralPractitioner(name, phone, mail);
 	}
 	
+	/**
+	 * Method in charge of creating update button for patients updates operations
+	 * @return Button to be added to the form
+	 */
 	public Button createUpdateButton(){
 		Button btn = new Button();
 		String text = Labels.getLabel("patients.update.title");

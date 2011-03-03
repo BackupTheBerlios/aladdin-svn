@@ -8,6 +8,8 @@
 		import eu.aladdin_project.xsd.SearchCriteria;;
 		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 		import org.zkoss.zul.SimpleListModel;
+		import eu.aladdin_project.xsd.MediaContent;
+		import eu.aladdin_project.xsd.QuestionnaireInfo;
 		
 		int tttexti = SystemDictionary.TASK_TYPE_TXT_INT;
 		String tttexts = SystemDictionary.TASK_TYPE_TXT; 
@@ -47,6 +49,16 @@
 		Session ses = Sessions.getCurrent();
 		String petusid = (String)ses.getAttribute("userid");
 		Date date = new Date();
+		
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		MediaContent[] urilist = null;
+		QuestionnaireInfo[] qsss = null;
+		try{
+			urilist = proxy.getMediaContent(new SearchCriteria[0], petusid);
+			qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(),petusid);
+		}catch(Exception e){
+			e.printStackTrace();			
+		}  
 		
 	</zscript>
 	<window id="create_my_entry" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.task.CalendarWindowControllerPatients">
@@ -92,15 +104,18 @@
 				<row id="qsrow" visible="false">
 					<label value="${tquestion }"/>
 					<hbox>
-						<textbox id="questidfield" readonly="true" width="35px"/>
-						<combobox id="questnamefield" autodrop="true">
+						<listbox mold="select" id="questnamefield">
+							<listitem forEach="${qsss }" value="${each.ID }" label="${each.title }  (${each.version })"/>
+						</listbox>
+						<!-- <textbox id="questidfield" readonly="true" width="35px"/>  -->
+						<!-- <combobox id="questnamefield" autodrop="true">
 							<attribute name="onSelect">
 								QuestionnaireInfo qinfo = (QuestionnaireInfo)questnamefield.getSelectedItem().getValue();
 								questidfield.setValue(qinfo.getID());
 							</attribute>
 							<attribute name="onCreate">
 								try{
-									eu.aladdin_project.xsd.QuestionnaireInfo[] qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(), petusid);
+									qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(), petusid);
 									qsssmodel = new SimpleListModel(qsss);
 									questnamefield.setModel(qsssmodel);
 								}catch(java.rmi.RemoteException re){
@@ -108,13 +123,15 @@
 								}
 							</attribute>
 							
-						</combobox>
-						
+						</combobox>  -->
 					</hbox>
 				</row>
 				<row id="urlrow" visible="false">
 					<label value="${turl }"/>
-					<textbox id="urlfield"/>
+					<!-- <textbox id="urlfield"/> -->
+					<listbox mold="select" id="urlfield">
+						<listitem forEach="${urilist }" label="${each.title }" value="${each.url }"/> 
+					</listbox>
 				</row>
 				<row id="textrow" visible="false">
 					<label value="Text"/>
@@ -182,6 +199,8 @@
 				<row>
 					<label id="usertype" value="${usertype }" visible="false"/>
 					<hbox>
+						<button id="closebutton" label="Close the window" onClick="create_my_entry.closeTheWindow()" visible="true"/>
+						<separator orient="horizontal" width="40px;"/>
 						<button id="savebutton" label="${tassigntt }" onClick="create_my_entry.saveTask()" visible="false"/>
 						<button id="cancelbutton" label="${tcancelt }" onClick="create_my_entry.cancelTask()" visible="false"/>
 					</hbox>

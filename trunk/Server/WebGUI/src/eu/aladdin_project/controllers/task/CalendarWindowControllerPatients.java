@@ -83,17 +83,18 @@ public class CalendarWindowControllerPatients extends Window {
 			switch(((Integer)listitem.getValue()).intValue()){
 				case SystemDictionary.TASK_TYPE_CARERQS_INT:
 				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
-					String qid = ((Textbox)getFellow("questidfield")).getValue();
+					//String qid = ((Textbox)getFellow("questidfield")).getValue();
+					String qid = (String)((Listbox)getFellow("questnamefield")).getSelectedItem().getValue();
 					questionnaire = proxy.getQuestionnaire(qid, SystemDictionary.getLocale(), userids);
 					break;
 				case SystemDictionary.TASK_TYPE_COGGAME_INT:
-					URL = ((Textbox)getFellow("urlfield")).getValue();
+					URL = (String)((Listbox)getFellow("urlfield")).getSelectedItem().getValue();
 					break;
 				case SystemDictionary.TASK_TYPE_TXT_INT:
 					text = ((Textbox)getFellow("textfield")).getValue();
 					break;
 				case SystemDictionary.TASK_TYPE_EXERCISE_INT:
-					URL = ((Textbox)getFellow("urlfield")).getValue();
+					URL = (String)((Listbox)getFellow("urlfield")).getSelectedItem().getValue();
 					text = ((Textbox)getFellow("textfield")).getValue();
 					break;
 				default:
@@ -150,6 +151,11 @@ public class CalendarWindowControllerPatients extends Window {
 		}finally{
 			Executions.getCurrent().sendRedirect("");
 		}
+	}
+	
+	public void closeTheWindow(){
+		this.setVisible(false);
+		this.getParent().removeChild(this);
 	}
 	
 }

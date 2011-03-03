@@ -20,6 +20,10 @@ import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.User;
 
+/**
+ * This class is in charge of managing Clinician forms
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 
 	private static final long serialVersionUID = 2164524095371327016L;
@@ -31,6 +35,11 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		this.buildForm();
 	}
 	
+	/**
+	 * Constructor for changing the create form into an update one
+	 * @param current Clinician to be updated
+	 * @param details Boolean flag to let the constructor know that is a update operation
+	 */
 	public ClinicianControllerWindow(Clinician current, boolean details){
 		this.currentid = current.getID();
 		this.currentdata = current.getPersonData();
@@ -61,7 +70,8 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 	}
 	
 	/**
-	 * Function to be executed on "Save" button click
+	 * It creates a new Clinician on the DataStorage.
+	 * Function to be executed on "Save" button click. 
 	 */
 	public void createClinician(){
 		//Getting information from form fields
@@ -72,7 +82,6 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		String clinID = ident.getType()+'-'+ident.getNumber();
 		
 		//TODO isPrimary control on Communication and Addresses
-		
 		Clinician clinic = new Clinician(clinID,personData);
 		try{
 			StorageComponentProxy proxy = new StorageComponentProxy();
@@ -83,13 +92,17 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CLINICIAN_SERVER);
 		}catch (Exception e){
-			//TODO Set message to "Unknow error creating clinician"
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
 		}finally{
 			//TODO Show message on the following page.
 			Executions.getCurrent().sendRedirect("/clinicians");
 		}
 	}
 	
+	/**
+	 * It sends the updates of an existing Clinician to the StorageComponent.
+	 * Function to be executed on "Update" button click. 
+	 */
 	public void updateClinician(){
 		PersonData personData = this.getPersonData();
 		
@@ -100,15 +113,19 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			String id = (String)ses.getAttribute("userid");
 			proxy.updateClinician(clinic, id);
 		}catch (RemoteException re) {
-			//TODO Set message to "Unable to update user. Server is not responding"
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CLINICIAN_SERVER);
 		}catch (Exception e){
-			//TODO Set message to "Unknown error updating clinician"
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
 		}finally{
 			//TODO Show message on the following page.
 			Executions.getCurrent().sendRedirect("/clinicians");
 		}
 	}
 	
+	/**
+	 * This method creates a button to create new clinicians using the current form
+	 * @return Button to be added to the form
+	 */
 	public Button createUpdateButton(){
 		Button btn = new Button();
 		String text = Labels.getLabel("clinicians.update.title");
@@ -123,6 +140,10 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		return btn;
 	}
 	
+	/**
+	 * This method creates a button to modify an existing clinician using the current form
+	 * @return Button to be added to the form
+	 */
 	public Button createEditButton(){
 		Button btn = new Button();
 		String text = Labels.getLabel("clinicians.edit");

@@ -20,6 +20,10 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.CarerInfo;
 
+/**
+ * This class is used to built the carer list that appears on the patients questionnaire.  
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class CarerListWindowController extends Window{
 	
 	private static final long serialVersionUID = 2272506957180879672L;
@@ -80,6 +84,7 @@ public class CarerListWindowController extends Window{
 			this.setClosable(true);
 			this.setWidth("300px");
 			this.setTitle(modtitle);
+			this.setBorder("normal");
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

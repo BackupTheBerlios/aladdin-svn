@@ -14,6 +14,10 @@ import eu.aladdin_project.xsd.MediaContent;
 import eu.aladdin_project.xsd.SearchCriteria;
 import eu.aladdin_project.xsd.SystemParameter;
 
+/**
+ * 
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class ContentManagerIndex extends Window{
 	
 	public Window contentpopup;

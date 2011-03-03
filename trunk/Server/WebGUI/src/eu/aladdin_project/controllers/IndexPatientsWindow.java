@@ -16,11 +16,18 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 
+/**
+ * This class manages al events from the patients index page
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class IndexPatientsWindow extends Window {
 	
 	private static final long serialVersionUID = -4585592732261850018L;
 	private String patid = null;
-	
+
+	/**
+	 * Invoke this method to remove a patients. It won't work unless you have set the patid attribute before
+	 */
 	public void deletePatient(){
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
@@ -36,6 +43,11 @@ public class IndexPatientsWindow extends Window {
 		
 	}
 	
+	/**
+	 * This method allow the user to remove patients from the index page with a confirmation 
+	 * dialog
+	 * @param id Id of the patient which is going to be deleted
+	 */
 	public void deletePatientMsg(String id){
 		this.patid = id;
 		ConfirmDeletePatient auxwin = new ConfirmDeletePatient(id);
@@ -64,10 +76,18 @@ public class IndexPatientsWindow extends Window {
 		
 	}
 	
+	/**
+	 * Very simple method to redirect users to update patients information
+	 * @param id Patient to be updated
+	 */
 	public void updatePatient(String id){
 		Executions.sendRedirect("/patients/update.zul?patid="+id);
 	}
 	
+	/**
+	 * Very simple method to redirect users to see Patients details
+	 * @param id Patient to be shown on the details page 
+	 */
 	public void detailsPatient(String id){
 		Executions.sendRedirect("/patients/details.zul?patid="+id);
 	}

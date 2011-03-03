@@ -115,7 +115,6 @@ public class QuestionWindow extends Window{
 			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
 			for(int i = 0; i<this.answers.size(); i++){
 				answersvec[i]=this.answers.get(i);
-				//answersvec[i].setPosition(i+1);
 			}
 			q.setAnswers(new QuestionnaireQuestionAnswerList(answersvec));
 		}else{

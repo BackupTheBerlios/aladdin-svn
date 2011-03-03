@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Iterator;
 
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
@@ -86,9 +85,7 @@ public class AladdinFormControllerWindow extends Window{
 			communications = new Communication[0];
 		}
 		CommunicationList comilist = new CommunicationList(comlist);
-		
-		//PersonData pdData = new PersonData(surname, name, idarr, addresslist, comlist);
-		PersonData pdData = new PersonData(name, surname, idlist, adrlist, comilist);
+		PersonData pdData = new PersonData(surname, name, idlist, adrlist, comilist);
 		return pdData;
 	}
 	
@@ -294,7 +291,7 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected void addErrorBox(){
 		Window errorwin = new Window();
-		errorwin.setId("patienterror");
+		errorwin.setId("internalformerror");
 		errorwin.setWidth("50%");
 		errorwin.setSclass("mainerror");
 		errorwin.setBorder("none");
@@ -338,11 +335,19 @@ public class AladdinFormControllerWindow extends Window{
 		this.appendChild(pgrid);
 	}
 	
+	/**
+	 * This method fills some person-related fields on the form. These fields are
+	 * the name and the surname of the person.
+	 */
 	protected void addPersonFieldsValues(){
 		((Textbox)this.getFellow("pat_name")).setValue(this.currentdata.getName());
 		((Textbox)this.getFellow("pat_sname")).setValue(this.currentdata.getSurname());
 	}
 	
+	/**
+	 * This method just adds a new row with the button that shows the new Address form
+	 * in a pop up
+	 */
 	protected void addAddressFields(){
 		String address = Labels.getLabel("patients.form.address");
 		String addaddressstr = Labels.getLabel("common.address.add");
@@ -373,6 +378,12 @@ public class AladdinFormControllerWindow extends Window{
 		this.appendChild(agrid);
 	}
 	
+	/**
+	 * This method is called by the button in the "addAddressFields" button. It only 
+	 * builds up a window with a form to create new addresses. 
+	 * 
+	 * The resultant window is stored on the "popaddresses" instance attribute.
+	 */
 	protected void addAddressWindow(){
 		String address = Labels.getLabel("patients.form.address");
 		String street = Labels.getLabel("patients.form.street");
@@ -398,9 +409,9 @@ public class AladdinFormControllerWindow extends Window{
 		rowsA.add(new SimpleFieldData(street, "pat_street"));
 		rowsA.add(new SimpleFieldData(streetno, "pat_streetno"));
 		rowsA.add(new SimpleFieldData(city, "pat_city"));
+		rowsA.add(new SimpleFieldData(zipcode, "pat_zipcode"));
 		rowsA.add(new SimpleFieldData(county, "pat_county"));
 		rowsA.add(new SimpleFieldData(country, "pat_country"));
-		rowsA.add(new SimpleFieldData(zipcode, "pat_zipcode"));
 		rowsA.add(new SimpleFieldData(notes, "pat_notes"));
 		
 		ArrayList<SimpleFieldData> rowsB = new ArrayList<SimpleFieldData>();
@@ -432,8 +443,11 @@ public class AladdinFormControllerWindow extends Window{
 		tboxe.setWidth("70%");
 	}
 	
+	/**
+	 * This method adds all the addresses related with one profile on the main grid.
+	 * They are not in a form way, they are being processed to show them in a plain text way
+	 */
 	protected void addAddressFieldsValues(){
-		
 		this.addresses = this.currentdata.getAddressList().getAddress();
 		SystemDictionary.webguiLog("DEBUG", "Addresses LENGTH: "+this.addresses.length);
 		for(int i = 0; i<this.addresses.length; i++){
@@ -443,6 +457,10 @@ public class AladdinFormControllerWindow extends Window{
 		}
 	}
 	
+	/**
+	 * This method just adds a communication row. There will be a button which will be in charge
+	 * of showing the "add communication" pop up
+	 */
 	protected void addCommunicationFields(){
 		String com = Labels.getLabel("patients.form.comunications");
 		String comaddlbl = Labels.getLabel("common.communications.add");
@@ -458,6 +476,7 @@ public class AladdinFormControllerWindow extends Window{
 				Row buttonrw = new Row();
 				Label labelbtn = new Label(" ");
 				Button btnaddress = new Button(comaddlbl);
+				//This listener will be in charge of showing the popup
 				btnaddress.addEventListener("onClick", new EventListener() {
 					
 					public void onEvent(Event arg0) throws Exception {
@@ -474,6 +493,9 @@ public class AladdinFormControllerWindow extends Window{
 		this.appendChild(agrid);
 	}
 	
+	/**
+	 * This method builds up the "add communication" popup
+	 */
 	protected void addCommunicationWindow(){
 		String comtype = Labels.getLabel("patients.form.com.type");
 		String comval = Labels.getLabel("patients.form.com.value");
@@ -482,12 +504,9 @@ public class AladdinFormControllerWindow extends Window{
 		String notes = Labels.getLabel("patients.form.notes");
 		String savecomm = Labels.getLabel("common.communications.save");
 		
-		this.popupcommunications = new Window();
-		this.popupcommunications.setTitle(com);
-		this.popupcommunications.setClosable(true);
-		this.popupcommunications.setVisible(false);
-		this.popupcommunications.setWidth("800px");
-		this.popupcommunications.setPosition("center, center");
+		this.popupcommunications = new Window();		this.popupcommunications.setTitle(com);
+		this.popupcommunications.setClosable(true);		this.popupcommunications.setVisible(false);
+		this.popupcommunications.setWidth("800px");		this.popupcommunications.setPosition("center, center");
 		this.popupcommunications.setBorder("normal");
 		this.appendChild(this.popupcommunications);
 		
@@ -535,6 +554,10 @@ public class AladdinFormControllerWindow extends Window{
 		}
 	}
 	
+	/**
+	 * This method appends the "Columns" element to common grids for person forms
+	 * @param grid Where columns are going to be attached
+	 */
 	protected void appendColumns(Grid grid){
 		Columns cols = new Columns();
 		
@@ -550,6 +573,11 @@ public class AladdinFormControllerWindow extends Window{
 		grid.appendChild(cols);
 	}
 	
+	/**
+	 * Protected method to ease appending titles on sub-form grids.
+	 * @param title Title of the sub-form
+	 * @param rows Rows element where subtitle will be added
+	 */
 	protected void appendSubFormTitleRow(String title, Rows rows){
 		Row row0 = new Row();
 		row0.setSpans("2");
@@ -562,8 +590,7 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	/**
-	 * Protected method to add Textbox fields from a TextboxData ArrayList
-	 * 
+	 * Protected method to add several Textbox fields from a TextboxData ArrayList
 	 * @param ArrayList<TextboxData> list 
 	 * @param Rows rows
 	 */
@@ -589,6 +616,11 @@ public class AladdinFormControllerWindow extends Window{
 		}
 	}
 	
+	/**
+	 * New method to make the addition of several integer fields easier
+	 * @param list SimpleFieldData arraylist with the fields to be added
+	 * @param rows Rows component where the fields will be added
+	 */
 	protected void appendIntboxFields(ArrayList<SimpleFieldData> list,Rows rows){
 		Iterator<SimpleFieldData> it = list.iterator();
 		while(it.hasNext()){
@@ -611,6 +643,11 @@ public class AladdinFormControllerWindow extends Window{
 		}
 	}
 	
+	/**
+	 * This method allows the developer to insert several Checkbox fields
+	 * @param list SimpleDataField arraylist which contains the checkbox values
+	 * @param rows Rows component where the checkbox will be added
+	 */
 	protected void appendCheckboxFields(ArrayList<SimpleFieldData> list,Rows rows){
 		Iterator<SimpleFieldData> it = list.iterator();
 		while(it.hasNext()){
@@ -628,6 +665,13 @@ public class AladdinFormControllerWindow extends Window{
 		}
 	}
 	
+	/**
+	 * This method allows the developer to insert ONE radigroup
+	 * @param list SimpleDataFields arraylist which contains the different radiobutton values
+	 * @param rows Rows element where the radiogoup will be added
+	 * @param label The string that will shown as title of the radigroup 
+	 * @param id Id of the radiogroup
+	 */
 	protected void appendRadioElement(ArrayList<SimpleFieldData> list,Rows rows,String label, String id){
 		
 		Row rowe = new Row();
@@ -653,7 +697,14 @@ public class AladdinFormControllerWindow extends Window{
 		rows.appendChild(rowe);
 	}
 	
-protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,String label, String id){
+	/**
+	 * This method allows the developer to insert ONE listbox (select)
+	 * @param list SimpleDataFields arraylist which contains the different listitem values
+	 * @param rows Rows element where the listitem will be added
+	 * @param label The string that will shown as title of the listbox 
+	 * @param id Id of the listbox
+	 */
+	protected void appendListboxElement(ArrayList<SimpleFieldData> list,Rows rows,String label, String id){
 		
 		Row rowe = new Row();
 		Label labe = new Label();

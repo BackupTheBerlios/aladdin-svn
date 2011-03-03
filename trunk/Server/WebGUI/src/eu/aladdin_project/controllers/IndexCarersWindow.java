@@ -16,11 +16,18 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 
+/**
+ * This class manages al events from the carer index page
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class IndexCarersWindow extends Window{
 
 	private static final long serialVersionUID = -4585592732261850018L;
 	private String carerid = null;
 	
+	/**
+	 * Invoke this method to remove a carer. It won't work unless you have called deleteCarerMsg before
+	 */
 	public void deleteCarer(){
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
@@ -36,6 +43,11 @@ public class IndexCarersWindow extends Window{
 		
 	}
 	
+	/**
+	 * This method allow the user to remove carers from the index page with a confirmation 
+	 * dialog
+	 * @param id Id of the carer which is going to be deleted
+	 */
 	public void deleteCarerMsg(String id){
 		this.carerid = id;
 		ConfirmDeleteCarer auxwin = new ConfirmDeleteCarer(id);
@@ -64,10 +76,18 @@ public class IndexCarersWindow extends Window{
 		
 	}
 	
+	/**
+	 * Very simple method to redirect users to update Carers information
+	 * @param id Carer to be updated
+	 */
 	public void updateCarer(String id){
 		Executions.sendRedirect("/carers/update.zul?carerid="+id);
 	}
 	
+	/**
+	 * Very simple method to redirect users to see Carers details
+	 * @param id Carer to be shown on the details page 
+	 */
 	public void detailsCarer(String id){
 		Executions.sendRedirect("/carers/details.zul?carerid="+id);
 	}

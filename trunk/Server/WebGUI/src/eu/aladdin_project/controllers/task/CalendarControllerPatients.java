@@ -2,6 +2,8 @@ package eu.aladdin_project.controllers.task;
 
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.event.CalendarsEvent;
@@ -13,6 +15,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Toolbar;
@@ -142,7 +145,29 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			int tasktype2 = Integer.parseInt((String)scevent.getParams().get("type"));
 			this.showCustomFields(tasktype2);
 			bookEventWin.getFellow("tasktypesel").setVisible(false);
-			((Textbox)bookEventWin.getFellow("urlfield")).setValue((String)scevent.getParams().get("url"));
+			List items = ((Listbox)bookEventWin.getFellow("urlfield")).getItems();
+			Iterator it = items.iterator();
+			while(it.hasNext()){
+				Listitem currentitem = (Listitem)it.next();
+				if(currentitem.getValue().equals((String)scevent.getParams().get("url"))){
+					((Listbox)bookEventWin.getFellow("urlfield")).setSelectedItem(currentitem);
+					break;
+				}
+			}
+			((Listbox)bookEventWin.getFellow("urlfield")).setDisabled(true);
+			if(scevent.getParams().get("questionnaire") != null){
+				items = ((Listbox)bookEventWin.getFellow("questnamefield")).getItems();
+				it = items.iterator();
+				while(it.hasNext()){
+					Listitem currentitem = (Listitem)it.next();
+					if(currentitem.getValue().equals(((Questionnaire)scevent.getParams().get("questionnaire")).getID())){
+						((Listbox)bookEventWin.getFellow("questnamefield")).setSelectedItem(currentitem);
+						break;
+					}
+				}
+			}
+			((Listbox)bookEventWin.getFellow("questnamefield")).setDisabled(true);
+			//((Textbox)bookEventWin.getFellow("urlfield")).setValue((String)scevent.getParams().get("url"));
 			((Textbox)bookEventWin.getFellow("textfield")).setValue((String)scevent.getParams().get("text"));
 			
 			bookEventWin.setTitle("View Task");
@@ -198,11 +223,9 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					break;
 			};
 			bookEventWin.getFellow("urlrow").setVisible(urlrow);
-			//bookEventWin.getFellow("qsrow").setVisible(qsrow);
-			bookEventWin.getFellow("qsrow").setVisible(false);
+			bookEventWin.getFellow("qsrow").setVisible(qsrow);
+			//bookEventWin.getFellow("qsrow").setVisible(false);
 			bookEventWin.getFellow("textrow").setVisible(txtrow);
-			((Textbox)bookEventWin.getFellow("urlfield")).setReadonly(true);
-			//((Textbox)bookEventWin.getFellow("qsrow")).setReadonly(true);
 			((Textbox)bookEventWin.getFellow("textfield")).setReadonly(true);
 	}
 }

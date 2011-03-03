@@ -16,11 +16,19 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 
+/**
+ * This class manages al events from the clinicians index page
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class IndexCliniciansWindow extends Window{
 	
 	private static final long serialVersionUID = 3432071789993143298L;
 	private String clinicianid = null;
 
+	/**
+	 * Invoke this method to remove a carer. It won't work unless you have set up the 
+	 * clinicianid attribute before
+	 */
 	public void deleteClinician(){
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
@@ -36,6 +44,11 @@ public class IndexCliniciansWindow extends Window{
 		
 	}
 	
+	/**
+	 * This method allow the user to remove clinicians on the index page with a confirmation 
+	 * dialog
+	 * @param id Id of the clinician which is going to be deleted
+	 */
 	public void deleteClinicianMsg(String id){
 		this.clinicianid = id;
 		ConfirmDeleteClinician auxwin = new ConfirmDeleteClinician(id);
@@ -64,10 +77,18 @@ public class IndexCliniciansWindow extends Window{
 		
 	}
 	
+	/**
+	 * Very simple method to redirect users to update clinicians information
+	 * @param id Clinician to be updated
+	 */
 	public void updateClinician(String id){
 		Executions.sendRedirect("/clinicians/update.zul?clinid="+id);
 	}
 	
+	/**
+	 * Very simple method to redirect users to see Clinicians details
+	 * @param id Clinician to be shown on the details page 
+	 */
 	public void detailsClinician(String id){
 		Executions.sendRedirect("/clinicians/details.zul?clinid="+id);
 	}

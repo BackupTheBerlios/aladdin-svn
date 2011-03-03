@@ -10,6 +10,8 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Window;
 
 import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
@@ -21,6 +23,10 @@ import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.User;
 
+/**
+ * Public class built to manage Carrer forms to create and update carrer objects
+ * @author Xavi Sarda (Atos Origin)
+ */
 public class CarerControllerWindow extends SDFormControllerWindow{
 
 	private static final long serialVersionUID = 7241911276370717234L;
@@ -32,6 +38,12 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		this.buildForm();
 	}
 	
+	/**
+	 * Constructor for updating a Carer
+	 * @param current Carer object to be updated
+	 * @param details Boolean flag to let the called methods that they must be shown 
+	 * in a proper way to update carers objects
+	 */
 	public CarerControllerWindow(Carer current, boolean details){
 		this.currentid = current.getID();
 		this.currentdata = current.getPersonData();
@@ -66,35 +78,42 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	 * @return void but saves a new Patient on the StorageComponent
 	 */
 	public void createCarer(){
-		//Getting information from form fields
-		PersonData personData = this.getPersonData();
-		SocioDemographicData sdData = this.getSocioDemographicData();
-		//TODO isPrimary control on Communication and Addresses
-		
-		Carer carer = new Carer("",personData,sdData);
-		try{
-			StorageComponentProxy proxy = new StorageComponentProxy();
-			Session ses = Sessions.getCurrent();
-			String id = (String)ses.getAttribute("userid");
-			OperationResult result = proxy.createCarer(carer, id);
-			result = proxy.createUser(new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), carer.getPersonData().getSurname(), carer.getPersonData().getSurname()));
-		}catch (RemoteException re) {
-			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
-		}catch (Exception e){
-			//TODO Set message to "Unknow error creating carer"
-			e.printStackTrace();
-		}finally{
-			//TODO Show message on the following page.
-			Executions.getCurrent().sendRedirect("/carers");
+		if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
+			Window win = (Window)getFellow("internalformerror");
+			((Label)win.getFellow("errorlbl")).setValue("You cannot create a carer without any address or any way to communicate with");
+			getFellow("internalformerror").setVisible(true);
+		}else{
+			//Getting information from form fields
+			PersonData personData = this.getPersonData();
+			SocioDemographicData sdData = this.getSocioDemographicData();
+			//TODO isPrimary control on Communication and Addresses
+			Carer carer = new Carer("",personData,sdData);
+			try{
+				StorageComponentProxy proxy = new StorageComponentProxy();
+				Session ses = Sessions.getCurrent();
+				String id = (String)ses.getAttribute("userid");
+				OperationResult result = proxy.createCarer(carer, id);
+				result = proxy.createUser(new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), carer.getPersonData().getSurname(), carer.getPersonData().getSurname()));
+			}catch (RemoteException re) {
+				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
+			}catch (Exception e){
+				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
+			}finally{
+				Executions.getCurrent().sendRedirect("/carers");
+			}
 		}
 	}
 	
+	/**
+	 * Submit function: Used on the view layer to update an existing Patient 
+	 * using the StorageComponentProxy appropriate call.
+	 * @return void but saves a new Patient on the StorageComponent
+	 */
 	public void updateCarer(){
 		//Getting information from form fields
 		PersonData personData = this.getPersonData();
 		SocioDemographicData sdData = this.getSocioDemographicData();
 		//TODO isPrimary control on Communication and Addresses
-		
 		Carer carer = new Carer(this.currentid,personData,sdData);
 		try{
 			StorageComponentProxy proxy = new StorageComponentProxy();
@@ -104,14 +123,17 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
 		}catch (Exception e){
-			//TODO Set message to "Unknow error creating carer"
-			e.printStackTrace();
+			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
 		}finally{
 			//TODO Show message on the following page.
 			Executions.getCurrent().sendRedirect("/carers");
 		}
 	}
 	
+	/**
+	 * This method creates a button to update carers using the existing form
+	 * @return Button object to be added to the form
+	 */
 	public Button createUpdateButton(){
 		Button btn = new Button();
 		String text = Labels.getLabel("carers.update.title");
@@ -126,6 +148,11 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		return btn;
 	}
 	
+	/**
+	 * This method creates a button to allow modification to the current carer 
+	 * using this form
+	 * @return Button object to be added to the form
+	 */
 	public Button createEditButton(){
 		Button btn = new Button();
 		String text = Labels.getLabel("carers.edit");
@@ -136,7 +163,6 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 				Executions.getCurrent().sendRedirect("/carers/update.zul?carerid="+currentid);
 			}
 		});
-		
 		return btn;
 	}
 }
