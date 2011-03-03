@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetSystemParameterListDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterListDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("getsystemparameterlist76e2doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterListDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("getsystemparameterlist76e2doctype");
     
     /**
      * Gets the "GetSystemParameterList" element
@@ -42,7 +42,7 @@ public interface GetSystemParameterListDocument extends org.apache.xmlbeans.XmlO
     public interface GetSystemParameterList extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("getsystemparameterlistb824elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetSystemParameterList.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("getsystemparameterlistb824elemtype");
         
         /**
          * Gets the "type" element

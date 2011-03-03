@@ -17,7 +17,7 @@ package org.w3.www._2004._06.xmlmime;
 public interface ExpectedMediaTypeDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExpectedMediaTypeDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5920F14D721C35BCDF7184CED07755E6").resolveHandle("expectedmediatype0e08doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExpectedMediaTypeDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("expectedmediatype0e08doctype");
     
     /**
      * Gets the "expectedMediaType" element
@@ -56,7 +56,7 @@ public interface ExpectedMediaTypeDocument extends org.apache.xmlbeans.XmlObject
         /** @deprecated */
         void set(java.util.List list);
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExpectedMediaType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5920F14D721C35BCDF7184CED07755E6").resolveHandle("expectedmediatypec05aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ExpectedMediaType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("expectedmediatypec05aelemtype");
         
         /**
          * A factory class with static methods for creating instances

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfSupportedLocalesDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocalesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("listofsupportedlocales5d20doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocalesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("listofsupportedlocales5d20doctype");
     
     /**
      * Gets the "ListOfSupportedLocales" element
@@ -42,7 +42,7 @@ public interface ListOfSupportedLocalesDocument extends org.apache.xmlbeans.XmlO
     public interface ListOfSupportedLocales extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocales.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("listofsupportedlocales99e4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocales.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("listofsupportedlocales99e4elemtype");
         
         /**
          * A factory class with static methods for creating instances

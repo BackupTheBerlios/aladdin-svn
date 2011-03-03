@@ -64,6 +64,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
     }
     
     /**
+     * True if has "Age" element
+     */
+    public boolean isSetAge()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(AGE$0) != 0;
+        }
+    }
+    
+    /**
      * Sets the "Age" element
      */
     public void setAge(short age)
@@ -100,6 +112,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
     }
     
     /**
+     * Unsets the "Age" element
+     */
+    public void unsetAge()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(AGE$0, 0);
+        }
+    }
+    
+    /**
      * Gets the "Gender" element
      */
     public eu.aladdin_project.xsd.SystemParameter getGender()
@@ -114,6 +138,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "Gender" element
+     */
+    public boolean isSetGender()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(GENDER$2) != 0;
         }
     }
     
@@ -150,6 +186,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
     }
     
     /**
+     * Unsets the "Gender" element
+     */
+    public void unsetGender()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(GENDER$2, 0);
+        }
+    }
+    
+    /**
      * Gets the "MaritalStatus" element
      */
     public eu.aladdin_project.xsd.SystemParameter getMaritalStatus()
@@ -164,6 +212,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "MaritalStatus" element
+     */
+    public boolean isSetMaritalStatus()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(MARITALSTATUS$4) != 0;
         }
     }
     
@@ -200,6 +260,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
     }
     
     /**
+     * Unsets the "MaritalStatus" element
+     */
+    public void unsetMaritalStatus()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(MARITALSTATUS$4, 0);
+        }
+    }
+    
+    /**
      * Gets the "Children" element
      */
     public short getChildren()
@@ -228,6 +300,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
             org.apache.xmlbeans.XmlUnsignedByte target = null;
             target = (org.apache.xmlbeans.XmlUnsignedByte)get_store().find_element_user(CHILDREN$6, 0);
             return target;
+        }
+    }
+    
+    /**
+     * True if has "Children" element
+     */
+    public boolean isSetChildren()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(CHILDREN$6) != 0;
         }
     }
     
@@ -268,6 +352,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
     }
     
     /**
+     * Unsets the "Children" element
+     */
+    public void unsetChildren()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(CHILDREN$6, 0);
+        }
+    }
+    
+    /**
      * Gets the "LivingWith" element
      */
     public eu.aladdin_project.xsd.SystemParameter getLivingWith()
@@ -282,6 +378,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "LivingWith" element
+     */
+    public boolean isSetLivingWith()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(LIVINGWITH$8) != 0;
         }
     }
     
@@ -314,6 +422,18 @@ public class SocioDemographicDataImpl extends org.apache.xmlbeans.impl.values.Xm
             eu.aladdin_project.xsd.SystemParameter target = null;
             target = (eu.aladdin_project.xsd.SystemParameter)get_store().add_element_user(LIVINGWITH$8);
             return target;
+        }
+    }
+    
+    /**
+     * Unsets the "LivingWith" element
+     */
+    public void unsetLivingWith()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(LIVINGWITH$8, 0);
         }
     }
 }

@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface QName extends org.apache.xmlbeans.XmlQName
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QName.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5920F14D721C35BCDF7184CED07755E6").resolveHandle("qnamea350type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QName.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("qnamea350type");
     
     /**
      * Gets the "id" attribute

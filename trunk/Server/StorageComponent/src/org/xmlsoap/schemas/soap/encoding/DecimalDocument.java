@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface DecimalDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DecimalDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s5920F14D721C35BCDF7184CED07755E6").resolveHandle("decimale015doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DecimalDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("decimale015doctype");
     
     /**
      * Gets the "decimal" element

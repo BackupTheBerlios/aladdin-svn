@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface AddMediaContentDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AddMediaContentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("addmediacontent32c4doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AddMediaContentDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("addmediacontent32c4doctype");
     
     /**
      * Gets the "AddMediaContent" element
@@ -42,7 +42,7 @@ public interface AddMediaContentDocument extends org.apache.xmlbeans.XmlObject
     public interface AddMediaContent extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AddMediaContent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("addmediacontentdec6elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AddMediaContent.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("addmediacontentdec6elemtype");
         
         /**
          * Gets the "in" element

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfPossibleTasksDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("listofpossibletasksdc96doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasksDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("listofpossibletasksdc96doctype");
     
     /**
      * Gets the "ListOfPossibleTasks" element
@@ -42,7 +42,7 @@ public interface ListOfPossibleTasksDocument extends org.apache.xmlbeans.XmlObje
     public interface ListOfPossibleTasks extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("listofpossibletasks8f6aelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfPossibleTasks.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("listofpossibletasks8f6aelemtype");
         
         /**
          * Gets the "userType" element

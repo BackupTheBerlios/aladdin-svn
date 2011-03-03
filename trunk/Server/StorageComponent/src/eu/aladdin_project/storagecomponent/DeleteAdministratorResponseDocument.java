@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteAdministratorResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministratorResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("deleteadministratorresponsefad1doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministratorResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("deleteadministratorresponsefad1doctype");
     
     /**
      * Gets the "DeleteAdministratorResponse" element
@@ -42,7 +42,7 @@ public interface DeleteAdministratorResponseDocument extends org.apache.xmlbeans
     public interface DeleteAdministratorResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministratorResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sC22900BC2536160200B1D20070AE98C3").resolveHandle("deleteadministratorresponse8da0elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteAdministratorResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("deleteadministratorresponse8da0elemtype");
         
         /**
          * Gets the "out" element

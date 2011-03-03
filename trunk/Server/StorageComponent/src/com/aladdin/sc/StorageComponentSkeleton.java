@@ -3,6 +3,7 @@ package com.aladdin.sc;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.apache.axis2.AxisFault;
+import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,7 +23,6 @@ import org.hibernate.cfg.Configuration;
 import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
-import com.aladdin.sc.db.Translate;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -105,7 +107,25 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.net.URL;
 
-    public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
+	@SuppressWarnings("serial")
+	class LocaleException extends Exception {
+		public LocaleException () {}
+		
+		public LocaleException (String message) {
+			super (message);
+		}
+		
+		public LocaleException (String message, Throwable cause) {
+			super (message, cause);
+		}
+		
+		public LocaleException (Throwable cause) {
+			super (cause);
+		}
+		
+	}
+
+	public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
     	
     	public final static int OP_LESS = 1;
     	public final static int OP_GREAT = 2;
@@ -165,8 +185,6 @@ import java.net.URL;
     		
     		s = sessionFactory.openSession();
     		
-//    		printTimestamp();
-    		
     		op = new HashMap<Integer, String>();
     		op.put(OP_LESS, " %s < '%s' ");
     		op.put(OP_GREAT, " %s > '%s' ");
@@ -174,25 +192,11 @@ import java.net.URL;
     		op.put(OP_NOTEQ, " %s != '%s' ");
     		op.put(OP_LIKE, "%s like '%s' ");
     		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
-    		
-//    		printTimestamp();
     	}
     	
     	protected void finalize () throws Throwable {
-    		
-//    		printTimestamp();
-    		
-//    		System.out.println (" ====finalize ");
-    		
-//    		printTimestamp();
-//			System.out.println (" ====finalize 1 ");
-//			printTimestamp();
     		s.flush();
-//    		System.out.println (" ====finalize 2 ");
-//    		printTimestamp();
     		s.close();
-//    		System.out.println (" ====finalize 3 ");
-//    		printTimestamp();
     		System.out.flush();
     	}
     	
@@ -232,8 +236,7 @@ import java.net.URL;
     			res.setCode(clinician.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -395,8 +398,7 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -405,7 +407,6 @@ import java.net.URL;
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
-    			System.out.println(e.toString());
     		}
     		
     		return respdoc;
@@ -414,10 +415,18 @@ import java.net.URL;
     	private Integer storeSocioDemographic (SocioDemographicData rsd, Integer id) {
     		com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
     		sd.setAge(new Integer(rsd.getAge()));
-    		sd.setGender(new Integer(rsd.getGender().getCode()));
-    		sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
+
+    		if (rsd.getGender() != null && rsd.getGender().getCode() != null && !rsd.getGender().getCode().isEmpty()) sd.setGender(new Integer(rsd.getGender().getCode()));
+    		else sd.setGender(0);
+
+    		if (rsd.getMaritalStatus() != null && rsd.getMaritalStatus().getCode() != null && !rsd.getMaritalStatus().getCode().isEmpty()) sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
+    		else sd.setMaritalStatus(0);
+
     		sd.setChildren(new Integer(rsd.getChildren()));
-    		sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
+
+    		if (rsd.getLivingWith() != null && rsd.getLivingWith().getCode() != null && !rsd.getLivingWith().getCode().isEmpty()) sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
+    		else sd.setLivingWith(0);
+
     		if (id != null && id > 0) {
     			sd.setId(id);
     			s.merge(sd);
@@ -470,16 +479,17 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
+    			System.out.println (e.toString());
+    			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		return respdoc;
     	}
@@ -509,13 +519,6 @@ import java.net.URL;
     		Questionnaire rquest = req.getUpdateQuestionnaire().getData();
     		SystemParameter locale = req.getUpdateQuestionnaire().getLocale();
 			
-			System.out.println ("============= updateQuestionnaire =============");
-			System.out.println ("locale: ");
-			System.out.println ("  code: " + locale.getCode());
-			System.out.println ("  desc: " + locale.getDescription());
-			System.out.println (" title: " + rquest.getTitle());
-			System.out.println ("   cnt: " + rquest.getQuestionArray().length);
-    		
     		try {
     			s.beginTransaction();
     			
@@ -526,28 +529,32 @@ import java.net.URL;
     			res.setCode(rquest.getID().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
-    		}
+    		} catch (LocaleException e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("error " + e.toString());
+			}
     		
     		return respdoc;
     	}
 
-    	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId, SystemParameter locale) {
-    		System.out.println (" uQQ 1");
+    	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId, SystemParameter locale) throws HibernateException, LocaleException {
     		com.aladdin.sc.db.QuestionnaireQuestion qq = new com.aladdin.sc.db.QuestionnaireQuestion ();
-    		System.out.println (" uQQ 2");
     		qq.setType(rqq.getType());
-    		System.out.println (" uQQ 3");
     		try {
     			qq.setId(new Integer (rqq.getId()));
     		} catch (NumberFormatException e) {
@@ -555,142 +562,67 @@ import java.net.URL;
     		} catch (Exception e) {
 				qq.setId(null);
 			}
-    		System.out.println (" uQQ 4");
     		qq.setCondition(new Integer(rqq.getCondition()));
-    		System.out.println (" uQQ 5");
     		
     		qq.setPosition(rqq.getPosition());
     		
-    		//qq.setTitle(rqq.getTitle());
-    		
-    		System.out.println (qq.getTitle());
-    		System.out.println (" uQQ 6");
     		qq.setParentid(parentId);
     		qq.setQuest(questId);
     		qq.setGlobalId(rqq.getGlobalID());
-    		System.out.println (" uQQ 7");
-/*    		if (rqq.getDeleted() != true) {
-    			rqq.setDeleted(false);
-    		}
-    		qq.setDeleted(rqq.getDeleted());*/
-    		
-    		//System.out.print (" question ");
-    		//System.out.print (qq.getTitle());
-    		//System.out.print (" ");
-    		//System.out.print (qq.getType());
-    		//System.out.print (" ");
-    		//System.out.println (qq.getId());
     		
     		s.saveOrUpdate(qq);
-    		System.out.println (" uQQ 71");
     		
     		if (!setTranslate("questionnairequestion", qq.getId(), locale, rqq.getTitle())) {
-    			System.out.println (" uQQ 72");
     			qq.setTitle(rqq.getTitle());
-    			System.out.println (" uQQ 73");
     			s.saveOrUpdate(qq);
-    			System.out.println (" uQQ 74");
     		}
     		
-    		System.out.println (" uQQ 8");
     		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
     			for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
-        			System.out.println (" uQQ 9");
         			updateQQ (rqq.getQuestions().getQuestionArray(i), questId, qq.getId(), locale);
-        			System.out.println (" uQQ 10");
         		}    			
     		}
     		
     		if (rqq.getAnswers() != null && rqq.getAnswers().getAnswerArray() != null) {
-
-    			System.out.println (" uQQ 11");
     			QuestionnaireQuestionAnswer rqqa = null;
-    			System.out.println (" uQQ 12");
         		List<Integer> qqaId = new ArrayList<Integer>();
-        		System.out.println (" uQQ 13");
         		
     			for (int i = 0; i < rqq.getAnswers().getAnswerArray().length; i++) {
-    				System.out.println (" uQQ 14");
-    				
         			rqqa = rqq.getAnswers().getAnswerArray(i);
-        			System.out.println (" uQQ 15");
         			
         			String sql = "SELECT id FROM questionnairequestionanswer WHERE question = '" + qq.getId().toString() + "' AND value = '" + new Integer (rqqa.getValue()).toString()  + "'";
-        			System.out.println (" uQQ 16");
-        			List<Object> _id = s.createSQLQuery(sql).list();
-        			System.out.println (" uQQ 17");
+        			@SuppressWarnings("rawtypes")
+					List list = s.createSQLQuery(sql).list();
+					@SuppressWarnings("unchecked")
+					List<Object> _id = list;
         			
         			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = null;
-        			System.out.println (" uQQ 18");
         			
         			if (_id.size() > 0) {
-        				System.out.println (" uQQ 19");
         				qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) s.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer)_id.get(0));
-        				System.out.println (" uQQ 20");
         				qqa.setQuestion(qq.getId());
-        				System.out.println (" uQQ 21");
         				qqa.setValue(new Integer(rqqa.getValue()));
-        				System.out.println (" uQQ 22");
         				qqa.setDeleted(false);
         				qqa.setPosition(rqqa.getPosition());
         				s.merge(qqa);
-        				System.out.println (" uQQ 23");
         			} else {
-        				System.out.println (" uQQ 24");
         				qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
-        				System.out.println (" uQQ 25");
         				qqa.setValue(new Integer(rqqa.getValue()));
-        				System.out.println (" uQQ 26");
         				qqa.setQuestion(qq.getId());
         				qqa.setPosition(rqqa.getPosition());
         				qqa.setDeleted(false);
         				s.saveOrUpdate(qqa);
-        				System.out.println (" uQQ 27");
         			}
         			
-        			System.out.println (" uQQ 28");
         			qqaId.add(qqa.getId());
-        			System.out.println (" uQQ 29");
         			
         			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getDescription())) {
-        				System.out.println (" uQQ 30");
             			qqa.setDescription(rqqa.getDescription());
-            			System.out.println (" uQQ 31");
             			s.saveOrUpdate(qq);
-            			System.out.println (" uQQ 32");
             		}
         			
         		}
-    			
-    			/*String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + qq.getId().toString();
-    			List<Object> qqal = s.createSQLQuery(sql).list();
-    			for (int i = 0; i < qqal.size(); i++) {
-    				boolean del = true;
-    				Integer qqaid = (Integer) qqal.get(i);
-    				for (int j = 0; j < qqaId.size(); j++) {
-    					if (qqaId.get(j) == qqal.get(i)) {
-    						del = false;
-    					}
-    				}
-    				if (del) {
-    					com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) s.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer) qqal.get(i));
-    					qqa.setDeleted(true);
-    					s.saveOrUpdate(qqa);
-    				}
-    			}*/
-    			
-    			/*System.out.println (" uQQ 33");
-    			String sql = "update questionnairequestionanswer set deleted = true where id in (";
-    			System.out.println (" uQQ 34");
-    			for (int i = 0; i < qqaId.size(); i++) {
-    				sql += qqaId.get(i).toString() + ",";
-    			}
-    			sql += "-1)";
-    			System.out.println (" uQQ 35");
-    			s.createSQLQuery(sql).executeUpdate();
-    			System.out.println (" uQQ 36");*/
     		}
-    		//System.out.println (" uQQ 20");
     	}
     	
     	private String getTranslate (String object, String id, String locale, String def) {
@@ -698,8 +630,6 @@ import java.net.URL;
 				String sql = "SELECT value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id;
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
-					//System.out.println (trans.toString());
-					//System.out.println (trans[0].toString());
 					return trans[0].toString();
 				}
 			}
@@ -711,7 +641,7 @@ import java.net.URL;
     		return getTranslate(object, id, locale.getCode(), def);
     	}
     	
-    	private boolean setTranslate (String object, Integer id, SystemParameter locale, String value) {
+    	private boolean setTranslate (String object, Integer id, SystemParameter locale, String value) throws LocaleException {
     		if (locale == null) return false;
     		return setTranslate(object, id, locale.getCode(), value);
     	}
@@ -720,10 +650,6 @@ import java.net.URL;
     		String sql = "SELECT id FROM locale WHERE name = '" + locale + "'";
 			Object[] loc = s.createSQLQuery(sql).list().toArray();
 			if (loc.length == 0) {
-				//s.createSQLQuery("INSERT INTO locale (name) VALUES ('" + locale + "')").executeUpdate();
-				//loc = s.createSQLQuery(sql).list().toArray();
-				//if (loc.length == 0) return new Integer(0);
-				
 				com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
 				l.setName(locale);
 				s.save(l);
@@ -738,16 +664,12 @@ import java.net.URL;
     		return getLocaleId(locale.getCode());
     	}
     	
-    	private boolean setTranslate (String object, Integer id, String locale, String value) {
+    	private boolean setTranslate (String object, Integer id, String locale, String value) throws LocaleException {
 			if (locale != null && locale.length() > 0) {
 				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id.toString();
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
-					com.aladdin.sc.db.Translate t = (Translate) s.load(com.aladdin.sc.db.Translate.class, ( (Integer) ((Object[])trans[0])[0]));
-					t.setValue(value);
-					s.saveOrUpdate(t);
-					//sql = "UPDATE translate SET value = '" + value + "' WHERE id = " + ( (Integer) ((Object[])trans[0])[0]).toString();
-					//return (s.createSQLQuery(sql).executeUpdate() == 1);
+					throw new LocaleException(locale + " is not supported");
 				}
 				Integer localeId = getLocaleId(locale);
 				if (localeId == 0) return false;
@@ -759,10 +681,6 @@ import java.net.URL;
 				t.setEntityid(id);
 				s.save(t);
 				return t.getId() > 0;
-				
-				
-				//sql = "INSERT INTO translate (value, locale, entity, entityid) VALUES ('" + value + "', '" + localeId.toString() + "', '" + object +"', '" + id + "')";
-				//return (s.createSQLQuery(sql).executeUpdate() == 1);
 			}
 			return false;
     	}
@@ -774,36 +692,23 @@ import java.net.URL;
     		// TODO: auth
     		
     		try {
-    			printTimestamp();
     			s.beginTransaction();
-//    			printTimestamp();
     			Object[] ql = s.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
-//    			printTimestamp();
     			for (int i = 0; i < ql.length; i++) {
     				Object[] quest = (Object[]) ql[i];
     				QuestionnaireInfo qi = resp.addNewOut();
     				qi.setID(((Integer)quest[0]).toString());
-//    				qi.setTitle((String)quest[1]);
-//    				printTimestamp();
     				qi.setTitle(getTranslate("questionnaire", qi.getID(), req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
-//    				printTimestamp();
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
-//    			printTimestamp();
     			s.getTransaction().commit();
-//    			printTimestamp();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
 
-		printTimestamp();
-    		
     		return respdoc;
     	}
     	
@@ -877,17 +782,15 @@ import java.net.URL;
     			res.setCode(warn.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-   				System.out.println (e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
@@ -931,17 +834,15 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println(e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		return respdoc;
     	}
@@ -989,8 +890,7 @@ import java.net.URL;
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     			
-    		}  catch (Exception e) {
-    			
+    		}  catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -998,8 +898,17 @@ import java.net.URL;
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
-    		}
+    			res.setDescription("database error " + e.toString());
+    		} catch (Exception e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("object not found");
+			}
     		
     		return respdoc;
     	}
@@ -1054,17 +963,15 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println(e.toString());
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		return respdoc;
     	}
@@ -1127,14 +1034,11 @@ import java.net.URL;
     				qi.setName(p.getM_PersonData().getName());
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -1197,14 +1101,11 @@ import java.net.URL;
     				qi.setName(p.getM_PersonData().getName());
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -1279,17 +1180,15 @@ import java.net.URL;
     			res.setCode(pa.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
@@ -1297,29 +1196,17 @@ import java.net.URL;
 
     	private Integer storeMeasurement(Measurement rm, Integer paid) {
     		long timeInMillis = 0;
-    		System.out.println ("sm 1");
     		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-    		System.out.println ("sm 2");
     		if (paid != null) m.setPatientassessment (paid);
-    		System.out.println ("sm 3");
     		m.setType(rm.getType().getCode());
-    		System.out.println ("sm 4");
     		m.setValue(new BigDecimal (rm.getValue()));
-    		System.out.println ("sm 5");
     		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
-    		System.out.println ("sm 6");
     		m.setDatetime(new Timestamp(timeInMillis));
-    		System.out.println ("sm 7");
     		m.setUnits(rm.getUnits());
-    		System.out.println ("sm 8");
     		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
-    		System.out.println ("sm 9");
     		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
-    		System.out.println ("sm 10");
     		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
-    		System.out.println ("sm 11");
     		s.save (m);
-    		System.out.println ("sm 12");
     		return m.getId();
     	}
     	
@@ -1363,7 +1250,10 @@ import java.net.URL;
     				
     				String patientID = "";
     				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
-    				List<Object> data = s.createSQLQuery(sql).list();
+    				@SuppressWarnings("rawtypes")
+					List list = s.createSQLQuery(sql).list();
+					@SuppressWarnings("unchecked")
+					List<Object> data = list;
     				if (data.size() > 0) {
     					patientID = (String)data.get(0);
     				}
@@ -1376,18 +1266,34 @@ import java.net.URL;
     			res.setCode(id.toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
-    		}
+    		} catch (AxisFault e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("Calling RAAC error " + e.toString());
+			} catch (RemoteException e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("Calling RAAC error " + e.toString());
+			}
     		
     		return respdoc;
     	}
@@ -1417,14 +1323,11 @@ import java.net.URL;
     			com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
         		resp.setOut (exportPatient (patient));
         		s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -1580,23 +1483,20 @@ import java.net.URL;
     			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
     		}
     		
     		return respdoc;
     	}
     	
-    	//@SuppressWarnings("deprecation")
 		public GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswers (GetQuestionnaireAnswersDocument req) {
     		GetQuestionnaireAnswersResponseDocument respdoc = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
     		GetQuestionnaireAnswersResponse resp = respdoc.addNewGetQuestionnaireAnswersResponse();
@@ -1676,14 +1576,11 @@ import java.net.URL;
     			
     			s.getTransaction().commit();
     			
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
 
     		return respdoc;
@@ -1719,16 +1616,14 @@ import java.net.URL;
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
 				res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -1777,18 +1672,25 @@ import java.net.URL;
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		}  catch (Exception e) {
-    			
+    		}  catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
-    		}
+    			res.setDescription("database error " + e.toString());
+    		} catch (Exception e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("object not found");
+			}
     		
     		return respdoc;
     	}
@@ -1839,18 +1741,25 @@ import java.net.URL;
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
-    		}
+    			res.setDescription("database error " + e.toString());
+    		} catch (Exception e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription("object not found");
+			}
     		
     		return respdoc;
     	}
@@ -1890,31 +1799,33 @@ import java.net.URL;
     			res.setCode(q.getId().toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error. " + e.toString());
-    		}
+    		} catch (LocaleException e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+
+    			res.setCode("-2");
+    			res.setStatus((short) 0);
+    			res.setDescription(e.toString());
+			}
     		
     		return respdoc;
     	}
 
-		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq, SystemParameter locale) {
-			System.out.println (" ================ storeQuestionnaire =============== ");
-			
-			System.out.println (rq.getID());
-			System.out.println (rq.getTitle());
-			System.out.println (rq.getVersion());
-			
+		private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq, SystemParameter locale) throws HibernateException, LocaleException {
 			if (rq.getID() != null) {
 				try {
+					@SuppressWarnings("unused")
 					Integer id = new Integer (rq.getID());
 				} catch (NumberFormatException e) {
 					return null;
@@ -1924,17 +1835,9 @@ import java.net.URL;
 			}
 			
 			
-			System.out.println (" sQ 1");
 			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
-			System.out.println (" sQ 2");
 			
-			//if (setTranslate("questionnaire", q.getId().toString(), locale, rq.getTitle())) q.setTitle(rq.getTitle());
-			
-			//System.out.println (rq.getTitle());
-			System.out.println (" sQ 3");
-			//System.out.println (rq.getVersion());
 			q.setVersion(new BigDecimal (rq.getVersion()));
-			System.out.println (" sQ 4");
 			if (rq.getID() != null) {
 				try {
 					q.setId(new Integer (rq.getID()));
@@ -1946,29 +1849,21 @@ import java.net.URL;
 			}
 			s.saveOrUpdate(q);
 			
-			System.out.println (" sQ 41");
-			
 			if (!setTranslate("questionnaire", q.getId(), locale, rq.getTitle())) {
-				System.out.println (" sQ 42");
 				q.setTitle(rq.getTitle());
-				System.out.println (" sQ 43");
 				s.saveOrUpdate(q);
 			}
 			
-			System.out.println (" sQ 5");
-			
 			QuestionnaireQuestion[] rqq = rq.getQuestionArray();
-			System.out.println (" sQ 6");
 			
 			for (int i = 0; i < rqq.length; i++) {
-				System.out.println (" sQ 7");
 				updateQQ(rqq[i], q.getId(), null, locale);
-				System.out.println (" sQ 8");
 			}
 			return q;
 		}
     	
-    	public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument req) {
+    	@SuppressWarnings("deprecation")
+		public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument req) {
     		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
     		
@@ -2024,59 +1919,38 @@ import java.net.URL;
     			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
     			for (int i = 0; i < ml.length; i++) {
-    				//System.out.println ("1");
     				Integer id = (Integer)ml[i];
-    				//System.out.println ("id: " + id.toString());
-    				//System.out.println ("2");
     				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) s.load(com.aladdin.sc.db.Measurement.class, id);
-    				//System.out.println ("3");
     				export.add(exportMeasurement(m));
-    				//System.out.println ("4");
     			}
     			resp.setOutArray((Measurement[]) export.toArray(new Measurement[0]));
     			
     			s.getTransaction().commit();
     			
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
 			}
     		
     		return respdoc;
     	}
 
 		private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
-			//System.out.println ("1");
 			Measurement rm = Measurement.Factory.newInstance();
-			//System.out.println ("2");
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
-			//System.out.println ("3");
 			rmeasurementType.setCode(m.getType());
 
-			//System.out.println ("4");
 			rm.setType(rmeasurementType);
-			//System.out.println ("5");
 			rm.setValue(m.getValue().doubleValue ());
-			//System.out.println ("6");
 			Timestamp datetime = m.getDatetime();
-			//System.out.println ("7");
 			Calendar c = Calendar.getInstance();
-			//System.out.println ("8");
 			c.setTimeInMillis(datetime.getTime());
-			//System.out.println ("9");
 			rm.setDateTime(c);
-			//System.out.println ("10");
 			rm.setUnits(m.getUnits());
-			//System.out.println ("11");
 			rm.setLowerLimit(m.getLowerlimit().doubleValue ());
-			//System.out.println ("12");
 			rm.setUpperLimit(m.getUpperlimit().doubleValue ());
-			//System.out.println ("13");
 			return rm;
 		}
 		
@@ -2105,33 +1979,25 @@ import java.net.URL;
     		try {
     			s.beginTransaction();
     			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
-    			//System.out.println ("dQ 1");
     			Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
-    			//System.out.println ("dQ 2");
     			for (int i = 0; i < qq.length; i++) {
-    				//System.out.println ("dQ 3");
     				dropQQ ((Integer)qq[i]);
-    				//System.out.println ("dQ 4");
     			}
-    			//System.out.println ("dQ 5");
     			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString()).executeUpdate();
-    			//System.out.println ("dQ 6");
     			
     			s.getTransaction().commit();
     			
     			res.setCode(id.toString());
     			res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -2139,21 +2005,13 @@ import java.net.URL;
     	}
     	
     	private void dropQQ (Integer id) {
-    		//System.out.println ("dQQ 1");
     		Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
-    		//System.out.println ("dQQ 2");
 			for (int i = 0; i < qq.length; i++) {
-				//System.out.println ("dQQ 3");
 				dropQQ ((Integer) qq[i]);
-				//System.out.println ("dQQ 4");
 			}
-			//System.out.println ("dQQ 5");
 			s.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
-			//System.out.println ("dQQ 6");
 			s.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
-			//System.out.println ("dQQ 7");
 			s.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
-			//System.out.println ("dQQ 8");
     	}
     	
     	private com.aladdin.sc.db.Task taskToHibernate (Task rtask) {
@@ -2214,14 +2072,12 @@ import java.net.URL;
     			res.setCode(task.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
+
     			res.setCode("-2");
         		res.setDescription("database error ");
         		res.setStatus((short) 0);
@@ -2271,7 +2127,6 @@ import java.net.URL;
     				}
     			}
     			sql += " 1=1 GROUP BY p.id,p.persondata";
-    			//System.out.println (sql);
     			
     			s.beginTransaction();
     			Object[] ql = s.createSQLQuery(sql).list().toArray();
@@ -2284,14 +2139,11 @@ import java.net.URL;
     				ai.setName(a.getM_PersonData().getName());
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -2301,7 +2153,8 @@ import java.net.URL;
     		return 7;
     	}
 
-    	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
+    	@SuppressWarnings("deprecation")
+		public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
@@ -2380,167 +2233,88 @@ import java.net.URL;
     				rt.setText(t.getText());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
-    					//System.out.println ();
-    					//System.out.println ();
-    					//System.out.println (" === QUESTIONNAIRE == ");
-    					//System.out.println (rt.toString());
-    					//System.out.println ();
-    					//System.out.println ();
     				}
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println(e.toString());
 			}
     		
     		return respdoc;
     	}
     	
     	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire q, SystemParameter locale) {
-    		System.out.println (" eQ 1");
     		Questionnaire rq = Questionnaire.Factory.newInstance();
-    		System.out.println (" eQ 2");
     		rq.setID(q.getId().toString());
-    		System.out.println (" eQ 3");
     		
-    		//rq.setTitle(q.getTitle());
     		rq.setTitle(getTranslate("questionnaire", rq.getID(), locale, q.getTitle()));
     		
-    		System.out.println (" eQ 4");
     		rq.setVersion(q.getVersion().doubleValue ());
-    		System.out.println (" eQ 5");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		System.out.println (" eQ 6");
     		
-    		//Object[] qql = q.getQuestionnaireQuestions().toArray();
     		String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
     		Object[] qql = s.createSQLQuery(sql).list ().toArray(); 
     		
-    		System.out.println (" eQ 7");
     		for (int i = 0; i < qql.length; i++) {
-    			System.out.println (" eQ 8");
     			com.aladdin.sc.db.QuestionnaireQuestion qq =
     				(com.aladdin.sc.db.QuestionnaireQuestion)
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
     				;
-    			///if (!qq.getDeleted()) {
     				rqql.add(exportQQ(qq, true, locale));
-    			//}
-    			System.out.println (" eQ 9");
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
-    		System.out.println (" eQ 10");
     		
     		return rq;
     	}
     	
     	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
-    		System.out.println (" eQQ 1");
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
-    		System.out.println (" eQQ 2");
     		
     		rqq.setType(qq.getType());
-    		System.out.println (" eQQ 3");
     		rqq.setId(qq.getId().toString());
     		rqq.setGlobalID(qq.getGlobalId());
     		rqq.setPosition(qq.getPosition());
-    		System.out.println (" eQQ 4");
-    		
-    		//System.out.println ("");
-			//System.out.println ("");
-			//System.out.println (" ======================== ");
-			//System.out.println (qq.getId() + " " + (level1 ? "condition" : "empty"));
-			//System.out.println (" ======================== ");
-			//System.out.println ("");
-			//System.out.println ("");
     		
     		if (!level1) {
     			rqq.setCondition(qq.getCondition().shortValue());
-    			System.out.println (" eQQ 5");
     		}
     		
-    		//rqq.setTitle(qq.getTitle());
     		rqq.setTitle(getTranslate("questionnairequestion", rqq.getId(), locale, qq.getTitle()));
     		
-    		//rqq.setDeleted(qq.getDeleted());
-    		
-    		System.out.println (" eQQ 6");
-    		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
-    		System.out.println (" eQQ 7");
     		Object[] qqal = qq.getQuestionnaireQuestionAnswers().toArray();
-    		System.out.println (" eQQ 8");
     		for (int i = 0; i < qqal.length; i++) {
-    			System.out.println (" eQQ 9");
     			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
-    			System.out.println (" eQQ 91");
 				if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
-    			System.out.println (" eQQ 10");
     		}
-    		System.out.println (" eQQ 11");
     		rqq.addNewAnswers();
-    		System.out.println (" eQQ 12");
     		rqq.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) rqqal.toArray(new QuestionnaireQuestionAnswer[0]));
-    		System.out.println (" eQQ 13");
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		System.out.println (" eQQ 14");
     		Object[] qql = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'").list().toArray();
-    		System.out.println (" eQQ 15");
     		for (int i = 0; i < qql.length; i++) {
-    			System.out.println (" eQQ 16");
-//			//System.out.println (qql[i].class.toString());
-				//System.out.println (qql[i].toString());
-				//System.out.println (qql.length);
-
-
-//			Object[] _obj_ = qq
-				//System.out.println ("b");
 				Integer _id = (Integer) (qql[i]);
-				//System.out.println ("c");
-				//System.out.println (_id);
-				//System.out.println ("load...");
 				com.aladdin.sc.db.QuestionnaireQuestion _obj = 
 					(com.aladdin.sc.db.QuestionnaireQuestion)
 						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
 				rqql.add ( exportQQ ( _obj, false, locale ) );
-
-//			if (qql.length > 1) rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) qql[i]));
-//			else rqql.add(exportQQ( (com.aladdin.sc.db.QuestionnaireQuestion) (Object) qql));
-    			System.out.println (" eQQ 17");
     		}
-    		System.out.println (" eQQ 18");
     		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
-    		System.out.println (" eQQ 19");
     		
     		return rqq;
     	}
     	
     	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
-    		System.out.println (" eQQA 1");
     		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
-    		System.out.println (" eQQA 2");
-    		
     		
     		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, qqa.getDescription()));
-    		System.out.println (" eQQA 21");
     		if (qqa.getPosition() != null) rqqa.setPosition(qqa.getPosition());
     		
-    		System.out.println (" eQQA 3");
     		rqqa.setValue(qqa.getValue().shortValue());
-    		System.out.println (" eQQA 4");
-//    		if (qqa.getDeleted() != null) rqqa.setDeleted(qqa.getDeleted());
-//    		else rqqa.setDeleted(false);
-    		//System.out.println (" eQQA 5");
-//    		rqqa.setId(qqa.getId());
-    		//System.out.println (" eQQA 6");
     		
     		return rqqa;
     	}
@@ -2583,15 +2357,14 @@ import java.net.URL;
     			res.setCode(es.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -2641,15 +2414,14 @@ import java.net.URL;
     			res.setCode(ca.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -2703,15 +2475,23 @@ import java.net.URL;
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
+        		res.setStatus((short) 0);
+			} catch (Exception e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
+    			res.setCode("-2");
+        		res.setDescription("object not found");
         		res.setStatus((short) 0);
 			}
     		
@@ -2756,8 +2536,7 @@ import java.net.URL;
     			res.setCode(administrator.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -2765,7 +2544,7 @@ import java.net.URL;
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
@@ -2810,16 +2589,14 @@ import java.net.URL;
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println (e.toString());
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -2850,14 +2627,11 @@ import java.net.URL;
     			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) s.load(com.aladdin.sc.db.Clinician.class, id);
         		resp.setOut (exportClinician (clinician));
         		s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -2906,16 +2680,14 @@ import java.net.URL;
     			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println (e.toString());
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
     		}
     		
@@ -2938,14 +2710,11 @@ import java.net.URL;
     				re.setID(es.getId().toString());
     				re.setType(es.getType());
     			}
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
 			}
     		
     		return respdoc;
@@ -2975,14 +2744,11 @@ import java.net.URL;
         		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, id);
         		s.getTransaction().commit();
         		resp.setOut (exportCarer (carer));
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -3011,14 +2777,11 @@ import java.net.URL;
 				com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) s.load(com.aladdin.sc.db.Administrator.class, id);
         		resp.setOut (exportAdministrator (administrator));
         		s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -3066,8 +2829,7 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -3075,7 +2837,7 @@ import java.net.URL;
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
@@ -3097,19 +2859,13 @@ import java.net.URL;
     			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) s.load(com.aladdin.sc.db.Questionnaire.class, id);
     			final SystemParameter locale = req.getGetQuestionnaire().getLocale();
     			
-    			System.out.println ("============== getQuestionnaire ===============");
-    			System.out.println ("locale: " + locale.getCode());
-    			
 				resp.setOut(exportQuestionnaire(q, locale));
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
 			}
 
     		return respdoc;
@@ -3141,55 +2897,28 @@ import java.net.URL;
     		try {
     			s.beginTransaction();
     			
-    			System.out.println (req.getStoreQuestionnaireAnswers().getData().toString());
-    			
-    			System.out.println ("sqa 1");
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
-    			System.out.println ("sqa 2");
 				Timestamp datetime = new Timestamp(0);
-				System.out.println ("sqa 3");
 				if (data.getDateTime() != null) datetime = new Timestamp(data.getDateTime().getTimeInMillis());
-				System.out.println ("sqa 4");
     			Integer objectId = new Integer (data.getObjectID());
-    			System.out.println ("sqa 5");
     			Integer userId = new Integer (data.getUserID());
-    			System.out.println ("sqa 6");
     			Integer taskId = new Integer (data.getTaskID());
-    			System.out.println ("sqa 7");
     			
     			Integer id = 0;
-    			System.out.println ("sqa 8");
     			QuestionnaireAnswer[] rqal = data.getAnswerArray();
-    			System.out.println ("sqa 9");
     			for (int i = 0; i < rqal.length; i++) {
-    				System.out.println ("sqa 10");
     				com.aladdin.sc.db.QuestionnaireAnswer qa = new com.aladdin.sc.db.QuestionnaireAnswer();
-    				System.out.println ("sqa 11");
-    				System.out.println(i);
-    				System.out.println(rqal[i].toString());
-    				System.out.println(rqal[i].getValue());
-    				System.out.println(rqal[i].getQuestionID());
     				if (rqal[i].getQuestionID() != null) qa.setQuestion(new Integer (rqal[i].getQuestionID()));
-    				System.out.println ("sqa 12");
     				qa.setValue(rqal[i].getValue());
-    				System.out.println ("sqa 13");
     				qa.setUserId(userId);
-    				System.out.println ("sqa 14");
     				qa.setObjectId(objectId);
-    				System.out.println ("sqa 15");
     				qa.setDateTime(datetime);
-    				System.out.println ("sqa 16");
     				s.save(qa);
-    				System.out.println ("sqa 17");
     				id = qa.getId();
-    				System.out.println ("sqa 18");
     			}
     			
-    			System.out.println ("sqa 19");
     			String sql = "UPDATE task SET datetimefulfilled = '" + datetime.toString() + "' WHERE id = " + taskId.toString();
-    			System.out.println ("sqa 20");
     			s.createSQLQuery(sql).executeUpdate();
-    			System.out.println ("sqa 21");
     			
     			s.getTransaction().commit();
     			
@@ -3203,16 +2932,22 @@ import java.net.URL;
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println (e.toString());
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
+        		res.setStatus((short) 0);
+			} catch (AxisFault e) {
+				res.setCode("-2");
+        		res.setDescription("Calling of RAAC error " + e.toString());
+        		res.setStatus((short) 0);
+			} catch (RemoteException e) {
+				res.setCode("-2");
+        		res.setDescription("Calling of RAAC error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -3240,119 +2975,74 @@ import java.net.URL;
     		
     		try {
     			s.beginTransaction();
-    			//System.out.println ("1");
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
-    			//System.out.println ("2");
     			Object[] pal = s.createSQLQuery("SELECT id FROM patientassessment WHERE patient = " + patientId.toString()).list().toArray();
-    			//System.out.println ("3");
     			
     			for (int i = 0; i < pal.length; i++) {
-    				//System.out.println ("4");
     				Integer id = (Integer) pal[0];
     				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) s.load (com.aladdin.sc.db.PatientAssessment.class, id);
-    				//System.out.println ("5");
     			
 	    			PatientAssessment rpa = resp.addNewOut();
-	    			//System.out.println ("6");
 	    			
 	    			rpa.setID(pa.getId().toString());
-	    			//System.out.println ("7");
 	    			rpa.setPatientID(pa.getPatient().toString());
-	    			//System.out.println ("8");
 	    			Calendar c1 = Calendar.getInstance();
-	    			//System.out.println ("9");
 	    			c1.setTimeInMillis(pa.getDateOfAssessment().getTime());
-	    			//System.out.println ("10");
 	    			rpa.setDateOfAssessment(c1);
-	    			//System.out.println ("11");
 	    			SystemParameter aetology = SystemParameter.Factory.newInstance();
-	    			//System.out.println ("12");
 	    			aetology.setCode(pa.getAetology().toString());
-	    			//System.out.println ("13");
 	    			rpa.setAetology(aetology);
-	    			//System.out.println ("14");
 	    			rpa.setTimeEllapsedSinceDiagnosed(pa.getTimeElapsedSinceDiagnose().shortValue());
-	    			//System.out.println ("15");
 	    			rpa.setSeverity(pa.getSeverity().shortValue());
-	    			//System.out.println ("16");
 	    			rpa.setRelevantPathologyAntecedents(pa.getRelevantPathologyAntecedents());
-	    			//System.out.println ("17");
 	    			rpa.setComorbidity(pa.getComorbidity());
-	    			//System.out.println ("18");
 	    			rpa.setCharlsonComorbidityIndex(pa.getCharlsonComobodityIndex().shortValue());
-	    			//System.out.println ("19");
 	    			rpa.setBarthelIndex(pa.getBarthelIndex().shortValue());
-	    			//System.out.println ("20");
 	    			rpa.setLawtonIndex(pa.getLawtonIndex().shortValue());
-	    			//System.out.println ("21");
 	    			rpa.setMMSE(pa.getMMSE().shortValue());
-	    			//System.out.println ("22");
 	    			rpa.setMDRS(pa.getMDRS().shortValue());
-	    			//System.out.println ("23");
 	    			
 	    			if (pa.getBlessedScalePart1() != null) rpa.setBlessedScalePart1(pa.getBlessedScalePart1().doubleValue());
 	    			else rpa.setBlessedScalePart1(0.0);
-	    			//System.out.println ("24");
 	    			
 	    			if (pa.getBlessedScalePart2() != null) rpa.setBlessedScalePart2(pa.getBlessedScalePart2().shortValue());
 	    			else rpa.setBlessedScalePart2((short)0);
 	    			
-	    			//System.out.println ("25");
 	    			if (pa.getBlessedScalePart3() != null) rpa.setBlessedScalePart3(pa.getBlessedScalePart3().shortValue());
 	    			else rpa.setBlessedScalePart3((short)0);
 	    			
-	    			//System.out.println ("26");
 	    			if (pa.getChecklistMBPC() != null) rpa.setChecklistMBP(pa.getChecklistMBPC().shortValue());
 	    			else rpa.setChecklistMBP((short)0);
 	    			
-	    			//System.out.println ("27");
 	    			if (pa.getNPQISeverity() != null) rpa.setNPQISeverity(pa.getNPQISeverity().shortValue());
 	    			else rpa.setNPQISeverity((short)0);
 	    			
-	    			//System.out.println ("28");
 	    			if (pa.getNPQIStress() != null) rpa.setNPQIStress(pa.getNPQIStress().shortValue());
 	    			else rpa.setNPQIStress((short)0);
 	    			
-	    			//System.out.println ("29");
 	    			if (pa.getGDS() != null) rpa.setGDS(pa.getGDS().shortValue());
 	    			else rpa.setGDS((short)0);
 	    			
-	    			//System.out.println ("30");
 	    			rpa.setFalls(pa.getFalls());
-	    			//System.out.println ("31");
 	    			rpa.setIncontinence(pa.getIncontinence());
-	    			//System.out.println ("32");
 	    			rpa.setDelirium(pa.getDelirium());
-	    			//System.out.println ("33");
 	    			rpa.setImmobility(pa.getImmobility());
-	    			//System.out.println ("34");
 	    			rpa.setSensorialDeficits(pa.getSensorialDeficits());
-	    			//System.out.println ("35");
 	    			rpa.setPharmacologicalTreatment(pa.getPharmacologyTreatment());
-	    			//System.out.println ("36");
 	    			
 	    			Object[] ml = pa.getMeasurements().toArray();
-	    			//System.out.println ("37");
 	    			List<Measurement> rml = new ArrayList<Measurement> ();
-	    			//System.out.println ("38");
 	    			for (int j = 0; j < ml.length; j++) {
-	    				//System.out.println ("39");
 	    				rml.add(exportMeasurement( (com.aladdin.sc.db.Measurement) ml[j]));
-	    				//System.out.println ("40");
 	    			}
-	    			//System.out.println ("41");
 	    			rpa.setClinicalDataArray((Measurement[]) rml.toArray(new Measurement[0]));
-	    			//System.out.println ("42");
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
 			}
     		
     		return respdoc;
@@ -3399,14 +3089,11 @@ import java.net.URL;
         			rca.setQualityOfLife(ca.getQualityOfLife().shortValue());
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
 			}
     		
     		return respdoc;
@@ -3446,15 +3133,14 @@ import java.net.URL;
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     			
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -3496,26 +3182,18 @@ import java.net.URL;
     			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) LEFT JOIN patientcarer ON (patientcarer.patient = p.id) WHERE ";
     			
     			SearchCriteria[] sc = req.getListOfPatients().getFilterArray();
-    			//System.out.println ("listOfPatients");
-    			//System.out.println (sc.length);
-    			//System.out.println (fl.size());
     			for (int i = 0; i < sc.length; i++) {
     				
     				if (sc[i].getFieldName() == null) continue;
     				
-    				//System.out.println (sc[i].getFieldName());
     				for (int j = 0; j < fl.size(); j++) {
-    					//System.out.println (fl.get(j).getName());
     					if (fl.get(j).getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
-    						//System.out.println ("1");
     						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
     						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
     						sql += " AND ";
-    					} // else //System.out.println ("0");
+    					}
     				}
-    				//System.out.println ("if");
     				if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
-    					//System.out.println ("carer");
 						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
 						sql += String.format(op.get(opnum), "patientcarer.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
 						sql += " AND ";
@@ -3539,14 +3217,11 @@ import java.net.URL;
     				qi.setName(p.getM_PersonData().getName());
     			}
     			s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
     		}
     		
     		return respdoc;
@@ -3592,83 +3267,54 @@ import java.net.URL;
     			s.beginTransaction();
     			Object[] list = s.createSQLQuery(sql).list().toArray();
 				for (int i = 0; i < list.length; i++) {
-					//System.out.println ("gW 1");
     				Integer id = (Integer) list[i];
-    				//System.out.println ("gW 2");
 					com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) s.load(com.aladdin.sc.db.Warning.class, id);
-					//System.out.println ("gW 3");
 					Warning rw = resp.addNewOut();
-					//System.out.println ("gW 4");
     				rw.setID(w.getId().toString());
-    				//System.out.println ("gW 5");
     				
     				SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
-    				//System.out.println ("gW 6");
     				typeOfWarning.setCode(w.getTypeOfWarning().toString());
-    				//System.out.println ("gW 7");
     				
     				rw.setTypeOfWarning(typeOfWarning);
-    				//System.out.println ("gW 8");
     				Calendar c1 = Calendar.getInstance();
-    				//System.out.println ("gW 9");
     				c1.setTimeInMillis(w.getDateTimeOfWarning().getTime());
-    				//System.out.println ("gW 10");
     				rw.setDateTimeOfWarning(c1);
-    				//System.out.println ("gW 11");
     				
     				SystemParameter effect = SystemParameter.Factory.newInstance();
-    				//System.out.println ("gW 12");
     				
     				if (w.getEffect() == null) w.setEffect(0);
     				
     				effect.setCode(w.getEffect().toString());
-    				//System.out.println ("gW 13");
     				
     				rw.setEffect(effect);
-    				//System.out.println ("gW 14");
     				
     				SystemParameter indicator = SystemParameter.Factory.newInstance();
-    				//System.out.println ("gW 15");
     				if (w.getIndicator() == null) w.setIndicator(0);
     				indicator.setCode(w.getIndicator().toString());
-    				//System.out.println ("gW 16");
     				
     				rw.setIndicator(indicator);
-    				//System.out.println ("gW 17");
     				
     				SystemParameter riskLevel = SystemParameter.Factory.newInstance();
-    				//System.out.println ("gW 18");
     				if (w.getRiskLevel() == null) w.setRiskLevel(0);
     				riskLevel.setCode(w.getRiskLevel().toString());
-    				//System.out.println ("gW 19");
     				
     				rw.setRiskLevel(riskLevel);
-    				//System.out.println ("gW 20");
     				rw.setJustificationText(w.getJustificationText());
-    				//System.out.println ("gW 21");
     				
     				SystemParameter emergencyLevel = SystemParameter.Factory.newInstance();
-    				//System.out.println ("gW 22");
     				if (w.getEmergencyLevel() == null) w.setEmergencyLevel(0);
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
-    				//System.out.println ("gW 23");
     				
     				rw.setEmergencyLevel(emergencyLevel);
-    				//System.out.println ("gW 24");
     				rw.setPatientID(w.getPatientID());
-    				//System.out.println ("gW 25");
     				rw.setDelivered(w.getDelivered());
-    				//System.out.println ("gW 26");
     			}
 				s.getTransaction().commit();
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
-    			System.out.println (e.toString());
 			}
     		
     		return respdoc;
@@ -3710,8 +3356,7 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -3719,7 +3364,7 @@ import java.net.URL;
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
-    			res.setDescription("database error");
+    			res.setDescription("database error " + e.toString());
     		}
     		
     		return respdoc;
@@ -3757,16 +3402,14 @@ import java.net.URL;
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-    		} catch (Exception e) {
-    			
+    		} catch (HibernateException e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println (e.toString());
     			res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
     		
@@ -3813,15 +3456,14 @@ import java.net.URL;
         		res.setCode(u.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-        	} catch (Exception e) {
-        		
+        	} catch (HibernateException e) {
         		try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
         		
         		res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
         	
@@ -3849,15 +3491,14 @@ import java.net.URL;
         		res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-        	} catch (Exception e) {
-        		
+        	} catch (HibernateException e) {
         		try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
         		
         		res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
         	
@@ -3894,15 +3535,14 @@ import java.net.URL;
         			res.setStatus((short) 0);
         		}
         		s.getTransaction().commit();
-        	} catch (Exception e) {
-        		//System.out.println ("1");
+        	} catch (HibernateException e) {
         		try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-        		System.out.println ("2");
+
         		res.setCode("-2");
-        		res.setDescription("database error sql = " + sql + " ex = " + e.toString());
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
         	
@@ -3932,15 +3572,14 @@ import java.net.URL;
         		res.setCode(id.toString());
     			res.setDescription("ok");
     			res.setStatus((short) 1);
-        	} catch (Exception e) {
-        		
+        	} catch (HibernateException e) {
         		try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
         		
         		res.setCode("-2");
-        		res.setDescription("database error");
+        		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			}
         	
@@ -4013,8 +3652,7 @@ import java.net.URL;
         		res.setCode(u.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-        	} catch (Exception e) {
-        		
+        	} catch (HibernateException e) {
         		try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4022,6 +3660,15 @@ import java.net.URL;
         		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
+        		res.setStatus((short) 0);
+			} catch (Exception e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+        		
+        		res.setCode("-2");
+        		res.setDescription("forum error " + e.toString());
         		res.setStatus((short) 0);
 			}
         	return respdoc;
@@ -4053,8 +3700,7 @@ import java.net.URL;
         			res.setStatus((short) 0);
         		}
         		s.getTransaction().commit();
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4074,7 +3720,6 @@ import java.net.URL;
 			
 			try {
 				Integer type = new Integer (req.getGetSystemParameterList().getType());
-				//Integer language = new Integer (req.getGetSystemParameterList().getLanguage());
 				SystemParameter locale = req.getGetSystemParameterList().getLocale();
 				if (locale == null) locale = SystemParameter.Factory.newInstance();
 				if (locale.getCode() == null || locale.getCode() == "") locale.setCode("en_US");
@@ -4093,14 +3738,11 @@ import java.net.URL;
 				
 				s.getTransaction().commit();
 				
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-				
-				System.out.println (e.toString());
 			}
 			
 			return respdoc;
@@ -4151,8 +3793,7 @@ import java.net.URL;
     			
     			s.getTransaction().commit();
 				
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4161,8 +3802,15 @@ import java.net.URL;
     			res.setCode("-2");
     			res.setDescription("database error " + e.toString());
     			res.setStatus((short)0);
-				
-				System.out.println (e.toString());
+			} catch (Exception e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+    			
+    			res.setCode("-2");
+    			res.setDescription("data not valid");
+    			res.setStatus((short)0);
 			}
 			
 			return respdoc;
@@ -4196,14 +3844,11 @@ import java.net.URL;
 				
 				s.getTransaction().commit();
 				
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-				
-				System.out.println (e.toString());
 			}
 			
 			return respdoc;
@@ -4244,14 +3889,11 @@ import java.net.URL;
         			}
         		}
         		s.getTransaction().commit();
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-				
-				System.out.println (e.toString());
 			}
 			
 			return respdoc;
@@ -4298,13 +3940,8 @@ import java.net.URL;
 				s.beginTransaction();
 				
 				String sql = "SELECT id FROM aladdinuser WHERE personid like '" + uid.toString() + "' AND type = '" + type.toString() + "'";
-				//System.out.println (sql);
-				//System.out.println (1);
 				SQLQuery q = s.createSQLQuery(sql);
-				//System.out.println (2);
 				Object[] obj = q.list().toArray();
-				//System.out.println (obj.length);
-				//System.out.println (3);
 				if (obj.length == 1) {
 					res.setCode(obj[0].toString());
 					res.setStatus((short)1);
@@ -4317,8 +3954,7 @@ import java.net.URL;
 				
 				s.getTransaction().commit();
 				
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4326,7 +3962,6 @@ import java.net.URL;
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
-				System.out.println (e.toString());
 				res.setStatus((short) 0);
 			}
 			
@@ -4370,8 +4005,7 @@ import java.net.URL;
 				res.setStatus((short)1);
 				res.setDescription("ok");
 				
-			} catch (Exception e) {
-				
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4379,7 +4013,6 @@ import java.net.URL;
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
-				System.out.println (e.toString());
 				res.setStatus((short) 0);
 			}
 			
@@ -4419,7 +4052,6 @@ import java.net.URL;
 					com.aladdin.sc.db.Task task = taskToHibernate(rtask);
 	    			s.save (task);
 					startDate.add(Calendar.DAY_OF_YEAR, frequency);
-					System.out.println (task.getId());
 				}
 				
 				s.getTransaction().commit();
@@ -4428,8 +4060,7 @@ import java.net.URL;
 				res.setStatus((short)1);
 				res.setDescription("ok");
         		
-        	} catch (Exception e) {
-				
+        	} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -4437,7 +4068,6 @@ import java.net.URL;
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
-				System.out.println (e.toString());
 				res.setStatus((short) 0);
 			}
         	
@@ -4491,7 +4121,6 @@ import java.net.URL;
 				Integer id = (Integer) list[i];
 				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) s.load(com.aladdin.sc.db.Measurement.class, id);
 				ml.add(exportMeasurement(m));
-				//resp.setOutArray(i, exportMeasurement(m));
 			}
 			resp.setOutArray((Measurement[]) ml.toArray(new Measurement[0]));
 			
@@ -4555,11 +4184,12 @@ import java.net.URL;
 					out.setQuestionnaire(exportQuestionnaire(dbTask.getM_Questionnaire(), req.getGetTask().getLocale()));
 				}
 				
-        	} catch (Exception e) {
-				System.out.println (e.toString());
+        	} catch (HibernateException e) {
+        		try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
 			}
-			
-			
 			
 			return respdoc;
 		}
@@ -4568,7 +4198,7 @@ import java.net.URL;
 			GetMediaContentResponseDocument respdoc = GetMediaContentResponseDocument.Factory.newInstance();
 			GetMediaContentResponse resp = respdoc.addNewGetMediaContentResponse();
 			
-			Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
+			Field[] field = com.aladdin.sc.db.EntertainmentContent.class.getDeclaredFields();
 			String sql = "SELECT id FROM entertainmentcontent WHERE ";
 			
 			SearchCriteria[] sc = req.getGetMediaContent().getFilterArray();
@@ -4638,14 +4268,13 @@ import java.net.URL;
 				res.setCode(savedId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-			} catch (Exception e) {
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			System.out.println (e.toString());
     			res.setCode("-2");
-				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
 			}
 			
@@ -4666,13 +4295,13 @@ import java.net.URL;
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-			} catch (Exception e) {
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			System.out.println (e.toString());
-    			res.setCode("-2");
+    			
+				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
 			}
@@ -4697,12 +4326,12 @@ import java.net.URL;
 				res.setCode(savedId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-			} catch (Exception e) {
+			} catch (HibernateException e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			System.out.println (e.toString());
+    			
     			res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
@@ -4754,8 +4383,11 @@ import java.net.URL;
     				rqa.setGlobalID(qq.getGlobalId().toString());
     			}
     			
-    		} catch (Exception e) {
-    			System.out.println (e.toString());
+    		} catch (HibernateException e) {
+    			try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
     		}
 			
 			return respdoc;
@@ -4765,18 +4397,21 @@ import java.net.URL;
 			ListOfSupportedLocalesResponseDocument respdoc = ListOfSupportedLocalesResponseDocument.Factory.newInstance();
 			ListOfSupportedLocalesResponse resp = respdoc.addNewListOfSupportedLocalesResponse();
 			
-			System.out.println ("================== listOfSupportedLocales ==================");
-			
 			try {
-				com.aladdin.sc.db.Locale[] locale = (Locale[]) s.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);
+				@SuppressWarnings("unchecked")
+				Object[] array = s.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);
+				com.aladdin.sc.db.Locale[] locale = (Locale[]) array;
 				for (int i = 0; i < locale.length; i++) {
 					SystemParameter l = resp.addNewOut();
 					l.setCode(locale[i].getId().toString());
 					l.setDescription(locale[i].getName());
 				}
 				
-			} catch (Exception e) {
-				System.out.println (e.toString());
+			} catch (HibernateException e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
 			}
 			
 			return respdoc;
@@ -4795,8 +4430,11 @@ import java.net.URL;
 				res.setDescription(getTranslate("questionnairequestion", questionID, locale, ""));
 				res.setCode(questionID);
 				
-			} catch (Exception e) {
-				System.out.println (e.toString());
+			} catch (HibernateException e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
 			}
 			
 			return respdoc;
