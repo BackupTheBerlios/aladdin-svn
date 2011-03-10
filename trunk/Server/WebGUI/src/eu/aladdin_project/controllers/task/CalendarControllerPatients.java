@@ -189,11 +189,13 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		
 	}
 	
-	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, ArrayList<QuestionnaireAnswer> qa, String ret){
+	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, ArrayList<QuestionnaireAnswer> qa, String ret) throws RemoteException{
 		for(int i = 0; i < q.length ; i++){
 			QuestionnaireAnswer currentqa = qa.get(0);
 			qa.remove(0);
-			ret+=q[i].getTitle()+" "+ currentqa.get_value()+" ("+ currentqa.getValue() + ")\n";
+			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+			String valuestring = proxy.getQuestionnaireAnswerValue(q[i].getId(), currentqa.getValue(), SystemDictionary.getLocale());
+			ret+=q[i].getTitle()+" "+ valuestring+" ("+ currentqa.getValue() + ")\n";
 			if(q[i].getQuestions() != null && q[i].getQuestions().getQuestion() != null && q[i].getQuestions().getQuestion().length>0){
 				for(int ii = 0 ; ii < q[i].getQuestions().getQuestion().length ; ii++){
 					if(q[i].getQuestions().getQuestion()[ii].getCondition() == new UnsignedByte(currentqa.getValue())){

@@ -76,4 +76,5 @@ public interface StorageComponent_PortType extends java.rmi.Remote {
     public eu.aladdin_project.xsd.QuestionnaireAnswers getQuestionnaireAnswersByTask(java.lang.String taskId, java.lang.String userId) throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.SystemParameter[] listOfSupportedLocales() throws java.rmi.RemoteException;
     public eu.aladdin_project.xsd.OperationResult getQuestionDescription(java.lang.String questionID, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException;
+    public java.lang.String getQuestionnaireAnswerValue(java.lang.String questionId, java.lang.String value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException;
 }
