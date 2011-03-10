@@ -37,6 +37,7 @@ public class QuestionnaireTranslateWindow extends Window{
 	private ArrayList<RelatedQuestion> questionlist = new ArrayList<RelatedQuestion>();
 	private ArrayList<RelatedQuestion> localeqlist =  new ArrayList<RelatedQuestion>();
 	private String currentquestionnaireid;
+	private static String fieldWidth = "300px";
 
 	public QuestionnaireTranslateWindow(){
 		
@@ -241,6 +242,8 @@ public class QuestionnaireTranslateWindow extends Window{
 		Textbox translation = (Textbox)titlehbox.getChildren().get(1);
 		if(question.getTitle()!=null && !question.getTitle().equals("null")){
 			translation.setValue(question.getTitle());
+		}else{
+			translation.setValue("");
 		}
 		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
 			QuestionnaireQuestionAnswer[] transans = question.getAnswers().getAnswer();
@@ -251,6 +254,8 @@ public class QuestionnaireTranslateWindow extends Window{
 				Textbox anstranslation = (Textbox)anshbox.getChildren().get(1);
 				if(anslist.get(i-1) != null){
 					anstranslation.setValue(anslist.get(i-1).getDescription());
+				}else{
+					anstranslation.setValue("");
 				}
 			}
 		}
@@ -279,7 +284,9 @@ public class QuestionnaireTranslateWindow extends Window{
 		Hbox hboxtitle = new Hbox();
 		Textbox qtitle = new Textbox(question.getTitle());
 		qtitle.setReadonly(true);
+		qtitle.setWidth(fieldWidth);
 		Textbox qtitletrans = new Textbox();
+		qtitletrans.setWidth(fieldWidth);
 		hboxtitle.appendChild(qtitle);
 		hboxtitle.appendChild(qtitletrans);
 		vbox2.appendChild(hboxtitle);
@@ -287,11 +294,14 @@ public class QuestionnaireTranslateWindow extends Window{
 		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
 			QuestionnaireQuestionAnswer[] answers = question.getAnswers().getAnswer();
 			List<QuestionnaireQuestionAnswer> anslist = Arrays.asList(answers);
+			Collections.sort(anslist, new QuestionAnswerSort());
 			for(int i = 0; i < anslist.size() ; i++){
 				Hbox hboxans = new Hbox();
 				Textbox qans = new Textbox(anslist.get(i).getDescription());
 				qans.setReadonly(true);
+				qans.setWidth(fieldWidth);
 				Textbox qanstrans = new Textbox();
+				qanstrans.setWidth(fieldWidth);
 				hboxans.appendChild(qans);
 				hboxans.appendChild(qanstrans);
 				vbox2.appendChild(hboxans);

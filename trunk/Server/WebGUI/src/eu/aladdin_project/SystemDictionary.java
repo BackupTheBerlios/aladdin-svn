@@ -46,6 +46,7 @@ public class SystemDictionary {
 		if(logger == null){
 			logger = Logger.getLogger("WebGUILogger");
 			logger.setLevel(Level.INFO);
+			//logger.setLevel(Level.DEBUG);
 			loglayout = new SimpleLayout();
 			logappender = new ConsoleAppender(loglayout);
 			logger.addAppender(logappender);

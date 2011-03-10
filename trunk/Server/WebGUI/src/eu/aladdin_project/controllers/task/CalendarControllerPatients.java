@@ -1,10 +1,13 @@
 package eu.aladdin_project.controllers.task;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.axis.types.UnsignedByte;
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
@@ -30,6 +33,8 @@ import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.Questionnaire;
+import eu.aladdin_project.xsd.QuestionnaireAnswer;
+import eu.aladdin_project.xsd.QuestionnaireAnswers;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.SearchCriteria;
 import eu.aladdin_project.xsd.SystemParameter;
@@ -103,9 +108,13 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 				if(tasktype.equals(SystemDictionary.TASK_TYPE_CARERQS) || tasktype.equals(SystemDictionary.TASK_TYPE_PATIENTQS)){
 					//TODO retrieve Questionnaire answers and show in the task window
 					Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
-					//proxy.getQuestionnaireAnswers(objectId, fromDate, toDate, userId)
-					
-					String responses = provideQuestionnaireResponse(q.getQuestion(), "");
+					QuestionnaireAnswers qa = proxy.getQuestionnaireAnswersByTask((String)scevent.getParams().get("task"), userid);
+					SystemDictionary.webguiLog("INFO", "ANSWERS LENGTH: "+ qa.getAnswer().length);
+					ArrayList<QuestionnaireAnswer> qalist = new ArrayList<QuestionnaireAnswer>();
+					for(int i = 0 ; i < qa.getAnswer().length ; i++){
+						qalist.add(i, qa.getAnswer(i));						
+					}
+					String responses = provideQuestionnaireResponse(q.getQuestion(), qalist, "");
 					SystemDictionary.webguiLog("DEBUG", "RESPONSES: "+responses);
 					bookEventWin.getFellow("qsanswersrow").setVisible(true);
 					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
@@ -180,11 +189,18 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		
 	}
 	
-	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, String ret){
+	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, ArrayList<QuestionnaireAnswer> qa, String ret){
 		for(int i = 0; i < q.length ; i++){
-			ret+=q[i].getTitle()+"\n";
+			QuestionnaireAnswer currentqa = qa.get(0);
+			qa.remove(0);
+			ret+=q[i].getTitle()+" "+ currentqa.get_value()+" ("+ currentqa.getValue() + ")\n";
 			if(q[i].getQuestions() != null && q[i].getQuestions().getQuestion() != null && q[i].getQuestions().getQuestion().length>0){
-				ret = provideQuestionnaireResponse(q[i].getQuestions().getQuestion(), ret);
+				for(int ii = 0 ; ii < q[i].getQuestions().getQuestion().length ; ii++){
+					if(q[i].getQuestions().getQuestion()[ii].getCondition() == new UnsignedByte(currentqa.getValue())){
+						ret = provideQuestionnaireResponse(new QuestionnaireQuestion[]{q[i].getQuestions().getQuestion()[ii]}, qa, ret);
+					}
+				}
+				
 			}
 		}
 		return ret;

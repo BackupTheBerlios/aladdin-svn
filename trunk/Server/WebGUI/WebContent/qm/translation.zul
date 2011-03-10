@@ -27,7 +27,7 @@
 	<label value="${title}" sclass="newitem" />
 		<grid>
 			<columns>
-				<column align="right" width="200px" valign="top"/>
+				<column align="right" width="100px" valign="top"/>
 				<column align="left"/>
 			</columns>
 			<rows id="rows_questions">
@@ -40,15 +40,15 @@
 				<row>
 					<label value="${versionl}"/>
 					<hbox>
-						<textbox id="trans_version"/>
+						<textbox id="trans_version" width="300px"/>
 						<textbox id="trans_qid" visible="false"/>
 					</hbox>
 				</row>
 				<row>
 					<label value="${descl}"/>
 					<hbox>
-						<textbox id="trans_title_original" readonly="true"/>
-						<textbox id="trans_title"/>
+						<textbox id="trans_title_original" readonly="true" width="300px"/>
+						<textbox id="trans_title" width="300px"/>
 					</hbox>
 					
 				</row>
