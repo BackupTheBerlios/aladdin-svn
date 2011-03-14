@@ -39,6 +39,7 @@ import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument.G
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument.SaveWarning;
 import eu.aladdin_project.storagecomponent.SaveWarningDocument;
+import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsResponseDocument.AnalyzeMeasurementsResponse;
@@ -119,6 +120,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		AuthResponseDocument res;
 		try {
 			res = sc.auth(authdoc);
+			System.out.println("AAA raac user authenticated successfully");
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 			return respdoc;
@@ -154,6 +156,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		GregorianCalendar twoMonthsBefore = (GregorianCalendar) GregorianCalendar
 				.getInstance();
 		twoMonthsBefore.add(Calendar.DATE, -60);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+		String formatted_currentDate = formatter.format(currentDate.getTime());
+		String formatted_twoMonthsBefore = formatter.format(twoMonthsBefore.getTime());
+		System.out.println("AAA getQuestionnaireAnswers for User ID " + ObjectUserID + " from " + formatted_twoMonthsBefore + " to " + formatted_currentDate);
 
 		GetQuestionnaireAnswersDocument qDocument = GetQuestionnaireAnswersDocument.Factory
 				.newInstance();
@@ -177,6 +184,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		System.out.println("AAA getQuestionnaireAnswers returned questionnaire answers");
 
 		GetQuestionnaireAnswersResponse gQuestAnsResp = qResponseDocument
 				.getGetQuestionnaireAnswersResponse();
@@ -193,6 +202,10 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		previousAnswerArray = previousQuestionnaireAnswers.getAnswerArray();
 		// currentAnswerArray
 		List<RuleMap> DefinedRules = GetRules();
+		
+		if (DefinedRules != null && DefinedRules.size() > 0)
+			System.out.println("AAA " + String.valueOf(DefinedRules.size()) + " rules read ok");
+		
 		RuleMap currentRule = null;
 		
 		double previousScore = 0;
@@ -201,6 +214,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		for (int j = 0; j < previousAnswerArray.length; j++) {
 			
 			String globalID = previousAnswerArray[j].getGlobalID();
+			System.out.println("AAA Reading previous answer GlobalID = " + globalID);
 			String globalIDGroup = getglobalIDGroup(globalID);
 			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
 			if (globalIDGroupAsDouble == 4000) {
@@ -212,6 +226,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		for (int j = 0; j < currentAnswerArray.length; j++) {
 			
 			String globalID = currentAnswerArray[j].getGlobalID();
+			System.out.println("AAA Reading current answer GlobalID = " + globalID);
 			String globalIDGroup = getglobalIDGroup(globalID);
 			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
 			if (globalIDGroupAsDouble == 4000) {
@@ -237,7 +252,10 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			}
 			
 			String currentValueStr = currentAnswer.getValue();
+			System.out.println("AAA Reading current value = " + currentValueStr);
 			String previousValueStr = previousAnswer.getValue();
+			System.out.println("AAA Reading previous value = " + previousValueStr);
+			
 			if ("9".equals(currentValueStr) || "9".equals(previousValueStr))
 				continue;
 			
@@ -311,14 +329,17 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			
 			if (generatedWarning != null) {
 
+				System.out.println("AAA Warning generated");
 				SaveWarningDocument swd = SaveWarningDocument.Factory
 						.newInstance();
 				SaveWarning sw = swd.addNewSaveWarning();
 				sw.setWarn(generatedWarning);
 				sw.setUserId(UserID);
 				try {
-					sc.saveWarning(swd);
-					System.out.printf("%s\n", generatedWarning.getJustificationText());
+					SaveWarningResponseDocument respSaveWarning = sc.saveWarning(swd);
+					OperationResult operationResult = respSaveWarning.getSaveWarningResponse().getOut();
+					System.out.printf("AAA SaveWarning returned Code = %s, Description = %s \n", operationResult.getCode(), operationResult.getDescription());
+					System.out.printf("AAA %s\n", generatedWarning.getJustificationText());
 
 				} catch (Exception e) {
 					e.printStackTrace();
