@@ -152,7 +152,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		// get all questionnaire answers
 		GregorianCalendar currentDate = (GregorianCalendar) GregorianCalendar
 				.getInstance();
-		//currentDate.add(Calendar.DATE, 0);
+		currentDate.add(Calendar.DATE, -1);
 		GregorianCalendar twoMonthsBefore = (GregorianCalendar) GregorianCalendar
 				.getInstance();
 		twoMonthsBefore.add(Calendar.DATE, -60);
