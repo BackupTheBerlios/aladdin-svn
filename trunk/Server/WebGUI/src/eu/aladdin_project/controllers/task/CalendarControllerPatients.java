@@ -119,7 +119,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					bookEventWin.getFellow("qsanswersrow").setVisible(true);
 					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
 					
-				}else if(tasktype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT)){
+				}else if(tasktype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT) || tasktype.equals(SystemDictionary.TASK_TYPE_ACTMONITOR)){
 					String resultfieldvalue = "";
 					SearchCriteria searchc = new SearchCriteria("task", new SystemParameter(SystemDictionary.COMPARE_EQ, ""), (String)scevent.getParams().get("task"), "");
 					Measurement[] results = proxy.getMeasurement(new SearchCriteria[]{searchc}, userid);
@@ -192,13 +192,16 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, ArrayList<QuestionnaireAnswer> qa, String ret) throws RemoteException{
 		for(int i = 0; i < q.length ; i++){
 			QuestionnaireAnswer currentqa = qa.get(0);
+			SystemDictionary.webguiLog("INFO", "SIZE before: "+qa.size());
 			qa.remove(0);
+			SystemDictionary.webguiLog("INFO", "SIZE after: "+qa.size());
 			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 			String valuestring = proxy.getQuestionnaireAnswerValue(q[i].getId(), currentqa.getValue(), SystemDictionary.getLocale());
 			ret+=q[i].getTitle()+" "+ valuestring+" ("+ currentqa.getValue() + ")\n";
 			if(q[i].getQuestions() != null && q[i].getQuestions().getQuestion() != null && q[i].getQuestions().getQuestion().length>0){
 				for(int ii = 0 ; ii < q[i].getQuestions().getQuestion().length ; ii++){
-					if(q[i].getQuestions().getQuestion()[ii].getCondition() == new UnsignedByte(currentqa.getValue())){
+					SystemDictionary.webguiLog("TRACE", "CONDITION: "+q[i].getQuestions().getQuestion()[ii].getCondition() +":" +currentqa.getValue());
+					if(q[i].getQuestions().getQuestion()[ii].getCondition().equals(new UnsignedByte(currentqa.getValue()))){
 						ret = provideQuestionnaireResponse(new QuestionnaireQuestion[]{q[i].getQuestions().getQuestion()[ii]}, qa, ret);
 					}
 				}

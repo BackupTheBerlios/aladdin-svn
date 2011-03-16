@@ -81,38 +81,10 @@ public class MeasurementPopupController extends Window{
 		calto.setTime(this.measurementto);
 		Calendar calfrom = new GregorianCalendar();
 		calfrom.setTime(this.measurementfrom);
-		int typeofmint = -1;
-		if(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT.equals(mtype)){
-			typeofmint = SystemDictionary.MEASUREMENT_BLODDPRESSURE_INT;
-		}else if(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT.equals(mtype)){
-			typeofmint = SystemDictionary.MEASUREMENT_WEIGHT_INT;
-		}else{
-			//TODO Exit
-		}
-		Measurement[] measures = sc.getPatientMeasurement(this.patientid, typeofmint, calfrom, calto, loggeduser);
-				
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		
-		if(measures != null && measures.length > 0){
-			List<Measurement> measurementlist = Arrays.asList(measures);
-			Collections.sort(measurementlist, new MeasurementDateSort());
-			Iterator<Measurement> it = measurementlist.iterator();
-			while(it.hasNext()){
-				Measurement mnext = it.next();
-				dataset.addValue(mnext.getValue(), mnext.getType().getDescription(), mnext.getDateTime().get(Calendar.DATE)+"/"+(mnext.getDateTime().get(Calendar.MONTH)+1));
-			}
-		}else{
-			//TODO Sample data
-			dataset.addValue(70,"Weight Measurement", "1");
-			dataset.addValue(72,"Weight Measurement", "5");
-			dataset.addValue(74,"Weight Measurement", "10");
-			dataset.addValue(74,"Weight Measurement", "14");
-			dataset.addValue(76,"Weight Measurement", "20");
-			dataset.addValue(78,"Weight Measurement", "24");
-			dataset.addValue(78,"Weight Measurement", "30");
-		}
-		
-		JFreeChart chart = ChartFactory.createLineChart("Weight Measurements","Day of month", "Weight", dataset, PlotOrientation.VERTICAL, false, false, false);
+		DefaultCategoryDataset dataset = this.fillData(mtype, calfrom, calto, loggeduser, sc);
+		String title = mtype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT) ? "Weight Measurements" : "Blood pressure measurements";
+		String axis = mtype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT) ? "Weight" : "Blood pressure";
+		JFreeChart chart = ChartFactory.createLineChart(title,"Day of month", axis, dataset, PlotOrientation.VERTICAL, false, false, false);
 		chart.setBackgroundPaint(Color.white);
 		
 		CategoryPlot cplot = chart.getCategoryPlot();
@@ -123,7 +95,6 @@ public class MeasurementPopupController extends Window{
 		renderer.setSeriesShapesVisible(0,true);
 		renderer.setDrawOutlines(true);
 		renderer.setUseFillPaint(true);
-
 		NumberAxis rangeAxis = (NumberAxis)cplot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		try{
@@ -137,6 +108,52 @@ public class MeasurementPopupController extends Window{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private DefaultCategoryDataset fillData(String typeofint, Calendar calfrom, Calendar calto, String loggeduser, StorageComponentProxy sc) throws RemoteException{
+		int typeofmint = -1;
+		if(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT.equals(typeofint)){
+			//SystemDictionary.MEASUREMENT_BLODDPRESSURE_INT;
+			typeofmint = 11;
+			//typeofmint = 12;
+		}else if(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT.equals(typeofint)){
+			typeofmint = SystemDictionary.MEASUREMENT_WEIGHT_INT;
+		}
+		Measurement[] measures = sc.getPatientMeasurement(this.patientid, typeofmint, calfrom, calto, loggeduser);
+		SystemDictionary.webguiLog("INFO", "Measures: "+measures);
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		if(measures != null && measures.length > 0){
+			List<Measurement> measurementlist = Arrays.asList(measures);
+			Collections.sort(measurementlist, new MeasurementDateSort());
+			Iterator<Measurement> it = measurementlist.iterator();
+			while(it.hasNext()){
+				Measurement mnext = it.next();
+				dataset.addValue(mnext.getValue(), "original", mnext.getDateTime().get(Calendar.DATE)+"/"+(mnext.getDateTime().get(Calendar.MONTH)+1));
+			}
+		}else{
+			//TODO Sample data
+			dataset.addValue(70,"Weight Measurement", "1");
+			dataset.addValue(72,"Weight Measurement", "5");
+			dataset.addValue(74,"Weight Measurement", "10");
+			dataset.addValue(74,"Weight Measurement", "14");
+			dataset.addValue(76,"Weight Measurement", "20");
+			dataset.addValue(78,"Weight Measurement", "24");
+			dataset.addValue(78,"Weight Measurement", "30");
+		}
+		if(typeofmint == 11){
+			measures = sc.getPatientMeasurement(this.patientid, 12, calfrom, calto, loggeduser);
+			//dataset = new DefaultCategoryDataset();
+			if(measures != null && measures.length > 0){
+				List<Measurement> measurementlist = Arrays.asList(measures);
+				Collections.sort(measurementlist, new MeasurementDateSort());
+				Iterator<Measurement> it = measurementlist.iterator();
+				while(it.hasNext()){
+					Measurement mnext = it.next();
+					dataset.addValue(mnext.getValue(), "diastolic", mnext.getDateTime().get(Calendar.DATE)+"/"+(mnext.getDateTime().get(Calendar.MONTH)+1));
+				}
+			}
+		}
+		return dataset;
 	}
 	
 	private class DownloadListener implements EventListener{

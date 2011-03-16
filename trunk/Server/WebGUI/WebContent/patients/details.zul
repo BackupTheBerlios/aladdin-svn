@@ -43,6 +43,7 @@
 				assinfolist = new eu.aladdin_project.controllers.details.assessment.AssessmentInfo[assessmentlist.length];
 				for(int i = 0 ; assessmentlist.length > i ; i++){
 					assinfolist[i] = new eu.aladdin_project.controllers.details.assessment.AssessmentInfo(assessmentlist[i]);
+					eu.aladdin_project.SystemDictionary.webguiLog("DEBUG", "ASSESSMENT ID: "+assessmentlist[i].getID());
 				}
 			}
 		}catch(RemoteException re){
@@ -143,16 +144,17 @@
 			<column/>
 		</columns>
 		<rows>
-			<row forEach="${assinfolist }" id="${each.ID }">
+			<row forEach="${assinfolist }" >
 				<label value="${each.ID }"/>
 				<label value="${each.dateOfAssessment }"/>
 				<label value="${each.aetology }"/>
 				<label value="${each.timeEllapsedSinceDiagnosed }"/>
 				<label value="${each.severity }"/>
-				<label value="Details" sclass="link" onClick="detailswin.viewAssessmentDetail(self.getParent().getId(), objid)"/>
+				<label value="Details" sclass="link" onClick="detailswin.viewAssessmentDetail(((Label)self.getParent().getChildren().get(0)).getValue(), objid)"/>
 			</row>
 		</rows>
 	</grid>
+	<button label="Create new assessment" onClick="detailswin.createAssessment()"/>
 	<separator height="20px"/>
 	</window>
 		<zscript>

@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers.details;
 
 import java.rmi.RemoteException;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -134,10 +135,34 @@ public class DetailPatientController extends DetailSDController{
 		}
 	}
 	
+	public void createAssessment() throws SuspendNotAllowedException, InterruptedException{
+		assessmentWindow = (AssessmentPopupController)Executions.createComponents("assessment.zul", this ,null);
+		this.turnAssessment2Form(assessmentWindow);
+		assessmentWindow.setVisible(true);
+		assessmentWindow.doModal();
+	}
+	
+	protected void turnAssessment2Form(AssessmentPopupController assessmentWindow){
+		for(int i = 0; i < 26 ; i++){
+			if(i<10){
+				assessmentWindow.getFellow("field0"+i).setVisible(false);
+				assessmentWindow.getFellow("field0"+i+"_in").setVisible(true);
+			}else{
+				assessmentWindow.getFellow("field"+i).setVisible(false);
+				assessmentWindow.getFellow("field"+i+"_in").setVisible(true);
+			}
+		}
+		assessmentWindow.getFellow("measurementsrow").setVisible(false);
+		assessmentWindow.getFellow("buttonrow").setVisible(true);
+		assessmentWindow.getFellow("noformrow").setVisible(false);
+		((Textbox)assessmentWindow.getFellow("patientid")).setValue(this.currentid);
+	}
+	
 	protected void setAssessmentValues(AssessmentPopupController assessmentWindow, PatientAssessment assessment){
 		((Label)assessmentWindow.getFellow("field00")).setValue(assessment.getID());
 		((Label)assessmentWindow.getFellow("field01")).setValue(assessment.getPatientID());
-		((Label)assessmentWindow.getFellow("field02")).setValue(assessment.getDateOfAssessment().toString());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		((Label)assessmentWindow.getFellow("field02")).setValue(sdf.format(assessment.getDateOfAssessment()));
 		((Label)assessmentWindow.getFellow("field03")).setValue(assessment.getAetology().toString());
 		((Label)assessmentWindow.getFellow("field04")).setValue(assessment.getTimeEllapsedSinceDiagnosed().toString());
 		((Label)assessmentWindow.getFellow("field05")).setValue(assessment.getSeverity().toString());

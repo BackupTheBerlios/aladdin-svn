@@ -483,4 +483,10 @@ public class SystemDictionary {
 	public static final String COMPARE_NOTEQ = "4";
 	public static final String COMPARE_LIKE = "5";
 	public static final String COMPARE_BETWEEN = "7";
+	
+	public static final String AETIOLOGY_ALZHEIMER = "1";
+	public static final String AETIOLOGY_VASCULAR = "2";
+	public static final String AETIOLOGY_MIXED = "3";
+	public static final String AETIOLOGY_PARKINSON = "4";
+	public static final String AETIOLOGY_OTHERS = "5";
 }
