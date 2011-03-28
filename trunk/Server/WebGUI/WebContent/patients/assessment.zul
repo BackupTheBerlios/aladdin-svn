@@ -52,7 +52,7 @@
 				<label value="${aspat }"/><hbox><label id="field01"/><textbox id="field01_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="${asdate }"/><hbox><label id="field02"/><textbox id="field02_in" visible="false"/></hbox>
+				<label id="datelabel" value="${asdate }"/><hbox id="datehbox"><label id="field02"/><textbox id="field02_in" visible="false"/></hbox>
 				<label value="${asaet }"/>
 				<hbox>
 					<label id="field03"/>
@@ -66,7 +66,7 @@
 				</hbox>
 			</row>
 			<row>
-				<label value="${astimee }"/><hbox><label id="field04"/><intbox id="field04_in" visible="false"/></hbox>
+				<label value="${astimee }"/><hbox><label id="field04"/><textbox id="field04_in" visible="false"/></hbox>
 				<label value="${assever }"/><hbox><label id="field05"/><textbox id="field05_in" visible="false"/></hbox>
 			</row>
 			<row>
@@ -74,29 +74,29 @@
 				<label value="${ascomor }"/><hbox><label id="field07"/><textbox id="field07_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="${ascharl }"/><hbox><label id="field08"/><intbox id="field08_in" visible="false"/></hbox>
-				<label value="${asbarth }"/><hbox><label id="field09"/><intbox id="field09_in" visible="false"/></hbox>
+				<label value="${ascharl }"/><hbox><label id="field08"/><textbox id="field08_in" visible="false"/></hbox>
+				<label value="${asbarth }"/><hbox><label id="field09"/><textbox id="field09_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="${aslaw }"/><hbox><label id="field10"/><intbox id="field10_in" visible="false"/></hbox>
-				<label value="${asmmse }"/><hbox><label id="field11"/><intbox id="field11_in" visible="false"/></hbox>
+				<label value="${aslaw }"/><hbox><label id="field10"/><textbox id="field10_in" visible="false"/></hbox>
+				<label value="${asmmse }"/><hbox><label id="field11"/><textbox id="field11_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="${asmdrs }"/><hbox><label id="field12"/><intbox id="field12_in" visible="false"/></hbox>
-				<label value="${asbl1 }"/><hbox><label id="field13"/><intbox id="field13_in" visible="false"/></hbox>
+				<label value="${asmdrs }"/><hbox><label id="field12"/><textbox id="field12_in" visible="false"/></hbox>
+				<label value="${asbl1 }"/><hbox><label id="field13"/><textbox id="field13_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="${asbl2 }"/><hbox><label id="field14"/><intbox id="field14_in" visible="false"/></hbox>
-				<label value="${asbl3 }"/><hbox><label id="field15"/><intbox id="field15_in" visible="false"/></hbox>
+				<label value="${asbl2 }"/><hbox><label id="field14"/><textbox id="field14_in" visible="false"/></hbox>
+				<label value="${asbl3 }"/><hbox><label id="field15"/><textbox id="field15_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="${asmbpc }"/><hbox><label id="field16"/><intbox id="field16_in" visible="false"/></hbox>
-				<label value="${asnpqi1 }"/><hbox><label id="field17"/><intbox id="field17_in" visible="false"/></hbox>
+				<label value="${asmbpc }"/><hbox><label id="field16"/><textbox id="field16_in" visible="false"/></hbox>
+				<label value="${asnpqi1 }"/><hbox><label id="field17"/><textbox id="field17_in" visible="false"/></hbox>
 				
 			</row>
 			<row>
-				<label value="${asnpqi2 }"/><hbox><label id="field18"/><intbox id="field18_in" visible="false"/></hbox>
-				<label value="${asgds }"/><hbox><label id="field19"/><intbox id="field19_in" visible="false"/></hbox>
+				<label value="${asnpqi2 }"/><hbox><label id="field18"/><textbox id="field18_in" visible="false"/></hbox>
+				<label value="${asgds }"/><hbox><label id="field19"/><textbox id="field19_in" visible="false"/></hbox>
 			</row>
 			<row>
 				<label value="${asfalls }"/><hbox><label id="field20"/><checkbox id="field20_in" checked="false" visible="false"/></hbox>

@@ -155,14 +155,22 @@ public class DetailPatientController extends DetailSDController{
 		assessmentWindow.getFellow("measurementsrow").setVisible(false);
 		assessmentWindow.getFellow("buttonrow").setVisible(true);
 		assessmentWindow.getFellow("noformrow").setVisible(false);
+		assessmentWindow.getFellow("datelabel").setVisible(false);
+		assessmentWindow.getFellow("datehbox").setVisible(false);
 		((Textbox)assessmentWindow.getFellow("patientid")).setValue(this.currentid);
+		
 	}
 	
 	protected void setAssessmentValues(AssessmentPopupController assessmentWindow, PatientAssessment assessment){
 		((Label)assessmentWindow.getFellow("field00")).setValue(assessment.getID());
 		((Label)assessmentWindow.getFellow("field01")).setValue(assessment.getPatientID());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		((Label)assessmentWindow.getFellow("field02")).setValue(sdf.format(assessment.getDateOfAssessment()));
+		if(assessment.getDateOfAssessment() == null){
+			((Label)assessmentWindow.getFellow("field02")).setValue("");
+		}else{
+			((Label)assessmentWindow.getFellow("field02")).setValue(sdf.format(assessment.getDateOfAssessment().getTime()));
+		}
+		
 		((Label)assessmentWindow.getFellow("field03")).setValue(assessment.getAetology().toString());
 		((Label)assessmentWindow.getFellow("field04")).setValue(assessment.getTimeEllapsedSinceDiagnosed().toString());
 		((Label)assessmentWindow.getFellow("field05")).setValue(assessment.getSeverity().toString());

@@ -449,10 +449,12 @@ public class AladdinFormControllerWindow extends Window{
 	 */
 	protected void addAddressFieldsValues(){
 		this.addresses = this.currentdata.getAddressList().getAddress();
-		SystemDictionary.webguiLog("DEBUG", "Addresses LENGTH: "+this.addresses.length);
-		for(int i = 0; i<this.addresses.length; i++){
-			if(this.addresses[i]!=null){
-				this.insertAddressRow(this.addresses[i]);
+		if(this.addresses != null){
+			SystemDictionary.webguiLog("DEBUG", "Addresses LENGTH: "+this.addresses.length);
+			for(int i = 0; i<this.addresses.length; i++){
+				if(this.addresses[i]!=null){
+					this.insertAddressRow(this.addresses[i]);
+				}
 			}
 		}
 	}
@@ -546,10 +548,12 @@ public class AladdinFormControllerWindow extends Window{
 	
 	protected void addCommunicationFieldsValues(){
 		this.communications = this.currentdata.getCommunicationList().getCommunication();
+		if(this.communications != null){
 		SystemDictionary.webguiLog("DEBUG", "Communications LENGTH: "+ this.communications.length);
-		for(int i = 0 ; i<this.communications.length; i++){
-			if(this.communications[i] != null){
-				this.insertComRow(this.communications[i]);
+			for(int i = 0 ; i<this.communications.length; i++){
+				if(this.communications[i] != null){
+					this.insertComRow(this.communications[i]);
+				}
 			}
 		}
 	}

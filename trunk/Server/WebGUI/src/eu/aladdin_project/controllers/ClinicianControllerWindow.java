@@ -6,13 +6,17 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Separator;
 
 import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.controllers.details.ChangePassword;
 import eu.aladdin_project.xsd.Clinician;
 import eu.aladdin_project.xsd.Identifier;
 import eu.aladdin_project.xsd.OperationResult;
@@ -50,13 +54,20 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
+		Hbox buttonshbox = new Hbox();
 		if(this.detailsmode){
 			Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 			if(isadmin){
-				this.appendChild(this.createEditButton());
+				buttonshbox.appendChild(this.createEditButton());
+				Separator sep = new Separator();
+				sep.setWidth("10px");
+				sep.setOrient("horizontal");
+				buttonshbox.appendChild(sep);
+				buttonshbox.appendChild(this.createPasswordButton());
+				this.appendChild(buttonshbox);
 			}
 		}else{
-			this.appendChild(this.createUpdateButton());
+			buttonshbox.appendChild(this.createUpdateButton());
 		}
 	}
 	
@@ -156,6 +167,28 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		});
 		
 		return btn;
+	}
+	
+	public Button createPasswordButton(){
+		Button btn = new Button("Change Password");
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				createPasswordDialog();
+			}
+		});
+		return btn;
+	}
+	
+	public void createPasswordDialog() throws SuspendNotAllowedException, InterruptedException, RemoteException{
+		ChangePassword win = (ChangePassword)Executions.createComponents("password.zul", this, null);
+		
+		this.appendChild(win);
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		String userid = (String)Sessions.getCurrent().getAttribute("userid");
+		OperationResult ores = proxy.getUserIdByPersonId(this.currentid, SystemDictionary.USERTYPE_CLINICIAN_INT, userid);
+		win.setuserid(ores.getCode());
+		win.doModal();
 	}
 	
 }

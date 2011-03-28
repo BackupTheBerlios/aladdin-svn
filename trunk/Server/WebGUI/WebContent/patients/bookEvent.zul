@@ -131,9 +131,9 @@
 				<row id="urlrow" visible="false">
 					<label value="${turl }"/>
 					<!-- <textbox id="urlfield"/> -->
-					<listbox mold="select" id="urlfield" onSelect="create_my_entry.setTextFromExercise()">
+					<listbox mold="select" id="urlfield">
 						<!-- <listitem forEach="${urilist }" label="${each.title }" value="${each.url }"/> --> 
-						<listitem forEach="${urilist }" label="${each.address }" value="${each.description }"/>
+						<listitem forEach="${urilist }" value="${each.address }" label="${each.description }"/>
 					</listbox>
 				</row>
 				<row id="textrow" visible="false">

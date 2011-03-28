@@ -132,13 +132,13 @@ public class MeasurementPopupController extends Window{
 			}
 		}else{
 			//TODO Sample data
-			dataset.addValue(70,"Weight Measurement", "1");
-			dataset.addValue(72,"Weight Measurement", "5");
-			dataset.addValue(74,"Weight Measurement", "10");
-			dataset.addValue(74,"Weight Measurement", "14");
-			dataset.addValue(76,"Weight Measurement", "20");
-			dataset.addValue(78,"Weight Measurement", "24");
-			dataset.addValue(78,"Weight Measurement", "30");
+			dataset.addValue(0,"Weight Measurement", "1");
+			dataset.addValue(0,"Weight Measurement", "5");
+			dataset.addValue(0,"Weight Measurement", "10");
+			dataset.addValue(0,"Weight Measurement", "15");
+			dataset.addValue(0,"Weight Measurement", "20");
+			dataset.addValue(0,"Weight Measurement", "25");
+			dataset.addValue(0,"Weight Measurement", "30");
 		}
 		if(typeofmint == 11){
 			measures = sc.getPatientMeasurement(this.patientid, 12, calfrom, calto, loggeduser);

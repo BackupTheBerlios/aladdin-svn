@@ -12,13 +12,16 @@ import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Separator;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.controllers.details.ChangePassword;
 import eu.aladdin_project.controllers.details.assessment.AssessmentPopupController;
 import eu.aladdin_project.controllers.details.assessment.CarerAssessmentInfo;
 import eu.aladdin_project.controllers.details.assessment.CarerAssessmentPopupController;
@@ -64,11 +67,18 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
 		this.addSocioDemographicDataFieldsValue();
+		Hbox buttonshbox = new Hbox();
 		if(this.detailsmode){
-			this.appendChild(this.createEditButton());
+			buttonshbox.appendChild(this.createEditButton());
 		}else{
-			this.appendChild(this.createUpdateButton());
+			buttonshbox.appendChild(this.createUpdateButton());
 		}
+		Separator sep = new Separator();
+		sep.setWidth("10px");
+		sep.setOrient("horizontal");
+		buttonshbox.appendChild(sep);
+		buttonshbox.appendChild(this.createPasswordButton());
+		this.appendChild(buttonshbox);
 	}
 	
 	/**
@@ -175,6 +185,28 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		return btn;
 	}
 	
+	public Button createPasswordButton(){
+		Button btn = new Button("Change Password");
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				createPasswordDialog();
+			}
+		});
+		return btn;
+	}
+	
+	public void createPasswordDialog() throws SuspendNotAllowedException, InterruptedException, RemoteException{
+		ChangePassword win = (ChangePassword)Executions.createComponents("password.zul", this, null);
+		
+		this.appendChild(win);
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		String userid = (String)Sessions.getCurrent().getAttribute("userid");
+		OperationResult ores = proxy.getUserIdByPersonId(this.currentid, SystemDictionary.USERTYPE_CARER_INT, userid);
+		win.setuserid(ores.getCode());
+		win.doModal();
+	}
+	
 	public void viewAssessmentDetail(String assid, String carerid){
 		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 		CarerAssessment assessment = null;
@@ -214,6 +246,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		}
 		assessmentWindow.getFellow("buttonrow").setVisible(true);
 		assessmentWindow.getFellow("noformrow").setVisible(false);
+		assessmentWindow.getFellow("datelabel").setVisible(false);
 		((Textbox)assessmentWindow.getFellow("carerid")).setValue(this.currentid);
 	}
 	
