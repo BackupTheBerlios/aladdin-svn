@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Aladdin.ClientApplication.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Aladdin_ClientApplication_aladdinService_StorageComponent" Type="(Web Service URL)" Scope="User">
+      <Value Profile="(Default)">http://193.174.152.114:8080/axis2/services/StorageComponent/</Value>
+    </Setting>
+    <Setting Name="DefaultLanguage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en_UK</Value>
+    </Setting>
+    <Setting Name="UpdatesUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://dev2.biomed.ntua.gr/aladdin/updates.xml</Value>
+    </Setting>
+    <Setting Name="OptionsLocked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
