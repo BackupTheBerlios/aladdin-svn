@@ -53,14 +53,14 @@
 			</row>
 			<row>
 				<label value="Relevant health problems"/><hbox><label id="field00"/><textbox id="field00_in" visible="false"/></hbox>
-				<label value="Severity of burden"/><hbox><label id="field01"/><textbox id="field01_in" visible="false"/></hbox>
+				<label value="Severity of burden (numeric 0-88)"/><hbox><label id="field01"/><textbox id="field01_in" visible="false"/></hbox>
 			</row>
 			<row>
 				<label value="Emotional/Mental disorders"/><hbox><label id="field02"/><textbox id="field02_in" visible="false"/></hbox>
 				<label value="Psychoactive drugs"/><hbox><label id="field03"/><textbox id="field03_in" visible="false"/></hbox>
 			</row>
 			<row>
-				<label value="Life quality"/><hbox><label id="field04"/><textbox id="field04_in" visible="false"/></hbox>
+				<label value="Life quality (Burckhardt scale 16-112)"/><hbox><label id="field04"/><textbox id="field04_in" visible="false"/></hbox>
 				<label id="datelabel" value="Date"/><hbox><label id="field05"/><textbox id="field05_in" visible="false"/></hbox>
 			</row>
 			<row spans="1,3" id="buttonrow" visible="false">

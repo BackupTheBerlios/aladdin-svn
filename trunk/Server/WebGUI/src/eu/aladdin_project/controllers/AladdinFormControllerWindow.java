@@ -89,6 +89,10 @@ public class AladdinFormControllerWindow extends Window{
 		return pdData;
 	}
 	
+	protected String getUsername(){
+		return ((Textbox)getFellow("pat_uname")).getValue();
+	}
+	
 	
 	/**
 	 * Private method which retrieves and generate required information to be stored on the identifier Object 
@@ -323,6 +327,7 @@ public class AladdinFormControllerWindow extends Window{
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
 		rowsA.add(new SimpleFieldData(name, "pat_name"));
 		rowsA.add(new SimpleFieldData(surname, "pat_sname"));
+		rowsA.add(new SimpleFieldData("Username", "pat_uname"));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");

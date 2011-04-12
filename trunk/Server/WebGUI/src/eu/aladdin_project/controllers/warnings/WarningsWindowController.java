@@ -62,7 +62,11 @@ public class WarningsWindowController extends Window {
 			((Textbox)warningPopup.getFellow("justfield")).setValue(warning[0].getJustificationText());
 			((Textbox)warningPopup.getFellow("emergencyfield")).setValue(SystemDictionary.getWarningEmergencyLevelLabel(warning[0].getEmergencyLevel().getCode()));
 			((Textbox)warningPopup.getFellow("patientfield")).setValue(warning[0].getID());
-			((Textbox)warningPopup.getFellow("patientnamefield")).setValue(pinfo.getPersonData().getSurname()+", "+pinfo.getPersonData().getName());
+			if(pinfo != null && pinfo.getPersonData() != null){
+				((Textbox)warningPopup.getFellow("patientnamefield")).setValue(pinfo.getPersonData().getSurname()+", "+pinfo.getPersonData().getName());
+			}else{
+				((Textbox)warningPopup.getFellow("patientnamefield")).setValue("N/A");
+			}
 			((Textbox)warningPopup.getFellow("delivfield")).setValue(warning[0].getDelivered()? Labels.getLabel("common.yes") : Labels.getLabel("common.no"));
 			((Row)warningPopup.getFellow("warningid")).setVisible(false);
 			if(warning[0].getDelivered()){
@@ -182,13 +186,13 @@ public class WarningsWindowController extends Window {
 		try{
 			User userlogged = proxy.getUser(id);
 			String clinidlogged = userlogged.getPersonID();
-			SearchCriteria novalid = new SearchCriteria("clinician", new SystemParameter(SystemDictionary.COMPARE_NOTEQ,""), clinidlogged, null);
-			PatientInfo[] novalidusers = proxy.listOfPatients(new SearchCriteria[]{novalid}, id);
+			//SearchCriteria novalid = new SearchCriteria("clinician", new SystemParameter(SystemDictionary.COMPARE_NOTEQ,""), clinidlogged, null);
+			//PatientInfo[] novalidusers = proxy.listOfPatients(new SearchCriteria[]{novalid}, id);
 			ArrayList<SearchCriteria> zerolist = new ArrayList<SearchCriteria>();
-			for(PatientInfo patient : novalidusers){
-				zerolist.add(new SearchCriteria("patientID",new SystemParameter(SystemDictionary.COMPARE_NOTEQ,""),patient.getID(),null));
-				
-			}
+			//for(PatientInfo patient : novalidusers){
+			//	zerolist.add(new SearchCriteria("patientID",new SystemParameter(SystemDictionary.COMPARE_NOTEQ,""),patient.getID(),null));
+			//	
+			//}
 			SearchCriteria patfil = this.showPatientWarnings();
 			SearchCriteria readfil = this.showReadOrAll();
 			SearchCriteria datefrom = this.showFromFilter();
@@ -218,7 +222,7 @@ public class WarningsWindowController extends Window {
 			Grid warningsgrid = (Grid)this.getFellow("warningsgrid");
 			Rows newsrows = new Rows();
 			for( WarningInfo rowi : wi ){
-				if(rowi.getClinicianResponsible().equals(clinidlogged)){
+				//if(rowi.getClinicianResponsible().equals(clinidlogged)){
 					Row newrow = new Row();
 					newrow.appendChild(new Label(rowi.getType()));
 					Label datelabel = new Label(rowi.getDate());
@@ -232,7 +236,7 @@ public class WarningsWindowController extends Window {
 					newrow.appendChild(link);
 					newrow.setId(rowi.getID());
 					newsrows.appendChild(newrow);
-				}
+				//}
 			}
 			warningsgrid.removeChild(warningsgrid.getFellow("filteredrows"));
 			newsrows.setId("filteredrows");

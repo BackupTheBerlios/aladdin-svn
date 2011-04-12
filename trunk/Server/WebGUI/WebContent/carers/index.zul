@@ -40,8 +40,8 @@
 	<grid>
 		<columns>
 			<!-- <column label="${idstr }" width="35px" sort="auto"/> -->
-			<column label="${surnlbl }" sort="auto"/>
 			<column label="${namelbl }" sort="auto"/>
+			<column label="${surnlbl }" sort="auto"/>
 			<column width="80px" align="center" />
 			<column width="80px" align="center" if="${!isadmin }" />
 			<column width="80px" align="center" />
@@ -61,8 +61,8 @@
 			</zscript>
 			<row forEach="${plist }" id="${each.ID }">
 				<!-- <label value="${each.ID }"/> -->
-				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
+				<label value="${each.surname }"/>
 				<label value="${details }" sclass="link" onClick="carers.detailsCarer(self.getParent().getId())"/>
 				<label if="${!isadmin }" value="${updmsg }" sclass="link" onClick="carers.updateCarer(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="carers.deleteCarerMsg(self.getParent().getId())"/>

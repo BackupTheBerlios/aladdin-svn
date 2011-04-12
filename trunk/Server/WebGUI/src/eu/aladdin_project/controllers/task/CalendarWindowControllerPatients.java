@@ -123,6 +123,7 @@ public class CalendarWindowControllerPatients extends Window {
 			if(massive){
 				Integer freq = new Integer((String)((Listbox)getFellow("massivelist")).getSelectedItem().getValue());
 				Date tillday = (Date)((Datebox)getFellow("massivecal")).getValue();
+				tillday.setTime(tillday.getTime()+(24*60*60*1000));
 				opres = proxy.assignTasksMassively(ts, dbox.getValue(), tillday, BigInteger.valueOf(freq), userids);
 			}else{
 				opres = proxy.assignTask(ts, SystemDictionary.getLocale(), userids);

@@ -19,7 +19,7 @@
 			</columns>
 			<rows>
 				<row forEach="${clinlist }">
-					<radio label="${each.surname }, ${each.surname }" value="${each.ID }"/>
+					<radio label="${each.surname }, ${each.name }" value="${each.ID }"/>
 				</row>
 			</rows>
 		</grid>

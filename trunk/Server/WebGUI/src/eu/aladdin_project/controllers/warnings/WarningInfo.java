@@ -81,14 +81,15 @@ public class WarningInfo {
             SystemParameter compare = new SystemParameter();
             compare.setCode("3");
             filter.setCompareOp(compare);
-            
+            SystemDictionary.webguiLog("TRACE", "PATID: "+this.patientID);
             //PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
             Patient pat = proxy.getPatient(this.patientID, id);
 			SystemDictionary.webguiLog("TRACE", "NAME: "+pat.toString());
 			this.patientName = pat.toString();
 			this.setClinicianResponsible(pat.getResponsibleClinicianID());
-		}catch(RemoteException re){
-			this.patientName="Error retrieving name";
+		}catch(Exception re){
+			this.patientName="N/A";
+			this.setClinicianResponsible("N/A");
 		}
 		
 	}

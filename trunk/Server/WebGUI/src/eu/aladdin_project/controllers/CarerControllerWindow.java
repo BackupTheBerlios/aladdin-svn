@@ -79,12 +79,14 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		buttonshbox.appendChild(sep);
 		buttonshbox.appendChild(this.createPasswordButton());
 		this.appendChild(buttonshbox);
+		this.getFellow("pat_uname").getParent().setVisible(false);
 	}
 	
 	/**
 	 * Build form instructions to be executed
 	 */
 	public void buildForm(){
+		this.addErrorBox();
 		this.addPersonFields();
 		this.addAddressFields();
 		this.addCommunicationFields();
@@ -112,13 +114,24 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 				Session ses = Sessions.getCurrent();
 				String id = (String)ses.getAttribute("userid");
 				OperationResult result = proxy.createCarer(carer, id);
-				result = proxy.createUser(new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), carer.getPersonData().getSurname(), carer.getPersonData().getSurname()));
+				String username = this.getUsername();
+				User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), username, carer.getPersonData().getSurname());
+				result = proxy.createUser(user);
+				if(result.getCode().equals("-2")){
+					SystemDictionary.webguiLog("TRACE", "Error creating user");
+					Window win = (Window)getFellow("internalformerror");
+					((Label)win.getFellow("errorlbl")).setValue("Username not valid");
+					getFellow("internalformerror").setVisible(true);
+					SystemDictionary.webguiLog("TRACE", "Deleting Carer...");
+					OperationResult newresult = proxy.deleteCarer(user.getPersonID(), id);
+					SystemDictionary.webguiLog("TRACE", "Delete Carer result: "+newresult.getCode());
+					return;
+				}
+				Executions.getCurrent().sendRedirect("/carers");
 			}catch (RemoteException re) {
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CARER_SERVER);
 			}catch (Exception e){
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
-			}finally{
-				Executions.getCurrent().sendRedirect("/carers");
 			}
 		}
 	}

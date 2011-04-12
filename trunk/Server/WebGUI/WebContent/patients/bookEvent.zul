@@ -109,23 +109,6 @@
 						<listbox mold="select" id="questnamefield">
 							<listitem forEach="${qsss }" value="${each.ID }" label="${each.title }  (${each.version })"/>
 						</listbox>
-						<!-- <textbox id="questidfield" readonly="true" width="35px"/>  -->
-						<!-- <combobox id="questnamefield" autodrop="true">
-							<attribute name="onSelect">
-								QuestionnaireInfo qinfo = (QuestionnaireInfo)questnamefield.getSelectedItem().getValue();
-								questidfield.setValue(qinfo.getID());
-							</attribute>
-							<attribute name="onCreate">
-								try{
-									qsss = proxy.listOfQuestionnaires(SystemDictionary.getLocale(), petusid);
-									qsssmodel = new SimpleListModel(qsss);
-									questnamefield.setModel(qsssmodel);
-								}catch(java.rmi.RemoteException re){
-									re.printStackTrace();
-								}
-							</attribute>
-							
-						</combobox>  -->
 					</hbox>
 				</row>
 				<row id="urlrow" visible="false">
@@ -144,7 +127,7 @@
 					<label value="${tassignd }"/>
 					<hbox>
 						<datebox id="datetask" cols="16" format="dd/MM/yyyy" compact="false"/>
-						<timebox id="timetask" cols="16"/>
+						<timebox id="timetask" cols="16" visible="false"/>
 					</hbox>
 					
 				</row>
@@ -194,7 +177,7 @@
 				<row id="till1row" visible="false">
 					<label value=""/>
 					<hbox>
-						<label value="Till day (not included)"/>
+						<label value="Till day"/>
 						<datebox id="massivecal" format="dd/MM/yyyy" value="${date }"/>
 					</hbox>
 					
@@ -202,10 +185,10 @@
 				<row>
 					<label id="usertype" value="${usertype }" visible="false"/>
 					<hbox>
-						<button id="closebutton" label="Close the window" onClick="create_my_entry.closeTheWindow()" visible="true"/>
-						<separator orient="horizontal" width="40px;"/>
 						<button id="savebutton" label="${tassigntt }" onClick="create_my_entry.saveTask()" visible="false"/>
-						<button id="cancelbutton" label="${tcancelt }" onClick="create_my_entry.cancelTask()" visible="false"/>
+						<button id="cancelbutton" label="Cancel task" onClick="create_my_entry.cancelTask()" visible="false"/>
+						<separator orient="horizontal" width="40px;"/>
+						<button id="closebutton" label="Close the window" onClick="create_my_entry.closeTheWindow()" visible="true"/>
 					</hbox>
 				</row>
 			</rows>

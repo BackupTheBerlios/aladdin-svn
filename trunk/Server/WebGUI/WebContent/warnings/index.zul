@@ -45,7 +45,7 @@
 	<grid id="warningsgrid">
 		<columns>
 			<!-- <column label="${idlbl }" width="35px" sort="auto"/> -->
-			<column label="${typelbl }" width="80px"/>
+			<column label="${typelbl }" width="80px" sort="auto"/>
 			<column label="${datelbl }" sort="auto" width="120px"/>
 			<!-- <column label="${efectlbl }" sort="auto"/>
 			<column label="${indclbl }" sort="auto"/>

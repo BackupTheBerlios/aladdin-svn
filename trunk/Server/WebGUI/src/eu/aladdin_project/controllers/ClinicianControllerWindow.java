@@ -11,7 +11,9 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
+import org.zkoss.zul.Window;
 
 import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
@@ -69,12 +71,14 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		}else{
 			buttonshbox.appendChild(this.createUpdateButton());
 		}
+		this.getFellow("pat_uname").getParent().setVisible(false);
 	}
 	
 	/**
 	 * Build form instructions to be executed
 	 */
 	public void buildForm(){
+		this.addErrorBox();
 		this.addPersonFields();
 		this.addAddressFields();
 		this.addCommunicationFields();
@@ -85,6 +89,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 	 * Function to be executed on "Save" button click. 
 	 */
 	public void createClinician(){
+		SystemDictionary.webguiLog("TRACE", "Saving Clinician...");
 		//Getting information from form fields
 		PersonData personData = this.getPersonData();
 		
@@ -98,15 +103,25 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			Session ses = Sessions.getCurrent();
 			String id = (String)ses.getAttribute("userid");
+			String username = this.getUsername();
 			OperationResult result = proxy.createClinician(clinic, id);
-			result = proxy.createUser(new User("", new SystemParameter(SystemDictionary.USERTYPE_CLINICIAN,""), result.getCode(), clinic.getPersonData().getSurname(), clinic.getPersonData().getSurname()));
+			User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_CLINICIAN,""), result.getCode(), username, clinic.getPersonData().getSurname());
+			result = proxy.createUser(user);
+			if(result.getCode().equals("-2")){
+				SystemDictionary.webguiLog("TRACE", "Error creating user");
+				Window win = (Window)getFellow("internalformerror");
+				((Label)win.getFellow("errorlbl")).setValue("Username not valid");
+				getFellow("internalformerror").setVisible(true);
+				SystemDictionary.webguiLog("TRACE", "Deleting Clinician...");
+				OperationResult newresult = proxy.deleteClinician(user.getPersonID(), id);
+				SystemDictionary.webguiLog("TRACE", "Delete Clinician result: "+newresult.getCode());
+				return;
+			}
+			Executions.getCurrent().sendRedirect("/clinicians");
 		}catch (RemoteException re) {
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_CLINICIAN_SERVER);
 		}catch (Exception e){
 			ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
-		}finally{
-			//TODO Show message on the following page.
-			Executions.getCurrent().sendRedirect("/clinicians");
 		}
 	}
 	

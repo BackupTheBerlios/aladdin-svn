@@ -83,6 +83,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.addCarerFieldValues();
 		this.addSocialWorkerConsulterAndGPFieldsValues();
 		this.appendChild(this.createUpdateButton());
+		this.getFellow("pat_uname").getParent().setVisible(false);
 	}
 	
 	/**
@@ -108,6 +109,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			Window win = (Window)getFellow("internalformerror");
 			((Label)win.getFellow("errorlbl")).setValue("You cannot create a patient without any address or any way to communicate with");
 			getFellow("internalformerror").setVisible(true);
+		}else if(((Textbox)getFellow("pat_respo")).getValue() == null || ((Textbox)getFellow("pat_respo")).getValue().trim().equals("")){
+			Window win = (Window)getFellow("internalformerror");
+			((Label)win.getFellow("errorlbl")).setValue("You must select some clinician");
+			getFellow("internalformerror").setVisible(true);
 		}else{
 			OperationResult result = null;
 			String resClinic = ((Textbox)getFellow("pat_respo")).getValue();
@@ -120,7 +125,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			Consulter consulter = this.getConsulterData();
 			GeneralPractitioner gralprac = this.getGeneralPracticionerData();
 			try{
-				StorageComponentProxy proxy = new StorageComponentProxy();
+				StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 				Session ses = Sessions.getCurrent();
 				String id = (String)ses.getAttribute("userid");
 				Carer car2set = proxy.getCarer(carerId, id);
@@ -135,23 +140,29 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 				if(newpatient){
 					result = proxy.createPatient(patient, id);
 					SystemDictionary.webguiLog("INFO", "Patient ID: "+result.getCode());
-					User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_PATIENT, ""), result.getCode(), personData.getSurname(), personData.getSurname());
+					String username = this.getUsername();
+					User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_PATIENT, ""), result.getCode(), username, personData.getSurname());
 					result = proxy.createUser(user);
+					if(result.getCode().equals("-2")){
+						SystemDictionary.webguiLog("TRACE", "Error creating user");
+						Window win = (Window)getFellow("internalformerror");
+						((Label)win.getFellow("errorlbl")).setValue("Username not valid");
+						getFellow("internalformerror").setVisible(true);
+						SystemDictionary.webguiLog("TRACE", "Deleting Patient...");
+						OperationResult newresult = proxy.deletePatient(user.getPersonID(), id);
+						SystemDictionary.webguiLog("TRACE", "Delete Patient result: "+newresult.getCode());
+						return;
+					}
+					Executions.getCurrent().sendRedirect("/patients");
 				}else{
 					patient.setID(this.currentid);
 					result = proxy.updatePatient(patient, id);
+					Executions.getCurrent().sendRedirect("/patients");
 				}
 			}catch (RemoteException re) {
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.CREATE_PATIENT_SERVER);
 			}catch (Exception e){
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
-			}finally{
-				//TODO Show message on the following page.
-				if(result != null){
-					String prin = "CODE: "+result.getCode()+"\nDESC: "+result.getDescription()+"\nSTATUS: "+result.getStatus().toString();
-					SystemDictionary.webguiLog("DEBUG", prin);
-				}
-				Executions.getCurrent().sendRedirect("/patients");
 			}
 		}
 	}
@@ -177,8 +188,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 * @throws InterruptedException
 	 */
 	public void createClinicianDialog() throws InterruptedException{
-		ClinicianListForPatients respolist = (ClinicianListForPatients)Executions.getCurrent().createComponents("/patients/clinlist.zul", this, null);
-		respolist.doModal();
+		if(this.getFellowIfAny("rclinlistwin") == null){
+			ClinicianListForPatients respolist = (ClinicianListForPatients)Executions.getCurrent().createComponents("/patients/clinlist.zul", this, null);
+			respolist.doModal();
+		}
 	}
 	
 	/**

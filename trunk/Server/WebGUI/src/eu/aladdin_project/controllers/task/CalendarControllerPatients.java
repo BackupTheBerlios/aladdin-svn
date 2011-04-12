@@ -74,6 +74,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		User assigner = proxy.getUser(userid);
 		Clinician assg = proxy.getClinician(assigner.getPersonID(), userid); 
 		((Textbox)bookEventWin.getFellow("userstr")).setValue(assg.toString());
+		((Listbox)bookEventWin.getFellow("questnamefield")).setSelectedIndex(0);
 		//bookEventWin.getFellow("assignerrow").setVisible(false);
 		bookEventWin.getFellow("massivequestionrow").setVisible(true);
 		bookEventWin.getFellow("massivecheckrow").setVisible(true);
