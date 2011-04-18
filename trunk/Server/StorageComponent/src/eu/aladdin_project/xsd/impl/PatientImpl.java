@@ -27,14 +27,14 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SD_Data");
     private static final javax.xml.namespace.QName RESPONSIBLECLINICIANID$6 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ResponsibleClinicianID");
-    private static final javax.xml.namespace.QName PATIENTCARERLIST$8 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList");
-    private static final javax.xml.namespace.QName SOCIALWORKER$10 = 
+    private static final javax.xml.namespace.QName SOCIALWORKER$8 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SocialWorker");
-    private static final javax.xml.namespace.QName CONSULTERINCHARGE$12 = 
+    private static final javax.xml.namespace.QName CONSULTERINCHARGE$10 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "ConsulterInCharge");
-    private static final javax.xml.namespace.QName GENERALPRACTITIONER$14 = 
+    private static final javax.xml.namespace.QName GENERALPRACTITIONER$12 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "GeneralPractitioner");
+    private static final javax.xml.namespace.QName PATIENTCARER$14 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarer");
     
     
     /**
@@ -274,56 +274,6 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
-     * Gets the "PatientCarerList" element
-     */
-    public eu.aladdin_project.xsd.PatientCarerList getPatientCarerList()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.PatientCarerList target = null;
-            target = (eu.aladdin_project.xsd.PatientCarerList)get_store().find_element_user(PATIENTCARERLIST$8, 0);
-            if (target == null)
-            {
-                return null;
-            }
-            return target;
-        }
-    }
-    
-    /**
-     * Sets the "PatientCarerList" element
-     */
-    public void setPatientCarerList(eu.aladdin_project.xsd.PatientCarerList patientCarerList)
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.PatientCarerList target = null;
-            target = (eu.aladdin_project.xsd.PatientCarerList)get_store().find_element_user(PATIENTCARERLIST$8, 0);
-            if (target == null)
-            {
-                target = (eu.aladdin_project.xsd.PatientCarerList)get_store().add_element_user(PATIENTCARERLIST$8);
-            }
-            target.set(patientCarerList);
-        }
-    }
-    
-    /**
-     * Appends and returns a new empty "PatientCarerList" element
-     */
-    public eu.aladdin_project.xsd.PatientCarerList addNewPatientCarerList()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            eu.aladdin_project.xsd.PatientCarerList target = null;
-            target = (eu.aladdin_project.xsd.PatientCarerList)get_store().add_element_user(PATIENTCARERLIST$8);
-            return target;
-        }
-    }
-    
-    /**
      * Gets the "SocialWorker" element
      */
     public eu.aladdin_project.xsd.SocialWorker getSocialWorker()
@@ -332,7 +282,7 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.SocialWorker target = null;
-            target = (eu.aladdin_project.xsd.SocialWorker)get_store().find_element_user(SOCIALWORKER$10, 0);
+            target = (eu.aladdin_project.xsd.SocialWorker)get_store().find_element_user(SOCIALWORKER$8, 0);
             if (target == null)
             {
                 return null;
@@ -350,10 +300,10 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.SocialWorker target = null;
-            target = (eu.aladdin_project.xsd.SocialWorker)get_store().find_element_user(SOCIALWORKER$10, 0);
+            target = (eu.aladdin_project.xsd.SocialWorker)get_store().find_element_user(SOCIALWORKER$8, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.xsd.SocialWorker)get_store().add_element_user(SOCIALWORKER$10);
+                target = (eu.aladdin_project.xsd.SocialWorker)get_store().add_element_user(SOCIALWORKER$8);
             }
             target.set(socialWorker);
         }
@@ -368,7 +318,7 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.SocialWorker target = null;
-            target = (eu.aladdin_project.xsd.SocialWorker)get_store().add_element_user(SOCIALWORKER$10);
+            target = (eu.aladdin_project.xsd.SocialWorker)get_store().add_element_user(SOCIALWORKER$8);
             return target;
         }
     }
@@ -382,7 +332,7 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.Consulter target = null;
-            target = (eu.aladdin_project.xsd.Consulter)get_store().find_element_user(CONSULTERINCHARGE$12, 0);
+            target = (eu.aladdin_project.xsd.Consulter)get_store().find_element_user(CONSULTERINCHARGE$10, 0);
             if (target == null)
             {
                 return null;
@@ -400,10 +350,10 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.Consulter target = null;
-            target = (eu.aladdin_project.xsd.Consulter)get_store().find_element_user(CONSULTERINCHARGE$12, 0);
+            target = (eu.aladdin_project.xsd.Consulter)get_store().find_element_user(CONSULTERINCHARGE$10, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.xsd.Consulter)get_store().add_element_user(CONSULTERINCHARGE$12);
+                target = (eu.aladdin_project.xsd.Consulter)get_store().add_element_user(CONSULTERINCHARGE$10);
             }
             target.set(consulterInCharge);
         }
@@ -418,7 +368,7 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.Consulter target = null;
-            target = (eu.aladdin_project.xsd.Consulter)get_store().add_element_user(CONSULTERINCHARGE$12);
+            target = (eu.aladdin_project.xsd.Consulter)get_store().add_element_user(CONSULTERINCHARGE$10);
             return target;
         }
     }
@@ -432,7 +382,7 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.GeneralPractitioner target = null;
-            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().find_element_user(GENERALPRACTITIONER$14, 0);
+            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().find_element_user(GENERALPRACTITIONER$12, 0);
             if (target == null)
             {
                 return null;
@@ -450,10 +400,10 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.GeneralPractitioner target = null;
-            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().find_element_user(GENERALPRACTITIONER$14, 0);
+            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().find_element_user(GENERALPRACTITIONER$12, 0);
             if (target == null)
             {
-                target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().add_element_user(GENERALPRACTITIONER$14);
+                target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().add_element_user(GENERALPRACTITIONER$12);
             }
             target.set(generalPractitioner);
         }
@@ -468,7 +418,57 @@ public class PatientImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         {
             check_orphaned();
             eu.aladdin_project.xsd.GeneralPractitioner target = null;
-            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().add_element_user(GENERALPRACTITIONER$14);
+            target = (eu.aladdin_project.xsd.GeneralPractitioner)get_store().add_element_user(GENERALPRACTITIONER$12);
+            return target;
+        }
+    }
+    
+    /**
+     * Gets the "PatientCarer" element
+     */
+    public eu.aladdin_project.xsd.Carer getPatientCarer()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.Carer target = null;
+            target = (eu.aladdin_project.xsd.Carer)get_store().find_element_user(PATIENTCARER$14, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target;
+        }
+    }
+    
+    /**
+     * Sets the "PatientCarer" element
+     */
+    public void setPatientCarer(eu.aladdin_project.xsd.Carer patientCarer)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.Carer target = null;
+            target = (eu.aladdin_project.xsd.Carer)get_store().find_element_user(PATIENTCARER$14, 0);
+            if (target == null)
+            {
+                target = (eu.aladdin_project.xsd.Carer)get_store().add_element_user(PATIENTCARER$14);
+            }
+            target.set(patientCarer);
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty "PatientCarer" element
+     */
+    public eu.aladdin_project.xsd.Carer addNewPatientCarer()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            eu.aladdin_project.xsd.Carer target = null;
+            target = (eu.aladdin_project.xsd.Carer)get_store().add_element_user(PATIENTCARER$14);
             return target;
         }
     }

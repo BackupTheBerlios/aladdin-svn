@@ -17,11 +17,12 @@
 <property name="gpname" type="string"><column name="gpname"/></property>
 <property name="gpphone" type="string"><column name="gpphone"/></property>
 <property name="gpemail" type="string"><column name="gpemail"/></property>
+<property name="carer" type="java.lang.Integer"><column name="carer"/></property>
 <set name="PatientAssessments" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="PatientAssessment"/></set>
 <many-to-one insert="false" update="false" name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
 <many-to-one insert="false" update="false" name="m_SocioDemographicData" class="SocioDemographicData" ><column name="sd" not-null="false" /></many-to-one>
 <many-to-one insert="false" update="false" name="m_Clinician" class="Clinician" ><column name="clinician" not-null="false" /></many-to-one>
-<set name="PatientCarers" inverse="true" cascade="none"><key><column name="patient" not-null="true" /></key><one-to-many class="PatientCarer"/></set>
+<many-to-one insert="false" update="false" name="m_Carer" class="Carer" ><column name="carer" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

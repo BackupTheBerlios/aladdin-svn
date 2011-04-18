@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface GeneralPractitioner extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GeneralPractitioner.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("generalpractitionerecbctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GeneralPractitioner.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("generalpractitionerecbctype");
     
     /**
      * Gets the "name" element

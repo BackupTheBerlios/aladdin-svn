@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserIdByPersonIdDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserIdByPersonIdDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("getuseridbypersonid4fb1doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserIdByPersonIdDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("getuseridbypersonid4fb1doctype");
     
     /**
      * Gets the "GetUserIdByPersonId" element
@@ -42,7 +42,7 @@ public interface GetUserIdByPersonIdDocument extends org.apache.xmlbeans.XmlObje
     public interface GetUserIdByPersonId extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserIdByPersonId.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("getuseridbypersonid5f60elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserIdByPersonId.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("getuseridbypersonid5f60elemtype");
         
         /**
          * Gets the "id" element

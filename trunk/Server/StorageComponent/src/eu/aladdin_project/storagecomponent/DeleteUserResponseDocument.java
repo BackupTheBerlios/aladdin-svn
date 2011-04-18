@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteUserResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUserResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("deleteuserresponseef97doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUserResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("deleteuserresponseef97doctype");
     
     /**
      * Gets the "DeleteUserResponse" element
@@ -42,7 +42,7 @@ public interface DeleteUserResponseDocument extends org.apache.xmlbeans.XmlObjec
     public interface DeleteUserResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUserResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("deleteuserresponse44c4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteUserResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("deleteuserresponse44c4elemtype");
         
         /**
          * Gets the "out" element

@@ -449,6 +449,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getAvailableCarers
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument getAvailableCarers
+                (
+                  eu.aladdin_project.storagecomponent.GetAvailableCarersDocument getAvailableCarers
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getMeasurement
          */
 

@@ -254,12 +254,6 @@
             <element name="SD_Data" type="tns:SocioDemographicData"/>
         </sequence>
     </complexType>
-    <complexType name="PatientCarer">
-        <sequence>
-            <element name="Carer" type="tns:Carer"/>
-            <element name="IsPrimary" type="boolean"/>
-        </sequence>
-    </complexType>
     <complexType name="Clinician">
         <sequence>
             <element name="ID" type="string"/>
@@ -272,10 +266,10 @@
             <element name="PersonData" type="tns:PersonData"/>
             <element name="SD_Data" type="tns:SocioDemographicData"/>
             <element name="ResponsibleClinicianID" type="string"/>
-            <element name="PatientCarerList" type="tns:PatientCarerList"/>
             <element name="SocialWorker" type="tns:SocialWorker"/>
             <element name="ConsulterInCharge" type="tns:Consulter"/>
             <element name="GeneralPractitioner" type="tns:GeneralPractitioner"/>
+            <element name="PatientCarer" type="tns:Carer"/>
         </sequence>
     </complexType>
     <complexType name="SocialWorker">
@@ -297,11 +291,6 @@
             <element name="name" type="string"/>
             <element name="phone" type="string"/>
             <element name="email" type="string"/>
-        </sequence>
-    </complexType>
-    <complexType name="PatientCarerList">
-        <sequence>
-            <element maxOccurs="unbounded" minOccurs="0" name="PatientCarer" type="tns:PatientCarer"/>
         </sequence>
     </complexType>
     <complexType name="Administrator">

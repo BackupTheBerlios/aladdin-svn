@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateAdministratorResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministratorResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("updateadministratorresponse9b73doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministratorResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("updateadministratorresponse9b73doctype");
     
     /**
      * Gets the "UpdateAdministratorResponse" element
@@ -42,7 +42,7 @@ public interface UpdateAdministratorResponseDocument extends org.apache.xmlbeans
     public interface UpdateAdministratorResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministratorResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s22872C9CAA0E9ECCD22F924FD2F8EF5A").resolveHandle("updateadministratorresponse8764elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateAdministratorResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("updateadministratorresponse8764elemtype");
         
         /**
          * Gets the "out" element

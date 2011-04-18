@@ -1036,6 +1036,20 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="getAvailableCarers">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="userId" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAvailableCarersResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="out" type="aladdin:Carer"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -1248,6 +1262,10 @@
   </wsdl:message>
   <wsdl:message name="GetPatientResponse">
     <wsdl:part name="parameters" element="tns:GetPatientResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableCarersResponse">
+    <wsdl:part name="parameters" element="tns:getAvailableCarersResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="GetWarningsRequest">
@@ -1580,6 +1598,10 @@
   </wsdl:message>
   <wsdl:message name="DeletePatientAssessmentResponse">
     <wsdl:part name="parameters" element="tns:DeletePatientAssessmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAvailableCarersRequest">
+    <wsdl:part name="parameters" element="tns:getAvailableCarers">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="StorageComponent">
@@ -1989,6 +2011,12 @@
       <wsdl:input message="tns:GetQuestionDescriptionRequest">
     </wsdl:input>
       <wsdl:output message="tns:GetQuestionDescriptionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableCarers">
+      <wsdl:input message="tns:getAvailableCarersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAvailableCarersResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -2599,6 +2627,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetQuestionDescription">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/GetQuestionDescription"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailableCarers">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/getAvailableCarers"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

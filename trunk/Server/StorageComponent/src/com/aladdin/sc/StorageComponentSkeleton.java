@@ -50,6 +50,7 @@ import eu.aladdin_project.storagecomponent.DeleteQuestionnaireResponseDocument.D
 import eu.aladdin_project.storagecomponent.DeleteUserResponseDocument.DeleteUserResponse;
 import eu.aladdin_project.storagecomponent.GetAdministratorResponseDocument.GetAdministratorResponse;
 import eu.aladdin_project.storagecomponent.GetAllExternalServicesResponseDocument.GetAllExternalServicesResponse;
+import eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument.GetAvailableCarersResponse;
 import eu.aladdin_project.storagecomponent.GetCarerAssessmentsResponseDocument.GetCarerAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetCarerResponseDocument.GetCarerResponse;
 import eu.aladdin_project.storagecomponent.GetClinicianResponseDocument.GetClinicianResponse;
@@ -104,6 +105,7 @@ import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument;
 import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URLConnection;
 import java.net.URL;
 
@@ -349,49 +351,61 @@ import java.net.URL;
     			Patient data = req.getCreatePatient().getData();
     			
     			s.beginTransaction();
+
+                System.out.println (1);
     			
     			com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
+
+                System.out.println (2);
     			
     			Integer pdid = storePersondata(data.getPersonData(), null);
+
+                System.out.println (3);
     			
     			Integer sdid = storeSocioDemographic(data.getSDData(), null);
+
+                System.out.println (4);
     			
     			GeneralPractitioner gp = data.getGeneralPractitioner();
+                System.out.println (5);
     			if (gp != null) {
     				p.setGpemail(gp.getEmail());
     				p.setGpname(gp.getName());
     				p.setGpphone(gp.getPhone());
     			}
+                System.out.println (6);
     			
     			Consulter c = data.getConsulterInCharge();
+                System.out.println (7);
     			if (c != null) {
     				p.setCcemail(c.getEmail());
     				p.setCcname(c.getName());
     				p.setCcphone(c.getPhone());
     			}
-    			
+    			System.out.println (8);
+
     			SocialWorker sw = data.getSocialWorker();
+                System.out.println (9);
     			if (sw != null) {
     				p.setSwemail(sw.getEmail());
     				p.setSwname(sw.getName());
     				p.setSwphone(sw.getPhone());
     			}
-    			
+    			System.out.println (10);
     			p.setPersondata(pdid);
+                System.out.println (11);
     			p.setSd(sdid);
+                System.out.println (12);
     			String responsibleClinicianID = data.getResponsibleClinicianID();
+                System.out.println (13);
     			if (responsibleClinicianID == null) responsibleClinicianID = "0";
+                System.out.println (14);
     			p.setClinician(new Integer(responsibleClinicianID));
+                System.out.println (15);
+                
+                if (data.getPatientCarer() != null) p.setCarer(new Integer (data.getPatientCarer().getID()));
+                
     			s.save(p);
-    			
-    			PatientCarer[] pcl = data.getPatientCarerList().getPatientCarerArray();
-    			for (int i = 0; i < pcl.length; i++) {
-    				com.aladdin.sc.db.PatientCarer pc = new com.aladdin.sc.db.PatientCarer ();
-    				pc.setPatient(p.getId());
-    				pc.setIsprimary(pcl[i].getIsPrimary());
-    				pc.setCarer(new Integer(pcl[i].getCarer().getID()));
-    				s.save(pc);
-    			}
     			
     			s.getTransaction().commit();
     			
@@ -957,6 +971,8 @@ import java.net.URL;
     			p.setGpphone(data.getGeneralPractitioner().getPhone());
     			p.setGpemail(data.getGeneralPractitioner().getEmail());
     			
+    			if (data.getPatientCarer() != null) p.setCarer(new Integer (data.getPatientCarer().getID()));
+    			
     			s.update(p);
     			s.getTransaction().commit();
     			
@@ -1358,13 +1374,8 @@ import java.net.URL;
 			gp.setPhone(patient.getGpphone());
 			p.setGeneralPractitioner(gp);
 			
-			Object[] pc = patient.getPatientCarers().toArray();
-			PatientCarerList pcl = p.addNewPatientCarerList();
-			for (int i = 0; i < pc.length; i++) {
-				PatientCarer rpc = pcl.addNewPatientCarer();
-				rpc.setIsPrimary( ((com.aladdin.sc.db.PatientCarer) pc[i]).getIsprimary());
-				rpc.setCarer(exportCarer(((com.aladdin.sc.db.PatientCarer)pc[i]).getM_Carer()));
-			}
+			p.setPatientCarer(exportCarer((com.aladdin.sc.db.Carer) this.s.load(com.aladdin.sc.db.Carer.class, patient.getCarer())));
+			
 			return p;
 		}
 
@@ -3446,7 +3457,7 @@ import java.net.URL;
         		
         		u.setId(new Integer (ru.getID()));
         		u.setType(new Integer (ru.getType().getCode()));
-        		u.setPersonId(ru.getPersonID());
+        		u.setPersonId(new Integer (ru.getPersonID()));
         		u.setUsername(ru.getUsername());
         		u.setPassword(ru.getPassword());
         		s.save (u);
@@ -3636,7 +3647,7 @@ import java.net.URL;
         		com.aladdin.sc.db.AladdinUser u = new com.aladdin.sc.db.AladdinUser ();
         		
         		u.setType(new Integer (ru.getType().getCode()));
-        		u.setPersonId(ru.getPersonID());
+        		u.setPersonId(new Integer (ru.getPersonID()));
         		u.setUsername(ru.getUsername());
         		u.setPassword(ru.getPassword());
         		s.save (u);
@@ -3836,7 +3847,7 @@ import java.net.URL;
 				User ru = resp.addNewOut();
 				ru.setID(user.getId().toString());
 				ru.setPassword("");
-				ru.setPersonID(user.getPersonId());
+				ru.setPersonID(user.getPersonId().toString());
 				SystemParameter spType = SystemParameter.Factory.newInstance();
 				spType.setCode(user.getType().toString());
 				ru.setType(spType);
@@ -4440,6 +4451,45 @@ import java.net.URL;
 			return respdoc;
 		}
 
-    
+		@Override
+		public GetAvailableCarersResponseDocument getAvailableCarers(GetAvailableCarersDocument req) {
+			GetAvailableCarersResponseDocument respdoc = GetAvailableCarersResponseDocument.Factory.newInstance();
+			GetAvailableCarersResponse resp = respdoc.addNewGetAvailableCarersResponse();
+			
+			{
+    			NullChecker nc = new NullChecker();
+    			
+    			req.getGetAvailableCarers().setUserId (nc.check(req.getGetAvailableCarers().getUserId(), String.class));
+    		}
+			
+    		if (
+    				!checkUser(req.getGetAvailableCarers().getUserId(), U_CLINICIAN) &&
+    				!checkUser(req.getGetAvailableCarers().getUserId(), U_ADMIN) &&
+    				!checkUser(req.getGetAvailableCarers().getUserId(), U_SERVICE)
+				) {
+    			return respdoc;
+    		}
+    		
+    		try {
+    			String sql = "select id from carer where id not in (select carer from patient)";
+    			Object[] data = s.createSQLQuery(sql).list().toArray();
+    			
+    			List<Carer> tmp = new ArrayList<Carer>();
+    			for (int i = 0; i < data.length; i++) {
+    				tmp.add(exportCarer ((com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, (Serializable) data[i])));
+    			}
+    			
+    			resp.setOutArray(tmp.toArray(new Carer[0]));
+    			
+    		} catch (HibernateException e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+			}
+			
+			return respdoc;
+		}
+
     }
     

@@ -133,6 +133,10 @@
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetMediaContent</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetMediaContentResponse</outputActionMapping>
         </operation>
+        <operation name="getAvailableCarers" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
+            <actionMapping>http://aladdin-project.eu/StorageComponent/getAvailableCarers</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/getAvailableCarersResponse</outputActionMapping>
+        </operation>
         <operation name="GetMeasurement" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/StorageComponent/">
             <actionMapping>http://aladdin-project.eu/StorageComponent/GetMeasurement</actionMapping>
             <outputActionMapping>http://aladdin-project.eu/StorageComponent/StorageComponent/GetMeasurementResponse</outputActionMapping>

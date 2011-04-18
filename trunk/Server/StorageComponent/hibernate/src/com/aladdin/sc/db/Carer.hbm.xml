@@ -10,7 +10,7 @@
 <many-to-one insert="false" update="false" name="m_PersonData" class="PersonData" ><column name="persondata" not-null="false" /></many-to-one>
 <many-to-one insert="false" update="false" name="m_SocioDemographicData" class="SocioDemographicData" ><column name="sd" not-null="false" /></many-to-one>
 <set name="CarerAssessments" inverse="true" cascade="none"><key><column name="carer" not-null="true" /></key><one-to-many class="CarerAssessment"/></set>
-<set name="PatientCarers" inverse="true" cascade="none"><key><column name="carer" not-null="true" /></key><one-to-many class="PatientCarer"/></set>
+<set name="Patients" inverse="true" cascade="none"><key><column name="carer" not-null="true" /></key><one-to-many class="Patient"/></set>
 </class>
 </hibernate-mapping>
 
