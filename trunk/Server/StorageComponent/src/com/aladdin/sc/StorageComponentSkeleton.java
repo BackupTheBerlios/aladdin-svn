@@ -2990,7 +2990,7 @@ import java.net.URL;
     			Object[] pal = s.createSQLQuery("SELECT id FROM patientassessment WHERE patient = " + patientId.toString()).list().toArray();
     			
     			for (int i = 0; i < pal.length; i++) {
-    				Integer id = (Integer) pal[0];
+    				Integer id = (Integer) pal[i];
     				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) s.load (com.aladdin.sc.db.PatientAssessment.class, id);
     			
 	    			PatientAssessment rpa = resp.addNewOut();
@@ -3887,7 +3887,7 @@ import java.net.URL;
 				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
         		SQLQuery q = s.createSQLQuery(sql);
         		if (q.list().size() == 1) {
-        			sql = "SELECT id FROM patientcarer WHERE carer = '" + q.list().get(0).toString() + "'";
+        			sql = "SELECT patient FROM patientcarer WHERE carer = '" + q.list().get(0).toString() + "'";
         			
         			Object[] ql = s.createSQLQuery(sql).list().toArray();
         			for (int i = 0; i < ql.length; i++) {
@@ -3950,7 +3950,7 @@ import java.net.URL;
 				
 				s.beginTransaction();
 				
-				String sql = "SELECT id FROM aladdinuser WHERE personid like '" + uid.toString() + "' AND type = '" + type.toString() + "'";
+				String sql = "SELECT id FROM aladdinuser WHERE personid = '" + uid.toString() + "' AND type = '" + type.toString() + "'";
 				SQLQuery q = s.createSQLQuery(sql);
 				Object[] obj = q.list().toArray();
 				if (obj.length == 1) {

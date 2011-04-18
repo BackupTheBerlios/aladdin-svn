@@ -176,7 +176,6 @@ public class NullChecker {
 		v.setID(this.check(v.getID(), String.class));
 		v.setPersonData(this.check(v.getPersonData(), PersonData.class));
 		v.setResponsibleClinicianID(this.check(v.getResponsibleClinicianID(), String.class));
-		v.setPatientCarerList(this.check(v.getPatientCarerList(), PatientCarerList.class));
 		v.setSDData(this.check(v.getSDData(), SocioDemographicData.class));
 		
 		return v;
