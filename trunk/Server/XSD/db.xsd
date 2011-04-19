@@ -11,7 +11,7 @@
     		<element name="username" type="string"></element>
     		<element name="password" type="string"></element>
     		<element name="type" type="int"></element>
-    		<element name="personId" type="string"></element>
+    		<element name="personId" type="int"></element>
     	</sequence>
     </complexType>
     
@@ -24,8 +24,8 @@
 			<element name="RiskLevel" type="int"></element>
 			<element name="JustificationText" type="string"></element>
 			<element name="EmergencyLevel" type="int"></element>
-			<element name="PatientID" type="string"></element>
 			<element name="Delivered" type="boolean"></element>
+			<element name="Patient" type="tns:Patient"></element>
 		</sequence>
 	</complexType>
 
@@ -73,11 +73,11 @@
     
     <complexType name="SocioDemographicData">
     	<sequence>
-    		<element name="Age" type="int"></element>
     		<element name="Gender" type="int"></element>
     		<element name="MaritalStatus" type="int"></element>
     		<element name="Children" type="int"></element>
     		<element name="LivingWith" type="int"></element>
+    		<element name="birthday" type="dateTime"></element>
     	</sequence>
     </complexType>
     
@@ -87,7 +87,6 @@
     		<element name="Name" type="string"></element>
     	</sequence>
     </complexType>
-    
 
     <complexType name="Clinician">
     	<sequence>
@@ -211,9 +210,15 @@
 
     <complexType name="Patient">
     	<sequence>
-    		<element name="persondata" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
-    		<element name="sd" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
-    		<element name="clinician" type="tns:Clinician" maxOccurs="1" minOccurs="1"></element>
+    		<element name="persondata" type="tns:PersonData"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="sd" type="tns:SocioDemographicData"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="clinician" type="tns:Clinician" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
     		<element name="swname" type="string"></element>
     		<element name="swphone" type="string"></element>
     		<element name="swemail" type="string"></element>
@@ -223,16 +228,10 @@
     		<element name="gpname" type="string"></element>
     		<element name="gpphone" type="string"></element>
     		<element name="gpemail" type="string"></element>
+    		<element name="carer" type="tns:Carer" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
 
-    <complexType name="PatientCarer">
-    	<sequence>
-    		<element name="patient" type="tns:Patient" maxOccurs="1"></element>
-    		<element name="carer" type="tns:Carer" minOccurs="1"></element>
-    		<element name="isprimary" type="boolean"></element>
-    	</sequence>
-    </complexType>
 
     <complexType name="Measurement">
     	<sequence>

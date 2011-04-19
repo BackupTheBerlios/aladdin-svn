@@ -16,37 +16,7 @@ package eu.aladdin_project.xsd;
 public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SocioDemographicData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("sociodemographicdata4e8etype");
-    
-    /**
-     * Gets the "Age" element
-     */
-    short getAge();
-    
-    /**
-     * Gets (as xml) the "Age" element
-     */
-    org.apache.xmlbeans.XmlUnsignedByte xgetAge();
-    
-    /**
-     * True if has "Age" element
-     */
-    boolean isSetAge();
-    
-    /**
-     * Sets the "Age" element
-     */
-    void setAge(short age);
-    
-    /**
-     * Sets (as xml) the "Age" element
-     */
-    void xsetAge(org.apache.xmlbeans.XmlUnsignedByte age);
-    
-    /**
-     * Unsets the "Age" element
-     */
-    void unsetAge();
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SocioDemographicData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("sociodemographicdata4e8etype");
     
     /**
      * Gets the "Gender" element
@@ -152,6 +122,26 @@ public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
      * Unsets the "LivingWith" element
      */
     void unsetLivingWith();
+    
+    /**
+     * Gets the "birthday" element
+     */
+    java.util.Calendar getBirthday();
+    
+    /**
+     * Gets (as xml) the "birthday" element
+     */
+    org.apache.xmlbeans.XmlDate xgetBirthday();
+    
+    /**
+     * Sets the "birthday" element
+     */
+    void setBirthday(java.util.Calendar birthday);
+    
+    /**
+     * Sets (as xml) the "birthday" element
+     */
+    void xsetBirthday(org.apache.xmlbeans.XmlDate birthday);
     
     /**
      * A factory class with static methods for creating instances

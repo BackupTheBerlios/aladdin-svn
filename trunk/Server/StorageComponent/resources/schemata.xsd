@@ -73,7 +73,7 @@
             <element minOccurs="0" name="RiskLevel" type="tns:SystemParameter"/>
             <element minOccurs="0" name="JustificationText" type="string"/>
             <element minOccurs="0" name="EmergencyLevel" type="tns:SystemParameter"/>
-            <element minOccurs="0" name="PatientID" type="string"/>
+            <element minOccurs="0" name="Patient" type="tns:Patient"/>
             <element minOccurs="0" name="Delivered" type="boolean"/>
         </sequence>
     </complexType>
@@ -216,11 +216,11 @@
     </complexType>
     <complexType name="SocioDemographicData">
         <sequence>
-            <element minOccurs="0" name="Age" type="unsignedByte"/>
             <element minOccurs="0" name="Gender" type="tns:SystemParameter"/>
             <element minOccurs="0" name="MaritalStatus" type="tns:SystemParameter"/>
             <element minOccurs="0" name="Children" type="unsignedByte"/>
             <element minOccurs="0" name="LivingWith" type="tns:SystemParameter"/>
+            <element name="birthday" type="date"/>
         </sequence>
     </complexType>
     <complexType name="PersonData">

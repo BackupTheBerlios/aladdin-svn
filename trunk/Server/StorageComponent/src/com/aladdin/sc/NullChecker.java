@@ -243,7 +243,7 @@ public class NullChecker {
 		v.setID(this.check(v.getID(), String.class));
 		v.setIndicator(this.check(v.getIndicator(), SystemParameter.class));
 		v.setJustificationText(this.check(v.getJustificationText(), String.class));
-		v.setPatientID(this.check(v.getPatientID(), String.class));
+		v.setPatient(this.check(v.getPatient(), Patient.class));
 		v.setRiskLevel(this.check(v.getRiskLevel(), SystemParameter.class));
 		v.setTypeOfWarning(this.check(v.getTypeOfWarning(), SystemParameter.class));
 		

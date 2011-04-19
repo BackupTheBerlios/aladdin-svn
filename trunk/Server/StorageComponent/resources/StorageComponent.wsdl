@@ -1050,6 +1050,22 @@
       		</xsd:sequence>
       	</xsd:complexType>
       </xsd:element>
+      <xsd:element name="getQuestionnaireAnswerValue">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="questionId" type="xsd:string"/>
+      			<xsd:element name="value" type="xsd:string"/>
+      			<xsd:element name="locale" type="aladdin:SystemParameter"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getQuestionnaireAnswerValueResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="xsd:string"/>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UpdateExternalServiceResponse">
@@ -1452,6 +1468,10 @@
     <wsdl:part name="parameters" element="tns:GetPatientMeasurementResponse">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getQuestionnaireAnswerValueResponse">
+    <wsdl:part name="parameters" element="tns:getQuestionnaireAnswerValueResponse">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="UpdateMediaContentRequest">
     <wsdl:part name="parameters" element="tns:UpdateMediaContent">
     </wsdl:part>
@@ -1538,6 +1558,10 @@
   </wsdl:message>
   <wsdl:message name="UpdateQuestionnaireRequest">
     <wsdl:part name="parameters" element="tns:UpdateQuestionnaire">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getQuestionnaireAnswerValueRequest">
+    <wsdl:part name="parameters" element="tns:getQuestionnaireAnswerValue">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="CreatePatientResponse">
@@ -2017,6 +2041,12 @@
       <wsdl:input message="tns:getAvailableCarersRequest">
     </wsdl:input>
       <wsdl:output message="tns:getAvailableCarersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuestionnaireAnswerValue">
+      <wsdl:input message="tns:getQuestionnaireAnswerValueRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getQuestionnaireAnswerValueResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -2636,6 +2666,15 @@
     </wsdl:operation>
     <wsdl:operation name="getAvailableCarers">
       <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/getAvailableCarers"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuestionnaireAnswerValue">
+      <soap:operation soapAction="http://aladdin-project.eu/StorageComponent/getQuestionnaireAnswerValue"/>
       <wsdl:input>
         <soap:body use="literal"/>
       </wsdl:input>

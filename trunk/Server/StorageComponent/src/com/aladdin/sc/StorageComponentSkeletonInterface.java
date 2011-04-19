@@ -673,6 +673,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getQuestionnaireAnswerValue
+         */
+
+        
+                public eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument getQuestionnaireAnswerValue
+                (
+                  eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument getQuestionnaireAnswerValue
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param createExternalService
          */
 

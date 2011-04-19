@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Warning extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("warning2936type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Warning.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("warning2936type");
     
     /**
      * Gets the "ID" element
@@ -234,34 +234,29 @@ public interface Warning extends org.apache.xmlbeans.XmlObject
     void unsetEmergencyLevel();
     
     /**
-     * Gets the "PatientID" element
+     * Gets the "Patient" element
      */
-    java.lang.String getPatientID();
+    eu.aladdin_project.xsd.Patient getPatient();
     
     /**
-     * Gets (as xml) the "PatientID" element
+     * True if has "Patient" element
      */
-    org.apache.xmlbeans.XmlString xgetPatientID();
+    boolean isSetPatient();
     
     /**
-     * True if has "PatientID" element
+     * Sets the "Patient" element
      */
-    boolean isSetPatientID();
+    void setPatient(eu.aladdin_project.xsd.Patient patient);
     
     /**
-     * Sets the "PatientID" element
+     * Appends and returns a new empty "Patient" element
      */
-    void setPatientID(java.lang.String patientID);
+    eu.aladdin_project.xsd.Patient addNewPatient();
     
     /**
-     * Sets (as xml) the "PatientID" element
+     * Unsets the "Patient" element
      */
-    void xsetPatientID(org.apache.xmlbeans.XmlString patientID);
-    
-    /**
-     * Unsets the "PatientID" element
-     */
-    void unsetPatientID();
+    void unsetPatient();
     
     /**
      * Gets the "Delivered" element

@@ -12,8 +12,9 @@
 <property name="RiskLevel" type="java.lang.Integer"><column name="RiskLevel"/></property>
 <property name="JustificationText" type="string"><column name="JustificationText"/></property>
 <property name="EmergencyLevel" type="java.lang.Integer"><column name="EmergencyLevel"/></property>
-<property name="PatientID" type="string"><column name="PatientID"/></property>
 <property name="Delivered" type="java.lang.Boolean"><column name="Delivered"/></property>
+<property name="Patient" type="java.lang.Integer"><column name="Patient"/></property>
+<many-to-one insert="false" update="false" name="m_Patient" class="Patient" ><column name="Patient" not-null="false" /></many-to-one>
 </class>
 </hibernate-mapping>
 

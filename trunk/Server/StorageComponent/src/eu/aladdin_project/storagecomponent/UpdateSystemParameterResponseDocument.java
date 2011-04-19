@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface UpdateSystemParameterResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateSystemParameterResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("updatesystemparameterresponseeae0doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateSystemParameterResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("updatesystemparameterresponseeae0doctype");
     
     /**
      * Gets the "UpdateSystemParameterResponse" element
@@ -42,7 +42,7 @@ public interface UpdateSystemParameterResponseDocument extends org.apache.xmlbea
     public interface UpdateSystemParameterResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateSystemParameterResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("updatesystemparameterresponse3dbeelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UpdateSystemParameterResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("updatesystemparameterresponse3dbeelemtype");
         
         /**
          * Gets the "out" element

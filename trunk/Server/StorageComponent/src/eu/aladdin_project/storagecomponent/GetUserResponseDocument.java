@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetUserResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("getuserresponsee530doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("getuserresponsee530doctype");
     
     /**
      * Gets the "GetUserResponse" element
@@ -42,7 +42,7 @@ public interface GetUserResponseDocument extends org.apache.xmlbeans.XmlObject
     public interface GetUserResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8FFB6639CE07877265FAED7A39ACAC04").resolveHandle("getuserresponse009eelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetUserResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("getuserresponse009eelemtype");
         
         /**
          * Gets the "out" element

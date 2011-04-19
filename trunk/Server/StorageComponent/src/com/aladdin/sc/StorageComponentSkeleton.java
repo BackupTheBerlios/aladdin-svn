@@ -60,6 +60,7 @@ import eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionDescriptionResponseDocument.GetQuestionDescriptionResponse;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.GetQuestionnaireAnswerValueResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskResponseDocument.GetQuestionnaireAnswersByTaskResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
@@ -428,7 +429,8 @@ import java.net.URL;
 
     	private Integer storeSocioDemographic (SocioDemographicData rsd, Integer id) {
     		com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
-    		sd.setAge(new Integer(rsd.getAge()));
+    		
+    		sd.setBirthday(new Timestamp (rsd.getBirthday().getTimeInMillis()));
 
     		if (rsd.getGender() != null && rsd.getGender().getCode() != null && !rsd.getGender().getCode().isEmpty()) sd.setGender(new Integer(rsd.getGender().getCode()));
     		else sd.setGender(0);
@@ -786,7 +788,8 @@ import java.net.URL;
     			} catch (NumberFormatException e) {
 				}
     			
-    			warn.setPatientID(rwarn.getPatientID());
+    			if (rwarn.getPatient() != null) warn.setPatient(new Integer (rwarn.getPatient().getID()));
+    			
     			warn.setDelivered(rwarn.getDelivered());
 
     			s.save (warn);
@@ -1389,7 +1392,11 @@ import java.net.URL;
 		
 		private SocioDemographicData exportSocioDemographicData (com.aladdin.sc.db.SocioDemographicData SDData) {
 			SocioDemographicData sd = SocioDemographicData.Factory.newInstance();
-			sd.setAge(SDData.getAge().shortValue());
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(SDData.getBirthday());
+			
+			sd.setBirthday(cal);
 			
 			SystemParameter gender = SystemParameter.Factory.newInstance();
 			gender.setCode(SDData.getGender().toString());
@@ -3317,7 +3324,8 @@ import java.net.URL;
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
     				
     				rw.setEmergencyLevel(emergencyLevel);
-    				rw.setPatientID(w.getPatientID());
+    				rw.setPatient(exportPatient((com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, w.getPatient())));
+    				
     				rw.setDelivered(w.getDelivered());
     			}
 				s.getTransaction().commit();
@@ -3326,6 +3334,7 @@ import java.net.URL;
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
 			}
     		
     		return respdoc;
@@ -4486,7 +4495,35 @@ import java.net.URL;
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			System.out.println (e.toString());
 			}
+    		
+			return respdoc;
+		}
+		
+		public GetQuestionnaireAnswerValueResponseDocument getQuestionnaireAnswerValue (GetQuestionnaireAnswerValueDocument req) {
+			GetQuestionnaireAnswerValueResponseDocument respdoc = GetQuestionnaireAnswerValueResponseDocument.Factory.newInstance();
+			GetQuestionnaireAnswerValueResponse resp = respdoc.addNewGetQuestionnaireAnswerValueResponse();
+			
+			try {
+				Integer questionId = new Integer (req.getGetQuestionnaireAnswerValue().getQuestionId());
+				Integer value = new Integer (req.getGetQuestionnaireAnswerValue().getValue());
+				SystemParameter locale = req.getGetQuestionnaireAnswerValue().getLocale();
+				
+				String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + questionId.toString() + " AND value = " + value.toString();
+				List _id = s.createSQLQuery(sql).list();
+				if (_id.size() == 1) {
+					Integer id = (Integer) _id.get(0);
+					resp.setOut(getTranslate("questionnairequestionanswer", id.toString(), locale.getCode(), ""));
+				}
+				
+			} catch (HibernateException e) {
+				try {
+    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    			} catch (TransactionException e2) {
+				}
+			}
+			
 			
 			return respdoc;
 		}

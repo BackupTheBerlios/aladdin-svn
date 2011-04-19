@@ -35,8 +35,8 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "JustificationText");
     private static final javax.xml.namespace.QName EMERGENCYLEVEL$14 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "EmergencyLevel");
-    private static final javax.xml.namespace.QName PATIENTID$16 = 
-        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientID");
+    private static final javax.xml.namespace.QName PATIENT$16 = 
+        new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Patient");
     private static final javax.xml.namespace.QName DELIVERED$18 = 
         new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Delivered");
     
@@ -688,94 +688,76 @@ public class WarningImpl extends org.apache.xmlbeans.impl.values.XmlComplexConte
     }
     
     /**
-     * Gets the "PatientID" element
+     * Gets the "Patient" element
      */
-    public java.lang.String getPatientID()
+    public eu.aladdin_project.xsd.Patient getPatient()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$16, 0);
+            eu.aladdin_project.xsd.Patient target = null;
+            target = (eu.aladdin_project.xsd.Patient)get_store().find_element_user(PATIENT$16, 0);
             if (target == null)
             {
                 return null;
             }
-            return target.getStringValue();
-        }
-    }
-    
-    /**
-     * Gets (as xml) the "PatientID" element
-     */
-    public org.apache.xmlbeans.XmlString xgetPatientID()
-    {
-        synchronized (monitor())
-        {
-            check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$16, 0);
             return target;
         }
     }
     
     /**
-     * True if has "PatientID" element
+     * True if has "Patient" element
      */
-    public boolean isSetPatientID()
+    public boolean isSetPatient()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().count_elements(PATIENTID$16) != 0;
+            return get_store().count_elements(PATIENT$16) != 0;
         }
     }
     
     /**
-     * Sets the "PatientID" element
+     * Sets the "Patient" element
      */
-    public void setPatientID(java.lang.String patientID)
+    public void setPatient(eu.aladdin_project.xsd.Patient patient)
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_element_user(PATIENTID$16, 0);
+            eu.aladdin_project.xsd.Patient target = null;
+            target = (eu.aladdin_project.xsd.Patient)get_store().find_element_user(PATIENT$16, 0);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_element_user(PATIENTID$16);
+                target = (eu.aladdin_project.xsd.Patient)get_store().add_element_user(PATIENT$16);
             }
-            target.setStringValue(patientID);
+            target.set(patient);
         }
     }
     
     /**
-     * Sets (as xml) the "PatientID" element
+     * Appends and returns a new empty "Patient" element
      */
-    public void xsetPatientID(org.apache.xmlbeans.XmlString patientID)
+    public eu.aladdin_project.xsd.Patient addNewPatient()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_element_user(PATIENTID$16, 0);
-            if (target == null)
-            {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_element_user(PATIENTID$16);
-            }
-            target.set(patientID);
+            eu.aladdin_project.xsd.Patient target = null;
+            target = (eu.aladdin_project.xsd.Patient)get_store().add_element_user(PATIENT$16);
+            return target;
         }
     }
     
     /**
-     * Unsets the "PatientID" element
+     * Unsets the "Patient" element
      */
-    public void unsetPatientID()
+    public void unsetPatient()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_element(PATIENTID$16, 0);
+            get_store().remove_element(PATIENT$16, 0);
         }
     }
     

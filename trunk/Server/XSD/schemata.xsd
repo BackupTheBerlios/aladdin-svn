@@ -94,7 +94,7 @@
 			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
 			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="0"></element>
 			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
-			<element name="PatientID" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Patient" type="tns:Patient" maxOccurs="1" minOccurs="0"></element>
 			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="0"></element>
 		</sequence>
 	</complexType>
@@ -256,11 +256,19 @@
 
 	<complexType name="SocioDemographicData">
 		<sequence>
-			<element name="Age" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
-			<element name="Gender" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="MaritalStatus" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="Children" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
-			<element name="LivingWith" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+			<element name="Gender" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="MaritalStatus" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="Children" type="unsignedByte" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="LivingWith" type="tns:SystemParameter"
+				maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="birthday" type="date"></element>
 		</sequence>
 	</complexType>
 
@@ -303,12 +311,6 @@
 		</sequence>
 	</complexType>
 
-	<complexType name="PatientCarer">
-		<sequence>
-			<element name="Carer" type="tns:Carer" maxOccurs="1" minOccurs="1"></element>
-			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1"></element>
-		</sequence>
-	</complexType>
 
 	<complexType name="Clinician">
 		<sequence>
@@ -319,14 +321,28 @@
 	
     <complexType name="Patient">
     	<sequence>
-    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
-    		<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
-    		<element name="ResponsibleClinicianID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="PatientCarerList" type="tns:PatientCarerList" maxOccurs="1" minOccurs="1"></element>
-    		<element name="SocialWorker" type="tns:SocialWorker" maxOccurs="1" minOccurs="1"></element>
-    		<element name="ConsulterInCharge" type="tns:Consulter" maxOccurs="1" minOccurs="1"></element>
-    		<element name="GeneralPractitioner" type="tns:GeneralPractitioner" maxOccurs="1" minOccurs="1"></element>
+    		<element name="ID" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="PersonData" type="tns:PersonData"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="SD_Data" type="tns:SocioDemographicData"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="ResponsibleClinicianID" type="string"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="SocialWorker" type="tns:SocialWorker"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="ConsulterInCharge" type="tns:Consulter"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="GeneralPractitioner"
+    			type="tns:GeneralPractitioner" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="PatientCarer" type="tns:Carer" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
     </complexType>
     
@@ -354,12 +370,6 @@
     	</sequence>
     </complexType>
     
-    <complexType name="PatientCarerList">
-    	<sequence>
-    		<element name="PatientCarer" type="tns:PatientCarer" maxOccurs="unbounded" minOccurs="0"></element>
-    	</sequence>
-    </complexType>
-
     <complexType name="Administrator">
     	<sequence>
     		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
