@@ -8,6 +8,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
@@ -653,6 +654,30 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	/**
+	 * New method to make the addition of several date fields easier
+	 * @param list DateField arraylist with the fields to be added
+	 * @param rows Rows component where the fields will be added
+	 */
+	protected void appendDateFields(ArrayList<DateField> list,Rows rows){
+		Iterator<DateField> it = list.iterator();
+		while(it.hasNext()){
+			DateField elem = it.next();
+			Row rowe = new Row();
+			Label labe = new Label();
+			labe.setValue(elem.getLabel());
+			rowe.appendChild(labe);
+			
+			Datebox tboxe = new Datebox();
+			tboxe.setId(elem.getId());
+			SystemDictionary.webguiLog("TRACE", "DETAILS: "+this.detailsmode);
+			if(detailsmode){tboxe.setReadonly(true);}
+			rowe.appendChild(tboxe);
+			
+			rows.appendChild(rowe); 
+		}
+	}
+	
+	/**
 	 * This method allows the developer to insert several Checkbox fields
 	 * @param list SimpleDataField arraylist which contains the checkbox values
 	 * @param rows Rows component where the checkbox will be added
@@ -765,6 +790,24 @@ public class AladdinFormControllerWindow extends Window{
 		
 		public String getConstraints(){
 			return this.contraints;
+		}
+	}
+	
+	protected class DateField{
+		private String label=null;
+		private String id=null;
+		
+		DateField(String label, String id){
+			this.label=label;
+			this.id=id;
+		}
+		
+		public String getLabel(){
+			return this.label;
+		}
+		
+		public String getId(){
+			return this.id;
 		}
 	}
 	
