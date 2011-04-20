@@ -1,4 +1,4 @@
-#Thu Nov 04 16:58:04 CET 2010
+#Mon Feb 14 16:25:39 CET 2011
 eclipse.preferences.version=1
 encoding//src/eu/aladdin_project/StorageComponent/StorageComponentSOAPStub.java=UTF-8
 encoding//src/eu/aladdin_project/StorageComponent/StorageComponent_PortType.java=UTF-8
@@ -15,11 +15,14 @@ encoding//src/eu/aladdin_project/xsd/Clinician.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/ClinicianInfo.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/Communication.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/CommunicationList.java=UTF-8
+encoding//src/eu/aladdin_project/xsd/Consulter.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/Event.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/ExternalService.java=UTF-8
+encoding//src/eu/aladdin_project/xsd/GeneralPractitioner.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/Identifier.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/IdentifierList.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/Measurement.java=UTF-8
+encoding//src/eu/aladdin_project/xsd/MediaContent.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/OperationResult.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/Patient.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/PatientAssessment.java=UTF-8
@@ -37,6 +40,7 @@ encoding//src/eu/aladdin_project/xsd/QuestionnaireQuestionAnswerList.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/QuestionnaireQuestionAnswerType.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/QuestionnaireQuestionList.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/SearchCriteria.java=UTF-8
+encoding//src/eu/aladdin_project/xsd/SocialWorker.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/SocioDemographicData.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/SystemParameter.java=UTF-8
 encoding//src/eu/aladdin_project/xsd/Task.java=UTF-8
