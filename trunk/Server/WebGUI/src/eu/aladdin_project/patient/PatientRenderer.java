@@ -15,7 +15,7 @@ public class PatientRenderer implements ListitemRenderer{
 		new Listcell(pat.getID()).setParent(arg0);
 		new Listcell(pat.getPersonData().getName()).setParent(arg0);
 		new Listcell(pat.getPersonData().getSurname()).setParent(arg0);
-		new Listcell(pat.getSD_Data().getAge().toString()).setParent(arg0);
+		new Listcell(pat.getSD_Data().getBirthday().toString()).setParent(arg0);
 		Address PAddress = this.getPrimaryAddress(pat.getPersonData());
 		new Listcell(PAddress.getStreetNo()+" "+PAddress.getStreet()+","+PAddress.getCity()).setParent(arg0);
 		

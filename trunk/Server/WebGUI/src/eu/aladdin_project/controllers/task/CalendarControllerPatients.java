@@ -64,7 +64,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		SystemDictionary.webguiLog("DEBUG", "Executor: "+currentexecutor);
 		OperationResult opres = proxy.getUserIdByPersonId(currentexecutor, SystemDictionary.USERTYPE_PATIENT_INT, userid);
 		Patient patient = proxy.getPatient(currentexecutor, userid);
-		Carer carer = patient.getPatientCarerList().getPatientCarer(0).getCarer();
+		Carer carer = patient.getPatientCarer();
 		OperationResult realexecutor = proxy.getUserIdByPersonId(carer.getID(), SystemDictionary.USERTYPE_CARER_INT, userid);
 		SystemDictionary.webguiLog("DEBUG", "Executor req: "+realexecutor.getCode()+":"+opres.getDescription());
 		((Textbox)bookEventWin.getFellow("objid")).setValue(realexecutor.getCode());

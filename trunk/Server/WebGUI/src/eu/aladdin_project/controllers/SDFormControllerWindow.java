@@ -65,7 +65,8 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 			SystemParameter living = new SystemParameter(lcode,lvalue);
 
 		//Creating socio-demographic object to store
-		SocioDemographicData sdData = new SocioDemographicData(age, gender, marital, children, living);
+		//TODO: !!! Birthday instead of Age
+		SocioDemographicData sdData = new SocioDemographicData(gender, marital, children, living, null);
 		return sdData;
 	}
 	
@@ -134,7 +135,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 * This method sets all the SocioDemographic field values when updating Patients or Carers
 	 */
 	protected void addSocioDemographicDataFieldsValue(){
-		((Intbox)this.getFellow("pat_age")).setValue(new Integer(this.currentsd.getAge().toString()));
+		((Intbox)this.getFellow("pat_age")).setValue(new Integer(this.currentsd.getBirthday().toString()));
 		((Intbox)this.getFellow("pat_children")).setValue(new Integer(this.currentsd.getChildren().toString()));
 		
 		

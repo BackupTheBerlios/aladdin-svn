@@ -24,7 +24,7 @@ public class Warning  implements java.io.Serializable {
 
     private eu.aladdin_project.xsd.SystemParameter emergencyLevel;
 
-    private java.lang.String patientID;
+    private eu.aladdin_project.xsd.Patient patient;
 
     private java.lang.Boolean delivered;
 
@@ -40,7 +40,7 @@ public class Warning  implements java.io.Serializable {
            eu.aladdin_project.xsd.SystemParameter riskLevel,
            java.lang.String justificationText,
            eu.aladdin_project.xsd.SystemParameter emergencyLevel,
-           java.lang.String patientID,
+           eu.aladdin_project.xsd.Patient patient,
            java.lang.Boolean delivered) {
            this.ID = ID;
            this.typeOfWarning = typeOfWarning;
@@ -50,7 +50,7 @@ public class Warning  implements java.io.Serializable {
            this.riskLevel = riskLevel;
            this.justificationText = justificationText;
            this.emergencyLevel = emergencyLevel;
-           this.patientID = patientID;
+           this.patient = patient;
            this.delivered = delivered;
     }
 
@@ -220,8 +220,8 @@ public class Warning  implements java.io.Serializable {
      * 
      * @return patientID
      */
-    public java.lang.String getPatientID() {
-        return patientID;
+    public eu.aladdin_project.xsd.Patient getPatient() {
+        return patient;
     }
 
 
@@ -230,8 +230,8 @@ public class Warning  implements java.io.Serializable {
      * 
      * @param patientID
      */
-    public void setPatientID(java.lang.String patientID) {
-        this.patientID = patientID;
+    public void setPatient(eu.aladdin_project.xsd.Patient patient) {
+        this.patient = patient;
     }
 
 
@@ -290,9 +290,9 @@ public class Warning  implements java.io.Serializable {
             ((this.emergencyLevel==null && other.getEmergencyLevel()==null) || 
              (this.emergencyLevel!=null &&
               this.emergencyLevel.equals(other.getEmergencyLevel()))) &&
-            ((this.patientID==null && other.getPatientID()==null) || 
-             (this.patientID!=null &&
-              this.patientID.equals(other.getPatientID()))) &&
+            ((this.patient==null && other.getPatient()==null) || 
+             (this.patient!=null &&
+              this.patient.equals(other.getPatient()))) &&
             ((this.delivered==null && other.getDelivered()==null) || 
              (this.delivered!=null &&
               this.delivered.equals(other.getDelivered())));
@@ -331,8 +331,8 @@ public class Warning  implements java.io.Serializable {
         if (getEmergencyLevel() != null) {
             _hashCode += getEmergencyLevel().hashCode();
         }
-        if (getPatientID() != null) {
-            _hashCode += getPatientID().hashCode();
+        if (getPatient() != null) {
+            _hashCode += getPatient().hashCode();
         }
         if (getDelivered() != null) {
             _hashCode += getDelivered().hashCode();
@@ -404,9 +404,9 @@ public class Warning  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("patientID");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientID"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setFieldName("patient");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Patient"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Patient"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

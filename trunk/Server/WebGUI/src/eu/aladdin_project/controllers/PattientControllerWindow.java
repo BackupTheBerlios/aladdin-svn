@@ -47,7 +47,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	private SocialWorker currentsocialworker = null;
 	private Consulter currentconsulter = null;
 	private GeneralPractitioner currentgeneralpracticioner = null;
-	private PatientCarer[] currentcarers = null;
+	private Carer currentcarer = null;
 	
 	/**
 	 * Default constructor
@@ -71,7 +71,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.currentconsulter = current.getConsulterInCharge();
 		SystemDictionary.webguiLog("TRACE", "General Practicioner: "+current.getGeneralPractitioner().getName());
 		this.currentgeneralpracticioner = current.getGeneralPractitioner();
-		this.currentcarers = current.getPatientCarerList().getPatientCarer();
+		this.currentcarer = current.getPatientCarer();
 		
 		this.buildForm();
 		
@@ -130,13 +130,10 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 				String id = (String)ses.getAttribute("userid");
 				Carer car2set = proxy.getCarer(carerId, id);
 				
-				PatientCarer[] listcarers = new PatientCarer[1];
-				listcarers[0]=new PatientCarer(car2set,true);
-				PatientCarerList oflist = new PatientCarerList(listcarers);
 				SystemDictionary.webguiLog("DEBUG", "Social worker: "+socialw.getName());
 				SystemDictionary.webguiLog("DEBUG", "Consulter: "+consulter.getName());
 				SystemDictionary.webguiLog("DEBUG", "General practicioner: "+gralprac.getName());
-				Patient patient = new Patient("",personData,sdData, resClinic, oflist, socialw, consulter, gralprac);
+				Patient patient = new Patient("",personData,sdData, resClinic, socialw, consulter, gralprac, car2set);
 				if(newpatient){
 					result = proxy.createPatient(patient, id);
 					SystemDictionary.webguiLog("INFO", "Patient ID: "+result.getCode());
@@ -326,8 +323,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 * This method sets the carer values when updating a patient
 	 */
 	protected void addCarerFieldValues(){
-		((Textbox)getFellow("pat_carid")).setValue(this.currentcarers[0].getCarer().getID());
-		((Textbox)getFellow("pat_carname")).setValue(this.currentcarers[0].getCarer().getPersonData().getName()+", "+this.currentcarers[0].getCarer().getPersonData().getSurname());
+		((Textbox)getFellow("pat_carid")).setValue(this.currentcarer.getID());
+		((Textbox)getFellow("pat_carname")).setValue(this.currentcarer.getPersonData().getName()+", "+this.currentcarer.getPersonData().getSurname());
 	}
 	
 	/**

@@ -3688,20 +3688,54 @@ public class StorageComponentSOAPStub extends org.apache.axis.client.Stub implem
   throw axisFaultException;
 }
     }
-
-    public java.lang.String getQuestionnaireAnswerValue(java.lang.String questionId, java.lang.String value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException {
+    
+    public eu.aladdin_project.xsd.Carer[] getAvailableCarers(java.lang.String userId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
         _call.setOperation(_operations[68]);
         _call.setUseSOAPAction(true);
-        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/GetQuestionnaireAnswerValue");
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/getAvailableCarers");
         _call.setEncodingStyle(null);
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "GetQuestionnaireAnswerValue"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getAvailableCarers"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {userId});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eu.aladdin_project.xsd.Carer[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eu.aladdin_project.xsd.Carer[]) org.apache.axis.utils.JavaUtils.convert(_resp, eu.aladdin_project.xsd.Carer[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public java.lang.String getQuestionnaireAnswerValue(java.lang.String questionId, java.lang.String value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[69]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://aladdin-project.eu/StorageComponent/getQuestionnaireAnswerValue");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getQuestionnaireAnswerValue"));
 
         setRequestHeaders(_call);
         setAttachments(_call);

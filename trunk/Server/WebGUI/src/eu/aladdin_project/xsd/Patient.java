@@ -16,13 +16,13 @@ public class Patient  implements java.io.Serializable {
 
     private java.lang.String responsibleClinicianID;
 
-    private eu.aladdin_project.xsd.PatientCarerList patientCarerList;
-
     private eu.aladdin_project.xsd.SocialWorker socialWorker;
 
     private eu.aladdin_project.xsd.Consulter consulterInCharge;
 
     private eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner;
+    
+    private eu.aladdin_project.xsd.Carer patientCarer;
     
     public String toString(){
     	return this.personData.getSurname()+", "+this.personData.getName();
@@ -36,18 +36,18 @@ public class Patient  implements java.io.Serializable {
            eu.aladdin_project.xsd.PersonData personData,
            eu.aladdin_project.xsd.SocioDemographicData SD_Data,
            java.lang.String responsibleClinicianID,
-           eu.aladdin_project.xsd.PatientCarerList patientCarerList,
            eu.aladdin_project.xsd.SocialWorker socialWorker,
            eu.aladdin_project.xsd.Consulter consulterInCharge,
-           eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner) {
+           eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner,
+           eu.aladdin_project.xsd.Carer patientCarer) {
            this.ID = ID;
            this.personData = personData;
            this.SD_Data = SD_Data;
            this.responsibleClinicianID = responsibleClinicianID;
-           this.patientCarerList = patientCarerList;
            this.socialWorker = socialWorker;
            this.consulterInCharge = consulterInCharge;
            this.generalPractitioner = generalPractitioner;
+           this.patientCarer = patientCarer;
     }
 
 
@@ -132,26 +132,6 @@ public class Patient  implements java.io.Serializable {
 
 
     /**
-     * Gets the patientCarerList value for this Patient.
-     * 
-     * @return patientCarerList
-     */
-    public eu.aladdin_project.xsd.PatientCarerList getPatientCarerList() {
-        return patientCarerList;
-    }
-
-
-    /**
-     * Sets the patientCarerList value for this Patient.
-     * 
-     * @param patientCarerList
-     */
-    public void setPatientCarerList(eu.aladdin_project.xsd.PatientCarerList patientCarerList) {
-        this.patientCarerList = patientCarerList;
-    }
-
-
-    /**
      * Gets the socialWorker value for this Patient.
      * 
      * @return socialWorker
@@ -209,6 +189,25 @@ public class Patient  implements java.io.Serializable {
     public void setGeneralPractitioner(eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner) {
         this.generalPractitioner = generalPractitioner;
     }
+    
+    /**
+     * Gets the patientCarer value for this Patient.
+     * 
+     * @return patientCarer
+     */
+    public eu.aladdin_project.xsd.Carer getPatientCarer() {
+        return patientCarer;
+    }
+
+
+    /**
+     * Sets the patientCarer value for this Patient.
+     * 
+     * @param patientCarer
+     */
+    public void setPatientCarer(eu.aladdin_project.xsd.Carer patientCarer) {
+        this.patientCarer = patientCarer;
+    }
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
@@ -234,9 +233,6 @@ public class Patient  implements java.io.Serializable {
             ((this.responsibleClinicianID==null && other.getResponsibleClinicianID()==null) || 
              (this.responsibleClinicianID!=null &&
               this.responsibleClinicianID.equals(other.getResponsibleClinicianID()))) &&
-            ((this.patientCarerList==null && other.getPatientCarerList()==null) || 
-             (this.patientCarerList!=null &&
-              this.patientCarerList.equals(other.getPatientCarerList()))) &&
             ((this.socialWorker==null && other.getSocialWorker()==null) || 
              (this.socialWorker!=null &&
               this.socialWorker.equals(other.getSocialWorker()))) &&
@@ -245,7 +241,10 @@ public class Patient  implements java.io.Serializable {
               this.consulterInCharge.equals(other.getConsulterInCharge()))) &&
             ((this.generalPractitioner==null && other.getGeneralPractitioner()==null) || 
              (this.generalPractitioner!=null &&
-              this.generalPractitioner.equals(other.getGeneralPractitioner())));
+              this.generalPractitioner.equals(other.getGeneralPractitioner()))) &&
+        ((this.patientCarer==null && other.getPatientCarer()==null) || 
+                (this.patientCarer!=null &&
+                 this.patientCarer.equals(other.getPatientCarer())));
         __equalsCalc = null;
         return _equals;
     }
@@ -269,9 +268,6 @@ public class Patient  implements java.io.Serializable {
         if (getResponsibleClinicianID() != null) {
             _hashCode += getResponsibleClinicianID().hashCode();
         }
-        if (getPatientCarerList() != null) {
-            _hashCode += getPatientCarerList().hashCode();
-        }
         if (getSocialWorker() != null) {
             _hashCode += getSocialWorker().hashCode();
         }
@@ -280,6 +276,9 @@ public class Patient  implements java.io.Serializable {
         }
         if (getGeneralPractitioner() != null) {
             _hashCode += getGeneralPractitioner().hashCode();
+        }
+        if (getPatientCarer() != null) {
+            _hashCode += getPatientCarer().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -316,12 +315,6 @@ public class Patient  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("patientCarerList");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarerList"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("socialWorker");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SocialWorker"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SocialWorker"));
@@ -337,6 +330,12 @@ public class Patient  implements java.io.Serializable {
         elemField.setFieldName("generalPractitioner");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "GeneralPractitioner"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "GeneralPractitioner"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("patientCarer");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "PatientCarer"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Carer"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

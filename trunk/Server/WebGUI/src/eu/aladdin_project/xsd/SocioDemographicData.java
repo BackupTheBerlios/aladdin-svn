@@ -8,8 +8,6 @@
 package eu.aladdin_project.xsd;
 
 public class SocioDemographicData  implements java.io.Serializable {
-    private org.apache.axis.types.UnsignedByte age;
-
     private eu.aladdin_project.xsd.SystemParameter gender;
 
     private eu.aladdin_project.xsd.SystemParameter maritalStatus;
@@ -17,41 +15,23 @@ public class SocioDemographicData  implements java.io.Serializable {
     private org.apache.axis.types.UnsignedByte children;
 
     private eu.aladdin_project.xsd.SystemParameter livingWith;
+    
+    private java.util.Date birthday;
 
     public SocioDemographicData() {
     }
 
     public SocioDemographicData(
-           org.apache.axis.types.UnsignedByte age,
            eu.aladdin_project.xsd.SystemParameter gender,
            eu.aladdin_project.xsd.SystemParameter maritalStatus,
            org.apache.axis.types.UnsignedByte children,
-           eu.aladdin_project.xsd.SystemParameter livingWith) {
-           this.age = age;
+           eu.aladdin_project.xsd.SystemParameter livingWith,
+           java.util.Date birthday) {
            this.gender = gender;
            this.maritalStatus = maritalStatus;
            this.children = children;
            this.livingWith = livingWith;
-    }
-
-
-    /**
-     * Gets the age value for this SocioDemographicData.
-     * 
-     * @return age
-     */
-    public org.apache.axis.types.UnsignedByte getAge() {
-        return age;
-    }
-
-
-    /**
-     * Sets the age value for this SocioDemographicData.
-     * 
-     * @param age
-     */
-    public void setAge(org.apache.axis.types.UnsignedByte age) {
-        this.age = age;
+           this.birthday = birthday;
     }
 
 
@@ -133,6 +113,25 @@ public class SocioDemographicData  implements java.io.Serializable {
     public void setLivingWith(eu.aladdin_project.xsd.SystemParameter livingWith) {
         this.livingWith = livingWith;
     }
+    
+    /**
+     * Gets the birthday value for this SocioDemographicData.
+     * 
+     * @return birthday
+     */
+    public java.util.Date getBirthday() {
+        return birthday;
+    }
+
+
+    /**
+     * Sets the birthday value for this SocioDemographicData.
+     * 
+     * @param birthday
+     */
+    public void setBirthday(java.util.Date birthday) {
+        this.birthday = birthday;
+    }
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
@@ -146,9 +145,6 @@ public class SocioDemographicData  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            ((this.age==null && other.getAge()==null) || 
-             (this.age!=null &&
-              this.age.equals(other.getAge()))) &&
             ((this.gender==null && other.getGender()==null) || 
              (this.gender!=null &&
               this.gender.equals(other.getGender()))) &&
@@ -160,7 +156,10 @@ public class SocioDemographicData  implements java.io.Serializable {
               this.children.equals(other.getChildren()))) &&
             ((this.livingWith==null && other.getLivingWith()==null) || 
              (this.livingWith!=null &&
-              this.livingWith.equals(other.getLivingWith())));
+              this.livingWith.equals(other.getLivingWith()))) &&
+              ((this.birthday==null && other.getBirthday()==null) || 
+                      (this.birthday!=null &&
+                       this.birthday.equals(other.getBirthday())));
         __equalsCalc = null;
         return _equals;
     }
@@ -172,9 +171,6 @@ public class SocioDemographicData  implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        if (getAge() != null) {
-            _hashCode += getAge().hashCode();
-        }
         if (getGender() != null) {
             _hashCode += getGender().hashCode();
         }
@@ -187,6 +183,9 @@ public class SocioDemographicData  implements java.io.Serializable {
         if (getLivingWith() != null) {
             _hashCode += getLivingWith().hashCode();
         }
+        if (getBirthday() != null) {
+            _hashCode += getBirthday().hashCode();
+        }
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -198,12 +197,6 @@ public class SocioDemographicData  implements java.io.Serializable {
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SocioDemographicData"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("age");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Age"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "unsignedByte"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("gender");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Gender"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
@@ -225,6 +218,12 @@ public class SocioDemographicData  implements java.io.Serializable {
         elemField.setFieldName("livingWith");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "LivingWith"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("birthday");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "birthday"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

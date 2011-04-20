@@ -23,7 +23,7 @@ public class MessivelyTasksRemove extends Window{
 		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 		String userId = (String)Sessions.getCurrent().getAttribute("userid");
 		Patient pat = proxy.getPatient(patientid, userId);
-		String carer = pat.getPatientCarerList().getPatientCarer(0).getCarer().getID();
+		String carer = pat.getPatientCarer().getID();
 		OperationResult careruser = proxy.getUserIdByPersonId(carer, SystemDictionary.USERTYPE_CARER_INT, userId);
 		OperationResult patientuser = proxy.getUserIdByPersonId(patientid, SystemDictionary.USERTYPE_PATIENT_INT, userId);
 		SystemDictionary.webguiLog("INFO", "CARER ID: "+careruser.getCode());

@@ -63,7 +63,7 @@ public class WarningInfo {
 		this.riskLevel = aux4==null ? "not set" : SystemDictionary.getWarningRiskLevel(aux4.getCode());
 		this.justification = input.getJustificationText() == null ? "" : input.getJustificationText();
 		this.emergencyLevel = aux5 == null? "not set" : SystemDictionary.getWarningEmergencyLevelLabel(aux5.getCode());
-		this.patientID = input.getPatientID();
+		this.patientID = input.getPatient().getID();
 		this.delivered = input.getDelivered().toString();
 		//this.delivered = new Boolean(input.isDelivered()).toString();
 		String id="";
@@ -83,7 +83,7 @@ public class WarningInfo {
             filter.setCompareOp(compare);
             SystemDictionary.webguiLog("TRACE", "PATID: "+this.patientID);
             //PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
-            Patient pat = proxy.getPatient(this.patientID, id);
+            Patient pat = input.getPatient();
 			SystemDictionary.webguiLog("TRACE", "NAME: "+pat.toString());
 			this.patientName = pat.toString();
 			this.setClinicianResponsible(pat.getResponsibleClinicianID());

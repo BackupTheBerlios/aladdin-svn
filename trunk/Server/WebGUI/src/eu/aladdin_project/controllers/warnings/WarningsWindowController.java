@@ -49,7 +49,7 @@ public class WarningsWindowController extends Window {
 			if(warning.length != 1){
 				ErrorDictionary.redirectWithError("/warnings/index.zul?error=4");
 			}
-			Patient pinfo = proxy.getPatient(warning[0].getPatientID(), usid);
+			Patient pinfo = warning[0].getPatient();
 			
 			warningPopup = (WarningsPopupController)Executions.createComponents("form.zul", this, null);
 			warningPopup.setWarningid(warningid);
