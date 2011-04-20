@@ -342,6 +342,25 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	/**
+	 * Protected method that allows us to add input elements to be able to
+	 * add Person objects
+	 */
+	protected void addBirthdayField(){
+		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
+		rowsA.add(new SimpleFieldData("Birthdate (dd/MM/yyyy)", "pat_age"));
+		
+		Grid pgrid = new Grid();
+		pgrid.setSclass("grid");
+		this.appendColumns(pgrid);
+			
+		Rows rows = new Rows();
+		this.appendDateboxFields(rowsA, rows);
+		
+		pgrid.appendChild(rows);
+		this.appendChild(pgrid);
+	}
+	
+	/**
 	 * This method fills some person-related fields on the form. These fields are
 	 * the name and the surname of the person.
 	 */

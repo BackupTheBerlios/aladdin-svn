@@ -2,6 +2,7 @@ package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 import org.zkoss.util.resource.Labels;
@@ -16,6 +17,7 @@ import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.ErrorDictionary;
@@ -66,6 +68,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
+		this.addBirthdayFieldValue(this.currentsd.getBirthday());
 		//this.addSocioDemographicDataFieldsValue();
 		Hbox buttonshbox = new Hbox();
 		if(this.detailsmode){
@@ -90,6 +93,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		this.addPersonFields();
 		this.addAddressFields();
 		this.addCommunicationFields();
+		this.addBirthdayField();
 		//this.addSocioDemographicDataFields();
 	}
 	
@@ -108,6 +112,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			PersonData personData = this.getPersonData();
 			//SocioDemographicData sdData = this.getSocioDemographicData();
 			SocioDemographicData sdData = new SocioDemographicData();
+			sdData.setBirthday(((Datebox)this.getFellow("pat_age")).getValue());
 			//TODO isPrimary control on Communication and Addresses
 			Carer carer = new Carer("",personData,sdData);
 			try{
@@ -147,6 +152,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		PersonData personData = this.getPersonData();
 		//SocioDemographicData sdData = this.getSocioDemographicData();
 		SocioDemographicData sdData = new SocioDemographicData();
+		sdData.setBirthday(((Datebox)this.getFellow("pat_age")).getValue());
 		//TODO isPrimary control on Communication and Addresses
 		Carer carer = new Carer(this.currentid,personData,sdData);
 		try{
@@ -276,5 +282,9 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		((Label)assessmentWindow.getFellow("field04")).setValue(cassessment.getQualityOfLife().toString());
 		((Label)assessmentWindow.getFellow("field05")).setValue(cassessment.getDateOfAssessment());
 		//((Label)assessmentWindow.getFellow("field26")).setValue(assessment);
+	}
+	
+	public void addBirthdayFieldValue(Date d){
+		((Datebox)this.getFellow("pat_age")).setValue(d);
 	}
 }
