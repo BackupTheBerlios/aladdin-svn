@@ -58,16 +58,16 @@ public class DetailPatientController extends DetailSDController{
 		this.usertype = SystemDictionary.USERTYPE_PATIENT_INT;
 	}
 	
-	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
+	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, Carer carers){
 		super.setControllerData(id, data, sddata, responsible, carers);
 	}
 	
-	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers, SocialWorker sw, Consulter consulter, GeneralPractitioner gralpract){
+	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, SocialWorker sw, Consulter consulter, GeneralPractitioner gralpract, Carer carer){
 		this.currentsocialworker = sw;
 		this.currentconsulter = consulter;
 		this.currentgralprac = gralpract;
 		
-		this.setControllerData(id, data, sddata, responsible, carers);
+		this.setControllerData(id, data, sddata, responsible, carer);
 	}
 
 	public Button[] createActionButtons(){
@@ -216,17 +216,16 @@ public class DetailPatientController extends DetailSDController{
 	}
 	
 	protected Listitem[] getCarerListAsListItems(){
-		Listitem[] ret = new Listitem[this.currentcarers.length];
+		Listitem[] ret = new Listitem[1];
+		
 		String text = "Carer";
-		for(int i = 0; i<this.currentcarers.length; i++){
-			PatientCarer carer = this.currentcarers[i];
+			Carer carer = this.currentcarers;
 			Listitem careritem = new Listitem();
-			Listcell empty = i==0 ? new Listcell(text) : new Listcell("");;
-			Listcell carername = new Listcell(carer.getCarer().getPersonData().getSurname()+", "+carer.getCarer().getPersonData().getName());
+			Listcell empty = new Listcell(text);
+			Listcell carername = new Listcell(carer.getPersonData().getSurname()+", "+carer.getPersonData().getName());
 			careritem.appendChild(empty);
 			careritem.appendChild(carername);
-			ret[i]=careritem;
-		}
+			ret[0]=careritem;
 		
 		return ret;
 	}
@@ -288,7 +287,7 @@ public class DetailPatientController extends DetailSDController{
 		Calendar calto = new GregorianCalendar();
 		calto.setTime(this.calendars.getEndDate());
 		try{
-			Carer carer = this.currentcarers[0].getCarer();
+			Carer carer = this.currentcarers;
 			OperationResult currentor = proxy.getUserIdByPersonId(carer.getID(), SystemDictionary.USERTYPE_CARER_INT, userid);
 			SystemDictionary.webguiLog("INFO", "USER TASKS: "+currentor.getCode());
 			Task[] tasklist = proxy.getUserPlannedTasks(currentor.getCode(), calfrom, calto,SystemDictionary.getLocale() ,userid);

@@ -12,6 +12,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.xsd.Address;
+import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.Communication;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
@@ -24,7 +25,7 @@ public abstract class DetailPersonController extends Window {
 	protected PersonData currentdata = null;
 	protected SocioDemographicData currentsd = null;
 	protected String currentresponsible = null;
-	protected PatientCarer[] currentcarers = null;
+	protected Carer currentcarers = null;
 	
 	public abstract Button[] createActionButtons();
 	public abstract Listitem[] createDataRows();
@@ -32,7 +33,7 @@ public abstract class DetailPersonController extends Window {
 	public DetailPersonController(){
 	}
 	
-	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
+	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, Carer carers){
 		this.setCurrentid(id);
 		this.setCurrentdata(data);
 		this.setCurrentresponsible(responsible);
@@ -138,11 +139,11 @@ public abstract class DetailPersonController extends Window {
 		this.currentresponsible = currentresponsible;
 	}
 
-	public PatientCarer[] getCurrentcarers() {
+	public Carer getCurrentcarers() {
 		return currentcarers;
 	}
 
-	protected void setCurrentcarers(PatientCarer[] currentcarers) {
+	protected void setCurrentcarers(Carer currentcarers) {
 		this.currentcarers = currentcarers;
 	}
 	

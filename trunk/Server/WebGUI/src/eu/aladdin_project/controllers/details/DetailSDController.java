@@ -6,6 +6,7 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 
 import eu.aladdin_project.SystemDictionary;
+import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
@@ -19,7 +20,7 @@ public class DetailSDController extends DetailPersonController{
 		this.usertype = SystemDictionary.USERTYPE_CARER_INT;
 	}
 	
-	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, PatientCarer[] carers){
+	public void setControllerData(String id, PersonData data, SocioDemographicData sddata, String responsible, Carer carers){
 		super.setControllerData(id, data, sddata, responsible, carers);
 	}
 	
