@@ -107,7 +107,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			//Getting information from form fields
 			PersonData personData = this.getPersonData();
 			//SocioDemographicData sdData = this.getSocioDemographicData();
-			SocioDemographicData sdData = null;
+			SocioDemographicData sdData = new SocioDemographicData();
 			//TODO isPrimary control on Communication and Addresses
 			Carer carer = new Carer("",personData,sdData);
 			try{
