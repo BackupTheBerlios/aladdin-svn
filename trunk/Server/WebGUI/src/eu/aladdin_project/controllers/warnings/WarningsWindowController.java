@@ -186,13 +186,7 @@ public class WarningsWindowController extends Window {
 		try{
 			User userlogged = proxy.getUser(id);
 			String clinidlogged = userlogged.getPersonID();
-			//SearchCriteria novalid = new SearchCriteria("clinician", new SystemParameter(SystemDictionary.COMPARE_NOTEQ,""), clinidlogged, null);
-			//PatientInfo[] novalidusers = proxy.listOfPatients(new SearchCriteria[]{novalid}, id);
 			ArrayList<SearchCriteria> zerolist = new ArrayList<SearchCriteria>();
-			//for(PatientInfo patient : novalidusers){
-			//	zerolist.add(new SearchCriteria("patientID",new SystemParameter(SystemDictionary.COMPARE_NOTEQ,""),patient.getID(),null));
-			//	
-			//}
 			SearchCriteria patfil = this.showPatientWarnings();
 			SearchCriteria readfil = this.showReadOrAll();
 			SearchCriteria datefrom = this.showFromFilter();
@@ -230,6 +224,7 @@ public class WarningsWindowController extends Window {
 					newrow.appendChild(datelabel);
 					newrow.appendChild(new Label(rowi.getPatientName()));
 					newrow.appendChild(new Label(rowi.getJustification()));
+					newrow.appendChild(new Label(rowi.getDelivered()));
 					Label link = new Label("Details");
 					link.setSclass("link");
 					link.addEventListener("onClick", new ReadWarningListener(rowi.getID()));

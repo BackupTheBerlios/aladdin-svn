@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.apache.axis.types.UnsignedByte;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -13,6 +12,7 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Rows;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Datebox;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.SocioDemographicData;
@@ -39,10 +39,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 */
 	protected SocioDemographicData getSocioDemographicData(){
 		//Getting fields from Social Demographic data
-		//Integer ageStr = ((Intbox)getFellow("pat_age")).getValue();
-		//UnsignedByte age = new UnsignedByte(ageStr);
-		
-		Date birthday = ((Datebox)getFellow ("pat_birthday")).getValue();
+		Date ageStr = ((Datebox)getFellow("pat_age")).getValue();
 		
 		Integer childrenStr = ((Intbox)getFellow("pat_children")).getValue();
 		UnsignedByte children = new UnsignedByte(childrenStr);
@@ -69,8 +66,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 			SystemParameter living = new SystemParameter(lcode,lvalue);
 
 		//Creating socio-demographic object to store
-		//TODO: !!! Birthday instead of Age
-		SocioDemographicData sdData = new SocioDemographicData(gender, marital, children, living, birthday);
+		SocioDemographicData sdData = new SocioDemographicData(gender, marital, children, living, ageStr);
 		return sdData;
 	}
 	
@@ -79,8 +75,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 */
 	protected void addSocioDemographicDataFields(){
 		String personal = Labels.getLabel("patients.form.personal");
-		//String age = Labels.getLabel("patients.form.sd.age");
-		String birthday = Labels.getLabel("patients.form.sd.birthday");
+		String age = Labels.getLabel("patients.form.sd.age");
 		String gender = Labels.getLabel("patients.form.sd.gender");
 		String marital = Labels.getLabel("patients.form.sd.marital");
 		String children = Labels.getLabel("patients.form.sd.children");
@@ -99,11 +94,10 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		String res = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_LBL;
 		String health = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
 		
-		ArrayList<DateField> rows0 = new ArrayList<DateField>();
-		rows0.add(new DateField(birthday, "pat_birthday"));
+		ArrayList<SimpleFieldData> rowsD = new ArrayList<SimpleFieldData>();
+		rowsD.add(new SimpleFieldData("Birthday (dd/MM/yyyy)", "pat_age", "no empty"));
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
-		//rowsA.add(new SimpleFieldData(age, "pat_age", "no empty"));
 		rowsA.add(new SimpleFieldData(children, "pat_children", "no empty"));
 		
 		ArrayList<SimpleFieldData> genderlist = new ArrayList<SimpleFieldData>();
@@ -130,7 +124,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 			
 		Rows rows = new Rows();
 		this.appendSubFormTitleRow(personal, rows);
-		this.appendDateFields(rows0, rows);
+		this.appendDateboxFields(rowsD, rows);
 		this.appendIntboxFields(rowsA, rows);
 		this.appendRadioElement(genderlist, rows, gender, "pat_gender");
 		this.appendListboxElement(maritallist, rows, marital, "pat_marital");
@@ -144,10 +138,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 * This method sets all the SocioDemographic field values when updating Patients or Carers
 	 */
 	protected void addSocioDemographicDataFieldsValue(){
-		//((Intbox)this.getFellow("pat_age")).setValue(new Integer(this.currentsd.getBirthday().toString()));
-		
-		((Datebox)this.getFellow("pat_birthday")).setValue(this.currentsd.getBirthday());
-		
+		((Datebox)this.getFellow("pat_age")).setValue(this.currentsd.getBirthday());
 		((Intbox)this.getFellow("pat_children")).setValue(new Integer(this.currentsd.getChildren().toString()));
 		
 		

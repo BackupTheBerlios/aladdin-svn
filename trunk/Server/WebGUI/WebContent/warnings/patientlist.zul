@@ -18,7 +18,8 @@
 				resclinicfilter.setFieldValue1(loggeduser.getPersonID());
 				resclinicfilter.setCompareOp(new SystemParameter(SystemDictionary.COMPARE_EQ,""));
 				
-				palist = proxy.listOfPatients(new SearchCriteria[]{resclinicfilter},userid);
+				//palist = proxy.listOfPatients(new SearchCriteria[]{resclinicfilter},userid);
+				palist = proxy.listOfPatients(new SearchCriteria[0],userid);
 				SystemDictionary.webguiLog("INFO", "Patient list: "+palist.length);
 			}catch(Exception e){
 				e.printStackTrace();

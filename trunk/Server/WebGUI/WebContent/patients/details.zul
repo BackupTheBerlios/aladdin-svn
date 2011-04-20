@@ -32,13 +32,15 @@
 		String title = Labels.getLabel("patients.update.title");
 		page.setTitle(title);	
 		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
-		
 		String objid = (String)Executions.getCurrent().getParameter("patid");
 		PatientAssessment[] assessmentlist = null;
 		eu.aladdin_project.controllers.details.assessment.AssessmentInfo[] assinfolist = null;
 		StorageComponentProxy proxy = new StorageComponentProxy();
+		Patient pataux = null;
 		try{
-			assessmentlist = proxy.getPatientAssessments(objid,(String)Sessions.getCurrent().getAttribute("userid"));
+            pataux = proxy.getPatient(objid,userid);
+            eu.aladdin_project.SystemDictionary.webguiLog("INFO", "Patient: "+pataux);
+			assessmentlist = proxy.getPatientAssessments(objid,userid);
 			if(assessmentlist != null){
 				assinfolist = new eu.aladdin_project.controllers.details.assessment.AssessmentInfo[assessmentlist.length];
 				for(int i = 0 ; assessmentlist.length > i ; i++){
@@ -52,7 +54,7 @@
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailPatientController">
-	<label value="${data }"/> <a id="showa" visible="true" onClick="showAnchor()">show</a> <a id="hidea" visible="false" onClick="hideAnchor()">hide</a>
+	<label value="${data }: ${pataux } "/><a id="showa" visible="true" onClick="showAnchor()">more</a> <a id="hidea" visible="false" onClick="hideAnchor()">less</a>
 	<zscript>
 		public void showAnchor(){
 			showa.setVisible(false);
@@ -127,7 +129,7 @@
 	<?component name="removemassively" macroURI="removetasks.zul"?>
 	<createDialog id="removemassively" />
 	<hbox>
-		<button label="Remove tasks massively" onClick="detailswin.createRemoveMassivelyDialog()"/>
+		<button label="Remove multiple tasks" onClick="detailswin.createRemoveMassivelyDialog()"/>
 		<button label="Monitor Measurements" onClick="detailswin.createWeightMeasurementDialog()"/>
 	</hbox>
 	<separator height="10px"/>
@@ -164,7 +166,7 @@
 			Patient userobj = proxy.getPatient(objid,userid);
 			eu.aladdin_project.xsd.OperationResult realusid = proxy.getUserIdByPersonId(objid,eu.aladdin_project.SystemDictionary.USERTYPE_PATIENT_INT,userid);
 			String robjid = realusid.getCode();
-			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),userobj.getResponsibleClinicianID(), userobj.getSocialWorker(), userobj.getConsulterInCharge(), userobj.getGeneralPractitioner(), userobj.getPatientCarer());
+			detailswin.setControllerData(userobj.getID(),userobj.getPersonData(),userobj.getSD_Data(),userobj.getResponsibleClinicianID(),userobj.getPatientCarer(), userobj.getSocialWorker(), userobj.getConsulterInCharge(), userobj.getGeneralPractitioner());
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}

@@ -421,7 +421,8 @@ public class AladdinFormControllerWindow extends Window{
 		rowsA.add(new SimpleFieldData(notes, "pat_notes"));
 		
 		ArrayList<SimpleFieldData> rowsB = new ArrayList<SimpleFieldData>();
-		rowsB.add(new SimpleFieldData(prim, "pat_primadd"));
+		//rowsB.add(new SimpleFieldData(prim, "pat_primadd"));
+		rowsB.add(new SimpleFieldData("use this as the primary means of contact", "pat_primadd"));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");
@@ -454,12 +455,14 @@ public class AladdinFormControllerWindow extends Window{
 	 * They are not in a form way, they are being processed to show them in a plain text way
 	 */
 	protected void addAddressFieldsValues(){
+		if(this.currentdata.getAddressList() != null && this.currentdata.getAddressList().getAddress() != null && this.currentdata.getAddressList().getAddress().length > 0){
 		this.addresses = this.currentdata.getAddressList().getAddress();
-		if(this.addresses != null){
-			SystemDictionary.webguiLog("DEBUG", "Addresses LENGTH: "+this.addresses.length);
-			for(int i = 0; i<this.addresses.length; i++){
-				if(this.addresses[i]!=null){
-					this.insertAddressRow(this.addresses[i]);
+			if(this.addresses != null){
+				SystemDictionary.webguiLog("DEBUG", "Addresses LENGTH: "+this.addresses.length);
+				for(int i = 0; i<this.addresses.length; i++){
+					if(this.addresses[i]!=null){
+						this.insertAddressRow(this.addresses[i]);
+					}
 				}
 			}
 		}
@@ -553,12 +556,14 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	protected void addCommunicationFieldsValues(){
-		this.communications = this.currentdata.getCommunicationList().getCommunication();
-		if(this.communications != null){
-		SystemDictionary.webguiLog("DEBUG", "Communications LENGTH: "+ this.communications.length);
-			for(int i = 0 ; i<this.communications.length; i++){
-				if(this.communications[i] != null){
-					this.insertComRow(this.communications[i]);
+		if(this.currentdata.getCommunicationList() != null && this.currentdata.getCommunicationList().getCommunication() != null && this.currentdata.getCommunicationList().getCommunication().length > 0){
+			this.communications = this.currentdata.getCommunicationList().getCommunication();
+			if(this.communications != null){
+			SystemDictionary.webguiLog("DEBUG", "Communications LENGTH: "+ this.communications.length);
+				for(int i = 0 ; i<this.communications.length; i++){
+					if(this.communications[i] != null){
+						this.insertComRow(this.communications[i]);
+					}
 				}
 			}
 		}
@@ -654,14 +659,14 @@ public class AladdinFormControllerWindow extends Window{
 	}
 	
 	/**
-	 * New method to make the addition of several date fields easier
-	 * @param list DateField arraylist with the fields to be added
+	 * New method to make the addition of several integer fields easier
+	 * @param list SimpleFieldData arraylist with the fields to be added
 	 * @param rows Rows component where the fields will be added
 	 */
-	protected void appendDateFields(ArrayList<DateField> list,Rows rows){
-		Iterator<DateField> it = list.iterator();
+	protected void appendDateboxFields(ArrayList<SimpleFieldData> list,Rows rows){
+		Iterator<SimpleFieldData> it = list.iterator();
 		while(it.hasNext()){
-			DateField elem = it.next();
+			SimpleFieldData elem = it.next();
 			Row rowe = new Row();
 			Label labe = new Label();
 			labe.setValue(elem.getLabel());
@@ -669,7 +674,12 @@ public class AladdinFormControllerWindow extends Window{
 			
 			Datebox tboxe = new Datebox();
 			tboxe.setId(elem.getId());
+			tboxe.setFormat("dd/MM/yyyy");
+			tboxe.setButtonVisible(false);
 			SystemDictionary.webguiLog("TRACE", "DETAILS: "+this.detailsmode);
+			if(elem.getConstraints() != null){
+				tboxe.setConstraint(elem.getConstraints());
+			}
 			if(detailsmode){tboxe.setReadonly(true);}
 			rowe.appendChild(tboxe);
 			
@@ -790,24 +800,6 @@ public class AladdinFormControllerWindow extends Window{
 		
 		public String getConstraints(){
 			return this.contraints;
-		}
-	}
-	
-	protected class DateField{
-		private String label=null;
-		private String id=null;
-		
-		DateField(String label, String id){
-			this.label=label;
-			this.id=id;
-		}
-		
-		public String getLabel(){
-			return this.label;
-		}
-		
-		public String getId(){
-			return this.id;
 		}
 	}
 	

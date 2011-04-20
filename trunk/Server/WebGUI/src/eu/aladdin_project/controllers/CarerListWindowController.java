@@ -18,6 +18,7 @@ import org.zkoss.zul.Radio;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.CarerInfo;
 
 /**
@@ -44,7 +45,8 @@ public class CarerListWindowController extends Window{
 			Session ses = Sessions.getCurrent();
 			String id = (String)ses.getAttribute("userid");
 
-			CarerInfo[] listcarer = proxy.listOfCarers(null,id);
+			//CarerInfo[] listcarer = proxy.listOfCarers(null,id);
+			Carer[] listcarer = proxy.getAvailableCarers(id);
 			SystemDictionary.webguiLog("DEBUG", "Carer LIST SIZE: "+listcarer.length);
 
 			Radiogroup rgroup = new Radiogroup();
@@ -61,7 +63,7 @@ public class CarerListWindowController extends Window{
 			for(int i=0; i<listcarer.length; i++){
 				Row rowe = new Row();
 				Radio rade = new Radio();
-				rade.setLabel(listcarer[i].getSurname()+", "+listcarer[i].getName());
+				rade.setLabel(listcarer[i].getPersonData().getSurname()+", "+listcarer[i].getPersonData().getName());
 				rade.setValue(listcarer[i].getID());
 				rowe.appendChild(rade);
 				rows.appendChild(rowe);

@@ -453,10 +453,10 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
   }
   
   public eu.aladdin_project.xsd.Carer[] getAvailableCarers(java.lang.String userId) throws java.rmi.RemoteException{
-	    if (storageComponent_PortType == null)
-	      _initStorageComponentProxy();
-	    return storageComponent_PortType.getAvailableCarers(userId);
-	  }
+    if (storageComponent_PortType == null)
+      _initStorageComponentProxy();
+    return storageComponent_PortType.getAvailableCarers(userId);
+  }
   
   public java.lang.String getQuestionnaireAnswerValue(java.lang.String questionId, java.lang.String value, eu.aladdin_project.xsd.SystemParameter locale) throws java.rmi.RemoteException{
     if (storageComponent_PortType == null)

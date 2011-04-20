@@ -52,11 +52,10 @@ public class WarningInfo {
 		SystemParameter aux4 = input.getRiskLevel();
 		SystemParameter aux5 = input.getEmergencyLevel();
 		
-		this.ID = input.getID(); 
+		this.ID = input.getID();
 		this.type = SystemDictionary.getWarningTypeLabel(aux1.getCode());
 		Calendar cal = input.getDateTimeOfWarning();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		//this.date = cal.get(Calendar.DAY_OF_MONTH) +"/"+ cal.get(Calendar.MONTH) +"/"+ cal.get(Calendar.YEAR) +" "+ cal.get(Calendar.HOUR_OF_DAY) +":"+ cal.get(Calendar.MINUTE);
 		this.date = cal == null ? "not set" : sdf.format(cal.getTime());
 		this.effect = aux2 == null ? "not set" : SystemDictionary.getWarningEffectLabel(aux2.getCode());
 		this.indicator = aux3 == null ? "not set" : SystemDictionary.getWarningIndicatorLabel(aux3.getCode());
@@ -65,33 +64,8 @@ public class WarningInfo {
 		this.emergencyLevel = aux5 == null? "not set" : SystemDictionary.getWarningEmergencyLevelLabel(aux5.getCode());
 		this.patientID = input.getPatient().getID();
 		this.delivered = input.getDelivered().toString();
-		//this.delivered = new Boolean(input.isDelivered()).toString();
-		String id="";
-		if(userId == null){
-			Session ses = Sessions.getCurrent();
-			id = (String)ses.getAttribute("userid");
-		}else{
-			id = userId;
-		}
-		try{
-			StorageComponentProxy proxy = new StorageComponentProxy();
-			SearchCriteria filter = new SearchCriteria();
-            filter.setFieldName("patient.id");
-            filter.setFieldValue1(this.patientID);
-            SystemParameter compare = new SystemParameter();
-            compare.setCode("3");
-            filter.setCompareOp(compare);
-            SystemDictionary.webguiLog("TRACE", "PATID: "+this.patientID);
-            //PatientInfo[] pat = proxy.listOfPatients(new SearchCriteria[] { filter }, id);
-            Patient pat = input.getPatient();
-			SystemDictionary.webguiLog("TRACE", "NAME: "+pat.toString());
-			this.patientName = pat.toString();
-			this.setClinicianResponsible(pat.getResponsibleClinicianID());
-		}catch(Exception re){
-			this.patientName="N/A";
-			this.setClinicianResponsible("N/A");
-		}
-		
+		this.patientName = input.getPatient().getPersonData().getSurname()+", "+input.getPatient().getPersonData().getName();
+		this.setClinicianResponsible(input.getPatient().getResponsibleClinicianID());
 	}
 	
 	public String getID() {

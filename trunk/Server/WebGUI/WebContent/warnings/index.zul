@@ -28,7 +28,7 @@
 	<label value="${titlelbl }" sclass="newitem"/>
 	<hbox>
 		<label value="Show only unread"/>
-		<checkbox id="readall" onCheck="warningswin.refreshWarnings()"/>
+		<checkbox id="readall" onCheck="warningswin.refreshWarnings()" checked="true"/>
 		<label value="Only patient"/>
 		<textbox id="filterpatient" visible="false" readonly="true"/>
 		<textbox id="filterpatienttrigger" readonly="true" onClick="warningswin.createPatientsDialog()"/>
@@ -53,6 +53,7 @@
 			<column label="${emerglbl }" sort="auto"/> -->
 			<column label="${patidlbl }" sort="auto"/>
 			<column label="Justification"/>
+			<column label="read" sort="auto"/>
 			<column width="80px" align="center" />
 		</columns>
 		<rows id="filteredrows">

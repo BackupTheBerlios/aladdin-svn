@@ -29,8 +29,7 @@ public class DetailSDController extends DetailPersonController{
 		String text = Labels.getLabel("common.personal.data");
 		Listcell cell1 = new Listcell(text);
 		lst1.appendChild(cell1);
-		
-		String sddatavalue = SystemDictionary.getGenderLabel(this.currentsd.getGender().getCode())+" ("+this.currentsd.getBirthday()+" "+Labels.getLabel("common.years.old")+")";
+		String sddatavalue = SystemDictionary.getGenderLabel(this.currentsd.getGender().getCode())+" ("+SystemDictionary.getDateFormatter(false).format(this.currentsd.getBirthday())+")";
 		if(this.currentsd.getChildren().toString().equals("0")){
 			String text2 = Labels.getLabel("common.children.no");
 			sddatavalue += " "+text2;

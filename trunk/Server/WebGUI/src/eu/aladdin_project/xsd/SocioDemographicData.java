@@ -15,7 +15,7 @@ public class SocioDemographicData  implements java.io.Serializable {
     private org.apache.axis.types.UnsignedByte children;
 
     private eu.aladdin_project.xsd.SystemParameter livingWith;
-    
+
     private java.util.Date birthday;
 
     public SocioDemographicData() {
@@ -113,7 +113,8 @@ public class SocioDemographicData  implements java.io.Serializable {
     public void setLivingWith(eu.aladdin_project.xsd.SystemParameter livingWith) {
         this.livingWith = livingWith;
     }
-    
+
+
     /**
      * Gets the birthday value for this SocioDemographicData.
      * 
@@ -157,9 +158,9 @@ public class SocioDemographicData  implements java.io.Serializable {
             ((this.livingWith==null && other.getLivingWith()==null) || 
              (this.livingWith!=null &&
               this.livingWith.equals(other.getLivingWith()))) &&
-              ((this.birthday==null && other.getBirthday()==null) || 
-                      (this.birthday!=null &&
-                       this.birthday.equals(other.getBirthday())));
+            ((this.birthday==null && other.getBirthday()==null) || 
+             (this.birthday!=null &&
+              this.birthday.equals(other.getBirthday())));
         __equalsCalc = null;
         return _equals;
     }
@@ -200,24 +201,28 @@ public class SocioDemographicData  implements java.io.Serializable {
         elemField.setFieldName("gender");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Gender"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("maritalStatus");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "MaritalStatus"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("children");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "Children"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "unsignedByte"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("livingWith");
         elemField.setXmlName(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "LivingWith"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://aladdin-project.eu/xsd", "SystemParameter"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

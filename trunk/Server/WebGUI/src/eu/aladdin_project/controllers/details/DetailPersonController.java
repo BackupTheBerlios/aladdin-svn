@@ -68,18 +68,21 @@ public abstract class DetailPersonController extends Window {
 		lst2.appendChild(addtitle);
 		listret.add(lst2);
 		
-		for(int i = 0; i < this.currentdata.getAddressList().getAddress().length; i++){
-			Address addressdata = this.currentdata.getAddressList().getAddress()[i];
-			String addressstring = addressdata.getStreet()+" "+addressdata.getStreetNo()+", "+addressdata.getCity();
-			if(addressdata.getCounty() != null && !addressdata.getCounty().equals("(none)")){
-				addressstring += "("+addressdata.getCounty()+")";
+		if(this.currentdata.getAddressList() != null && this.currentdata.getAddressList().getAddress() != null && this.currentdata.getAddressList().getAddress().length > 0){
+			for(int i = 0; i < this.currentdata.getAddressList().getAddress().length; i++){
+				Address addressdata = this.currentdata.getAddressList().getAddress()[i];
+				String addressstring = addressdata.getStreet()+" "+addressdata.getStreetNo()+", "+addressdata.getCity();
+				if(addressdata.getCounty() != null && !addressdata.getCounty().equals("(none)")){
+					addressstring += "("+addressdata.getCounty()+")";
+				}
+				addressstring += "\n"+addressdata.getZipCode()+" "+addressdata.getCountry();
+				Listitem addresstext = new Listitem();
+				addresstext.appendChild(new Listcell(""));
+				addresstext.appendChild(new Listcell(addressstring));
+				listret.add(addresstext);
 			}
-			addressstring += "\n"+addressdata.getZipCode()+" "+addressdata.getCountry();
-			Listitem addresstext = new Listitem();
-			addresstext.appendChild(new Listcell(""));
-			addresstext.appendChild(new Listcell(addressstring));
-			listret.add(addresstext);
 		}
+		
 		
 		Listitem lst5 = new Listitem();
 		String text5 = Labels.getLabel("common.communications");
@@ -88,14 +91,16 @@ public abstract class DetailPersonController extends Window {
 		lst5.appendChild(comtitle);
 		listret.add(lst5);
 		
-		Communication[] commdata = this.currentdata.getCommunicationList().getCommunication();
-		for(int i = 0; i < commdata.length ; i++){
-			Listitem lst6 = new Listitem();
-			Listcell comcell = new Listcell("");
-			Listcell comcell2 = new Listcell("("+commdata[i].getType()+") "+commdata[i].getValue());
-			lst6.appendChild(comcell);
-			lst6.appendChild(comcell2);
-			listret.add(lst6);
+		if(this.currentdata.getCommunicationList() != null && this.currentdata.getCommunicationList().getCommunication() != null && this.currentdata.getCommunicationList().getCommunication().length >0 ){
+			Communication[] commdata = this.currentdata.getCommunicationList().getCommunication();
+			for(int i = 0; i < commdata.length ; i++){
+				Listitem lst6 = new Listitem();
+				Listcell comcell = new Listcell("");
+				Listcell comcell2 = new Listcell("("+commdata[i].getType()+") "+commdata[i].getValue());
+				lst6.appendChild(comcell);
+				lst6.appendChild(comcell2);
+				listret.add(lst6);
+			}
 		}
 	
 		Listitem[] ret = new Listitem[listret.size()];

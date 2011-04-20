@@ -216,9 +216,9 @@ public class Warning  implements java.io.Serializable {
 
 
     /**
-     * Gets the patientID value for this Warning.
+     * Gets the patient value for this Warning.
      * 
-     * @return patientID
+     * @return patient
      */
     public eu.aladdin_project.xsd.Patient getPatient() {
         return patient;
@@ -226,9 +226,9 @@ public class Warning  implements java.io.Serializable {
 
 
     /**
-     * Sets the patientID value for this Warning.
+     * Sets the patient value for this Warning.
      * 
-     * @param patientID
+     * @param patient
      */
     public void setPatient(eu.aladdin_project.xsd.Patient patient) {
         this.patient = patient;

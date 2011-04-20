@@ -47,7 +47,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	private SocialWorker currentsocialworker = null;
 	private Consulter currentconsulter = null;
 	private GeneralPractitioner currentgeneralpracticioner = null;
-	private Carer currentcarer = null;
+	private Carer currentcarers = null;
 	
 	/**
 	 * Default constructor
@@ -71,7 +71,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		this.currentconsulter = current.getConsulterInCharge();
 		SystemDictionary.webguiLog("TRACE", "General Practicioner: "+current.getGeneralPractitioner().getName());
 		this.currentgeneralpracticioner = current.getGeneralPractitioner();
-		this.currentcarer = current.getPatientCarer();
+		this.currentcarers = current.getPatientCarer();
 		
 		this.buildForm();
 		
@@ -129,7 +129,6 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 				Session ses = Sessions.getCurrent();
 				String id = (String)ses.getAttribute("userid");
 				Carer car2set = proxy.getCarer(carerId, id);
-				
 				SystemDictionary.webguiLog("DEBUG", "Social worker: "+socialw.getName());
 				SystemDictionary.webguiLog("DEBUG", "Consulter: "+consulter.getName());
 				SystemDictionary.webguiLog("DEBUG", "General practicioner: "+gralprac.getName());
@@ -323,8 +322,8 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 * This method sets the carer values when updating a patient
 	 */
 	protected void addCarerFieldValues(){
-		((Textbox)getFellow("pat_carid")).setValue(this.currentcarer.getID());
-		((Textbox)getFellow("pat_carname")).setValue(this.currentcarer.getPersonData().getName()+", "+this.currentcarer.getPersonData().getSurname());
+		((Textbox)getFellow("pat_carid")).setValue(this.currentcarers.getID());
+		((Textbox)getFellow("pat_carname")).setValue(this.currentcarers.getPersonData().getName()+", "+this.currentcarers.getPersonData().getSurname());
 	}
 	
 	/**

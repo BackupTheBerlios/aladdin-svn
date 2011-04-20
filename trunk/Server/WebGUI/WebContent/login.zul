@@ -98,9 +98,11 @@
 		<hbox>
 			<label value="${lguser}:" sclass="logintext"/>
 			<textbox id="login_user" value="Merkel" width="120px"/>
+			<!-- <textbox id="login_user" width="120px"/>  -->
 			<separator orient="horizontal" width="10px"/>
 			<label value="${lgpwd}:" sclass="logintext"/>
 			<textbox id="login_password" type="password" value="Merkel" width="120px"/>
+			<!-- <textbox id="login_password" type="password" width="120px"/> -->
 		</hbox>
 		<separator height="5px"/>
 		<button label="${lgbtn}" width="100%" sclass="logintext" onClick="authenticate(login_user.getValue(),login_password.getValue())"/>

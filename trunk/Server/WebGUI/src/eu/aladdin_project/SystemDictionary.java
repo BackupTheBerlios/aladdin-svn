@@ -1,5 +1,7 @@
 package eu.aladdin_project;
 
+import java.text.SimpleDateFormat;
+
 import org.zkoss.util.resource.Labels;
 
 import org.apache.log4j.ConsoleAppender;
@@ -18,6 +20,8 @@ import eu.aladdin_project.xsd.SystemParameter;
 public class SystemDictionary {
 	
 	private static SystemParameter locale = new SystemParameter("en_UK","English");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private static SimpleDateFormat sdf_long = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	
 	private static StorageComponentProxy proxy = null;
 	
@@ -34,6 +38,13 @@ public class SystemDictionary {
 			proxy = new StorageComponentProxy();
 		}
 		return proxy;
+	}
+	
+	public static SimpleDateFormat getDateFormatter(boolean withhour){
+		if(withhour){
+			return sdf_long;
+		}
+		return sdf;
 	}
 	
 	/**

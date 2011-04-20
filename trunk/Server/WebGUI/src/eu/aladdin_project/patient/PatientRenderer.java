@@ -1,9 +1,12 @@
 package eu.aladdin_project.patient;
 
+import java.text.SimpleDateFormat;
+
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 
+import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.Address;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.PersonData;
@@ -15,7 +18,8 @@ public class PatientRenderer implements ListitemRenderer{
 		new Listcell(pat.getID()).setParent(arg0);
 		new Listcell(pat.getPersonData().getName()).setParent(arg0);
 		new Listcell(pat.getPersonData().getSurname()).setParent(arg0);
-		new Listcell(pat.getSD_Data().getBirthday().toString()).setParent(arg0);
+		SimpleDateFormat sdf = SystemDictionary.getDateFormatter(false);
+		new Listcell(sdf.format(pat.getSD_Data().getBirthday())).setParent(arg0);
 		Address PAddress = this.getPrimaryAddress(pat.getPersonData());
 		new Listcell(PAddress.getStreetNo()+" "+PAddress.getStreet()+","+PAddress.getCity()).setParent(arg0);
 		

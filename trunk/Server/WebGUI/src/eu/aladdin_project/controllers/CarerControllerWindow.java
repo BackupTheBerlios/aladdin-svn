@@ -66,7 +66,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		this.addPersonFieldsValues();
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
-		this.addSocioDemographicDataFieldsValue();
+		//this.addSocioDemographicDataFieldsValue();
 		Hbox buttonshbox = new Hbox();
 		if(this.detailsmode){
 			buttonshbox.appendChild(this.createEditButton());
@@ -90,7 +90,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 		this.addPersonFields();
 		this.addAddressFields();
 		this.addCommunicationFields();
-		this.addSocioDemographicDataFields();
+		//this.addSocioDemographicDataFields();
 	}
 	
 	/**
@@ -99,14 +99,15 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	 * @return void but saves a new Patient on the StorageComponent
 	 */
 	public void createCarer(){
-		if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
-			Window win = (Window)getFellow("internalformerror");
-			((Label)win.getFellow("errorlbl")).setValue("You cannot create a carer without any address or any way to communicate with");
-			getFellow("internalformerror").setVisible(true);
-		}else{
+		//if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
+		//	Window win = (Window)getFellow("internalformerror");
+		//	((Label)win.getFellow("errorlbl")).setValue("You cannot create a carer without any address or any way to communicate with");
+		//	getFellow("internalformerror").setVisible(true);
+		//}else{
 			//Getting information from form fields
 			PersonData personData = this.getPersonData();
-			SocioDemographicData sdData = this.getSocioDemographicData();
+			//SocioDemographicData sdData = this.getSocioDemographicData();
+			SocioDemographicData sdData = null;
 			//TODO isPrimary control on Communication and Addresses
 			Carer carer = new Carer("",personData,sdData);
 			try{
@@ -133,7 +134,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 			}catch (Exception e){
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
 			}
-		}
+		//}
 	}
 	
 	/**
@@ -144,7 +145,8 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	public void updateCarer(){
 		//Getting information from form fields
 		PersonData personData = this.getPersonData();
-		SocioDemographicData sdData = this.getSocioDemographicData();
+		//SocioDemographicData sdData = this.getSocioDemographicData();
+		SocioDemographicData sdData = new SocioDemographicData();
 		//TODO isPrimary control on Communication and Addresses
 		Carer carer = new Carer(this.currentid,personData,sdData);
 		try{

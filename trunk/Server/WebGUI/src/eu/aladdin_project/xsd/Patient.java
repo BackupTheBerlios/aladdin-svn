@@ -21,13 +21,13 @@ public class Patient  implements java.io.Serializable {
     private eu.aladdin_project.xsd.Consulter consulterInCharge;
 
     private eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner;
-    
+
     private eu.aladdin_project.xsd.Carer patientCarer;
-    
-    public String toString(){
+
+     public String toString(){
     	return this.personData.getSurname()+", "+this.personData.getName();
     }
-
+    
     public Patient() {
     }
 
@@ -189,7 +189,8 @@ public class Patient  implements java.io.Serializable {
     public void setGeneralPractitioner(eu.aladdin_project.xsd.GeneralPractitioner generalPractitioner) {
         this.generalPractitioner = generalPractitioner;
     }
-    
+
+
     /**
      * Gets the patientCarer value for this Patient.
      * 
@@ -242,9 +243,9 @@ public class Patient  implements java.io.Serializable {
             ((this.generalPractitioner==null && other.getGeneralPractitioner()==null) || 
              (this.generalPractitioner!=null &&
               this.generalPractitioner.equals(other.getGeneralPractitioner()))) &&
-        ((this.patientCarer==null && other.getPatientCarer()==null) || 
-                (this.patientCarer!=null &&
-                 this.patientCarer.equals(other.getPatientCarer())));
+            ((this.patientCarer==null && other.getPatientCarer()==null) || 
+             (this.patientCarer!=null &&
+              this.patientCarer.equals(other.getPatientCarer())));
         __equalsCalc = null;
         return _equals;
     }
