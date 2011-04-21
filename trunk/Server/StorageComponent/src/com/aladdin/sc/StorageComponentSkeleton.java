@@ -3268,17 +3268,22 @@ import java.net.URL;
     		
     		try {
     			Field[] field = com.aladdin.sc.db.Warning.class.getDeclaredFields();
-    			String sql = "SELECT id FROM warning WHERE ";
+    			String sql = "SELECT warning.id FROM warning inner join patient on (patient.id = warning.patient) WHERE ";
     			
     			SearchCriteria[] sc = req.getGetWarnings().getWarnArray();
     			for (int i = 0; i < sc.length; i++) {
     				for (int j = 0; j < field.length; j++) {
     					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
     						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
-    						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+    						sql += String.format(op.get(opnum), "warning." + sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
     						sql += " AND ";
     					}
     				}
+    				if (sc[i].getFieldName().compareToIgnoreCase("patient.id") == 0) {
+						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+						sql += " AND ";
+					}
     			}
     			sql += "1=1";
     			
