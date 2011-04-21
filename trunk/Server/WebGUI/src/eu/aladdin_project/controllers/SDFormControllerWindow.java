@@ -39,7 +39,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 */
 	protected SocioDemographicData getSocioDemographicData(){
 		//Getting fields from Social Demographic data
-		Date ageStr = ((Datebox)getFellow("pat_birthday")).getValue();
+		Date birthdayStr = ((Datebox)getFellow("pat_birthday")).getValue();
 		
 		Integer childrenStr = ((Intbox)getFellow("pat_children")).getValue();
 		UnsignedByte children = new UnsignedByte(childrenStr);
@@ -66,7 +66,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 			SystemParameter living = new SystemParameter(lcode,lvalue);
 
 		//Creating socio-demographic object to store
-		SocioDemographicData sdData = new SocioDemographicData(gender, marital, children, living, ageStr);
+		SocioDemographicData sdData = new SocioDemographicData(gender, marital, children, living, birthdayStr);
 		return sdData;
 	}
 	
