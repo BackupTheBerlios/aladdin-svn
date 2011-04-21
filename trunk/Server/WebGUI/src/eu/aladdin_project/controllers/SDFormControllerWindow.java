@@ -39,7 +39,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 */
 	protected SocioDemographicData getSocioDemographicData(){
 		//Getting fields from Social Demographic data
-		Date ageStr = ((Datebox)getFellow("pat_age")).getValue();
+		Date ageStr = ((Datebox)getFellow("pat_birthday")).getValue();
 		
 		Integer childrenStr = ((Intbox)getFellow("pat_children")).getValue();
 		UnsignedByte children = new UnsignedByte(childrenStr);
@@ -95,7 +95,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		String health = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
 		
 		ArrayList<SimpleFieldData> rowsD = new ArrayList<SimpleFieldData>();
-		rowsD.add(new SimpleFieldData("Birthday (dd/MM/yyyy)", "pat_age", "no empty"));
+		rowsD.add(new SimpleFieldData("Birthday (dd/MM/yyyy)", "pat_birthday", "no empty"));
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
 		rowsA.add(new SimpleFieldData(children, "pat_children", "no empty"));
@@ -138,7 +138,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 * This method sets all the SocioDemographic field values when updating Patients or Carers
 	 */
 	protected void addSocioDemographicDataFieldsValue(){
-		((Datebox)this.getFellow("pat_age")).setValue(this.currentsd.getBirthday());
+		((Datebox)this.getFellow("pat_birthday")).setValue(this.currentsd.getBirthday());
 		((Intbox)this.getFellow("pat_children")).setValue(new Integer(this.currentsd.getChildren().toString()));
 		
 		

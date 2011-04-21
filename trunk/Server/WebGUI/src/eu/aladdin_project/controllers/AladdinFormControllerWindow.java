@@ -694,7 +694,7 @@ public class AladdinFormControllerWindow extends Window{
 			Datebox tboxe = new Datebox();
 			tboxe.setId(elem.getId());
 			tboxe.setFormat("dd/MM/yyyy");
-			tboxe.setButtonVisible(false);
+			//tboxe.setButtonVisible(false);
 			SystemDictionary.webguiLog("TRACE", "DETAILS: "+this.detailsmode);
 			if(elem.getConstraints() != null){
 				tboxe.setConstraint(elem.getConstraints());
