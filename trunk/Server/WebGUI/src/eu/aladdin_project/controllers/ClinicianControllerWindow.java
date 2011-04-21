@@ -105,7 +105,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 			String id = (String)ses.getAttribute("userid");
 			String username = this.getUsername();
 			OperationResult result = proxy.createClinician(clinic, id);
-			User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_CLINICIAN,""), result.getCode(), username, clinic.getPersonData().getSurname());
+			User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_CLINICIAN,""), result.getCode(), username, clinic.getPersonData().getSurname().replaceAll("\\W", ""));
 			result = proxy.createUser(user);
 			if(result.getCode().equals("-2")){
 				SystemDictionary.webguiLog("TRACE", "Error creating user");

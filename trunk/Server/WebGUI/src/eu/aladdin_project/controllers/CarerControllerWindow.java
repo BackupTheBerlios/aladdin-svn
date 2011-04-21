@@ -125,7 +125,7 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 				String id = (String)ses.getAttribute("userid");
 				OperationResult result = proxy.createCarer(carer, id);
 				String username = this.getUsername();
-				User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), username, carer.getPersonData().getSurname());
+				User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_CARER,""), result.getCode(), username, carer.getPersonData().getSurname().replaceAll("\\W", ""));
 				result = proxy.createUser(user);
 				if(result.getCode().equals("-2")){
 					SystemDictionary.webguiLog("TRACE", "Error creating user");

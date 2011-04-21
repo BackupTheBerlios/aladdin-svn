@@ -113,7 +113,7 @@ public class WarningsWindowController extends Window {
 			SystemParameter compare = new SystemParameter();
 			compare.setCode("3");
 			sconcrete = new SearchCriteria();
-			sconcrete.setFieldName("patientID");
+			sconcrete.setFieldName("patient.id");
 			
 			sconcrete.setFieldValue1(filtervalue);
 			sconcrete.setCompareOp(compare);

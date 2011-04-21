@@ -4,15 +4,18 @@ import java.rmi.RemoteException;
 
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
+import eu.aladdin_project.xsd.User;
 
 public class ChangePassword extends Window{
 	
 	private String uid;
+	private User user;
 	
 	public void changePassword(String pwd){
 		String userid = (String)Sessions.getCurrent().getAttribute("userid");
@@ -27,7 +30,10 @@ public class ChangePassword extends Window{
 		}
 	}
 	
-	public void setuserid(String uid){
+	public void setuserid(String uid) throws RemoteException{
 		this.uid = uid;
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		this.user = proxy.getUser(uid);
+		((Textbox)this.getFellow("uname_show")).setValue(this.user.getUsername());
 	}
 }

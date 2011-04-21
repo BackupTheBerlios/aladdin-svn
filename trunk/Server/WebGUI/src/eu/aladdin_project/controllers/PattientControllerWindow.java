@@ -137,7 +137,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 					result = proxy.createPatient(patient, id);
 					SystemDictionary.webguiLog("INFO", "Patient ID: "+result.getCode());
 					String username = this.getUsername();
-					User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_PATIENT, ""), result.getCode(), username, personData.getSurname());
+					User user = new User("", new SystemParameter(SystemDictionary.USERTYPE_PATIENT, ""), result.getCode(), username, personData.getSurname().replaceAll("\\W", ""));
 					result = proxy.createUser(user);
 					if(result.getCode().equals("-2")){
 						SystemDictionary.webguiLog("TRACE", "Error creating user");
