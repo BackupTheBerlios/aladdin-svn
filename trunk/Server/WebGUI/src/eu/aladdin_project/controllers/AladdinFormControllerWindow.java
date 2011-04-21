@@ -347,7 +347,7 @@ public class AladdinFormControllerWindow extends Window{
 	 */
 	protected void addBirthdayField(){
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
-		rowsA.add(new SimpleFieldData("Birthdate (dd/MM/yyyy)", "pat_age"));
+		rowsA.add(new SimpleFieldData("Birthdate (dd/MM/yyyy)", "pat_age", "no empty"));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");

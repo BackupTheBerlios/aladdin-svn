@@ -105,15 +105,15 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 	 * @return void but saves a new Patient on the server
 	 */
 	public void sendPatient(boolean newpatient){
-		if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
-			Window win = (Window)getFellow("internalformerror");
-			((Label)win.getFellow("errorlbl")).setValue("You cannot create a patient without any address or any way to communicate with");
-			getFellow("internalformerror").setVisible(true);
-		}else if(((Textbox)getFellow("pat_respo")).getValue() == null || ((Textbox)getFellow("pat_respo")).getValue().trim().equals("")){
-			Window win = (Window)getFellow("internalformerror");
-			((Label)win.getFellow("errorlbl")).setValue("You must select some clinician");
-			getFellow("internalformerror").setVisible(true);
-		}else{
+		//if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
+		//	Window win = (Window)getFellow("internalformerror");
+		//	((Label)win.getFellow("errorlbl")).setValue("You cannot create a patient without any address or any way to communicate with");
+		//	getFellow("internalformerror").setVisible(true);
+		//}else if(((Textbox)getFellow("pat_respo")).getValue() == null || ((Textbox)getFellow("pat_respo")).getValue().trim().equals("")){
+		//	Window win = (Window)getFellow("internalformerror");
+		//	((Label)win.getFellow("errorlbl")).setValue("You must select some clinician");
+		//	getFellow("internalformerror").setVisible(true);
+		//}else{
 			OperationResult result = null;
 			String resClinic = ((Textbox)getFellow("pat_respo")).getValue();
 			String carerId = ((Textbox)getFellow("pat_carid")).getValue();
@@ -160,7 +160,7 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 			}catch (Exception e){
 				ErrorDictionary.redirectWithError("/carers/?error="+ErrorDictionary.UNKOW_ERROR);
 			}
-		}
+		//}
 	}
 	
 	/**

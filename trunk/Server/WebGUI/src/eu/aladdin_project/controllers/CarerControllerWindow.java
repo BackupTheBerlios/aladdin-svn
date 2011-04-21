@@ -103,16 +103,20 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	 * @return void but saves a new Patient on the StorageComponent
 	 */
 	public void createCarer(){
-		//if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
+		Date birthd = ((Datebox)this.getFellow("pat_age")).getValue();
+		//if(birthd == null){
 		//	Window win = (Window)getFellow("internalformerror");
-		//	((Label)win.getFellow("errorlbl")).setValue("You cannot create a carer without any address or any way to communicate with");
+		//	((Label)win.getFellow("errorlbl")).setValue("You cannot create carers without their birthdate");
 		//	getFellow("internalformerror").setVisible(true);
+		//if(this.addresses == null || this.communications == null || this.addresses.length == 0 || this.communications.length == 0){
+		//	
 		//}else{
 			//Getting information from form fields
 			PersonData personData = this.getPersonData();
 			//SocioDemographicData sdData = this.getSocioDemographicData();
 			SocioDemographicData sdData = new SocioDemographicData();
-			sdData.setBirthday(((Datebox)this.getFellow("pat_age")).getValue());
+			
+			sdData.setBirthday(birthd);
 			//TODO isPrimary control on Communication and Addresses
 			Carer carer = new Carer("",personData,sdData);
 			try{
