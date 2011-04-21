@@ -57,6 +57,7 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 		this.addAddressFieldsValues();
 		this.addCommunicationFieldsValues();
 		Hbox buttonshbox = new Hbox();
+		
 		if(this.detailsmode){
 			Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 			if(isadmin){
@@ -66,11 +67,12 @@ public class ClinicianControllerWindow extends AladdinFormControllerWindow{
 				sep.setOrient("horizontal");
 				buttonshbox.appendChild(sep);
 				buttonshbox.appendChild(this.createPasswordButton());
-				this.appendChild(buttonshbox);
 			}
 		}else{
+			SystemDictionary.webguiLog("INFO", "WHAT!!!!");
 			buttonshbox.appendChild(this.createUpdateButton());
 		}
+		this.appendChild(buttonshbox);
 		this.getFellow("pat_uname").getParent().setVisible(false);
 	}
 	
