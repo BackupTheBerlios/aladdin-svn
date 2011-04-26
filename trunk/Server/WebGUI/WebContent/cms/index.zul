@@ -59,7 +59,7 @@
 				<label value="${each.enabled }"/>
 				<label value="${updmsg }" sclass="link" onClick="mediamanager.modifyContent(self.getParent().getId())"/>
 				<label if="${each.enabled }" value="Disable" sclass="link" onClick="mediamanager.disableContent(self.getParent().getId())"/>
-				<label if="${!each.enabled }" value="Enable" sclass="link" onClick="mediamanager.disableContent(self.getParent().getId())"/>
+				<label if="${!each.enabled }" value="Enable" sclass="link" onClick="mediamanager.enableContent(self.getParent().getId())"/>
 			</row>
 		</rows>
 	</grid>
