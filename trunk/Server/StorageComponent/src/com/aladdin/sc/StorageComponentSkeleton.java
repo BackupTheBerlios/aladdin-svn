@@ -1274,7 +1274,7 @@ import java.net.URL;
 					@SuppressWarnings("unchecked")
 					List<Object> data = list;
     				if (data.size() > 0) {
-    					patientID = (String)data.get(0);
+    					patientID = data.get(0).toString();
     				}
     				
     				am.setPatientID(patientID);
@@ -1749,7 +1749,6 @@ import java.net.URL;
     			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
     			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
     			s.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM patientcarer WHERE patient = " + id.toString()).executeUpdate();
     			s.createSQLQuery("DELETE FROM patient WHERE id = " + id.toString()).executeUpdate();
     			s.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
     			s.createSQLQuery("DELETE FROM sociodemographicdata WHERE id = " + sd.toString()).executeUpdate();
@@ -3197,7 +3196,7 @@ import java.net.URL;
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Identifier.class.getDeclaredFields()));
                 fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Patient.class.getDeclaredFields()));
     			
-    			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) LEFT JOIN patientcarer ON (patientcarer.patient = p.id) WHERE ";
+    			String sql = "SELECT p.id FROM patient p LEFT JOIN persondata pd ON (pd.id = p.persondata) LEFT JOIN address a ON (a.persondata = pd.id) LEFT JOIN communication c ON (c.persondata = pd.id) LEFT JOIN identifier i ON (i.persondata = pd.id) LEFT JOIN sociodemographicdata sd ON (sd.id = p.sd) WHERE ";
     			
     			SearchCriteria[] sc = req.getListOfPatients().getFilterArray();
     			for (int i = 0; i < sc.length; i++) {
@@ -3211,11 +3210,11 @@ import java.net.URL;
     						sql += " AND ";
     					}
     				}
-    				if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
+    				/*if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
 						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
-						sql += String.format(op.get(opnum), "patientcarer.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
+						sql += String.format(op.get(opnum), "patient.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
 						sql += " AND ";
-					}
+					}*/
                     if (sc[i].getFieldName ().compareToIgnoreCase("patient.id") == 0) {
                         Integer opnum = new Integer (sc[i].getCompareOp().getCode());
                         sql += String.format(op.get(opnum), "p.id", sc[i].getFieldValue1(), sc[i].getFieldValue2());
@@ -3668,7 +3667,9 @@ import java.net.URL;
         		
         		url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
         		
-        		if (getURLChar(url) == '0') {
+        		char urlChar = getURLChar(url);
+        		System.out.println (urlChar);
+        		if (urlChar == '0') {
         			throw new Exception ("Can't create user in forum!");
         		}
         		
@@ -3901,7 +3902,7 @@ import java.net.URL;
 				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
         		SQLQuery q = s.createSQLQuery(sql);
         		if (q.list().size() == 1) {
-        			sql = "SELECT patient FROM patientcarer WHERE carer = '" + q.list().get(0).toString() + "'";
+        			sql = "SELECT id FROM patient WHERE carer = '" + q.list().get(0).toString() + "'";
         			
         			Object[] ql = s.createSQLQuery(sql).list().toArray();
         			for (int i = 0; i < ql.length; i++) {
