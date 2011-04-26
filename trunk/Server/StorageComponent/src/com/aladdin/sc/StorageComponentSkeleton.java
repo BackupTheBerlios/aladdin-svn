@@ -130,8 +130,7 @@ import java.net.URL;
 	}
 
 	public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
-    	
-    	public final static int OP_LESS = 1;
+		public final static int OP_LESS = 1;
     	public final static int OP_GREAT = 2;
     	public final static int OP_EQ = 3;
     	public final static int OP_NOTEQ = 4;
@@ -142,11 +141,14 @@ import java.net.URL;
     	
     	private final static SessionFactory sessionFactory;
     	private Session s;
-    	
+    	private final static String forumSC;
     	
     	static {
     		try {
-    			sessionFactory = new Configuration().configure("/hibernate-aladdin-sc.cfg.xml").buildSessionFactory();
+    			com.aladdin.sc.config.Configuration config = new com.aladdin.sc.config.Configuration();
+    			forumSC = config.forumSC;
+    			
+				sessionFactory = new Configuration().configure(config.hibernateCfg).buildSessionFactory();
     			System.out.println ("new sessionFactory");
     		} catch (Throwable ex) {
     			System.err.println("Initial SessionFactory creation failed." + ex);
@@ -3595,7 +3597,7 @@ import java.net.URL;
         		
         		com.aladdin.sc.db.AladdinUser u = (AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
         		
-        		String url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?action=password&password=" + password + "username=" + u.getUsername();
+        		String url = forumSC + "?action=password&password=" + password + "&username=" + u.getUsername();
         		
         		System.out.println (url);
         		
@@ -3653,7 +3655,7 @@ import java.net.URL;
         		
                 User ru = req.getCreateUser().getUser();
 
-        		String url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?none=1&password=***&type=***&username=" + ru.getUsername();
+        		String url = forumSC + "?none=1&password=***&type=***&username=" + ru.getUsername();
         		
         		if (getURLChar(url) == '0') {
                     throw new Exception ("The User with same name exists in Forum");
@@ -3675,7 +3677,7 @@ import java.net.URL;
         		u.setPassword(ru.getPassword());
         		s.save (u);
         		
-        		url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
+        		url = forumSC + "?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
         		
         		char urlChar = getURLChar(url);
         		System.out.println (urlChar);
