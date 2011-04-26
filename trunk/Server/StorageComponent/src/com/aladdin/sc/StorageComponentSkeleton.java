@@ -21,6 +21,7 @@ import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
 
 import com.aladdin.raac.RaacStub;
+import com.aladdin.sc.db.AladdinUser;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
 
@@ -3591,6 +3592,15 @@ import java.net.URL;
         		
         		s.beginTransaction();
         		s.createSQLQuery("UPDATE aladdinuser SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
+        		
+        		com.aladdin.sc.db.AladdinUser u = (AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
+        		
+        		String url = "http://dafnis.atosorigin.es/aladdin/phpBB3/includes/sc.php?action=password&password=" + password + "username=" + u.getUsername();
+        		
+        		System.out.println (url);
+        		
+        		getURLChar(url);
+        		
         		s.getTransaction().commit();
         		
         		res.setCode(id.toString());

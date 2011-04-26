@@ -7,6 +7,20 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
+if (trim($_REQUEST['action']) == "password") {
+	if (!isset($_REQUEST["username"]) || empty($_REQUEST["username"]) || !isset($_REQUEST["password"]) || empty($_REQUEST["password"])) {
+		echo 0; 
+		exit;
+	}
+	
+	$username = trim ($_REQUEST["username"]);
+	$password = md5 (trim ($_REQUEST["password"]));
+	
+	$sql = "UPDATE {$table_prefix}users SET password = '" . $password . "' WHERE username like '" . mysql_escape_string ($user["username"]) . "'";
+	$db->sql_query ($sql);
+	exit;
+}
+
 if (!isset($_REQUEST["username"]) || empty($_REQUEST["username"]) || !isset($_REQUEST["password"]) || empty($_REQUEST["password"]) || !isset($_REQUEST["type"]) || empty($_REQUEST["type"])) {
 	echo 0; 
 	exit;
