@@ -483,6 +483,9 @@ public class SystemDictionary {
 	public final static String MEASUREMENT_WEIGHT = "2";
 	public final static int MEASUREMENT_WEIGHT_INT = 2;
 	public final static String MEASUREMENT_WEIGHT_LBL = "dic.task.type.weight.mes";
+	public final static String MEASUREMENT_ACTIVITY_MONITOR = "3";
+	public final static int MEASUREMENT_ACTIVITY_MONITOR_INT = 3;
+	public final static String MEASUREMENT_ACTIVITY_MONITOR_LBL = "dic.task.type.activity.mon";
 	
 	public static final String QUESTION_TYPE_ONE_ANSWER = "OneAnswer";
 	public static final String QUESTION_TYPE_MANY_ANSWERS = "ManyAnswers";

@@ -4,6 +4,7 @@
 		
 		String bloodt = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT;
 		String weightt = SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT;
+		String actmonitor = SystemDictionary.TASK_TYPE_ACTMONITOR;
 		
 	</zscript>
 <window id="measurementswin" title="Measurement Chart" border="normal" closable="true" position="center,center" use="eu.aladdin_project.controllers.details.measurements.MeasurementPopupController">
@@ -12,6 +13,7 @@
 			<listbox id="measurementtype" mold="select">
 				<listitem label="Weight measurement" value="${weightt }" selected="true"/>
 				<listitem label="Blood pressure measurement" value="${bloodt }"/>
+				<listitem label="Activity monitor" value="${actmonitor }"/>
 			</listbox>
 			<label value="from"/><datebox id="measurementfrom"/>
 			<label value="to"/><datebox id="measurementto"/>

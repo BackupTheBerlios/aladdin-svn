@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -21,6 +22,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.zkoss.calendar.impl.SimpleDateFormatter;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -118,6 +120,8 @@ public class MeasurementPopupController extends Window{
 			//typeofmint = 12;
 		}else if(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT.equals(typeofint)){
 			typeofmint = SystemDictionary.MEASUREMENT_WEIGHT_INT;
+		}else if(SystemDictionary.TASK_TYPE_ACTMONITOR.equals(typeofint)){
+			typeofmint = SystemDictionary.MEASUREMENT_ACTIVITY_MONITOR_INT;
 		}
 		Measurement[] measures = sc.getPatientMeasurement(this.patientid, typeofmint, calfrom, calto, loggeduser);
 		SystemDictionary.webguiLog("INFO", "Measures: "+measures);
@@ -128,7 +132,9 @@ public class MeasurementPopupController extends Window{
 			Iterator<Measurement> it = measurementlist.iterator();
 			while(it.hasNext()){
 				Measurement mnext = it.next();
-				dataset.addValue(mnext.getValue(), "original", mnext.getDateTime().get(Calendar.DATE)+"/"+(mnext.getDateTime().get(Calendar.MONTH)+1));
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+				dataset.addValue(mnext.getValue(), "original", sdf.format(mnext.getDateTime().getTime()));
+				SystemDictionary.webguiLog("INFO", "DATE: "+sdf.format(mnext.getDateTime().getTime())+"\nMEASUREMENT: "+mnext.getValue());
 			}
 		}else{
 			//TODO Sample data

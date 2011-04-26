@@ -7,7 +7,8 @@ import eu.aladdin_project.xsd.Measurement;
 public class MeasurementDateSort implements Comparator<Measurement>{
 
 	public int compare(Measurement arg0, Measurement arg1) {
-		return new Integer(""+(arg0.getDateTime().getTimeInMillis()-arg1.getDateTime().getTimeInMillis()));
+		Double result = new Double(""+(arg0.getDateTime().getTimeInMillis()-arg1.getDateTime().getTimeInMillis())); 
+		return result.intValue();
 	}
 
 }
