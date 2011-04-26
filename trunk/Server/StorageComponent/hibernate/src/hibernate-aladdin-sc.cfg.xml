@@ -17,8 +17,6 @@
 	<property name="hibernate.c3p0.min_size">0</property>
 	<property name="hibernate.c3p0.max_size">50</property>
 	<property name="hibernate.c3p0.max_statements">500</property>
-<!--	<property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
-	<property name="hibernate.c3p0.testConnectionOnCheckin">true</property>	-->
 	
 	<property name="hibernate.c3p0.idleConnectionTestPeriod">10</property>
 
@@ -27,32 +25,33 @@
 
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
 <!--
-<mapping resource="com/aladdin/sc/db/Address.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Administrator.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/CarerAssessment.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Carer.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Clinician.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Communication.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/ExternalService.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Identifier.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Measurement.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/PatientAssessment.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/PatientCarer.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Patient.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/PersonData.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/QuestionnaireAnswer.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Questionnaire.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/QuestionnaireQuestionAnswer.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/QuestionnaireQuestion.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/SocioDemographicData.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/SystemParameter.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Task.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/AladdinUser.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Warning.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Locale.hbm.xml"/>
-<mapping resource="com/aladdin/sc/db/Translate.hbm.xml"/>
+
+<mapping resource="EntertainmentContent.hbm.xml"/>
+<mapping resource="Address.hbm.xml"/>
+<mapping resource="Administrator.hbm.xml"/>
+<mapping resource="CarerAssessment.hbm.xml"/>
+<mapping resource="Carer.hbm.xml"/>
+<mapping resource="Clinician.hbm.xml"/>
+<mapping resource="Communication.hbm.xml"/>
+<mapping resource="ExternalService.hbm.xml"/>
+<mapping resource="Identifier.hbm.xml"/>
+<mapping resource="Measurement.hbm.xml"/>
+<mapping resource="PatientAssessment.hbm.xml"/>
+<mapping resource="Patient.hbm.xml"/>
+<mapping resource="PersonData.hbm.xml"/>
+<mapping resource="QuestionnaireAnswer.hbm.xml"/>
+<mapping resource="Questionnaire.hbm.xml"/>
+<mapping resource="QuestionnaireQuestionAnswer.hbm.xml"/>
+<mapping resource="QuestionnaireQuestion.hbm.xml"/>
+<mapping resource="SocioDemographicData.hbm.xml"/>
+<mapping resource="SystemParameter.hbm.xml"/>
+<mapping resource="Task.hbm.xml"/>
+<mapping resource="AladdinUser.hbm.xml"/>
+<mapping resource="Warning.hbm.xml"/>
+<mapping resource="Locale.hbm.xml"/>
+<mapping resource="Translate.hbm.xml"/>
+<mapping resource="Dict.hbm.xml"/>
+
 -->
-
-
     </session-factory>
 </hibernate-configuration>
