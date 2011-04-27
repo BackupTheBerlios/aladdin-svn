@@ -13,7 +13,6 @@ import eu.aladdin_project.xsd.IdentifierList;
 import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.PatientAssessment;
-import eu.aladdin_project.xsd.PatientCarerList;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.Questionnaire;
 import eu.aladdin_project.xsd.QuestionnaireAnswer;
@@ -156,16 +155,6 @@ public class NullChecker {
 		v.setPersonData(this.check(v.getPersonData(), PersonData.class));
 		v.setID(this.check(v.getID(), String.class));
 		v.setSDData(this.check(v.getSDData(), SocioDemographicData.class));
-		
-		return v;
-	}
-	
-	public PatientCarerList check (PatientCarerList v, Class<PatientCarerList> t) {
-		if (v == null) v = PatientCarerList.Factory.newInstance();
-		
-		for (int i = 0; i < v.getPatientCarerArray().length; i++) {
-			v.getPatientCarerArray(i).setCarer(this.check(v.getPatientCarerArray(i).getCarer(), Carer.class));
-		}
 		
 		return v;
 	}

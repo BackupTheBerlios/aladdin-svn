@@ -1925,7 +1925,9 @@ import java.net.URL;
     			
     			s.beginTransaction();
     			
-    			Object[] ml = s.createSQLQuery("SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'").list().toArray();
+    			String sql = "SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'";
+    			System.out.println (sql);
+				Object[] ml = s.createSQLQuery(sql).list().toArray();
     			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
     			for (int i = 0; i < ml.length; i++) {
