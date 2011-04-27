@@ -137,7 +137,7 @@ import java.net.URL;
     	public final static int OP_LIKE = 5;
     	public final static int OP_BETWEEN = 7;
     	
-    	private HashMap<Integer, String> op;
+    	private static HashMap<Integer, String> op;
     	
     	private final static SessionFactory sessionFactory;
     	private Session s;
@@ -154,6 +154,14 @@ import java.net.URL;
     			System.err.println("Initial SessionFactory creation failed." + ex);
     			throw new ExceptionInInitializerError(ex);
     		}
+    		
+    		op = new HashMap<Integer, String>();
+    		op.put(OP_LESS, " %s < '%s' ");
+    		op.put(OP_GREAT, " %s > '%s' ");
+    		op.put(OP_EQ, " %s = '%s' ");
+    		op.put(OP_NOTEQ, " %s != '%s' ");
+    		op.put(OP_LIKE, "%s like '%s' ");
+    		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
     	}
     	
     	public final static int U_CARER = 3;
@@ -161,10 +169,6 @@ import java.net.URL;
     	public final static int U_CLINICIAN = 2;
     	public final static int U_ADMIN = 1;
     	public final static int U_SERVICE = 5;
-    	
-    	private void printTimestamp () {
-    		System.out.println (new Timestamp (new Date().getTime ()).toString ());
-    	}
     	
     	private boolean checkUser (String userId, Integer userType) {
     		if (userId == null || userId == "") return true;
@@ -184,26 +188,12 @@ import java.net.URL;
     	}
     	
     	public StorageComponentSkeleton () {
-    		
-    		System.out.println (" ====StorageComponentSkeleton ");
-    		
-    		printTimestamp();
-    		
     		s = sessionFactory.openSession();
-    		
-    		op = new HashMap<Integer, String>();
-    		op.put(OP_LESS, " %s < '%s' ");
-    		op.put(OP_GREAT, " %s > '%s' ");
-    		op.put(OP_EQ, " %s = '%s' ");
-    		op.put(OP_NOTEQ, " %s != '%s' ");
-    		op.put(OP_LIKE, "%s like '%s' ");
-    		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
     	}
     	
     	protected void finalize () throws Throwable {
     		s.flush();
     		s.close();
-    		System.out.flush();
     	}
     	
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
