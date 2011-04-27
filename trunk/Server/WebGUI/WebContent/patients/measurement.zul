@@ -7,7 +7,7 @@
 		String actmonitor = SystemDictionary.TASK_TYPE_ACTMONITOR;
 		
 	</zscript>
-<window id="measurementswin" title="Measurement Chart" border="normal" closable="true" position="center,center" use="eu.aladdin_project.controllers.details.measurements.MeasurementPopupController">
+<window id="measurementswin" title="Measurement Chart" border="normal" closable="true" position="left,top" use="eu.aladdin_project.controllers.details.measurements.MeasurementPopupController">
 	<vbox>
 		<hbox>
 			<listbox id="measurementtype" mold="select">

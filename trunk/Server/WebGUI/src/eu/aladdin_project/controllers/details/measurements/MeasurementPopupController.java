@@ -2,7 +2,6 @@ package eu.aladdin_project.controllers.details.measurements;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -22,7 +21,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.zkoss.calendar.impl.SimpleDateFormatter;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -43,13 +41,13 @@ import eu.aladdin_project.xsd.OperationResult;
 
 public class MeasurementPopupController extends Window{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2129003366036217191L;
 	private String patientid;
-	private String patientuserid;
-	private Date measurementfrom;
-	private Date measurementto;
 	
 	public MeasurementPopupController(){
-		
 	}
 	
 	public void setPatientid(String patientid){
@@ -58,7 +56,6 @@ public class MeasurementPopupController extends Window{
 		String loggeduser = (String)Sessions.getCurrent().getAttribute("userid");
 		try{
 			OperationResult user = proxy.getUserIdByPersonId(this.patientid, SystemDictionary.USERTYPE_PATIENT_INT, loggeduser);
-			this.patientuserid = user.getCode();
 		}catch(Exception e){
 			e.printStackTrace();
 			Executions.sendRedirect("");
@@ -66,27 +63,43 @@ public class MeasurementPopupController extends Window{
 	}
 	
 	public void setFrom(Date from){
-		this.measurementfrom = from;
-		((Datebox)getFellow("measurementfrom")).setValue(this.measurementfrom);
+		((Datebox)getFellow("measurementfrom")).setValue(from);
 	}
 	
 	public void setTo(Date to){
-		this.measurementto = to;
-		((Datebox)getFellow("measurementto")).setValue(this.measurementto);
+		((Datebox)getFellow("measurementto")).setValue(to);
 	}
 	
 	public void generateImage() throws RemoteException{
 		StorageComponentProxy sc = SystemDictionary.getSCProxy();
 		String loggeduser = (String)Sessions.getCurrent().getAttribute("userid");
 		String mtype = (String)((Listbox)getFellow("measurementtype")).getSelectedItem().getValue();
+		
 		Calendar calto = new GregorianCalendar();
-		calto.setTime(this.measurementto);
+		calto.setTime(((Datebox)getFellow("measurementto")).getValue());
 		Calendar calfrom = new GregorianCalendar();
-		calfrom.setTime(this.measurementfrom);
+		calfrom.setTime(((Datebox)getFellow("measurementfrom")).getValue());
+
+		if (calfrom.equals(calto)) {
+			calto.add(Calendar.DAY_OF_YEAR, 1);
+		}
+		
 		DefaultCategoryDataset dataset = this.fillData(mtype, calfrom, calto, loggeduser, sc);
-		String title = mtype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT) ? "Weight Measurements" : "Blood pressure measurements";
-		String axis = mtype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT) ? "Weight" : "Blood pressure";
-		JFreeChart chart = ChartFactory.createLineChart(title,"Day of month", axis, dataset, PlotOrientation.VERTICAL, false, false, false);
+		String title = "";
+		String axis  ="";
+		
+		if (mtype.equals(SystemDictionary.TASK_TYPE_WEIGHT_MEASUREMENT)) {
+			title ="Weight Measurements";
+			axis = "Weight";
+		} else if (mtype.equals(SystemDictionary.TASK_TYPE_ACTMONITOR)) {
+			title ="Activity Monitor";
+			axis = "steps";
+		} else if (mtype.equals(SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT)) {
+			title ="Blood pressure measurements";
+			axis = "Blood pressure";
+		}
+		
+		JFreeChart chart = ChartFactory.createLineChart(title,"Day and hour", axis, dataset, PlotOrientation.VERTICAL, false, false, false);
 		chart.setBackgroundPaint(Color.white);
 		
 		CategoryPlot cplot = chart.getCategoryPlot();
@@ -100,7 +113,7 @@ public class MeasurementPopupController extends Window{
 		NumberAxis rangeAxis = (NumberAxis)cplot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		try{
-			BufferedImage bi = chart.createBufferedImage(500, 300, BufferedImage.TRANSLUCENT , null);
+			BufferedImage bi = chart.createBufferedImage(1000, 600, BufferedImage.TRANSLUCENT , null);
 			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 			AImage image = new AImage("Line Chart", bytes);
 			((Image)getFellow("imagemeas")).setContent(image);
@@ -132,9 +145,9 @@ public class MeasurementPopupController extends Window{
 			Iterator<Measurement> it = measurementlist.iterator();
 			while(it.hasNext()){
 				Measurement mnext = it.next();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+				SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd/MM");
 				dataset.addValue(mnext.getValue(), "original", sdf.format(mnext.getDateTime().getTime()));
-				SystemDictionary.webguiLog("INFO", "DATE: "+sdf.format(mnext.getDateTime().getTime())+"\nMEASUREMENT: "+mnext.getValue());
+				if (mnext.getValue() > 0) SystemDictionary.webguiLog("INFO", "DATE: "+sdf.format(mnext.getDateTime().getTime())+"\nMEASUREMENT: "+mnext.getValue());
 			}
 		}else{
 			//TODO Sample data
