@@ -91,9 +91,6 @@ public class MeasurementPopupController extends Window{
 		to.setMinutes(((Timebox)getFellow("tto")).getValue().getMinutes());
 		to.setSeconds(((Timebox)getFellow("tto")).getValue().getSeconds());
 		
-		System.out.println (from.toString());
-		System.out.println (to.toString());
-		
 		Calendar calto = new GregorianCalendar();
 		calto.setTime(to);
 		Calendar calfrom = new GregorianCalendar();
@@ -159,7 +156,6 @@ public class MeasurementPopupController extends Window{
 			List<Measurement> tmp = new ArrayList<Measurement>();
 			
 			for (int i = 0; i < measurementlist.size(); i++) {
-				System.out.println (measurementlist.get(i).getDateTime().getTime().toString());
 				if (
 						measurementlist.get(i).getDateTime().compareTo(calfrom) >= 0 &&
 						measurementlist.get(i).getDateTime().compareTo(calto) <= 0
