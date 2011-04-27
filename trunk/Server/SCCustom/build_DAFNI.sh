@@ -8,8 +8,13 @@ echo "public class Configuration {" >> StorageComponent/src/com/aladdin/sc/confi
 echo "public String hibernateCfg = \"/hibernate-aladdin-sc-dafni.cfg.xml\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "public String forumSC = \"http://dafnis.atosorigin.es/DAFNI/Aladdin/includes/sc.php\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "}" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
-cp build_DAFNI.xml StorageComponent/build.xml
 cd StorageComponent/
+cat build.xml |sed 's/<property name="name" value="StorageComponent"\/>/<property name="name" value="SCDAFNI"\/>/' > tmp
+mv tmp build.xml
+cat resources/services.xml|sed 's/<service name="StorageComponent">/<service name="SCDAFNI">/' > tmp
+mv tmp resources/services.xml
+cat resources/StorageComponent.wsdl|sed 's/<wsdl:service name="StorageComponent">/<wsdl:service name="SCDAFNI">/' > tmp
+mv tmp resources/StorageComponent.wsdl
 ant
 mv build/lib/*.aar ..
 cd ..
