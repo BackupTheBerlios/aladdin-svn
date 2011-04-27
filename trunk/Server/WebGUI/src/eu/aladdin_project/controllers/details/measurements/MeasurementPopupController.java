@@ -145,7 +145,7 @@ public class MeasurementPopupController extends Window{
 			Iterator<Measurement> it = measurementlist.iterator();
 			while(it.hasNext()){
 				Measurement mnext = it.next();
-				SimpleDateFormat sdf = new SimpleDateFormat("hh:mm dd/MM");
+				SimpleDateFormat sdf = new SimpleDateFormat("hh dd/MM");
 				dataset.addValue(mnext.getValue(), "original", sdf.format(mnext.getDateTime().getTime()));
 				if (mnext.getValue() > 0) SystemDictionary.webguiLog("INFO", "DATE: "+sdf.format(mnext.getDateTime().getTime())+"\nMEASUREMENT: "+mnext.getValue());
 			}
