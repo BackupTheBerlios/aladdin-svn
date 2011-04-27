@@ -32,10 +32,8 @@ import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.Clinician;
 import eu.aladdin_project.xsd.Consulter;
 import eu.aladdin_project.xsd.GeneralPractitioner;
-import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.PatientAssessment;
-import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocialWorker;
 import eu.aladdin_project.xsd.SocioDemographicData;
@@ -382,7 +380,7 @@ public class DetailPatientController extends DetailSDController{
 		((MeasurementPopupController)weightMeasurementDialog).setFrom(bdate);
 		((MeasurementPopupController)weightMeasurementDialog).setTo(edate);
 		
-		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		//StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 		//TODO Continue working
 		//Measurement[] meas = proxy.getPatientMeasurement(this.currentid, measurementType, fromData, toData, userId)
 		

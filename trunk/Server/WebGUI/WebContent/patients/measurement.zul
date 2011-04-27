@@ -15,8 +15,8 @@
 				<listitem label="Blood pressure measurement" value="${bloodt }"/>
 				<listitem label="Activity monitor" value="${actmonitor }"/>
 			</listbox>
-			<label value="from"/><datebox id="measurementfrom"/>
-			<label value="to"/><datebox id="measurementto"/>
+			<label value="from"/><datebox id="dfrom"/><timebox id="tfrom"/>
+			<label value="to"/><datebox id="dto"/><timebox id="tto"/>
 			<separator orient="horizontal" width="50px"/>
 			<button label="Show" onClick="measurementswin.generateImage()"/>
 		</hbox>

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -32,6 +33,7 @@ import org.zkoss.zul.Image;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Timebox;
 
 
 import eu.aladdin_project.SystemDictionary;
@@ -50,6 +52,7 @@ public class MeasurementPopupController extends Window{
 	public MeasurementPopupController(){
 	}
 	
+	@SuppressWarnings("unused")
 	public void setPatientid(String patientid){
 		this.patientid = patientid;
 		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
@@ -63,26 +66,38 @@ public class MeasurementPopupController extends Window{
 	}
 	
 	public void setFrom(Date from){
-		((Datebox)getFellow("measurementfrom")).setValue(from);
+		((Datebox)getFellow("dfrom")).setValue(from);
+		((Timebox)getFellow("tfrom")).setValue(from);
 	}
 	
 	public void setTo(Date to){
-		((Datebox)getFellow("measurementto")).setValue(to);
+		((Datebox)getFellow("dto")).setValue(to);
+		((Timebox)getFellow("tto")).setValue(to);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void generateImage() throws RemoteException{
 		StorageComponentProxy sc = SystemDictionary.getSCProxy();
 		String loggeduser = (String)Sessions.getCurrent().getAttribute("userid");
 		String mtype = (String)((Listbox)getFellow("measurementtype")).getSelectedItem().getValue();
 		
+		Date from = ((Datebox)getFellow("dfrom")).getValue();
+		from.setHours(((Timebox)getFellow("tfrom")).getValue().getHours());
+		from.setMinutes(((Timebox)getFellow("tfrom")).getValue().getMinutes());
+		from.setSeconds(((Timebox)getFellow("tfrom")).getValue().getSeconds());
+		
+		Date to = ((Datebox)getFellow("dto")).getValue();
+		to.setHours(((Timebox)getFellow("tto")).getValue().getHours());
+		to.setMinutes(((Timebox)getFellow("tto")).getValue().getMinutes());
+		to.setSeconds(((Timebox)getFellow("tto")).getValue().getSeconds());
+		
+		System.out.println (from.toString());
+		System.out.println (to.toString());
+		
 		Calendar calto = new GregorianCalendar();
-		calto.setTime(((Datebox)getFellow("measurementto")).getValue());
+		calto.setTime(to);
 		Calendar calfrom = new GregorianCalendar();
-		calfrom.setTime(((Datebox)getFellow("measurementfrom")).getValue());
-
-		if (calfrom.equals(calto)) {
-			calto.add(Calendar.DAY_OF_YEAR, 1);
-		}
+		calfrom.setTime(from);
 		
 		DefaultCategoryDataset dataset = this.fillData(mtype, calfrom, calto, loggeduser, sc);
 		String title = "";
@@ -141,11 +156,24 @@ public class MeasurementPopupController extends Window{
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		if(measures != null && measures.length > 0){
 			List<Measurement> measurementlist = Arrays.asList(measures);
+			List<Measurement> tmp = new ArrayList<Measurement>();
+			
+			for (int i = 0; i < measurementlist.size(); i++) {
+				System.out.println (measurementlist.get(i).getDateTime().getTime().toString());
+				if (
+						measurementlist.get(i).getDateTime().compareTo(calfrom) >= 0 &&
+						measurementlist.get(i).getDateTime().compareTo(calto) <= 0
+					)
+					tmp.add(measurementlist.get(i));
+			}
+			
+			measurementlist = tmp;
+			
 			Collections.sort(measurementlist, new MeasurementDateSort());
 			Iterator<Measurement> it = measurementlist.iterator();
 			while(it.hasNext()){
 				Measurement mnext = it.next();
-				SimpleDateFormat sdf = new SimpleDateFormat("hh dd/MM");
+				SimpleDateFormat sdf = new SimpleDateFormat("HH dd/MM");
 				dataset.addValue(mnext.getValue(), "original", sdf.format(mnext.getDateTime().getTime()));
 				if (mnext.getValue() > 0) SystemDictionary.webguiLog("INFO", "DATE: "+sdf.format(mnext.getDateTime().getTime())+"\nMEASUREMENT: "+mnext.getValue());
 			}
