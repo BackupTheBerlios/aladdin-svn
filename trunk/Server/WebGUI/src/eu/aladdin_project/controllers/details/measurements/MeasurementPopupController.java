@@ -113,7 +113,7 @@ public class MeasurementPopupController extends Window{
 		NumberAxis rangeAxis = (NumberAxis)cplot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		try{
-			BufferedImage bi = chart.createBufferedImage(1000, 600, BufferedImage.TRANSLUCENT , null);
+			BufferedImage bi = chart.createBufferedImage(1200, 600, BufferedImage.TRANSLUCENT , null);
 			byte[] bytes = EncoderUtil.encode(bi, ImageFormat.PNG, true);
 			AImage image = new AImage("Line Chart", bytes);
 			((Image)getFellow("imagemeas")).setContent(image);
