@@ -1289,16 +1289,12 @@ import java.net.URL;
     	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
-    					e.printStackTrace();
     				} catch (AxisFault e) {
     					try {
     	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
     	    			
-    	    			System.out.println ("ABORT!!!");
-    	    			e.printStackTrace();
-
     	    			res.setCode("-2");
     	    			res.setStatus((short) 0);
     	    			res.setDescription("Calling RAAC error " + e.toString());
@@ -1309,9 +1305,6 @@ import java.net.URL;
     	    			} catch (TransactionException e2) {
     					}
     	    			
-    	    			System.out.println ("ABORT!!!");
-    	    			e.printStackTrace();
-
     	    			res.setCode("-2");
     	    			res.setStatus((short) 0);
     	    			res.setDescription("Calling RAAC error " + e.toString());
@@ -1319,8 +1312,6 @@ import java.net.URL;
     				}
     				
     			}
-    			
-    			System.out.println ("OK!!!");
     			
     			res.setCode(id.toString());
     			res.setStatus((short) 1);
@@ -1331,9 +1322,6 @@ import java.net.URL;
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println ("ABORT!!!");
-    			e.printStackTrace();
-
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
