@@ -9,12 +9,19 @@ echo "public String hibernateCfg = \"/hibernate-aladdin-sc-nhnn.cfg.xml\";" >> S
 echo "public String forumSC = \"http://dafnis.atosorigin.es/NHNN/Aladdin/includes/sc.php\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "}" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 cd StorageComponent/
+
 cat build.xml |sed 's/<property name="name" value="StorageComponent"\/>/<property name="name" value="SCNHNN"\/>/' > tmp
 mv tmp build.xml
+
 cat resources/services.xml|sed 's/<service name="StorageComponent">/<service name="SCNHNN">/' > tmp
 mv tmp resources/services.xml
+
 cat resources/StorageComponent.wsdl|sed 's/<wsdl:service name="StorageComponent">/<wsdl:service name="SCNHNN">/' > tmp
 mv tmp resources/StorageComponent.wsdl
+
+cat ./src/com/aladdin/raac/RaacStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/raac\//http:\/\/193.174.152.114:8080\/axis2\/services\/raacNHNN\//' > tmp
+mv tmp ./src/com/aladdin/raac/RaacStub.java
+
 ant
 mv build/lib/*.aar ..
 cd ..
