@@ -1207,19 +1207,24 @@ import java.net.URL;
     	}
 
     	private Integer storeMeasurement(Measurement rm, Integer paid) {
-    		long timeInMillis = 0;
-    		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-    		if (paid != null) m.setPatientassessment (paid);
-    		m.setType(rm.getType().getCode());
-    		m.setValue(new BigDecimal (rm.getValue()));
-    		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
-    		m.setDatetime(new Timestamp(timeInMillis));
-    		m.setUnits(rm.getUnits());
-    		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
-    		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
-    		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
-    		s.save (m);
-    		return m.getId();
+//    		try {
+	    		long timeInMillis = 0;
+	    		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
+	    		if (paid != null) m.setPatientassessment (paid);
+	    		m.setType(rm.getType().getCode());
+	    		m.setValue(new BigDecimal (rm.getValue()));
+	    		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
+	    		m.setDatetime(new Timestamp(timeInMillis));
+	    		m.setUnits(rm.getUnits());
+	    		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
+	    		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
+	    		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
+	    		s.save (m);
+	    		return m.getId();
+    		/*} catch (Exception e) {
+    			System.out.println (e.toString());
+    			return 0;
+    		}*/
     	}
     	
     	public StoreMeasurementsResponseDocument storeMeasurements (StoreMeasurementsDocument req) {
@@ -1254,7 +1259,11 @@ import java.net.URL;
     			Measurement[] rm = req.getStoreMeasurements().getDataArray();
     			Integer id = 0;
     			for (int i = 0; i < rm.length; i++) {
-    				id = storeMeasurement(rm[i], null);
+    				try {
+    					id = storeMeasurement(rm[i], null);
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    				}
     				RaacStub rs = new RaacStub();
     				AnalyzeMeasurementsDocument amd = AnalyzeMeasurementsDocument.Factory.newInstance();
     				AnalyzeMeasurements am = amd.addNewAnalyzeMeasurements();
