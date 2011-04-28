@@ -1128,6 +1128,8 @@ import java.net.URL;
     		SavePatientAssessmentResponse resp = respdoc.addNewSavePatientAssessmentResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		System.out.println ("savePatientAssessment");
+    		
     		{
     			NullChecker nc = new NullChecker();
     			
@@ -1232,6 +1234,8 @@ import java.net.URL;
     		StoreMeasurementsResponse resp = respdoc.addNewStoreMeasurementsResponse();
     		OperationResult res = resp.addNewOut();
     		
+    		System.out.println ("storeMeasurements");
+    		
     		{
     			NullChecker nc = new NullChecker();
     			
@@ -1254,36 +1258,70 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
     			
     			Measurement[] rm = req.getStoreMeasurements().getDataArray();
     			Integer id = 0;
     			for (int i = 0; i < rm.length; i++) {
     				try {
+    					s.beginTransaction();
     					id = storeMeasurement(rm[i], null);
-    				} catch (Exception e) {
+    					s.getTransaction().commit();
+    					
+    					RaacStub rs = new RaacStub();
+        				AnalyzeMeasurementsDocument amd = AnalyzeMeasurementsDocument.Factory.newInstance();
+        				AnalyzeMeasurements am = amd.addNewAnalyzeMeasurements();
+        				am.setIn(rm[i]);
+        				
+        				String patientID = "";
+        				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
+        				@SuppressWarnings("rawtypes")
+    					List list = s.createSQLQuery(sql).list();
+    					@SuppressWarnings("unchecked")
+    					List<Object> data = list;
+        				if (data.size() > 0) {
+        					patientID = data.get(0).toString();
+        				}
+        				
+        				am.setPatientID(patientID);
+        				rs.analyzeMeasurements(amd);
+    				} catch (HibernateException e) {
+    					try {
+    	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    	    			} catch (TransactionException e2) {
+    					}
     					e.printStackTrace();
+    				} catch (AxisFault e) {
+    					try {
+    	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    	    			} catch (TransactionException e2) {
+    					}
+    	    			
+    	    			System.out.println ("ABORT!!!");
+    	    			e.printStackTrace();
+
+    	    			res.setCode("-2");
+    	    			res.setStatus((short) 0);
+    	    			res.setDescription("Calling RAAC error " + e.toString());
+    	    			return respdoc;
+    				} catch (RemoteException e) {
+    					try {
+    	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    	    			} catch (TransactionException e2) {
+    					}
+    	    			
+    	    			System.out.println ("ABORT!!!");
+    	    			e.printStackTrace();
+
+    	    			res.setCode("-2");
+    	    			res.setStatus((short) 0);
+    	    			res.setDescription("Calling RAAC error " + e.toString());
+    	    			return respdoc;
     				}
-    				RaacStub rs = new RaacStub();
-    				AnalyzeMeasurementsDocument amd = AnalyzeMeasurementsDocument.Factory.newInstance();
-    				AnalyzeMeasurements am = amd.addNewAnalyzeMeasurements();
-    				am.setIn(rm[i]);
     				
-    				String patientID = "";
-    				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
-    				@SuppressWarnings("rawtypes")
-					List list = s.createSQLQuery(sql).list();
-					@SuppressWarnings("unchecked")
-					List<Object> data = list;
-    				if (data.size() > 0) {
-    					patientID = data.get(0).toString();
-    				}
-    				
-    				am.setPatientID(patientID);
-    				rs.analyzeMeasurements(amd);
     			}
     			
-    			s.getTransaction().commit();
+    			System.out.println ("OK!!!");
+    			
     			res.setCode(id.toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
@@ -1292,28 +1330,13 @@ import java.net.URL;
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			System.out.println ("ABORT!!!");
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
-    		} catch (AxisFault e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
-
-    			res.setCode("-2");
-    			res.setStatus((short) 0);
-    			res.setDescription("Calling RAAC error " + e.toString());
-			} catch (RemoteException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
-
-    			res.setCode("-2");
-    			res.setStatus((short) 0);
-    			res.setDescription("Calling RAAC error " + e.toString());
 			}
     		
     		return respdoc;
