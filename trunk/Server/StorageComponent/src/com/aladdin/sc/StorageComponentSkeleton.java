@@ -2236,7 +2236,7 @@ import java.net.URL;
     			
     			s.beginTransaction();
     			
-    			String sql = "SELECT id FROM task WHERE datetimefulfilled BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
+    			String sql = "SELECT id FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			Object[] tl = s.createSQLQuery(sql).list().toArray();
     			
     			for (int i = 0; i < tl.length; i++) {
