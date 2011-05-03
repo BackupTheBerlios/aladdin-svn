@@ -1557,6 +1557,9 @@ import java.net.URL;
     			s.beginTransaction();
     			
     			String sql = "SELECT qa.timestamp, qq.quest, qa.objectid, qa.userid FROM questionnaireanswer qa inner join questionnairequestion qq on (qq.id = qa.question) WHERE qa.objectid = '" + objectId.toString() + "' AND qa.timestamp BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY qa.timestamp, qq.quest, qa.objectid, qa.userid";
+
+			System.out.println (sql);
+
     			Object[] questionids = s.createSQLQuery(sql).list().toArray();
     			
     			for (int i = 0; i < questionids.length; i++) {
@@ -1577,6 +1580,9 @@ import java.net.URL;
 					sql += "' AND timestamp BETWEEN '" + before.getTime().toString();
 					sql += "' AND '" + after.getTime().toString();
 					sql += "' AND question in (select id from questionnairequestion where quest = " + question.toString() + ")";
+
+					System.out.println (sql);
+
 	    			Object[] lqa = s.createSQLQuery(sql).list().toArray();
 	    			QuestionnaireAnswers rqas = resp.addNewOut();
 	    			rqas.setDateTime(cal);
@@ -4423,7 +4429,7 @@ import java.net.URL;
     			
     			for (int j = 0; j < lqa.length; j++) {
     				QuestionnaireAnswer rqa = rqas.addNewAnswer();
-    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[0]); 
+    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]); 
     				rqa.setQuestionID(qa.getQuestion().toString());
     				rqa.setValue(qa.getValue());
     				rqas.setObjectID(qa.getObjectId().toString());
