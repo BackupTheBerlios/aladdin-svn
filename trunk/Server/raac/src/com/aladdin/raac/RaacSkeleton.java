@@ -49,6 +49,7 @@ import eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument;
 import eu.aladdin_project.www.raac.AnalyzeQuestionnairesResponseDocument.AnalyzeQuestionnairesResponse;
 import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
+import eu.aladdin_project.xsd.Patient;
 import eu.aladdin_project.xsd.QuestionnaireAnswer;
 import eu.aladdin_project.xsd.QuestionnaireAnswers;
 import eu.aladdin_project.xsd.SystemParameter;
@@ -71,14 +72,12 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	static final int DoubleCompareRuleType = 2;
 	static final int GreaterThanRuleType = 3;
 	static final int CategoryChangeType = 4;
-	
+
 	static final int MeasurementAnalysis = 1;
 	static final int QuestionnaireAnalysis = 2;
-	
-	
 
 	QuestionnaireAnswer[] previousAnswerArray = null;
-	
+
 	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
 			AnalyzeQuestionnairesDocument req) {
 		
@@ -88,12 +87,12 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 				.newInstance();
 		AnalyzeQuestionnairesResponse resp = respdoc
 				.addNewAnalyzeQuestionnairesResponse();
-		
+
 		AnalyzeQuestionnaires analyzeQuestionnairesIn = req
 				.getAnalyzeQuestionnaires();
 		if (analyzeQuestionnairesIn == null)
 			return respdoc;
-		
+
 		String ObjectUserID = analyzeQuestionnairesIn.getUserID();
 		String ObjectPersonID;
 
@@ -111,9 +110,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			e1.printStackTrace();
 			return respdoc;
 		}
-		
-	
-	
+
 		AuthDocument authdoc = AuthDocument.Factory.newInstance();
 		Auth auth = Auth.Factory.newInstance();
 		auth.setLogin("raac");
@@ -134,7 +131,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 		if (UserID == "-1")
 			return respdoc;
-		
+
 		GetUserDocument getUserDocument = GetUserDocument.Factory.newInstance();
 		getUserDocument.addNewGetUser();
 		GetUser getUser = GetUser.Factory.newInstance();
@@ -147,7 +144,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		
+
 		User user = getUserDocumentResponse.getGetUserResponse().getOut();
 		ObjectPersonID = user.getPersonID();
 
@@ -158,24 +155,29 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		GregorianCalendar twoMonthsBefore = (GregorianCalendar) GregorianCalendar
 				.getInstance();
 		twoMonthsBefore.add(Calendar.DATE, -60);
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"dd-MMM-yyyy HH:mm:ss");
 		String formatted_currentDate = formatter.format(currentDate.getTime());
-		String formatted_twoMonthsBefore = formatter.format(twoMonthsBefore.getTime());
-		System.out.println("AAA getQuestionnaireAnswers for User ID " + ObjectUserID + " from " + formatted_twoMonthsBefore + " to " + formatted_currentDate);
+		String formatted_twoMonthsBefore = formatter.format(twoMonthsBefore
+				.getTime());
+		System.out.println("AAA getQuestionnaireAnswers for User ID "
+				+ ObjectUserID + " from " + formatted_twoMonthsBefore + " to "
+				+ formatted_currentDate);
 
 		GetQuestionnaireAnswersDocument qDocument = GetQuestionnaireAnswersDocument.Factory
 				.newInstance();
-		
-		GetQuestionnaireAnswers getQuestionnaireAnswers = GetQuestionnaireAnswers.Factory.newInstance();
+
+		GetQuestionnaireAnswers getQuestionnaireAnswers = GetQuestionnaireAnswers.Factory
+				.newInstance();
 		getQuestionnaireAnswers.setFromDate(twoMonthsBefore);
 		getQuestionnaireAnswers.setToDate(currentDate);
 		getQuestionnaireAnswers.setObjectId(ObjectUserID);
 		getQuestionnaireAnswers.setUserId(UserID);
-		
+
 		qDocument.addNewGetQuestionnaireAnswers();
 		qDocument.setGetQuestionnaireAnswers(getQuestionnaireAnswers);
-		
+
 		GetQuestionnaireAnswersResponseDocument qResponseDocument = null;
 
 		try {
@@ -186,8 +188,9 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println("AAA getQuestionnaireAnswers returned questionnaire answers");
+
+		System.out
+				.println("AAA getQuestionnaireAnswers returned questionnaire answers");
 
 		GetQuestionnaireAnswersResponse gQuestAnsResp = qResponseDocument
 				.getGetQuestionnaireAnswersResponse();
@@ -204,88 +207,116 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		previousAnswerArray = previousQuestionnaireAnswers.getAnswerArray();
 		// currentAnswerArray
 		List<RuleMap> DefinedRules = GetRules();
-		
+
 		if (DefinedRules != null && DefinedRules.size() > 0)
-			System.out.println("AAA " + String.valueOf(DefinedRules.size()) + " rules read ok");
-		
+			System.out.println("AAA " + String.valueOf(DefinedRules.size())
+					+ " rules read ok");
+
 		RuleMap currentRule = null;
-		
+
 		double previousScore = 0;
 		double currentScore = 0;
-		
+
 		for (int j = 0; j < previousAnswerArray.length; j++) {
-			
+
 			String globalID = previousAnswerArray[j].getGlobalID();
-			System.out.println("AAA Reading previous answer GlobalID = " + globalID);
+			System.out.println("AAA Reading previous answer GlobalID = "
+					+ globalID);
 			String globalIDGroup = getglobalIDGroup(globalID);
-			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			double globalIDGroupAsDouble = -1;
+
+			try {
+				globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (globalIDGroupAsDouble == -1)
+				continue;
+
 			if (globalIDGroupAsDouble == 4000) {
-				double previousScoreAsDouble = Double.valueOf(previousAnswerArray[j].getValue());
+				double previousScoreAsDouble = Double
+						.valueOf(previousAnswerArray[j].getValue());
 				previousScore += previousScoreAsDouble;
 			}
 		}
-		
+
 		for (int j = 0; j < currentAnswerArray.length; j++) {
-			
+
 			String globalID = currentAnswerArray[j].getGlobalID();
-			System.out.println("AAA Reading current answer GlobalID = " + globalID);
+			System.out.println("AAA Reading current answer GlobalID = "
+					+ globalID);
 			String globalIDGroup = getglobalIDGroup(globalID);
-			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			double globalIDGroupAsDouble = -1;
+			try {
+				globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (globalIDGroupAsDouble == -1)
+				continue;
+
 			if (globalIDGroupAsDouble == 4000) {
-				double currentScoreAsDouble = Double.valueOf(currentAnswerArray[j].getValue());
+				double currentScoreAsDouble = Double
+						.valueOf(currentAnswerArray[j].getValue());
 				currentScore += currentScoreAsDouble;
 			}
 		}
-		
 
 		for (int k = 0; k < currentAnswerArray.length; k++) {
 
 			QuestionnaireAnswer currentAnswer = currentAnswerArray[k];
 			QuestionnaireAnswer previousAnswer = getPreviousQuestionnaireAnswer(currentAnswer
 					.getQuestionID());
-			
+
 			// For non-existant answers, create a new answer with "Never"
 			if (previousAnswer == null) {
-				QuestionnaireAnswer neverAnswer = QuestionnaireAnswer.Factory.newInstance();
+				QuestionnaireAnswer neverAnswer = QuestionnaireAnswer.Factory
+						.newInstance();
 				neverAnswer.setQuestionID(currentAnswer.getQuestionID());
 				neverAnswer.setGlobalID(currentAnswer.getGlobalID());
 				neverAnswer.setValue("0");
 				previousAnswer = neverAnswer;
 			}
-			
+
 			String currentValueStr = currentAnswer.getValue();
-			System.out.println("AAA Reading current value = " + currentValueStr);
+			System.out
+					.println("AAA Reading current value = " + currentValueStr);
 			String previousValueStr = previousAnswer.getValue();
-			System.out.println("AAA Reading previous value = " + previousValueStr);
-			
+			System.out.println("AAA Reading previous value = "
+					+ previousValueStr);
+
 			if ("9".equals(currentValueStr) || "9".equals(previousValueStr))
 				continue;
-			
+
 			double currentValue;
 			double previousValue;
-			
+
 			try {
-				currentValue  = Double.valueOf(currentValueStr);
+				currentValue = Double.valueOf(currentValueStr);
 				previousValue = Double.valueOf(previousValueStr);
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				continue;
 			}
-			
+
 			String globaID = currentAnswer.getGlobalID();
-			
+
 			if (globaID == null || "".equals(globaID))
 				continue;
-			
+
 			int globalIDasInteger = Integer.valueOf(globaID);
 			if (globalIDasInteger < 1000)
 				continue;
-			
+
 			String globalIDGroup = getglobalIDGroup(globaID);
-			if (globalIDGroup == null) continue;
-			
+			if (globalIDGroup == null)
+				continue;
+
 			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
-			if (globalIDGroupAsDouble == 4000) continue;
+			if (globalIDGroupAsDouble == 4000)
+				continue;
 
 			for (int count = 0; count < DefinedRules.size(); count++) {
 
@@ -299,36 +330,48 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 			if (currentRule == null) // Rule not found
 				return respdoc;
-			
-			GetQuestionDescriptionDocument getQuestionDescriptionDocument = GetQuestionDescriptionDocument.Factory.newInstance();
-			GetQuestionDescription getQuestionDescription = GetQuestionDescription.Factory.newInstance();
+
+			GetQuestionDescriptionDocument getQuestionDescriptionDocument = GetQuestionDescriptionDocument.Factory
+					.newInstance();
+			GetQuestionDescription getQuestionDescription = GetQuestionDescription.Factory
+					.newInstance();
 			getQuestionDescription.setQuestionID(currentAnswer.getQuestionID());
-			SystemParameter locale =  SystemParameter.Factory.newInstance();
+			SystemParameter locale = SystemParameter.Factory.newInstance();
 			locale.setCode("en_UK");
 			getQuestionDescription.setLocale(locale);
 			getQuestionDescriptionDocument.addNewGetQuestionDescription();
-			getQuestionDescriptionDocument.setGetQuestionDescription(getQuestionDescription);
+			getQuestionDescriptionDocument
+					.setGetQuestionDescription(getQuestionDescription);
 			GetQuestionDescriptionResponseDocument getQuestionDescriptionResponseDocument = null;
 			try {
-				getQuestionDescriptionResponseDocument = sc.getQuestionDescription(getQuestionDescriptionDocument);
+				getQuestionDescriptionResponseDocument = sc
+						.getQuestionDescription(getQuestionDescriptionDocument);
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			OperationResult questionDescriptionResult = getQuestionDescriptionResponseDocument.getGetQuestionDescriptionResponse().getOut();
-			String description = String.format("Question '%s' changed from '%s' to '%s'", questionDescriptionResult.getDescription().replaceAll("\n", ""), GetAnswerDescription(globalIDGroupAsDouble, previousValue), GetAnswerDescription(globalIDGroupAsDouble, currentValue));
-			
+			OperationResult questionDescriptionResult = getQuestionDescriptionResponseDocument
+					.getGetQuestionDescriptionResponse().getOut();
+			String description = String.format(
+					"Question '%s' changed from '%s' to '%s'",
+					questionDescriptionResult.getDescription().replaceAll("\n",
+							""),
+					GetAnswerDescription(globalIDGroupAsDouble, previousValue),
+					GetAnswerDescription(globalIDGroupAsDouble, currentValue));
+
 			switch (currentRule.getCallerID()) {
-				case GreaterThanRuleType:
-					generatedWarning = GreaterThanRule(ObjectPersonID, description,
-							currentValue, previousValue, currentRule.getLowerLimit(), QuestionnaireAnalysis);
-					break;
-				case LessThanRuleType:
-					generatedWarning = LessThanRule(ObjectPersonID, description,
-							currentValue, previousValue, currentRule.getLowerLimit(), QuestionnaireAnalysis);
-					break;
+			case GreaterThanRuleType:
+				generatedWarning = GreaterThanRule(ObjectPersonID, description,
+						currentValue, previousValue,
+						currentRule.getLowerLimit(), QuestionnaireAnalysis);
+				break;
+			case LessThanRuleType:
+				generatedWarning = LessThanRule(ObjectPersonID, description,
+						currentValue, previousValue,
+						currentRule.getLowerLimit(), QuestionnaireAnalysis);
+				break;
 			}
-			
+
 			if (generatedWarning != null) {
 
 				System.out.println("AAA Warning generated");
@@ -337,22 +380,25 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 				SaveWarning sw = swd.addNewSaveWarning();
 				sw.setWarn(generatedWarning);
 				sw.setUserId(UserID);
+				
+				
 				try {
 					SaveWarningResponseDocument respSaveWarning = sc.saveWarning(swd);
 					OperationResult operationResult = respSaveWarning.getSaveWarningResponse().getOut();
 					System.out.printf("AAA SaveWarning returned Code = %s, Description = %s \n", operationResult.getCode(), operationResult.getDescription());
 					System.out.printf("AAA %s\n", generatedWarning.getJustificationText());
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		if (currentScore > 0) {
-			
-			String description = String.format("Change in Zarit Burden Interview from '%s' to '%s'", previousScore, currentScore);
-			
+
+			String description = String.format(
+					"Change in Zarit Burden Interview from '%s' to '%s'",
+					previousScore, currentScore);
+
 			for (int count = 0; count < DefinedRules.size(); count++) {
 
 				String ruleDataType = DefinedRules.get(count).getDataType();
@@ -362,10 +408,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 					break;
 				}
 			}
-			
+
 			generatedWarning = CategoryChangeRule(ObjectPersonID, description,
-					currentScore, previousScore, currentRule.getLowerLimit(), currentRule.getUpperLimit(), QuestionnaireAnalysis);
-			
+					currentScore, previousScore, currentRule.getLowerLimit(),
+					currentRule.getUpperLimit(), QuestionnaireAnalysis);
+
 			if (generatedWarning != null) {
 
 				SaveWarningDocument swd = SaveWarningDocument.Factory
@@ -375,7 +422,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 				sw.setUserId(UserID);
 				try {
 					sc.saveWarning(swd);
-					System.out.printf("%s\n", generatedWarning.getJustificationText());
+					System.out.printf("%s\n",
+							generatedWarning.getJustificationText());
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -383,23 +431,21 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			}
 		}
 
-
 		return null;
 	}
-	
-	
-	private String GetAnswerDescription(double globalIDGroupAsDouble, double value) {
-		
-		if (globalIDGroupAsDouble == 1000 || globalIDGroupAsDouble == 3000)
-		{
+
+	private String GetAnswerDescription(double globalIDGroupAsDouble,
+			double value) {
+
+		if (globalIDGroupAsDouble == 1000 || globalIDGroupAsDouble == 3000) {
 			if (value == 0)
 				return "YES";
 			else if (value == 1)
 				return "NO";
 		}
-		
+
 		if (globalIDGroupAsDouble == 2000) {
-			
+
 			if (value == 0)
 				return "Never";
 			else if (value == 1)
@@ -411,12 +457,10 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			else if (value == 4)
 				return "Everyday";
 		}
-		
+
 		return "";
-		
+
 	}
-	
-	
 
 	// returns the Global ID group (e.g. 1000, 2000, 3000 etc) based on GlobalID
 	String getglobalIDGroup(String globalID) {
@@ -542,7 +586,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 						.toArray(new Measurement[SortedMeasurements.size()]);
 				generatedWarning = LessThanRule(PatientID,
 						measurementDescription, measurement.getValue(),
-						Sorted[0].getValue(), currentRule.getUpperLimit(), MeasurementAnalysis);
+						Sorted[0].getValue(), currentRule.getUpperLimit(),
+						MeasurementAnalysis);
 				break;
 			case DoubleCompareRuleType:
 				generatedWarning = DoubleCompareRule(PatientID,
@@ -598,11 +643,11 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			unmarshaller.setEventHandler(new DefaultValidationEventHandler());
 
-			 DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
-			 unmarshaller.unmarshal(new
-			 File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
-//			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
-//					.unmarshal(new File("rules.xml"))).getValue().getRule();
+			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
+			unmarshaller.unmarshal(new
+			File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
+			//DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
+			//		.unmarshal(new File("rules.xml"))).getValue().getRule();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -611,10 +656,12 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	// Rule 1 - Less Than rule
 	static Warning LessThanRule(String PatientID, String description,
-			double Current, double Previous, double Threshold, int TypeOfAnalysis) {
+			double Current, double Previous, double Threshold,
+			int TypeOfAnalysis) {
 		Warning warning;
 		if (Current <= Previous - Threshold)
-			warning = GenerateWarning(PatientID, description, Current, Previous, TypeOfAnalysis);
+			warning = GenerateWarning(PatientID, description, Current,
+					Previous, TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
@@ -625,7 +672,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 			double Current, double Upper, double Lower, int TypeOfAnalysis) {
 		Warning warning;
 		if ((Current > Upper || Current < Lower))
-			warning = GenerateWarning(PatientID, description, Current, 0.0, TypeOfAnalysis);
+			warning = GenerateWarning(PatientID, description, Current, 0.0,
+					TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
@@ -633,48 +681,52 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	// Rule 3 - Greater Than Rule()
 	static Warning GreaterThanRule(String PatientID, String description,
-			double Current, double Previous, double Threshold, int TypeOfAnalysis) {
+			double Current, double Previous, double Threshold,
+			int TypeOfAnalysis) {
 		Warning warning;
 
 		if (Current >= Previous + Threshold)
-			warning = GenerateWarning(PatientID, description, Current, Previous, TypeOfAnalysis);
+			warning = GenerateWarning(PatientID, description, Current,
+					Previous, TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
 	}
-	
+
 	// Rule 4 - Category Change Rule
 	static Warning CategoryChangeRule(String PatientID, String description,
-			double Current, double Previous, double LowerThreshold, double UpperThreshold, int TypeOfAnalysis) {
+			double Current, double Previous, double LowerThreshold,
+			double UpperThreshold, int TypeOfAnalysis) {
 		Warning warning;
 
 		if (Previous <= LowerThreshold && Current > UpperThreshold)
-			warning = GenerateWarning(PatientID, description, Current, Previous, TypeOfAnalysis);
+			warning = GenerateWarning(PatientID, description, Current,
+					Previous, TypeOfAnalysis);
 		else
 			warning = null;
 		return warning;
 	}
-	
 
 	// Generate Warning
 	static Warning GenerateWarning(String PatientID, String description,
 			double RiskValue, double PreviousValue, int TypeOfAnalysis) {
 
 		Warning warning = Warning.Factory.newInstance();
-		warning.setPatientID(PatientID);
+		Patient patient = Patient.Factory.newInstance();
+		patient.setID(PatientID);
+		warning.setPatient(patient);
 		SystemParameter typeOfWarning = SystemParameter.Factory.newInstance();
 		typeOfWarning.setCode("2");
 		typeOfWarning.setDescription("autogenerated");
 		warning.setTypeOfWarning(typeOfWarning);
 		warning.setDateTimeOfWarning(Calendar.getInstance());
-		
+
 		if (TypeOfAnalysis == MeasurementAnalysis) {
-		
-		warning.setJustificationText(String.format(
-				"Type {%s} Current value = %s, Previous value = %s",
-				description, RiskValue, PreviousValue));
-		}
-		else if (TypeOfAnalysis == QuestionnaireAnalysis)
+
+			warning.setJustificationText(String.format(
+					"Type {%s} Current value = %s, Previous value = %s",
+					description, RiskValue, PreviousValue));
+		} else if (TypeOfAnalysis == QuestionnaireAnalysis)
 			warning.setJustificationText(description);
 
 		return warning;
