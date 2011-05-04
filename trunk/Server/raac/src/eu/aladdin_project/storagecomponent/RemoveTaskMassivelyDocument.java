@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface RemoveTaskMassivelyDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(RemoveTaskMassivelyDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4F143EE3F2CD7E93697A385986EBF2F9").resolveHandle("removetaskmassively0cd6doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(RemoveTaskMassivelyDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("removetaskmassively0cd6doctype");
     
     /**
      * Gets the "RemoveTaskMassively" element
@@ -42,7 +42,7 @@ public interface RemoveTaskMassivelyDocument extends org.apache.xmlbeans.XmlObje
     public interface RemoveTaskMassively extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(RemoveTaskMassively.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4F143EE3F2CD7E93697A385986EBF2F9").resolveHandle("removetaskmassively3feaelemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(RemoveTaskMassively.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("removetaskmassively3feaelemtype");
         
         /**
          * Gets the "patientId" element

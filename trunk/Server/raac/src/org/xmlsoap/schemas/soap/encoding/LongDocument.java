@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface LongDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(LongDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C897DC8CD4162BFFD5B54A474285309").resolveHandle("long0d92doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(LongDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("long0d92doctype");
     
     /**
      * Gets the "long" element

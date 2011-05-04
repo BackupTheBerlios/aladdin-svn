@@ -81,6 +81,8 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	
 	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
 			AnalyzeQuestionnairesDocument req) {
+		
+		System.out.println ("=== analyzeQuestionnaires ===");
 
 		AnalyzeQuestionnairesResponseDocument respdoc = AnalyzeQuestionnairesResponseDocument.Factory
 				.newInstance();

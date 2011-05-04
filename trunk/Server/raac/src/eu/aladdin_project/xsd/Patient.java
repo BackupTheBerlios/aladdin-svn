@@ -16,7 +16,7 @@ package eu.aladdin_project.xsd;
 public interface Patient extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Patient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C897DC8CD4162BFFD5B54A474285309").resolveHandle("patient46dftype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Patient.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("patient46dftype");
     
     /**
      * Gets the "ID" element
@@ -89,21 +89,6 @@ public interface Patient extends org.apache.xmlbeans.XmlObject
     void xsetResponsibleClinicianID(org.apache.xmlbeans.XmlString responsibleClinicianID);
     
     /**
-     * Gets the "PatientCarerList" element
-     */
-    eu.aladdin_project.xsd.PatientCarerList getPatientCarerList();
-    
-    /**
-     * Sets the "PatientCarerList" element
-     */
-    void setPatientCarerList(eu.aladdin_project.xsd.PatientCarerList patientCarerList);
-    
-    /**
-     * Appends and returns a new empty "PatientCarerList" element
-     */
-    eu.aladdin_project.xsd.PatientCarerList addNewPatientCarerList();
-    
-    /**
      * Gets the "SocialWorker" element
      */
     eu.aladdin_project.xsd.SocialWorker getSocialWorker();
@@ -147,6 +132,21 @@ public interface Patient extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "GeneralPractitioner" element
      */
     eu.aladdin_project.xsd.GeneralPractitioner addNewGeneralPractitioner();
+    
+    /**
+     * Gets the "PatientCarer" element
+     */
+    eu.aladdin_project.xsd.Carer getPatientCarer();
+    
+    /**
+     * Sets the "PatientCarer" element
+     */
+    void setPatientCarer(eu.aladdin_project.xsd.Carer patientCarer);
+    
+    /**
+     * Appends and returns a new empty "PatientCarer" element
+     */
+    eu.aladdin_project.xsd.Carer addNewPatientCarer();
     
     /**
      * A factory class with static methods for creating instances

@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface NCNameDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NCNameDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C897DC8CD4162BFFD5B54A474285309").resolveHandle("ncname95b6doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NCNameDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("ncname95b6doctype");
     
     /**
      * Gets the "NCName" element

@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface GetTaskDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTaskDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4F143EE3F2CD7E93697A385986EBF2F9").resolveHandle("gettaskdd09doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTaskDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("gettaskdd09doctype");
     
     /**
      * Gets the "GetTask" element
@@ -42,7 +42,7 @@ public interface GetTaskDocument extends org.apache.xmlbeans.XmlObject
     public interface GetTask extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTask.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s4F143EE3F2CD7E93697A385986EBF2F9").resolveHandle("gettaskd410elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(GetTask.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("gettaskd410elemtype");
         
         /**
          * Gets the "id" element

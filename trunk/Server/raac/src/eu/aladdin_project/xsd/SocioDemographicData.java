@@ -16,32 +16,17 @@ package eu.aladdin_project.xsd;
 public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SocioDemographicData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s2C897DC8CD4162BFFD5B54A474285309").resolveHandle("sociodemographicdata4e8etype");
-    
-    /**
-     * Gets the "Age" element
-     */
-    short getAge();
-    
-    /**
-     * Gets (as xml) the "Age" element
-     */
-    org.apache.xmlbeans.XmlUnsignedByte xgetAge();
-    
-    /**
-     * Sets the "Age" element
-     */
-    void setAge(short age);
-    
-    /**
-     * Sets (as xml) the "Age" element
-     */
-    void xsetAge(org.apache.xmlbeans.XmlUnsignedByte age);
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SocioDemographicData.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8D84879630252E557120036CD5D6216B").resolveHandle("sociodemographicdata4e8etype");
     
     /**
      * Gets the "Gender" element
      */
     eu.aladdin_project.xsd.SystemParameter getGender();
+    
+    /**
+     * True if has "Gender" element
+     */
+    boolean isSetGender();
     
     /**
      * Sets the "Gender" element
@@ -54,9 +39,19 @@ public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewGender();
     
     /**
+     * Unsets the "Gender" element
+     */
+    void unsetGender();
+    
+    /**
      * Gets the "MaritalStatus" element
      */
     eu.aladdin_project.xsd.SystemParameter getMaritalStatus();
+    
+    /**
+     * True if has "MaritalStatus" element
+     */
+    boolean isSetMaritalStatus();
     
     /**
      * Sets the "MaritalStatus" element
@@ -69,6 +64,11 @@ public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
     eu.aladdin_project.xsd.SystemParameter addNewMaritalStatus();
     
     /**
+     * Unsets the "MaritalStatus" element
+     */
+    void unsetMaritalStatus();
+    
+    /**
      * Gets the "Children" element
      */
     short getChildren();
@@ -77,6 +77,11 @@ public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
      * Gets (as xml) the "Children" element
      */
     org.apache.xmlbeans.XmlUnsignedByte xgetChildren();
+    
+    /**
+     * True if has "Children" element
+     */
+    boolean isSetChildren();
     
     /**
      * Sets the "Children" element
@@ -89,9 +94,19 @@ public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
     void xsetChildren(org.apache.xmlbeans.XmlUnsignedByte children);
     
     /**
+     * Unsets the "Children" element
+     */
+    void unsetChildren();
+    
+    /**
      * Gets the "LivingWith" element
      */
     eu.aladdin_project.xsd.SystemParameter getLivingWith();
+    
+    /**
+     * True if has "LivingWith" element
+     */
+    boolean isSetLivingWith();
     
     /**
      * Sets the "LivingWith" element
@@ -102,6 +117,31 @@ public interface SocioDemographicData extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "LivingWith" element
      */
     eu.aladdin_project.xsd.SystemParameter addNewLivingWith();
+    
+    /**
+     * Unsets the "LivingWith" element
+     */
+    void unsetLivingWith();
+    
+    /**
+     * Gets the "birthday" element
+     */
+    java.util.Calendar getBirthday();
+    
+    /**
+     * Gets (as xml) the "birthday" element
+     */
+    org.apache.xmlbeans.XmlDate xgetBirthday();
+    
+    /**
+     * Sets the "birthday" element
+     */
+    void setBirthday(java.util.Calendar birthday);
+    
+    /**
+     * Sets (as xml) the "birthday" element
+     */
+    void xsetBirthday(org.apache.xmlbeans.XmlDate birthday);
     
     /**
      * A factory class with static methods for creating instances

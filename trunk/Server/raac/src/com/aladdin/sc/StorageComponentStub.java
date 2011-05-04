@@ -44,7 +44,7 @@
         //creating the operations
         org.apache.axis2.description.AxisOperation __operation;
 
-        _operations = new org.apache.axis2.description.AxisOperation[68];
+        _operations = new org.apache.axis2.description.AxisOperation[70];
         
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
@@ -421,7 +421,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getMeasurement"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getAvailableCarers"));
 	    _service.addOperation(__operation);
 	    
 
@@ -433,7 +433,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createQuestionnaire"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getMeasurement"));
 	    _service.addOperation(__operation);
 	    
 
@@ -445,7 +445,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getPatientsForCaregiver"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createQuestionnaire"));
 	    _service.addOperation(__operation);
 	    
 
@@ -457,7 +457,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "removeTaskMassively"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getPatientsForCaregiver"));
 	    _service.addOperation(__operation);
 	    
 
@@ -469,7 +469,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getPatientMeasurement"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "removeTaskMassively"));
 	    _service.addOperation(__operation);
 	    
 
@@ -481,7 +481,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updatePatient"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getPatientMeasurement"));
 	    _service.addOperation(__operation);
 	    
 
@@ -493,7 +493,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfSupportedLocales"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updatePatient"));
 	    _service.addOperation(__operation);
 	    
 
@@ -505,7 +505,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deleteQuestionnaire"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfSupportedLocales"));
 	    _service.addOperation(__operation);
 	    
 
@@ -517,7 +517,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "assignTask"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deleteQuestionnaire"));
 	    _service.addOperation(__operation);
 	    
 
@@ -529,7 +529,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createPatient"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "assignTask"));
 	    _service.addOperation(__operation);
 	    
 
@@ -541,7 +541,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfAdministrators"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createPatient"));
 	    _service.addOperation(__operation);
 	    
 
@@ -553,7 +553,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getTask"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfAdministrators"));
 	    _service.addOperation(__operation);
 	    
 
@@ -565,7 +565,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getUserPlannedTasks"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getTask"));
 	    _service.addOperation(__operation);
 	    
 
@@ -577,7 +577,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfPossibleTasks"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getUserPlannedTasks"));
 	    _service.addOperation(__operation);
 	    
 
@@ -589,7 +589,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createCarer"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfPossibleTasks"));
 	    _service.addOperation(__operation);
 	    
 
@@ -601,7 +601,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createExternalService"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createCarer"));
 	    _service.addOperation(__operation);
 	    
 
@@ -613,7 +613,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "saveCarerAssessment"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getQuestionnaireAnswerValue"));
 	    _service.addOperation(__operation);
 	    
 
@@ -625,7 +625,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deleteCarer"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createExternalService"));
 	    _service.addOperation(__operation);
 	    
 
@@ -637,7 +637,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createAdministrator"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "saveCarerAssessment"));
 	    _service.addOperation(__operation);
 	    
 
@@ -649,7 +649,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updateExternalService"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deleteCarer"));
 	    _service.addOperation(__operation);
 	    
 
@@ -661,7 +661,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getPatientAssessments"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createAdministrator"));
 	    _service.addOperation(__operation);
 	    
 
@@ -673,7 +673,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getClinician"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updateExternalService"));
 	    _service.addOperation(__operation);
 	    
 
@@ -685,7 +685,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deletePatientAssessment"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getPatientAssessments"));
 	    _service.addOperation(__operation);
 	    
 
@@ -697,7 +697,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getAllExternalServices"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getClinician"));
 	    _service.addOperation(__operation);
 	    
 
@@ -709,7 +709,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getCarer"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deletePatientAssessment"));
 	    _service.addOperation(__operation);
 	    
 
@@ -721,7 +721,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getAdministrator"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getAllExternalServices"));
 	    _service.addOperation(__operation);
 	    
 
@@ -733,7 +733,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updateAdministrator"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getCarer"));
 	    _service.addOperation(__operation);
 	    
 
@@ -745,7 +745,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getQuestionnaire"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getAdministrator"));
 	    _service.addOperation(__operation);
 	    
 
@@ -757,7 +757,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "storeQuestionnaireAnswers"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updateAdministrator"));
 	    _service.addOperation(__operation);
 	    
 
@@ -769,7 +769,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "changeTaskStatus"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getQuestionnaire"));
 	    _service.addOperation(__operation);
 	    
 
@@ -781,7 +781,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfPatients"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "storeQuestionnaireAnswers"));
 	    _service.addOperation(__operation);
 	    
 
@@ -793,7 +793,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getWarnings"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "changeTaskStatus"));
 	    _service.addOperation(__operation);
 	    
 
@@ -805,7 +805,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createUser"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "listOfPatients"));
 	    _service.addOperation(__operation);
 	    
 
@@ -817,7 +817,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updateClinician"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getWarnings"));
 	    _service.addOperation(__operation);
 	    
 
@@ -829,7 +829,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getUser"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "createUser"));
 	    _service.addOperation(__operation);
 	    
 
@@ -841,7 +841,7 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "markWarningAsRead"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "updateClinician"));
 	    _service.addOperation(__operation);
 	    
 
@@ -853,13 +853,37 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deleteMediaContent"));
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "getUser"));
 	    _service.addOperation(__operation);
 	    
 
 	    
 	    
             _operations[67]=__operation;
+            
+        
+                   __operation = new org.apache.axis2.description.OutInAxisOperation();
+                
+
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "markWarningAsRead"));
+	    _service.addOperation(__operation);
+	    
+
+	    
+	    
+            _operations[68]=__operation;
+            
+        
+                   __operation = new org.apache.axis2.description.OutInAxisOperation();
+                
+
+            __operation.setName(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/", "deleteMediaContent"));
+	    _service.addOperation(__operation);
+	    
+
+	    
+	    
+            _operations[69]=__operation;
             
         
         }
@@ -4622,6 +4646,125 @@
                     /**
                      * Auto generated method signature
                      * 
+                     * @see com.aladdin.sc.StorageComponent#getAvailableCarers
+                     * @param getAvailableCarers
+                    
+                     */
+
+                    
+
+                            public  eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument getAvailableCarers(
+
+                            eu.aladdin_project.storagecomponent.GetAvailableCarersDocument getAvailableCarers)
+                        
+
+                    throws java.rmi.RemoteException
+                    
+                    {
+              org.apache.axis2.context.MessageContext _messageContext = null;
+              try{
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[31].getName());
+              _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/getAvailableCarers");
+              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+              // create a message context
+              _messageContext = new org.apache.axis2.context.MessageContext();
+
+              
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env = null;
+                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    getAvailableCarers,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/",
+                                                    "getAvailableCarers")));
+                                                
+        //adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // set the message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message contxt to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+        //execute the operation client
+        _operationClient.execute(true);
+
+         
+               org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+                                           org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+                org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+                
+                
+                                java.lang.Object object = fromOM(
+                                             _returnEnv.getBody().getFirstElement() ,
+                                             eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument.class,
+                                              getEnvelopeNamespaces(_returnEnv));
+
+                               
+                                        return (eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument)object;
+                                   
+         }catch(org.apache.axis2.AxisFault f){
+
+            org.apache.axiom.om.OMElement faultElt = f.getDetail();
+            if (faultElt!=null){
+                if (faultExceptionNameMap.containsKey(faultElt.getQName())){
+                    //make the fault by reflection
+                    try{
+                        java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
+                        java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+                        java.lang.Exception ex=
+                                (java.lang.Exception) exceptionClass.newInstance();
+                        //message class
+                        java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
+                        java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+                        java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+                        java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+                                   new java.lang.Class[]{messageClass});
+                        m.invoke(ex,new java.lang.Object[]{messageObject});
+                        
+
+                        throw new java.rmi.RemoteException(ex.getMessage(), ex);
+                    }catch(java.lang.ClassCastException e){
+                       // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.ClassNotFoundException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }catch (java.lang.NoSuchMethodException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.reflect.InvocationTargetException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }  catch (java.lang.IllegalAccessException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }   catch (java.lang.InstantiationException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }
+                }else{
+                    throw f;
+                }
+            }else{
+                throw f;
+            }
+            } finally {
+                _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+            }
+        }
+            
+                    /**
+                     * Auto generated method signature
+                     * 
                      * @see com.aladdin.sc.StorageComponent#getMeasurement
                      * @param getMeasurement
                     
@@ -4639,7 +4782,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[31].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[32].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetMeasurement");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -4758,7 +4901,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[32].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[33].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/CreateQuestionnaire");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -4877,7 +5020,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[33].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[34].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetPatientsForCaregiver");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -4996,7 +5139,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[34].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[35].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/RemoveTaskMassively");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5115,7 +5258,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[35].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[36].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetPatientMeasurement");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5234,7 +5377,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[36].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[37].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/UpdatePatient");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5353,7 +5496,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[37].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[38].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/ListOfSupportedLocales");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5472,7 +5615,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[38].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[39].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/DeleteQuestionnaire");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5591,7 +5734,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[39].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[40].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/AssignTask");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5710,7 +5853,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[40].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[41].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/CreatePatient");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5829,7 +5972,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[41].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[42].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/ListOfAdministrators");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -5948,7 +6091,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[42].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[43].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetTask");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6067,7 +6210,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[43].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[44].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetUserPlannedTasks");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6186,7 +6329,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[44].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[45].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/ListOfPossibleTasks");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6305,7 +6448,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[45].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[46].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/CreateCarer");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6407,6 +6550,125 @@
                     /**
                      * Auto generated method signature
                      * 
+                     * @see com.aladdin.sc.StorageComponent#getQuestionnaireAnswerValue
+                     * @param getQuestionnaireAnswerValue
+                    
+                     */
+
+                    
+
+                            public  eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument getQuestionnaireAnswerValue(
+
+                            eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument getQuestionnaireAnswerValue)
+                        
+
+                    throws java.rmi.RemoteException
+                    
+                    {
+              org.apache.axis2.context.MessageContext _messageContext = null;
+              try{
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[47].getName());
+              _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/getQuestionnaireAnswerValue");
+              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+              // create a message context
+              _messageContext = new org.apache.axis2.context.MessageContext();
+
+              
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env = null;
+                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    getQuestionnaireAnswerValue,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://aladdin-project.eu/StorageComponent/",
+                                                    "getQuestionnaireAnswerValue")));
+                                                
+        //adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // set the message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message contxt to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+        //execute the operation client
+        _operationClient.execute(true);
+
+         
+               org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+                                           org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+                org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+                
+                
+                                java.lang.Object object = fromOM(
+                                             _returnEnv.getBody().getFirstElement() ,
+                                             eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.class,
+                                              getEnvelopeNamespaces(_returnEnv));
+
+                               
+                                        return (eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument)object;
+                                   
+         }catch(org.apache.axis2.AxisFault f){
+
+            org.apache.axiom.om.OMElement faultElt = f.getDetail();
+            if (faultElt!=null){
+                if (faultExceptionNameMap.containsKey(faultElt.getQName())){
+                    //make the fault by reflection
+                    try{
+                        java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
+                        java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+                        java.lang.Exception ex=
+                                (java.lang.Exception) exceptionClass.newInstance();
+                        //message class
+                        java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
+                        java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+                        java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+                        java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+                                   new java.lang.Class[]{messageClass});
+                        m.invoke(ex,new java.lang.Object[]{messageObject});
+                        
+
+                        throw new java.rmi.RemoteException(ex.getMessage(), ex);
+                    }catch(java.lang.ClassCastException e){
+                       // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.ClassNotFoundException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }catch (java.lang.NoSuchMethodException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.reflect.InvocationTargetException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }  catch (java.lang.IllegalAccessException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }   catch (java.lang.InstantiationException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }
+                }else{
+                    throw f;
+                }
+            }else{
+                throw f;
+            }
+            } finally {
+                _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+            }
+        }
+            
+                    /**
+                     * Auto generated method signature
+                     * 
                      * @see com.aladdin.sc.StorageComponent#createExternalService
                      * @param createExternalService
                     
@@ -6424,7 +6686,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[46].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[48].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/CreateExternalService");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6543,7 +6805,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[47].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[49].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/SaveCarerAssessment");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6662,7 +6924,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[48].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[50].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/DeleteCarer");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6781,7 +7043,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[49].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[51].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/CreateAdministrator");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -6900,7 +7162,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[50].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[52].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/UpdateExternalService");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7019,7 +7281,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[51].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[53].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetPatientAssessments");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7138,7 +7400,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[52].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[54].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetClinician");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7257,7 +7519,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[53].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[55].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/DeletePatientAssessment");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7376,7 +7638,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[54].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[56].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetAllExternalServices");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7495,7 +7757,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[55].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[57].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetCarer");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7614,7 +7876,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[56].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[58].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetAdministrator");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7733,7 +7995,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[57].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[59].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/UpdateAdministrator");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7852,7 +8114,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[58].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[60].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetQuestionnaire");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -7971,7 +8233,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[59].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[61].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/StoreQuestionnaireAnswers");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8090,7 +8352,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[60].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[62].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/ChangeTaskStatus");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8209,7 +8471,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[61].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[63].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/ListOfPatients");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8328,7 +8590,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[62].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[64].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetWarnings");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8447,7 +8709,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[63].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[65].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/CreateUser");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8566,7 +8828,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[64].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[66].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/UpdateClinician");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8685,7 +8947,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[65].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[67].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/GetUser");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8804,7 +9066,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[66].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[68].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/MarkWarningAsRead");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -8923,7 +9185,7 @@
                     {
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[67].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[69].getName());
               _operationClient.getOptions().setAction("http://aladdin-project.eu/StorageComponent/DeleteMediaContent");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -13271,6 +13533,142 @@
             }
         
 
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetAvailableCarersDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetAvailableCarersDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
             private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetMeasurementDocument param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault{
 
@@ -15253,6 +15651,142 @@
             }
 
             private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.CreateCarerResponseDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument param)
+                    throws org.apache.axis2.AxisFault {
+
+                final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
+                while (!xmlReader.isStartElement()) {
+                    try {
+                        xmlReader.next();
+                    } catch (javax.xml.stream.XMLStreamException e) {
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                }
+
+                org.apache.axiom.om.OMDataSource omDataSource = new org.apache.axiom.om.OMDataSource() {
+
+                    public void serialize(java.io.OutputStream outputStream, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(outputStream,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(java.io.Writer writer, org.apache.axiom.om.OMOutputFormat omOutputFormat)
+                            throws javax.xml.stream.XMLStreamException {
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(writer,xmlOptions.setSaveNoXmlDecl());
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document",e);
+                        }
+                    }
+
+                    public void serialize(javax.xml.stream.XMLStreamWriter xmlStreamWriter)
+                            throws javax.xml.stream.XMLStreamException {
+                        org.apache.axiom.om.impl.MTOMXMLStreamWriter mtomxmlStreamWriter =
+                                                        (org.apache.axiom.om.impl.MTOMXMLStreamWriter) xmlStreamWriter;
+                        try {
+                            org.apache.xmlbeans.XmlOptions xmlOptions = new org.apache.xmlbeans.XmlOptions();
+                            param.save(mtomxmlStreamWriter.getOutputStream(),xmlOptions.setSaveNoXmlDecl());
+                            mtomxmlStreamWriter.getOutputStream().flush();
+                        } catch (java.io.IOException e) {
+                            throw new javax.xml.stream.XMLStreamException("Problem with saving document", e);
+                        }
+                    }
+
+                    public javax.xml.stream.XMLStreamReader getReader()
+                            throws javax.xml.stream.XMLStreamException {
+                        return param.newXMLStreamReader();
+                    }
+                };
+            
+                return  new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(xmlReader.getName(),
+                        org.apache.axiom.om.OMAbstractFactory.getOMFactory(),
+                        omDataSource);
+            }
+        
+
+            private  org.apache.axiom.om.OMElement  toOM(eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault{
+
+            
+                    return toOM(param);
+                
+
+            }
+
+            private org.apache.axiom.om.OMElement toOM(final eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument param)
                     throws org.apache.axis2.AxisFault {
 
                 final javax.xml.stream.XMLStreamReader xmlReader = param.newXMLStreamReader();
@@ -18613,6 +19147,16 @@
                                 }
                             
                                 
+                                private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.GetAvailableCarersDocument param, boolean optimizeContent)
+                                throws org.apache.axis2.AxisFault{
+                                org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                                if (param != null){
+                                envelope.getBody().addChild(toOM(param, optimizeContent));
+                                }
+                                return envelope;
+                                }
+                            
+                                
                                 private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.GetMeasurementDocument param, boolean optimizeContent)
                                 throws org.apache.axis2.AxisFault{
                                 org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
@@ -18754,6 +19298,16 @@
                             
                                 
                                 private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.CreateCarerDocument param, boolean optimizeContent)
+                                throws org.apache.axis2.AxisFault{
+                                org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
+                                if (param != null){
+                                envelope.getBody().addChild(toOM(param, optimizeContent));
+                                }
+                                return envelope;
+                                }
+                            
+                                
+                                private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument param, boolean optimizeContent)
                                 throws org.apache.axis2.AxisFault{
                                 org.apache.axiom.soap.SOAPEnvelope envelope = factory.getDefaultEnvelope();
                                 if (param != null){
@@ -19804,6 +20358,32 @@
 
         
 
+            if (eu.aladdin_project.storagecomponent.GetAvailableCarersDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.GetAvailableCarersDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.GetAvailableCarersDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.GetAvailableCarersResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
             if (eu.aladdin_project.storagecomponent.GetMeasurementDocument.class.equals(type)){
             if (extraNamespaces!=null){
             return eu.aladdin_project.storagecomponent.GetMeasurementDocument.Factory.parse(
@@ -20188,6 +20768,32 @@
             new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
             }else{
             return eu.aladdin_project.storagecomponent.CreateCarerResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching());
+            }
+            }
+
+        
+
+            if (eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.class.equals(type)){
+            if (extraNamespaces!=null){
+            return eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.Factory.parse(
+            param.getXMLStreamReaderWithoutCaching(),
+            new org.apache.xmlbeans.XmlOptions().setLoadAdditionalNamespaces(extraNamespaces));
+            }else{
+            return eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.Factory.parse(
             param.getXMLStreamReaderWithoutCaching());
             }
             }
