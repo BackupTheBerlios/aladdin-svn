@@ -21,9 +21,9 @@ var_dump ($_REQUEST);
 	$username = trim ($_REQUEST["username"]);
 	$password = md5 (trim ($_REQUEST["password"]));
 	
-	$sql = "UPDATE {$table_prefix}users SET password = '" . $password . "' WHERE username like '" . mysql_escape_string ($user["username"]) . "'";
+	$sql = "UPDATE {$table_prefix}users SET password = '" . $password . "' WHERE username like '" . mysql_escape_string ($username) . "'";
 	echo $sql;
-	$db->sql_query ($sql);
+	echo $db->sql_query ($sql);
 	exit;
 }
 
