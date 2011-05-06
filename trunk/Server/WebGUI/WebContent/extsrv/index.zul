@@ -21,7 +21,7 @@
 		String id = (String)ses.getAttribute("userid");
 		try{
 			plist = proxy.getAllExternalServices(id);
-			eu.aladdin_project.SystemDictionary.webguiLog("INFO", "SERVICES LIST LENGHT: "+plist.length);
+			//eu.aladdin_project.SystemDictionary.webguiLog("INFO", "SERVICES LIST LENGHT: "+plist.length);
 		}catch(java.rmi.RemoteException re){
 			re.printStackTrace();
 		}
