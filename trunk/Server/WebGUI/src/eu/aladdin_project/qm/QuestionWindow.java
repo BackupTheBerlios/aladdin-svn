@@ -14,6 +14,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
@@ -94,35 +95,39 @@ public class QuestionWindow extends Window{
 	}
 	
 	public void saveQuestion(){
-		QuestionnaireQuestion q = new QuestionnaireQuestion();
-		q.setType(this.type);
-		q.setId(this.ID);
-		
-		String title = ((Textbox)getFellow("question_text")).getValue();
-		String globalid = ((Textbox)getFellow("question_idg")).getValue();
-		int position = ((Intbox)getFellow("question_position")).getValue();
-		if(getFellow("question_condrow").isVisible()){
-			Integer condition = ((Intbox)getFellow("question_cond")).getValue();
-			q.setCondition(new UnsignedByte(condition));
-		}
-		q.setTitle(title);
-		q.setPosition(position);
-		q.setGlobalID(Integer.parseInt(globalid));
-		QuestionnaireQuestionList qqqlist = new QuestionnaireQuestionList(new QuestionnaireQuestion[0]);
-		q.setQuestions(qqqlist);
-		
-		if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
-			QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
-			for(int i = 0; i<this.answers.size(); i++){
-				answersvec[i]=this.answers.get(i);
-			}
-			q.setAnswers(new QuestionnaireQuestionAnswerList(answersvec));
+		if(this.answers == null || this.answers.size() == 0){
+			showErrorMessage(true);
 		}else{
-			q.setAnswers(new QuestionnaireQuestionAnswerList(new QuestionnaireQuestionAnswer[0]));
+			QuestionnaireQuestion q = new QuestionnaireQuestion();
+			q.setType(this.type);
+			q.setId(this.ID);
+			
+			String title = ((Textbox)getFellow("question_text")).getValue();
+			String globalid = ((Textbox)getFellow("question_idg")).getValue();
+			int position = ((Intbox)getFellow("question_position")).getValue();
+			if(getFellow("question_condrow").isVisible()){
+				Integer condition = ((Intbox)getFellow("question_cond")).getValue();
+				q.setCondition(new UnsignedByte(condition));
+			}
+			q.setTitle(title);
+			q.setPosition(position);
+			q.setGlobalID(Integer.parseInt(globalid));
+			QuestionnaireQuestionList qqqlist = new QuestionnaireQuestionList(new QuestionnaireQuestion[0]);
+			q.setQuestions(qqqlist);
+			
+			if(this.type.equals(SystemDictionary.QUESTION_TYPE_ONE_ANSWER) || this.type.equals(SystemDictionary.QUESTION_TYPE_MANY_ANSWERS)){
+				QuestionnaireQuestionAnswer[] answersvec = new QuestionnaireQuestionAnswer[this.answers.size()];
+				for(int i = 0; i<this.answers.size(); i++){
+					answersvec[i]=this.answers.get(i);
+				}
+				q.setAnswers(new QuestionnaireQuestionAnswerList(answersvec));
+			}else{
+				q.setAnswers(new QuestionnaireQuestionAnswerList(new QuestionnaireQuestionAnswer[0]));
+			}
+			this.pform.addQuestion(q,parent);
+			this.setVisible(false);
+			this.getParent().removeChild(this);
 		}
-		this.pform.addQuestion(q,parent);
-		this.setVisible(false);
-		this.getParent().removeChild(this);
 	}
 	
 	/**
@@ -206,6 +211,10 @@ public class QuestionWindow extends Window{
 		}
 	}
 	
+	public void showErrorMessage(boolean show){
+		getFellow("error-no-answers").setVisible(show);
+	}
+	
 	/**
 	 * This method builds up a one answer form
 	 * 
@@ -224,6 +233,26 @@ public class QuestionWindow extends Window{
 			grid.appendChild(cols);
 			Rows rows = new Rows();
 			rows.setId("answersrows");
+			
+			Row row000 = new Row();
+			row000.setId("error-no-answers");
+			row000.setVisible(false);
+				Label lab000 = new Label("");
+				row000.appendChild(lab000);
+				
+				Hbox errmsg = new Hbox();
+				Label lab001 = new Label("You must enter some answers to save the question ");
+				Label lab002 = new Label("close");
+				lab002.setSclass("link");
+				lab002.addEventListener("onClick", new EventListener() {
+					public void onEvent(Event arg0) throws Exception {
+						showErrorMessage(false);
+					}
+				});
+				errmsg.appendChild(lab001);
+				errmsg.appendChild(lab002);
+				row000.appendChild(errmsg);
+			rows.appendChild(row000);
 			
 			Row row00 = new Row();
 				Label lab00 = new Label();
