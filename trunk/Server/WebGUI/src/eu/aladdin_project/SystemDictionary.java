@@ -35,6 +35,7 @@ public class SystemDictionary {
 	
 	public static StorageComponentProxy getSCProxy(){
 		if(proxy == null){
+			System.setProperty("javax.net.ssl.trustStore", "/jssecacerts");
 			proxy = new StorageComponentProxy();
 		}
 		return proxy;
