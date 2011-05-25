@@ -2242,13 +2242,12 @@ import java.net.URL;
     			
     			s.beginTransaction();
     			
-    			String sql = "SELECT id FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
+    			String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			System.out.println (sql);
     			Object[] tl = s.createSQLQuery(sql).list().toArray();
     			
     			for (int i = 0; i < tl.length; i++) {
-    				Integer id = (Integer) tl[i];
-    				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) s.load(com.aladdin.sc.db.Task.class, id);
+    				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) tl[i];
     				Task rt = resp.addNewOut();
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
@@ -2264,15 +2263,6 @@ import java.net.URL;
     				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
     				taskStatus.setCode(t.getTaskStatus().toString());
     				
-    				System.out.println ("GeUserPlannedTasks " + new Timestamp (new Date().getTime ()).toString ());
-    				System.out.println ("GeUserPlannedTasks task id " + rt.getID() + " datetimeassigned " +
-    						new Integer (rt.getDateTimeAssigned ().get(Calendar.DAY_OF_MONTH)).toString () +
-    						"/" + 
-    						new Integer (rt.getDateTimeAssigned ().get(Calendar.MONTH)).toString () +
-    						"/" +
-    						new Integer (rt.getDateTimeAssigned ().get(Calendar.YEAR)).toString ()
-    				);
-
     				rt.setTaskStatus(taskStatus);
     				rt.setURL(t.getUrl());
     				rt.setExecutorID(t.getExecutor().toString());
