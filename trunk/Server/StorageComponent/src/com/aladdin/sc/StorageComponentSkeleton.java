@@ -2244,7 +2244,7 @@ import java.net.URL;
     			
     			String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			System.out.println (sql);
-    			List<?> tl = s.createSQLQuery(sql).list();
+    			List<Task> tl = s.createSQLQuery(sql).list();
     			
     			for (Task t:tl) {
     				Task rt = resp.addNewOut();
