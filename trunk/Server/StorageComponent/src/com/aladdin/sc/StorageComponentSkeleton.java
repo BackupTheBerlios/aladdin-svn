@@ -2392,9 +2392,9 @@ import java.net.URL;
     		
     		String sql = "SELECT qqa.id,qqa.value,t.value,qqa.question,qqa.deleted,qqa.position " +
     		"FROM questionnairequestionanswer qqa " +
-    		"INNER JOIN translate t ON(t.entityid = qq.id) " + 
+    		"INNER JOIN translate t ON(t.entityid = qqa.id) " + 
     		"INNER JOIN locale l ON (l.id = t.locale)" +
-    		"where entity = 'questionnairequestionanswer' AND l.name = '" + locale.getCode() + "' AND qqq.id = " + qqaId.toString();
+    		"where entity = 'questionnairequestionanswer' AND l.name = '" + locale.getCode() + "' AND qqa.id = " + qqaId.toString();
     		
     		System.out.println (sql);
     		
