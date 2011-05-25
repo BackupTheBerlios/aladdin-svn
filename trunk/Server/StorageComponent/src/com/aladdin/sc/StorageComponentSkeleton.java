@@ -2372,10 +2372,10 @@ import java.net.URL;
     		Object[] qql = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'").list().toArray();
     		for (int i = 0; i < qql.length; i++) {
 				Integer _id = (Integer) (qql[i]);
-				com.aladdin.sc.db.QuestionnaireQuestion _obj = 
+				/*com.aladdin.sc.db.QuestionnaireQuestion _obj = 
 					(com.aladdin.sc.db.QuestionnaireQuestion)
-						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );
-				rqql.add ( exportQQ ( _obj, false, locale ) );
+						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );*/
+				rqql.add ( exportQQ ( _id, false, locale ) );
     		}
     		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
     		
