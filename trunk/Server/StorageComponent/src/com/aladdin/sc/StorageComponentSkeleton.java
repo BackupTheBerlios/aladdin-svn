@@ -2280,12 +2280,14 @@ import java.net.URL;
 				
 				System.out.println (now("mm:ss.SSS"));
     			
-    			Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
-    			criteria.add(Restrictions.between("DateTimeAssigned", _fromDate.getTime(), _toDate.getTime()));
-    			criteria.add(Restrictions.eq("Executor", userId));
-    			criteria.setCacheable(true);
-    			criteria.setCacheRegion(null);
-    			List tl = criteria.list();
+    			final Query query = s.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
+    			query.setDate("a", _fromDate.getTime());
+    			query.setDate("b", _toDate.getTime());
+    			query.setInteger("e", userId);
+    			query.setCacheable(true);
+    			query.setCacheRegion(null);
+    			
+    			List tl = query.list();
     			System.out.println ("tl: " + new Integer (tl.size()).toString());
     			
     			System.out.println (now("mm:ss.SSS"));
