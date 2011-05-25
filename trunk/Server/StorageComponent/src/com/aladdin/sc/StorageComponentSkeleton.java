@@ -2246,7 +2246,7 @@ import java.net.URL;
     			System.out.println (sql);
     			List<com.aladdin.sc.db.Task> tl = s.createSQLQuery(sql).list();
     			
-    			for (Task t:tl) {
+    			for (com.aladdin.sc.db.Task t:tl) {
     				Task rt = resp.addNewOut();
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
