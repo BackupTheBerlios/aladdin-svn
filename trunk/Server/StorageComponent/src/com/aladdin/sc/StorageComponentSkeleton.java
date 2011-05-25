@@ -16,6 +16,7 @@ import java.util.TimeZone;
 import org.apache.axis2.AxisFault;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -2345,7 +2346,10 @@ import java.net.URL;
     		
     		System.out.println (sql);
     		
-    		Object[] data = (Object[]) s.createSQLQuery(sql).list().get(0);
+    		final Query q1 = s.createQuery(sql);
+    		q1.setCacheable(true);
+    		q1.setCacheRegion(null);
+    		Object[] data = (Object[]) q1.list().get(0);
     		
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
     		
@@ -2364,7 +2368,12 @@ import java.net.URL;
     		
     		sql = "SELECT id FROM questionnairequestionanswer WHERE NOT deleted AND question = " + qqId.toString();
     		
-    		Object[] qqal = s.createSQLQuery(sql).list().toArray();
+    		final Query q2 = s.createQuery(sql);
+    		q2.setCacheable(true);
+    		q2.setCacheRegion(null);
+    		Object[] qqal = q2.list().toArray();
+    		
+    		
     		for (int i = 0; i < qqal.length; i++) {
     			//com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
 				//if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
@@ -2374,7 +2383,13 @@ import java.net.URL;
     		rqq.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) rqqal.toArray(new QuestionnaireQuestionAnswer[0]));
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-    		Object[] qql = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = '" + qqId.toString() + "'").list().toArray();
+    		
+    		sql = "SELECT id FROM questionnairequestion WHERE parentid = '" + qqId.toString() + "'";
+    		final Query q3 = s.createQuery(sql);
+    		q3.setCacheable(true);
+    		q3.setCacheRegion(null);
+    		Object[] qql = q3.list().toArray();
+    		
     		for (int i = 0; i < qql.length; i++) {
 				Integer _id = (Integer) (qql[i]);
 				/*com.aladdin.sc.db.QuestionnaireQuestion _obj = 
@@ -2396,9 +2411,10 @@ import java.net.URL;
     		"INNER JOIN locale l ON (l.id = t.locale)" +
     		"where entity = 'questionnairequestionanswer' AND l.name = '" + locale.getCode() + "' AND qqa.id = " + qqaId.toString();
     		
-    		System.out.println (sql);
-    		
-    		Object[] data = (Object[]) s.createSQLQuery(sql).list().get(0);
+    		final Query query = s.createQuery(sql);
+    		query.setCacheable(true);
+    		query.setCacheRegion(null);
+			Object[] data = (Object[]) query.list().get(0);
     		
     		rqqa.setDescription((String) data[2]);
     		if (data[5] != null) rqqa.setPosition((Integer) data[5]);
