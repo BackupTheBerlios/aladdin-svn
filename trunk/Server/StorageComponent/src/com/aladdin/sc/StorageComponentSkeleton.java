@@ -2324,18 +2324,28 @@ import java.net.URL;
     		Object[] qql = s.createSQLQuery(sql).list ().toArray(); 
     		
     		for (int i = 0; i < qql.length; i++) {
-    			com.aladdin.sc.db.QuestionnaireQuestion qq =
+    			/*com.aladdin.sc.db.QuestionnaireQuestion qq =
     				(com.aladdin.sc.db.QuestionnaireQuestion)
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
-    				;
-    				rqql.add(exportQQ(qq, true, locale));
+    				;*/
+    				rqql.add(exportQQ((Integer)qql[i], true, locale));
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
     		
     		return rq;
     	}
     	
-    	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
+    	private QuestionnaireQuestion exportQQ (Integer qqId, boolean level1, SystemParameter locale) {
+    		
+    		String sql = "SELECT qq.id,qq.typ-e,qq.isprimary,qq.parentid,t.value,qq.quest,qq.condition,qq.deleted,qq.globalid,qq.position " + 
+    		"FROM questionnairequestion qq " +
+    		"INNER JOIN translate t ON(t.entityid = qq.id) " + 
+    		"INNER JOIN locale l ON (l.id = t.locale)" +
+    		"where entity = 'questionnairequestion' AND l.name = '" + locale.getCode() + "' AND qq.id = " + qqId.toString();
+    		
+    		List lst = s.createSQLQuery(sql).list();
+    		com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) lst.get(0);
+    		
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
     		
     		rqq.setType(qq.getType());
