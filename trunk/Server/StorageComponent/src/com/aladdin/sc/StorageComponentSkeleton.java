@@ -2322,7 +2322,10 @@ import java.net.URL;
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
     		String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
-    		Object[] qql = s.createSQLQuery(sql).list ().toArray(); 
+    		final SQLQuery query = s.createSQLQuery(sql);
+    		query.setCacheable(true);
+    		query.setCacheRegion(null);
+			Object[] qql = query.list ().toArray(); 
     		
     		for (int i = 0; i < qql.length; i++) {
     			/*com.aladdin.sc.db.QuestionnaireQuestion qq =
@@ -2338,15 +2341,15 @@ import java.net.URL;
     	
     	private QuestionnaireQuestion exportQQ (Integer qqId, boolean level1, SystemParameter locale) {
     		
-    		String sql = "SELECT qq.id,qq.type,qq.isprimary,qq.parentid,t.value,qq.quest,qq.condition,qq.deleted,qq.globalid,qq.position " + 
+    		String sql1 = "SELECT qq.id,qq.type,qq.isprimary,qq.parentid,t.value,qq.quest,qq.condition,qq.deleted,qq.globalid,qq.position " + 
     		"FROM questionnairequestion qq " +
     		"INNER JOIN translate t ON(t.entityid = qq.id) " + 
     		"INNER JOIN locale l ON (l.id = t.locale)" +
     		"where entity = 'questionnairequestion' AND l.name = '" + locale.getCode() + "' AND qq.id = " + qqId.toString();
     		
-    		System.out.println (sql);
+    		System.out.println (sql1);
     		
-    		final Query q1 = s.createQuery(sql);
+    		final SQLQuery q1 = s.createSQLQuery(sql1);
     		q1.setCacheable(true);
     		q1.setCacheRegion(null);
     		Object[] data = (Object[]) q1.list().get(0);
@@ -2366,9 +2369,9 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
     		
-    		sql = "SELECT id FROM questionnairequestionanswer WHERE NOT deleted AND question = " + qqId.toString();
+    		String sql2 = "SELECT id FROM questionnairequestionanswer WHERE NOT deleted AND question = " + qqId.toString();
     		
-    		final Query q2 = s.createQuery(sql);
+    		final SQLQuery q2 = s.createSQLQuery(sql2);
     		q2.setCacheable(true);
     		q2.setCacheRegion(null);
     		Object[] qqal = q2.list().toArray();
@@ -2384,8 +2387,8 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		sql = "SELECT id FROM questionnairequestion WHERE parentid = '" + qqId.toString() + "'";
-    		final Query q3 = s.createQuery(sql);
+    		String sql3 = "SELECT id FROM questionnairequestion WHERE parentid = '" + qqId.toString() + "'";
+    		final SQLQuery q3 = s.createSQLQuery(sql3);
     		q3.setCacheable(true);
     		q3.setCacheRegion(null);
     		Object[] qql = q3.list().toArray();
@@ -2411,7 +2414,7 @@ import java.net.URL;
     		"INNER JOIN locale l ON (l.id = t.locale)" +
     		"where entity = 'questionnairequestionanswer' AND l.name = '" + locale.getCode() + "' AND qqa.id = " + qqaId.toString();
     		
-    		final Query query = s.createQuery(sql);
+    		final SQLQuery query = s.createSQLQuery(sql);
     		query.setCacheable(true);
     		query.setCacheRegion(null);
 			Object[] data = (Object[]) query.list().get(0);
