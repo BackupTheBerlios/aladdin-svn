@@ -2242,12 +2242,20 @@ import java.net.URL;
     				fromDate = time2.toString();
     			}
     			
+    			_fromDate.set(Calendar.HOUR, 0);
+				_fromDate.set(Calendar.MINUTE, 0);
+				_fromDate.set(Calendar.SECOND, 0);
+				
+				_toDate.set(Calendar.HOUR, 23);
+				_toDate.set(Calendar.MINUTE, 59);
+				_toDate.set(Calendar.SECOND, 59);
+    			
     			//String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			//System.out.println (sql);
     			//List<?> tl = s.createSQLQuery(sql).list();
     			
     			Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
-    			criteria.add(Restrictions.between("DateTimeAssigned", fromDate, toDate));
+    			criteria.add(Restrictions.between("DateTimeAssigned", _fromDate.getTime(), _toDate.getTime()));
     			criteria.add(Restrictions.eq("Executor", userId));
     			List tl = criteria.list();
     			System.out.println ("tl: " + new Integer (tl.size()).toString());
