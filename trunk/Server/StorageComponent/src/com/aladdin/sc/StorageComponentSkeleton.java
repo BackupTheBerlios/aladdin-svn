@@ -2242,9 +2242,10 @@ import java.net.URL;
     			
     			String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			System.out.println (sql);
-    			com.aladdin.sc.db.Task[] tl = (com.aladdin.sc.db.Task[])s.createSQLQuery(sql).list().toArray (new com.aladdin.sc.db.Task[0]);
+    			Object[] tl = s.createSQLQuery(sql).list().toArray ();
     			
-    			for (com.aladdin.sc.db.Task t:tl) {
+    			for (int i = 0; i < tl.length; i++) {
+    				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) tl[i];
     				Task rt = resp.addNewOut();
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
