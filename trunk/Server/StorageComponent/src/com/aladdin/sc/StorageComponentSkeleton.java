@@ -13,12 +13,14 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.axis2.AxisFault;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.AladdinUser;
@@ -2240,9 +2242,15 @@ import java.net.URL;
     				fromDate = time2.toString();
     			}
     			
-    			String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
-    			System.out.println (sql);
-    			List<?> tl = s.createSQLQuery(sql).list();
+    			//String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
+    			//System.out.println (sql);
+    			//List<?> tl = s.createSQLQuery(sql).list();
+    			
+    			Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
+    			criteria.add(Restrictions.between("datetimeassigned", fromDate, toDate));
+    			criteria.add(Restrictions.eq("executor", userId));
+    			List tl = criteria.list();
+    			System.out.println ("tl: " + new Integer (tl.size()).toString());
     			
     			for (int i = 0; i < tl.size(); i++) {
     				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) tl.get(i);
