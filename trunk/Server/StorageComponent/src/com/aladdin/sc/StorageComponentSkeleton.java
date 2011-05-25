@@ -28,6 +28,7 @@ import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.AladdinUser;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
+import com.aladdin.sc.db.Translate;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -644,25 +645,33 @@ import java.net.URL;
     		}
     	}
     	
-    	private String getTranslate (String object, String id, String locale, String def) {
+    	private String getTranslate (String entity, Integer entityId, String locale, String def) {
 			if (locale != null && locale.length() > 0) {
-				String sql = "SELECT value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id;
-				Object[] trans = s.createSQLQuery(sql).list().toArray();
-				if (trans.length > 0) {
-					return trans[0].toString();
+				
+				final Query query = s.createQuery("select t from Translate t inner join Locale l where l.id = t.locale and l.name = :name AND entity = :entity AND entityid = :entityid");
+				query.setString("name", locale);
+				query.setString("entity", entity);
+				query.setInteger("entityid", entityId);
+				query.setCacheable(true);
+				query.setCacheRegion(null);
+				
+				List<?> data = query.list();
+				if (data.size() == 1) {
+					com.aladdin.sc.db.Translate trans = (Translate) data.get(0);
+					return trans.getValue();
 				}
 			}
 			return def;
     	}
     	
-    	private String getTranslate (String object, String id, SystemParameter locale, String def) {
+    	private String getTranslate (String entity, Integer entityId, SystemParameter locale, String def) {
     		if (locale == null) return def;
-    		return getTranslate(object, id, locale.getCode(), def);
+    		return getTranslate(entity, entityId, locale.getCode(), def);
     	}
     	
-    	private boolean setTranslate (String object, Integer id, SystemParameter locale, String value) throws LocaleException {
+    	private boolean setTranslate (String entity, Integer entityId, SystemParameter locale, String value) throws LocaleException {
     		if (locale == null) return false;
-    		return setTranslate(object, id, locale.getCode(), value);
+    		return setTranslate(entity, entityId, locale.getCode(), value);
     	}
     	
     	private Integer getLocaleId (String locale) {
@@ -683,9 +692,9 @@ import java.net.URL;
     		return getLocaleId(locale.getCode());
     	}
     	
-    	private boolean setTranslate (String object, Integer id, String locale, String value) throws LocaleException {
+    	private boolean setTranslate (String entity, Integer entityId, String locale, String value) throws LocaleException {
 			if (locale != null && locale.length() > 0) {
-				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + object + "' AND entityid = " + id.toString();
+				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
 					throw new LocaleException(locale + " is not supported");
@@ -696,8 +705,8 @@ import java.net.URL;
 				com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
 				t.setValue(value);
 				t.setLocale(localeId);
-				t.setEntity(object);
-				t.setEntityid(id);
+				t.setEntity(entity);
+				t.setEntityid(entityId);
 				s.save(t);
 				return t.getId() > 0;
 			}
@@ -717,7 +726,7 @@ import java.net.URL;
     				Object[] quest = (Object[]) ql[i];
     				QuestionnaireInfo qi = resp.addNewOut();
     				qi.setID(((Integer)quest[0]).toString());
-    				qi.setTitle(getTranslate("questionnaire", qi.getID(), req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
+    				qi.setTitle(getTranslate("questionnaire", (Integer)quest[0], req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
     			s.getTransaction().commit();
@@ -2315,13 +2324,12 @@ import java.net.URL;
     		Questionnaire rq = Questionnaire.Factory.newInstance();
     		rq.setID(q.getId().toString());
     		
-    		rq.setTitle(getTranslate("questionnaire", rq.getID(), locale, q.getTitle()));
+    		rq.setTitle(getTranslate("questionnaire", q.getId(), locale, q.getTitle()));
     		
     		rq.setVersion(q.getVersion().doubleValue ());
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		//String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
     		final Query query = s.createQuery("select qq from QuestionnaireQuestion qq where qq.quest = :quest AND qq.parentid is null");
     		query.setInteger("quest", q.getId());
     		query.setCacheable(true);
@@ -2329,11 +2337,6 @@ import java.net.URL;
 			List<?> qql = query.list (); 
     		
     		for (int i = 0; i < qql.size(); i++) {
-    			/*com.aladdin.sc.db.QuestionnaireQuestion qq =
-    				(com.aladdin.sc.db.QuestionnaireQuestion)
-    					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
-    				;*/
-    			System.out.println (qql.get(i).getClass().getCanonicalName());
     			rqql.add(exportQQ((com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), true, locale));
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
@@ -2353,7 +2356,7 @@ import java.net.URL;
     			rqq.setCondition(qq.getCondition().shortValue());
     		}
     		
-    		rqq.setTitle(getTranslate("questionnairequestion", qq.getId().toString(), locale, ""));
+    		rqq.setTitle(getTranslate("questionnairequestion", qq.getId(), locale, ""));
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
     		
@@ -2364,10 +2367,7 @@ import java.net.URL;
     		q2.setCacheRegion(null);
     		List<?> qqal = q2.list();
     		
-    		
     		for (int i = 0; i < qqal.size(); i++) {
-    			//com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
-				//if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
     			rqqal.add(exportQQA((com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal.get(i), locale));
     		}
     		rqq.addNewAnswers();
@@ -2375,18 +2375,14 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		String sql3 = "SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'";
-    		final SQLQuery q3 = s.createSQLQuery(sql3);
+    		final Query q3 = s.createQuery("select from QuestionnaireQuestion qq where parentid = :parentid");
+    		q3.setInteger("parentid", qq.getId());
     		q3.setCacheable(true);
     		q3.setCacheRegion(null);
-    		Object[] qql = q3.list().toArray();
+    		List<?> qql = q3.list();
     		
-    		for (int i = 0; i < qql.length; i++) {
-				Integer _id = (Integer) (qql[i]);
-				/*com.aladdin.sc.db.QuestionnaireQuestion _obj = 
-					(com.aladdin.sc.db.QuestionnaireQuestion)
-						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );*/
-				//rqql.add ( exportQQ ( _id, false, locale ) );
+    		for (int i = 0; i < qql.size(); i++) {
+				rqql.add ( exportQQ ( (com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), false, locale ) );
     		}
     		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
     		
@@ -2396,7 +2392,7 @@ import java.net.URL;
     	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
     		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
     		
-    		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, ""));
+    		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId(), locale, ""));
     		if (qqa.getPosition() != null) rqqa.setPosition(qqa.getPosition());
     		
     		rqqa.setValue(qqa.getValue().shortValue());
@@ -4530,7 +4526,7 @@ import java.net.URL;
 				
 				OperationResult res = resp.addNewOut();
 				
-				res.setDescription(getTranslate("questionnairequestion", questionID, locale, ""));
+				res.setDescription(getTranslate("questionnairequestion", new Integer (questionID), locale, ""));
 				res.setCode(questionID);
 				
 			} catch (HibernateException e) {
@@ -4605,7 +4601,7 @@ import java.net.URL;
 				List _id = s.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
-					resp.setOut(getTranslate("questionnairequestionanswer", id.toString(), locale.getCode(), ""));
+					resp.setOut(getTranslate("questionnairequestionanswer", id, locale.getCode(), ""));
 				}
 				
 			} catch (HibernateException e) {
