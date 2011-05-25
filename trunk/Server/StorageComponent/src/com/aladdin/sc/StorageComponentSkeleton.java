@@ -2379,7 +2379,7 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		final Query q3 = s.createQuery("select from QuestionnaireQuestion qq where parentid = :parentid");
+    		final Query q3 = s.createQuery("select qq from QuestionnaireQuestion qq where parentid = :parentid");
     		q3.setInteger("parentid", qq.getId());
     		q3.setCacheable(true);
     		q3.setCacheRegion(null);
