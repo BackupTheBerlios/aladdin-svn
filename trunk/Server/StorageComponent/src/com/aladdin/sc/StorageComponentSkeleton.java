@@ -682,7 +682,7 @@ import java.net.URL;
     		query.setCacheRegion(null);
     		List<?> data = query.list();
     		if (data.size() == 1) {
-    			return ((com.aladdin.sc.db.Locale)data).getId();
+    			return ((com.aladdin.sc.db.Locale)data.get(0)).getId();
     		}
     		
     		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
