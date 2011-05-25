@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -144,6 +145,12 @@ import java.net.URL;
     	private final static SessionFactory sessionFactory;
     	private Session s;
     	private final static String forumSC;
+    	
+    	public static String now(String dateFormat) {
+    	    Calendar cal = Calendar.getInstance();
+    	    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+    	    return sdf.format(cal.getTime());
+    	}
     	
     	static {
     		try {
@@ -2253,6 +2260,8 @@ import java.net.URL;
     			//String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			//System.out.println (sql);
     			//List<?> tl = s.createSQLQuery(sql).list();
+				
+				System.out.println (now("mm:ss.SSS"));
     			
     			Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
     			criteria.add(Restrictions.between("DateTimeAssigned", _fromDate.getTime(), _toDate.getTime()));
@@ -2260,7 +2269,12 @@ import java.net.URL;
     			List tl = criteria.list();
     			System.out.println ("tl: " + new Integer (tl.size()).toString());
     			
+    			System.out.println (now("mm:ss.SSS"));
+    			
     			for (int i = 0; i < tl.size(); i++) {
+    				
+    				System.out.println (now("mm:ss.SSS"));
+    				
     				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) tl.get(i);
     				Task rt = resp.addNewOut();
     				rt.setID(t.getId().toString());
