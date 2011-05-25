@@ -2337,11 +2337,13 @@ import java.net.URL;
     	
     	private QuestionnaireQuestion exportQQ (Integer qqId, boolean level1, SystemParameter locale) {
     		
-    		String sql = "SELECT qq.id,qq.typ-e,qq.isprimary,qq.parentid,t.value,qq.quest,qq.condition,qq.deleted,qq.globalid,qq.position " + 
+    		String sql = "SELECT qq.id,qq.type,qq.isprimary,qq.parentid,t.value,qq.quest,qq.condition,qq.deleted,qq.globalid,qq.position " + 
     		"FROM questionnairequestion qq " +
     		"INNER JOIN translate t ON(t.entityid = qq.id) " + 
     		"INNER JOIN locale l ON (l.id = t.locale)" +
     		"where entity = 'questionnairequestion' AND l.name = '" + locale.getCode() + "' AND qq.id = " + qqId.toString();
+    		
+    		System.out.println (sql);
     		
     		List lst = s.createSQLQuery(sql).list();
     		com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) lst.get(0);
