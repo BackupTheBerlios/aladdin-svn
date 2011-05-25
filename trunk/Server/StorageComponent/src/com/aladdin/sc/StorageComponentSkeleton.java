@@ -2334,44 +2334,30 @@ import java.net.URL;
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
     				;*/
     			System.out.println (qql.get(i).getClass().getCanonicalName());
-    				//rqql.add(exportQQ(qql[i], true, locale));
+    			rqql.add(exportQQ((com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), true, locale));
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
     		
     		return rq;
     	}
     	
-    	private QuestionnaireQuestion exportQQ (Integer qqId, boolean level1, SystemParameter locale) {
-    		
-    		String sql1 = "SELECT qq.id,qq.type,qq.isprimary,qq.parentid,t.value,qq.quest,qq.condition,qq.deleted,qq.globalid,qq.position " + 
-    		"FROM questionnairequestion qq " +
-    		"INNER JOIN translate t ON(t.entityid = qq.id) " + 
-    		"INNER JOIN locale l ON (l.id = t.locale)" +
-    		"where entity = 'questionnairequestion' AND l.name = '" + locale.getCode() + "' AND qq.id = " + qqId.toString();
-    		
-    		System.out.println (sql1);
-    		
-    		final SQLQuery q1 = s.createSQLQuery(sql1);
-    		q1.setCacheable(true);
-    		q1.setCacheRegion(null);
-    		Object[] data = (Object[]) q1.list().get(0);
-    		
+    	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
     		
-    		rqq.setType(data[1].toString());
-    		rqq.setId(data[0].toString());
-    		rqq.setGlobalID((Integer) data[8]);
-    		rqq.setPosition((Integer) data[9]);
+    		rqq.setType(qq.getType());
+    		rqq.setId(qq.getId().toString());
+    		rqq.setGlobalID(qq.getGlobalId());
+    		rqq.setPosition(qq.getPosition());
     		
     		if (!level1) {
-    			rqq.setCondition(((Number) data[6]).shortValue());
+    			rqq.setCondition(qq.getCondition().shortValue());
     		}
     		
-    		rqq.setTitle((String) data[4]);
+    		rqq.setTitle(getTranslate("questionnairequestion", qq.getId().toString(), locale, ""));
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
     		
-    		String sql2 = "SELECT id FROM questionnairequestionanswer WHERE NOT deleted AND question = " + qqId.toString();
+    		String sql2 = "SELECT id FROM questionnairequestionanswer WHERE NOT deleted AND question = " + qq.getId().toString();
     		
     		final SQLQuery q2 = s.createSQLQuery(sql2);
     		q2.setCacheable(true);
@@ -2389,7 +2375,7 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		String sql3 = "SELECT id FROM questionnairequestion WHERE parentid = '" + qqId.toString() + "'";
+    		String sql3 = "SELECT id FROM questionnairequestion WHERE parentid = '" + qq.getId().toString() + "'";
     		final SQLQuery q3 = s.createSQLQuery(sql3);
     		q3.setCacheable(true);
     		q3.setCacheRegion(null);
@@ -2400,7 +2386,7 @@ import java.net.URL;
 				/*com.aladdin.sc.db.QuestionnaireQuestion _obj = 
 					(com.aladdin.sc.db.QuestionnaireQuestion)
 						s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, _id );*/
-				rqql.add ( exportQQ ( _id, false, locale ) );
+				//rqql.add ( exportQQ ( _id, false, locale ) );
     		}
     		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
     		
