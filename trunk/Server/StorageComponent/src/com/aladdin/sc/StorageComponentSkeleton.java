@@ -2240,8 +2240,6 @@ import java.net.URL;
     				fromDate = time2.toString();
     			}
     			
-    			s.beginTransaction();
-    			
     			String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
     			System.out.println (sql);
     			com.aladdin.sc.db.Task[] tl = (com.aladdin.sc.db.Task[])s.createSQLQuery(sql).list().toArray (new com.aladdin.sc.db.Task[0]);
@@ -2272,12 +2270,8 @@ import java.net.URL;
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
     				}
     			}
-    			s.getTransaction().commit();
-    		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    		} catch (Exception e) {
+    			e.printStackTrace();
 			}
     		
     		return respdoc;
