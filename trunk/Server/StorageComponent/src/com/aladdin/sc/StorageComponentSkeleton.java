@@ -2257,25 +2257,25 @@ import java.net.URL;
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
     			
-    			//String sql = "SELECT * FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
-    			//System.out.println (sql);
-    			//List<?> tl = s.createSQLQuery(sql).list();
+    			String sql = "SELECT id FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
+    			System.out.println (sql);
+    			Object[] tl = s.createSQLQuery(sql).list().toArray();
 				
 				System.out.println (now("mm:ss.SSS"));
     			
-    			Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
+    			/*Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
     			criteria.add(Restrictions.between("DateTimeAssigned", _fromDate.getTime(), _toDate.getTime()));
     			criteria.add(Restrictions.eq("Executor", userId));
     			List tl = criteria.list();
-    			System.out.println ("tl: " + new Integer (tl.size()).toString());
+    			System.out.println ("tl: " + new Integer (tl.size()).toString());*/
     			
     			System.out.println (now("mm:ss.SSS"));
     			
-    			for (int i = 0; i < tl.size(); i++) {
+    			for (int i = 0; i < tl.length; i++) {
     				
     				System.out.println (now("mm:ss.SSS"));
     				
-    				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) tl.get(i);
+    				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) s.load(com.aladdin.sc.db.Task.class, (Serializable) tl[i]);
     				Task rt = resp.addNewOut();
     				rt.setID(t.getId().toString());
     				SystemParameter taskType = SystemParameter.Factory.newInstance();
