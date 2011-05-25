@@ -19,7 +19,7 @@ mv tmp resources/services.xml
 cat resources/StorageComponent.wsdl|sed 's/<wsdl:service name="StorageComponent">/<wsdl:service name="SCBSA">/' > tmp
 mv tmp resources/StorageComponent.wsdl
 
-cat ./src/com/aladdin/raac/RaacStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/raac\//http:\/\/193.174.152.114:8080\/axis2\/services\/raacBSA\//' > tmp
+cat ./src/com/aladdin/raac/RaacStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/raac\//http:\/\/127.0.0.1:8080\/axis2\/services\/raacBSA\//' > tmp
 mv tmp ./src/com/aladdin/raac/RaacStub.java
 
 ant

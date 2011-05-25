@@ -4,7 +4,7 @@ rm -rf raac
 svn export svn://svn.berlios.de/aladdin/trunk/Server/raac raac
 cd raac
 
-cat ./src/com/aladdin/sc/StorageComponentStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/StorageComponent\//http:\/\/193.174.152.114:8080\/axis2\/services\/SCBSA\//'>tmp
+cat ./src/com/aladdin/sc/StorageComponentStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/StorageComponent\//http:\/\/127.0.0.1:8080\/axis2\/services\/SCBSA\//'>tmp
 mv tmp ./src/com/aladdin/sc/StorageComponentStub.java
 
 cat build.xml |sed 's/<property name="name" value="raac"\/>/<property name="name" value="raacBSA"\/>/' > tmp
