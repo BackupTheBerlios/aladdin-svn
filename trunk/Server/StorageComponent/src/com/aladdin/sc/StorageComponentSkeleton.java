@@ -2357,8 +2357,9 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
     		
-    		final Query q2 = s.createQuery("select qqa from QuestionnaireQuestionAnswer qqa where not deleted and question = :question");
+    		final Query q2 = s.createQuery("select qqa from QuestionnaireQuestionAnswer qqa where deleted = :deleted and question = :question");
     		q2.setInteger("question", qq.getId());
+    		q2.setBoolean("deleted", false);
     		q2.setCacheable(true);
     		q2.setCacheRegion(null);
     		Object[] qqal = q2.list().toArray();
