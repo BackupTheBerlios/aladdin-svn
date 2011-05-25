@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.rmi.RemoteException;
+import java.sql.Connection;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -203,8 +204,10 @@ import java.net.URL;
     	}
     	
     	protected void finalize () throws Throwable {
+    		System.out.println ("finalize");
     		s.flush();
-    		s.close();
+    		Connection cnt = s.close();
+    		cnt.close();
     	}
     	
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
