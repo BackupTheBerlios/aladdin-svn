@@ -648,8 +648,8 @@ import java.net.URL;
     	private String getTranslate (String entity, Integer entityId, String locale, String def) {
 			if (locale != null && locale.length() > 0) {
 				
-				final Query query = s.createQuery("select t from Translate t inner join Locale l where l.id = t.locale and l.name = :name AND entity = :entity AND entityid = :entityid");
-				query.setString("name", locale);
+				final Query query = s.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
+				query.setInteger("locale", getLocaleId(locale));
 				query.setString("entity", entity);
 				query.setInteger("entityid", entityId);
 				query.setCacheable(true);
@@ -675,16 +675,20 @@ import java.net.URL;
     	}
     	
     	private Integer getLocaleId (String locale) {
-    		String sql = "SELECT id FROM locale WHERE name = '" + locale + "'";
-			Object[] loc = s.createSQLQuery(sql).list().toArray();
-			if (loc.length == 0) {
-				com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
-				l.setName(locale);
-				s.save(l);
-				return l.getId();
-				
-			}
-			return (Integer)loc[0];
+    		
+    		final Query query = s.createQuery("select l from Locale l where name = :name");
+    		query.setString("name", locale);
+    		query.setCacheable(true);
+    		query.setCacheRegion(null);
+    		List<?> data = query.list();
+    		if (data.size() == 1) {
+    			return ((com.aladdin.sc.db.Locale)data).getId();
+    		}
+    		
+    		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
+			l.setName(locale);
+			s.save(l);
+			return l.getId();
     	}
     	
     	private Integer getLocaleId (SystemParameter locale) {
