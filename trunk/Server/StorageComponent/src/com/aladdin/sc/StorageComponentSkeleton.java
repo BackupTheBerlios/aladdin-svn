@@ -2321,11 +2321,12 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
-    		final SQLQuery query = s.createSQLQuery(sql);
+    		//String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
+    		final Query query = s.createQuery("select * from questionnairequestion where quest = :quest AND parentid is null");
+    		query.setInteger("name", q.getId());
     		query.setCacheable(true);
     		query.setCacheRegion(null);
-			List qql = query.list (); 
+			List<?> qql = query.list (); 
     		
     		for (int i = 0; i < qql.size(); i++) {
     			/*com.aladdin.sc.db.QuestionnaireQuestion qq =
