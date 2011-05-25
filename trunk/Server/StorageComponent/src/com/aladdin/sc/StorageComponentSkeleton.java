@@ -2323,7 +2323,7 @@ import java.net.URL;
     		
     		//String sql = "SELECT id FROM questionnairequestion WHERE quest = " + q.getId().toString() + " AND parentid is null";
     		final Query query = s.createQuery("select qq from QuestionnaireQuestion qq where qq.quest = :quest AND qq.parentid is null");
-    		query.setInteger("name", q.getId());
+    		query.setInteger("quest", q.getId());
     		query.setCacheable(true);
     		query.setCacheRegion(null);
 			List<?> qql = query.list (); 
