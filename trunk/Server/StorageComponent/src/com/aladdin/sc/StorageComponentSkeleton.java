@@ -2362,13 +2362,13 @@ import java.net.URL;
     		q2.setBoolean("deleted", false);
     		q2.setCacheable(true);
     		q2.setCacheRegion(null);
-    		Object[] qqal = q2.list().toArray();
+    		List<?> qqal = q2.list();
     		
     		
-    		for (int i = 0; i < qqal.length; i++) {
+    		for (int i = 0; i < qqal.size(); i++) {
     			//com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal[i];
 				//if (qqa.getDeleted() == null || !qqa.getDeleted()) rqqal.add(exportQQA(qqa, locale));
-    			rqqal.add(exportQQA((Integer)qqal[i], locale));
+    			rqqal.add(exportQQA((com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal.get(i), locale));
     		}
     		rqq.addNewAnswers();
     		rqq.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) rqqal.toArray(new QuestionnaireQuestionAnswer[0]));
@@ -2393,24 +2393,13 @@ import java.net.URL;
     		return rqq;
     	}
     	
-    	private QuestionnaireQuestionAnswer exportQQA (Integer qqaId, SystemParameter locale) {
+    	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
     		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
     		
-    		String sql = "SELECT qqa.id,qqa.value,t.value,qqa.question,qqa.deleted,qqa.position " +
-    		"FROM questionnairequestionanswer qqa " +
-    		"INNER JOIN translate t ON(t.entityid = qqa.id) " + 
-    		"INNER JOIN locale l ON (l.id = t.locale)" +
-    		"where entity = 'questionnairequestionanswer' AND l.name = '" + locale.getCode() + "' AND qqa.id = " + qqaId.toString();
+    		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId().toString(), locale, ""));
+    		if (qqa.getPosition() != null) rqqa.setPosition(qqa.getPosition());
     		
-    		final SQLQuery query = s.createSQLQuery(sql);
-    		query.setCacheable(true);
-    		query.setCacheRegion(null);
-			Object[] data = (Object[]) query.list().get(0);
-    		
-    		rqqa.setDescription((String) data[2]);
-    		if (data[5] != null) rqqa.setPosition((Integer) data[5]);
-    		
-    		rqqa.setValue(((Number) data[1]).shortValue());
+    		rqqa.setValue(qqa.getValue().shortValue());
     		
     		return rqqa;
     	}
