@@ -2325,14 +2325,15 @@ import java.net.URL;
     		final SQLQuery query = s.createSQLQuery(sql);
     		query.setCacheable(true);
     		query.setCacheRegion(null);
-			Integer[] qql = (Integer[]) query.list ().toArray(); 
+			List qql = query.list (); 
     		
-    		for (int i = 0; i < qql.length; i++) {
+    		for (int i = 0; i < qql.size(); i++) {
     			/*com.aladdin.sc.db.QuestionnaireQuestion qq =
     				(com.aladdin.sc.db.QuestionnaireQuestion)
     					s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, (Integer)qql[i])
     				;*/
-    				rqql.add(exportQQ(qql[i], true, locale));
+    			System.out.println (qql.get(i).getClass().getCanonicalName());
+    				//rqql.add(exportQQ(qql[i], true, locale));
     		}
     		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
     		
