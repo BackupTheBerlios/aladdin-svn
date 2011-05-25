@@ -2298,7 +2298,9 @@ import java.net.URL;
     				rt.setObjectID(t.getObject().toString());
     				rt.setText(t.getText());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
+    					System.out.println ("exprt Questionnaire start " + now("mm:ss.SSS"));
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
+    					System.out.println ("exprt Questionnaire end " + now("mm:ss.SSS"));
     				}
     			}
     		} catch (Exception e) {
