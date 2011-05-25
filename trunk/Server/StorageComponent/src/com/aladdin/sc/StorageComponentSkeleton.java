@@ -2247,8 +2247,8 @@ import java.net.URL;
     			//List<?> tl = s.createSQLQuery(sql).list();
     			
     			Criteria criteria = s.createCriteria(com.aladdin.sc.db.Task.class);
-    			criteria.add(Restrictions.between("datetimeassigned", fromDate, toDate));
-    			criteria.add(Restrictions.eq("executor", userId));
+    			criteria.add(Restrictions.between("DateTimeAssigned", fromDate, toDate));
+    			criteria.add(Restrictions.eq("Executor", userId));
     			List tl = criteria.list();
     			System.out.println ("tl: " + new Integer (tl.size()).toString());
     			
