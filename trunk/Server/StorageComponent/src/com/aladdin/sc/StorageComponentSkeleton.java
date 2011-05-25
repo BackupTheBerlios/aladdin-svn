@@ -2243,6 +2243,7 @@ import java.net.URL;
     			s.beginTransaction();
     			
     			String sql = "SELECT id FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
+    			System.out.println (sql);
     			Object[] tl = s.createSQLQuery(sql).list().toArray();
     			
     			for (int i = 0; i < tl.length; i++) {
@@ -2262,6 +2263,15 @@ import java.net.URL;
     				rt.setDateTimeFulfilled(c2);
     				SystemParameter taskStatus = SystemParameter.Factory.newInstance();
     				taskStatus.setCode(t.getTaskStatus().toString());
+    				
+    				System.out.println ("GeUserPlannedTasks " + new Timestamp (new Date().getTime ()).toString ());
+    				System.out.println ("GeUserPlannedTasks task id " + rt.getID() + " datetimeassigned " +
+    						new Integer (rt.getDateTimeAssigned ().get(Calendar.DAY_OF_MONTH)).toString () +
+    						"/" + 
+    						new Integer (rt.getDateTimeAssigned ().get(Calendar.MONTH)).toString () +
+    						"/" +
+    						new Integer (rt.getDateTimeAssigned ().get(Calendar.YEAR)).toString ()
+    				);
 
     				rt.setTaskStatus(taskStatus);
     				rt.setURL(t.getUrl());
@@ -4546,7 +4556,15 @@ import java.net.URL;
 				Integer value = new Integer (req.getGetQuestionnaireAnswerValue().getValue());
 				SystemParameter locale = req.getGetQuestionnaireAnswerValue().getLocale();
 				
+				System.out.println (
+						"getQuestionnaireAnswerValue qId = " + questionId.toString() +
+						" value " + value.toString() + 
+						" locale " + locale.getCode()
+				);
+				
+				
 				String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + questionId.toString() + " AND value = " + value.toString();
+				System.out.println (sql);
 				List _id = s.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
