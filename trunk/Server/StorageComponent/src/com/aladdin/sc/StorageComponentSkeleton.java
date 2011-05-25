@@ -2349,8 +2349,8 @@ import java.net.URL;
     		
     		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
     		
-    		rqq.setType((String) data[1]);
-    		rqq.setId((String) data[0]);
+    		rqq.setType(data[1].toString());
+    		rqq.setId(data[0].toString());
     		rqq.setGlobalID((Integer) data[8]);
     		rqq.setPosition((Integer) data[9]);
     		
