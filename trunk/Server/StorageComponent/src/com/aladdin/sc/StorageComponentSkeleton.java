@@ -202,7 +202,7 @@ import java.net.URL;
     	}
     	
     	protected void finalize () throws Throwable {
-    		System.out.println ("finalize");
+    		//System.out.println ("finalize");
     		s.flush();
     		Connection cnt = s.close();
     		cnt.close();
@@ -2213,6 +2213,8 @@ import java.net.URL;
     		
     		try {
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
+    			
+    			System.out.println ("getUserPlannedTasks userId " + userId + " _fromDate " + _fromDate + " _toDate " + _toDate);
     			
     			_fromDate.set(Calendar.HOUR, 0);
 				_fromDate.set(Calendar.MINUTE, 0);
