@@ -27,6 +27,7 @@ import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.AladdinUser;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
+import com.aladdin.sc.db.Translate;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -642,11 +643,11 @@ import java.net.URL;
     		}
     	}
     	
-    	private String getTranslate (String entity, Integer entityId, Integer locale, String def) {
-			if (locale != null) {
+    	private String getTranslate (String entity, Integer entityId, String locale, String def) {
+			if (locale != null && locale.length() > 0) {
 				
 				final Query query = s.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
-				query.setInteger("locale", locale);
+				query.setInteger("locale", getLocaleId(locale));
 				query.setString("entity", entity);
 				query.setInteger("entityid", entityId);
 				query.setCacheable(true);
@@ -654,7 +655,8 @@ import java.net.URL;
 				
 				List<?> data = query.list();
 				if (data.size() == 1) {
-					return ((com.aladdin.sc.db.Translate) data.get(0)).getValue();
+					com.aladdin.sc.db.Translate trans = (Translate) data.get(0);
+					return trans.getValue();
 				}
 			}
 			return def;
@@ -662,15 +664,15 @@ import java.net.URL;
     	
     	private String getTranslate (String entity, Integer entityId, SystemParameter locale, String def) {
     		if (locale == null) return def;
-    		return getTranslate(entity, entityId, new Integer (locale.getCode()), def);
+    		return getTranslate(entity, entityId, locale.getCode(), def);
     	}
     	
     	private boolean setTranslate (String entity, Integer entityId, SystemParameter locale, String value) throws LocaleException {
     		if (locale == null) return false;
-    		return setTranslate(entity, entityId, new Integer (locale.getCode()), value);
+    		return setTranslate(entity, entityId, locale.getCode(), value);
     	}
     	
-    	/*private Integer getLocaleId (String locale) {
+    	private Integer getLocaleId (String locale) {
     		
     		final Query query = s.createQuery("select l from Locale l where name = :name");
     		query.setString("name", locale);
@@ -681,28 +683,30 @@ import java.net.URL;
     			return ((com.aladdin.sc.db.Locale)data.get(0)).getId();
     		}
     		
-    		System.out.println ("insert locale " + locale);
     		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
 			l.setName(locale);
 			s.save(l);
 			return l.getId();
-    	}*/
+    	}
     	
-/*    	private Integer getLocaleId (SystemParameter locale) {
+    	private Integer getLocaleId (SystemParameter locale) {
     		if (locale == null || locale.getCode() == null || locale.getCode() == "") return getLocaleId ("en_US");
     		return getLocaleId(locale.getCode());
-    	}*/
+    	}
     	
-    	private boolean setTranslate (String entity, Integer entityId, Integer locale, String value) throws LocaleException {
-			if (locale != null) {
+    	private boolean setTranslate (String entity, Integer entityId, String locale, String value) throws LocaleException {
+			if (locale != null && locale.length() > 0) {
 				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
 					throw new LocaleException(locale + " is not supported");
 				}
+				Integer localeId = getLocaleId(locale);
+				if (localeId == 0) return false;
+				
 				com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
 				t.setValue(value);
-				t.setLocale(locale);
+				t.setLocale(localeId);
 				t.setEntity(entity);
 				t.setEntityid(entityId);
 				s.save(t);
@@ -2272,7 +2276,7 @@ import java.net.URL;
     			query.setCacheRegion(null);
     			
     			List<?> tl = query.list();
-    			System.out.println ("tl: " + new Integer (tl.size()).toString());
+    			System.out.println ("tl: " + tl.size());
     			
     			System.out.println (now("mm:ss.SSS"));
     			
@@ -3851,7 +3855,7 @@ import java.net.URL;
 				
 				s.beginTransaction();
 				
-				Integer localeid = new Integer(req.getUpdateSystemParameter().getLocale().toString());
+				Integer localeid = getLocaleId(req.getUpdateSystemParameter().getLocale());
 				Integer type = req.getUpdateSystemParameter().getType();
 				SystemParameter value = req.getUpdateSystemParameter().getValue();
 
@@ -4362,11 +4366,14 @@ import java.net.URL;
 				res.setCode(savedId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-			} catch (HibernateException e) {
+			} catch (Exception e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
+    			
     			System.out.println (e.toString());
     			res.setCode("-2");
 				res.setStatus((short) 0);
@@ -4389,11 +4396,13 @@ import java.net.URL;
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-			} catch (HibernateException e) {
+			} catch (Exception e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
@@ -4420,11 +4429,13 @@ import java.net.URL;
 				res.setCode(savedId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
-			} catch (HibernateException e) {
+			} catch (Exception e) {
 				try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
 				res.setDescription("database error " + e.toString());
@@ -4477,11 +4488,8 @@ import java.net.URL;
     				rqa.setGlobalID(qq.getGlobalId().toString());
     			}
     			
-    		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    		} catch (Exception e) {
+    			e.printStackTrace();
     		}
 			
 			return respdoc;
@@ -4501,11 +4509,8 @@ import java.net.URL;
 					l.setDescription(locale[i].getName());
 				}
 				
-			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 			return respdoc;
@@ -4524,11 +4529,8 @@ import java.net.URL;
 				res.setDescription(getTranslate("questionnairequestion", new Integer (questionID), locale, ""));
 				res.setCode(questionID);
 				
-			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 			return respdoc;
@@ -4563,12 +4565,8 @@ import java.net.URL;
     			
     			resp.setOutArray(tmp.toArray(new Carer[0]));
     			
-    		} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
-    			System.out.println (e.toString());
+    		} catch (Exception e) {
+    			e.printStackTrace();
 			}
     		
 			return respdoc;
@@ -4595,14 +4593,11 @@ import java.net.URL;
 				List<?> _id = s.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
-					resp.setOut(getTranslate("questionnairequestionanswer", id, locale, ""));
+					resp.setOut(getTranslate("questionnairequestionanswer", id, locale.getCode(), ""));
 				}
 				
-			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 			
