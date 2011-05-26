@@ -3019,7 +3019,7 @@ import java.net.URL;
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
     			System.out.println (8);
     			
-    			final Query query = s.createQuery("select p from PaitentAssessment p where patient = :patient");
+    			final Query query = s.createQuery("select p from PatientAssessment p where patient = :patient");
     			System.out.println (9);
     			query.setInteger("patient", patientId);
     			System.out.println (10);
