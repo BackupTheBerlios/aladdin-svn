@@ -2188,8 +2188,7 @@ import java.net.URL;
     		return 7;
     	}
 
-    	@SuppressWarnings("deprecation")
-		public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
+    	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
@@ -2214,28 +2213,6 @@ import java.net.URL;
     		
     		try {
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
-    			String fromDate  = _fromDate.toString();
-    			String toDate = _toDate.toString();
-    			
-    			if (fromDate.compareTo(toDate) == 0) {
-    				Date time = _fromDate.getTime();
-    				time.setHours(time.getHours() + 23);
-    				time.setMinutes(time.getMinutes() + 59);
-    				time.setSeconds(time.getSeconds() + 59);
-    				toDate = time.toString();
-    			} else {
-    				Date time1 = _toDate.getTime();
-    				time1.setHours(23);
-    				time1.setMinutes(59);
-    				time1.setSeconds(59);
-    				toDate = time1.toString();
-    				
-    				Date time2 = _fromDate.getTime();
-    				time2.setHours(0);
-    				time2.setMinutes(0);
-    				time2.setSeconds(0);
-    				fromDate = time2.toString();
-    			}
     			
     			_fromDate.set(Calendar.HOUR, 0);
 				_fromDate.set(Calendar.MINUTE, 0);
@@ -2283,6 +2260,7 @@ import java.net.URL;
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
     				}
+    				System.out.println ("getUserPlannedTasks task " + t.getId() + " " + now("mm:ss.SSS"));
     			}
     		} catch (Exception e) {
     			e.printStackTrace();
