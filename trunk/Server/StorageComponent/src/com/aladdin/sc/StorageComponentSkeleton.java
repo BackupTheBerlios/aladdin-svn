@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.axis2.AxisFault;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -23,13 +22,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 
 import com.aladdin.raac.RaacStub;
 import com.aladdin.sc.db.AladdinUser;
 import com.aladdin.sc.db.Dict;
 import com.aladdin.sc.db.Locale;
-import com.aladdin.sc.db.Translate;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -614,10 +611,7 @@ import java.net.URL;
         			rqqa = rqq.getAnswers().getAnswerArray(i);
         			
         			String sql = "SELECT id FROM questionnairequestionanswer WHERE question = '" + qq.getId().toString() + "' AND value = '" + new Integer (rqqa.getValue()).toString()  + "'";
-        			@SuppressWarnings("rawtypes")
-					List list = s.createSQLQuery(sql).list();
-					@SuppressWarnings("unchecked")
-					List<Object> _id = list;
+					List<?> _id = s.createSQLQuery(sql).list();
         			
         			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = null;
         			
@@ -660,8 +654,7 @@ import java.net.URL;
 				
 				List<?> data = query.list();
 				if (data.size() == 1) {
-					com.aladdin.sc.db.Translate trans = (Translate) data.get(0);
-					return trans.getValue();
+					return ((com.aladdin.sc.db.Translate) data.get(0)).getValue();
 				}
 			}
 			return def;
@@ -674,10 +667,10 @@ import java.net.URL;
     	
     	private boolean setTranslate (String entity, Integer entityId, SystemParameter locale, String value) throws LocaleException {
     		if (locale == null) return false;
-    		return setTranslate(entity, entityId, locale.getCode(), value);
+    		return setTranslate(entity, entityId, new Integer (locale.getCode()), value);
     	}
     	
-    	private Integer getLocaleId (String locale) {
+    	/*private Integer getLocaleId (String locale) {
     		
     		final Query query = s.createQuery("select l from Locale l where name = :name");
     		query.setString("name", locale);
@@ -693,26 +686,23 @@ import java.net.URL;
 			l.setName(locale);
 			s.save(l);
 			return l.getId();
-    	}
+    	}*/
     	
-    	private Integer getLocaleId (SystemParameter locale) {
+/*    	private Integer getLocaleId (SystemParameter locale) {
     		if (locale == null || locale.getCode() == null || locale.getCode() == "") return getLocaleId ("en_US");
     		return getLocaleId(locale.getCode());
-    	}
+    	}*/
     	
-    	private boolean setTranslate (String entity, Integer entityId, String locale, String value) throws LocaleException {
-			if (locale != null && locale.length() > 0) {
+    	private boolean setTranslate (String entity, Integer entityId, Integer locale, String value) throws LocaleException {
+			if (locale != null) {
 				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
 				Object[] trans = s.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
 					throw new LocaleException(locale + " is not supported");
 				}
-				Integer localeId = getLocaleId(locale);
-				if (localeId == 0) return false;
-				
 				com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
 				t.setValue(value);
-				t.setLocale(localeId);
+				t.setLocale(locale);
 				t.setEntity(entity);
 				t.setEntityid(entityId);
 				s.save(t);
@@ -1301,10 +1291,7 @@ import java.net.URL;
         				
         				String patientID = "";
         				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
-        				@SuppressWarnings("rawtypes")
-    					List list = s.createSQLQuery(sql).list();
-    					@SuppressWarnings("unchecked")
-    					List<Object> data = list;
+    					List<?> data = s.createSQLQuery(sql).list();
         				if (data.size() > 0) {
         					patientID = data.get(0).toString();
         				}
@@ -2275,10 +2262,6 @@ import java.net.URL;
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
 				
-    			/*String sql = "SELECT id FROM task WHERE datetimeassigned BETWEEN '" + fromDate + "' AND '" + toDate + "' AND executor = '" + userId.toString() + "'";
-    			System.out.println (sql);
-    			Object[] tl = s.createSQLQuery(sql).list().toArray();*/
-				
 				System.out.println (now("mm:ss.SSS"));
     			
     			final Query query = s.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
@@ -2288,7 +2271,7 @@ import java.net.URL;
     			query.setCacheable(true);
     			query.setCacheRegion(null);
     			
-    			List tl = query.list();
+    			List<?> tl = query.list();
     			System.out.println ("tl: " + new Integer (tl.size()).toString());
     			
     			System.out.println (now("mm:ss.SSS"));
@@ -3868,7 +3851,7 @@ import java.net.URL;
 				
 				s.beginTransaction();
 				
-				Integer localeid = getLocaleId(req.getUpdateSystemParameter().getLocale());
+				Integer localeid = new Integer(req.getUpdateSystemParameter().getLocale().toString());
 				Integer type = req.getUpdateSystemParameter().getType();
 				SystemParameter value = req.getUpdateSystemParameter().getValue();
 
@@ -4551,7 +4534,6 @@ import java.net.URL;
 			return respdoc;
 		}
 
-		@Override
 		public GetAvailableCarersResponseDocument getAvailableCarers(GetAvailableCarersDocument req) {
 			GetAvailableCarersResponseDocument respdoc = GetAvailableCarersResponseDocument.Factory.newInstance();
 			GetAvailableCarersResponse resp = respdoc.addNewGetAvailableCarersResponse();
@@ -4610,7 +4592,7 @@ import java.net.URL;
 				
 				String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + questionId.toString() + " AND value = " + value.toString();
 				System.out.println (sql);
-				List _id = s.createSQLQuery(sql).list();
+				List<?> _id = s.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
 					resp.setOut(getTranslate("questionnairequestionanswer", id, locale, ""));
