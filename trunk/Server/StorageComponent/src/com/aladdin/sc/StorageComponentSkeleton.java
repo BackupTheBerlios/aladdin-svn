@@ -1973,32 +1973,19 @@ import java.net.URL;
     	}
 
 		private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
-			System.out.println (100);
 			Measurement rm = Measurement.Factory.newInstance();
-			System.out.println (101);
 			SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
-			System.out.println (102);
 			rmeasurementType.setCode(m.getType());
-			System.out.println (103);
 
 			rm.setType(rmeasurementType);
-			System.out.println (104);
 			rm.setValue(m.getValue().doubleValue ());
-			System.out.println (105);
 			Timestamp datetime = m.getDatetime();
-			System.out.println (106);
 			Calendar c = Calendar.getInstance();
-			System.out.println (107);
 			c.setTimeInMillis(datetime.getTime());
-			System.out.println (108);
 			rm.setDateTime(c);
-			System.out.println (109);
 			rm.setUnits(m.getUnits());
-			System.out.println (110);
 			rm.setLowerLimit(m.getLowerlimit().doubleValue ());
-			System.out.println (111);
 			rm.setUpperLimit(m.getUpperlimit().doubleValue ());
-			System.out.println (112);
 			return rm;
 		}
 		
@@ -3005,16 +2992,11 @@ import java.net.URL;
     		GetPatientAssessmentsResponseDocument respdoc = GetPatientAssessmentsResponseDocument.Factory.newInstance();
     		GetPatientAssessmentsResponse resp = respdoc.addNewGetPatientAssessmentsResponse();
     		
-    		System.out.println (1);
-    		
     		{
     			NullChecker nc = new NullChecker();
-    			System.out.println (2);
     			
     			req.getGetPatientAssessments().setUserId (nc.check(req.getGetPatientAssessments().getUserId(), String.class));
-    			System.out.println (3);
     			req.getGetPatientAssessments().setPatientId (nc.check(req.getGetPatientAssessments().getPatientId(), String.class));
-    			System.out.println (4);
     		}
     		
     		if (
@@ -3022,132 +3004,78 @@ import java.net.URL;
     				!checkUser(req.getGetPatientAssessments().getUserId(), U_CARER) &&
     				!checkUser(req.getGetPatientAssessments().getUserId(), U_ADMIN)
 				) {
-    			System.out.println (5);
     			return respdoc;
     		}
     		
     		try {
-    			System.out.println (6);
-    			System.out.println (7);
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
-    			System.out.println (8);
     			
     			final Query query = s.createQuery("select p from PatientAssessment p where patient = :patient");
-    			System.out.println (9);
     			query.setInteger("patient", patientId);
-    			System.out.println (10);
     			query.setCacheable(true);
-    			System.out.println (11);
     			query.setCacheRegion(null);
-    			System.out.println (12);
     			List<?> data = query.list();
-    			System.out.println (13);
     			
     			for (int i = 0; i < data.size(); i++) {
-    				System.out.println (14);
     				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) data.get(i);
-    				System.out.println (15);
     			
 	    			PatientAssessment rpa = resp.addNewOut();
-	    			System.out.println (16);
 	    			
 	    			rpa.setID(pa.getId().toString());
-	    			System.out.println (17);
 	    			rpa.setPatientID(pa.getPatient().toString());
-	    			System.out.println (18);
 	    			
 	    			Calendar c1 = Calendar.getInstance();
-	    			System.out.println (19);
 	    			c1.setTimeInMillis(pa.getDateOfAssessment().getTime());
-	    			System.out.println (20);
 	    			rpa.setDateOfAssessment(c1);
-	    			System.out.println (21);
 	    			
 	    			SystemParameter aetology = SystemParameter.Factory.newInstance();
-	    			System.out.println (22);
 	    			aetology.setCode(pa.getAetology().toString());
-	    			System.out.println (23);
 	    			rpa.setAetology(aetology);
-	    			System.out.println (24);
 	    			
 	    			rpa.setTimeEllapsedSinceDiagnosed(pa.getTimeElapsedSinceDiagnose().shortValue());
-	    			System.out.println (25);
 	    			rpa.setSeverity(pa.getSeverity().shortValue());
-	    			System.out.println (26);
 	    			rpa.setRelevantPathologyAntecedents(pa.getRelevantPathologyAntecedents());
-	    			System.out.println (27);
 	    			rpa.setComorbidity(pa.getComorbidity());
-	    			System.out.println (28);
 	    			rpa.setCharlsonComorbidityIndex(pa.getCharlsonComobodityIndex().shortValue());
-	    			System.out.println (29);
 	    			rpa.setBarthelIndex(pa.getBarthelIndex().shortValue());
-	    			System.out.println (30);
 	    			rpa.setLawtonIndex(pa.getLawtonIndex().shortValue());
-	    			System.out.println (31);
 	    			rpa.setMMSE(pa.getMMSE().shortValue());
-	    			System.out.println (32);
 	    			rpa.setMDRS(pa.getMDRS().shortValue());
-	    			System.out.println (33);
 	    			
 	    			if (pa.getBlessedScalePart1() != null) rpa.setBlessedScalePart1(pa.getBlessedScalePart1().doubleValue());
 	    			else rpa.setBlessedScalePart1(0.0);
 	    			
-	    			System.out.println (34);
-	    			
 	    			if (pa.getBlessedScalePart2() != null) rpa.setBlessedScalePart2(pa.getBlessedScalePart2().shortValue());
 	    			else rpa.setBlessedScalePart2((short)0);
-	    			
-	    			System.out.println (35);
 	    			
 	    			if (pa.getBlessedScalePart3() != null) rpa.setBlessedScalePart3(pa.getBlessedScalePart3().shortValue());
 	    			else rpa.setBlessedScalePart3((short)0);
 	    			
-	    			System.out.println (36);
-	    			
 	    			if (pa.getChecklistMBPC() != null) rpa.setChecklistMBP(pa.getChecklistMBPC().shortValue());
 	    			else rpa.setChecklistMBP((short)0);
-	    			
-	    			System.out.println (37);
 	    			
 	    			if (pa.getNPQISeverity() != null) rpa.setNPQISeverity(pa.getNPQISeverity().shortValue());
 	    			else rpa.setNPQISeverity((short)0);
 	    			
-	    			System.out.println (38);
-	    			
 	    			if (pa.getNPQIStress() != null) rpa.setNPQIStress(pa.getNPQIStress().shortValue());
 	    			else rpa.setNPQIStress((short)0);
-	    			
-	    			System.out.println (39);
 	    			
 	    			if (pa.getGDS() != null) rpa.setGDS(pa.getGDS().shortValue());
 	    			else rpa.setGDS((short)0);
 	    			
-	    			System.out.println (40);
-	    			
 	    			rpa.setFalls(pa.getFalls());
-	    			System.out.println (41);
 	    			rpa.setIncontinence(pa.getIncontinence());
-	    			System.out.println (42);
 	    			rpa.setDelirium(pa.getDelirium());
-	    			System.out.println (43);
 	    			rpa.setImmobility(pa.getImmobility());
-	    			System.out.println (44);
 	    			rpa.setSensorialDeficits(pa.getSensorialDeficits());
-	    			System.out.println (45);
 	    			rpa.setPharmacologicalTreatment(pa.getPharmacologyTreatment());
-	    			System.out.println (46);
 	    			
 	    			Object[] ml = pa.getMeasurements().toArray();
-	    			System.out.println (47);
 	    			List<Measurement> rml = new ArrayList<Measurement> ();
-	    			System.out.println (48);
 	    			for (int j = 0; j < ml.length; j++) {
-	    				System.out.println (49);
 	    				rml.add(exportMeasurement( (com.aladdin.sc.db.Measurement) ml[j]));
-	    				System.out.println (50);
 	    			}
 	    			rpa.setClinicalDataArray((Measurement[]) rml.toArray(new Measurement[0]));
-	    			System.out.println (51);
     			}
     		} catch (Exception e) {
     			e.printStackTrace();
