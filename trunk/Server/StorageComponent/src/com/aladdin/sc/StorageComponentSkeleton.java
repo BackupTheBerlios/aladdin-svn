@@ -358,56 +358,37 @@ import java.net.URL;
     			
     			s.beginTransaction();
 
-                System.out.println (1);
-    			
     			com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
 
-                System.out.println (2);
-    			
     			Integer pdid = storePersondata(data.getPersonData(), null);
 
-                System.out.println (3);
-    			
     			Integer sdid = storeSocioDemographic(data.getSDData(), null);
 
-                System.out.println (4);
-    			
     			GeneralPractitioner gp = data.getGeneralPractitioner();
-                System.out.println (5);
     			if (gp != null) {
     				p.setGpemail(gp.getEmail());
     				p.setGpname(gp.getName());
     				p.setGpphone(gp.getPhone());
     			}
-                System.out.println (6);
     			
     			Consulter c = data.getConsulterInCharge();
-                System.out.println (7);
     			if (c != null) {
     				p.setCcemail(c.getEmail());
     				p.setCcname(c.getName());
     				p.setCcphone(c.getPhone());
     			}
-    			System.out.println (8);
 
     			SocialWorker sw = data.getSocialWorker();
-                System.out.println (9);
     			if (sw != null) {
     				p.setSwemail(sw.getEmail());
     				p.setSwname(sw.getName());
     				p.setSwphone(sw.getPhone());
     			}
-    			System.out.println (10);
     			p.setPersondata(pdid);
-                System.out.println (11);
     			p.setSd(sdid);
-                System.out.println (12);
     			String responsibleClinicianID = data.getResponsibleClinicianID();
-                System.out.println (13);
     			if (responsibleClinicianID == null) responsibleClinicianID = "0";
-                System.out.println (14);
     			p.setClinician(new Integer(responsibleClinicianID));
-                System.out.println (15);
                 
                 if (data.getPatientCarer() != null) p.setCarer(new Integer (data.getPatientCarer().getID()));
                 
@@ -418,11 +399,13 @@ import java.net.URL;
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
-    		} catch (HibernateException e) {
+    		} catch (Exception e) {
     			try {
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
@@ -1230,24 +1213,19 @@ import java.net.URL;
     	}
 
     	private Integer storeMeasurement(Measurement rm, Integer paid) {
-//    		try {
-	    		long timeInMillis = 0;
-	    		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-	    		if (paid != null) m.setPatientassessment (paid);
-	    		m.setType(rm.getType().getCode());
-	    		m.setValue(new BigDecimal (rm.getValue()));
-	    		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
-	    		m.setDatetime(new Timestamp(timeInMillis));
-	    		m.setUnits(rm.getUnits());
-	    		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
-	    		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
-	    		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
-	    		s.save (m);
-	    		return m.getId();
-    		/*} catch (Exception e) {
-    			System.out.println (e.toString());
-    			return 0;
-    		}*/
+    		long timeInMillis = 0;
+    		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
+    		if (paid != null) m.setPatientassessment (paid);
+    		m.setType(rm.getType().getCode());
+    		m.setValue(new BigDecimal (rm.getValue()));
+    		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
+    		m.setDatetime(new Timestamp(timeInMillis));
+    		m.setUnits(rm.getUnits());
+    		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
+    		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
+    		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
+    		s.save (m);
+    		return m.getId();
     	}
     	
     	public StoreMeasurementsResponseDocument storeMeasurements (StoreMeasurementsDocument req) {
@@ -1307,12 +1285,13 @@ import java.net.URL;
     	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
+    	    			e.printStackTrace();
     				} catch (AxisFault e) {
     					try {
     	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
-    	    			
+    	    			e.printStackTrace();
     	    			res.setCode("-2");
     	    			res.setStatus((short) 0);
     	    			res.setDescription("Calling RAAC error " + e.toString());
@@ -1322,7 +1301,7 @@ import java.net.URL;
     	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
-    	    			
+    	    			e.printStackTrace();
     	    			res.setCode("-2");
     	    			res.setStatus((short) 0);
     	    			res.setDescription("Calling RAAC error " + e.toString());
@@ -1339,7 +1318,7 @@ import java.net.URL;
     				if (s.getTransaction().isActive()) s.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
-    			
+    			e.printStackTrace();
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
@@ -1576,7 +1555,7 @@ import java.net.URL;
     			
     			String sql = "SELECT qa.timestamp, qq.quest, qa.objectid, qa.userid FROM questionnaireanswer qa inner join questionnairequestion qq on (qq.id = qa.question) WHERE qa.objectid = '" + objectId.toString() + "' AND qa.timestamp BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY qa.timestamp, qq.quest, qa.objectid, qa.userid";
 
-			System.out.println (sql);
+    			System.out.println (sql);
 
     			Object[] questionids = s.createSQLQuery(sql).list().toArray();
     			
@@ -2266,7 +2245,7 @@ import java.net.URL;
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
 				
-				System.out.println (now("mm:ss.SSS"));
+				System.out.println ("getUserPlannedTasks start " + now("mm:ss.SSS"));
     			
     			final Query query = s.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
     			query.setDate("a", _fromDate.getTime());
@@ -2276,13 +2255,8 @@ import java.net.URL;
     			query.setCacheRegion(null);
     			
     			List<?> tl = query.list();
-    			System.out.println ("tl: " + tl.size());
-    			
-    			System.out.println (now("mm:ss.SSS"));
     			
     			for (int i = 0; i < tl.size(); i++) {
-    				
-    				System.out.println (now("mm:ss.SSS"));
     				
     				com.aladdin.sc.db.Task t = (com.aladdin.sc.db.Task) tl.get(i);
     				Task rt = resp.addNewOut();
@@ -2307,14 +2281,14 @@ import java.net.URL;
     				rt.setObjectID(t.getObject().toString());
     				rt.setText(t.getText());
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
-    					System.out.println ("exprt Questionnaire start " + now("mm:ss.SSS"));
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
-    					System.out.println ("exprt Questionnaire end " + now("mm:ss.SSS"));
     				}
     			}
     		} catch (Exception e) {
     			e.printStackTrace();
 			}
+    		
+    		System.out.println ("getUserPlannedTasks done " + now("mm:ss.SSS"));
     		
     		return respdoc;
     	}
