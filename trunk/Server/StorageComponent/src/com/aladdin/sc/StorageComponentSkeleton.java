@@ -688,6 +688,7 @@ import java.net.URL;
     			return ((com.aladdin.sc.db.Locale)data.get(0)).getId();
     		}
     		
+    		System.out.println ("insert locale " + locale);
     		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
 			l.setName(locale);
 			s.save(l);
