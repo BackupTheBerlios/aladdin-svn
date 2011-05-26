@@ -2992,11 +2992,16 @@ import java.net.URL;
     		GetPatientAssessmentsResponseDocument respdoc = GetPatientAssessmentsResponseDocument.Factory.newInstance();
     		GetPatientAssessmentsResponse resp = respdoc.addNewGetPatientAssessmentsResponse();
     		
+    		System.out.println (1);
+    		
     		{
     			NullChecker nc = new NullChecker();
+    			System.out.println (2);
     			
     			req.getGetPatientAssessments().setUserId (nc.check(req.getGetPatientAssessments().getUserId(), String.class));
+    			System.out.println (3);
     			req.getGetPatientAssessments().setPatientId (nc.check(req.getGetPatientAssessments().getPatientId(), String.class));
+    			System.out.println (4);
     		}
     		
     		if (
@@ -3004,18 +3009,26 @@ import java.net.URL;
     				!checkUser(req.getGetPatientAssessments().getUserId(), U_CARER) &&
     				!checkUser(req.getGetPatientAssessments().getUserId(), U_ADMIN)
 				) {
+    			System.out.println (5);
     			return respdoc;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			System.out.println (6);
+    			System.out.println (7);
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
+    			System.out.println (8);
     			
     			final Query query = s.createQuery("select p from PaitentAssessment p where patient = :patient");
+    			System.out.println (9);
     			query.setInteger("patient", patientId);
+    			System.out.println (10);
     			query.setCacheable(true);
+    			System.out.println (11);
     			query.setCacheRegion(null);
+    			System.out.println (12);
     			List<?> data = query.list();
+    			System.out.println (13);
     			
     			for (int i = 0; i < data.size(); i++) {
     				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) data.get(i);
@@ -3075,12 +3088,8 @@ import java.net.URL;
 	    			}
 	    			rpa.setClinicalDataArray((Measurement[]) rml.toArray(new Measurement[0]));
     			}
-    			s.getTransaction().commit();
-    		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    		} catch (Exception e) {
+    			e.printStackTrace();
 			}
     		
     		return respdoc;
