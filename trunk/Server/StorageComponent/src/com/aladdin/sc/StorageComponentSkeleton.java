@@ -648,11 +648,11 @@ import java.net.URL;
     		}
     	}
     	
-    	private String getTranslate (String entity, Integer entityId, String locale, String def) {
-			if (locale != null && locale.length() > 0) {
+    	private String getTranslate (String entity, Integer entityId, Integer locale, String def) {
+			if (locale != null) {
 				
 				final Query query = s.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
-				query.setInteger("locale", getLocaleId(locale));
+				query.setInteger("locale", locale);
 				query.setString("entity", entity);
 				query.setInteger("entityid", entityId);
 				query.setCacheable(true);
@@ -669,7 +669,7 @@ import java.net.URL;
     	
     	private String getTranslate (String entity, Integer entityId, SystemParameter locale, String def) {
     		if (locale == null) return def;
-    		return getTranslate(entity, entityId, locale.getCode(), def);
+    		return getTranslate(entity, entityId, new Integer (locale.getCode()), def);
     	}
     	
     	private boolean setTranslate (String entity, Integer entityId, SystemParameter locale, String value) throws LocaleException {
@@ -4613,7 +4613,7 @@ import java.net.URL;
 				List _id = s.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
-					resp.setOut(getTranslate("questionnairequestionanswer", id, locale.getCode(), ""));
+					resp.setOut(getTranslate("questionnairequestionanswer", id, locale, ""));
 				}
 				
 			} catch (HibernateException e) {
