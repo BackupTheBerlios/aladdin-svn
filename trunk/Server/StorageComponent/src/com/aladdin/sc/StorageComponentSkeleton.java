@@ -3011,7 +3011,7 @@ import java.net.URL;
     			s.beginTransaction();
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
     			
-    			final Query query = s.createQuery("selecto p from PaitentAssessment where patient = :patient");
+    			final Query query = s.createQuery("select p from PaitentAssessment p where patient = :patient");
     			query.setInteger("patient", patientId);
     			query.setCacheable(true);
     			query.setCacheRegion(null);
