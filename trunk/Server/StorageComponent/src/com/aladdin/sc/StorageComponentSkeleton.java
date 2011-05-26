@@ -3010,11 +3010,15 @@ import java.net.URL;
     		try {
     			s.beginTransaction();
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
-    			Object[] pal = s.createSQLQuery("SELECT id FROM patientassessment WHERE patient = " + patientId.toString()).list().toArray();
     			
-    			for (int i = 0; i < pal.length; i++) {
-    				Integer id = (Integer) pal[i];
-    				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) s.load (com.aladdin.sc.db.PatientAssessment.class, id);
+    			final Query query = s.createQuery("selecto p from PaitentAssessment where patient = :patient");
+    			query.setInteger("patient", patientId);
+    			query.setCacheable(true);
+    			query.setCacheRegion(null);
+    			List<?> data = query.list();
+    			
+    			for (int i = 0; i < data.size(); i++) {
+    				com.aladdin.sc.db.PatientAssessment pa = (com.aladdin.sc.db.PatientAssessment) data.get(i);
     			
 	    			PatientAssessment rpa = resp.addNewOut();
 	    			
