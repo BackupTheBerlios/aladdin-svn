@@ -2659,6 +2659,7 @@ import java.net.URL;
     			Integer id = new Integer (req.getGetClinician().getId());
     			s.beginTransaction();
     			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) s.load(com.aladdin.sc.db.Clinician.class, id);
+    			System.out.println (clinician);
         		resp.setOut (exportClinician (clinician));
         		s.getTransaction().commit();
     		} catch (HibernateException e) {
