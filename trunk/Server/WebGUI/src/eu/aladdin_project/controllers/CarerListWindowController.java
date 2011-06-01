@@ -10,6 +10,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
@@ -47,10 +48,8 @@ public class CarerListWindowController extends Window{
 
 			//CarerInfo[] listcarer = proxy.listOfCarers(null,id);
 			Carer[] listcarer = proxy.getAvailableCarers(id);
-			SystemDictionary.webguiLog("DEBUG", "Carer LIST SIZE: "+listcarer.length);
 
-			Radiogroup rgroup = new Radiogroup();
-			rgroup.setId("rgroup_carer");
+			
 			
 			Grid grid = new Grid();
 			Columns cols = new Columns();
@@ -60,27 +59,38 @@ public class CarerListWindowController extends Window{
 			grid.appendChild(cols);
 			
 			Rows rows = new Rows();
-			for(int i=0; i<listcarer.length; i++){
-				Row rowe = new Row();
-				Radio rade = new Radio();
-				rade.setLabel(listcarer[i].getPersonData().getSurname()+", "+listcarer[i].getPersonData().getName());
-				rade.setValue(listcarer[i].getID());
-				rowe.appendChild(rade);
-				rows.appendChild(rowe);
-			}
-			grid.appendChild(rows);
-			rgroup.appendChild(grid);
-			this.appendChild(rgroup);
-			
-			Button ton = new Button();
-			ton.setLabel(modbutton);
-			ton.addEventListener("onClick", new EventListener() {
-				
-				public void onEvent(Event arg0) throws Exception {
-					setCarer();
+			if(listcarer != null){
+				Radiogroup rgroup = new Radiogroup();
+				rgroup.setId("rgroup_carer");
+				SystemDictionary.webguiLog("DEBUG", "Carer LIST SIZE: "+listcarer.length);
+				for(int i=0; i<listcarer.length; i++){
+					Row rowe = new Row();
+					Radio rade = new Radio();
+					rade.setLabel(listcarer[i].getPersonData().getSurname()+", "+listcarer[i].getPersonData().getName());
+					rade.setValue(listcarer[i].getID());
+					rowe.appendChild(rade);
+					rows.appendChild(rowe);
 				}
-			});
-			this.appendChild(ton);
+				grid.appendChild(rows);
+				rgroup.appendChild(grid);
+				this.appendChild(rgroup);
+				Button ton = new Button();
+				ton.setLabel(modbutton);
+				ton.addEventListener("onClick", new EventListener() {
+					
+					public void onEvent(Event arg0) throws Exception {
+						setCarer();
+					}
+				});
+				this.appendChild(ton);
+			}else{
+				Row rowno = new Row();
+				Label nocarers = new Label("No available carers");
+				rowno.appendChild(nocarers);
+				rows.appendChild(rowno);
+				grid.appendChild(rows);
+				this.appendChild(grid);
+			}
 			
 			this.setId("listcare");
 			this.setClosable(true);
