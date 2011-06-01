@@ -17,6 +17,8 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -384,5 +386,27 @@ public class DetailPatientController extends DetailSDController{
 		//TODO Continue working
 		//Measurement[] meas = proxy.getPatientMeasurement(this.currentid, measurementType, fromData, toData, userId)
 		
+	}
+	
+	public void createPasswordDialog() throws SuspendNotAllowedException, InterruptedException, RemoteException{
+		ChangePassword win = (ChangePassword)Executions.createComponents("password.zul", this, null);
+		
+		this.appendChild(win);
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		String userid = (String)Sessions.getCurrent().getAttribute("userid");
+		OperationResult ores = proxy.getUserIdByPersonId(this.currentid, SystemDictionary.USERTYPE_PATIENT_INT, userid);
+		win.setuserid(ores.getCode());
+		win.doModal();
+	}
+	
+	public Button createPasswordButton(){
+		Button btn = new Button("Change Password");
+		btn.addEventListener("onClick", new EventListener() {
+			
+			public void onEvent(Event arg0) throws Exception {
+				createPasswordDialog();
+			}
+		});
+		return btn;
 	}
 }

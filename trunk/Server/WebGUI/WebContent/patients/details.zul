@@ -131,6 +131,7 @@
 	<hbox>
 		<button label="Remove multiple tasks" onClick="detailswin.createRemoveMassivelyDialog()"/>
 		<button label="Monitor Measurements" onClick="detailswin.createWeightMeasurementDialog()"/>
+		<button label="Change password" onClick="detailswin.createPasswordDialog()"/>
 	</hbox>
 	<separator height="10px"/>
 	<label value="${assmnts }"/>
