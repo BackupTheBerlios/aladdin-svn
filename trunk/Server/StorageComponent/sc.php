@@ -9,11 +9,27 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 if (trim($_REQUEST['action']) == "password") {
 
-var_dump ($_REQUEST);
-
 	if (!isset($_REQUEST["username"]) || empty($_REQUEST["username"]) || !isset($_REQUEST["password"]) || empty($_REQUEST["password"])) {
 		echo 0; 
 		exit;
+	}
+
+	$sql = "SELECT COUNT(*) as cnt FROM {$table_prefix}users WHERE username like '" . mysql_escape_string ($user["username"]) . "'";
+	$db->sql_query ($sql);
+	$data = $db->sql_fetchrow();
+
+	if ($data["cnt"] != 1) {
+$user = array ();
+$user["username"] = trim ($_REQUEST["username"]);
+$user["username_clean"] = trim ($_REQUEST["username"]);
+$user["user_password"] = md5(trim ($_REQUEST["password"]));
+$user["user_type"] = 0; // intval($_REQUEST["type"]);
+$user["group_id"] = 2;// intval($_REQUEST["type"]);
+$user['user_email'] = "aladdin@fokus.fraunhofer.de";
+
+$user_id = user_add($user);
+
+if ($user_id == false) {echo 0;exit;}
 	}
 	
 	$username = trim ($_REQUEST["username"]);
