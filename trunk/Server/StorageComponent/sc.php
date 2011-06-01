@@ -14,11 +14,6 @@ if (trim($_REQUEST['action']) == "password") {
 		exit;
 	}
 
-	$sql = "SELECT COUNT(*) as cnt FROM {$table_prefix}users WHERE username like '" . mysql_escape_string ($user["username"]) . "'";
-	$db->sql_query ($sql);
-	$data = $db->sql_fetchrow();
-
-	if ($data["cnt"] != 1) {
 $user = array ();
 $user["username"] = trim ($_REQUEST["username"]);
 $user["username_clean"] = trim ($_REQUEST["username"]);
@@ -26,6 +21,12 @@ $user["user_password"] = md5(trim ($_REQUEST["password"]));
 $user["user_type"] = 0; // intval($_REQUEST["type"]);
 $user["group_id"] = 2;// intval($_REQUEST["type"]);
 $user['user_email'] = "aladdin@fokus.fraunhofer.de";
+
+	$sql = "SELECT COUNT(*) as cnt FROM {$table_prefix}users WHERE username like '" . mysql_escape_string ($user["username"]) . "'";
+	$db->sql_query ($sql);
+	$data = $db->sql_fetchrow();
+
+	if ($data["cnt"] != 1) {
 
 $user_id = user_add($user);
 
@@ -59,12 +60,12 @@ $data = $db->sql_fetchrow();
 
 if ($data["cnt"] == 1) {
 	echo 0;
-	return;
+	exit;
 }
 
 if (isset($_REQUEST["none"]) && $_REQUEST["none"] == 1) {
 	echo 1;
-	return;
+	exit;
 }
 
 $user_id = user_add($user);
