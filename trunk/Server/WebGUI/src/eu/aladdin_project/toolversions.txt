@@ -10,33 +10,3 @@ JCommon 1.0.16
 Icons from:
 http://www.iconarchive.com/category/people/medical-icons-by-aha-soft.html
 http://www.iconarchive.com/category/people/medical-icons-by-devcom.html
-
-Implemented methods on WSDL and XSD dependant Files:
-
-QuestionnaireInfo
-
-public String toString(){
-    return this.getTitle();
-}
-
-PatientInfo
-
-public String toString(){
-	return surname+", "+name;
-}
-
-Patient, Clinician, Carer
-
-public String toString(){
-    	return this.personData.getSurname()+", "+this.personData.getName();
-    }
-    
-SystemParameter
-
-public String toString(){
-	return description;
-}
-
-SystemParameter was also modified to set the "description" field to "" instead of null.
-
- 

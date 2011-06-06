@@ -7,18 +7,35 @@
 
 package eu.aladdin_project.StorageComponent;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.PropertiesConfiguration;
+
 public class StorageComponent_ServiceLocator extends org.apache.axis.client.Service implements eu.aladdin_project.StorageComponent.StorageComponent_Service {
+	
+	private void getSCAddress() throws Exception {
+		Configuration config = new PropertiesConfiguration("webgui.properties");
+		String URI = config.getString("storagecomponent.uri");
+		System.out.println("URI location "+URI);
+		if(URI == null){
+			throw new Exception("Impossible to find the Storage Component address");
+		}else{
+			this.StorageComponentSOAP_address = URI;
+		}
+	}
 
-    public StorageComponent_ServiceLocator() {
+    public StorageComponent_ServiceLocator() throws Exception {
+    	this.getSCAddress();
     }
 
 
-    public StorageComponent_ServiceLocator(org.apache.axis.EngineConfiguration config) {
+    public StorageComponent_ServiceLocator(org.apache.axis.EngineConfiguration config) throws Exception {
         super(config);
+        this.getSCAddress();
     }
 
-    public StorageComponent_ServiceLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
+    public StorageComponent_ServiceLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException, Exception{
         super(wsdlLoc, sName);
+        this.getSCAddress();
     }
 
     // Use to get a proxy class for StorageComponentSOAP

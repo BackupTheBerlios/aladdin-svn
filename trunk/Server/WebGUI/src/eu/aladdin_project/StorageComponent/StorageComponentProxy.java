@@ -25,6 +25,7 @@ public class StorageComponentProxy implements eu.aladdin_project.StorageComponen
       
     }
     catch (javax.xml.rpc.ServiceException serviceException) {}
+    catch (Exception severe) { System.exit(-2); }
   }
   
   public String getEndpoint() {
