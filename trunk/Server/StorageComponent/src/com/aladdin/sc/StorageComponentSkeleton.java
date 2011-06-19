@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,10 +22,6 @@ import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
 
 import com.aladdin.raac.RaacStub;
-import com.aladdin.sc.db.AladdinUser;
-import com.aladdin.sc.db.Dict;
-import com.aladdin.sc.db.Locale;
-import com.aladdin.sc.db.Translate;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -145,12 +140,6 @@ import java.net.URL;
     	private final static SessionFactory sessionFactory;
     	private Session session;
     	private final static String forumSC;
-    	
-    	public static String now(String dateFormat) {
-    	    Calendar cal = Calendar.getInstance();
-    	    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-    	    return sdf.format(cal.getTime());
-    	}
     	
     	static {
     		try {
@@ -661,7 +650,7 @@ import java.net.URL;
 				
 				List<?> data = query.list();
 				if (data.size() == 1) {
-					com.aladdin.sc.db.Translate trans = (Translate) data.get(0);
+					com.aladdin.sc.db.Translate trans = (com.aladdin.sc.db.Translate) data.get(0);
 					return trans.getValue();
 				}
 			}
@@ -1178,8 +1167,6 @@ import java.net.URL;
     		SavePatientAssessmentResponse resp = respdoc.addNewSavePatientAssessmentResponse();
     		OperationResult res = resp.addNewOut();
     		
-    		System.out.println ("savePatientAssessment");
-    		
     		{
     			NullChecker nc = new NullChecker();
     			
@@ -1633,8 +1620,6 @@ import java.net.URL;
 					sql += "' AND '" + after.getTime().toString();
 					sql += "' AND question in (select id from questionnairequestion where quest = " + question.toString() + ")";
 
-					System.out.println (sql);
-
 	    			Object[] lqa = session.createSQLQuery(sql).list().toArray();
 	    			QuestionnaireAnswers rqas = resp.addNewOut();
 	    			rqas.setDateTime(cal);
@@ -1647,8 +1632,6 @@ import java.net.URL;
 	    				rqas.setTaskID(((Integer)lt[0]).toString());
 	    			}
 	    			
-                    System.out.print ("lsq.length + ");
-                    System.out.println (lqa.length);
                     for (int j = 0; j < lqa.length; j++) {
 	    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
 	    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
@@ -1954,7 +1937,7 @@ import java.net.URL;
 				try {
 					q.setId(new Integer (rq.getID()));
 				} catch (Exception e) {
-					System.out.println (e.toString());
+					e.printStackTrace();
 					q = null;
 					return null;
 				}
@@ -2029,7 +2012,6 @@ import java.net.URL;
     			session.beginTransaction();
     			
     			String sql = "SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'";
-    			System.out.println (sql);
 				Object[] ml = session.createSQLQuery(sql).list().toArray();
     			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
@@ -2351,15 +2333,12 @@ import java.net.URL;
     				if (t.getQuestionnaire() != null && t.getQuestionnaire() > 0) {
     					rt.setQuestionnaire(exportQuestionnaire(t.getM_Questionnaire(), req.getGetUserPlannedTasks().getLocale()));
     				}
-    				System.out.println ("getUserPlannedTasks task " + t.getId() + " " + now("mm:ss.SSS"));
     			}
     		} catch (Exception e) {
     			e.printStackTrace();
 			} finally {
 				_finally();
 			}
-    		
-    		System.out.println ("getUserPlannedTasks done " + now("mm:ss.SSS"));
     		
     		return respdoc;
     	}
@@ -3753,7 +3732,7 @@ import java.net.URL;
         		session.beginTransaction();
         		session.createSQLQuery("UPDATE aladdinuser SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
         		
-        		com.aladdin.sc.db.AladdinUser u = (AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, id);
+        		com.aladdin.sc.db.AladdinUser u = (com.aladdin.sc.db.AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, id);
         		
         		String url = forumSC + "?action=password&password=" + password + "&username=" + u.getUsername();
         		
@@ -3982,7 +3961,7 @@ import java.net.URL;
 				
 				if (exist.length == 1) {
 					Integer id = (Integer)((Object[])exist[0])[0];
-					dict = (Dict) session.load(com.aladdin.sc.db.Dict.class, id);
+					dict = (com.aladdin.sc.db.Dict) session.load(com.aladdin.sc.db.Dict.class, id);
 				} else dict = new com.aladdin.sc.db.Dict();
 				
 				dict.setCode(value.getCode());
@@ -4504,9 +4483,9 @@ import java.net.URL;
     			
     			e.printStackTrace();
     			
-    			System.out.println (e.toString());
     			res.setCode("-2");
 				res.setStatus((short) 0);
+				res.setDescription(e.toString());
 			} finally {
 				_finally();
 			}
@@ -4643,7 +4622,7 @@ import java.net.URL;
 			try {
 				@SuppressWarnings("unchecked")
 				Object[] array = session.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);
-				com.aladdin.sc.db.Locale[] locale = (Locale[]) array;
+				com.aladdin.sc.db.Locale[] locale = (com.aladdin.sc.db.Locale[]) array;
 				for (int i = 0; i < locale.length; i++) {
 					SystemParameter l = resp.addNewOut();
 					l.setCode(locale[i].getId().toString());
@@ -4722,15 +4701,7 @@ import java.net.URL;
 				Integer value = new Integer (req.getGetQuestionnaireAnswerValue().getValue());
 				SystemParameter locale = req.getGetQuestionnaireAnswerValue().getLocale();
 				
-				System.out.println (
-						"getQuestionnaireAnswerValue qId = " + questionId.toString() +
-						" value " + value.toString() + 
-						" locale " + locale.getCode()
-				);
-				
-				
 				String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + questionId.toString() + " AND value = " + value.toString();
-				System.out.println (sql);
 				List<?> _id = session.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
