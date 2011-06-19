@@ -1,8 +1,12 @@
 package com.aladdin.sc;
 
+import java.io.InputStream;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
+import java.net.URLConnection;
 import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -58,15 +62,18 @@ import eu.aladdin_project.storagecomponent.GetMediaContentResponseDocument.GetMe
 import eu.aladdin_project.storagecomponent.GetPatientAssessmentsResponseDocument.GetPatientAssessmentsResponse;
 import eu.aladdin_project.storagecomponent.GetPatientMeasurementResponseDocument.GetPatientMeasurementResponse;
 import eu.aladdin_project.storagecomponent.GetPatientResponseDocument.GetPatientResponse;
+import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionDescriptionResponseDocument.GetQuestionDescriptionResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.GetQuestionnaireAnswerValueResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskResponseDocument.GetQuestionnaireAnswersByTaskResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
+import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
 import eu.aladdin_project.storagecomponent.GetTaskResponseDocument.GetTaskResponse;
 import eu.aladdin_project.storagecomponent.GetUserIdByPersonIdResponseDocument.GetUserIdByPersonIdResponse;
 import eu.aladdin_project.storagecomponent.GetUserPlannedTasksResponseDocument.GetUserPlannedTasksResponse;
 import eu.aladdin_project.storagecomponent.GetUserResponseDocument.GetUserResponse;
+import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
 import eu.aladdin_project.storagecomponent.GetWarningsResponseDocument.GetWarningsResponse;
 import eu.aladdin_project.storagecomponent.ListOfAdministratorsResponseDocument.ListOfAdministratorsResponse;
 import eu.aladdin_project.storagecomponent.ListOfCarersResponseDocument.ListOfCarersResponse;
@@ -82,35 +89,58 @@ import eu.aladdin_project.storagecomponent.SavePatientAssessmentResponseDocument
 import eu.aladdin_project.storagecomponent.SaveWarningResponseDocument.SaveWarningResponse;
 import eu.aladdin_project.storagecomponent.StoreMeasurementsResponseDocument.StoreMeasurementsResponse;
 import eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersResponseDocument.StoreQuestionnaireAnswersResponse;
-import eu.aladdin_project.storagecomponent.UpdateMediaContentResponseDocument.UpdateMediaContentResponse;
-import eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse;
 import eu.aladdin_project.storagecomponent.UpdateAdministratorResponseDocument.UpdateAdministratorResponse;
 import eu.aladdin_project.storagecomponent.UpdateCarerResponseDocument.UpdateCarerResponse;
 import eu.aladdin_project.storagecomponent.UpdateClinicianResponseDocument.UpdateClinicianResponse;
 import eu.aladdin_project.storagecomponent.UpdateExternalServiceResponseDocument.UpdateExternalServiceResponse;
+import eu.aladdin_project.storagecomponent.UpdateMediaContentResponseDocument.UpdateMediaContentResponse;
+import eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdatePatientResponse;
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument.UpdateSystemParameterResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
-import eu.aladdin_project.storagecomponent.GetUserTypeResponseDocument.GetUserTypeResponse;
-import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
-import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocument.GetPatientsForCaregiverResponse;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
 import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument.AnalyzeMeasurements;
 import eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument;
-import eu.aladdin_project.xsd.*;
-import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument;
-import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyResponseDocument;
-import eu.aladdin_project.storagecomponent.RemoveTaskMassivelyDocument;
-import eu.aladdin_project.storagecomponent.AssignTasksMassivelyResponseDocument;
-import eu.aladdin_project.storagecomponent.AssignTasksMassivelyDocument;
+import eu.aladdin_project.xsd.Address;
+import eu.aladdin_project.xsd.AddressList;
+import eu.aladdin_project.xsd.Administrator;
+import eu.aladdin_project.xsd.AdministratorInfo;
+import eu.aladdin_project.xsd.Carer;
+import eu.aladdin_project.xsd.CarerAssessment;
+import eu.aladdin_project.xsd.CarerInfo;
+import eu.aladdin_project.xsd.Clinician;
+import eu.aladdin_project.xsd.ClinicianInfo;
+import eu.aladdin_project.xsd.Communication;
+import eu.aladdin_project.xsd.CommunicationList;
+import eu.aladdin_project.xsd.Consulter;
+import eu.aladdin_project.xsd.ExternalService;
+import eu.aladdin_project.xsd.GeneralPractitioner;
+import eu.aladdin_project.xsd.Identifier;
+import eu.aladdin_project.xsd.IdentifierList;
+import eu.aladdin_project.xsd.Measurement;
+import eu.aladdin_project.xsd.MediaContent;
+import eu.aladdin_project.xsd.OperationResult;
+import eu.aladdin_project.xsd.Patient;
+import eu.aladdin_project.xsd.PatientAssessment;
+import eu.aladdin_project.xsd.PatientInfo;
+import eu.aladdin_project.xsd.PersonData;
+import eu.aladdin_project.xsd.Questionnaire;
+import eu.aladdin_project.xsd.QuestionnaireAnswer;
+import eu.aladdin_project.xsd.QuestionnaireAnswers;
+import eu.aladdin_project.xsd.QuestionnaireInfo;
+import eu.aladdin_project.xsd.QuestionnaireQuestion;
+import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
+import eu.aladdin_project.xsd.SearchCriteria;
+import eu.aladdin_project.xsd.SocialWorker;
+import eu.aladdin_project.xsd.SocioDemographicData;
+import eu.aladdin_project.xsd.SystemParameter;
+import eu.aladdin_project.xsd.Task;
+import eu.aladdin_project.xsd.User;
+import eu.aladdin_project.xsd.Warning;
 
-import java.io.InputStream;
-import java.io.Serializable;
-import java.net.URLConnection;
-import java.net.URL;
-
-	@SuppressWarnings("serial")
 	class LocaleException extends Exception {
+		private static final long serialVersionUID = -7232119734945287619L;
+
 		public LocaleException () {}
 		
 		public LocaleException (String message) {
@@ -727,8 +757,6 @@ import java.net.URL;
     		
     		trace(Thread.currentThread().getStackTrace());
     		
-    		// TODO: auth
-    		
     		try {
     			
     			Object[] ql = session.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
@@ -1065,9 +1093,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getDeclaredFields()));
@@ -1198,8 +1223,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
     			session.beginTransaction();
     			com.aladdin.sc.db.PatientAssessment pa = new com.aladdin.sc.db.PatientAssessment();
     			PatientAssessment rpa = req.getSavePatientAssessment().getAssessment();
@@ -1306,9 +1329,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			Measurement[] rm = req.getStoreMeasurements().getDataArray();
     			Integer id = 0;
     			for (int i = 0; i < rm.length; i++) {
@@ -1886,9 +1906,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			session.beginTransaction();
     			
     			Questionnaire rq = req.getCreateQuestionnaire().getData();
@@ -2231,9 +2248,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
@@ -2813,9 +2827,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			session.getTransaction().begin();
     			
     			Integer assessmentId = new Integer (req.getDeletePatientAssessment().getAssessmentId());
@@ -3814,9 +3825,6 @@ import java.net.URL;
     		}
         	
         	try {
-        		
-        		
-        		
                 User ru = req.getCreateUser().getUser();
 
         		String url = forumSC + "?none=1&password=***&type=***&username=" + ru.getUsername();
@@ -4101,7 +4109,6 @@ import java.net.URL;
 			return respdoc;
         }
         
-    	// TODO:
     	public ListOfPossibleTasksResponseDocument listOfPossibleTasks (ListOfPossibleTasksDocument listOfPossibleTasks48) {
     		trace(Thread.currentThread().getStackTrace());
     		ListOfPossibleTasksResponseDocument respdoc = ListOfPossibleTasksResponseDocument.Factory.newInstance();
@@ -4188,9 +4195,6 @@ import java.net.URL;
     		}
 			
 			try {
-				
-				
-				
 				Calendar startDate = req.getRemoveTaskMassively().getStartDate();
 				Calendar endDate = req.getRemoveTaskMassively().getEndDate();
 				BigInteger typeOfTask = req.getRemoveTaskMassively().getTypeOfTask();
@@ -4244,9 +4248,6 @@ import java.net.URL;
     		}
         	
         	try {
-        		
-        		
-        		
         		Calendar startDate = req.getAssignTasksMassively().getStartDate();
 				Calendar endDate = req.getAssignTasksMassively().getEndDate();
 				int frequency = req.getAssignTasksMassively().getFrequency().intValue();
