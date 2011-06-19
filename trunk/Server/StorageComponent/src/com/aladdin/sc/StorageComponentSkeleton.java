@@ -197,14 +197,16 @@ import java.net.URL;
     	}
     	
     	public StorageComponentSkeleton () {
-    		session = null;
+    		_init ();
     	}
     	
     	private void _init () {
+    		System.out.println ("_init");
     		session = sessionFactory.openSession();
     	}
     	
     	private void _finally () {
+    		System.out.println ("_finally");
     		session.flush();
     		session.close();
     	}
@@ -229,7 +231,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Clinician data = req.getCreateClinician().getData();
     			
     			session.beginTransaction();
@@ -360,7 +362,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Patient data = req.getCreatePatient().getData();
     			
     			session.beginTransaction();
@@ -473,7 +475,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Carer data = req.getCreateCarer().getData();
     			
     			session.beginTransaction();
@@ -537,7 +539,7 @@ import java.net.URL;
     		SystemParameter locale = req.getUpdateQuestionnaire().getLocale();
 			
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
 				storeQuestionnaire(rquest, locale);
@@ -726,7 +728,7 @@ import java.net.URL;
     		// TODO: auth
     		
     		try {
-    			_init ();
+    			
     			Object[] ql = session.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Object[] quest = (Object[]) ql[i];
@@ -769,7 +771,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
     			Warning rwarn = req.getSaveWarning().getWarn();
@@ -857,7 +859,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			
     			Carer data = req.getUpdateCarer().getData();
     			
@@ -914,7 +916,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			
     			Integer id = new Integer (req.getDeleteAdministrator().getId());
     			
@@ -989,7 +991,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			
     			Patient data = req.getUpdatePatient().getData();
     			
@@ -1061,7 +1063,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
@@ -1128,7 +1130,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
@@ -1197,7 +1199,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			
     			session.beginTransaction();
     			com.aladdin.sc.db.PatientAssessment pa = new com.aladdin.sc.db.PatientAssessment();
@@ -1306,7 +1308,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			Measurement[] rm = req.getStoreMeasurements().getDataArray();
     			Integer id = 0;
@@ -1399,7 +1401,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getGetPatient().getId());
     			com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) session.load(com.aladdin.sc.db.Patient.class, id);
         		resp.setOut (exportPatient (patient));
@@ -1554,7 +1556,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer assessmentId = new Integer (req.getDeleteCarerAssessment().getAssessmentId());
     			session.beginTransaction();
     			session.createSQLQuery("DELETE FROM carerassessment WHERE id = " + assessmentId.toString()).executeUpdate();
@@ -1602,7 +1604,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			
     			Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
     			Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
@@ -1692,7 +1694,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getDeleteExternalService().getId());
     			session.beginTransaction();
     			session.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString()).executeUpdate();
@@ -1740,7 +1742,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			
     			Integer id = new Integer (req.getDeleteClinician().getId());
     			
@@ -1814,7 +1816,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getDeletePatient().getId());
     			
     			if (id < 1) throw new Exception ("error");
@@ -1890,7 +1892,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			session.beginTransaction();
     			
@@ -1998,7 +2000,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
     			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
     			String fromDate = _fromDate.toString();
@@ -2093,7 +2095,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
     			Object[] qq = session.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
@@ -2183,7 +2185,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
     			com.aladdin.sc.db.Task task = taskToHibernate(req.getAssignTask().getTask());
@@ -2234,7 +2236,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
@@ -2302,7 +2304,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
     			
     			_fromDate.set(Calendar.HOUR, 0);
@@ -2465,7 +2467,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
     			ExternalService re = req.getCreateExternalService().getData();
@@ -2523,7 +2525,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
     			CarerAssessment rca = req.getSaveCarerAssessment().getAssessment();
@@ -2585,7 +2587,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getDeleteCarer().getId());
     			
     			if (id < 1) throw new Exception ("error");
@@ -2660,7 +2662,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Administrator data = req.getCreateAdministrator().getData();
     			
     			session.beginTransaction();
@@ -2718,7 +2720,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
     			ExternalService re = req.getUpdateExternalService().getData();
@@ -2772,7 +2774,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getGetClinician().getId());
     			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) session.load(com.aladdin.sc.db.Clinician.class, id);
         		resp.setOut (exportClinician (clinician));
@@ -2817,7 +2819,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			session.getTransaction().begin();
     			
@@ -2853,7 +2855,7 @@ import java.net.URL;
     		GetAllExternalServicesResponse resp = respdoc.addNewGetAllExternalServicesResponse();
     		
     		try {
-    			_init ();
+    			
     			Object[] esl = session.createQuery("from ExternalService").list().toArray();
     			for (int i = 0; i < esl.length; i++) {
     				com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService)esl[i];
@@ -2891,7 +2893,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getGetCarer().getId());
         		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) session.load(com.aladdin.sc.db.Carer.class, id);
         		resp.setOut (exportCarer (carer));
@@ -2922,7 +2924,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getGetAdministrator().getId());
 				com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) session.load(com.aladdin.sc.db.Administrator.class, id);
         		resp.setOut (exportAdministrator (administrator));
@@ -2964,7 +2966,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Administrator data = req.getUpdateAdministrator().getData();
     			
     			session.beginTransaction();
@@ -3007,7 +3009,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getGetQuestionnaire().getId());
     			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) session.load(com.aladdin.sc.db.Questionnaire.class, id);
     			final SystemParameter locale = req.getGetQuestionnaire().getLocale();
@@ -3045,7 +3047,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			session.beginTransaction();
     			
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
@@ -3131,7 +3133,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
     			
     			final Query query = session.createQuery("select p from PatientAssessment p where patient = :patient");
@@ -3229,7 +3231,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer carerId = new Integer (req.getGetCarerAssessments().getCarerId());
     			Object[] cal = session.createSQLQuery("SELECT id FROM carerassessment WHERE carer = " + carerId.toString()).list().toArray();
     			
@@ -3282,7 +3284,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = req.getChangeTaskStatus().getTaskId();
     			Integer status = req.getChangeTaskStatus().getTaskStatus();
     			
@@ -3336,7 +3338,7 @@ import java.net.URL;
     		
     		try {
     			
-    			_init ();
+    			
     			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
@@ -3408,7 +3410,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Field[] field = com.aladdin.sc.db.Warning.class.getDeclaredFields();
     			String sql = "SELECT warning.id FROM warning inner join patient on (patient.id = warning.patient) WHERE ";
     			
@@ -3505,7 +3507,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Clinician data = req.getUpdateClinician().getData();
     			
     			session.beginTransaction();
@@ -3561,7 +3563,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer id = new Integer (req.getMarkWarningAsRead().getId());
     			
     			session.beginTransaction();
@@ -3606,7 +3608,7 @@ import java.net.URL;
     		}
         	
         	try {
-        		_init ();
+        		
         		session.beginTransaction();
         		
         		User ru = req.getUpdateUser().getUser();
@@ -3660,7 +3662,7 @@ import java.net.URL;
     		}
         	
         	try {
-        		_init ();
+        		
         		Integer id = new Integer (req.getDeleteUser().getId());
         		
         		session.beginTransaction();
@@ -3703,7 +3705,7 @@ import java.net.URL;
         	String sql = "";
         	
         	try {
-        		_init ();
+        		
         		String username = req.getAuth().getLogin();
         		String password = req.getAuth().getPassword();
         		
@@ -3744,7 +3746,7 @@ import java.net.URL;
     		}
         	
         	try {
-        		_init ();
+        		
         		Integer id = new Integer (req.getChangePassword().getUserId());
         		String password = req.getChangePassword().getPassword();
         		
@@ -3813,7 +3815,7 @@ import java.net.URL;
         	
         	try {
         		
-        		_init ();
+        		
         		
                 User ru = req.getCreateUser().getUser();
 
@@ -3893,7 +3895,7 @@ import java.net.URL;
     		}
 				 
 			try {
-				_init ();
+				
 
 				Integer id = new Integer (req.getGetUserType().getId());
 				String sql = "SELECT type FROM aladdinuser WHERE id = '" + id.toString() + "'";
@@ -3925,7 +3927,7 @@ import java.net.URL;
 			GetSystemParameterListResponse resp = respdoc.addNewGetSystemParameterListResponse();
 			
 			try {
-				_init ();
+				
 				Integer type = new Integer (req.getGetSystemParameterList().getType());
 				SystemParameter locale = req.getGetSystemParameterList().getLocale();
 				if (locale == null) locale = SystemParameter.Factory.newInstance();
@@ -3956,7 +3958,7 @@ import java.net.URL;
 			
 			try {
 				
-				_init ();
+				
 				
 				session.beginTransaction();
 				
@@ -4037,7 +4039,7 @@ import java.net.URL;
 			
 			try {
 				
-				_init ();
+				
 				
 				Integer id = new Integer (req.getGetUser().getId());
 				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, id);
@@ -4076,7 +4078,7 @@ import java.net.URL;
     		}
 			
 			try {
-				_init ();
+				
 
 				Integer uid = new Integer (req.getGetPatientsForCaregiver().getUserId());
 				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
@@ -4138,7 +4140,7 @@ import java.net.URL;
     		}
 			
 			try {
-				_init ();
+				
 				Integer uid = new Integer (req.getGetUserIdByPersonId().getId());
 				Integer type = req.getGetUserIdByPersonId().getType();
 				
@@ -4189,7 +4191,7 @@ import java.net.URL;
 			
 			try {
 				
-				_init ();
+				
 				
 				Calendar startDate = req.getRemoveTaskMassively().getStartDate();
 				Calendar endDate = req.getRemoveTaskMassively().getEndDate();
@@ -4245,7 +4247,7 @@ import java.net.URL;
         	
         	try {
         		
-        		_init ();
+        		
         		
         		Calendar startDate = req.getAssignTasksMassively().getStartDate();
 				Calendar endDate = req.getAssignTasksMassively().getEndDate();
@@ -4311,7 +4313,7 @@ import java.net.URL;
     		}
 			
 			try {
-				_init ();
+				
 				Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
 				String sql = "SELECT id FROM measurement WHERE ";
 				
@@ -4370,7 +4372,7 @@ import java.net.URL;
 			
 			try {
 				
-				_init ();
+				
 				
 				String id = req.getGetTask().getId();
 				
@@ -4418,7 +4420,7 @@ import java.net.URL;
 			GetMediaContentResponse resp = respdoc.addNewGetMediaContentResponse();
 			
 			try {
-				_init ();
+				
 				Field[] field = com.aladdin.sc.db.EntertainmentContent.class.getDeclaredFields();
 				String sql = "SELECT id FROM entertainmentcontent WHERE ";
 				
@@ -4484,7 +4486,7 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				_init ();
+				
 				session.beginTransaction();
 				
 				Integer savedId = storeEntertainmentContent(req.getAddMediaContent().getIn(), null);
@@ -4519,7 +4521,7 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				_init ();
+				
 				Integer id = new Integer (req.getDeleteMediaContent().getId());
     			session.beginTransaction();
     			session.createSQLQuery("DELETE FROM entertainmentcontent WHERE id = " + id.toString()).executeUpdate();
@@ -4552,7 +4554,7 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				_init ();
+				
 				session.beginTransaction();
 				
 				final MediaContent rEC = req.getUpdateMediaContent().getEc();
@@ -4601,7 +4603,7 @@ import java.net.URL;
     		}
     		
     		try {
-    			_init ();
+    			
     			Integer taskId = new Integer (req.getGetQuestionnaireAnswersByTask().getTaskId());
     			com.aladdin.sc.db.Task task = (com.aladdin.sc.db.Task) session.load(com.aladdin.sc.db.Task.class, taskId);
     			
