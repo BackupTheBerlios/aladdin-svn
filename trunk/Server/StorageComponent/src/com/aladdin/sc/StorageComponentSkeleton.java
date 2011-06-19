@@ -127,7 +127,7 @@ import java.net.URL;
 		
 	}
 
-	public class StorageComponentSkeleton implements StorageComponentSkeletonInterface{
+	public class StorageComponentSkeleton implements StorageComponentSkeletonInterface {
 		public final static int OP_LESS = 1;
     	public final static int OP_GREAT = 2;
     	public final static int OP_EQ = 3;
@@ -160,6 +160,17 @@ import java.net.URL;
     		op.put(OP_NOTEQ, " %s != '%s' ");
     		op.put(OP_LIKE, "%s like '%s' ");
     		op.put(OP_BETWEEN, " %s BETWEEN '%s' AND '%s' ");
+    	}
+    	
+    	public static void trace(StackTraceElement e[]) {
+    		boolean doNext = false;
+    		for (StackTraceElement s : e) {
+    			if (doNext) {
+    				System.out.println(s.getMethodName());
+    				return;
+    			}
+    			doNext = s.getMethodName().equals("getStackTrace");
+    		}
     	}
     	
     	public final static int U_CARER = 3;
@@ -714,6 +725,8 @@ import java.net.URL;
     		ListOfQuestionnairesResponseDocument respdoc = ListOfQuestionnairesResponseDocument.Factory.newInstance();
     		ListOfQuestionnairesResponse resp = respdoc.addNewListOfQuestionnairesResponse();
     		
+    		trace(Thread.currentThread().getStackTrace());
+    		
     		// TODO: auth
     		
     		try {
@@ -1030,6 +1043,7 @@ import java.net.URL;
     	}
     	
     	public ListOfCarersResponseDocument listOfCarers (ListOfCarersDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		ListOfCarersResponseDocument respdoc = ListOfCarersResponseDocument.Factory.newInstance();
     		ListOfCarersResponse resp = respdoc.addNewListOfCarersResponse();
     		
@@ -1097,6 +1111,7 @@ import java.net.URL;
     	}
     	
     	public ListOfCliniciansResponseDocument listOfClinicians (ListOfCliniciansDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		ListOfCliniciansResponseDocument respdoc = ListOfCliniciansResponseDocument.Factory.newInstance();
     		ListOfCliniciansResponse resp = respdoc.addNewListOfCliniciansResponse();
     		
@@ -1118,9 +1133,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
@@ -1369,6 +1381,7 @@ import java.net.URL;
     	}
     	
     	public GetPatientResponseDocument getPatient (GetPatientDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetPatientResponseDocument respdoc = GetPatientResponseDocument.Factory.newInstance();
     		GetPatientResponse resp = respdoc.addNewGetPatientResponse();
     		
@@ -1570,7 +1583,8 @@ import java.net.URL;
     	}
     	
 		public GetQuestionnaireAnswersResponseDocument getQuestionnaireAnswers (GetQuestionnaireAnswersDocument req) {
-    		GetQuestionnaireAnswersResponseDocument respdoc = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
+			trace(Thread.currentThread().getStackTrace());
+			GetQuestionnaireAnswersResponseDocument respdoc = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
     		GetQuestionnaireAnswersResponse resp = respdoc.addNewGetQuestionnaireAnswersResponse();
     		
     		{
@@ -1591,8 +1605,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
     			Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
     			Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
     			Integer objectId  = new Integer (req.getGetQuestionnaireAnswers().getObjectId());
@@ -1959,6 +1971,7 @@ import java.net.URL;
     	
     	@SuppressWarnings("deprecation")
 		public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
     		GetPatientMeasurementResponse resp = respdoc.addNewGetPatientMeasurementResponse();
     		
@@ -2197,6 +2210,7 @@ import java.net.URL;
     	}
     	         
     	public ListOfAdministratorsResponseDocument listOfAdministrators (ListOfAdministratorsDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		ListOfAdministratorsResponseDocument respdoc = ListOfAdministratorsResponseDocument.Factory.newInstance();
     		ListOfAdministratorsResponse resp = respdoc.addNewListOfAdministratorsResponse();
     		
@@ -2263,6 +2277,7 @@ import java.net.URL;
     	}
 
     	public GetUserPlannedTasksResponseDocument getUserPlannedTasks (GetUserPlannedTasksDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetUserPlannedTasksResponseDocument respdoc = GetUserPlannedTasksResponseDocument.Factory.newInstance();
     		GetUserPlannedTasksResponse resp = respdoc.addNewGetUserPlannedTasksResponse();
     		
@@ -2735,6 +2750,7 @@ import java.net.URL;
     	}
     	
     	public GetClinicianResponseDocument getClinician (GetClinicianDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetClinicianResponseDocument respdoc = GetClinicianResponseDocument.Factory.newInstance();
     		GetClinicianResponse resp = respdoc.addNewGetClinicianResponse();
     		
@@ -2830,6 +2846,7 @@ import java.net.URL;
     	}
     	
     	public GetAllExternalServicesResponseDocument getAllExternalServices (GetAllExternalServicesDocument getAllExternalServices66) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetAllExternalServicesResponseDocument respdoc = GetAllExternalServicesResponseDocument.Factory.newInstance();
     		GetAllExternalServicesResponse resp = respdoc.addNewGetAllExternalServicesResponse();
     		
@@ -2854,6 +2871,7 @@ import java.net.URL;
     	}
     	
     	public GetCarerResponseDocument getCarer (GetCarerDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetCarerResponseDocument respdoc = GetCarerResponseDocument.Factory.newInstance();
     		GetCarerResponse resp = respdoc.addNewGetCarerResponse();
     		
@@ -2886,6 +2904,7 @@ import java.net.URL;
     	}
     	
     	public GetAdministratorResponseDocument getAdministrator (GetAdministratorDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetAdministratorResponseDocument respdoc = GetAdministratorResponseDocument.Factory.newInstance();
     		GetAdministratorResponse resp = respdoc.addNewGetAdministratorResponse();
     		
@@ -2978,6 +2997,7 @@ import java.net.URL;
     	}
     	
     	public GetQuestionnaireResponseDocument getQuestionnaire (GetQuestionnaireDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetQuestionnaireResponseDocument respdoc = GetQuestionnaireResponseDocument.Factory.newInstance();
     		GetQuestionnaireResponse resp = respdoc.addNewGetQuestionnaireResponse();
     		
@@ -3093,6 +3113,7 @@ import java.net.URL;
     	}
     	
     	public GetPatientAssessmentsResponseDocument getPatientAssessments (GetPatientAssessmentsDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetPatientAssessmentsResponseDocument respdoc = GetPatientAssessmentsResponseDocument.Factory.newInstance();
     		GetPatientAssessmentsResponse resp = respdoc.addNewGetPatientAssessmentsResponse();
     		
@@ -3192,6 +3213,7 @@ import java.net.URL;
     	}
     	
     	public GetCarerAssessmentsResponseDocument getCarerAssessments (GetCarerAssessmentsDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetCarerAssessmentsResponseDocument respdoc = GetCarerAssessmentsResponseDocument.Factory.newInstance();
     		GetCarerAssessmentsResponse resp = respdoc.addNewGetCarerAssessmentsResponse();
     		
@@ -3294,6 +3316,7 @@ import java.net.URL;
     	}
     	
     	public ListOfPatientsResponseDocument listOfPatients (ListOfPatientsDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		ListOfPatientsResponseDocument respdoc = ListOfPatientsResponseDocument.Factory.newInstance();
     		ListOfPatientsResponse resp = respdoc.addNewListOfPatientsResponse();
     		
@@ -3316,9 +3339,6 @@ import java.net.URL;
     		}
     		
     		try {
-    			
-    			
-    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getDeclaredFields()));
@@ -3368,6 +3388,7 @@ import java.net.URL;
     	}
     	
     	public GetWarningsResponseDocument getWarnings (GetWarningsDocument req) {
+    		trace(Thread.currentThread().getStackTrace());
     		GetWarningsResponseDocument respdoc = GetWarningsResponseDocument.Factory.newInstance();
     		GetWarningsResponse resp = respdoc.addNewGetWarningsResponse();
     		
@@ -3863,6 +3884,7 @@ import java.net.URL;
         }
         
 		public GetUserTypeResponseDocument getUserType (GetUserTypeDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetUserTypeResponseDocument respdoc = GetUserTypeResponseDocument.Factory.newInstance();
 			GetUserTypeResponse resp = respdoc.addNewGetUserTypeResponse();
 			OperationResult res = resp.addNewOut();
@@ -3902,6 +3924,7 @@ import java.net.URL;
 		}
 		
 		public GetSystemParameterListResponseDocument getSystemParameterList (GetSystemParameterListDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetSystemParameterListResponseDocument respdoc = GetSystemParameterListResponseDocument.Factory.newInstance();
 			GetSystemParameterListResponse resp = respdoc.addNewGetSystemParameterListResponse();
 			
@@ -3936,9 +3959,6 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				
-				
-				
 				session.beginTransaction();
 				
 				Integer localeid = getLocaleId(req.getUpdateSystemParameter().getLocale());
@@ -4007,6 +4027,7 @@ import java.net.URL;
         }
 		
 		public GetUserResponseDocument getUser (GetUserDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetUserResponseDocument respdoc = GetUserResponseDocument.Factory.newInstance();
 			GetUserResponse resp = respdoc.addNewGetUserResponse();
 			
@@ -4017,9 +4038,6 @@ import java.net.URL;
     		}
 			
 			try {
-				
-				
-				
 				Integer id = new Integer (req.getGetUser().getId());
 				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, id);
 				
@@ -4041,6 +4059,7 @@ import java.net.URL;
         }
 		
 		public GetPatientsForCaregiverResponseDocument getPatientsForCaregiver (GetPatientsForCaregiverDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetPatientsForCaregiverResponseDocument respdoc = GetPatientsForCaregiverResponseDocument.Factory.newInstance();
 			GetPatientsForCaregiverResponse resp = respdoc.addNewGetPatientsForCaregiverResponse();
 			
@@ -4057,8 +4076,6 @@ import java.net.URL;
     		}
 			
 			try {
-				
-
 				Integer uid = new Integer (req.getGetPatientsForCaregiver().getUserId());
 				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
         		SQLQuery q = session.createSQLQuery(sql);
@@ -4086,6 +4103,7 @@ import java.net.URL;
         
     	// TODO:
     	public ListOfPossibleTasksResponseDocument listOfPossibleTasks (ListOfPossibleTasksDocument listOfPossibleTasks48) {
+    		trace(Thread.currentThread().getStackTrace());
     		ListOfPossibleTasksResponseDocument respdoc = ListOfPossibleTasksResponseDocument.Factory.newInstance();
     		ListOfPossibleTasksResponse resp = respdoc.addNewListOfPossibleTasksResponse();
     		
@@ -4098,6 +4116,7 @@ import java.net.URL;
     	}
 
 		public GetUserIdByPersonIdResponseDocument getUserIdByPersonId (GetUserIdByPersonIdDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetUserIdByPersonIdResponseDocument respdoc = GetUserIdByPersonIdResponseDocument.Factory.newInstance();
 			GetUserIdByPersonIdResponse resp = respdoc.addNewGetUserIdByPersonIdResponse();
 			OperationResult res = resp.addNewOut();
@@ -4267,6 +4286,7 @@ import java.net.URL;
         }
 
 		public GetMeasurementResponseDocument getMeasurement(GetMeasurementDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetMeasurementResponseDocument respdoc = GetMeasurementResponseDocument.Factory.newInstance();
 			GetMeasurementResponse resp = respdoc.addNewGetMeasurementResponse();
 			
@@ -4327,6 +4347,7 @@ import java.net.URL;
 		}
 
 		public GetTaskResponseDocument getTask(GetTaskDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetTaskResponseDocument respdoc = GetTaskResponseDocument.Factory.newInstance();
 			GetTaskResponse resp = respdoc.addNewGetTaskResponse();
 			Task out = resp.addNewOut();
@@ -4350,9 +4371,6 @@ import java.net.URL;
     		}
 			
 			try {
-				
-				
-				
 				String id = req.getGetTask().getId();
 				
 				com.aladdin.sc.db.Task dbTask = (com.aladdin.sc.db.Task) session.load(com.aladdin.sc.db.Task.class, new Integer (id));
@@ -4395,6 +4413,7 @@ import java.net.URL;
 		}
 		
 		public GetMediaContentResponseDocument getMediaContent(GetMediaContentDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetMediaContentResponseDocument respdoc = GetMediaContentResponseDocument.Factory.newInstance();
 			GetMediaContentResponse resp = respdoc.addNewGetMediaContentResponse();
 			
@@ -4563,6 +4582,7 @@ import java.net.URL;
 		}
 
 		public GetQuestionnaireAnswersByTaskResponseDocument getQuestionnaireAnswersByTask(GetQuestionnaireAnswersByTaskDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetQuestionnaireAnswersByTaskResponseDocument respdoc = GetQuestionnaireAnswersByTaskResponseDocument.Factory.newInstance();
 			GetQuestionnaireAnswersByTaskResponse resp = respdoc.addNewGetQuestionnaireAnswersByTaskResponse();
 			
@@ -4616,6 +4636,7 @@ import java.net.URL;
 		}
 
 		public ListOfSupportedLocalesResponseDocument listOfSupportedLocales(ListOfSupportedLocalesDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			ListOfSupportedLocalesResponseDocument respdoc = ListOfSupportedLocalesResponseDocument.Factory.newInstance();
 			ListOfSupportedLocalesResponse resp = respdoc.addNewListOfSupportedLocalesResponse();
 			
@@ -4637,6 +4658,7 @@ import java.net.URL;
 		}
 
 		public GetQuestionDescriptionResponseDocument getQuestionDescription(GetQuestionDescriptionDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetQuestionDescriptionResponseDocument respdoc = GetQuestionDescriptionResponseDocument.Factory.newInstance();
 			GetQuestionDescriptionResponse resp = respdoc.addNewGetQuestionDescriptionResponse();
 			
@@ -4657,6 +4679,7 @@ import java.net.URL;
 		}
 
 		public GetAvailableCarersResponseDocument getAvailableCarers(GetAvailableCarersDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetAvailableCarersResponseDocument respdoc = GetAvailableCarersResponseDocument.Factory.newInstance();
 			GetAvailableCarersResponse resp = respdoc.addNewGetAvailableCarersResponse();
 			
@@ -4693,6 +4716,7 @@ import java.net.URL;
 		}
 		
 		public GetQuestionnaireAnswerValueResponseDocument getQuestionnaireAnswerValue (GetQuestionnaireAnswerValueDocument req) {
+			trace(Thread.currentThread().getStackTrace());
 			GetQuestionnaireAnswerValueResponseDocument respdoc = GetQuestionnaireAnswerValueResponseDocument.Factory.newInstance();
 			GetQuestionnaireAnswerValueResponse resp = respdoc.addNewGetQuestionnaireAnswerValueResponse();
 			
@@ -4711,7 +4735,6 @@ import java.net.URL;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 			
 			return respdoc;
 		}
