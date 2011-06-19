@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.rmi.RemoteException;
-import java.sql.Connection;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,7 +143,7 @@ import java.net.URL;
     	private static HashMap<Integer, String> op;
     	
     	private final static SessionFactory sessionFactory;
-    	private Session s;
+    	private Session session;
     	private final static String forumSC;
     	
     	public static String now(String dateFormat) {
@@ -183,14 +182,14 @@ import java.net.URL;
     	private boolean checkUser (String userId, Integer userType) {
     		if (userId == null || userId == "") return true;
     		try {
-    			s.beginTransaction();
+    			session.beginTransaction();
 	    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
-				int size = s.createSQLQuery(sql).list().size();
-				s.getTransaction().commit();
+				int size = session.createSQLQuery(sql).list().size();
+				session.getTransaction().commit();
 				return (size > 0);
     		} catch (Exception e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
 				return false;
@@ -198,14 +197,16 @@ import java.net.URL;
     	}
     	
     	public StorageComponentSkeleton () {
-    		s = sessionFactory.openSession();
+    		session = null;
     	}
     	
-    	protected void finalize () throws Throwable {
-    		//System.out.println ("finalize");
-    		s.flush();
-    		Connection cnt = s.close();
-    		cnt.close();
+    	private void _init () {
+    		session = sessionFactory.openSession();
+    	}
+    	
+    	private void _finally () {
+    		session.flush();
+    		session.close();
     	}
     	
     	public CreateClinicianResponseDocument createClinician (CreateClinicianDocument req) {
@@ -228,31 +229,36 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Clinician data = req.getCreateClinician().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			com.aladdin.sc.db.Clinician clinician = new com.aladdin.sc.db.Clinician ();
     			
     			Integer pdid = storePersondata(data.getPersonData(), null); 
     			
     			clinician.setPersondata(pdid);
-    			s.save(clinician);
+    			session.save(clinician);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(clinician.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error." + e.toString ());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -264,16 +270,16 @@ import java.net.URL;
     		pd.setSurname(rpd.getSurname());
     		if (id != null && id > 0) {
     			pd.setId(id);
-    			s.merge(pd);
+    			session.merge(pd);
     		} else {
-    			s.save (pd);
+    			session.save (pd);
     		}
 
     		Integer pdid = pd.getId();
     		
-			s.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			s.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
-			s.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			session.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			session.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
+			session.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
     		
     		Address[] rad = rpd.getAddressList().getAddressArray();
 			for (int i = 0; i < rad.length; i++) {
@@ -300,7 +306,7 @@ import java.net.URL;
     		cm.setValue(rcm.getValue());
     		cm.setNotes(rcm.getNotes());
     		cm.setIsPrimary(rcm.getIsPrimary());
-    		s.save (cm);
+    		session.save (cm);
     	}
 
     	private void storeIdentifier(Identifier rid, Integer pdid) {
@@ -314,7 +320,7 @@ import java.net.URL;
     		if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
     		id.setIssueDate(new Timestamp(timeInMillis));
     		id.setIssueAuthority(rid.getIssueAuthority());
-    		s.save (id);
+    		session.save (id);
     	}
 
     	private void storeAddress(Address rad, Integer pdid) {
@@ -328,7 +334,7 @@ import java.net.URL;
     		ad.setStreetNo(rad.getStreetNo());
     		ad.setZipCode(rad.getZipCode());
     		ad.setIsPrimary(rad.getIsPrimary());
-    		s.save(ad);
+    		session.save(ad);
     	}
 
     	public CreatePatientResponseDocument createPatient (CreatePatientDocument req) {
@@ -354,9 +360,10 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Patient data = req.getCreatePatient().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
 
     			com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
 
@@ -392,16 +399,16 @@ import java.net.URL;
                 
                 if (data.getPatientCarer() != null) p.setCarer(new Integer (data.getPatientCarer().getID()));
                 
-    			s.save(p);
+    			session.save(p);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (Exception e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
@@ -410,6 +417,8 @@ import java.net.URL;
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -433,9 +442,9 @@ import java.net.URL;
 
     		if (id != null && id > 0) {
     			sd.setId(id);
-    			s.merge(sd);
+    			session.merge(sd);
     		} else {
-    			s.save(sd);
+    			session.save(sd);
     		}
     		
     		return sd.getId();
@@ -464,9 +473,10 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Carer data = req.getCreateCarer().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			com.aladdin.sc.db.Carer p = new com.aladdin.sc.db.Carer ();
     			
@@ -476,25 +486,28 @@ import java.net.URL;
     			
     			p.setPersondata(pdid);
     			p.setSd(sdid);
-    			s.save(p);
+    			session.save(p);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
-    			System.out.println (e.toString());
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
+    		
     		return respdoc;
     	}
     	
@@ -524,33 +537,41 @@ import java.net.URL;
     		SystemParameter locale = req.getUpdateQuestionnaire().getLocale();
 			
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
 				storeQuestionnaire(rquest, locale);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(rquest.getID().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
     		} catch (LocaleException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
-				}
+
+    			}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("error " + e.toString());
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -574,11 +595,11 @@ import java.net.URL;
     		qq.setQuest(questId);
     		qq.setGlobalId(rqq.getGlobalID());
     		
-    		s.saveOrUpdate(qq);
+    		session.saveOrUpdate(qq);
     		
     		if (!setTranslate("questionnairequestion", qq.getId(), locale, rqq.getTitle())) {
     			qq.setTitle(rqq.getTitle());
-    			s.saveOrUpdate(qq);
+    			session.saveOrUpdate(qq);
     		}
     		
     		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
@@ -595,31 +616,31 @@ import java.net.URL;
         			rqqa = rqq.getAnswers().getAnswerArray(i);
         			
         			String sql = "SELECT id FROM questionnairequestionanswer WHERE question = '" + qq.getId().toString() + "' AND value = '" + new Integer (rqqa.getValue()).toString()  + "'";
-					List<?> _id = s.createSQLQuery(sql).list();
+					List<?> _id = session.createSQLQuery(sql).list();
         			
         			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = null;
         			
         			if (_id.size() > 0) {
-        				qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) s.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer)_id.get(0));
+        				qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) session.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer)_id.get(0));
         				qqa.setQuestion(qq.getId());
         				qqa.setValue(new Integer(rqqa.getValue()));
         				qqa.setDeleted(false);
         				qqa.setPosition(rqqa.getPosition());
-        				s.merge(qqa);
+        				session.merge(qqa);
         			} else {
         				qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
         				qqa.setValue(new Integer(rqqa.getValue()));
         				qqa.setQuestion(qq.getId());
         				qqa.setPosition(rqqa.getPosition());
         				qqa.setDeleted(false);
-        				s.saveOrUpdate(qqa);
+        				session.saveOrUpdate(qqa);
         			}
         			
         			qqaId.add(qqa.getId());
         			
         			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getDescription())) {
             			qqa.setDescription(rqqa.getDescription());
-            			s.saveOrUpdate(qq);
+            			session.saveOrUpdate(qq);
             		}
         			
         		}
@@ -629,7 +650,7 @@ import java.net.URL;
     	private String getTranslate (String entity, Integer entityId, String locale, String def) {
 			if (locale != null && locale.length() > 0) {
 				
-				final Query query = s.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
+				final Query query = session.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
 				query.setInteger("locale", getLocaleId(locale));
 				query.setString("entity", entity);
 				query.setInteger("entityid", entityId);
@@ -657,7 +678,7 @@ import java.net.URL;
     	
     	private Integer getLocaleId (String locale) {
     		
-    		final Query query = s.createQuery("select l from Locale l where name = :name");
+    		final Query query = session.createQuery("select l from Locale l where name = :name");
     		query.setString("name", locale);
     		query.setCacheable(true);
     		query.setCacheRegion(null);
@@ -668,7 +689,7 @@ import java.net.URL;
     		
     		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
 			l.setName(locale);
-			s.save(l);
+			session.save(l);
 			return l.getId();
     	}
     	
@@ -680,7 +701,7 @@ import java.net.URL;
     	private boolean setTranslate (String entity, Integer entityId, String locale, String value) throws LocaleException {
 			if (locale != null && locale.length() > 0) {
 				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
-				Object[] trans = s.createSQLQuery(sql).list().toArray();
+				Object[] trans = session.createSQLQuery(sql).list().toArray();
 				if (trans.length > 0) {
 					throw new LocaleException(locale + " is not supported");
 				}
@@ -692,7 +713,7 @@ import java.net.URL;
 				t.setLocale(localeId);
 				t.setEntity(entity);
 				t.setEntityid(entityId);
-				s.save(t);
+				session.save(t);
 				return t.getId() > 0;
 			}
 			return false;
@@ -705,8 +726,8 @@ import java.net.URL;
     		// TODO: auth
     		
     		try {
-    			s.beginTransaction();
-    			Object[] ql = s.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
+    			_init ();
+    			Object[] ql = session.createSQLQuery("SELECT id, title, version FROM questionnaire").list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Object[] quest = (Object[]) ql[i];
     				QuestionnaireInfo qi = resp.addNewOut();
@@ -714,12 +735,10 @@ import java.net.URL;
     				qi.setTitle(getTranslate("questionnaire", (Integer)quest[0], req.getListOfQuestionnaires().getLocale(), (String)quest[1]));
     				qi.setVersion(((BigDecimal)quest[2]).doubleValue ());
     			}
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
 
     		return respdoc;
@@ -750,7 +769,8 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
     			Warning rwarn = req.getSaveWarning().getWarn();
     			com.aladdin.sc.db.Warning warn = new com.aladdin.sc.db.Warning ();
@@ -789,22 +809,26 @@ import java.net.URL;
     			
     			warn.setDelivered(rwarn.getDelivered());
 
-    			s.save (warn);
+    			session.save (warn);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(warn.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -833,31 +857,38 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
+    			
     			Carer data = req.getUpdateCarer().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			Integer id = new Integer (data.getID());
-    			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) s.load (com.aladdin.sc.db.Carer.class, id);
+    			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) session.load (com.aladdin.sc.db.Carer.class, id);
     			storePersondata(data.getPersonData(), p.getPersondata());
     			storeSocioDemographic(data.getSDData(), p.getSd());
-    			s.update(p);
+    			session.update(p);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
+    		
     		return respdoc;
     	}
     	
@@ -883,22 +914,24 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
+    			
     			Integer id = new Integer (req.getDeleteAdministrator().getId());
     			
     			if (id < 1) throw new Exception ("error");
     			
-    			com.aladdin.sc.db.Administrator p = (com.aladdin.sc.db.Administrator) s.load(com.aladdin.sc.db.Administrator.class, id);
+    			com.aladdin.sc.db.Administrator p = (com.aladdin.sc.db.Administrator) session.load(com.aladdin.sc.db.Administrator.class, id);
     			Integer pd = p.getPersonData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM administrator WHERE id = " + id.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM administrator WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM administrator WHERE id = " + id.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
@@ -906,22 +939,28 @@ import java.net.URL;
     			
     		}  catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
     		} catch (Exception e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("object not found");
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -950,12 +989,14 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
+    			
     			Patient data = req.getUpdatePatient().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			Integer id = new Integer (data.getID());
-    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) s.load (com.aladdin.sc.db.Patient.class, id);
+    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) session.load (com.aladdin.sc.db.Patient.class, id);
     			storePersondata(data.getPersonData(), p.getPersondata());
     			storeSocioDemographic(data.getSDData(), p.getSd());
     			
@@ -973,22 +1014,27 @@ import java.net.URL;
     			
     			if (data.getPatientCarer() != null) p.setCarer(new Integer (data.getPatientCarer().getID()));
     			
-    			s.update(p);
-    			s.getTransaction().commit();
+    			session.update(p);
+    			session.getTransaction().commit();
     			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
+    		
     		return respdoc;
     	}
     	
@@ -1015,6 +1061,8 @@ import java.net.URL;
     		
     		try {
     			
+    			_init ();
+    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getDeclaredFields()));
@@ -1039,22 +1087,19 @@ import java.net.URL;
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata, p.sd";
     			
-    			s.beginTransaction();
-    			Object[] ql = s.createSQLQuery(sql).list().toArray();
+    			Object[] ql = session.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
-    				com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer)s.load(com.aladdin.sc.db.Carer.class, id);
+    				com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer)session.load(com.aladdin.sc.db.Carer.class, id);
     				CarerInfo qi = resp.addNewOut();
     				qi.setID(p.getId().toString());
     				qi.setSurname(p.getM_PersonData().getSurname());
     				qi.setName(p.getM_PersonData().getName());
     			}
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -1083,6 +1128,8 @@ import java.net.URL;
     		
     		try {
     			
+    			_init ();
+    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
@@ -1106,22 +1153,19 @@ import java.net.URL;
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata";
     			
-    			s.beginTransaction();
-    			Object[] ql = s.createSQLQuery(sql).list().toArray();
+    			Object[] ql = session.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
-    				com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician)s.load(com.aladdin.sc.db.Clinician.class, id);
+    				com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician)session.load(com.aladdin.sc.db.Clinician.class, id);
     				ClinicianInfo qi = resp.addNewOut();
     				qi.setID(p.getId().toString());
     				qi.setSurname(p.getM_PersonData().getSurname());
     				qi.setName(p.getM_PersonData().getName());
     			}
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -1153,7 +1197,9 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			
+    			session.beginTransaction();
     			com.aladdin.sc.db.PatientAssessment pa = new com.aladdin.sc.db.PatientAssessment();
     			PatientAssessment rpa = req.getSavePatientAssessment().getAssessment();
     			
@@ -1186,27 +1232,31 @@ import java.net.URL;
     			pa.setImmobility(rpa.getImmobility());
     			pa.setSensorialDeficits(rpa.getSensorialDeficits());
     			pa.setPharmacologyTreatment(rpa.getPharmacologicalTreatment());
-    			s.save(pa);
+    			session.save(pa);
     			
     			Integer pid = new Integer (pa.getId());
     			for (int i = 0; i < rpa.getClinicalDataArray().length; i++) {
     				storeMeasurement(rpa.getClinicalDataArray(i), pid);
     			}
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(pa.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -1224,7 +1274,7 @@ import java.net.URL;
     		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
     		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
     		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
-    		s.save (m);
+    		session.save (m);
     		return m.getId();
     	}
     	
@@ -1232,8 +1282,6 @@ import java.net.URL;
     		StoreMeasurementsResponseDocument respdoc = StoreMeasurementsResponseDocument.Factory.newInstance();
     		StoreMeasurementsResponse resp = respdoc.addNewStoreMeasurementsResponse();
     		OperationResult res = resp.addNewOut();
-    		
-    		System.out.println ("storeMeasurements");
     		
     		{
     			NullChecker nc = new NullChecker();
@@ -1258,13 +1306,15 @@ import java.net.URL;
     		
     		try {
     			
+    			_init ();
+    			
     			Measurement[] rm = req.getStoreMeasurements().getDataArray();
     			Integer id = 0;
     			for (int i = 0; i < rm.length; i++) {
     				try {
-    					s.beginTransaction();
+    					session.beginTransaction();
     					id = storeMeasurement(rm[i], null);
-    					s.getTransaction().commit();
+    					session.getTransaction().commit();
     					
     					RaacStub rs = new RaacStub();
         				AnalyzeMeasurementsDocument amd = AnalyzeMeasurementsDocument.Factory.newInstance();
@@ -1273,7 +1323,7 @@ import java.net.URL;
         				
         				String patientID = "";
         				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
-    					List<?> data = s.createSQLQuery(sql).list();
+    					List<?> data = session.createSQLQuery(sql).list();
         				if (data.size() > 0) {
         					patientID = data.get(0).toString();
         				}
@@ -1282,13 +1332,13 @@ import java.net.URL;
         				rs.analyzeMeasurements(amd);
     				} catch (HibernateException e) {
     					try {
-    	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    	    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
     	    			e.printStackTrace();
     				} catch (AxisFault e) {
     					try {
-    	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    	    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
     	    			e.printStackTrace();
@@ -1298,7 +1348,7 @@ import java.net.URL;
     	    			return respdoc;
     				} catch (RemoteException e) {
     					try {
-    	    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    	    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     	    			} catch (TransactionException e2) {
     					}
     	    			e.printStackTrace();
@@ -1315,13 +1365,15 @@ import java.net.URL;
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			e.printStackTrace();
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -1347,16 +1399,14 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getGetPatient().getId());
-        		s.beginTransaction();
-    			com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
+    			com.aladdin.sc.db.Patient patient = (com.aladdin.sc.db.Patient) session.load(com.aladdin.sc.db.Patient.class, id);
         		resp.setOut (exportPatient (patient));
-        		s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -1387,7 +1437,7 @@ import java.net.URL;
 			gp.setPhone(patient.getGpphone());
 			p.setGeneralPractitioner(gp);
 			
-			p.setPatientCarer(exportCarer((com.aladdin.sc.db.Carer) this.s.load(com.aladdin.sc.db.Carer.class, patient.getCarer())));
+			p.setPatientCarer(exportCarer((com.aladdin.sc.db.Carer) this.session.load(com.aladdin.sc.db.Carer.class, patient.getCarer())));
 			
 			return p;
 		}
@@ -1504,22 +1554,27 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer assessmentId = new Integer (req.getDeleteCarerAssessment().getAssessmentId());
-    			s.beginTransaction();
-    			s.createSQLQuery("DELETE FROM carerassessment WHERE id = " + assessmentId.toString()).executeUpdate();
-    			s.getTransaction().commit();
+    			session.beginTransaction();
+    			session.createSQLQuery("DELETE FROM carerassessment WHERE id = " + assessmentId.toString()).executeUpdate();
+    			session.getTransaction().commit();
     			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -1547,17 +1602,15 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
+    			
     			Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
     			Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
     			Integer objectId  = new Integer (req.getGetQuestionnaireAnswers().getObjectId());
     			
-    			s.beginTransaction();
-    			
     			String sql = "SELECT qa.timestamp, qq.quest, qa.objectid, qa.userid FROM questionnaireanswer qa inner join questionnairequestion qq on (qq.id = qa.question) WHERE qa.objectid = '" + objectId.toString() + "' AND qa.timestamp BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY qa.timestamp, qq.quest, qa.objectid, qa.userid";
 
-    			System.out.println (sql);
-
-    			Object[] questionids = s.createSQLQuery(sql).list().toArray();
+    			Object[] questionids = session.createSQLQuery(sql).list().toArray();
     			
     			for (int i = 0; i < questionids.length; i++) {
     				Object[] q = (Object[]) questionids[i];
@@ -1580,14 +1633,14 @@ import java.net.URL;
 
 					System.out.println (sql);
 
-	    			Object[] lqa = s.createSQLQuery(sql).list().toArray();
+	    			Object[] lqa = session.createSQLQuery(sql).list().toArray();
 	    			QuestionnaireAnswers rqas = resp.addNewOut();
 	    			rqas.setDateTime(cal);
 	    			rqas.setObjectID(((Integer)q[2]).toString());
 	    			rqas.setUserID(((Integer)q[3]).toString());
 	    			
 	    			String sqlTask = "SELECT id FROM task WHERE datetimefulfilled = '" + before.getTime().toString() + "'";
-	    			Object[] lt = s.createSQLQuery(sqlTask).list().toArray();
+	    			Object[] lt = session.createSQLQuery(sqlTask).list().toArray();
 	    			if (lt.length > 0) {
 	    				rqas.setTaskID(((Integer)lt[0]).toString());
 	    			}
@@ -1596,25 +1649,21 @@ import java.net.URL;
                     System.out.println (lqa.length);
                     for (int j = 0; j < lqa.length; j++) {
 	    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
-	    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
+	    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
 	    				rqa.setQuestionID(qa.getQuestion().toString());
 	    				rqa.setValue(qa.getValue());
 	    				
 	    				rqas.setObjectID(qa.getObjectId().toString());
 	    				rqas.setUserID(qa.getUserId().toString());
 	    				
-	    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) s.load (com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
+	    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) session.load (com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
 	    				rqa.setGlobalID(qq.getGlobalId().toString());
 	    			}
     			}
-    			
-    			s.getTransaction().commit();
-    			
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
 
     		return respdoc;
@@ -1643,22 +1692,27 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getDeleteExternalService().getId());
-    			s.beginTransaction();
-    			s.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString()).executeUpdate();
-    			s.getTransaction().commit();
+    			session.beginTransaction();
+    			session.createSQLQuery("DELETE FROM externalservice WHERE id = " + id.toString()).executeUpdate();
+    			session.getTransaction().commit();
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
 				res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -1686,44 +1740,52 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
+    			
     			Integer id = new Integer (req.getDeleteClinician().getId());
     			
     			if (id < 1) throw new Exception ("error");
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
-    			com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician) s.load(com.aladdin.sc.db.Clinician.class, id);
+    			com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician) session.load(com.aladdin.sc.db.Clinician.class, id);
     			Integer pd = p.getPersondata();
 
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM clinician WHERE id = " + id.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM clinician WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM clinician WHERE id = " + id.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		}  catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
     		} catch (Exception e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("object not found");
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -1752,46 +1814,53 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getDeletePatient().getId());
     			
     			if (id < 1) throw new Exception ("error");
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
-    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, id);
+    			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) session.load(com.aladdin.sc.db.Patient.class, id);
     			Integer pd = p.getPersondata();
     			Integer sd = p.getSd();
     			
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM patient WHERE id = " + id.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM sociodemographicdata WHERE id = " + sd.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM patient WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM patient WHERE id = " + id.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM sociodemographicdata WHERE id = " + sd.toString()).executeUpdate();
 
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
     		} catch (Exception e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("object not found");
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -1821,35 +1890,43 @@ import java.net.URL;
     		
     		try {
     			
-    			s.beginTransaction();
+    			_init ();
+    			
+    			session.beginTransaction();
     			
     			Questionnaire rq = req.getCreateQuestionnaire().getData();
     			rq.setID(null);
     			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq, req.getCreateQuestionnaire().getLocale());
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(q.getId().toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error. " + e.toString());
     		} catch (LocaleException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription(e.toString());
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -1880,11 +1957,11 @@ import java.net.URL;
 					return null;
 				}
 			}
-			s.saveOrUpdate(q);
+			session.saveOrUpdate(q);
 			
 			if (!setTranslate("questionnaire", q.getId(), locale, rq.getTitle())) {
 				q.setTitle(rq.getTitle());
-				s.saveOrUpdate(q);
+				session.saveOrUpdate(q);
 			}
 			
 			QuestionnaireQuestion[] rqq = rq.getQuestionArray();
@@ -1921,6 +1998,7 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
     			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
     			String fromDate = _fromDate.toString();
@@ -1946,27 +2024,30 @@ import java.net.URL;
     				fromDate = time2.toString();
     			}
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			String sql = "SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'";
     			System.out.println (sql);
-				Object[] ml = s.createSQLQuery(sql).list().toArray();
+				Object[] ml = session.createSQLQuery(sql).list().toArray();
     			
     			ArrayList<Measurement> export = new ArrayList<Measurement>();
     			for (int i = 0; i < ml.length; i++) {
     				Integer id = (Integer)ml[i];
-    				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) s.load(com.aladdin.sc.db.Measurement.class, id);
+    				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) session.load(com.aladdin.sc.db.Measurement.class, id);
     				export.add(exportMeasurement(m));
     			}
     			resp.setOutArray((Measurement[]) export.toArray(new Measurement[0]));
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			e.printStackTrace();
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -2012,41 +2093,46 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
-    			Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
+    			Object[] qq = session.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
     			for (int i = 0; i < qq.length; i++) {
     				dropQQ ((Integer)qq[i]);
     			}
-    			s.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString()).executeUpdate();
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString());
     			res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
     	}
     	
     	private void dropQQ (Integer id) {
-    		Object[] qq = s.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
+    		Object[] qq = session.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
 			for (int i = 0; i < qq.length; i++) {
 				dropQQ ((Integer) qq[i]);
 			}
-			s.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
-			s.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
-			s.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
+			session.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
+			session.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
+			session.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
     	}
     	
     	private com.aladdin.sc.db.Task taskToHibernate (Task rtask) {
@@ -2097,25 +2183,30 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
     			com.aladdin.sc.db.Task task = taskToHibernate(req.getAssignTask().getTask());
     			
-    			s.save (task);
-    			s.getTransaction().commit();
+    			session.save (task);
+    			session.getTransaction().commit();
     			
     			res.setCode(task.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 
     			res.setCode("-2");
         		res.setDescription("database error ");
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -2143,6 +2234,8 @@ import java.net.URL;
     		
     		try {
     			
+    			_init ();
+    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.Address.class.getDeclaredFields()));
@@ -2163,22 +2256,19 @@ import java.net.URL;
     			}
     			sql += " 1=1 GROUP BY p.id,p.persondata";
     			
-    			s.beginTransaction();
-    			Object[] ql = s.createSQLQuery(sql).list().toArray();
+    			Object[] ql = session.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
-    				com.aladdin.sc.db.Administrator a = (com.aladdin.sc.db.Administrator)s.load(com.aladdin.sc.db.Administrator.class, id);
+    				com.aladdin.sc.db.Administrator a = (com.aladdin.sc.db.Administrator)session.load(com.aladdin.sc.db.Administrator.class, id);
     				AdministratorInfo ai = resp.addNewOut();
     				ai.setID(a.getId().toString());
     				ai.setSurname(a.getM_PersonData().getSurname());
     				ai.setName(a.getM_PersonData().getName());
     			}
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2212,9 +2302,8 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
-    			
-    			System.out.println ("getUserPlannedTasks userId " + userId + " _fromDate " + _fromDate + " _toDate " + _toDate);
     			
     			_fromDate.set(Calendar.HOUR, 0);
 				_fromDate.set(Calendar.MINUTE, 0);
@@ -2224,9 +2313,7 @@ import java.net.URL;
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
 				
-				System.out.println ("getUserPlannedTasks start " + now("mm:ss.SSS"));
-    			
-    			final Query query = s.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
+    			final Query query = session.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
     			query.setDate("a", _fromDate.getTime());
     			query.setDate("b", _toDate.getTime());
     			query.setInteger("e", userId);
@@ -2266,6 +2353,8 @@ import java.net.URL;
     			}
     		} catch (Exception e) {
     			e.printStackTrace();
+			} finally {
+				_finally();
 			}
     		
     		System.out.println ("getUserPlannedTasks done " + now("mm:ss.SSS"));
@@ -2283,7 +2372,7 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		final Query query = s.createQuery("select qq from QuestionnaireQuestion qq where qq.quest = :quest AND qq.parentid is null");
+    		final Query query = session.createQuery("select qq from QuestionnaireQuestion qq where qq.quest = :quest AND qq.parentid is null");
     		query.setInteger("quest", q.getId());
     		query.setCacheable(true);
     		query.setCacheRegion(null);
@@ -2313,7 +2402,7 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
     		
-    		final Query q2 = s.createQuery("select qqa from QuestionnaireQuestionAnswer qqa where deleted = :deleted and question = :question");
+    		final Query q2 = session.createQuery("select qqa from QuestionnaireQuestionAnswer qqa where deleted = :deleted and question = :question");
     		q2.setInteger("question", qq.getId());
     		q2.setBoolean("deleted", false);
     		q2.setCacheable(true);
@@ -2328,7 +2417,7 @@ import java.net.URL;
     		
     		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
     		
-    		final Query q3 = s.createQuery("select qq from QuestionnaireQuestion qq where parentid = :parentid");
+    		final Query q3 = session.createQuery("select qq from QuestionnaireQuestion qq where parentid = :parentid");
     		q3.setInteger("parentid", qq.getId());
     		q3.setCacheable(true);
     		q3.setCacheRegion(null);
@@ -2376,7 +2465,8 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
     			ExternalService re = req.getCreateExternalService().getData();
     			com.aladdin.sc.db.ExternalService es = new com.aladdin.sc.db.ExternalService();
@@ -2384,22 +2474,26 @@ import java.net.URL;
     			es.setAddress(re.getAddress());
     			es.setDescription(re.getDescription());
     			es.setType(re.getType());
-    			s.save(es);
+    			session.save(es);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(es.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -2429,7 +2523,8 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
     			CarerAssessment rca = req.getSaveCarerAssessment().getAssessment();
     			com.aladdin.sc.db.CarerAssessment ca = new com.aladdin.sc.db.CarerAssessment ();
@@ -2442,21 +2537,25 @@ import java.net.URL;
     			ca.setPsychoactiveDrugs(rca.getPsychoactiveDrugs());
     			ca.setQualityOfLife(new Integer (rca.getQualityOfLife()));
     			
-    			s.save(ca);
-    			s.getTransaction().commit();
+    			session.save(ca);
+    			session.getTransaction().commit();
     			
     			res.setCode(ca.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		
@@ -2486,47 +2585,54 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getDeleteCarer().getId());
     			
     			if (id < 1) throw new Exception ("error");
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
-    			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, id);
+    			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) session.load(com.aladdin.sc.db.Carer.class, id);
     			Integer pd = p.getPersondata();
     			Integer sd = p.getSd();
 
-    			s.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM carer WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM carer WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM carer WHERE id = " + id.toString() + ")").executeUpdate();
-    			s.createSQLQuery("DELETE FROM carer WHERE id = " + id.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM sociodemographicdata WHERE id = " + sd.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM identifier WHERE persondata = (SELECT persondata FROM carer WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM address WHERE persondata = (SELECT persondata FROM carer WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM communication WHERE persondata = (SELECT persondata FROM carer WHERE id = " + id.toString() + ")").executeUpdate();
+    			session.createSQLQuery("DELETE FROM carer WHERE id = " + id.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM persondata WHERE id = " + pd.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM sociodemographicdata WHERE id = " + sd.toString()).executeUpdate();
 
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString ());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			} catch (Exception e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("object not found");
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -2554,31 +2660,36 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Administrator data = req.getCreateAdministrator().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			com.aladdin.sc.db.Administrator administrator = new com.aladdin.sc.db.Administrator ();
     			
     			Integer pdid = storePersondata(data.getPersonData(), null); 
     			
     			administrator.setPersonData(pdid);
-    			s.save(administrator);
+    			session.save(administrator);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(administrator.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2607,31 +2718,36 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
     			ExternalService re = req.getUpdateExternalService().getData();
     			Integer id = new Integer (re.getID()); 
 
-    			com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService) s.load(com.aladdin.sc.db.ExternalService.class, id);
+    			com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService) session.load(com.aladdin.sc.db.ExternalService.class, id);
     			es.setAddress(re.getAddress());
     			es.setDescription(re.getDescription());
     			es.setType(re.getType());
-    			s.save(es);
+    			session.save(es);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -2656,17 +2772,14 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getGetClinician().getId());
-    			s.beginTransaction();
-    			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) s.load(com.aladdin.sc.db.Clinician.class, id);
-    			System.out.println (clinician);
+    			com.aladdin.sc.db.Clinician clinician = (com.aladdin.sc.db.Clinician) session.load(com.aladdin.sc.db.Clinician.class, id);
         		resp.setOut (exportClinician (clinician));
-        		s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2704,26 +2817,32 @@ import java.net.URL;
     		
     		try {
     			
-    			s.getTransaction().begin();
+    			_init ();
+    			
+    			session.getTransaction().begin();
     			
     			Integer assessmentId = new Integer (req.getDeletePatientAssessment().getAssessmentId());
-				s.createSQLQuery("DELETE FROM measurement WHERE patientassessment = " + assessmentId.toString()).executeUpdate();
-    			s.createSQLQuery("DELETE FROM patientassessment WHERE id = " + assessmentId.toString()).executeUpdate();
+				session.createSQLQuery("DELETE FROM measurement WHERE patientassessment = " + assessmentId.toString()).executeUpdate();
+    			session.createSQLQuery("DELETE FROM patientassessment WHERE id = " + assessmentId.toString()).executeUpdate();
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(assessmentId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2734,9 +2853,8 @@ import java.net.URL;
     		GetAllExternalServicesResponse resp = respdoc.addNewGetAllExternalServicesResponse();
     		
     		try {
-    			s.beginTransaction();
-    			Object[] esl = s.createQuery("from ExternalService").list().toArray();
-    			s.getTransaction().commit();
+    			_init ();
+    			Object[] esl = session.createQuery("from ExternalService").list().toArray();
     			for (int i = 0; i < esl.length; i++) {
     				com.aladdin.sc.db.ExternalService es = (com.aladdin.sc.db.ExternalService)esl[i];
     				ExternalService re = resp.addNewOut();
@@ -2746,10 +2864,9 @@ import java.net.URL;
     				re.setType(es.getType());
     			}
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -2774,16 +2891,14 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getGetCarer().getId());
-    			s.beginTransaction();
-        		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, id);
-        		s.getTransaction().commit();
+        		com.aladdin.sc.db.Carer carer = (com.aladdin.sc.db.Carer) session.load(com.aladdin.sc.db.Carer.class, id);
         		resp.setOut (exportCarer (carer));
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2807,16 +2922,14 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getGetAdministrator().getId());
-    			s.beginTransaction();
-				com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) s.load(com.aladdin.sc.db.Administrator.class, id);
+				com.aladdin.sc.db.Administrator administrator = (com.aladdin.sc.db.Administrator) session.load(com.aladdin.sc.db.Administrator.class, id);
         		resp.setOut (exportAdministrator (administrator));
-        		s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2851,28 +2964,33 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Administrator data = req.getUpdateAdministrator().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			Integer id = new Integer (data.getID());
-    			com.aladdin.sc.db.Administrator p = (com.aladdin.sc.db.Administrator) s.load (com.aladdin.sc.db.Administrator.class, id);
+    			com.aladdin.sc.db.Administrator p = (com.aladdin.sc.db.Administrator) session.load (com.aladdin.sc.db.Administrator.class, id);
     			storePersondata(data.getPersonData(), p.getPersonData());
-    			s.update(p);
-    			s.getTransaction().commit();
+    			session.update(p);
+    			session.getTransaction().commit();
     			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -2889,18 +3007,15 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getGetQuestionnaire().getId());
-    			s.beginTransaction();
-    			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) s.load(com.aladdin.sc.db.Questionnaire.class, id);
+    			com.aladdin.sc.db.Questionnaire q = (com.aladdin.sc.db.Questionnaire) session.load(com.aladdin.sc.db.Questionnaire.class, id);
     			final SystemParameter locale = req.getGetQuestionnaire().getLocale();
-    			
 				resp.setOut(exportQuestionnaire(q, locale));
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+			} finally {
+				_finally();
 			}
 
     		return respdoc;
@@ -2930,7 +3045,8 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
+    			session.beginTransaction();
     			
     			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
 				Timestamp datetime = new Timestamp(0);
@@ -2948,14 +3064,14 @@ import java.net.URL;
     				qa.setUserId(userId);
     				qa.setObjectId(objectId);
     				qa.setDateTime(datetime);
-    				s.save(qa);
+    				session.save(qa);
     				id = qa.getId();
     			}
     			
     			String sql = "UPDATE task SET datetimefulfilled = '" + datetime.toString() + "' WHERE id = " + taskId.toString();
-    			s.createSQLQuery(sql).executeUpdate();
+    			session.createSQLQuery(sql).executeUpdate();
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			RaacStub rc = new RaacStub();
     			AnalyzeQuestionnairesDocument analyzeQuestionnaires = AnalyzeQuestionnairesDocument.Factory.newInstance ();
@@ -2969,21 +3085,27 @@ import java.net.URL;
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			} catch (AxisFault e) {
+				e.printStackTrace();
 				res.setCode("-2");
         		res.setDescription("Calling of RAAC error " + e.toString());
         		res.setStatus((short) 0);
 			} catch (RemoteException e) {
+				e.printStackTrace();
 				res.setCode("-2");
         		res.setDescription("Calling of RAAC error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -3009,9 +3131,10 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer patientId = new Integer (req.getGetPatientAssessments().getPatientId());
     			
-    			final Query query = s.createQuery("select p from PatientAssessment p where patient = :patient");
+    			final Query query = session.createQuery("select p from PatientAssessment p where patient = :patient");
     			query.setInteger("patient", patientId);
     			query.setCacheable(true);
     			query.setCacheRegion(null);
@@ -3080,6 +3203,8 @@ import java.net.URL;
     			}
     		} catch (Exception e) {
     			e.printStackTrace();
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -3104,13 +3229,13 @@ import java.net.URL;
     		}
     		
     		try {
-    			s.beginTransaction();
+    			_init ();
     			Integer carerId = new Integer (req.getGetCarerAssessments().getCarerId());
-    			Object[] cal = s.createSQLQuery("SELECT id FROM carerassessment WHERE carer = " + carerId.toString()).list().toArray();
+    			Object[] cal = session.createSQLQuery("SELECT id FROM carerassessment WHERE carer = " + carerId.toString()).list().toArray();
     			
     			for (int i = 0; i < cal.length; i++) {
     				Integer id = (Integer) cal[0];
-    				com.aladdin.sc.db.CarerAssessment ca = (com.aladdin.sc.db.CarerAssessment) s.load (com.aladdin.sc.db.CarerAssessment.class, id);
+    				com.aladdin.sc.db.CarerAssessment ca = (com.aladdin.sc.db.CarerAssessment) session.load (com.aladdin.sc.db.CarerAssessment.class, id);
     				
     				CarerAssessment rca = resp.addNewOut();
         			rca.setID(ca.getId().toString());
@@ -3125,12 +3250,10 @@ import java.net.URL;
         			rca.setPsychoactiveDrugs(ca.getPsychoactiveDrugs());
         			rca.setQualityOfLife(ca.getQualityOfLife().shortValue());
     			}
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -3159,12 +3282,13 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = req.getChangeTaskStatus().getTaskId();
     			Integer status = req.getChangeTaskStatus().getTaskStatus();
     			
-    			s.beginTransaction();
-    			s.createSQLQuery("UPDATE task SET taskstatus = '" + status.toString() + "' WHERE id = '" + id.toString() + "'").executeUpdate();
-    			s.getTransaction().commit();
+    			session.beginTransaction();
+    			session.createSQLQuery("UPDATE task SET taskstatus = '" + status.toString() + "' WHERE id = '" + id.toString() + "'").executeUpdate();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString());
         		res.setDescription("ok");
@@ -3172,13 +3296,17 @@ import java.net.URL;
     			
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -3208,6 +3336,8 @@ import java.net.URL;
     		
     		try {
     			
+    			_init ();
+    			
     			List<Field> fl = new ArrayList<Field>();
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.PersonData.class.getDeclaredFields()));
     			fl.addAll(java.util.Arrays.asList(com.aladdin.sc.db.SocioDemographicData.class.getDeclaredFields()));
@@ -3230,11 +3360,6 @@ import java.net.URL;
     						sql += " AND ";
     					}
     				}
-    				/*if (sc[i].getFieldName().compareToIgnoreCase("carer") == 0) {
-						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
-						sql += String.format(op.get(opnum), "patient.carer", sc[i].getFieldValue1(), sc[i].getFieldValue2());
-						sql += " AND ";
-					}*/
                     if (sc[i].getFieldName ().compareToIgnoreCase("patient.id") == 0) {
                         Integer opnum = new Integer (sc[i].getCompareOp().getCode());
                         sql += String.format(op.get(opnum), "p.id", sc[i].getFieldValue1(), sc[i].getFieldValue2());
@@ -3243,22 +3368,19 @@ import java.net.URL;
     			}
     			sql += " 1=1 GROUP BY p.id, p.persondata, p.clinician, p.sd";
 
-    			s.beginTransaction();
-    			Object[] ql = s.createSQLQuery(sql).list().toArray();
+    			Object[] ql = session.createSQLQuery(sql).list().toArray();
     			for (int i = 0; i < ql.length; i++) {
     				Integer id = (Integer) ql[i];
-    				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)s.load(com.aladdin.sc.db.Patient.class, id);
+    				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)session.load(com.aladdin.sc.db.Patient.class, id);
     				PatientInfo qi = resp.addNewOut();
     				qi.setID(p.getId().toString());
     				qi.setSurname(p.getM_PersonData().getSurname());
     				qi.setName(p.getM_PersonData().getName());
     			}
-    			s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+    			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -3286,6 +3408,7 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Field[] field = com.aladdin.sc.db.Warning.class.getDeclaredFields();
     			String sql = "SELECT warning.id FROM warning inner join patient on (patient.id = warning.patient) WHERE ";
     			
@@ -3306,11 +3429,10 @@ import java.net.URL;
     			}
     			sql += "1=1";
     			
-    			s.beginTransaction();
-    			Object[] list = s.createSQLQuery(sql).list().toArray();
+    			Object[] list = session.createSQLQuery(sql).list().toArray();
 				for (int i = 0; i < list.length; i++) {
     				Integer id = (Integer) list[i];
-					com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) s.load(com.aladdin.sc.db.Warning.class, id);
+					com.aladdin.sc.db.Warning w = (com.aladdin.sc.db.Warning) session.load(com.aladdin.sc.db.Warning.class, id);
 					Warning rw = resp.addNewOut();
     				rw.setID(w.getId().toString());
     				
@@ -3348,17 +3470,14 @@ import java.net.URL;
     				emergencyLevel.setCode(w.getEmergencyLevel().toString());
     				
     				rw.setEmergencyLevel(emergencyLevel);
-    				rw.setPatient(exportPatient((com.aladdin.sc.db.Patient) s.load(com.aladdin.sc.db.Patient.class, w.getPatient())));
+    				rw.setPatient(exportPatient((com.aladdin.sc.db.Patient) session.load(com.aladdin.sc.db.Patient.class, w.getPatient())));
     				
     				rw.setDelivered(w.getDelivered());
     			}
-				s.getTransaction().commit();
     		} catch (HibernateException e) {
-    			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
-    			
+    			e.printStackTrace();
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
@@ -3386,29 +3505,34 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Clinician data = req.getUpdateClinician().getData();
     			
-    			s.beginTransaction();
+    			session.beginTransaction();
     			
     			Integer id = new Integer (data.getID());
-    			com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician) s.load (com.aladdin.sc.db.Clinician.class, id);
+    			com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician) session.load (com.aladdin.sc.db.Clinician.class, id);
     			storePersondata(data.getPersonData(), p.getPersondata());
-    			s.update(p);
+    			session.update(p);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
     			
     			res.setCode(p.getId().toString());
     			res.setStatus((short) 1);
     			res.setDescription("ok");
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error " + e.toString());
+    		} finally {
+    			_finally();
     		}
     		
     		return respdoc;
@@ -3437,31 +3561,36 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer id = new Integer (req.getMarkWarningAsRead().getId());
     			
-    			s.beginTransaction();
-    			s.createSQLQuery("UPDATE warning SET delivered = '1' WHERE id = '" + id.toString() + "'").executeUpdate();
-    			s.getTransaction().commit();
+    			session.beginTransaction();
+    			session.createSQLQuery("UPDATE warning SET delivered = '1' WHERE id = '" + id.toString() + "'").executeUpdate();
+    			session.getTransaction().commit();
     			
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
     		} catch (HibernateException e) {
     			try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
     		
     		return respdoc;
     	}
     	
     	private Integer existUser (String username, Integer id) {
-    		if (s.createSQLQuery("SELECT * FROM aladdinuser WHERE username like '" + username + "' AND id != '" + id.toString() + "'").list().size() > 1) return 1;
+    		if (session.createSQLQuery("SELECT * FROM aladdinuser WHERE username like '" + username + "' AND id != '" + id.toString() + "'").list().size() > 1) return 1;
     		return 0;
     	}
          
@@ -3477,7 +3606,8 @@ import java.net.URL;
     		}
         	
         	try {
-        		s.beginTransaction();
+        		_init ();
+        		session.beginTransaction();
         		
         		User ru = req.getUpdateUser().getUser();
         		if (existUser(ru.getUsername(), new Integer (ru.getID())) == 1) {
@@ -3493,22 +3623,26 @@ import java.net.URL;
         		u.setPersonId(new Integer (ru.getPersonID()));
         		u.setUsername(ru.getUsername());
         		u.setPassword(ru.getPassword());
-        		s.save (u);
+        		session.save (u);
         		
-        		s.getTransaction().commit();
+        		session.getTransaction().commit();
         		
         		res.setCode(u.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (HibernateException e) {
         		try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
         		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
         	
         	return respdoc;
@@ -3526,24 +3660,29 @@ import java.net.URL;
     		}
         	
         	try {
+        		_init ();
         		Integer id = new Integer (req.getDeleteUser().getId());
         		
-        		s.beginTransaction();
-        		s.createSQLQuery("DELETE FROM aladdinuser WHERE id = " + id.toString()).executeUpdate();
-        		s.getTransaction().commit();
+        		session.beginTransaction();
+        		session.createSQLQuery("DELETE FROM aladdinuser WHERE id = " + id.toString()).executeUpdate();
+        		session.getTransaction().commit();
         		
         		res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (HibernateException e) {
         		try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
         		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
         	
         	return respdoc;
@@ -3564,11 +3703,12 @@ import java.net.URL;
         	String sql = "";
         	
         	try {
+        		_init ();
         		String username = req.getAuth().getLogin();
         		String password = req.getAuth().getPassword();
-        		s.beginTransaction();
+        		
         		sql = "SELECT id FROM aladdinuser WHERE username = '" + username + "' AND password = '" + password + "'";
-        		SQLQuery q = s.createSQLQuery(sql);
+        		SQLQuery q = session.createSQLQuery(sql);
         		if (q.list().size() == 1) {
         			res.setCode(q.list().get(0).toString());
         			res.setDescription("ok");
@@ -3578,16 +3718,14 @@ import java.net.URL;
         			res.setDescription("none");
         			res.setStatus((short) 0);
         		}
-        		s.getTransaction().commit();
         	} catch (HibernateException e) {
-        		try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+        		e.printStackTrace();
 
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
         	
         	return respdoc;
@@ -3606,13 +3744,14 @@ import java.net.URL;
     		}
         	
         	try {
+        		_init ();
         		Integer id = new Integer (req.getChangePassword().getUserId());
         		String password = req.getChangePassword().getPassword();
         		
-        		s.beginTransaction();
-        		s.createSQLQuery("UPDATE aladdinuser SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
+        		session.beginTransaction();
+        		session.createSQLQuery("UPDATE aladdinuser SET password = '" + password + "' WHERE id = '" + id.toString() + "'").executeUpdate();
         		
-        		com.aladdin.sc.db.AladdinUser u = (AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
+        		com.aladdin.sc.db.AladdinUser u = (AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, id);
         		
         		String url = forumSC + "?action=password&password=" + password + "&username=" + u.getUsername();
         		
@@ -3620,20 +3759,24 @@ import java.net.URL;
         		
         		getURLChar(url);
         		
-        		s.getTransaction().commit();
+        		session.getTransaction().commit();
         		
         		res.setCode(id.toString());
     			res.setDescription("ok");
     			res.setStatus((short) 1);
         	} catch (HibernateException e) {
         		try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
         		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
         	
         	return respdoc;
@@ -3670,6 +3813,8 @@ import java.net.URL;
         	
         	try {
         		
+        		_init ();
+        		
                 User ru = req.getCreateUser().getUser();
 
         		String url = forumSC + "?none=1&password=***&type=***&username=" + ru.getUsername();
@@ -3678,7 +3823,7 @@ import java.net.URL;
                     throw new Exception ("The User with same name exists in Forum");
         		}
 
-        		s.beginTransaction();
+        		session.beginTransaction();
         		
         		if (existUser(ru.getUsername(), 0) == 1) {
         			res.setCode("-2");
@@ -3692,7 +3837,7 @@ import java.net.URL;
         		u.setPersonId(new Integer (ru.getPersonID()));
         		u.setUsername(ru.getUsername());
         		u.setPassword(ru.getPassword());
-        		s.save (u);
+        		session.save (u);
         		
         		url = forumSC + "?username=" + ru.getUsername() + "&password=" + ru.getPassword() + "&type=" + ru.getType().getCode();
         		
@@ -3702,30 +3847,37 @@ import java.net.URL;
         			throw new Exception ("Can't create user in forum!");
         		}
         		
-        		s.getTransaction().commit();
+        		session.getTransaction().commit();
         		
         		res.setCode(u.getId().toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
         	} catch (HibernateException e) {
         		try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
         		
         		res.setCode("-2");
         		res.setDescription("database error " + e.toString());
         		res.setStatus((short) 0);
 			} catch (Exception e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
         		
         		res.setCode("-2");
         		res.setDescription("forum error " + e.toString());
         		res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
+			
         	return respdoc;
         }
         
@@ -3741,10 +3893,11 @@ import java.net.URL;
     		}
 				 
 			try {
-				s.beginTransaction();
+				_init ();
+
 				Integer id = new Integer (req.getGetUserType().getId());
 				String sql = "SELECT type FROM aladdinuser WHERE id = '" + id.toString() + "'";
-        		SQLQuery q = s.createSQLQuery(sql);
+        		SQLQuery q = session.createSQLQuery(sql);
         		if (q.list().size() == 1) {
         			res.setCode(q.list().get(0).toString());
         			res.setDescription("ok");
@@ -3754,16 +3907,14 @@ import java.net.URL;
         			res.setDescription("none");
         			res.setStatus((short) 0);
         		}
-        		s.getTransaction().commit();
 			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+				e.printStackTrace();
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
 				 
 			return respdoc;
@@ -3774,15 +3925,14 @@ import java.net.URL;
 			GetSystemParameterListResponse resp = respdoc.addNewGetSystemParameterListResponse();
 			
 			try {
+				_init ();
 				Integer type = new Integer (req.getGetSystemParameterList().getType());
 				SystemParameter locale = req.getGetSystemParameterList().getLocale();
 				if (locale == null) locale = SystemParameter.Factory.newInstance();
 				if (locale.getCode() == null || locale.getCode() == "") locale.setCode("en_US");
 				
-				s.beginTransaction();
-				
 				String sql = "SELECT code, description FROM dict as d INNER JOIN locale as l ON (l.id = d.locale) WHERE d.type = '" + type.toString() + "' AND l.name = '" + locale.getCode() + "'";
-				Object[] ret = s.createSQLQuery(sql).list().toArray();
+				Object[] ret = session.createSQLQuery(sql).list().toArray();
 				
 				for (int i = 0; i < ret.length; i++) {
 					Object[] obj = (Object[]) ret[i];
@@ -3790,14 +3940,10 @@ import java.net.URL;
 					sp.setCode(obj[0].toString());
 					sp.setDescription(obj[1].toString());
 				}
-				
-				s.getTransaction().commit();
-				
 			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+				e.printStackTrace();
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -3810,7 +3956,9 @@ import java.net.URL;
 			
 			try {
 				
-				s.beginTransaction();
+				_init ();
+				
+				session.beginTransaction();
 				
 				Integer localeid = getLocaleId(req.getUpdateSystemParameter().getLocale());
 				Integer type = req.getUpdateSystemParameter().getType();
@@ -3826,13 +3974,13 @@ import java.net.URL;
 				) throw new Exception("null");
 				
 				String sql = "SELECT id FROM dict WHERE code = '" + value.getCode() + "' AND description LIKE '" + value.getDescription() + "' AND type = '" + type.toString() + "' AND locale = '" + localeid.toString() + "'";
-				Object[] exist = s.createSQLQuery(sql).list().toArray();
+				Object[] exist = session.createSQLQuery(sql).list().toArray();
 				
 				com.aladdin.sc.db.Dict dict;
 				
 				if (exist.length == 1) {
 					Integer id = (Integer)((Object[])exist[0])[0];
-					dict = (Dict) s.load(com.aladdin.sc.db.Dict.class, id);
+					dict = (Dict) session.load(com.aladdin.sc.db.Dict.class, id);
 				} else dict = new com.aladdin.sc.db.Dict();
 				
 				dict.setCode(value.getCode());
@@ -3840,32 +3988,38 @@ import java.net.URL;
 				dict.setLocale(localeid);
 				dict.setType(type);
 				
-				s.saveOrUpdate(dict);
+				session.saveOrUpdate(dict);
 				
 				res.setCode(dict.getId().toString());
     			res.setDescription("ok");
     			res.setStatus((short)1);
     			
-    			s.getTransaction().commit();
+    			session.getTransaction().commit();
 				
 			} catch (HibernateException e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setDescription("database error " + e.toString());
     			res.setStatus((short)0);
 			} catch (Exception e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
     			
     			res.setCode("-2");
     			res.setDescription("data not valid");
     			res.setStatus((short)0);
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -3883,10 +4037,10 @@ import java.net.URL;
 			
 			try {
 				
-				s.beginTransaction();
+				_init ();
 				
 				Integer id = new Integer (req.getGetUser().getId());
-				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) s.load(com.aladdin.sc.db.AladdinUser.class, id);
+				com.aladdin.sc.db.AladdinUser user = (com.aladdin.sc.db.AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, id);
 				
 				User ru = resp.addNewOut();
 				ru.setID(user.getId().toString());
@@ -3896,14 +4050,10 @@ import java.net.URL;
 				spType.setCode(user.getType().toString());
 				ru.setType(spType);
 				ru.setUsername(user.getUsername());
-				
-				s.getTransaction().commit();
-				
 			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+				e.printStackTrace();
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -3926,29 +4076,28 @@ import java.net.URL;
     		}
 			
 			try {
-				s.beginTransaction();
+				_init ();
+
 				Integer uid = new Integer (req.getGetPatientsForCaregiver().getUserId());
 				String sql = "SELECT personid FROM aladdinuser WHERE id = '" + uid.toString() + "' AND type = '3'";
-        		SQLQuery q = s.createSQLQuery(sql);
+        		SQLQuery q = session.createSQLQuery(sql);
         		if (q.list().size() == 1) {
         			sql = "SELECT id FROM patient WHERE carer = '" + q.list().get(0).toString() + "'";
         			
-        			Object[] ql = s.createSQLQuery(sql).list().toArray();
+        			Object[] ql = session.createSQLQuery(sql).list().toArray();
         			for (int i = 0; i < ql.length; i++) {
         				Integer id = (Integer) ql[i];
-        				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)s.load(com.aladdin.sc.db.Patient.class, id);
+        				com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient)session.load(com.aladdin.sc.db.Patient.class, id);
         				PatientInfo qi = resp.addNewOut();
         				qi.setID(p.getId().toString());
         				qi.setSurname(p.getM_PersonData().getSurname());
         				qi.setName(p.getM_PersonData().getName());
         			}
         		}
-        		s.getTransaction().commit();
 			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+				e.printStackTrace();
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -3989,13 +4138,12 @@ import java.net.URL;
     		}
 			
 			try {
+				_init ();
 				Integer uid = new Integer (req.getGetUserIdByPersonId().getId());
 				Integer type = req.getGetUserIdByPersonId().getType();
 				
-				s.beginTransaction();
-				
 				String sql = "SELECT id FROM aladdinuser WHERE personid = '" + uid.toString() + "' AND type = '" + type.toString() + "'";
-				SQLQuery q = s.createSQLQuery(sql);
+				SQLQuery q = session.createSQLQuery(sql);
 				Object[] obj = q.list().toArray();
 				if (obj.length == 1) {
 					res.setCode(obj[0].toString());
@@ -4006,18 +4154,14 @@ import java.net.URL;
         			res.setDescription("none");
         			res.setStatus((short) 0);
 				}
-				
-				s.getTransaction().commit();
-				
 			} catch (HibernateException e) {
-				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+				e.printStackTrace();
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -4045,6 +4189,8 @@ import java.net.URL;
 			
 			try {
 				
+				_init ();
+				
 				Calendar startDate = req.getRemoveTaskMassively().getStartDate();
 				Calendar endDate = req.getRemoveTaskMassively().getEndDate();
 				BigInteger typeOfTask = req.getRemoveTaskMassively().getTypeOfTask();
@@ -4052,9 +4198,9 @@ import java.net.URL;
 				
 				String sql = "DELETE FROM task WHERE datetimeassigned >= '" + startDate.toString() + "' AND datetimeassigned <= '" + endDate.toString() + "' AND tasktype = '" + typeOfTask.toString() + "' AND object = '" + patientId.toString() + "'";
 	    		
-				s.beginTransaction();
-				s.createSQLQuery(sql).executeUpdate();
-				s.getTransaction().commit();
+				session.beginTransaction();
+				session.createSQLQuery(sql).executeUpdate();
+				session.getTransaction().commit();
 				
 				res.setCode("0");
 				res.setStatus((short)1);
@@ -4062,13 +4208,17 @@ import java.net.URL;
 				
 			} catch (HibernateException e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -4095,21 +4245,23 @@ import java.net.URL;
         	
         	try {
         		
+        		_init ();
+        		
         		Calendar startDate = req.getAssignTasksMassively().getStartDate();
 				Calendar endDate = req.getAssignTasksMassively().getEndDate();
 				int frequency = req.getAssignTasksMassively().getFrequency().intValue();
 				Task rtask = req.getAssignTasksMassively().getTask();
 				
-				s.beginTransaction();
+				session.beginTransaction();
 				
 				while (startDate.compareTo(endDate) < 0) {
 					rtask.setDateTimeAssigned(startDate);
 					com.aladdin.sc.db.Task task = taskToHibernate(rtask);
-	    			s.save (task);
+	    			session.save (task);
 					startDate.add(Calendar.DAY_OF_YEAR, frequency);
 				}
 				
-				s.getTransaction().commit();
+				session.getTransaction().commit();
 				
 				res.setCode("0");
 				res.setStatus((short)1);
@@ -4117,13 +4269,17 @@ import java.net.URL;
         		
         	} catch (HibernateException e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
+    			
+    			e.printStackTrace();
 				
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
         	
         	return respdoc;
@@ -4154,30 +4310,37 @@ import java.net.URL;
     			return respdoc;
     		}
 			
-			Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
-			String sql = "SELECT id FROM measurement WHERE ";
-			
-			SearchCriteria[] sc = req.getGetMeasurement().getFilterArray();
-			for (int i = 0; i < sc.length; i++) {
-				for (int j = 0; j < field.length; j++) {
-					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
-						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
-						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
-						sql += " AND ";
+			try {
+				_init ();
+				Field[] field = com.aladdin.sc.db.Measurement.class.getDeclaredFields();
+				String sql = "SELECT id FROM measurement WHERE ";
+				
+				SearchCriteria[] sc = req.getGetMeasurement().getFilterArray();
+				for (int i = 0; i < sc.length; i++) {
+					for (int j = 0; j < field.length; j++) {
+						if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+							Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+							sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+							sql += " AND ";
+						}
 					}
 				}
+				
+				sql += "1 = 1";
+				
+				Object[] list = session.createSQLQuery(sql).list().toArray();
+				List<Measurement> ml = new ArrayList<Measurement>();
+				for (int i = 0; i < list.length; i++) {
+					Integer id = (Integer) list[i];
+					com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) session.load(com.aladdin.sc.db.Measurement.class, id);
+					ml.add(exportMeasurement(m));
+				}
+				resp.setOutArray((Measurement[]) ml.toArray(new Measurement[0]));
+			} catch (HibernateException e) {
+				e.printStackTrace();
+			} finally {
+				_finally();
 			}
-			
-			sql += "1 = 1";
-			
-			Object[] list = s.createSQLQuery(sql).list().toArray();
-			List<Measurement> ml = new ArrayList<Measurement>();
-			for (int i = 0; i < list.length; i++) {
-				Integer id = (Integer) list[i];
-				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) s.load(com.aladdin.sc.db.Measurement.class, id);
-				ml.add(exportMeasurement(m));
-			}
-			resp.setOutArray((Measurement[]) ml.toArray(new Measurement[0]));
 			
 			return respdoc;
 		}
@@ -4207,9 +4370,11 @@ import java.net.URL;
 			
 			try {
 				
+				_init ();
+				
 				String id = req.getGetTask().getId();
 				
-				com.aladdin.sc.db.Task dbTask = (com.aladdin.sc.db.Task) s.load(com.aladdin.sc.db.Task.class, new Integer (id));
+				com.aladdin.sc.db.Task dbTask = (com.aladdin.sc.db.Task) session.load(com.aladdin.sc.db.Task.class, new Integer (id));
 				
 				out.setID(dbTask.getId().toString());
 				
@@ -4240,10 +4405,9 @@ import java.net.URL;
 				}
 				
         	} catch (HibernateException e) {
-        		try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
-    			} catch (TransactionException e2) {
-				}
+        		e.printStackTrace();
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -4253,35 +4417,42 @@ import java.net.URL;
 			GetMediaContentResponseDocument respdoc = GetMediaContentResponseDocument.Factory.newInstance();
 			GetMediaContentResponse resp = respdoc.addNewGetMediaContentResponse();
 			
-			Field[] field = com.aladdin.sc.db.EntertainmentContent.class.getDeclaredFields();
-			String sql = "SELECT id FROM entertainmentcontent WHERE ";
-			
-			SearchCriteria[] sc = req.getGetMediaContent().getFilterArray();
-			for (int i = 0; i < sc.length; i++) {
-				for (int j = 0; j < field.length; j++) {
-					if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
-						Integer opnum = new Integer (sc[i].getCompareOp().getCode());
-						sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
-						sql += " AND ";
+			try {
+				_init ();
+				Field[] field = com.aladdin.sc.db.EntertainmentContent.class.getDeclaredFields();
+				String sql = "SELECT id FROM entertainmentcontent WHERE ";
+				
+				SearchCriteria[] sc = req.getGetMediaContent().getFilterArray();
+				for (int i = 0; i < sc.length; i++) {
+					for (int j = 0; j < field.length; j++) {
+						if (field[j].getName().compareToIgnoreCase(sc[i].getFieldName()) == 0) {
+							Integer opnum = new Integer (sc[i].getCompareOp().getCode());
+							sql += String.format(op.get(opnum), sc[i].getFieldName(), sc[i].getFieldValue1(), sc[i].getFieldValue2());
+							sql += " AND ";
+						}
 					}
 				}
-			}
-			
-			sql += "1 = 1";
-			
-			Object[] list = s.createSQLQuery(sql).list().toArray();
-			for (int i = 0; i < list.length; i++) {
-				Integer id = (Integer) list[i];
-				com.aladdin.sc.db.EntertainmentContent ec = (com.aladdin.sc.db.EntertainmentContent) s.load(com.aladdin.sc.db.EntertainmentContent.class, id);
-				MediaContent out = resp.addNewOut();
 				
-				out.setID(ec.getId().toString());
-				out.setCategory(ec.getCategory());
-				out.setText(ec.getText());
-				out.setTitle(ec.getTitle());
-				out.setType(ec.getType());
-				out.setUrl(ec.getUrl());
-				out.setEnabled(ec.getEnabled());
+				sql += "1 = 1";
+				
+				Object[] list = session.createSQLQuery(sql).list().toArray();
+				for (int i = 0; i < list.length; i++) {
+					Integer id = (Integer) list[i];
+					com.aladdin.sc.db.EntertainmentContent ec = (com.aladdin.sc.db.EntertainmentContent) session.load(com.aladdin.sc.db.EntertainmentContent.class, id);
+					MediaContent out = resp.addNewOut();
+					
+					out.setID(ec.getId().toString());
+					out.setCategory(ec.getCategory());
+					out.setText(ec.getText());
+					out.setTitle(ec.getTitle());
+					out.setType(ec.getType());
+					out.setUrl(ec.getUrl());
+					out.setEnabled(ec.getEnabled());
+				}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -4297,15 +4468,14 @@ import java.net.URL;
 			ec.setEnabled(rEC.getEnabled());
 			if (id != null && id > 0) {
 				ec.setId(id);
-				s.merge(ec);
+				session.merge(ec);
 			} else {
 				ec.setId(null);
-				s.save(ec);
+				session.save(ec);
 			}
 			
 			return ec.getId();
 		}
-
 
 		public AddMediaContentResponseDocument addMediaContent(AddMediaContentDocument req) {
 			AddMediaContentResponseDocument respdoc = AddMediaContentResponseDocument.Factory.newInstance();
@@ -4314,18 +4484,19 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				s.beginTransaction();
+				_init ();
+				session.beginTransaction();
 				
 				Integer savedId = storeEntertainmentContent(req.getAddMediaContent().getIn(), null);
 				
-				s.getTransaction().commit();
+				session.getTransaction().commit();
 				
 				res.setCode(savedId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
 			} catch (Exception e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
@@ -4334,6 +4505,8 @@ import java.net.URL;
     			System.out.println (e.toString());
     			res.setCode("-2");
 				res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -4346,16 +4519,17 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
+				_init ();
 				Integer id = new Integer (req.getDeleteMediaContent().getId());
-    			s.beginTransaction();
-    			s.createSQLQuery("DELETE FROM entertainmentcontent WHERE id = " + id.toString()).executeUpdate();
-    			s.getTransaction().commit();
+    			session.beginTransaction();
+    			session.createSQLQuery("DELETE FROM entertainmentcontent WHERE id = " + id.toString()).executeUpdate();
+    			session.getTransaction().commit();
     			res.setCode(id.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
 			} catch (Exception e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
@@ -4364,6 +4538,8 @@ import java.net.URL;
 				res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
+			} finally {
+				_finally ();
 			}
 			
 			return respdoc;
@@ -4376,19 +4552,20 @@ import java.net.URL;
 			OperationResult res = resp.addNewOut();
 			
 			try {
-				s.beginTransaction();
+				_init ();
+				session.beginTransaction();
 				
 				final MediaContent rEC = req.getUpdateMediaContent().getEc();
 				Integer savedId = storeEntertainmentContent(rEC, new Integer (rEC.getID()));
 				
-				s.getTransaction().commit();
+				session.getTransaction().commit();
 				
 				res.setCode(savedId.toString());
         		res.setDescription("ok");
         		res.setStatus((short) 1);
 			} catch (Exception e) {
 				try {
-    				if (s.getTransaction().isActive()) s.getTransaction().rollback();
+    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
 				}
     			
@@ -4397,6 +4574,8 @@ import java.net.URL;
     			res.setCode("-2");
 				res.setDescription("database error " + e.toString());
 				res.setStatus((short) 0);
+			} finally {
+				_finally();
 			}
 			
 			return respdoc;
@@ -4422,31 +4601,34 @@ import java.net.URL;
     		}
     		
     		try {
+    			_init ();
     			Integer taskId = new Integer (req.getGetQuestionnaireAnswersByTask().getTaskId());
-    			com.aladdin.sc.db.Task task = (com.aladdin.sc.db.Task) s.load(com.aladdin.sc.db.Task.class, taskId);
+    			com.aladdin.sc.db.Task task = (com.aladdin.sc.db.Task) session.load(com.aladdin.sc.db.Task.class, taskId);
     			
     			String sql = "SELECT id FROM questionnaireanswer WHERE ";
 				sql += "timestamp = '" + task.getDateTimeFulfilled().toString() + "' ";
 				sql += " AND question in (select id from questionnairequestion where quest = " + task.getQuestionnaire().toString() + ")";
 				
-				Object[] lqa = s.createSQLQuery(sql).list().toArray();
+				Object[] lqa = session.createSQLQuery(sql).list().toArray();
     			QuestionnaireAnswers rqas = resp.addNewOut();
     			rqas.setTaskID(taskId.toString());
     			
     			for (int j = 0; j < lqa.length; j++) {
     				QuestionnaireAnswer rqa = rqas.addNewAnswer();
-    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) s.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]); 
+    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]); 
     				rqa.setQuestionID(qa.getQuestion().toString());
     				rqa.setValue(qa.getValue());
     				rqas.setObjectID(qa.getObjectId().toString());
     				rqas.setUserID(qa.getUserId().toString());
     				
-    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) s.load(com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
+    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) session.load(com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
     				rqa.setGlobalID(qq.getGlobalId().toString());
     			}
     			
     		} catch (Exception e) {
     			e.printStackTrace();
+    		} finally {
+    			_finally();
     		}
 			
 			return respdoc;
@@ -4458,7 +4640,7 @@ import java.net.URL;
 			
 			try {
 				@SuppressWarnings("unchecked")
-				Object[] array = s.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);
+				Object[] array = session.createQuery("from Locale").list().toArray(new com.aladdin.sc.db.Locale[0]);
 				com.aladdin.sc.db.Locale[] locale = (Locale[]) array;
 				for (int i = 0; i < locale.length; i++) {
 					SystemParameter l = resp.addNewOut();
@@ -4513,11 +4695,11 @@ import java.net.URL;
     		
     		try {
     			String sql = "select id from carer where id not in (select carer from patient)";
-    			Object[] data = s.createSQLQuery(sql).list().toArray();
+    			Object[] data = session.createSQLQuery(sql).list().toArray();
     			
     			List<Carer> tmp = new ArrayList<Carer>();
     			for (int i = 0; i < data.length; i++) {
-    				tmp.add(exportCarer ((com.aladdin.sc.db.Carer) s.load(com.aladdin.sc.db.Carer.class, (Serializable) data[i])));
+    				tmp.add(exportCarer ((com.aladdin.sc.db.Carer) session.load(com.aladdin.sc.db.Carer.class, (Serializable) data[i])));
     			}
     			
     			resp.setOutArray(tmp.toArray(new Carer[0]));
@@ -4547,7 +4729,7 @@ import java.net.URL;
 				
 				String sql = "SELECT id FROM questionnairequestionanswer WHERE question = " + questionId.toString() + " AND value = " + value.toString();
 				System.out.println (sql);
-				List<?> _id = s.createSQLQuery(sql).list();
+				List<?> _id = session.createSQLQuery(sql).list();
 				if (_id.size() == 1) {
 					Integer id = (Integer) _id.get(0);
 					resp.setOut(getTranslate("questionnairequestionanswer", id, locale.getCode(), ""));
