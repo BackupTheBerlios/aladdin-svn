@@ -184,8 +184,8 @@ public class WarningsWindowController extends Window {
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		String id = (String)Sessions.getCurrent().getAttribute("userid");
 		try{
-			User userlogged = proxy.getUser(id);
-			String clinidlogged = userlogged.getPersonID();
+			//User userlogged = proxy.getUser(id);
+			//String clinidlogged = userlogged.getPersonID();
 			ArrayList<SearchCriteria> zerolist = new ArrayList<SearchCriteria>();
 			SearchCriteria patfil = this.showPatientWarnings();
 			SearchCriteria readfil = this.showReadOrAll();
