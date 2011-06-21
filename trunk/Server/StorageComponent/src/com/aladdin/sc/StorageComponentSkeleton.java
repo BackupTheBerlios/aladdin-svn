@@ -734,9 +734,9 @@ import eu.aladdin_project.xsd.Warning;
 			if (locale != null && locale.length() > 0) {
 				String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
 				Object[] trans = session.createSQLQuery(sql).list().toArray();
-				if (trans.length > 0) {
-					throw new LocaleException(locale + " is not supported");
-				}
+				//if (trans.length > 1) {
+				//	throw new LocaleException(locale + " is not supported");
+				//}
 				Integer localeId = getLocaleId(locale);
 				if (localeId == 0) return false;
 				
@@ -745,7 +745,12 @@ import eu.aladdin_project.xsd.Warning;
 				t.setLocale(localeId);
 				t.setEntity(entity);
 				t.setEntityid(entityId);
-				session.save(t);
+				if (trans != null && trans.length > 0) {
+					t.setId((Integer) ((Object[])trans[0])[0]);
+					session.merge(t);
+				} else {
+					session.save(t);
+				}
 				return t.getId() > 0;
 			}
 			return false;
@@ -1928,7 +1933,7 @@ import eu.aladdin_project.xsd.Warning;
     			res.setCode("-2");
     			res.setStatus((short) 0);
     			res.setDescription("database error. " + e.toString());
-    		} catch (LocaleException e) {
+    		} catch (Exception e) {
     			try {
     				if (session.getTransaction().isActive()) session.getTransaction().rollback();
     			} catch (TransactionException e2) {
@@ -1957,7 +1962,6 @@ import eu.aladdin_project.xsd.Warning;
 					return null;				
 				}
 			}
-			
 			
 			com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
 			
