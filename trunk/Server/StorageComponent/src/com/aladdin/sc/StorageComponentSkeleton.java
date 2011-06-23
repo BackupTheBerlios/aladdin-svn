@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.axis2.AxisFault;
+import org.hibernate.EmptyInterceptor;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -138,6 +139,14 @@ import eu.aladdin_project.xsd.Task;
 import eu.aladdin_project.xsd.User;
 import eu.aladdin_project.xsd.Warning;
 
+class MyInterceptor extends EmptyInterceptor {
+	private static final long serialVersionUID = -7205426371169287451L;
+	public String onPrepareStatement(String sql) {
+		System.out.println (sql);
+		return sql;
+	}
+}
+
 	class LocaleException extends Exception {
 		private static final long serialVersionUID = -7232119734945287619L;
 
@@ -176,7 +185,9 @@ import eu.aladdin_project.xsd.Warning;
     			com.aladdin.sc.config.Configuration config = new com.aladdin.sc.config.Configuration();
     			forumSC = config.forumSC;
     			
-				sessionFactory = new Configuration().configure(config.hibernateCfg).buildSessionFactory();
+				Configuration configure = new Configuration().configure(config.hibernateCfg);
+				configure.setInterceptor(new MyInterceptor());
+				sessionFactory = configure.buildSessionFactory();
     			System.out.println ("new sessionFactory");
     		} catch (Throwable ex) {
     			System.err.println("Initial SessionFactory creation failed." + ex);
@@ -2322,11 +2333,11 @@ import eu.aladdin_project.xsd.Warning;
     			
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
     			
-    			_fromDate.set(Calendar.HOUR_OF_DAY, 0);
+    			_fromDate.set(Calendar.HOUR, 0);
 				_fromDate.set(Calendar.MINUTE, 0);
 				_fromDate.set(Calendar.SECOND, 0);
 				
-				_toDate.set(Calendar.HOUR_OF_DAY, 23);
+				_toDate.set(Calendar.HOUR, 23);
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
 				
@@ -2340,7 +2351,6 @@ import eu.aladdin_project.xsd.Warning;
     			System.out.println (_fromDate.getTime().toString());
     			System.out.println (_toDate.getTime().toString());
     			System.out.println (userId);
-    			System.out.println (query.getQueryString());
     			
     			List<?> tl = query.list();
     			
