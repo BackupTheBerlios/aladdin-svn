@@ -2339,6 +2339,7 @@ import eu.aladdin_project.xsd.Warning;
     			
     			System.out.println (_fromDate.getTime().toString());
     			System.out.println (_toDate.getTime().toString());
+    			System.out.println (userId);
     			
     			List<?> tl = query.list();
     			
