@@ -2322,17 +2322,17 @@ import eu.aladdin_project.xsd.Warning;
     			
     			Integer userId = new Integer (req.getGetUserPlannedTasks().getUserId());
     			
-    			_fromDate.set(Calendar.HOUR, 0);
+    			_fromDate.set(Calendar.HOUR_OF_DAY, 0);
 				_fromDate.set(Calendar.MINUTE, 0);
 				_fromDate.set(Calendar.SECOND, 0);
 				
-				_toDate.set(Calendar.HOUR, 23);
+				_toDate.set(Calendar.HOUR_OF_DAY, 23);
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
 				
     			final Query query = session.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
-    			query.setString("a", _fromDate.getTime().toString());
-    			query.setString("b", _toDate.getTime().toString());
+    			query.setDate("a", _fromDate.getTime());
+    			query.setDate("b", _toDate.getTime());
     			query.setInteger("e", userId);
     			query.setCacheable(true);
     			query.setCacheRegion(null);
@@ -2340,6 +2340,7 @@ import eu.aladdin_project.xsd.Warning;
     			System.out.println (_fromDate.getTime().toString());
     			System.out.println (_toDate.getTime().toString());
     			System.out.println (userId);
+    			System.out.println (query.getQueryString());
     			
     			List<?> tl = query.list();
     			
