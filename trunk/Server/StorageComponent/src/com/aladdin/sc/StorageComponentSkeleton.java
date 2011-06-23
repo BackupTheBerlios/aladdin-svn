@@ -2331,7 +2331,7 @@ import eu.aladdin_project.xsd.Warning;
 				_toDate.set(Calendar.MINUTE, 59);
 				_toDate.set(Calendar.SECOND, 59);
 				
-    			final Query query = session.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
+    			final Query query = session.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e order by DateTimeAssigned");
     			query.setCalendar("a", _fromDate);
     			query.setCalendar("b", _toDate);
     			query.setInteger("e", userId);
