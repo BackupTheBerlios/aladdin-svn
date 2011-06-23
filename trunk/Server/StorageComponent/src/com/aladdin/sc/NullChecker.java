@@ -28,8 +28,20 @@ import eu.aladdin_project.xsd.Task;
 import eu.aladdin_project.xsd.User;
 import eu.aladdin_project.xsd.Warning;
 
+/**
+ * Helper class for checking null fields of object.
+ * @author Andrey Baboshin
+ *
+ */
 public class NullChecker {
 	
+	/**
+	 * Check object for null values
+	 * @param <T> type of the object
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public <T> T check (T v, Class<T> t) {
 		if (v == null) {
 			try {
@@ -43,6 +55,12 @@ public class NullChecker {
 		return v;
 	}
 
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Integer check (Integer v, Class<Integer> t) {
 		if (v == null) {
 			return new Integer (0);
@@ -50,12 +68,24 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Calendar check (Calendar v, Class<Calendar> t) {
 		if (v == null) v = Calendar.getInstance();
 		
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public AddressList check (AddressList v, Class<AddressList> t) {
 		if (v == null) v = AddressList.Factory.newInstance();
 		
@@ -72,6 +102,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public CommunicationList check (CommunicationList v, Class<CommunicationList> t) {
 		if (v == null) v = CommunicationList.Factory.newInstance();
 		
@@ -84,17 +120,12 @@ public class NullChecker {
 		return v;
 	}
 	
-/*	public Identifier check (Identifier v, Class<Identifier> t) {
-		if (v == null) v = Identifier.Factory.newInstance();
-		
-		v.setIssueAuthority(this.check(v.getIssueAuthority(), String.class));
-		v.setNumber(this.check(v.getNumber(), String.class));
-		v.setType(this.check(v.getType(), String.class));
-		v.setIssueDate(this.check(v.getIssueDate(), Calendar.class));
-		
-		return v;
-	}*/
-	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public IdentifierList check (IdentifierList v, Class<IdentifierList> t) {
 		if (v == null) v = IdentifierList.Factory.newInstance();
 		
@@ -108,6 +139,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public PersonData check (PersonData v, Class<PersonData> t) {
 		if (v == null) v = PersonData.Factory.newInstance();
 		
@@ -121,6 +158,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Clinician check (Clinician v, Class<Clinician> t) {
 		if (v == null) v = Clinician.Factory.newInstance();
 		
@@ -130,6 +173,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public SystemParameter check (SystemParameter v, Class<SystemParameter> t) {
 		if (v == null) v = SystemParameter.Factory.newInstance();
 		
@@ -139,6 +188,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public SocioDemographicData check (SocioDemographicData v, Class<SocioDemographicData> t) {
 		if (v == null) v = SocioDemographicData.Factory.newInstance();
 		
@@ -149,6 +204,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Carer check (Carer v, Class<Carer> t) {
 		if (v == null) v = Carer.Factory.newInstance();
 		
@@ -159,6 +220,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Patient check (Patient v, Class<Patient> t) {
 		if (v == null) v = Patient.Factory.newInstance();
 		
@@ -170,6 +237,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public QuestionnaireQuestionList check (QuestionnaireQuestionList v, Class<QuestionnaireQuestionList> t) {
 		if (v == null) v = QuestionnaireQuestionList.Factory.newInstance();
 		
@@ -180,6 +253,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public QuestionnaireQuestionAnswer check (QuestionnaireQuestionAnswer v, Class<QuestionnaireQuestionAnswer> t) {
 		if (v == null) v = QuestionnaireQuestionAnswer.Factory.newInstance();
 		
@@ -188,6 +267,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public QuestionnaireQuestionAnswerList check (QuestionnaireQuestionAnswerList v, Class<QuestionnaireQuestionAnswerList> t) {
 		if (v == null) v = QuestionnaireQuestionAnswerList.Factory.newInstance();
 		
@@ -198,6 +283,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public QuestionnaireQuestion check (QuestionnaireQuestion v, Class<QuestionnaireQuestion> t) {
 		if (v == null) v = QuestionnaireQuestion.Factory.newInstance();
 		
@@ -210,6 +301,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Questionnaire check (Questionnaire v, Class<Questionnaire> t) {
 		if (v == null) v = Questionnaire.Factory.newInstance();
 		
@@ -223,6 +320,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Warning check (Warning v, Class<Warning> t) {
 		if (v == null) v = Warning.Factory.newInstance();
 		
@@ -239,6 +342,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public SearchCriteria check (SearchCriteria v, Class<SearchCriteria> t) {
 		if (v == null) v = SearchCriteria.Factory.newInstance();
 		
@@ -250,6 +359,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Measurement check (Measurement v, Class<Measurement> t) {
 		if (v == null) v = Measurement.Factory.newInstance();
 		
@@ -261,6 +376,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public PatientAssessment check (PatientAssessment v, Class<PatientAssessment> t) {
 		if (v == null) v = PatientAssessment.Factory.newInstance();
 		
@@ -278,6 +399,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Task check (Task v, Class<Task> t) {
 		if (v == null) v = Task.Factory.newInstance();
 		
@@ -295,6 +422,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public ExternalService check (ExternalService v, Class<ExternalService> t) {
 		if (v == null) v = ExternalService.Factory.newInstance();
 		
@@ -305,6 +438,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public CarerAssessment check (CarerAssessment v, Class<CarerAssessment> t) {
 		if (v == null) v = CarerAssessment.Factory.newInstance();
 		
@@ -319,6 +458,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public Administrator check (Administrator v, Class<Administrator> t) {
 		if (v == null) v = Administrator.Factory.newInstance();
 		
@@ -328,6 +473,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public QuestionnaireAnswer check (QuestionnaireAnswer v, Class<QuestionnaireAnswer> t) {
 		if (v == null) v = QuestionnaireAnswer.Factory.newInstance();
 		
@@ -338,6 +489,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public QuestionnaireAnswers check (QuestionnaireAnswers v, Class<QuestionnaireAnswers> t) {
 		if (v == null) v = QuestionnaireAnswers.Factory.newInstance();
 		
@@ -353,6 +510,12 @@ public class NullChecker {
 		return v;
 	}
 	
+	/**
+	 * Check object for null values
+	 * @param v object to be checked
+	 * @param t class
+	 * @return checked object
+	 */
 	public User check (User v, Class<User> t) {
 		if (v == null) v = User.Factory.newInstance();
 		
