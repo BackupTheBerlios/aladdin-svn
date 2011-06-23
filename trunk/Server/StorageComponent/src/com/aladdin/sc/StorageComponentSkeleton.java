@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.axis2.AxisFault;
-import org.hibernate.EmptyInterceptor;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -2333,8 +2332,8 @@ import eu.aladdin_project.xsd.Warning;
 				_toDate.set(Calendar.SECOND, 59);
 				
     			final Query query = session.createQuery("select t from Task t where DateTimeAssigned between :a and :b and Executor = :e");
-    			query.setDate("a", _fromDate.getTime());
-    			query.setDate("b", _toDate.getTime());
+    			query.setCalendar("a", _fromDate);
+    			query.setCalendar("b", _toDate);
     			query.setInteger("e", userId);
     			query.setCacheable(true);
     			query.setCacheRegion(null);
