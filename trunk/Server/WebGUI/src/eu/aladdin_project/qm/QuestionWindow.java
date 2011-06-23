@@ -95,7 +95,8 @@ public class QuestionWindow extends Window{
 	}
 	
 	public void saveQuestion(){
-		if(this.answers == null || this.answers.size() == 0){
+		SystemDictionary.webguiLog("INFO", "QUESTION TYPE = "+this.type);
+		if((this.answers == null || this.answers.size() == 0) && !this.type.equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
 			showErrorMessage(true);
 		}else{
 			QuestionnaireQuestion q = new QuestionnaireQuestion();

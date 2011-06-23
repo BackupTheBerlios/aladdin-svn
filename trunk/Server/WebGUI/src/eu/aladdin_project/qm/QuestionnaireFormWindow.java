@@ -188,7 +188,7 @@ public class QuestionnaireFormWindow extends Window{
 		for(int i = 0; i<this.questionlist.size(); i++){
 			QuestionnaireQuestion elem = this.questionlist.get(i).getQuestion();
 			if(elem.getId().equals(question.getId())){
-				this.removeQuestionRow(getFellow(question.getId()+"-rowqstn"));
+				this.removeQuestionRow(getFellow(question.getId()+"-rowqstn"), false);
 			}
 		}
 		this.questionlist.add(new RelatedQuestion(parent,question));
@@ -268,12 +268,7 @@ public class QuestionnaireFormWindow extends Window{
 		return row;
 	}
 	
-	/**
-	 * Helper method to remove a question from the questionnaire (UI and data)
-	 * 
-	 * @param comp Row UI-component to be removed
-	 */
-	private void removeQuestionRow(Component comp){
+	private void removeQuestionRow(Component comp, boolean removechildren){
 		SystemDictionary.webguiLog("TRACE", comp.getId());
 		Rows rows = (Rows)getFellow("rows_questions");
 		String ID = comp.getId().substring(0, comp.getId().length()-8);
@@ -285,16 +280,24 @@ public class QuestionnaireFormWindow extends Window{
 				SystemDictionary.webguiLog("TRACE", "QSIZE after: "+this.questionlist.size());
 			}
 		}
-		
-		ArrayList<RelatedQuestion> copy = (ArrayList<RelatedQuestion>)this.questionlist.clone();
-		for(int i = 0 ; i < copy.size() ; i++){
-			if(copy.get(i).getParent().equals(ID)){
-				this.removeQuestionRow((Row)getFellow(copy.get(i).getId()+"-rowqstn"));
+		if(removechildren){
+			ArrayList<RelatedQuestion> copy = (ArrayList<RelatedQuestion>)this.questionlist.clone();
+			for(int i = 0 ; i < copy.size() ; i++){
+				if(copy.get(i).getParent().equals(ID)){
+					this.removeQuestionRow((Row)getFellow(copy.get(i).getId()+"-rowqstn"));
+				}
 			}
 		}
-		
 		//this.removeQuestion(ID);
-		
+	}
+	
+	/**
+	 * Helper method to remove a question from the questionnaire (UI and data)
+	 * 
+	 * @param comp Row UI-component to be removed
+	 */
+	private void removeQuestionRow(Component comp){
+		this.removeQuestionRow(comp, true);
 	}
 	
 	/**
