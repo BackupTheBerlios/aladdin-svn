@@ -139,14 +139,6 @@ import eu.aladdin_project.xsd.Task;
 import eu.aladdin_project.xsd.User;
 import eu.aladdin_project.xsd.Warning;
 
-class MyInterceptor extends EmptyInterceptor {
-	private static final long serialVersionUID = -7205426371169287451L;
-	public String onPrepareStatement(String sql) {
-		System.out.println (sql);
-		return sql;
-	}
-}
-
 	class LocaleException extends Exception {
 		private static final long serialVersionUID = -7232119734945287619L;
 
@@ -186,7 +178,6 @@ class MyInterceptor extends EmptyInterceptor {
     			forumSC = config.forumSC;
     			
 				Configuration configure = new Configuration().configure(config.hibernateCfg);
-				configure.setInterceptor(new MyInterceptor());
 				sessionFactory = configure.buildSessionFactory();
     			System.out.println ("new sessionFactory");
     		} catch (Throwable ex) {
