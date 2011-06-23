@@ -197,12 +197,34 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 	 * Constant for "between"
 	 */
 	public final static int OP_BETWEEN = 7;
-	
+	/**
+	 * Constant for the Carer type
+	 */
+	public final static int U_CARER = 3;
+	/**
+	 * Constant for the Patient type
+	 */
+	public final static int U_PATIENT = 4;
+	/**
+	 * Constant for the Clinician type
+	 */
+	public final static int U_CLINICIAN = 2;
+	/**
+	 * Constant for the Admin type
+	 */
+	public final static int U_ADMIN = 1;
+	/**
+	 * Constant for the Service type
+	 */
+	public final static int U_SERVICE = 5;
 	/**
 	 * Map of code of operation => string representation
 	 */
 	private static HashMap<Integer, String> op;
-	
+	/**
+	 * URI of the Forum sc.php
+	 */
+	private final static String forumSC;
 	/**
 	 * Instance of the session factory
 	 */
@@ -211,10 +233,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 	 * Instance of the session
 	 */
 	private Session session;
-	/**
-	 * URI of the Forum sc.php
-	 */
-	private final static String forumSC;
 	
 	static {
 		try {
@@ -239,73 +257,11 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 	}
 	
 	/**
-	 * Help functions for printing methods name.
-	 * @param e
-	 */
-	private static void trace(StackTraceElement e[]) {
-		boolean doNext = false;
-		for (StackTraceElement s : e) {
-			if (doNext) {
-				System.out.println(s.getMethodName());
-				return;
-			}
-			doNext = s.getMethodName().equals("getStackTrace");
-		}
-	}
-	
-	/**
-	 * Constant for the Carer type
-	 */
-	public final static int U_CARER = 3;
-	/**
-	 * Constant for the Patient type
-	 */
-	public final static int U_PATIENT = 4;
-	/**
-	 * Constant for the Clinician type
-	 */
-	public final static int U_CLINICIAN = 2;
-	/**
-	 * Constant for the Admin type
-	 */
-	public final static int U_ADMIN = 1;
-	/**
-	 * Constant for the Service type
-	 */
-	public final static int U_SERVICE = 5;
-	
-	/**
-	 * Check is the user type of.
-	 * @param userId is of the user
-	 * @param userType type for the checking
-	 * @return boolean
-	 */
-	private boolean checkUser (String userId, Integer userType) {
-		if (userId == null || userId == "") return true;
-		try {
-    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
-			int size = session.createSQLQuery(sql).list().size();
-			return (size > 0);
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	
-	/**
 	 * Default constructor
 	 */
 	public StorageComponentSkeleton () {
 		System.out.println ("_init");
 		session = sessionFactory.openSession();
-	}
-	
-	/**
-	 * Flush & close session
-	 */
-	private void _finally () {
-		System.out.println ("_finally");
-		session.flush();
-		session.close();
 	}
 	
 	/* (non-Javadoc)
@@ -338,7 +294,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			com.aladdin.sc.db.Clinician clinician = new com.aladdin.sc.db.Clinician ();
 			
-			Integer pdid = storePersondata(data.getPersonData(), null); 
+			Integer pdid = importPersondata(data.getPersonData(), null); 
 			
 			clinician.setPersondata(pdid);
 			session.save(clinician);
@@ -366,100 +322,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
-	/**
-	 * Store persondata object
-	 * @param rpd persondata
-	 * @param id id if exist
-	 * @return id of the stored data
-	 */
-	private Integer storePersondata (PersonData rpd, Integer id) {
-		com.aladdin.sc.db.PersonData pd = new com.aladdin.sc.db.PersonData();
-		pd.setName(rpd.getName());
-		pd.setSurname(rpd.getSurname());
-		if (id != null && id > 0) {
-			pd.setId(id);
-			session.merge(pd);
-		} else {
-			session.save (pd);
-		}
-
-		Integer pdid = pd.getId();
-		
-		session.createSQLQuery("DELETE FROM address WHERE persondata = " + pd.getId().toString()).executeUpdate();
-		session.createSQLQuery("DELETE FROM identifier WHERE persondata = " + pd.getId().toString()).executeUpdate();
-		session.createSQLQuery("DELETE FROM communication WHERE persondata = " + pd.getId().toString()).executeUpdate();
-		
-		Address[] rad = rpd.getAddressList().getAddressArray();
-		for (int i = 0; i < rad.length; i++) {
-			storeAddress(rad[i], pdid);
-		}
-
-		Identifier[] rid = rpd.getIdentifierList().getIdentifierArray();
-		for (int i = 0; i < rid.length; i++) {
-			storeIdentifier(rid[i], pdid);
-		}
-		
-		Communication[] rcm = rpd.getCommunicationList().getCommunicationArray();
-		for (int i = 0; i < rcm.length; i++) {
-			storeCommunication(rcm[i], pdid);
-		}
-		
-		return pd.getId();
-	}
-
-	/**
-	 * Store communication object
-	 * @param rcm communication
-	 * @param pdid id of the persondata
-	 */
-	private void storeCommunication(Communication rcm, Integer pdid) {
-		com.aladdin.sc.db.Communication cm = new com.aladdin.sc.db.Communication ();
-		cm.setPersondata(pdid);
-		cm.setType(rcm.getType());
-		cm.setValue(rcm.getValue());
-		cm.setNotes(rcm.getNotes());
-		cm.setIsPrimary(rcm.getIsPrimary());
-		session.save (cm);
-	}
-
-	/**
-	 * Store identifier object
-	 * @param rid identifier
-	 * @param pdid id of the persondata
-	 */
-	private void storeIdentifier(Identifier rid, Integer pdid) {
-		com.aladdin.sc.db.Identifier id = new com.aladdin.sc.db.Identifier ();
-		id.setPersondata(pdid);
-		id.setType(rid.getType());
-		id.setNumber(rid.getNumber());
-		Calendar issueDate = rid.getIssueDate();
-		
-		long timeInMillis = 0;
-		if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
-		id.setIssueDate(new Timestamp(timeInMillis));
-		id.setIssueAuthority(rid.getIssueAuthority());
-		session.save (id);
-	}
-
-	/**
-	 * Store address
-	 * @param rad address
-	 * @param pdid id of the persondata
-	 */
-	private void storeAddress(Address rad, Integer pdid) {
-		com.aladdin.sc.db.Address ad = new com.aladdin.sc.db.Address ();
-		ad.setPersondata(pdid);
-		ad.setCity(rad.getCity());
-		ad.setCountry(rad.getCountry());
-		ad.setCounty(rad.getCounty());
-		ad.setNotes(rad.getNotes());
-		ad.setStreet(rad.getStreet());
-		ad.setStreetNo(rad.getStreetNo());
-		ad.setZipCode(rad.getZipCode());
-		ad.setIsPrimary(rad.getIsPrimary());
-		session.save(ad);
-	}
-
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#createPatient(eu.aladdin_project.storagecomponent.CreatePatientDocument)
 	 */
@@ -493,9 +355,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 
 			com.aladdin.sc.db.Patient p = new com.aladdin.sc.db.Patient ();
 
-			Integer pdid = storePersondata(data.getPersonData(), null);
+			Integer pdid = importPersondata(data.getPersonData(), null);
 
-			Integer sdid = storeSocioDemographic(data.getSDData(), null);
+			Integer sdid = importSocioDemographic(data.getSDData(), null);
 
 			GeneralPractitioner gp = data.getGeneralPractitioner();
 			if (gp != null) {
@@ -550,38 +412,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 
-	/**
-	 * Store socioDemographicData
-	 * @param rsd socioDemographicData
-	 * @param id id of the data if exist
-	 * @return if of the stored data
-	 */
-	private Integer storeSocioDemographic (SocioDemographicData rsd, Integer id) {
-		com.aladdin.sc.db.SocioDemographicData sd = new com.aladdin.sc.db.SocioDemographicData ();
-		
-		sd.setBirthday(new Timestamp (rsd.getBirthday().getTimeInMillis()));
-
-		if (rsd.getGender() != null && rsd.getGender().getCode() != null && !rsd.getGender().getCode().isEmpty()) sd.setGender(new Integer(rsd.getGender().getCode()));
-		else sd.setGender(0);
-
-		if (rsd.getMaritalStatus() != null && rsd.getMaritalStatus().getCode() != null && !rsd.getMaritalStatus().getCode().isEmpty()) sd.setMaritalStatus(new Integer(rsd.getMaritalStatus().getCode()));
-		else sd.setMaritalStatus(0);
-
-		sd.setChildren(new Integer(rsd.getChildren()));
-
-		if (rsd.getLivingWith() != null && rsd.getLivingWith().getCode() != null && !rsd.getLivingWith().getCode().isEmpty()) sd.setLivingWith(new Integer(rsd.getLivingWith().getCode()));
-		else sd.setLivingWith(0);
-
-		if (id != null && id > 0) {
-			sd.setId(id);
-			session.merge(sd);
-		} else {
-			session.save(sd);
-		}
-		
-		return sd.getId();
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#createCarer(eu.aladdin_project.storagecomponent.CreateCarerDocument)
 	 */
@@ -615,9 +445,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			com.aladdin.sc.db.Carer p = new com.aladdin.sc.db.Carer ();
 			
-			Integer pdid = storePersondata(data.getPersonData(), null);
+			Integer pdid = importPersondata(data.getPersonData(), null);
 			
-			Integer sdid = storeSocioDemographic(data.getSDData(), null);
+			Integer sdid = importSocioDemographic(data.getSDData(), null);
 			
 			p.setPersondata(pdid);
 			p.setSd(sdid);
@@ -678,7 +508,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			session.beginTransaction();
 			
-			storeQuestionnaire(rquest, locale);
+			importQuestionnaire(rquest, locale);
 			
 			session.getTransaction().commit();
 			
@@ -715,205 +545,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 
-	/**
-	 * Update QuestionnaireQuestion
-	 * @param rqq QuestionnaireQuestion
-	 * @param questId questionnaire id
-	 * @param parentId id of the parent question
-	 * @param locale
-	 * @throws HibernateException
-	 * @throws LocaleException
-	 */
-	private void updateQQ(QuestionnaireQuestion rqq, int questId, Integer parentId, SystemParameter locale) throws HibernateException, LocaleException {
-		com.aladdin.sc.db.QuestionnaireQuestion qq = new com.aladdin.sc.db.QuestionnaireQuestion ();
-		qq.setType(rqq.getType());
-		try {
-			qq.setId(new Integer (rqq.getId()));
-		} catch (NumberFormatException e) {
-			qq.setId(null);
-		} catch (Exception e) {
-			qq.setId(null);
-		}
-		qq.setCondition(new Integer(rqq.getCondition()));
-		
-		qq.setPosition(rqq.getPosition());
-		
-		qq.setParentid(parentId);
-		qq.setQuest(questId);
-		qq.setGlobalId(rqq.getGlobalID());
-		
-		session.saveOrUpdate(qq);
-		
-		if (!setTranslate("questionnairequestion", qq.getId(), locale, rqq.getTitle())) {
-			qq.setTitle(rqq.getTitle());
-			session.saveOrUpdate(qq);
-		}
-		
-		if (rqq.getQuestions() != null && rqq.getQuestions().getQuestionArray() != null) {
-			for (int i = 0; i < rqq.getQuestions().getQuestionArray().length; i++) {
-    			updateQQ (rqq.getQuestions().getQuestionArray(i), questId, qq.getId(), locale);
-    		}    			
-		}
-		
-		if (rqq.getAnswers() != null && rqq.getAnswers().getAnswerArray() != null) {
-			QuestionnaireQuestionAnswer rqqa = null;
-    		List<Integer> qqaId = new ArrayList<Integer>();
-    		
-			for (int i = 0; i < rqq.getAnswers().getAnswerArray().length; i++) {
-    			rqqa = rqq.getAnswers().getAnswerArray(i);
-    			
-    			String sql = "SELECT id FROM questionnairequestionanswer WHERE question = '" + qq.getId().toString() + "' AND value = '" + new Integer (rqqa.getValue()).toString()  + "'";
-				List<?> _id = session.createSQLQuery(sql).list();
-    			
-    			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = null;
-    			
-    			if (_id.size() > 0) {
-    				qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) session.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer)_id.get(0));
-    				qqa.setQuestion(qq.getId());
-    				qqa.setValue(new Integer(rqqa.getValue()));
-    				qqa.setDeleted(false);
-    				qqa.setPosition(rqqa.getPosition());
-    				session.merge(qqa);
-    			} else {
-    				qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
-    				qqa.setValue(new Integer(rqqa.getValue()));
-    				qqa.setQuestion(qq.getId());
-    				qqa.setPosition(rqqa.getPosition());
-    				qqa.setDeleted(false);
-    				session.saveOrUpdate(qqa);
-    			}
-    			
-    			qqaId.add(qqa.getId());
-    			
-    			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getDescription())) {
-        			qqa.setDescription(rqqa.getDescription());
-        			session.saveOrUpdate(qq);
-        		}
-    			
-    		}
-		}
-	}
-	
-	/**
-	 * Get translated value for the object
-	 * @param entity entity name
-	 * @param entityId if of the entity
-	 * @param locale
-	 * @param def default value
-	 * @return value
-	 */
-	private String getTranslate (String entity, Integer entityId, String locale, String def) {
-		if (locale != null && locale.length() > 0) {
-			
-			final Query query = session.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
-			query.setInteger("locale", getLocaleId(locale));
-			query.setString("entity", entity);
-			query.setInteger("entityid", entityId);
-			query.setCacheable(true);
-			query.setCacheRegion(null);
-			
-			List<?> data = query.list();
-			if (data.size() == 1) {
-				com.aladdin.sc.db.Translate trans = (com.aladdin.sc.db.Translate) data.get(0);
-				return trans.getValue();
-			}
-		}
-		return def;
-	}
-	
-	/**
-	 * Get translated value for the object
-	 * @param entity entity name
-	 * @param entityId if of the entity
-	 * @param locale
-	 * @param def default value
-	 * @return value
-	 */
-	private String getTranslate (String entity, Integer entityId, SystemParameter locale, String def) {
-		if (locale == null) return def;
-		return getTranslate(entity, entityId, locale.getCode(), def);
-	}
-	
-	/**
-	 * Save translated value for the object
-	 * @param entity entity name
-	 * @param entityId if of the entity
-	 * @param locale
-	 * @param def default value
-	 * @return true if ok
-	 * @throws LocaleException
-	 */
-	private boolean setTranslate (String entity, Integer entityId, SystemParameter locale, String value) throws LocaleException {
-		if (locale == null) return false;
-		return setTranslate(entity, entityId, locale.getCode(), value);
-	}
-	
-	/**
-	 * Get locale id
-	 * @param locale
-	 * @return id of the locale
-	 */
-	private Integer getLocaleId (String locale) {
-		final Query query = session.createQuery("select l from Locale l where name = :name");
-		query.setString("name", locale);
-		query.setCacheable(true);
-		query.setCacheRegion(null);
-		List<?> data = query.list();
-		if (data.size() == 1) {
-			return ((com.aladdin.sc.db.Locale)data.get(0)).getId();
-		}
-		
-		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
-		l.setName(locale);
-		session.save(l);
-		return l.getId();
-	}
-	
-	/**
-	 * Get locale id
-	 * @param locale
-	 * @return id of the locale
-	 */
-	private Integer getLocaleId (SystemParameter locale) {
-		if (locale == null || locale.getCode() == null || locale.getCode() == "") return getLocaleId ("en_US");
-		return getLocaleId(locale.getCode());
-	}
-	
-	/**
-	 * Save translated value for the object
-	 * @param entity entity name
-	 * @param entityId if of the entity
-	 * @param locale
-	 * @param def default value
-	 * @return true if ok
-	 * @throws LocaleException
-	 */
-	private boolean setTranslate (String entity, Integer entityId, String locale, String value) throws LocaleException {
-		if (locale != null && locale.length() > 0) {
-			String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
-			Object[] trans = session.createSQLQuery(sql).list().toArray();
-			//if (trans.length > 1) {
-			//	throw new LocaleException(locale + " is not supported");
-			//}
-			Integer localeId = getLocaleId(locale);
-			if (localeId == 0) return false;
-			
-			com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
-			t.setValue(value);
-			t.setLocale(localeId);
-			t.setEntity(entity);
-			t.setEntityid(entityId);
-			if (trans != null && trans.length > 0) {
-				t.setId((Integer) ((Object[])trans[0])[0]);
-				session.merge(t);
-			} else {
-				session.save(t);
-			}
-			return t.getId() > 0;
-		}
-		return false;
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#listOfQuestionnaires(eu.aladdin_project.storagecomponent.ListOfQuestionnairesDocument)
 	 */
@@ -1069,8 +700,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			Integer id = new Integer (data.getID());
 			com.aladdin.sc.db.Carer p = (com.aladdin.sc.db.Carer) session.load (com.aladdin.sc.db.Carer.class, id);
-			storePersondata(data.getPersonData(), p.getPersondata());
-			storeSocioDemographic(data.getSDData(), p.getSd());
+			importPersondata(data.getPersonData(), p.getPersondata());
+			importSocioDemographic(data.getSDData(), p.getSd());
 			session.update(p);
 			
 			session.getTransaction().commit();
@@ -1121,8 +752,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		try {
-			
-			
 			Integer id = new Integer (req.getDeleteAdministrator().getId());
 			
 			if (id < 1) throw new Exception ("error");
@@ -1199,16 +828,14 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		try {
-			
-			
 			Patient data = req.getUpdatePatient().getData();
 			
 			session.beginTransaction();
 			
 			Integer id = new Integer (data.getID());
 			com.aladdin.sc.db.Patient p = (com.aladdin.sc.db.Patient) session.load (com.aladdin.sc.db.Patient.class, id);
-			storePersondata(data.getPersonData(), p.getPersondata());
-			storeSocioDemographic(data.getSDData(), p.getSd());
+			importPersondata(data.getPersonData(), p.getPersondata());
+			importSocioDemographic(data.getSDData(), p.getSd());
 			
 			p.setCcname(data.getConsulterInCharge().getName());
 			p.setCcphone(data.getConsulterInCharge().getPhone());
@@ -1447,7 +1074,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			Integer pid = new Integer (pa.getId());
 			for (int i = 0; i < rpa.getClinicalDataArray().length; i++) {
-				storeMeasurement(rpa.getClinicalDataArray(i), pid);
+				importMeasurement(rpa.getClinicalDataArray(i), pid);
 			}
 			
 			session.getTransaction().commit();
@@ -1473,28 +1100,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 
-	/**
-	 * Store measurement
-	 * @param rm measurement
-	 * @param paid id if exist
-	 * @return id of the stored data
-	 */
-	private Integer storeMeasurement(Measurement rm, Integer paid) {
-		long timeInMillis = 0;
-		com.aladdin.sc.db.Measurement m = new com.aladdin.sc.db.Measurement ();
-		if (paid != null) m.setPatientassessment (paid);
-		m.setType(rm.getType().getCode());
-		m.setValue(new BigDecimal (rm.getValue()));
-		if (rm.getDateTime() != null) timeInMillis = rm.getDateTime().getTimeInMillis();
-		m.setDatetime(new Timestamp(timeInMillis));
-		m.setUnits(rm.getUnits());
-		m.setLowerlimit(new BigDecimal (rm.getLowerLimit()));
-		m.setUpperlimit(new BigDecimal (rm.getUpperLimit()));
-		if (rm.getTaskID() != null) m.setTask(new Integer (rm.getTaskID()));
-		session.save (m);
-		return m.getId();
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#storeMeasurements(eu.aladdin_project.storagecomponent.StoreMeasurementsDocument)
 	 */
@@ -1530,7 +1135,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			for (int i = 0; i < rm.length; i++) {
 				try {
 					session.beginTransaction();
-					id = storeMeasurement(rm[i], null);
+					id = importMeasurement(rm[i], null);
 					session.getTransaction().commit();
 					
 					RaacStub rs = new RaacStub();
@@ -1633,160 +1238,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 
-	/**
-	 * Export patient into XSD-Schema format
-	 * @param patient data from DB
-	 * @return XSD conform
-	 */
-	private Patient exportPatient(com.aladdin.sc.db.Patient patient) {
-		Patient p = Patient.Factory.newInstance();
-		p.setID(patient.getId().toString());
-		p.setPersonData(exportPersonData(patient.getM_PersonData()));
-		p.setSDData (exportSocioDemographicData(patient.getM_SocioDemographicData()));
-		p.setResponsibleClinicianID(patient.getClinician().toString());
-		
-		Consulter c = Consulter.Factory.newInstance();
-		c.setName(patient.getCcname());
-		c.setEmail(patient.getCcemail());
-		c.setPhone(patient.getCcphone());
-		p.setConsulterInCharge(c);
-		
-		SocialWorker sw = SocialWorker.Factory.newInstance();
-		sw.setName(patient.getSwname());
-		sw.setEmail(patient.getSwemail());
-		sw.setPhone(patient.getSwphone());
-		p.setSocialWorker(sw);
-		
-		GeneralPractitioner gp = GeneralPractitioner.Factory.newInstance();
-		gp.setName(patient.getGpname());
-		gp.setEmail(patient.getGpemail());
-		gp.setPhone(patient.getGpphone());
-		p.setGeneralPractitioner(gp);
-		
-		p.setPatientCarer(exportCarer((com.aladdin.sc.db.Carer) this.session.load(com.aladdin.sc.db.Carer.class, patient.getCarer())));
-		
-		return p;
-	}
-
-	/**
-	 * Export carer into XSD-Schema format
-	 * @param carer data from DB
-	 * @return XSD conform
-	 */
-	private Carer exportCarer(com.aladdin.sc.db.Carer carer) {
-		Carer c = Carer.Factory.newInstance();
-		c.setID(carer.getId().toString());
-		c.setPersonData(exportPersonData(carer.getM_PersonData()));
-		c.setSDData(exportSocioDemographicData(carer.getM_SocioDemographicData()));
-		return c;
-	}
-	
-	/**
-	 * Export SocioDemographicData into XSD-Schema format
-	 * @param SDData data from DB
-	 * @return XSD conform
-	 */
-	private SocioDemographicData exportSocioDemographicData (com.aladdin.sc.db.SocioDemographicData SDData) {
-		SocioDemographicData sd = SocioDemographicData.Factory.newInstance();
-		
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(SDData.getBirthday());
-		
-		sd.setBirthday(cal);
-		
-		SystemParameter gender = SystemParameter.Factory.newInstance();
-		gender.setCode(SDData.getGender().toString());
-		
-		sd.setGender(gender);
-		
-		SystemParameter maritalStatus = SystemParameter.Factory.newInstance();
-		maritalStatus.setCode(SDData.getMaritalStatus().toString());
-		
-		sd.setMaritalStatus(maritalStatus);
-		sd.setChildren(SDData.getChildren().shortValue());
-		
-		SystemParameter livingWith = SystemParameter.Factory.newInstance();
-		livingWith.setCode(SDData.getLivingWith().toString());
-		
-		sd.setLivingWith(livingWith);
-		return sd;
-	}
-
-	/**
-	 * Export PersonData into XSD-Schema format
-	 * @param personData data from DB
-	 * @return XSD conform
-	 */
-	private PersonData exportPersonData(com.aladdin.sc.db.PersonData personData) {
-		PersonData pd = PersonData.Factory.newInstance();
-		pd.setSurname(personData.getSurname());
-		pd.setName(personData.getName());
-		
-		Object[] id = personData.getIdentifiers().toArray();
-		IdentifierList idl = pd.addNewIdentifierList();
-		for (int i = 0; i < id.length; i++) {
-			exportIdentifier( (com.aladdin.sc.db.Identifier) id[i], idl);
-		}
-		
-		Object[] ad = personData.getAddresss().toArray();
-		AddressList adl = pd.addNewAddressList();
-		for (int i = 0; i < ad.length; i++) {
-			exportAddress( (com.aladdin.sc.db.Address) ad[i], adl);
-		}
-		
-		Object[] cm = personData.getCommunications().toArray();
-		CommunicationList cml = pd.addNewCommunicationList();
-		for (int i = 0; i < cm.length; i++) {
-			exportCommunication( (com.aladdin.sc.db.Communication) cm[i], cml);
-		}
-		return pd;
-	}
-
-	/**
-	 * Export communication 
-	 * @param cm data for export
-	 * @param cml place to export
-	 */
-	private void exportCommunication(com.aladdin.sc.db.Communication cm, CommunicationList cml) {
-		Communication rcm = cml.addNewCommunication();
-		rcm.setType(cm.getType());
-		rcm.setValue(cm.getValue());
-		rcm.setNotes(cm.getNotes());
-		rcm.setIsPrimary(cm.getIsPrimary());
-	}
-
-	/**
-	 * Export Address 
-	 * @param ad data for export
-	 * @param adl place to export
-	 */
-	private void exportAddress(com.aladdin.sc.db.Address ad, AddressList adl) {
-		Address rad = adl.addNewAddress();
-		rad.setStreet(ad.getStreet());
-		rad.setStreetNo(ad.getStreetNo());
-		rad.setCity(ad.getCity());
-		rad.setCountry(ad.getCountry());
-		rad.setCounty(ad.getCounty());
-		rad.setZipCode(ad.getZipCode());
-		rad.setNotes(ad.getNotes());
-		rad.setIsPrimary(ad.getIsPrimary());
-	}
-
-	/**
-	 * Export Identifier 
-	 * @param id data for export
-	 * @param idl place to export
-	 */
-	private void exportIdentifier(com.aladdin.sc.db.Identifier id, IdentifierList idl) {
-		Identifier rid = idl.addNewIdentifier();
-		rid.setType(id.getType());
-		rid.setNumber(id.getNumber());
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis(id.getIssueDate().getTime());
-		rid.setIssueDate(c);
-		rid.setIssueAuthority(id.getIssueAuthority());
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#deleteCarerAssessment(eu.aladdin_project.storagecomponent.DeleteCarerAssessmentDocument)
 	 */
@@ -2160,7 +1611,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			Questionnaire rq = req.getCreateQuestionnaire().getData();
 			rq.setID(null);
-			com.aladdin.sc.db.Questionnaire q = storeQuestionnaire(rq, req.getCreateQuestionnaire().getLocale());
+			com.aladdin.sc.db.Questionnaire q = importQuestionnaire(rq, req.getCreateQuestionnaire().getLocale());
 			
 			session.getTransaction().commit();
 			
@@ -2196,53 +1647,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 
-	/**
-	 * Store Questionnaire
-	 * @param rq questionnaire for storing
-	 * @param locale
-	 * @return DB object
-	 * @throws HibernateException
-	 * @throws LocaleException
-	 */
-	private com.aladdin.sc.db.Questionnaire storeQuestionnaire (Questionnaire rq, SystemParameter locale) throws HibernateException, LocaleException {
-		if (rq.getID() != null) {
-			try {
-				@SuppressWarnings("unused")
-				Integer id = new Integer (rq.getID());
-			} catch (NumberFormatException e) {
-				return null;
-			} catch (Exception e) {
-				return null;				
-			}
-		}
-		
-		com.aladdin.sc.db.Questionnaire q = new com.aladdin.sc.db.Questionnaire ();
-		
-		q.setVersion(new BigDecimal (rq.getVersion()));
-		if (rq.getID() != null) {
-			try {
-				q.setId(new Integer (rq.getID()));
-			} catch (Exception e) {
-				e.printStackTrace();
-				q = null;
-				return null;
-			}
-		}
-		session.saveOrUpdate(q);
-		
-		if (!setTranslate("questionnaire", q.getId(), locale, rq.getTitle())) {
-			q.setTitle(rq.getTitle());
-			session.saveOrUpdate(q);
-		}
-		
-		QuestionnaireQuestion[] rqq = rq.getQuestionArray();
-		
-		for (int i = 0; i < rqq.length; i++) {
-			updateQQ(rqq[i], q.getId(), null, locale);
-		}
-		return q;
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#getPatientMeasurement(eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument)
 	 */
@@ -2327,28 +1731,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 
-	/**
-	 * Export measurement
-	 * @param m measurement for export
-	 * @return XSD conform
-	 */
-	private Measurement exportMeasurement(com.aladdin.sc.db.Measurement m) {
-		Measurement rm = Measurement.Factory.newInstance();
-		SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
-		rmeasurementType.setCode(m.getType());
-
-		rm.setType(rmeasurementType);
-		rm.setValue(m.getValue().doubleValue ());
-		Timestamp datetime = m.getDatetime();
-		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis(datetime.getTime());
-		rm.setDateTime(c);
-		rm.setUnits(m.getUnits());
-		rm.setLowerLimit(m.getLowerlimit().doubleValue ());
-		rm.setUpperLimit(m.getUpperlimit().doubleValue ());
-		return rm;
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#deleteQuestionnaire(eu.aladdin_project.storagecomponent.DeleteQuestionnaireDocument)
 	 */
@@ -2380,7 +1762,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			Integer id = new Integer (req.getDeleteQuestionnaire().getId());
 			Object[] qq = session.createSQLQuery("SELECT id FROM questionnairequestion WHERE quest = " + id.toString()).list().toArray();
 			for (int i = 0; i < qq.length; i++) {
-				dropQQ ((Integer)qq[i]);
+				dropQuestionnaireQuestion ((Integer)qq[i]);
 			}
 			session.createSQLQuery("DELETE FROM questionnaire WHERE id = " + id.toString()).executeUpdate();
 			
@@ -2405,50 +1787,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		return respdoc;
-	}
-	
-	/**
-	 * Delete QuestionnaireQuestion 
-	 * @param id of the QuestionnaireQuestion
-	 */
-	private void dropQQ (Integer id) {
-		Object[] qq = session.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
-		for (int i = 0; i < qq.length; i++) {
-			dropQQ ((Integer) qq[i]);
-		}
-		session.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
-		session.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
-		session.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
-	}
-	
-	/**
-	 * Store task in the DB
-	 * @param rtask for storing
-	 * @return DB object
-	 */
-	private com.aladdin.sc.db.Task storeTask (Task rtask) {
-		com.aladdin.sc.db.Task task = new com.aladdin.sc.db.Task ();
-		task.setTaskType(new Integer (rtask.getTaskType().getCode()));
-		task.setDateTimeAssigned(new Timestamp(rtask.getDateTimeAssigned().getTimeInMillis()));
-		task.setDateTimeFulfilled(new Timestamp(rtask.getDateTimeFulfilled().getTimeInMillis()));
-		task.setTaskStatus(new Integer (rtask.getTaskStatus().getCode()));
-		task.setUrl(rtask.getURL());
-		task.setExecutor(new Integer (rtask.getExecutorID()));
-		task.setAssigner(new Integer (rtask.getAssignerID()));
-		task.setObject(new Integer (rtask.getObjectID()));
-		task.setText(rtask.getText());
-		
-		if (rtask.getQuestionnaire() != null) {
-			
-			if (rtask.getQuestionnaire().getID() != null && rtask.getQuestionnaire().getID().compareTo("") != 0) {
-				try {
-					task.setQuestionnaire(new Integer (rtask.getQuestionnaire().getID()));
-				} catch (Exception e) {
-					task.setQuestionnaire(null);
-				}
-			}
-		}
-		return task;
 	}
 	
 	/* (non-Javadoc)
@@ -2480,7 +1818,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			session.beginTransaction();
 			
-			com.aladdin.sc.db.Task task = storeTask(req.getAssignTask().getTask());
+			com.aladdin.sc.db.Task task = importTask(req.getAssignTask().getTask());
 			
 			session.save (task);
 			session.getTransaction().commit();
@@ -2569,14 +1907,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
-	/**
-	 * Get count of task types.
-	 * @return count
-	 */
-	private Integer getTaskTypesCount () {
-		return 7;
-	}
-
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#getUserPlannedTasks(eu.aladdin_project.storagecomponent.GetUserPlannedTasksDocument)
 	 */
@@ -2666,105 +1996,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
-	/**
-	 * Export Questionnaire
-	 * @param q DB object for export
-	 * @param locale
-	 * @return XSD conform
-	 */
-	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire q, SystemParameter locale) {
-		Questionnaire rq = Questionnaire.Factory.newInstance();
-		rq.setID(q.getId().toString());
-		
-		rq.setTitle(getTranslate("questionnaire", q.getId(), locale, q.getTitle()));
-		
-		rq.setVersion(q.getVersion().doubleValue ());
-		
-		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-		
-		final Query query = session.createQuery("select qq from QuestionnaireQuestion qq where qq.quest = :quest AND qq.parentid is null");
-		query.setInteger("quest", q.getId());
-		query.setCacheable(true);
-		query.setCacheRegion(null);
-		List<?> qql = query.list (); 
-		
-		for (int i = 0; i < qql.size(); i++) {
-			rqql.add(exportQQ((com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), true, locale));
-		}
-		rq.setQuestionArray((QuestionnaireQuestion[]) rqql.toArray(new QuestionnaireQuestion[0]));
-		
-		return rq;
-	}
-	
-	/**
-	 * Export QuestionnaireQuestion
-	 * @param qq DB object for export
-	 * @param level1
-	 * @param locale
-	 * @return XSD conform
-	 */
-	private QuestionnaireQuestion exportQQ (com.aladdin.sc.db.QuestionnaireQuestion qq, boolean level1, SystemParameter locale) {
-		QuestionnaireQuestion rqq = QuestionnaireQuestion.Factory.newInstance();
-		
-		rqq.setType(qq.getType());
-		rqq.setId(qq.getId().toString());
-		rqq.setGlobalID(qq.getGlobalId());
-		rqq.setPosition(qq.getPosition());
-		
-		if (!level1) {
-			rqq.setCondition(qq.getCondition().shortValue());
-		}
-		
-		rqq.setTitle(getTranslate("questionnairequestion", qq.getId(), locale, ""));
-		
-		List<QuestionnaireQuestionAnswer> rqqal = new ArrayList<QuestionnaireQuestionAnswer> ();
-		
-		final Query q2 = session.createQuery("select qqa from QuestionnaireQuestionAnswer qqa where deleted = :deleted and question = :question");
-		q2.setInteger("question", qq.getId());
-		q2.setBoolean("deleted", false);
-		q2.setCacheable(true);
-		q2.setCacheRegion(null);
-		List<?> qqal = q2.list();
-		
-		for (int i = 0; i < qqal.size(); i++) {
-			rqqal.add(exportQQA((com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal.get(i), locale));
-		}
-		rqq.addNewAnswers();
-		rqq.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) rqqal.toArray(new QuestionnaireQuestionAnswer[0]));
-		
-		List<QuestionnaireQuestion> rqql = new ArrayList<QuestionnaireQuestion>();
-		
-		final Query q3 = session.createQuery("select qq from QuestionnaireQuestion qq where parentid = :parentid");
-		q3.setInteger("parentid", qq.getId());
-		q3.setCacheable(true);
-		q3.setCacheRegion(null);
-		List<?> qql = q3.list();
-		
-		for (int i = 0; i < qql.size(); i++) {
-			rqql.add ( exportQQ ( (com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), false, locale ) );
-		}
-		rqq.addNewQuestions().setQuestionArray(rqql.toArray(new QuestionnaireQuestion[0]));
-		
-		return rqq;
-	}
-	
-	/**
-	 * Export QuestionnaireQuestionAnswer
-	 * @param qqa DB object for export
-	 * @param locale
-	 * @return XSD conform
-	 */
-	private QuestionnaireQuestionAnswer exportQQA (com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa, SystemParameter locale) {
-		QuestionnaireQuestionAnswer rqqa = QuestionnaireQuestionAnswer.Factory.newInstance();
-		
-		rqqa.setDescription(getTranslate("questionnairequestionanswer", qqa.getId(), locale, ""));
-		if (qqa.getPosition() != null) rqqa.setPosition(qqa.getPosition());
-		
-		rqqa.setValue(qqa.getValue().shortValue());
-		
-		return rqqa;
-	}
-	     
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#createExternalService(eu.aladdin_project.storagecomponent.CreateExternalServiceDocument)
 	 */
@@ -3002,7 +2233,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			com.aladdin.sc.db.Administrator administrator = new com.aladdin.sc.db.Administrator ();
 			
-			Integer pdid = storePersondata(data.getPersonData(), null); 
+			Integer pdid = importPersondata(data.getPersonData(), null); 
 			
 			administrator.setPersonData(pdid);
 			session.save(administrator);
@@ -3125,18 +2356,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		return respdoc;
-	}
-	
-	/**
-	 * Export clinician
-	 * @param clinician DB object for export
-	 * @return XSD conform
-	 */
-	private Clinician exportClinician(com.aladdin.sc.db.Clinician clinician) {
-		Clinician p = Clinician.Factory.newInstance();
-		p.setID(clinician.getId().toString());
-		p.setPersonData(exportPersonData(clinician.getM_PersonData()));
-		return p;
 	}
 	
 	/* (non-Javadoc)
@@ -3294,18 +2513,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
-	/**
-	 * Export Administrator
-	 * @param administrator DB object for export
-	 * @return XSD conform
-	 */
-	private Administrator exportAdministrator (com.aladdin.sc.db.Administrator administrator) {
-		Administrator p = Administrator.Factory.newInstance();
-		p.setID(administrator.getId().toString());
-		p.setPersonData(exportPersonData(administrator.getM_PersonData()));
-		return p;
-	}
-	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#updateAdministrator(eu.aladdin_project.storagecomponent.UpdateAdministratorDocument)
 	 */
@@ -3338,7 +2545,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			Integer id = new Integer (data.getID());
 			com.aladdin.sc.db.Administrator p = (com.aladdin.sc.db.Administrator) session.load (com.aladdin.sc.db.Administrator.class, id);
-			storePersondata(data.getPersonData(), p.getPersonData());
+			importPersondata(data.getPersonData(), p.getPersonData());
 			session.update(p);
 			session.getTransaction().commit();
 			
@@ -3905,7 +3112,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			Integer id = new Integer (data.getID());
 			com.aladdin.sc.db.Clinician p = (com.aladdin.sc.db.Clinician) session.load (com.aladdin.sc.db.Clinician.class, id);
-			storePersondata(data.getPersonData(), p.getPersondata());
+			importPersondata(data.getPersonData(), p.getPersondata());
 			session.update(p);
 			
 			session.getTransaction().commit();
@@ -3985,17 +3192,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
-	/**
-	 * Check if the user exist
-	 * @param username
-	 * @param id
-	 * @return true if exist
-	 */
-	private Integer existUser (String username, Integer id) {
-		if (session.createSQLQuery("SELECT * FROM aladdinuser WHERE username like '" + username + "' AND id != '" + id.toString() + "'").list().size() > 1) return 1;
-		return 0;
-	}
-     
     /* (non-Javadoc)
      * @see com.aladdin.sc.StorageComponentSkeletonInterface#updateUser(eu.aladdin_project.storagecomponent.UpdateUserDocument)
      */
@@ -4196,29 +3392,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
     	return respdoc;
     }
     
-    /**
-     * Load URL and get first char of content
-     * @param urlStr URL
-     * @return first char
-     */
-    private char getURLChar (String urlStr) {
-    	try {
-            URL url = new URL (urlStr);
-            System.out.println (urlStr);
-            URLConnection uc = url.openConnection ();
-            uc.connect ();
-            InputStream is = uc.getInputStream ();
-            byte[] b = new byte[5];
-            is.read (b, 0, 5);
-            System.out.println ((char)(b[0]));
-            return (char)(b[0]);
-        } catch (java.net.MalformedURLException e){
-            return 0;
-        } catch (java.io.IOException e){
-            return 0;
-        }
-    }
-
     /* (non-Javadoc)
      * @see com.aladdin.sc.StorageComponentSkeletonInterface#createUser(eu.aladdin_project.storagecomponent.CreateUserDocument)
      */
@@ -4691,7 +3864,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			while (startDate.compareTo(endDate) < 0) {
 				rtask.setDateTimeAssigned(startDate);
-				com.aladdin.sc.db.Task task = storeTask(rtask);
+				com.aladdin.sc.db.Task task = importTask(rtask);
     			session.save (task);
 				startDate.add(Calendar.DAY_OF_YEAR, frequency);
 			}
@@ -4902,31 +4075,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
-	/**
-	 * Store MediaContent
-	 * @param rEC data for store
-	 * @param id id if exist
-	 * @return id of the stored data
-	 */
-	private Integer storeEntertainmentContent (MediaContent rEC, Integer id) {
-		com.aladdin.sc.db.EntertainmentContent ec = new com.aladdin.sc.db.EntertainmentContent();
-		ec.setCategory(rEC.getCategory());
-		ec.setText(rEC.getText());
-		ec.setTitle(rEC.getTitle());
-		ec.setType(rEC.getType());
-		ec.setUrl(rEC.getUrl());
-		ec.setEnabled(rEC.getEnabled());
-		if (id != null && id > 0) {
-			ec.setId(id);
-			session.merge(ec);
-		} else {
-			ec.setId(null);
-			session.save(ec);
-		}
-		
-		return ec.getId();
-	}
-
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#addMediaContent(eu.aladdin_project.storagecomponent.AddMediaContentDocument)
 	 */
@@ -4940,7 +4088,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			session.beginTransaction();
 			
-			Integer savedId = storeEntertainmentContent(req.getAddMediaContent().getIn(), null);
+			Integer savedId = importMediaContent(req.getAddMediaContent().getIn(), null);
 			
 			session.getTransaction().commit();
 			
@@ -5015,7 +4163,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			session.beginTransaction();
 			
 			final MediaContent rEC = req.getUpdateMediaContent().getEc();
-			Integer savedId = storeEntertainmentContent(rEC, new Integer (rEC.getID()));
+			Integer savedId = importMediaContent(rEC, new Integer (rEC.getID()));
 			
 			session.getTransaction().commit();
 			
@@ -5211,6 +4359,851 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		return respdoc;
+	}
+	
+	/**
+	 * Flush & close session
+	 */
+	private void _finally () {
+		System.out.println ("_finally");
+		session.flush();
+		session.close();
+	}
+	
+	/**
+	 * Help functions for printing methods name.
+	 * @param e
+	 */
+	private static void trace(StackTraceElement e[]) {
+		boolean doNext = false;
+		for (StackTraceElement s : e) {
+			if (doNext) {
+				System.out.println(s.getMethodName());
+				return;
+			}
+			doNext = s.getMethodName().equals("getStackTrace");
+		}
+	}
+	
+	/**
+	 * Check is the user type of.
+	 * @param userId is of the user
+	 * @param userType type for the checking
+	 * @return boolean
+	 */
+	private boolean checkUser (String userId, Integer userType) {
+		if (userId == null || userId == "") return true;
+		try {
+    		String sql = "SELECT * FROM aladdinuser WHERE id = '" + userId + "' AND type = '" + userType.toString() + "'";
+			int size = session.createSQLQuery(sql).list().size();
+			return (size > 0);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	/**
+	 * Delete QuestionnaireQuestion 
+	 * @param id of the QuestionnaireQuestion
+	 */
+	private void dropQuestionnaireQuestion (Integer id) {
+		Object[] qq = session.createSQLQuery("SELECT id FROM questionnairequestion WHERE parentid = " + id.toString()).list().toArray();
+		for (int i = 0; i < qq.length; i++) {
+			dropQuestionnaireQuestion ((Integer) qq[i]);
+		}
+		session.createSQLQuery("DELETE FROM questionnairequestionanswer WHERE question = " + id.toString()).executeUpdate();
+		session.createSQLQuery("DELETE FROM questionnaireanswer WHERE question = " + id.toString()).executeUpdate();
+		session.createSQLQuery("DELETE FROM questionnairequestion WHERE id = " + id.toString()).executeUpdate();
+	}
+	
+	/**
+	 * Store task in the DB
+	 * @param xTask for storing
+	 * @return DB object
+	 */
+	private com.aladdin.sc.db.Task importTask (Task xTask) {
+		com.aladdin.sc.db.Task dTask = new com.aladdin.sc.db.Task ();
+		dTask.setTaskType(new Integer (xTask.getTaskType().getCode()));
+		dTask.setDateTimeAssigned(new Timestamp(xTask.getDateTimeAssigned().getTimeInMillis()));
+		dTask.setDateTimeFulfilled(new Timestamp(xTask.getDateTimeFulfilled().getTimeInMillis()));
+		dTask.setTaskStatus(new Integer (xTask.getTaskStatus().getCode()));
+		dTask.setUrl(xTask.getURL());
+		dTask.setExecutor(new Integer (xTask.getExecutorID()));
+		dTask.setAssigner(new Integer (xTask.getAssignerID()));
+		dTask.setObject(new Integer (xTask.getObjectID()));
+		dTask.setText(xTask.getText());
+		
+		if (xTask.getQuestionnaire() != null) {
+			
+			if (xTask.getQuestionnaire().getID() != null && xTask.getQuestionnaire().getID().compareTo("") != 0) {
+				try {
+					dTask.setQuestionnaire(new Integer (xTask.getQuestionnaire().getID()));
+				} catch (Exception e) {
+					dTask.setQuestionnaire(null);
+				}
+			}
+		}
+		return dTask;
+	}
+	
+	/**
+	 * Store persondata object
+	 * @param xPersonData persondata
+	 * @param id id if exist
+	 * @return id of the stored data
+	 */
+	private Integer importPersondata (PersonData xPersonData, Integer id) {
+		com.aladdin.sc.db.PersonData dPersonData = new com.aladdin.sc.db.PersonData();
+		dPersonData.setName(xPersonData.getName());
+		dPersonData.setSurname(xPersonData.getSurname());
+		if (id != null && id > 0) {
+			dPersonData.setId(id);
+			session.merge(dPersonData);
+		} else {
+			session.save (dPersonData);
+		}
+
+		Integer pdid = dPersonData.getId();
+		
+		session.createSQLQuery("DELETE FROM address WHERE persondata = " + dPersonData.getId().toString()).executeUpdate();
+		session.createSQLQuery("DELETE FROM identifier WHERE persondata = " + dPersonData.getId().toString()).executeUpdate();
+		session.createSQLQuery("DELETE FROM communication WHERE persondata = " + dPersonData.getId().toString()).executeUpdate();
+		
+		Address[] rad = xPersonData.getAddressList().getAddressArray();
+		for (int i = 0; i < rad.length; i++) {
+			importAddress(rad[i], pdid);
+		}
+
+		Identifier[] rid = xPersonData.getIdentifierList().getIdentifierArray();
+		for (int i = 0; i < rid.length; i++) {
+			importIdentifier(rid[i], pdid);
+		}
+		
+		Communication[] rcm = xPersonData.getCommunicationList().getCommunicationArray();
+		for (int i = 0; i < rcm.length; i++) {
+			importCommunication(rcm[i], pdid);
+		}
+		
+		return dPersonData.getId();
+	}
+
+	/**
+	 * Store communication object
+	 * @param xCommunication communication
+	 * @param personDataId id of the persondata
+	 */
+	private void importCommunication(Communication xCommunication, Integer personDataId) {
+		com.aladdin.sc.db.Communication dCommunication = new com.aladdin.sc.db.Communication ();
+		dCommunication.setPersondata(personDataId);
+		dCommunication.setType(xCommunication.getType());
+		dCommunication.setValue(xCommunication.getValue());
+		dCommunication.setNotes(xCommunication.getNotes());
+		dCommunication.setIsPrimary(xCommunication.getIsPrimary());
+		session.save (dCommunication);
+	}
+
+	/**
+	 * Store identifier object
+	 * @param xIdentifier identifier
+	 * @param personDataId id of the persondata
+	 */
+	private void importIdentifier(Identifier xIdentifier, Integer personDataId) {
+		com.aladdin.sc.db.Identifier dIdentifier = new com.aladdin.sc.db.Identifier ();
+		dIdentifier.setPersondata(personDataId);
+		dIdentifier.setType(xIdentifier.getType());
+		dIdentifier.setNumber(xIdentifier.getNumber());
+		Calendar issueDate = xIdentifier.getIssueDate();
+		
+		long timeInMillis = 0;
+		if (issueDate != null) timeInMillis = issueDate.getTimeInMillis();
+		dIdentifier.setIssueDate(new Timestamp(timeInMillis));
+		dIdentifier.setIssueAuthority(xIdentifier.getIssueAuthority());
+		session.save (dIdentifier);
+	}
+
+	/**
+	 * Store address
+	 * @param xAddress address
+	 * @param personDataId id of the persondata
+	 */
+	private void importAddress(Address xAddress, Integer personDataId) {
+		com.aladdin.sc.db.Address dAddress = new com.aladdin.sc.db.Address ();
+		dAddress.setPersondata(personDataId);
+		dAddress.setCity(xAddress.getCity());
+		dAddress.setCountry(xAddress.getCountry());
+		dAddress.setCounty(xAddress.getCounty());
+		dAddress.setNotes(xAddress.getNotes());
+		dAddress.setStreet(xAddress.getStreet());
+		dAddress.setStreetNo(xAddress.getStreetNo());
+		dAddress.setZipCode(xAddress.getZipCode());
+		dAddress.setIsPrimary(xAddress.getIsPrimary());
+		session.save(dAddress);
+	}
+	
+	/**
+	 * Store socioDemographicData
+	 * @param xSD socioDemographicData
+	 * @param id id of the data if exist
+	 * @return if of the stored data
+	 */
+	private Integer importSocioDemographic (SocioDemographicData xSD, Integer id) {
+		com.aladdin.sc.db.SocioDemographicData dSD = new com.aladdin.sc.db.SocioDemographicData ();
+		
+		dSD.setBirthday(new Timestamp (xSD.getBirthday().getTimeInMillis()));
+
+		if (xSD.getGender() != null && xSD.getGender().getCode() != null && !xSD.getGender().getCode().isEmpty()) dSD.setGender(new Integer(xSD.getGender().getCode()));
+		else dSD.setGender(0);
+
+		if (xSD.getMaritalStatus() != null && xSD.getMaritalStatus().getCode() != null && !xSD.getMaritalStatus().getCode().isEmpty()) dSD.setMaritalStatus(new Integer(xSD.getMaritalStatus().getCode()));
+		else dSD.setMaritalStatus(0);
+
+		dSD.setChildren(new Integer(xSD.getChildren()));
+
+		if (xSD.getLivingWith() != null && xSD.getLivingWith().getCode() != null && !xSD.getLivingWith().getCode().isEmpty()) dSD.setLivingWith(new Integer(xSD.getLivingWith().getCode()));
+		else dSD.setLivingWith(0);
+
+		if (id != null && id > 0) {
+			dSD.setId(id);
+			session.merge(dSD);
+		} else {
+			session.save(dSD);
+		}
+		
+		return dSD.getId();
+	}
+	
+	/**
+	 * Update QuestionnaireQuestion
+	 * @param xQuestionnaireQuestion QuestionnaireQuestion
+	 * @param questionnaireId questionnaire id
+	 * @param parentId id of the parent question
+	 * @param locale
+	 * @throws HibernateException
+	 * @throws LocaleException
+	 */
+	private void updateQuestionnaireQuestion(QuestionnaireQuestion xQuestionnaireQuestion, int questionnaireId, Integer parentId, SystemParameter locale) throws HibernateException, LocaleException {
+		com.aladdin.sc.db.QuestionnaireQuestion dQuestionnaireQuestion = new com.aladdin.sc.db.QuestionnaireQuestion ();
+		dQuestionnaireQuestion.setType(xQuestionnaireQuestion.getType());
+		try {
+			dQuestionnaireQuestion.setId(new Integer (xQuestionnaireQuestion.getId()));
+		} catch (NumberFormatException e) {
+			dQuestionnaireQuestion.setId(null);
+		} catch (Exception e) {
+			dQuestionnaireQuestion.setId(null);
+		}
+		dQuestionnaireQuestion.setCondition(new Integer(xQuestionnaireQuestion.getCondition()));
+		
+		dQuestionnaireQuestion.setPosition(xQuestionnaireQuestion.getPosition());
+		
+		dQuestionnaireQuestion.setParentid(parentId);
+		dQuestionnaireQuestion.setQuest(questionnaireId);
+		dQuestionnaireQuestion.setGlobalId(xQuestionnaireQuestion.getGlobalID());
+		
+		session.saveOrUpdate(dQuestionnaireQuestion);
+		
+		if (!setTranslate("questionnairequestion", dQuestionnaireQuestion.getId(), locale, xQuestionnaireQuestion.getTitle())) {
+			dQuestionnaireQuestion.setTitle(xQuestionnaireQuestion.getTitle());
+			session.saveOrUpdate(dQuestionnaireQuestion);
+		}
+		
+		if (xQuestionnaireQuestion.getQuestions() != null && xQuestionnaireQuestion.getQuestions().getQuestionArray() != null) {
+			for (int i = 0; i < xQuestionnaireQuestion.getQuestions().getQuestionArray().length; i++) {
+    			updateQuestionnaireQuestion (xQuestionnaireQuestion.getQuestions().getQuestionArray(i), questionnaireId, dQuestionnaireQuestion.getId(), locale);
+    		}    			
+		}
+		
+		if (xQuestionnaireQuestion.getAnswers() != null && xQuestionnaireQuestion.getAnswers().getAnswerArray() != null) {
+			QuestionnaireQuestionAnswer rqqa = null;
+    		List<Integer> qqaId = new ArrayList<Integer>();
+    		
+			for (int i = 0; i < xQuestionnaireQuestion.getAnswers().getAnswerArray().length; i++) {
+    			rqqa = xQuestionnaireQuestion.getAnswers().getAnswerArray(i);
+    			
+    			String sql = "SELECT id FROM questionnairequestionanswer WHERE question = '" + dQuestionnaireQuestion.getId().toString() + "' AND value = '" + new Integer (rqqa.getValue()).toString()  + "'";
+				List<?> _id = session.createSQLQuery(sql).list();
+    			
+    			com.aladdin.sc.db.QuestionnaireQuestionAnswer qqa = null;
+    			
+    			if (_id.size() > 0) {
+    				qqa = (com.aladdin.sc.db.QuestionnaireQuestionAnswer) session.load(com.aladdin.sc.db.QuestionnaireQuestionAnswer.class, (Integer)_id.get(0));
+    				qqa.setQuestion(dQuestionnaireQuestion.getId());
+    				qqa.setValue(new Integer(rqqa.getValue()));
+    				qqa.setDeleted(false);
+    				qqa.setPosition(rqqa.getPosition());
+    				session.merge(qqa);
+    			} else {
+    				qqa = new com.aladdin.sc.db.QuestionnaireQuestionAnswer ();
+    				qqa.setValue(new Integer(rqqa.getValue()));
+    				qqa.setQuestion(dQuestionnaireQuestion.getId());
+    				qqa.setPosition(rqqa.getPosition());
+    				qqa.setDeleted(false);
+    				session.saveOrUpdate(qqa);
+    			}
+    			
+    			qqaId.add(qqa.getId());
+    			
+    			if (!setTranslate("questionnairequestionanswer", qqa.getId(), locale, rqqa.getDescription())) {
+        			qqa.setDescription(rqqa.getDescription());
+        			session.saveOrUpdate(dQuestionnaireQuestion);
+        		}
+    			
+    		}
+		}
+	}
+	
+	/**
+	 * Get translated value for the object
+	 * @param entity entity name
+	 * @param entityId if of the entity
+	 * @param locale
+	 * @param def default value
+	 * @return value
+	 */
+	private String getTranslate (String entity, Integer entityId, String locale, String def) {
+		if (locale != null && locale.length() > 0) {
+			
+			final Query query = session.createQuery("select t from Translate t where t.locale = :locale AND t.entity = :entity AND t.entityid = :entityid");
+			query.setInteger("locale", getLocaleId(locale));
+			query.setString("entity", entity);
+			query.setInteger("entityid", entityId);
+			query.setCacheable(true);
+			query.setCacheRegion(null);
+			
+			List<?> data = query.list();
+			if (data.size() == 1) {
+				com.aladdin.sc.db.Translate trans = (com.aladdin.sc.db.Translate) data.get(0);
+				return trans.getValue();
+			}
+		}
+		return def;
+	}
+	
+	/**
+	 * Get translated value for the object
+	 * @param entity entity name
+	 * @param entityId if of the entity
+	 * @param locale
+	 * @param def default value
+	 * @return value
+	 */
+	private String getTranslate (String entity, Integer entityId, SystemParameter locale, String def) {
+		if (locale == null) return def;
+		return getTranslate(entity, entityId, locale.getCode(), def);
+	}
+	
+	/**
+	 * Save translated value for the object
+	 * @param entity entity name
+	 * @param entityId if of the entity
+	 * @param locale
+	 * @param def default value
+	 * @return true if ok
+	 * @throws LocaleException
+	 */
+	private boolean setTranslate (String entity, Integer entityId, SystemParameter locale, String value) throws LocaleException {
+		if (locale == null) return false;
+		return setTranslate(entity, entityId, locale.getCode(), value);
+	}
+	
+	/**
+	 * Save translated value for the object
+	 * @param entity entity name
+	 * @param entityId if of the entity
+	 * @param locale
+	 * @param def default value
+	 * @return true if ok
+	 * @throws LocaleException
+	 */
+	private boolean setTranslate (String entity, Integer entityId, String locale, String value) throws LocaleException {
+		if (locale != null && locale.length() > 0) {
+			String sql = "SELECT t.id, t.value FROM translate as t INNER JOIN locale as l ON (l.id = t.locale) WHERE l.name = '" + locale + "' AND entity = '" + entity + "' AND entityid = " + entityId.toString();
+			Object[] trans = session.createSQLQuery(sql).list().toArray();
+			//if (trans.length > 1) {
+			//	throw new LocaleException(locale + " is not supported");
+			//}
+			Integer localeId = getLocaleId(locale);
+			if (localeId == 0) return false;
+			
+			com.aladdin.sc.db.Translate t = new com.aladdin.sc.db.Translate ();
+			t.setValue(value);
+			t.setLocale(localeId);
+			t.setEntity(entity);
+			t.setEntityid(entityId);
+			if (trans != null && trans.length > 0) {
+				t.setId((Integer) ((Object[])trans[0])[0]);
+				session.merge(t);
+			} else {
+				session.save(t);
+			}
+			return t.getId() > 0;
+		}
+		return false;
+	}
+	
+	/**
+	 * Get locale id
+	 * @param locale
+	 * @return id of the locale
+	 */
+	private Integer getLocaleId (String locale) {
+		final Query query = session.createQuery("select l from Locale l where name = :name");
+		query.setString("name", locale);
+		query.setCacheable(true);
+		query.setCacheRegion(null);
+		List<?> data = query.list();
+		if (data.size() == 1) {
+			return ((com.aladdin.sc.db.Locale)data.get(0)).getId();
+		}
+		
+		com.aladdin.sc.db.Locale l = new com.aladdin.sc.db.Locale();
+		l.setName(locale);
+		session.save(l);
+		return l.getId();
+	}
+	
+	/**
+	 * Get locale id
+	 * @param locale
+	 * @return id of the locale
+	 */
+	private Integer getLocaleId (SystemParameter locale) {
+		if (locale == null || locale.getCode() == null || locale.getCode() == "") return getLocaleId ("en_US");
+		return getLocaleId(locale.getCode());
+	}
+	
+	/**
+	 * Store measurement
+	 * @param xMeasurement measurement
+	 * @param patientAssessmentId id of the patientAssessment
+	 * @return id of the stored data
+	 */
+	private Integer importMeasurement(Measurement xMeasurement, Integer patientAssessmentId) {
+		long timeInMillis = 0;
+		com.aladdin.sc.db.Measurement dMeasurement = new com.aladdin.sc.db.Measurement ();
+		if (patientAssessmentId != null) dMeasurement.setPatientassessment (patientAssessmentId);
+		dMeasurement.setType(xMeasurement.getType().getCode());
+		dMeasurement.setValue(new BigDecimal (xMeasurement.getValue()));
+		if (xMeasurement.getDateTime() != null) timeInMillis = xMeasurement.getDateTime().getTimeInMillis();
+		dMeasurement.setDatetime(new Timestamp(timeInMillis));
+		dMeasurement.setUnits(xMeasurement.getUnits());
+		dMeasurement.setLowerlimit(new BigDecimal (xMeasurement.getLowerLimit()));
+		dMeasurement.setUpperlimit(new BigDecimal (xMeasurement.getUpperLimit()));
+		if (xMeasurement.getTaskID() != null) dMeasurement.setTask(new Integer (xMeasurement.getTaskID()));
+		session.save (dMeasurement);
+		return dMeasurement.getId();
+	}
+	
+	/**
+	 * Export patient into XSD-Schema format
+	 * @param dPatient data from DB
+	 * @return XSD conform
+	 */
+	private Patient exportPatient(com.aladdin.sc.db.Patient dPatient) {
+		Patient xPatient = Patient.Factory.newInstance();
+		xPatient.setID(dPatient.getId().toString());
+		xPatient.setPersonData(exportPersonData(dPatient.getM_PersonData()));
+		xPatient.setSDData (exportSocioDemographicData(dPatient.getM_SocioDemographicData()));
+		xPatient.setResponsibleClinicianID(dPatient.getClinician().toString());
+		
+		Consulter xConsulter = Consulter.Factory.newInstance();
+		xConsulter.setName(dPatient.getCcname());
+		xConsulter.setEmail(dPatient.getCcemail());
+		xConsulter.setPhone(dPatient.getCcphone());
+		xPatient.setConsulterInCharge(xConsulter);
+		
+		SocialWorker xSocialWorker = SocialWorker.Factory.newInstance();
+		xSocialWorker.setName(dPatient.getSwname());
+		xSocialWorker.setEmail(dPatient.getSwemail());
+		xSocialWorker.setPhone(dPatient.getSwphone());
+		xPatient.setSocialWorker(xSocialWorker);
+		
+		GeneralPractitioner xGeneralPractitioner = GeneralPractitioner.Factory.newInstance();
+		xGeneralPractitioner.setName(dPatient.getGpname());
+		xGeneralPractitioner.setEmail(dPatient.getGpemail());
+		xGeneralPractitioner.setPhone(dPatient.getGpphone());
+		xPatient.setGeneralPractitioner(xGeneralPractitioner);
+		
+		xPatient.setPatientCarer(exportCarer((com.aladdin.sc.db.Carer) this.session.load(com.aladdin.sc.db.Carer.class, dPatient.getCarer())));
+		
+		return xPatient;
+	}
+
+	/**
+	 * Export carer into XSD-Schema format
+	 * @param dCarer data from DB
+	 * @return XSD conform
+	 */
+	private Carer exportCarer(com.aladdin.sc.db.Carer dCarer) {
+		Carer xCarer = Carer.Factory.newInstance();
+		xCarer.setID(dCarer.getId().toString());
+		xCarer.setPersonData(exportPersonData(dCarer.getM_PersonData()));
+		xCarer.setSDData(exportSocioDemographicData(dCarer.getM_SocioDemographicData()));
+		return xCarer;
+	}
+	
+	/**
+	 * Export SocioDemographicData into XSD-Schema format
+	 * @param dSD data from DB
+	 * @return XSD conform
+	 */
+	private SocioDemographicData exportSocioDemographicData (com.aladdin.sc.db.SocioDemographicData dSD) {
+		SocioDemographicData xSD = SocioDemographicData.Factory.newInstance();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dSD.getBirthday());
+		
+		xSD.setBirthday(cal);
+		
+		SystemParameter gender = SystemParameter.Factory.newInstance();
+		gender.setCode(dSD.getGender().toString());
+		
+		xSD.setGender(gender);
+		
+		SystemParameter maritalStatus = SystemParameter.Factory.newInstance();
+		maritalStatus.setCode(dSD.getMaritalStatus().toString());
+		
+		xSD.setMaritalStatus(maritalStatus);
+		xSD.setChildren(dSD.getChildren().shortValue());
+		
+		SystemParameter livingWith = SystemParameter.Factory.newInstance();
+		livingWith.setCode(dSD.getLivingWith().toString());
+		
+		xSD.setLivingWith(livingWith);
+		return xSD;
+	}
+
+	/**
+	 * Export PersonData into XSD-Schema format
+	 * @param dPersonData data from DB
+	 * @return XSD conform
+	 */
+	private PersonData exportPersonData(com.aladdin.sc.db.PersonData dPersonData) {
+		PersonData xPersonData = PersonData.Factory.newInstance();
+		xPersonData.setSurname(dPersonData.getSurname());
+		xPersonData.setName(dPersonData.getName());
+		
+		Object[] id = dPersonData.getIdentifiers().toArray();
+		IdentifierList idl = xPersonData.addNewIdentifierList();
+		for (int i = 0; i < id.length; i++) {
+			exportIdentifier( (com.aladdin.sc.db.Identifier) id[i], idl);
+		}
+		
+		Object[] ad = dPersonData.getAddresss().toArray();
+		AddressList adl = xPersonData.addNewAddressList();
+		for (int i = 0; i < ad.length; i++) {
+			exportAddress( (com.aladdin.sc.db.Address) ad[i], adl);
+		}
+		
+		Object[] cm = dPersonData.getCommunications().toArray();
+		CommunicationList cml = xPersonData.addNewCommunicationList();
+		for (int i = 0; i < cm.length; i++) {
+			exportCommunication( (com.aladdin.sc.db.Communication) cm[i], cml);
+		}
+		return xPersonData;
+	}
+
+	/**
+	 * Export communication 
+	 * @param dCommunication data for export
+	 * @param xCommunicationList place to export
+	 */
+	private void exportCommunication(com.aladdin.sc.db.Communication dCommunication, CommunicationList xCommunicationList) {
+		Communication rcm = xCommunicationList.addNewCommunication();
+		rcm.setType(dCommunication.getType());
+		rcm.setValue(dCommunication.getValue());
+		rcm.setNotes(dCommunication.getNotes());
+		rcm.setIsPrimary(dCommunication.getIsPrimary());
+	}
+
+	/**
+	 * Export Address 
+	 * @param dAddress data for export
+	 * @param xAddressList place to export
+	 */
+	private void exportAddress(com.aladdin.sc.db.Address dAddress, AddressList xAddressList) {
+		Address rad = xAddressList.addNewAddress();
+		rad.setStreet(dAddress.getStreet());
+		rad.setStreetNo(dAddress.getStreetNo());
+		rad.setCity(dAddress.getCity());
+		rad.setCountry(dAddress.getCountry());
+		rad.setCounty(dAddress.getCounty());
+		rad.setZipCode(dAddress.getZipCode());
+		rad.setNotes(dAddress.getNotes());
+		rad.setIsPrimary(dAddress.getIsPrimary());
+	}
+
+	/**
+	 * Export Identifier 
+	 * @param dIdentifier data for export
+	 * @param xIdentifierList place to export
+	 */
+	private void exportIdentifier(com.aladdin.sc.db.Identifier dIdentifier, IdentifierList xIdentifierList) {
+		Identifier rid = xIdentifierList.addNewIdentifier();
+		rid.setType(dIdentifier.getType());
+		rid.setNumber(dIdentifier.getNumber());
+		Calendar c = Calendar.getInstance();
+		c.setTimeInMillis(dIdentifier.getIssueDate().getTime());
+		rid.setIssueDate(c);
+		rid.setIssueAuthority(dIdentifier.getIssueAuthority());
+	}
+	
+	/**
+	 * Store Questionnaire
+	 * @param xQuestionnaire questionnaire for storing
+	 * @param locale
+	 * @return DB object
+	 * @throws HibernateException
+	 * @throws LocaleException
+	 */
+	private com.aladdin.sc.db.Questionnaire importQuestionnaire (Questionnaire xQuestionnaire, SystemParameter locale) throws HibernateException, LocaleException {
+		if (xQuestionnaire.getID() != null) {
+			try {
+				@SuppressWarnings("unused")
+				Integer id = new Integer (xQuestionnaire.getID());
+			} catch (NumberFormatException e) {
+				return null;
+			} catch (Exception e) {
+				return null;				
+			}
+		}
+		
+		com.aladdin.sc.db.Questionnaire dQuestionnaire = new com.aladdin.sc.db.Questionnaire ();
+		
+		dQuestionnaire.setVersion(new BigDecimal (xQuestionnaire.getVersion()));
+		if (xQuestionnaire.getID() != null) {
+			try {
+				dQuestionnaire.setId(new Integer (xQuestionnaire.getID()));
+			} catch (Exception e) {
+				e.printStackTrace();
+				dQuestionnaire = null;
+				return null;
+			}
+		}
+		session.saveOrUpdate(dQuestionnaire);
+		
+		if (!setTranslate("questionnaire", dQuestionnaire.getId(), locale, xQuestionnaire.getTitle())) {
+			dQuestionnaire.setTitle(xQuestionnaire.getTitle());
+			session.saveOrUpdate(dQuestionnaire);
+		}
+		
+		QuestionnaireQuestion[] xQuestionnaireQuestions = xQuestionnaire.getQuestionArray();
+		
+		for (int i = 0; i < xQuestionnaireQuestions.length; i++) {
+			updateQuestionnaireQuestion(xQuestionnaireQuestions[i], dQuestionnaire.getId(), null, locale);
+		}
+		return dQuestionnaire;
+	}
+	
+	/**
+	 * Export measurement
+	 * @param dMeasurement measurement for export
+	 * @return XSD conform
+	 */
+	private Measurement exportMeasurement(com.aladdin.sc.db.Measurement dMeasurement) {
+		Measurement xMeasurement = Measurement.Factory.newInstance();
+		SystemParameter rmeasurementType = SystemParameter.Factory.newInstance();
+		rmeasurementType.setCode(dMeasurement.getType());
+
+		xMeasurement.setType(rmeasurementType);
+		xMeasurement.setValue(dMeasurement.getValue().doubleValue ());
+		Timestamp datetime = dMeasurement.getDatetime();
+		Calendar c = Calendar.getInstance();
+		c.setTimeInMillis(datetime.getTime());
+		xMeasurement.setDateTime(c);
+		xMeasurement.setUnits(dMeasurement.getUnits());
+		xMeasurement.setLowerLimit(dMeasurement.getLowerlimit().doubleValue ());
+		xMeasurement.setUpperLimit(dMeasurement.getUpperlimit().doubleValue ());
+		return xMeasurement;
+	}
+	
+	/**
+	 * Get count of task types.
+	 * @return count
+	 */
+	private Integer getTaskTypesCount () {
+		return 7;
+	}
+	
+	/**
+	 * Export Questionnaire
+	 * @param dQuestionnaire DB object for export
+	 * @param locale
+	 * @return XSD conform
+	 */
+	private Questionnaire exportQuestionnaire (com.aladdin.sc.db.Questionnaire dQuestionnaire, SystemParameter locale) {
+		Questionnaire xQuestionnaire = Questionnaire.Factory.newInstance();
+		xQuestionnaire.setID(dQuestionnaire.getId().toString());
+		
+		xQuestionnaire.setTitle(getTranslate("questionnaire", dQuestionnaire.getId(), locale, dQuestionnaire.getTitle()));
+		
+		xQuestionnaire.setVersion(dQuestionnaire.getVersion().doubleValue ());
+		
+		List<QuestionnaireQuestion> xQuestionnaireQuestions = new ArrayList<QuestionnaireQuestion>();
+		
+		final Query query = session.createQuery("select qq from QuestionnaireQuestion qq where qq.quest = :quest AND qq.parentid is null");
+		query.setInteger("quest", dQuestionnaire.getId());
+		query.setCacheable(true);
+		query.setCacheRegion(null);
+		List<?> qql = query.list (); 
+		
+		for (int i = 0; i < qql.size(); i++) {
+			xQuestionnaireQuestions.add(exportQuestionnaireQuestion((com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), true, locale));
+		}
+		xQuestionnaire.setQuestionArray((QuestionnaireQuestion[]) xQuestionnaireQuestions.toArray(new QuestionnaireQuestion[0]));
+		
+		return xQuestionnaire;
+	}
+	
+	/**
+	 * Export QuestionnaireQuestion
+	 * @param dQuestionnaireQuestion DB object for export
+	 * @param level1
+	 * @param locale
+	 * @return XSD conform
+	 */
+	private QuestionnaireQuestion exportQuestionnaireQuestion (com.aladdin.sc.db.QuestionnaireQuestion dQuestionnaireQuestion, boolean level1, SystemParameter locale) {
+		QuestionnaireQuestion xQuestionnaireQuestion = QuestionnaireQuestion.Factory.newInstance();
+		
+		xQuestionnaireQuestion.setType(dQuestionnaireQuestion.getType());
+		xQuestionnaireQuestion.setId(dQuestionnaireQuestion.getId().toString());
+		xQuestionnaireQuestion.setGlobalID(dQuestionnaireQuestion.getGlobalId());
+		xQuestionnaireQuestion.setPosition(dQuestionnaireQuestion.getPosition());
+		
+		if (!level1) {
+			xQuestionnaireQuestion.setCondition(dQuestionnaireQuestion.getCondition().shortValue());
+		}
+		
+		xQuestionnaireQuestion.setTitle(getTranslate("questionnairequestion", dQuestionnaireQuestion.getId(), locale, ""));
+		
+		List<QuestionnaireQuestionAnswer> xQuestionnaireQuestionAnswers = new ArrayList<QuestionnaireQuestionAnswer> ();
+		
+		final Query q2 = session.createQuery("select qqa from QuestionnaireQuestionAnswer qqa where deleted = :deleted and question = :question");
+		q2.setInteger("question", dQuestionnaireQuestion.getId());
+		q2.setBoolean("deleted", false);
+		q2.setCacheable(true);
+		q2.setCacheRegion(null);
+		List<?> qqal = q2.list();
+		
+		for (int i = 0; i < qqal.size(); i++) {
+			xQuestionnaireQuestionAnswers.add(exportQuestionnaireQuestionAnswer((com.aladdin.sc.db.QuestionnaireQuestionAnswer) qqal.get(i), locale));
+		}
+		xQuestionnaireQuestion.addNewAnswers();
+		xQuestionnaireQuestion.getAnswers().setAnswerArray((QuestionnaireQuestionAnswer[]) xQuestionnaireQuestionAnswers.toArray(new QuestionnaireQuestionAnswer[0]));
+		
+		List<QuestionnaireQuestion> xQuestionnaireQuestions = new ArrayList<QuestionnaireQuestion>();
+		
+		final Query q3 = session.createQuery("select qq from QuestionnaireQuestion qq where parentid = :parentid");
+		q3.setInteger("parentid", dQuestionnaireQuestion.getId());
+		q3.setCacheable(true);
+		q3.setCacheRegion(null);
+		List<?> qql = q3.list();
+		
+		for (int i = 0; i < qql.size(); i++) {
+			xQuestionnaireQuestions.add ( exportQuestionnaireQuestion ( (com.aladdin.sc.db.QuestionnaireQuestion) qql.get(i), false, locale ) );
+		}
+		xQuestionnaireQuestion.addNewQuestions().setQuestionArray(xQuestionnaireQuestions.toArray(new QuestionnaireQuestion[0]));
+		
+		return xQuestionnaireQuestion;
+	}
+	
+	/**
+	 * Export QuestionnaireQuestionAnswer
+	 * @param dQuestionnaireQuestionAnswer DB object for export
+	 * @param locale
+	 * @return XSD conform
+	 */
+	private QuestionnaireQuestionAnswer exportQuestionnaireQuestionAnswer (com.aladdin.sc.db.QuestionnaireQuestionAnswer dQuestionnaireQuestionAnswer, SystemParameter locale) {
+		QuestionnaireQuestionAnswer xQuestionnaireQuestionAnswer = QuestionnaireQuestionAnswer.Factory.newInstance();
+		
+		xQuestionnaireQuestionAnswer.setDescription(getTranslate("questionnairequestionanswer", dQuestionnaireQuestionAnswer.getId(), locale, ""));
+		if (dQuestionnaireQuestionAnswer.getPosition() != null) xQuestionnaireQuestionAnswer.setPosition(dQuestionnaireQuestionAnswer.getPosition());
+		
+		xQuestionnaireQuestionAnswer.setValue(dQuestionnaireQuestionAnswer.getValue().shortValue());
+		
+		return xQuestionnaireQuestionAnswer;
+	}
+	
+	/**
+	 * Export clinician
+	 * @param dClinician DB object for export
+	 * @return XSD conform
+	 */
+	private Clinician exportClinician(com.aladdin.sc.db.Clinician dClinician) {
+		Clinician xClinician = Clinician.Factory.newInstance();
+		xClinician.setID(dClinician.getId().toString());
+		xClinician.setPersonData(exportPersonData(dClinician.getM_PersonData()));
+		return xClinician;
+	}
+	
+	/**
+	 * Export Administrator
+	 * @param dAdministrator DB object for export
+	 * @return XSD conform
+	 */
+	private Administrator exportAdministrator (com.aladdin.sc.db.Administrator dAdministrator) {
+		Administrator xAdministrator = Administrator.Factory.newInstance();
+		xAdministrator.setID(dAdministrator.getId().toString());
+		xAdministrator.setPersonData(exportPersonData(dAdministrator.getM_PersonData()));
+		return xAdministrator;
+	}
+	
+	/**
+	 * Check if the user exist
+	 * @param username
+	 * @param id
+	 * @return true if exist
+	 */
+	private Integer existUser (String username, Integer id) {
+		if (session.createSQLQuery("SELECT * FROM aladdinuser WHERE username like '" + username + "' AND id != '" + id.toString() + "'").list().size() > 1) return 1;
+		return 0;
+	}
+	
+	/**
+     * Load URL and get first char of content
+     * @param urlStr URL
+     * @return first char
+     */
+    private char getURLChar (String urlStr) {
+    	try {
+            URL url = new URL (urlStr);
+            System.out.println (urlStr);
+            URLConnection uc = url.openConnection ();
+            uc.connect ();
+            InputStream is = uc.getInputStream ();
+            byte[] b = new byte[5];
+            is.read (b, 0, 5);
+            System.out.println ((char)(b[0]));
+            return (char)(b[0]);
+        } catch (java.net.MalformedURLException e){
+            return 0;
+        } catch (java.io.IOException e){
+            return 0;
+        }
+    }
+    
+    /**
+	 * Store MediaContent
+	 * @param xMediaContent data for store
+	 * @param id id if exist
+	 * @return id of the stored data
+	 */
+	private Integer importMediaContent (MediaContent xMediaContent, Integer id) {
+		com.aladdin.sc.db.EntertainmentContent dEntertainmentContent = new com.aladdin.sc.db.EntertainmentContent();
+		dEntertainmentContent.setCategory(xMediaContent.getCategory());
+		dEntertainmentContent.setText(xMediaContent.getText());
+		dEntertainmentContent.setTitle(xMediaContent.getTitle());
+		dEntertainmentContent.setType(xMediaContent.getType());
+		dEntertainmentContent.setUrl(xMediaContent.getUrl());
+		dEntertainmentContent.setEnabled(xMediaContent.getEnabled());
+		if (id != null && id > 0) {
+			dEntertainmentContent.setId(id);
+			session.merge(dEntertainmentContent);
+		} else {
+			dEntertainmentContent.setId(null);
+			session.save(dEntertainmentContent);
+		}
+		
+		return dEntertainmentContent.getId();
 	}
 
 }
