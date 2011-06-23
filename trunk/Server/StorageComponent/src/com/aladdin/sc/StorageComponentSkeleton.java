@@ -168,10 +168,6 @@ class LocaleException extends Exception {
  * @author Andrey Baboshin
  *
  */
-/**
- * @author andrey
- *
- */
 public class StorageComponentSkeleton implements StorageComponentSkeletonInterface {
 	/**
 	 * Constant for "<"
