@@ -2337,6 +2337,9 @@ import eu.aladdin_project.xsd.Warning;
     			query.setCacheable(true);
     			query.setCacheRegion(null);
     			
+    			System.out.println (_fromDate.getTime().toString());
+    			System.out.println (_toDate.getTime().toString());
+    			
     			List<?> tl = query.list();
     			
     			for (int i = 0; i < tl.size(); i++) {

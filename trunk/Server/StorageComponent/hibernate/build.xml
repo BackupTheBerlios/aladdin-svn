@@ -24,11 +24,13 @@
     
     <schemaexport
         properties="src/hibernate.properties"
-        quiet="no"
-        text="no"
+	create="true"
+        quiet="yes"
+        text="yes"
         drop="no"
         delimiter=";"
-        output="src/sc.sql">
+	output="src/sc.sql"
+        >
         <fileset dir="src">
             <include name="**/*.hbm.xml"/>
         </fileset>
