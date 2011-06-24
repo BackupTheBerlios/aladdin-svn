@@ -91,16 +91,14 @@ namespace Aladdin.ClientApplication
 
             App.ThisApp = this;
 
-
-
             try
             {
                 AutoUpdater.CheckForUpdates();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show("Please check Internet connection!", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MessageBox.Show("Can't download updates! Let work with current version.", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
+                //return;
             }
 
             try
@@ -109,8 +107,8 @@ namespace Aladdin.ClientApplication
             }
             catch (Exception)
             {
-                MessageBox.Show("No connection to server", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MessageBox.Show("No connection to server, please choose another", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
+                //return;
             }
 
         }
