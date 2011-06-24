@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfSupportedLocalesResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocalesResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("listofsupportedlocalesresponse1f01doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocalesResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("listofsupportedlocalesresponse1f01doctype");
     
     /**
      * Gets the "ListOfSupportedLocalesResponse" element
@@ -42,7 +42,7 @@ public interface ListOfSupportedLocalesResponseDocument extends org.apache.xmlbe
     public interface ListOfSupportedLocalesResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocalesResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("listofsupportedlocalesresponse0504elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfSupportedLocalesResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("listofsupportedlocalesresponse0504elemtype");
         
         /**
          * Gets array of all "out" elements

@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface IDDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IDDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("id73b1doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(IDDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("id73b1doctype");
     
     /**
      * Gets the "ID" element

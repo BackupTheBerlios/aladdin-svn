@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface DeleteClinicianDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteClinicianDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("deleteclinician5f11doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteClinicianDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("deleteclinician5f11doctype");
     
     /**
      * Gets the "DeleteClinician" element
@@ -42,7 +42,7 @@ public interface DeleteClinicianDocument extends org.apache.xmlbeans.XmlObject
     public interface DeleteClinician extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteClinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("deleteclinician9e20elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(DeleteClinician.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("deleteclinician9e20elemtype");
         
         /**
          * Gets the "id" element

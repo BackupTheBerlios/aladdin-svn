@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface ListOfQuestionnairesDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnairesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("listofquestionnaireseb85doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnairesDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("listofquestionnaireseb85doctype");
     
     /**
      * Gets the "ListOfQuestionnaires" element
@@ -42,7 +42,7 @@ public interface ListOfQuestionnairesDocument extends org.apache.xmlbeans.XmlObj
     public interface ListOfQuestionnaires extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnaires.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("listofquestionnairesd584elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ListOfQuestionnaires.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("listofquestionnairesd584elemtype");
         
         /**
          * Gets the "locale" element

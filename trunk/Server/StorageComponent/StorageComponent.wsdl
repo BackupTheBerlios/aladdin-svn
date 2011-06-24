@@ -1499,282 +1499,355 @@
   </wsdl:message>
   <wsdl:portType name="StorageComponent">
         <wsdl:operation name="CreatePatient">
+        	<wsdl:documentation>The CreatePatient method creates a new record for the patient using “data”. It returns the patient’s identity from the database or an error-code. There are following error codes:
+ “-1” Operation is not permitted
+“-2” Database error.
+</wsdl:documentation>
         	<wsdl:input message="tns:CreatePatientRequest"></wsdl:input>
         	<wsdl:output message="tns:CreatePatientResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdatePatient">
+        	<wsdl:documentation>The UpdatePatient method updates an existing patient record using “data”. It returns the patient’s identity from the database or error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdatePatientRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdatePatientResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeletePatient">
+        	<wsdl:documentation>The DeletePatient method deletes an existing patient record (patient identified by “id”). It returns the patient’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeletePatientRequest"></wsdl:input>
         	<wsdl:output message="tns:DeletePatientResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetPatient">
+        	<wsdl:documentation>The DeletePatient method deletes an existing patient record (patient identified by “id”). It returns the patient’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:GetPatientRequest"></wsdl:input>
         	<wsdl:output message="tns:GetPatientResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfPatients">
+        	<wsdl:documentation>The ListOfPatients method selects a list of patients from the database using “filter” (“filter” can restrict various parameters of the patient’s profile such as name, age, id, etc.).</wsdl:documentation>
         	<wsdl:input message="tns:ListOfPatientsRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfPatientsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateAdministrator">
+        	<wsdl:documentation>The CreateAdministrator method creates a new record for the administrator using “data”. It returns the administrator’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:CreateAdministratorRequest"></wsdl:input>
         	<wsdl:output message="tns:CreateAdministratorResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateAdministrator">
+        	<wsdl:documentation>The UpdateAdministrator method updates an existing administrator record using “data”. It returns the administrator’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateAdministratorRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateAdministratorResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteAdministrator">
+        	<wsdl:documentation>The DeleteAdministrator method deletes an existing administrator record (administrator is identified by “id”). It returns the administrator’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteAdministratorRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteAdministratorResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetAdministrator">
+        	<wsdl:documentation>The GetAdministrator method selects an administrator from the database using “id”.</wsdl:documentation>
         	<wsdl:input message="tns:GetAdministratorRequest"></wsdl:input>
         	<wsdl:output message="tns:GetAdministratorResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfAdministrators">
+        	<wsdl:documentation>The ListOfAdministrators method selects a list of administrators from database using “filter” (“filter” can restrict various parameters of the administrator’s profile, such as name, id, etc.).</wsdl:documentation>
         	<wsdl:input message="tns:ListOfAdministratorsRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfAdministratorsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateCarer">
+        	<wsdl:documentation>The CreateCarer method creates a new record for carer using “data”. It returns the carer’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:CreateCarerRequest"></wsdl:input>
         	<wsdl:output message="tns:CreateCarerResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateCarer">
+        	<wsdl:documentation>The UpdateCarer method updates an existing record for carer using “data”. It returns the carer’s identity in the database or error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateCarerRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateCarerResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteCarer">
+        	<wsdl:documentation>The DeleteCarer method deletes an existing record for the carer (carer is identified by “id”). It returns carer’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteCarerRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteCarerResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetCarer">
+        	<wsdl:documentation>The GetCarer method selects a carer from database using “id”.</wsdl:documentation>
         	<wsdl:input message="tns:GetCarerRequest"></wsdl:input>
         	<wsdl:output message="tns:GetCarerResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfCarers">
+        	<wsdl:documentation>The ListOfCarers method selects a list of carers from database using “filter” (“filter” can restrict various parameters of carer’s profile such as name, age, id, etc.).</wsdl:documentation>
         	<wsdl:input message="tns:ListOfCarersRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfCarersResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateClinician">
+        	<wsdl:documentation>The CreateClinician method creates a new record for the clinician using “data”. It returns the clinician’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:CreateClinicianRequest"></wsdl:input>
         	<wsdl:output message="tns:CreateClinicianResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateClinician">
+        	<wsdl:documentation>The UpdateClinician method updates an existing clinician record using “data”. It returns the clinician’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateClinicianRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateClinicianResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteClinician">
+        	<wsdl:documentation>The DeleteClinician method deletes an existing clinician record (clinician is identified by “id”). It returns the clinician’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteClinicianRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteClinicianResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetClinician">
+        	<wsdl:documentation>The GetClinician method selects a clinician from database using “id”.</wsdl:documentation>
         	<wsdl:input message="tns:GetClinicianRequest"></wsdl:input>
         	<wsdl:output message="tns:GetClinicianResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfClinicians">
+        	<wsdl:documentation>The ListOfClinicians method selects a list of clinicians from database using “filter” (“filter” can restrict various parameters of clinician’s profile such as name, age, id, etc.).</wsdl:documentation>
         	<wsdl:input message="tns:ListOfCliniciansRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfCliniciansResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetUserPlannedTasks">
+        	<wsdl:documentation>The GetUserPlannedTasks method receives the user’s id, range of time (fromData, toDate) and returns the list of tasks for the user. </wsdl:documentation>
         	<wsdl:input message="tns:GetUserPlannedTasksRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserPlannedTasksResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="StoreMeasurements">
+        	<wsdl:documentation>The StoreMeasurements method receives an array of measurements (data) and stores it in the database. It returns a new record’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:StoreMeasurementsRequest"></wsdl:input>
         	<wsdl:output message="tns:StoreMeasurementsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetPatientMeasurement">
+        	<wsdl:documentation>The GetPatientMeasurements method receives the patient’s identity (PatientId), the measurement’s type (MeasurementType), the date range (fromDate, toDate) and returns the corresponding records from the database.</wsdl:documentation>
         	<wsdl:input message="tns:GetPatientMeasurementRequest"></wsdl:input>
         	<wsdl:output message="tns:GetPatientMeasurementResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ChangeTaskStatus">
+        	<wsdl:documentation>The ChangeTaskStatus method receives the task’s identity (TaskId) and the status (TaskStatus) that should be applied. It returns the task’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:ChangeTaskStatusRequest"></wsdl:input>
         	<wsdl:output message="tns:ChangeTaskStatusResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="AssignTask">
+        	<wsdl:documentation>The AssingTask method receives a task’s description (task) and stores it in the database. It returns a new record’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:AssignTaskRequest"></wsdl:input>
         	<wsdl:output message="tns:AssignTaskResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfPossibleTasks">
+        	<wsdl:documentation>The ListOfPossibleTasks method receives the user type (userType) and returns a list of permitted tasks for this user type.</wsdl:documentation>
         	<wsdl:input message="tns:ListOfPossibleTasksRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfPossibleTasksResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="StoreQuestionnaireAnswers">
+        	<wsdl:documentation>The StoreQuestionnaireAnswers method receives the answers for a questionnaire (“data”) and stores them in the database. It returns a new record’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:StoreQuestionnaireAnswersRequest"></wsdl:input>
         	<wsdl:output message="tns:StoreQuestionnaireAnswersResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfQuestionnaires">
+        	<wsdl:documentation>The ListOfQuestionnaires method returns a list of short descriptions of the available questionnaires.</wsdl:documentation>
         	<wsdl:input message="tns:ListOfQuestionnairesRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfQuestionnairesResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetQuestionnaire">
+        	<wsdl:documentation>The GetQuestionnaire method returns the questionnaire description identified by the provided unique id.</wsdl:documentation>
         	<wsdl:input message="tns:GetQuestionnaireRequest"></wsdl:input>
         	<wsdl:output message="tns:GetQuestionnaireResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateQuestionnaire">
+        	<wsdl:documentation>The UpdateQuestionnaire method updates the description of an existing questionnaire in the database. It returns a confirmation code or an error code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateQuestionnaireRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateQuestionnaireResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateQuestionnaire">
+        	<wsdl:documentation>The CreateQuestionnaire method saves a new questionnaire in the database. It returns a confirmation code or an error code.</wsdl:documentation>
         	<wsdl:input message="tns:CreateQuestionnaireRequest"></wsdl:input>
         	<wsdl:output message="tns:CreateQuestionnaireResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteQuestionnaire">
+        	<wsdl:documentation>The DeleteQuestionnaire method deletes from the database the questionnaire identified by the provided unique id.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteQuestionnaireRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteQuestionnaireResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetQuestionnaireAnswers">
+        	<wsdl:documentation>The GetQuestionnaireAnswers method returns from the database the questionnaire answers about the person with a given ID (ObjectId) for the requested date range (fromDate, toDate)</wsdl:documentation>
         	<wsdl:input message="tns:GetQuestionnaireAnswersRequest"></wsdl:input>
         	<wsdl:output message="tns:GetQuestionnaireAnswersResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="SavePatientAssessment">
+        	<wsdl:documentation>The SavePatientAssessment method receives the assessment data for a patient (”assessment”), stores it in the database and returns the assessment’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:SavePatientAssessmentRequest"></wsdl:input>
         	<wsdl:output message="tns:SavePatientAssessmentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="SaveCarerAssessment">
+        	<wsdl:documentation>The SaveCarerAssessment method receives assessment data for a carer (”assessment”), stores it in the database and returns the assessment’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:SaveCarerAssessmentRequest"></wsdl:input>
         	<wsdl:output message="tns:SaveCarerAssessmentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeletePatientAssessment">
+        	<wsdl:documentation>The DeletePatientAssessment method deletes an existing assessment from the database (identified by assessmentId), returns the assessment’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeletePatientAssessmentRequest"></wsdl:input>
         	<wsdl:output message="tns:DeletePatientAssessmentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteCarerAssessment">
+        	<wsdl:documentation>The DeleteCarerAssessment method deletes an existing assessment from the database (assessment is identified by assessmentId), returns the assessment’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteCarerAssessmentRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteCarerAssessmentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetPatientAssessments">
+        	<wsdl:documentation>The GetPatientAssessments method receives the patient’s identity (“id”) and returns her/his assessment’s data or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:GetPatientAssessmentsRequest"></wsdl:input>
         	<wsdl:output message="tns:GetPatientAssessmentsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetCarerAssessments">
+        	<wsdl:documentation>The GetCarerAssessments method receives the carer’s identity (“id”) and returns her/his assessment’s data or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:GetCarerAssessmentsRequest"></wsdl:input>
         	<wsdl:output message="tns:GetCarerAssessmentsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateExternalService">
+        	<wsdl:documentation>The CreateExternalService method creates a new record for the external service using “data”. It returns the service’s identity from the database or error-code.</wsdl:documentation>
         	<wsdl:input message="tns:CreateExternalServiceRequest"></wsdl:input>
         	<wsdl:output message="tns:CreateExternalServiceResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateExternalService">
+        	<wsdl:documentation>The UpdateExternalService method updates an existing record for the external service using “data”. It returns the service’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateExternalServiceRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateExternalServiceResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteExternalService">
+        	<wsdl:documentation>The DeleteExternalService method deletes an existing external service record (service is identified by “id”). It returns service’s identity from the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteExternalServiceRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteExternalServiceResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetAllExternalServices">
+        	<wsdl:documentation>The GetExternalService method selects all external services from the database.</wsdl:documentation>
         	<wsdl:input message="tns:GetAllExternalServicesRequest"></wsdl:input>
         	<wsdl:output message="tns:GetAllExternalServicesResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="SaveWarning">
+        	<wsdl:documentation>The SaveWarning method receives the warning’s data and stores it in the database. It returns the warning id in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:SaveWarningRequest"></wsdl:input>
         	<wsdl:output message="tns:SaveWarningResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetWarnings">
+        	<wsdl:documentation>The GetWarnings method returns the warnings from the database using “filter” (“filter” can restrict various parameters of the warning, such as risk level, patient, etc.).</wsdl:documentation>
         	<wsdl:input message="tns:GetWarningsRequest"></wsdl:input>
         	<wsdl:output message="tns:GetWarningsResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="MarkWarningAsRead">
+        	<wsdl:documentation>The MarkWarningAsRead method marks the warning as read in the database. It returns the warning id in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:MarkWarningAsReadRequest"></wsdl:input>
         	<wsdl:output message="tns:MarkWarningAsReadResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="CreateUser">
+        	<wsdl:documentation>The CreateUser method receives a user’s data and stores it in the database. It returns a new record’s identity or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:CreateUserRequest"></wsdl:input>
         	<wsdl:output message="tns:CreateUserResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteUser">
+        	<wsdl:documentation>The DeleteUser method receives a user’s data (user) and deletes it from database. It returns a confirmation code or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteUserRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteUserResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateUser">
+        	<wsdl:documentation>The UpdateUser method receives a user’s data (data) and updates it in the database. It returns a confirmation code or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateUserRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateUserResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ChangePassword">
+        	<wsdl:documentation>The ChangePassword method updates the password for the user identified by “userId”, if the requestor identified by “requestorId” has permissions for that. The method returns a confirmation code or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:ChangePasswordRequest"></wsdl:input>
         	<wsdl:output message="tns:ChangePasswordResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="Auth">
+        	<wsdl:documentation>The Auth method performs the user’s authentication based on login and password. It returns a user’s id in case of success, error-code otherwise. </wsdl:documentation>
         	<wsdl:input message="tns:AuthRequest"></wsdl:input>
         	<wsdl:output message="tns:AuthResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetUserType">
+        	<wsdl:documentation>Get type of the user by its id.</wsdl:documentation>
         	<wsdl:input message="tns:GetUserTypeRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserTypeResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetSystemParameterList">
+        	<wsdl:documentation>The GetSystemParameterListreturns the list of the system parameter of given type and for given locale.</wsdl:documentation>
         	<wsdl:input message="tns:GetSystemParameterListRequest"></wsdl:input>
         	<wsdl:output message="tns:GetSystemParameterListResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetUser">
+        	<wsdl:documentation>The GetUser method receives a user’s identity (userId) and returns user’s data.</wsdl:documentation>
         	<wsdl:input message="tns:GetUserRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetPatientsForCaregiver">
+        	<wsdl:documentation>The GetPatientsForCaregiver returns the list of patient for that this is caregiver is responded.</wsdl:documentation>
         	<wsdl:input message="tns:GetPatientsForCaregiverRequest"></wsdl:input>
         	<wsdl:output message="tns:GetPatientsForCaregiverResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetUserIdByPersonId">
+        	<wsdl:documentation>The GetUserIdByPersonId method receives a person’s identity and person’s type and returns corresponded user id or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:GetUserIdByPersonIdRequest"></wsdl:input>
         	<wsdl:output message="tns:GetUserIdByPersonIdResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateSystemParameter">
+        	<wsdl:documentation>The UpdateSystemParametermethod updates the system parameter. It returns the parameter id in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateSystemParameterRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateSystemParameterResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="AssignTasksMassively">
+        	<wsdl:documentation>The AssignTasksMassivelymethod creates a number of task for the given period of time and with given frequency. It returns the id  of the last task in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:AssignTasksMassivelyRequest"></wsdl:input>
         	<wsdl:output message="tns:AssignTasksMassivelyResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="RemoveTaskMassively">
+        	<wsdl:documentation>The RemoveTaskMassivelymethod removes tasks of given type for given patient for the given period of time. It returns the id of the last deleted task in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:RemoveTaskMassivelyRequest"></wsdl:input>
         	<wsdl:output message="tns:RemoveTaskMassivelyResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetTask">
+        	<wsdl:documentation>The GetTask method returns task by its id for the given locale.</wsdl:documentation>
         	<wsdl:input message="tns:GetTaskRequest"></wsdl:input>
         	<wsdl:output message="tns:GetTaskResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetMeasurement">
+        	<wsdl:documentation>The GetMeasurement method filters measurements by its parameters and return the list of filtered items.</wsdl:documentation>
         	<wsdl:input message="tns:GetMeasurementRequest"></wsdl:input>
         	<wsdl:output message="tns:GetMeasurementResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="AddMediaContent">
+        	<wsdl:documentation>The AddMediaContent method adds the media content in the database. It returns the media content id in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:AddMediaContentRequest"></wsdl:input>
         	<wsdl:output message="tns:AddMediaContentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="DeleteMediaContent">
+        	<wsdl:documentation>The DeleteMediaContent method removes the media content from the database by its id. It returns the media content id in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:DeleteMediaContentRequest"></wsdl:input>
         	<wsdl:output message="tns:DeleteMediaContentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="UpdateMediaContent">
+        	<wsdl:documentation>The UpdateMediaContent method updates the media content in the database. It returns the media content id in the database or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:UpdateMediaContentRequest"></wsdl:input>
         	<wsdl:output message="tns:UpdateMediaContentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetMediaContent">
+        	<wsdl:documentation>The GetMediaContent method gets the media content from the database by its id.</wsdl:documentation>
         	<wsdl:input message="tns:GetMediaContentRequest"></wsdl:input>
         	<wsdl:output message="tns:GetMediaContentResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetQuestionnaireAnswersByTask">
+        	<wsdl:documentation>The GetQuestionnaireAnswersByTask method gets QuestionnaireAnswers value for the given task from the database.</wsdl:documentation>
         	<wsdl:input message="tns:GetQuestionnaireAnswersByTaskRequest"></wsdl:input>
         	<wsdl:output message="tns:GetQuestionnaireAnswersByTaskResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="ListOfSupportedLocales">
+        	<wsdl:documentation>The ListOfSupportedLocales method gets the list of locales that are supported by the Storage Component.</wsdl:documentation>
         	<wsdl:input message="tns:ListOfSupportedLocalesRequest"></wsdl:input>
         	<wsdl:output message="tns:ListOfSupportedLocalesResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetQuestionDescription">
+        	<wsdl:documentation>The GetQuestionDescription method gets description of the question by its id from the database. It returns the value or an error-code.</wsdl:documentation>
         	<wsdl:input message="tns:GetQuestionDescriptionRequest"></wsdl:input>
         	<wsdl:output message="tns:GetQuestionDescriptionResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getAvailableCarers">
+        	<wsdl:documentation>The getAvailableCarers method returns list of carers that are not binded for the any patient.</wsdl:documentation>
         	<wsdl:input message="tns:getAvailableCarersRequest"></wsdl:input>
         	<wsdl:output message="tns:getAvailableCarersResponse"></wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getQuestionnaireAnswerValue">
+        	<wsdl:documentation>The getQuestionnaireAnswerValue method reads value for the given question for the given locale.</wsdl:documentation>
         	<wsdl:input message="tns:getQuestionnaireAnswerValueRequest"></wsdl:input>
         	<wsdl:output message="tns:getQuestionnaireAnswerValueResponse"></wsdl:output>
         </wsdl:operation>
@@ -2485,6 +2558,7 @@
   	</wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="StorageComponent">
+    <wsdl:documentation>The Storage Component is responsible for storing and retrieving data into/from the ALADDIN database.</wsdl:documentation>
     <wsdl:port binding="tns:StorageComponentSOAP" name="StorageComponentSOAP">
       <soap:address location="http://193.174.152.114:28080/axis2/services/StorageComponent/"/>
     </wsdl:port>

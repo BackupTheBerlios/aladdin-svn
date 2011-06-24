@@ -16,7 +16,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface Time extends org.apache.xmlbeans.XmlTime
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Time.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("timec293type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(Time.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("timec293type");
     
     /**
      * Gets the "id" attribute

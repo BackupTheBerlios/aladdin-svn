@@ -17,7 +17,7 @@ package eu.aladdin_project.storagecomponent;
 public interface AssignTasksMassivelyResponseDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTasksMassivelyResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("assigntasksmassivelyresponse7b13doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTasksMassivelyResponseDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("assigntasksmassivelyresponse7b13doctype");
     
     /**
      * Gets the "AssignTasksMassivelyResponse" element
@@ -42,7 +42,7 @@ public interface AssignTasksMassivelyResponseDocument extends org.apache.xmlbean
     public interface AssignTasksMassivelyResponse extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTasksMassivelyResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s49A0C072BDB5961250B4F3A0BC48A04B").resolveHandle("assigntasksmassivelyresponse63c4elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AssignTasksMassivelyResponse.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sE76D02AA29B6DBC90ECEEE7F8EA551D9").resolveHandle("assigntasksmassivelyresponse63c4elemtype");
         
         /**
          * Gets the "out" element

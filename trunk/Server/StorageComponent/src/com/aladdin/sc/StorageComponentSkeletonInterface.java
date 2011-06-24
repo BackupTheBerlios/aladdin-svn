@@ -14,7 +14,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateCarer method updates an existing record for carer using “data”. It returns the carer’s identity in the database or error-code.
                                     * @param updateCarer
          */
 
@@ -28,7 +28,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateUser method receives a user’s data (data) and updates it in the database. It returns a confirmation code or an error-code.
                                     * @param updateUser
          */
 
@@ -42,7 +42,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteAdministrator method deletes an existing administrator record (administrator is identified by “id”). It returns the administrator’s identity from the database or an error-code.
                                     * @param deleteAdministrator
          */
 
@@ -56,7 +56,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteUser method receives a user’s data (user) and deletes it from database. It returns a confirmation code or an error-code.
                                     * @param deleteUser
          */
 
@@ -70,7 +70,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetQuestionnaireAnswersByTask method gets QuestionnaireAnswers value for the given task from the database.
                                     * @param getQuestionnaireAnswersByTask
          */
 
@@ -84,7 +84,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The AssignTasksMassivelymethod creates a number of task for the given period of time and with given frequency. It returns the id  of the last task in the database or an error-code.
                                     * @param assignTasksMassively
          */
 
@@ -98,7 +98,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateQuestionnaire method updates the description of an existing questionnaire in the database. It returns a confirmation code or an error code.
                                     * @param updateQuestionnaire
          */
 
@@ -112,7 +112,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfQuestionnaires method returns a list of short descriptions of the available questionnaires.
                                     * @param listOfQuestionnaires
          */
 
@@ -126,7 +126,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The SaveWarning method receives the warning’s data and stores it in the database. It returns the warning id in the database or an error-code.
                                     * @param saveWarning
          */
 
@@ -140,7 +140,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetQuestionDescription method gets description of the question by its id from the database. It returns the value or an error-code.
                                     * @param getQuestionDescription
          */
 
@@ -154,7 +154,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfCarers method selects a list of carers from database using “filter” (“filter” can restrict various parameters of carer’s profile such as name, age, id, etc.).
                                     * @param listOfCarers
          */
 
@@ -168,7 +168,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateMediaContent method updates the media content in the database. It returns the media content id in the database or an error-code.
                                     * @param updateMediaContent
          */
 
@@ -182,7 +182,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetSystemParameterListreturns the list of the system parameter of given type and for given locale.
                                     * @param getSystemParameterList
          */
 
@@ -196,7 +196,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetCarerAssessments method receives the carer’s identity (“id”) and returns her/his assessment’s data or an error-code.
                                     * @param getCarerAssessments
          */
 
@@ -210,7 +210,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The AddMediaContent method adds the media content in the database. It returns the media content id in the database or an error-code.
                                     * @param addMediaContent
          */
 
@@ -224,7 +224,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfClinicians method selects a list of clinicians from database using “filter” (“filter” can restrict various parameters of clinician’s profile such as name, age, id, etc.).
                                     * @param listOfClinicians
          */
 
@@ -238,7 +238,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * Get type of the user by its id.
                                     * @param getUserType
          */
 
@@ -252,7 +252,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The SavePatientAssessment method receives the assessment data for a patient (”assessment”), stores it in the database and returns the assessment’s identity or an error-code.
                                     * @param savePatientAssessment
          */
 
@@ -266,7 +266,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The StoreMeasurements method receives an array of measurements (data) and stores it in the database. It returns a new record’s identity or an error-code.
                                     * @param storeMeasurements
          */
 
@@ -280,7 +280,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeletePatient method deletes an existing patient record (patient identified by “id”). It returns the patient’s identity from the database or an error-code.
                                     * @param getPatient
          */
 
@@ -294,7 +294,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteCarerAssessment method deletes an existing assessment from the database (assessment is identified by assessmentId), returns the assessment’s identity or an error-code.
                                     * @param deleteCarerAssessment
          */
 
@@ -308,7 +308,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreateClinician method creates a new record for the clinician using “data”. It returns the clinician’s identity from the database or an error-code.
                                     * @param createClinician
          */
 
@@ -322,7 +322,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The Auth method performs the user’s authentication based on login and password. It returns a user’s id in case of success, error-code otherwise.
                                     * @param auth
          */
 
@@ -336,7 +336,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetQuestionnaireAnswers method returns from the database the questionnaire answers about the person with a given ID (ObjectId) for the requested date range (fromDate, toDate)
                                     * @param getQuestionnaireAnswers
          */
 
@@ -350,7 +350,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteExternalService method deletes an existing external service record (service is identified by “id”). It returns service’s identity from the database or an error-code.
                                     * @param deleteExternalService
          */
 
@@ -364,7 +364,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteClinician method deletes an existing clinician record (clinician is identified by “id”). It returns the clinician’s identity from the database or an error-code.
                                     * @param deleteClinician
          */
 
@@ -378,7 +378,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateSystemParametermethod updates the system parameter. It returns the parameter id in the database or an error-code.
                                     * @param updateSystemParameter
          */
 
@@ -392,7 +392,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetUserIdByPersonId method receives a person’s identity and person’s type and returns corresponded user id or an error-code.
                                     * @param getUserIdByPersonId
          */
 
@@ -406,7 +406,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ChangePassword method updates the password for the user identified by “userId”, if the requestor identified by “requestorId” has permissions for that. The method returns a confirmation code or an error-code.
                                     * @param changePassword
          */
 
@@ -420,7 +420,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeletePatient method deletes an existing patient record (patient identified by “id”). It returns the patient’s identity from the database or an error-code.
                                     * @param deletePatient
          */
 
@@ -434,7 +434,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetMediaContent method gets the media content from the database by its id.
                                     * @param getMediaContent
          */
 
@@ -448,7 +448,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The getAvailableCarers method returns list of carers that are not binded for the any patient.
                                     * @param getAvailableCarers
          */
 
@@ -462,7 +462,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetMeasurement method filters measurements by its parameters and return the list of filtered items.
                                     * @param getMeasurement
          */
 
@@ -476,7 +476,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreateQuestionnaire method saves a new questionnaire in the database. It returns a confirmation code or an error code.
                                     * @param createQuestionnaire
          */
 
@@ -490,7 +490,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetPatientsForCaregiver returns the list of patient for that this is caregiver is responded.
                                     * @param getPatientsForCaregiver
          */
 
@@ -504,7 +504,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The RemoveTaskMassivelymethod removes tasks of given type for given patient for the given period of time. It returns the id of the last deleted task in the database or an error-code.
                                     * @param removeTaskMassively
          */
 
@@ -518,7 +518,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetPatientMeasurements method receives the patient’s identity (PatientId), the measurement’s type (MeasurementType), the date range (fromDate, toDate) and returns the corresponding records from the database.
                                     * @param getPatientMeasurement
          */
 
@@ -532,7 +532,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdatePatient method updates an existing patient record using “data”. It returns the patient’s identity from the database or error-code.
                                     * @param updatePatient
          */
 
@@ -546,7 +546,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfSupportedLocales method gets the list of locales that are supported by the Storage Component.
                                     * @param listOfSupportedLocales
          */
 
@@ -560,7 +560,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteQuestionnaire method deletes from the database the questionnaire identified by the provided unique id.
                                     * @param deleteQuestionnaire
          */
 
@@ -574,7 +574,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The AssingTask method receives a task’s description (task) and stores it in the database. It returns a new record’s identity or an error-code.
                                     * @param assignTask
          */
 
@@ -588,7 +588,9 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreatePatient method creates a new record for the patient using “data”. It returns the patient’s identity from the database or an error-code. There are following error codes:
+ “-1” Operation is not permitted
+“-2” Database error.
                                     * @param createPatient
          */
 
@@ -602,7 +604,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfAdministrators method selects a list of administrators from database using “filter” (“filter” can restrict various parameters of the administrator’s profile, such as name, id, etc.).
                                     * @param listOfAdministrators
          */
 
@@ -616,7 +618,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetTask method returns task by its id for the given locale.
                                     * @param getTask
          */
 
@@ -630,7 +632,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetUserPlannedTasks method receives the user’s id, range of time (fromData, toDate) and returns the list of tasks for the user.
                                     * @param getUserPlannedTasks
          */
 
@@ -644,7 +646,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfPossibleTasks method receives the user type (userType) and returns a list of permitted tasks for this user type.
                                     * @param listOfPossibleTasks
          */
 
@@ -658,7 +660,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreateCarer method creates a new record for carer using “data”. It returns the carer’s identity from the database or an error-code.
                                     * @param createCarer
          */
 
@@ -672,7 +674,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The getQuestionnaireAnswerValue method reads value for the given question for the given locale.
                                     * @param getQuestionnaireAnswerValue
          */
 
@@ -686,7 +688,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreateExternalService method creates a new record for the external service using “data”. It returns the service’s identity from the database or error-code.
                                     * @param createExternalService
          */
 
@@ -700,7 +702,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The SaveCarerAssessment method receives assessment data for a carer (”assessment”), stores it in the database and returns the assessment’s identity or an error-code.
                                     * @param saveCarerAssessment
          */
 
@@ -714,7 +716,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteCarer method deletes an existing record for the carer (carer is identified by “id”). It returns carer’s identity from the database or an error-code.
                                     * @param deleteCarer
          */
 
@@ -728,7 +730,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreateAdministrator method creates a new record for the administrator using “data”. It returns the administrator’s identity from the database or an error-code.
                                     * @param createAdministrator
          */
 
@@ -742,7 +744,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateExternalService method updates an existing record for the external service using “data”. It returns the service’s identity from the database or an error-code.
                                     * @param updateExternalService
          */
 
@@ -756,7 +758,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetPatientAssessments method receives the patient’s identity (“id”) and returns her/his assessment’s data or an error-code.
                                     * @param getPatientAssessments
          */
 
@@ -770,7 +772,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetClinician method selects a clinician from database using “id”.
                                     * @param getClinician
          */
 
@@ -784,7 +786,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeletePatientAssessment method deletes an existing assessment from the database (identified by assessmentId), returns the assessment’s identity or an error-code.
                                     * @param deletePatientAssessment
          */
 
@@ -798,7 +800,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetExternalService method selects all external services from the database.
                                     * @param getAllExternalServices
          */
 
@@ -812,7 +814,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetCarer method selects a carer from database using “id”.
                                     * @param getCarer
          */
 
@@ -826,7 +828,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetAdministrator method selects an administrator from the database using “id”.
                                     * @param getAdministrator
          */
 
@@ -840,7 +842,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateAdministrator method updates an existing administrator record using “data”. It returns the administrator’s identity from the database or an error-code.
                                     * @param updateAdministrator
          */
 
@@ -854,7 +856,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetQuestionnaire method returns the questionnaire description identified by the provided unique id.
                                     * @param getQuestionnaire
          */
 
@@ -868,7 +870,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The StoreQuestionnaireAnswers method receives the answers for a questionnaire (“data”) and stores them in the database. It returns a new record’s identity or an error-code.
                                     * @param storeQuestionnaireAnswers
          */
 
@@ -882,7 +884,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ChangeTaskStatus method receives the task’s identity (TaskId) and the status (TaskStatus) that should be applied. It returns the task’s identity or an error-code.
                                     * @param changeTaskStatus
          */
 
@@ -896,7 +898,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The ListOfPatients method selects a list of patients from the database using “filter” (“filter” can restrict various parameters of the patient’s profile such as name, age, id, etc.).
                                     * @param listOfPatients
          */
 
@@ -910,7 +912,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetWarnings method returns the warnings from the database using “filter” (“filter” can restrict various parameters of the warning, such as risk level, patient, etc.).
                                     * @param getWarnings
          */
 
@@ -924,7 +926,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The CreateUser method receives a user’s data and stores it in the database. It returns a new record’s identity or an error-code.
                                     * @param createUser
          */
 
@@ -938,7 +940,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The UpdateClinician method updates an existing clinician record using “data”. It returns the clinician’s identity from the database or an error-code.
                                     * @param updateClinician
          */
 
@@ -952,7 +954,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The GetUser method receives a user’s identity (userId) and returns user’s data.
                                     * @param getUser
          */
 
@@ -966,7 +968,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The MarkWarningAsRead method marks the warning as read in the database. It returns the warning id in the database or an error-code.
                                     * @param markWarningAsRead
          */
 
@@ -980,7 +982,7 @@
          
         /**
          * Auto generated method signature
-         * 
+         * The DeleteMediaContent method removes the media content from the database by its id. It returns the media content id in the database or an error-code.
                                     * @param deleteMediaContent
          */
 

@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://aladdin-project.eu/xsd" elementFormDefault="qualified" xmlns:tns="http://aladdin-project.eu/xsd">
     <complexType name="Questionnaire">
-    	<sequence>
+        <annotation>
+        	<documentation>Definition of any questionnaire </documentation></annotation>
+        <sequence>
     		<element name="question" type="tns:QuestionnaireQuestion" maxOccurs="unbounded" minOccurs="1"></element>
     	</sequence>
-    	<attribute name="version" type="double"></attribute>
-    	<attribute name="ID" type="string"></attribute>
-    	<attribute name="title" type="string"></attribute>
+    	<attribute name="version" type="double">
+    		<annotation>
+    			<documentation>Version e.g. “1.0”</documentation></annotation></attribute>
+    	<attribute name="ID" type="string">
+    		<annotation>
+    			<documentation>Unique Identification Code</documentation></annotation></attribute>
+    	<attribute name="title" type="string">
+    		<annotation>
+    			<documentation>Questionnaire Title</documentation></annotation></attribute>
     </complexType>
 
     <complexType name="QuestionnaireQuestion">
-    	<sequence>
+        <annotation>
+        	<documentation>Definition of a question contained in the patient’s or carer’s questionnaire. The question may contain a list of sub-questions, that must be presented to the user only if the condition specified by the condition attribute is fulfilled e.g. only when the user answers “YES” to that question.</documentation></annotation>
+        <sequence>
     		<element name="title" type="string" maxOccurs="1"
     			minOccurs="1">
+                <annotation>
+                	<documentation>The title of the question e.g. “Does he/she become angry?”</documentation></annotation>
     		</element>
     		<element name="GlobalID" type="int" maxOccurs="1"
     			minOccurs="1">
+                <annotation>
+                	<documentation>Global ID</documentation>
+                </annotation>
     		</element>
     		<element name="answers"
     			type="tns:QuestionnaireQuestionAnswerList" maxOccurs="1"
     			minOccurs="1">
+                <annotation>
+                	<documentation>The list of possible answers for that question</documentation></annotation>
     		</element>
     		<element name="questions"
     			type="tns:QuestionnaireQuestionList" maxOccurs="1"
     			minOccurs="1">
+                <annotation>
+                	<documentation>The list of sub-questions</documentation></annotation>
     		</element>
-    		<element name="position" type="int"></element>
+    		<element name="position" type="int">
+    			<annotation>
+    				<documentation>Position in the List</documentation>
+    			</annotation></element>
     	</sequence>
-    	<attribute name="id" type="string"></attribute>
-    	<attribute name="type" type="string"></attribute>
-    	<attribute name="condition" type="unsignedByte" use="optional"></attribute>
+    	<attribute name="id" type="string">
+    		<annotation>
+    			<documentation>The unique identifier of the question</documentation></annotation></attribute>
+    	<attribute name="type" type="string">
+    		<annotation>
+    			<documentation>The type of the answer e.g. OneAnswer or FreeText</documentation></annotation></attribute>
+    	<attribute name="condition" type="unsignedByte" use="optional">
+    		<annotation>
+    			<documentation>The condition which must be fulfilled in order to show this question, e.g. 1.YES</documentation></annotation></attribute>
     </complexType>
 
     <complexType name="QuestionnaireQuestionList">
@@ -48,30 +76,63 @@
     
 
 	<complexType name="QuestionnaireQuestionAnswer">
-	    <sequence>
-	    	<element name="position" type="int"></element>
-	    	<element name="description" type="string"></element>
+        <annotation>
+        	<documentation>A possible answer to a question</documentation></annotation>
+        <sequence>
+	    	<element name="position" type="int">
+	    		<annotation>
+	    			<documentation>Position in the List</documentation>
+	    		</annotation></element>
+	    	<element name="description" type="string">
+	    		<annotation>
+	    			<documentation>e.g. “From 3 to 6 times in the last week”</documentation></annotation></element>
 	    </sequence>
-		<attribute type="unsignedByte" name="value"/>
+		<attribute type="unsignedByte" name="value">
+			<annotation>
+				<documentation>e.g. 0, 1, 9</documentation></annotation></attribute>
 	</complexType>
 
 	<complexType name="QuestionnaireAnswers">
-		<sequence>
-			<element name="answer" type="tns:QuestionnaireAnswer" maxOccurs="unbounded" minOccurs="1"></element>
+        <annotation>
+        	<documentation>The carer’s answers to a completed questionnaire</documentation></annotation>
+        <sequence>
+			<element name="answer" type="tns:QuestionnaireAnswer" maxOccurs="unbounded" minOccurs="1">
+				<annotation>
+					<documentation>The specific answer to a question</documentation></annotation></element>
 		</sequence>
-		<attribute name="ID" type="string"></attribute>
-		<attribute name="DateTime" type="dateTime"></attribute>
-		<attribute name="ObjectID" type="string"></attribute>
-		<attribute name="TaskID" type="string"></attribute>
-		<attribute name="UserID" type="string"></attribute>
+		<attribute name="ID" type="string">
+			<annotation>
+				<documentation>Unique Identification Code</documentation></annotation></attribute>
+		<attribute name="DateTime" type="dateTime">
+			<annotation>
+				<documentation>The date and time the questionnaire was submitted to the Server Application</documentation></annotation></attribute>
+		<attribute name="ObjectID" type="string">
+			<annotation>
+				<documentation>The unique identifier of the person addressed in the questionnaire</documentation></annotation></attribute>
+		<attribute name="TaskID" type="string">
+			<annotation>
+				<documentation>Id of the task for this questionnaire is saved.</documentation>
+			</annotation></attribute>
+		<attribute name="UserID" type="string">
+			<annotation>
+				<documentation>The unique identifier of the user filling the questionnaire</documentation></annotation></attribute>
 	</complexType>
 	
 	<complexType name="QuestionnaireAnswer">
-		<simpleContent>
+        <annotation>
+        	<documentation>The carer’s answer to a daily questionnaire question</documentation></annotation>
+        <simpleContent>
 			<extension base="string">
-				<attribute type="string" name="value"/>
-				<attribute type="string" name="questionID"/>
-				<attribute type="string" name="globalID"/>
+				<attribute type="string" name="value">
+					<annotation>
+						<documentation>The answer value</documentation></annotation></attribute>
+				<attribute type="string" name="questionID">
+					<annotation>
+						<documentation>The unique identifier of the question</documentation></annotation></attribute>
+				<attribute type="string" name="globalID">
+					<annotation>
+						<documentation>Global Id of the question</documentation>
+					</annotation></attribute>
 			</extension>
 		</simpleContent>
 	</complexType>
@@ -85,200 +146,473 @@
 	</simpleType>
 	
 	<complexType name="Warning">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="TypeOfWarning" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
-			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="0"></element>
-			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
-			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
-			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
-			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0"></element>
-			<element name="Patient" type="tns:Patient" maxOccurs="1" minOccurs="0"></element>
-			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="0"></element>
+        <annotation>
+        	<documentation>Description of the Warning auto-generated by the Risk Assessment and Analysis component or manually submitted by the carer</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Unique Warning Identification Code</documentation></annotation></element>
+			<element name="TypeOfWarning" type="tns:SystemParameter" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Type of warning e.g. Manual or auto-generated</documentation></annotation></element>
+			<element name="DateTimeOfWarning" type="dateTime" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Date and time of warning</documentation></annotation></element>
+			<element name="Effect" type="tns:SystemParameter" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>The symptom that the patient might present, e.g. stroke</documentation></annotation></element>
+			<element name="Indicator" type="tns:SystemParameter" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Specifies which data lead to the production of this warning, e.g. High blood pressure or Falls (in case of manual warnings submitted by the carer)</documentation></annotation></element>
+			<element name="RiskLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>High or Low (how likely it is to happen)</documentation></annotation></element>
+			<element name="JustificationText" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Free text (text where the reasoning used for the production of this warning is presented) or notes provided by the carer in the case of manual warnings</documentation></annotation></element>
+			<element name="EmergencyLevel" type="tns:SystemParameter" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Immediate attention, Attention (how immediate should be the response of the clinicians to this warning)</documentation></annotation></element>
+			<element name="Patient" type="tns:Patient" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>The warning is corresponding to identified patient</documentation></annotation></element>
+			<element name="Delivered" type="boolean" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>The warning is delivered to carer/clinician</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="SystemParameter">
-		<sequence>
-			<element name="Code" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Description" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>System Parameters, like Gender, Marital Status, Dementia Etiology, etc. System parameters are lists of {code, description} pairs that change rarely or not at all.</documentation></annotation>
+        <sequence>
+			<element name="Code" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The code of the parameter</documentation></annotation></element>
+			<element name="Description" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The description of the parameter</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="ExternalService">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Description" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Address" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Description of an external service (e.g. cognitive stimulation game)</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique Service Identification Code</documentation></annotation></element>
+			<element name="Description" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>External service description</documentation></annotation></element>
+			<element name="Address" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Address of the external service</documentation></annotation></element>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of the external service</documentation>
+				</annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Event">
-		<sequence>
-			<element name="EventType" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="Subject" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Text" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Target" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Description of an event</documentation></annotation>
+        <sequence>
+			<element name="EventType" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of event (1 – e-mail, 2 – sms)</documentation></annotation></element>
+			<element name="Subject" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Subject of the message (for e-mail)</documentation></annotation></element>
+			<element name="Text" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Text for sending</documentation></annotation></element>
+			<element name="Target" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Number or e-mail</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="User">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="PersonID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Username" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Password" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Description of an ALADDIN user.</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Identity of the user</documentation></annotation></element>
+			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of a user (carer, clinician, admin)</documentation></annotation></element>
+			<element name="PersonID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique identification code of the person</documentation></annotation></element>
+			<element name="Username" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Username</documentation></annotation></element>
+			<element name="Password" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>User’s password (encrypted or plain text)</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="SearchCriteria">
-		<sequence>
-			<element name="FieldName" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="CompareOp" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="FieldValue1" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="FieldValue2" type="string" maxOccurs="1" minOccurs="0"></element>
+        <annotation>
+        	<documentation>Description of the search criteria’s for all entities involved in ALADDIN e.g. patient, carer, clinician, questionnaire, etc.</documentation></annotation>
+        <sequence>
+			<element name="FieldName" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Name of field for filtering</documentation></annotation></element>
+			<element name="CompareOp" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of compare (&lt;, &gt;, =, ! =, like, don’t like, between, etc.) *</documentation></annotation></element>
+			<element name="FieldValue1" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Value for filtering</documentation></annotation></element>
+			<element name="FieldValue2" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Second value for filtering (use only for two-criteria search like interval search, e.g. Age between 50 and 60)</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Task">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="TaskType" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTimeAssigned" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTimeFulfilled" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="TaskStatus" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="URL" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="Text" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="Questionnaire" type="tns:Questionnaire" maxOccurs="1" minOccurs="0"></element>
-			<element name="ExecutorID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="AssignerID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="ObjectID" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Any task assigned to a patient or carer.</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique Task Identification Code</documentation></annotation></element>
+			<element name="TaskType" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of task *
+* TaskType e.g.
+•	DailyQuestionnaire
+•	CarerQuestionnaire
+•	BloodPressureMeasurement
+•	ActivityMonitorMeasurement
+•	WeightMeasurement
+•	CognitiveStimulation
+•	Exercise
+</documentation>
+				</annotation></element>
+			<element name="DateTimeAssigned" type="dateTime" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The date and time on which the task should be fulfilled</documentation></annotation></element>
+			<element name="DateTimeFulfilled" type="dateTime" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The date and time on which the task has been actually fulfilled</documentation></annotation></element>
+			<element name="TaskStatus" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The task status e.g. 1. Pending
+2. Cancelled
+3. Completed
+</documentation></annotation></element>
+			<element name="URL" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>URL for task assignments involving external services e.g. cognitive stimulation</documentation></annotation></element>
+			<element name="Text" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Questionnaire definition for tasks involving questionnaires</documentation></annotation></element>
+			<element name="Questionnaire" type="tns:Questionnaire" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Questionnaire definition for tasks involving questionnaires</documentation></annotation></element>
+			<element name="ExecutorID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>ID of the user that performed the task</documentation></annotation></element>
+			<element name="AssignerID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>ID of the user that assigned the task</documentation></annotation></element>
+			<element name="ObjectID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>ID of the person addressed in the task (PatientID or CarerID)</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="CarerAssessment">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="CarerID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="ClinicianID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateOfAssessment" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="RelevantHealthProblem" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="SeverityOfBurden" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
-			<element name="EmotionalOrMentalDisorders" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="PsychoactiveDrugs" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="QualityOfLife" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
+        <annotation>
+        	<documentation>Carer assessment (whenever applicable)</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique CarerAssessment Identification Code</documentation></annotation></element>
+			<element name="CarerID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Carer</documentation></annotation></element>
+			<element name="ClinicianID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>ID of the Clinician performed the assessment</documentation></annotation></element>
+			<element name="DateOfAssessment" type="dateTime" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Date &amp; Time of assessment </documentation></annotation></element>
+			<element name="RelevantHealthProblem" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Relevant Health problem (free text)</documentation></annotation></element>
+			<element name="SeverityOfBurden" type="unsignedByte" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Severity of Burden : Zarit Burden Interview , (numeric) Score from 0 to 88 (&lt; 47 no burden; 47 - 55 light burden; &gt; 55 heavy burden)</documentation></annotation></element>
+			<element name="EmotionalOrMentalDisorders" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Emotional/ mental disorders: depression, anxiety…(free text)</documentation></annotation></element>
+			<element name="PsychoactiveDrugs" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Use of psychoactive drugs</documentation></annotation></element>
+			<element name="QualityOfLife" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Quality of Life Scale</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="PatientAssessment">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateOfAssessment" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="Aetology" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>A set of assessment scales that will be administered to the patient face to face at baseline, after three months, after six months and at the end point (after nine months). (Or whenever applicable)</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique Patient Assessment Identification Code</documentation></annotation></element>
+			<element name="PatientID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The Patient</documentation></annotation></element>
+			<element name="DateOfAssessment" type="dateTime" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The date &amp; time of assessment </documentation></annotation></element>
+			<element name="Aetology" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Aetiology e.g. “Alzheimer D”</documentation></annotation></element>
 			<element name="TimeEllapsedSinceDiagnosed"
 				type="unsignedByte" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Time elapsed since diagnosed (months)</documentation></annotation>
 			</element>
-			<element name="Severity" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
+			<element name="Severity" type="unsignedByte" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Severity: Clinical Dementia Rating (CDR) numeric, score from 0 to 3, possibilities (0; 0,5; 1; 2; and 3)</documentation></annotation></element>
 			<element name="RelevantPathologyAntecedents"
 				type="string" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Relevant Pathology antecedents (i.e. AVC)</documentation></annotation>
 			</element>
-			<element name="Comorbidity" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="Comorbidity" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Comorbidity (HBP, diabetes, cardiopathy, etc.)</documentation></annotation></element>
 			<element name="CharlsonComorbidityIndex"
 				type="unsignedByte" maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Charlson Comorbidity Index score</documentation></annotation>
 			</element>
-			<element name="BarthelIndex" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="LawtonIndex" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="MMSE" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
-			<element name="MDRS" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="BlessedScalePart1" type="double" maxOccurs="1" minOccurs="0"></element>
-			<element name="BlessedScalePart2" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="BlessedScalePart3" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="ChecklistMBP" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="NPQI_Severity" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="NPQI_Stress" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="GDS" type="unsignedByte" maxOccurs="1" minOccurs="0"></element>
-			<element name="Falls" type="boolean" maxOccurs="1" minOccurs="0"></element>
-			<element name="Incontinence" type="boolean" maxOccurs="1" minOccurs="0"></element>
-			<element name="Delirium" type="boolean" maxOccurs="1" minOccurs="0"></element>
-			<element name="Immobility" type="boolean" maxOccurs="1" minOccurs="0"></element>
-			<element name="SensorialDeficits" type="boolean" maxOccurs="1" minOccurs="0"></element>
-			<element name="PharmacologicalTreatment" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="ClinicalData" type="tns:Measurement" maxOccurs="unbounded" minOccurs="1"></element>
+			<element name="BarthelIndex" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Barthel Index score</documentation></annotation></element>
+			<element name="LawtonIndex" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Lawton index score</documentation></annotation></element>
+			<element name="MMSE" type="unsignedByte" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Mini Mental Status Examination (MMSE) score</documentation></annotation></element>
+			<element name="MDRS" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Mattis Dementia Rating Scale (MDRS) score</documentation></annotation></element>
+			<element name="BlessedScalePart1" type="double" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Blessed Scale Part 1 Score</documentation></annotation></element>
+			<element name="BlessedScalePart2" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Blessed Scale Part 2 Score</documentation></annotation></element>
+			<element name="BlessedScalePart3" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Blessed Scale Part 3 Score</documentation></annotation></element>
+			<element name="ChecklistMBP" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Checklist MBPC</documentation></annotation></element>
+			<element name="NPQI_Severity" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Neuropsychatric Inventory (NPI-Q): Severity</documentation></annotation></element>
+			<element name="NPQI_Stress" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Neuropsychatric Inventory (NPI-Q): Stress</documentation></annotation></element>
+			<element name="GDS" type="unsignedByte" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Yesavage Geriatric Depression Scale (GDS) score</documentation></annotation></element>
+			<element name="Falls" type="boolean" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Falls</documentation></annotation></element>
+			<element name="Incontinence" type="boolean" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Incontinence</documentation></annotation></element>
+			<element name="Delirium" type="boolean" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Delirium</documentation></annotation></element>
+			<element name="Immobility" type="boolean" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Immobility</documentation></annotation></element>
+			<element name="SensorialDeficits" type="boolean" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Sensorial Deficits</documentation></annotation></element>
+			<element name="PharmacologicalTreatment" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Pharmacological treatment (free text)</documentation></annotation></element>
+			<element name="ClinicalData" type="tns:Measurement" maxOccurs="unbounded" minOccurs="1">
+				<annotation>
+					<documentation>List of physical measurements</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Measurement">
-		<sequence>
-			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1"></element>
-			<element name="Value" type="double" maxOccurs="1" minOccurs="1"></element>
-			<element name="DateTime" type="dateTime" maxOccurs="1" minOccurs="1"></element>
-			<element name="Units" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="LowerLimit" type="double" maxOccurs="1" minOccurs="0"></element>
-			<element name="UpperLimit" type="double" maxOccurs="1" minOccurs="0"></element>
-			<element name="TaskID" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Any physical measurement, such as blood pressure, heart rate, weight, activity or sleep quality information, etc.</documentation></annotation>
+        <sequence>
+			<element name="Type" type="tns:SystemParameter" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of measurement e.g. Weight, Blood pressure, etc.</documentation></annotation></element>
+			<element name="Value" type="double" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Measurement value </documentation></annotation></element>
+			<element name="DateTime" type="dateTime" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The date and time of the measurement</documentation></annotation></element>
+			<element name="Units" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Measurement units</documentation></annotation></element>
+			<element name="LowerLimit" type="double" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Reference Range – Lower Limit</documentation></annotation></element>
+			<element name="UpperLimit" type="double" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Reference Range – Upper limit</documentation></annotation></element>
+			<element name="TaskID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The task ID</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Identifier">
-		<sequence>
-			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Number" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="IssueDate" type="date" maxOccurs="1" minOccurs="0"></element>
-			<element name="IssueAuthority" type="string" maxOccurs="1" minOccurs="0"></element>
+        <annotation>
+        	<documentation>Any identifier used by a healthcare facility to uniquely identify a person (e.g. medical record number, birth registry, national unique individual identifier, Passport ID, etc.).</documentation></annotation>
+        <sequence>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>e.g. “medical record number”</documentation></annotation></element>
+			<element name="Number" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Identification number</documentation></annotation></element>
+			<element name="IssueDate" type="date" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Date issued</documentation></annotation></element>
+			<element name="IssueAuthority" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Authority that issued the identifier</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Address">
-		<sequence>
-			<element name="Street" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="StreetNo" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="City" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="County" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="Country" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="ZipCode" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="Notes" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Any address of a person (Note: Contact should be made to the primary address only)</documentation></annotation>
+        <sequence>
+			<element name="Street" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Street</documentation></annotation></element>
+			<element name="StreetNo" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Street Number</documentation></annotation></element>
+			<element name="City" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>City</documentation></annotation></element>
+			<element name="County" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>County</documentation></annotation></element>
+			<element name="Country" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Country</documentation></annotation></element>
+			<element name="ZipCode" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Zip Code</documentation></annotation></element>
+			<element name="Notes" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Notes</documentation></annotation></element>
+			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>True, if it is the primary address of the person</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="Communication">
-		<sequence>
-			<element name="Type" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Value" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Notes" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Any communication number or other means to contact the person e.g. phone, mobile phone, e-mail, fax, etc.</documentation></annotation>
+        <sequence>
+			<element name="Type" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Type of communication e.g. phone, mobile, e-mail, etc.</documentation></annotation></element>
+			<element name="Value" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The communication number or text, e.g. +30 210 7722453, aladdin@biomed.ntua.gr, etc.</documentation></annotation></element>
+			<element name="Notes" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>Notes about the communication, e.g. call only 9:00 am - 12:00 amNotes about the communication, e.g. call only 9:00 am - 12:00 am</documentation>
+				</annotation></element>
+			<element name="IsPrimary" type="boolean" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>True, if it is the primary means of communication (used when contact should be made)</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="SocioDemographicData">
-		<sequence>
+        <annotation>
+        	<documentation>Patient or Carer (anonymous) social and demographic data</documentation></annotation>
+        <sequence>
 			<element name="Gender" type="tns:SystemParameter"
 				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Gender (1 male - 2 female)</documentation></annotation>
 			</element>
 			<element name="MaritalStatus" type="tns:SystemParameter"
 				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Marital status ( 1 widow, 2 married, 3 single, 4 divorced)</documentation></annotation>
 			</element>
 			<element name="Children" type="unsignedByte" maxOccurs="1"
 				minOccurs="0">
+                <annotation>
+                	<documentation>Number of living children</documentation></annotation>
 			</element>
 			<element name="LivingWith" type="tns:SystemParameter"
 				maxOccurs="1" minOccurs="0">
+                <annotation>
+                	<documentation>Living With (*)
+•	0 alone, 
+•	1 with son/daughter, 
+•	2 with partner, 
+•	3 with partner + son/daughter, 
+•	4 with partner + son/daughter + s/d in law, 
+•	5 with partner + s/d + s/d in law + grandson/d
+•	other options 
+</documentation>
+                </annotation>
 			</element>
-			<element name="birthday" type="date"></element>
+			<element name="birthday" type="date">
+				<annotation>
+					<documentation>date of birth</documentation>
+				</annotation></element>
 		</sequence>
 	</complexType>
 
 	<complexType name="PersonData">
-		<sequence>
-			<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="IdentifierList" type="tns:IdentifierList" maxOccurs="1" minOccurs="1"></element>
-			<element name="AddressList" type="tns:AddressList" maxOccurs="1" minOccurs="1"></element>
-			<element name="CommunicationList" type="tns:CommunicationList" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Basic identification / contact information about any person involved in the ALADDIN platform, e.g. Patient, Carer, Clinician, etc.</documentation></annotation>
+        <sequence>
+			<element name="Surname" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Surname</documentation></annotation></element>
+			<element name="Name" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Name</documentation></annotation></element>
+			<element name="IdentifierList" type="tns:IdentifierList" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>A list of identifiers used by a healthcare facility to uniquely identify a person</documentation></annotation></element>
+			<element name="AddressList" type="tns:AddressList" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>A list of addresses for that person</documentation></annotation></element>
+			<element name="CommunicationList" type="tns:CommunicationList" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>A list of ways to communicate with that person</documentation></annotation></element>
 		</sequence>
 	</complexType>
 	
@@ -304,43 +638,76 @@
 	</complexType>
 
 	<complexType name="Carer">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
-			<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>Basic ALADDIN Carer information</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique Carer Identification Code</documentation></annotation></element>
+			<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Carer basic identification / contact information</documentation></annotation></element>
+			<element name="SD_Data" type="tns:SocioDemographicData" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Carer social and demographic data</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
 
 	<complexType name="Clinician">
-		<sequence>
-			<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>The ALADDIN Clinician</documentation></annotation>
+        <sequence>
+			<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Unique Clinician Identification Code</documentation></annotation></element>
+			<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Clinician basic identification / contact information</documentation></annotation></element>
 		</sequence>
 	</complexType>
 	
     <complexType name="Patient">
-    	<sequence>
+        <annotation>
+        	<documentation>The ALADDIN Patient</documentation></annotation>
+        <sequence>
     		<element name="ID" type="string" maxOccurs="1"
     			minOccurs="1">
+                <annotation>
+                	<documentation>Unique Patient Identification Code</documentation></annotation>
     		</element>
     		<element name="PersonData" type="tns:PersonData"
     			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Patient basic identification / contact information</documentation></annotation>
     		</element>
     		<element name="SD_Data" type="tns:SocioDemographicData"
     			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Patient social and demographic data</documentation></annotation>
     		</element>
     		<element name="ResponsibleClinicianID" type="string"
     			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>The clinician responsible for the patient</documentation></annotation>
     		</element>
     		<element name="SocialWorker" type="tns:SocialWorker"
     			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Social Worker that is corresponded to Patient</documentation>
+                </annotation>
     		</element>
     		<element name="ConsulterInCharge" type="tns:Consulter"
     			maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Consulter that is corresponded to Patient</documentation>
+                </annotation>
     		</element>
     		<element name="GeneralPractitioner"
     			type="tns:GeneralPractitioner" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>General Practitioner that is corresponding to the patient.</documentation>
+                </annotation>
     		</element>
     		<element name="PatientCarer" type="tns:Carer" maxOccurs="1" minOccurs="1"></element>
     	</sequence>
@@ -371,67 +738,150 @@
     </complexType>
     
     <complexType name="Administrator">
-    	<sequence>
-    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>The ALADDIN Administrator</documentation></annotation>
+        <sequence>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Unique Identification Code</documentation></annotation></element>
+    		<element name="PersonData" type="tns:PersonData" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Clinician basic identification / contact information</documentation></annotation></element>
     	</sequence>
     </complexType>
     
     <complexType name="PatientInfo">
-    	<sequence>
-    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>The short variant of patient’s information</documentation></annotation>
+        <sequence>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Unique Identification Code</documentation></annotation></element>
+    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Surname</documentation></annotation></element>
+    		<element name="Name" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Name</documentation></annotation></element>
     	</sequence>
     </complexType>
     
     <complexType name="CarerInfo">
-    	<sequence>
-    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>The short variant of carer’s information</documentation></annotation>
+        <sequence>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Unique Identification Code</documentation></annotation></element>
+    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Surname</documentation></annotation></element>
+    		<element name="Name" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Name</documentation>
+    			</annotation></element>
     	</sequence>
     </complexType>
     
     <complexType name="ClinicianInfo">
-    	<sequence>
-    		<element name="ID" type="string"></element>
-    		<element name="Surname" type="string"></element>
-    		<element name="Name" type="string"></element>
+        <annotation>
+        	<documentation>The short variant of clinician’s information</documentation></annotation>
+        <sequence>
+    		<element name="ID" type="string">
+    			<annotation>
+    				<documentation>Unique Identification Code</documentation></annotation></element>
+    		<element name="Surname" type="string">
+    			<annotation>
+    				<documentation>Surname</documentation>
+    			</annotation></element>
+    		<element name="Name" type="string">
+    			<annotation>
+    				<documentation>Name</documentation>
+    			</annotation></element>
     	</sequence>
     </complexType>
     
     <complexType name="AdministratorInfo">
-    	<sequence>
-    		<element name="ID" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1"></element>
-    		<element name="Name" type="string" maxOccurs="1" minOccurs="1"></element>
+        <annotation>
+        	<documentation>The short variant of administrator’s information</documentation></annotation>
+        <sequence>
+    		<element name="ID" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Unique Identification Code</documentation></annotation></element>
+    		<element name="Surname" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Surname</documentation>
+    			</annotation></element>
+    		<element name="Name" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Name</documentation>
+    			</annotation></element>
     	</sequence>
     </complexType>
     
     <complexType name="QuestionnaireInfo">
-    	<attribute name="version" type="double"></attribute>
-    	<attribute name="ID" type="string"></attribute>
-    	<attribute name="title" type="string"></attribute>
+        <annotation>
+        	<documentation>Short description of a questionnaire</documentation></annotation>
+        <attribute name="version" type="double">
+        	<annotation>
+        		<documentation>Version e.g. “1.0”</documentation></annotation></attribute>
+    	<attribute name="ID" type="string">
+    		<annotation>
+    			<documentation>Unique Identification Code</documentation></annotation></attribute>
+    	<attribute name="title" type="string">
+    		<annotation>
+    			<documentation>Questionnare Title</documentation></annotation></attribute>
     </complexType>
 
 	<complexType name="OperationResult">
-		<sequence>
-			<element name="Code" type="string" maxOccurs="1" minOccurs="1"></element>
-			<element name="Status" type="unsignedByte" maxOccurs="1" minOccurs="1"></element>
-			<element name="Description" type="string" maxOccurs="1" minOccurs="0"></element>
+        <annotation>
+        	<documentation>OperationResult contains the code of an operation result, the status of the result (passed or failed) and the operation result description</documentation></annotation>
+        <sequence>
+			<element name="Code" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The code of the parameter</documentation></annotation></element>
+			<element name="Status" type="unsignedByte" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>The status of the parameter</documentation></annotation></element>
+			<element name="Description" type="string" maxOccurs="1" minOccurs="0">
+				<annotation>
+					<documentation>The description of the parameter</documentation></annotation></element>
 		</sequence>
 	</complexType>
 
     <complexType name="MediaContent">
+        <annotation>
+        	<documentation>Media Content</documentation>
+        </annotation>
         <sequence>
-            <element name="ID" type="string"></element>
-            <element name="title" type="string"></element>
-            <element name="url" type="string"></element>
-            <element name="type" type="string"></element>
-            <element name="category" type="string"></element>
-            <element name="text" type="string"></element>
-            <element name="enabled" type="boolean"></element>
+            <element name="ID" type="string">
+            	<annotation>
+            		<documentation>Unique Identification Code</documentation>
+            	</annotation></element>
+            <element name="title" type="string">
+            	<annotation>
+            		<documentation>title (name)</documentation>
+            	</annotation></element>
+            <element name="url" type="string">
+            	<annotation>
+            		<documentation>URL of site</documentation>
+            	</annotation></element>
+            <element name="type" type="string">
+            	<annotation>
+            		<documentation>type of content (site, game, text)</documentation>
+            	</annotation></element>
+            <element name="category" type="string">
+            	<annotation>
+            		<documentation>Category (game, training, etc.)</documentation>
+            	</annotation></element>
+            <element name="text" type="string">
+            	<annotation>
+            		<documentation>text</documentation>
+            	</annotation></element>
+            <element name="enabled" type="boolean">
+            	<annotation>
+            		<documentation>true if enabled</documentation>
+            	</annotation></element>
         </sequence>
     </complexType>
 
