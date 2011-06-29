@@ -58,6 +58,7 @@ import eu.aladdin_project.xsd.User;
 import eu.aladdin_project.xsd.Warning;
 
 import org.apache.axis2.AxisFault;
+import org.apache.axis2.context.MessageContext;
 import org.example.rulemap.*;
 
 import com.aladdin.sc.StorageComponentStub;
@@ -80,6 +81,13 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	public AnalyzeQuestionnairesResponseDocument analyzeQuestionnaires(
 			AnalyzeQuestionnairesDocument req) {
+		
+		try {
+			checkIP();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return null;
+		}
 		
 		System.out.println ("=== analyzeQuestionnaires ===");
 
@@ -493,6 +501,15 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 	public AnalyzeMeasurementsResponseDocument analyzeMeasurements(
 			AnalyzeMeasurementsDocument req) {
+		
+		
+		try {
+			checkIP();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		
 		AnalyzeMeasurementsResponseDocument respdoc = AnalyzeMeasurementsResponseDocument.Factory
 				.newInstance();
 		AnalyzeMeasurementsResponse resp = respdoc
@@ -731,6 +748,22 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 
 		return warning;
 
+	}
+	
+	/**
+	 * Check access for client IP
+	 * @throws Exception if access is denied
+	 */
+	private void checkIP () throws Exception {
+		String ip = (String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR);
+		List<String> lst = new ArrayList<String>();
+		String trustedIp[] = {"193.174.152.114", "127.0.0.1"}; 
+		Collections.addAll(lst, trustedIp);
+		Collections.sort(lst);
+		int idx = Collections.binarySearch(lst, ip);
+		if (idx < 0) {
+			throw new Exception("access denied");
+		}
 	}
 
 }
