@@ -16,6 +16,10 @@ mv tmp resources/services.xml
 cat resources/raac.wsdl|sed 's/<wsdl:service name="raac">/<wsdl:service name="raacNHNN">/' > tmp
 mv tmp resources/raac.wsdl
 
+cat src/com/aladdin/raac/RaacSkeleton.java|sed 's/String trustedIp[] = {"193.174.152.114", "127.0.0.1"};/String trustedIp[] = {"193.174.152.114", "127.0.0.1"};/' > tmp
+mv tmp src/com/aladdin/raac/RaacSkeleton.java
+
+
 ant
 mv build/lib/*.aar ..
 cd ..

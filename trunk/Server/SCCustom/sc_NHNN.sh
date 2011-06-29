@@ -7,6 +7,7 @@ echo "package com.aladdin.sc.config;" >> StorageComponent/src/com/aladdin/sc/con
 echo "public class Configuration {" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "public String hibernateCfg = \"/hibernate-aladdin-sc-nhnn.cfg.xml\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "public String forumSC = \"http://dafnis.atosorigin.es/NHNN/Aladdin/includes/sc.php\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
+echo "public static String trustedIP[] = {\"193.174.152.114\", \"127.0.0.1\"};" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "}" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 cd StorageComponent/
 
