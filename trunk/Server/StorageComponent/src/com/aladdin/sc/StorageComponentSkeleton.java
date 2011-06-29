@@ -11,12 +11,14 @@ import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.axis2.AxisFault;
+import org.apache.axis2.context.MessageContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -232,10 +234,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 	
 	static {
 		try {
-			com.aladdin.sc.config.Configuration config = new com.aladdin.sc.config.Configuration();
-			forumSC = config.forumSC;
+			forumSC = com.aladdin.sc.config.Configuration.forumSC;
 			
-			Configuration configure = new Configuration().configure(config.hibernateCfg);
+			Configuration configure = new Configuration().configure(com.aladdin.sc.config.Configuration.hibernateCfg);
 			sessionFactory = configure.buildSessionFactory();
 			System.out.println ("new sessionFactory");
 		} catch (Throwable ex) {
@@ -3204,6 +3205,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
     	
     	try {
     		
+    		checkIP ();
+    		
     		session.beginTransaction();
     		
     		User ru = req.getUpdateUser().getUser();
@@ -3238,6 +3241,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
     		res.setCode("-2");
     		res.setDescription("database error " + e.toString());
     		res.setStatus((short) 0);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			_finally();
 		}
@@ -3260,7 +3265,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
     	
     	try {
-    		
+    		checkIP ();
     		Integer id = new Integer (req.getDeleteUser().getId());
     		
     		session.beginTransaction();
@@ -3281,17 +3286,26 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
     		res.setCode("-2");
     		res.setDescription("database error " + e.toString());
     		res.setStatus((short) 0);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			_finally();
 		}
     	
     	return respdoc;
     }
+    
+    private void printIp () {
+    	System.out.println ((String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR));
+    }
      
     /* (non-Javadoc)
      * @see com.aladdin.sc.StorageComponentSkeletonInterface#auth(eu.aladdin_project.storagecomponent.AuthDocument)
      */
     public AuthResponseDocument auth (AuthDocument req) {
+    	
+    	printIp ();
+    	
     	AuthResponseDocument respdoc = AuthResponseDocument.Factory.newInstance();
     	AuthResponse resp = respdoc.addNewAuthResponse();
     	OperationResult res = resp.addNewOut();
@@ -3351,6 +3365,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
     	
     	try {
     		
+    		checkIP ();
+    		
     		Integer id = new Integer (req.getChangePassword().getUserId());
     		String password = req.getChangePassword().getPassword();
     		
@@ -3381,6 +3397,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
     		res.setCode("-2");
     		res.setDescription("database error " + e.toString());
     		res.setStatus((short) 0);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			_finally();
 		}
@@ -3403,6 +3421,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
     	
     	try {
+    		
+    		checkIP ();
+    		
             User ru = req.getCreateUser().getUser();
 
     		String url = forumSC + "?none=1&password=***&type=***&username=" + ru.getUsername();
@@ -3485,6 +3506,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 			 
 		try {
+			checkIP ();
 			Integer id = new Integer (req.getGetUserType().getId());
 			String sql = "SELECT type FROM aladdinuser WHERE id = '" + id.toString() + "'";
     		SQLQuery q = session.createSQLQuery(sql);
@@ -3503,6 +3525,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			res.setCode("-2");
 			res.setDescription("database error " + e.toString());
 			res.setStatus((short) 0);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			_finally();
 		}
@@ -3646,6 +3670,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			ru.setType(spType);
 			ru.setUsername(user.getUsername());
 		} catch (HibernateException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			_finally();
@@ -5200,6 +5226,21 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		return dEntertainmentContent.getId();
+	}
+	
+	/**
+	 * Check access for client IP
+	 * @throws Exception if access is denied
+	 */
+	private void checkIP () throws Exception {
+		String ip = (String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR);
+		List<String> lst = new ArrayList<String>();
+		Collections.addAll(lst, com.aladdin.sc.config.Configuration.trustedIP);
+		Collections.sort(lst);
+		int idx = Collections.binarySearch(lst, ip);
+		if (idx < 0) {
+			throw new Exception("access denied");
+		}
 	}
 
 }

@@ -126,4 +126,15 @@
     <target name="clean">
         <delete dir="${build}"/>
     </target>
+	<javadoc packagenames="com.aladdin.sc.*"
+       sourcepath="src"
+       defaultexcludes="yes"
+       destdir="build/docs/javadoc"
+       excludepackagenames="org.apache.*"
+       author="true"
+       version="true"
+       use="true"
+       windowtitle="ALADDIN Storage Component">
+		<tag name="todo" scope="all" description="To do:"/>
+	</javadoc>
 </project>
