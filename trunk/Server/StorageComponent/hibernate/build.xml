@@ -8,29 +8,27 @@
         <fileset dir="${AXIS2_HOME}/lib">
             <include name="*.jar"/>
         </fileset>
-	<fileset dir="../jar">
+        <fileset dir="../jar">
             <include name="*.jar"/>
         </fileset>
     </path>
 
     <target name="generate.hbm">
-    	<exec executable="create-hbm"/>
+        <exec executable="create-hbm"/>
     </target>
 
 <target name="sql">
     <taskdef name="schemaexport"
-        classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
-        classpathref="classpath"/>
-    
+       classname="org.hibernate.tool.hbm2ddl.SchemaExportTask"
+       classpathref="classpath"/>
+   
     <schemaexport
-        properties="src/hibernate.properties"
-	create="true"
-        quiet="yes"
-        text="yes"
-        drop="no"
-        delimiter=";"
-	output="src/sc.sql"
-        >
+       properties="src/hibernate.properties"
+       quiet="no"
+       text="no"
+       drop="no"
+       delimiter=";"
+       output="src/sc.sql">
         <fileset dir="src">
             <include name="**/*.hbm.xml"/>
         </fileset>
@@ -39,26 +37,26 @@
 
     <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="classpath" />
     <target name="hbm2java" depends="generate.hbm">
-	<mkdir dir="${build.dir}"/>
-	<mkdir dir="${build.dir}/src"/>
-    	<hibernatetool destdir="${build.dir}/src">
-    		<configuration configurationfile="src/hibernate-aladdin-sc.cfg.xml">
-	    		<fileset dir="src/com/aladdin/sc/db">
-    				<include name="**/*.hbm.xml"/>
-    			</fileset>
-    		</configuration>
-    		<hbm2java/>
-    	</hibernatetool>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/src"/>
+        <hibernatetool destdir="${build.dir}/src">
+                <configuration configurationfile="src/hibernate-aladdin-sc.cfg.xml">
+                        <fileset dir="src/com/aladdin/sc/db">
+                                <include name="**/*.hbm.xml"/>
+                        </fileset>
+                </configuration>
+                <hbm2java/>
+        </hibernatetool>
     </target>
 
     <target name="compile.hibernate.jar" depends="hbm2java">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${build.dir}/classes"/>
-        <javac debug="on" 
-               fork="true"
-               destdir="${build.dir}/classes/"
-               srcdir="${build.dir}/src"
-               classpathref="classpath">
+        <javac debug="on"
+              fork="true"
+              destdir="${build.dir}/classes/"
+              srcdir="${build.dir}/src"
+              classpathref="classpath">
         </javac>
     </target>
 
