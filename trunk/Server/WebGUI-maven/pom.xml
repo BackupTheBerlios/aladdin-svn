@@ -21,21 +21,21 @@
     <dependency>
     	<groupId>org.zkoss.common</groupId>
     	<artifactId>zcommon</artifactId>
-    	<version>5.0.4</version>
+    	<version>5.0.7</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>org.zkoss.zk</groupId>
     	<artifactId>zk</artifactId>
-    	<version>5.0.4</version>
+    	<version>5.0.7</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>org.zkoss.zk</groupId>
     	<artifactId>zul</artifactId>
-    	<version>5.0.4</version>
+    	<version>5.0.7</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
@@ -90,7 +90,7 @@
     <dependency>
     	<groupId>org.zkoss.zk</groupId>
     	<artifactId>zhtml</artifactId>
-    	<version>5.0.4</version>
+    	<version>5.0.7</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
