@@ -1,0 +1,69 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.MediaContent;
+		import eu.aladdin_project.xsd.SearchCriteria;
+		import eu.aladdin_project.SystemDictionary;
+		
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+		String idlbl = Labels.getLabel("common.id");
+		String desc = Labels.getLabel("common.description");
+		String urilbl = Labels.getLabel("common.URI");
+		String newextrsrv = Labels.getLabel("extsrv.new");
+
+		MediaContent[] plist = null;
+		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+		Session ses = Sessions.getCurrent();
+		String id = (String)ses.getAttribute("userid");
+		try{
+			plist = proxy.getMediaContent(new SearchCriteria[0],id);
+			if(plist == null){
+				SystemDictionary.webguiLog("INFO", "CONTENT LIST LENGHT: NULL");
+			}else{
+				SystemDictionary.webguiLog("INFO", "CONTENT LIST LENGHT: "+plist.length);
+			}
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+		
+	</zscript>
+	<window border="none" width="800px" sclass="centerwin" id="mediamanager" use="eu.aladdin_project.controllers.cms.ContentManagerIndex">
+	<?component name="contentModal" macroURI="form.zul"?>
+	<contentModal id="contentModal" />
+	<vbox>
+	<button label="Add content" onClick="mediamanager.createContent()" sclass="newitem" />
+	<grid>
+		<columns>
+			<column label="${idlbl }" width="35px" sort="auto"/>
+			<column label="Title"/>
+			<column label="${urilbl }" sort="auto"/>
+			<!-- <column label="Type"/>  -->
+			<column label="Category"/>
+			<column label="Enabled"/>
+			<column width="80px" align="center" />
+			<column width="80px" align="center" />
+		</columns>
+		<rows>
+			<row forEach="${plist }" id="${each.ID }">
+				<label value="${each.ID }"/>
+				<label value="${each.title }"/>
+				<label value="${each.url }"/>
+				<!-- <label value="${each.type }"/>  -->
+				<label value="${each.category }"/>
+				<label value="${each.enabled }"/>
+				<label value="${updmsg }" sclass="link" onClick="mediamanager.modifyContent(self.getParent().getId())"/>
+				<label if="${each.enabled }" value="Disable" sclass="link" onClick="mediamanager.disableContent(self.getParent().getId())"/>
+				<label if="${!each.enabled }" value="Enable" sclass="link" onClick="mediamanager.enableContent(self.getParent().getId())"/>
+			</row>
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>

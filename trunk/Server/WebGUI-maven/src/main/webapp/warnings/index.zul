@@ -1,0 +1,68 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.SystemDictionary;
+		
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+		String idlbl = Labels.getLabel("common.id");
+		String typelbl = Labels.getLabel("common.type");
+		String datelbl = Labels.getLabel("common.date");
+		String efectlbl = Labels.getLabel("cwarn.effect");
+		String indclbl = Labels.getLabel("cwarn.ind");
+		String risklbl = Labels.getLabel("cwarn.risklvl");
+		String emerglbl = Labels.getLabel("cwarn.emergencylvl");
+		String patidlbl = Labels.getLabel("cwarn.patientid");
+		String delivlbl = Labels.getLabel("cwarn.deliver");
+		String titlelbl = Labels.getLabel("menu.warnings");
+		
+	</zscript>
+	<window border="none" width="800px" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
+	<?component name="warningModal" macroURI="form.zul"?>
+	<warningModal id="warningModal" />
+	<vbox>
+	<label value="${titlelbl }" sclass="newitem"/>
+	<hbox>
+		<label value="Show only unread"/>
+		<checkbox id="readall" onCheck="warningswin.refreshWarnings()" checked="true"/>
+		<label value="Only patient"/>
+		<textbox id="filterpatient" visible="false" readonly="true"/>
+		<textbox id="filterpatienttrigger" readonly="true" onClick="warningswin.createPatientsDialog()"/>
+		<button label="Show for all patients" onClick="warningswin.showForAllPatients()"/>
+	</hbox>
+	<hbox>
+		<label value="From"/>
+		<datebox id="datefromfilter" format="dd/MM/yyyy" readonly="true"/>
+		<label value="to"/>
+		<datebox id="datetofilter" format="dd/MM/yyyy" readonly="true"/>
+		<button label="Apply date filter" onClick="warningswin.refreshWarnings()"/>
+		<button label="Clear date filters" onClick="warningswin.clearDateFilters()"/>
+	</hbox>
+	<grid id="warningsgrid">
+		<columns>
+			<!-- <column label="${idlbl }" width="35px" sort="auto"/> -->
+			<column label="${typelbl }" width="80px" sort="auto"/>
+			<column label="${datelbl }" sort="auto" width="120px"/>
+			<!-- <column label="${efectlbl }" sort="auto"/>
+			<column label="${indclbl }" sort="auto"/>
+			<column label="${risklbl }" sort="auto"/>
+			<column label="${emerglbl }" sort="auto"/> -->
+			<column label="${patidlbl }" sort="auto"/>
+			<column label="Justification"/>
+			<column label="read" sort="auto"/>
+			<column width="80px" align="center" />
+		</columns>
+		<rows id="filteredrows">
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+	<zscript>
+		warningswin.refreshWarnings();
+	</zscript>
+	<include src="/inc/footer.zul"/>
+</zk>

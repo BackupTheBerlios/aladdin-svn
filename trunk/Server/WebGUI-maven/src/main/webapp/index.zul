@@ -1,0 +1,53 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String title = Labels.getLabel("home.title");
+		page.setTitle(title);
+		String newprof = Labels.getLabel("home.newprofile");
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
+	</zscript>
+	<style dynamic="true">
+		.gridnolayout tr.z-row td.z-row-inner, tr.z-row .z-cell,div.z-grid{
+			border: none;
+			overflow:hidden;
+			zoom: 1;
+			background: white; 
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			border-bottom: none; 
+		}
+	</style>
+	<window width="800px" sclass="centerwin" border="none">
+		<grid sclass="gridnolayout" >
+			<columns>
+				<column width="33%" align="center"/>
+				<column width="33%" align="center"/>
+				<column width="33%" align="center"/>
+			</columns>
+			<rows>
+				<row height="200px">
+					<button href="/patients/" label="Go to Patients" height="180px" width="80%" image="/inc/icons/patient-icon2.png"/>
+					<button href="/carers/" label="Go to Carers" height="180px" width="80%" image="/inc/icons/carer.png"/>
+					<button href="/clinicians/" label="Go to Clinicians" height="180px" width="80%" image="/inc/icons/clinician.png"/>
+				</row>
+				<row height="200px">
+					<button href="/qm/" label="Open question manager" height="180px" width="80%" image="/inc/icons/qm.png"/>
+					<button href="/extsrv/" label="Manage external services" height="180px" width="80%" image="/inc/icons/services.png"/>
+					<button  href="/warnings/" label="View clinical warnings" height="180px" width="80%" image="/inc/icons/warning.png">
+						<attribute name="onCreate">
+							if(isadmin){
+								self.setDisabled(true);
+							}
+						</attribute>
+					</button>
+				</row>
+			</rows>
+		</grid>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>

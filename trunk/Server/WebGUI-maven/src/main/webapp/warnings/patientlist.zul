@@ -1,0 +1,38 @@
+<zk>
+	<window title="Select Patient" closable="true" border="normal" width="300px" id="patientlistwin" use="eu.aladdin_project.controllers.warnings.PatientListForWarnings">
+		<zscript>
+			import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+			import eu.aladdin_project.xsd.SearchCriteria;
+			import eu.aladdin_project.xsd.PatientInfo;
+			import eu.aladdin_project.xsd.User;
+			import eu.aladdin_project.xsd.SystemParameter;
+			import eu.aladdin_project.SystemDictionary;
+			
+			StorageComponentProxy proxy = new StorageComponentProxy();
+			String userid = (String)Sessions.getCurrent().getAttribute("userid");
+			PatientInfo[] palist = null;
+			try{
+				User loggeduser = proxy.getUser(userid);
+				SearchCriteria resclinicfilter = new SearchCriteria();
+				resclinicfilter.setFieldName("clinician");
+				resclinicfilter.setFieldValue1(loggeduser.getPersonID());
+				resclinicfilter.setCompareOp(new SystemParameter(SystemDictionary.COMPARE_EQ,""));
+				
+				//palist = proxy.listOfPatients(new SearchCriteria[]{resclinicfilter},userid);
+				palist = proxy.listOfPatients(new SearchCriteria[0],userid);
+				SystemDictionary.webguiLog("INFO", "Patient list: "+palist.length);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		</zscript>
+		<radiogroup id="respo_rgroup"><grid>
+			<rows>
+				<row forEach="${palist}">
+					<radio label="${each.surname}, ${each.name}" value="${each.ID }"/>
+				</row>
+			</rows>
+		</grid>
+		<button label="Select Patient" onClick="patientlistwin.setPatient()"/>
+		</radiogroup>
+	</window>
+</zk>

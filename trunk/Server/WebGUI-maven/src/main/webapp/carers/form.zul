@@ -1,0 +1,16 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		String title = Labels.getLabel("carers.new.title");
+		String save = Labels.getLabel("carers.save");
+		page.setTitle(title);	
+	</zscript>
+	<window title="${title}" id="carerform" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.CarerControllerWindow">
+	<button label="${save }" onClick="carerform.createCarer()"/>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>
