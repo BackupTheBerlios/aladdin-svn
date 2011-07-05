@@ -82,7 +82,9 @@ public class CalendarWindowControllerPatients extends Window {
 			Listbox urlfield = (Listbox)getFellow("urlfield");
 			System.out.println (urlfield.toString());
 			Listitem selectedItem = urlfield.getSelectedItem();
-			System.out.println (selectedItem.toString());
+			if (selectedItem == null && urlfield.getItemCount() > 0) {
+				selectedItem = (Listitem) urlfield.getItems().get(0);
+			}
 			switch(((Integer)listitem.getValue()).intValue()){
 				case SystemDictionary.TASK_TYPE_CARERQS_INT:
 				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
