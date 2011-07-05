@@ -79,6 +79,10 @@ public class CalendarWindowControllerPatients extends Window {
 			org.zkoss.zul.api.Listitem listitem = listbox.getSelectedItemApi();
 			SystemParameter tastype = new SystemParameter(((Integer)listitem.getValue()).toString(), listitem.getLabel());
 			String userids = ((Textbox)getFellow("userid")).getValue();
+			Listbox urlfield = (Listbox)getFellow("urlfield");
+			System.out.println (urlfield.toString());
+			Listitem selectedItem = urlfield.getSelectedItem();
+			System.out.println (selectedItem.toString());
 			switch(((Integer)listitem.getValue()).intValue()){
 				case SystemDictionary.TASK_TYPE_CARERQS_INT:
 				case SystemDictionary.TASK_TYPE_PATIENTQS_INT:
@@ -87,13 +91,13 @@ public class CalendarWindowControllerPatients extends Window {
 					questionnaire = proxy.getQuestionnaire(qid, SystemDictionary.getLocale(), userids);
 					break;
 				case SystemDictionary.TASK_TYPE_COGGAME_INT:
-					URL = (String)((Listbox)getFellow("urlfield")).getSelectedItem().getValue();
+					URL = (String)selectedItem.getValue();
 					break;
 				case SystemDictionary.TASK_TYPE_TXT_INT:
 					text = ((Textbox)getFellow("textfield")).getValue();
 					break;
 				case SystemDictionary.TASK_TYPE_EXERCISE_INT:
-					URL = (String)((Listbox)getFellow("urlfield")).getSelectedItem().getValue();
+					URL = (String)selectedItem.getValue();
 					text = ((Textbox)getFellow("textfield")).getValue();
 					break;
 				default:
