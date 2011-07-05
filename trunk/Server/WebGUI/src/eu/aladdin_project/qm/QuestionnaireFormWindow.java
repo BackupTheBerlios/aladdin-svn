@@ -2,7 +2,6 @@ package eu.aladdin_project.qm;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -23,7 +22,6 @@ import eu.aladdin_project.xsd.Questionnaire;
 import eu.aladdin_project.xsd.QuestionnaireInfo;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.QuestionnaireQuestionList;
-import eu.aladdin_project.xsd.SystemParameter;
 
 public class QuestionnaireFormWindow extends Window{
 

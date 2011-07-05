@@ -24,15 +24,12 @@ import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Patient;
-import eu.aladdin_project.xsd.PatientInfo;
 import eu.aladdin_project.xsd.SearchCriteria;
 import eu.aladdin_project.xsd.SystemParameter;
-import eu.aladdin_project.xsd.User;
 import eu.aladdin_project.xsd.Warning;
 
-@SuppressWarnings("serial")
 public class WarningsWindowController extends Window {
-
+	private static final long serialVersionUID = 8199279504649823907L;
 	public WarningsPopupController warningPopup;
 	
 	public void readWarning(String warningid){

@@ -1,6 +1,5 @@
 package eu.aladdin_project.controllers.details.assessment;
 
-import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -13,8 +12,6 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Window;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.Intbox;
-
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
@@ -22,7 +19,8 @@ import eu.aladdin_project.xsd.PatientAssessment;
 import eu.aladdin_project.xsd.SystemParameter;
 
 public class AssessmentPopupController extends Window{
-	
+	private static final long serialVersionUID = -4444846754906879668L;
+
 	public void saveAssessment(){
 		String userid = (String)Sessions.getCurrent().getAttribute("userid");
 		StorageComponentProxy proxy = SystemDictionary.getSCProxy();

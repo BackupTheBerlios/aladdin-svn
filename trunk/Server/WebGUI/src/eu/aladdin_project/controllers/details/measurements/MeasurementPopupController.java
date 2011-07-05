@@ -42,10 +42,6 @@ import eu.aladdin_project.xsd.Measurement;
 import eu.aladdin_project.xsd.OperationResult;
 
 public class MeasurementPopupController extends Window{
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2129003366036217191L;
 	private String patientid;
 	

@@ -13,7 +13,7 @@ import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.User;
 
 public class ChangePassword extends Window{
-	
+	private static final long serialVersionUID = 1203601720297000762L;
 	private String uid;
 	private User user;
 	

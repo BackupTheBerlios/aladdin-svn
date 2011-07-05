@@ -20,7 +20,6 @@ import org.zkoss.zul.Radio;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.Carer;
-import eu.aladdin_project.xsd.CarerInfo;
 
 /**
  * This class is used to built the carer list that appears on the patients questionnaire.  

@@ -7,13 +7,11 @@ import org.zkoss.zul.Listitem;
 
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.xsd.Carer;
-import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
 
-@SuppressWarnings("serial")
 public class DetailSDController extends DetailPersonController{
-	
+	private static final long serialVersionUID = -8678452591172228455L;
 	protected int usertype;
 	
 	public DetailSDController(){

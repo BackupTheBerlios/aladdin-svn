@@ -41,9 +41,8 @@ import eu.aladdin_project.xsd.SocialWorker;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.Task;
 
-@SuppressWarnings("serial")
 public class DetailPatientController extends DetailSDController{
-	
+	private static final long serialVersionUID = 6583102921034384286L;
 	public AssessmentPopupController assessmentWindow;
 	private Window removeMassivelyDialog;
 	private Window weightMeasurementDialog;

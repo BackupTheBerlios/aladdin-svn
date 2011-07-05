@@ -19,7 +19,7 @@ import eu.aladdin_project.xsd.SystemParameter;
  * @author Xavi Sarda (Atos Origin)
  */
 public class ContentManagerIndex extends Window{
-	
+	private static final long serialVersionUID = -5977974069200968628L;
 	public Window contentpopup;
 
 	public void createContent() throws SuspendNotAllowedException, InterruptedException{

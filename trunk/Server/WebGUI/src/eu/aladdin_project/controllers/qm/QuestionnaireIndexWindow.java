@@ -10,9 +10,9 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 
-@SuppressWarnings("serial")
 public class QuestionnaireIndexWindow extends Window {
-	
+	private static final long serialVersionUID = 1967142868699449476L;
+
 	/**
 	 * Function to remove Questionnaires from questionnaire manager index page.
 	 * 

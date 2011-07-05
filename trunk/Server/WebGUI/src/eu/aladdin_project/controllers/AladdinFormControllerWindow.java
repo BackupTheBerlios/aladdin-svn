@@ -38,9 +38,8 @@ import eu.aladdin_project.xsd.PersonData;
  * General profile form controller for Aladdin. 
  * @author Xavi Sarda (Atos Origin)
  */
-@SuppressWarnings("serial")
 public class AladdinFormControllerWindow extends Window{
-	
+	private static final long serialVersionUID = 2661475164027020887L;
 	protected String currentid = null;
 	protected PersonData currentdata = null;
 	protected Communication[] communications = null;
@@ -417,7 +416,6 @@ public class AladdinFormControllerWindow extends Window{
 		String county = Labels.getLabel("patients.form.county");
 		String country = Labels.getLabel("patients.form.country");
 		String zipcode = Labels.getLabel("patients.form.zip");
-		String prim = Labels.getLabel("patients.form.primary");
 		String notes = Labels.getLabel("patients.form.notes");
 		String addresssave = Labels.getLabel("common.address.save");
 		
@@ -612,14 +610,15 @@ public class AladdinFormControllerWindow extends Window{
 	 * @param title Title of the sub-form
 	 * @param rows Rows element where subtitle will be added
 	 */
+	@SuppressWarnings("deprecation")
 	protected void appendSubFormTitleRow(String title, Rows rows){
 		Row row0 = new Row();
 		row0.setSpans("2");
 		row0.setSclass("center");
-			Label lab0 = new Label();
-			lab0.setValue(title);
-			lab0.setSclass("strong");
-			row0.appendChild(lab0);
+		Label lab0 = new Label();
+		lab0.setValue(title);
+		lab0.setSclass("strong");
+		row0.appendChild(lab0);
 		rows.appendChild(row0);
 	}
 	

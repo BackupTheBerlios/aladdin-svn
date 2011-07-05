@@ -13,7 +13,7 @@ import eu.aladdin_project.xsd.MediaContent;
 import eu.aladdin_project.xsd.OperationResult;
 
 public class ContentManagerPopup extends Window{
-	
+	private static final long serialVersionUID = -3943905769559638872L;
 	private String id;
 	private String title;
 	private String url;

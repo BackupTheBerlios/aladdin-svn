@@ -11,18 +11,18 @@ import org.zkoss.zul.Window;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.ExternalService;
 
-@SuppressWarnings("serial")
 public class ExternalServicesPopupController extends Window {
+	private static final long serialVersionUID = 6419201142415762086L;
 
 	public void createExternalServiceToStorage(){
 		String description = ((Textbox)getFellow("srvdescfield")).getValue(); 
-		String uir = ((Textbox)getFellow("srvuricfield")).getValue();
+		String uri = ((Textbox)getFellow("srvuricfield")).getValue();
 		StorageComponentProxy proxy = new StorageComponentProxy();
 		Session ses = Sessions.getCurrent();
 		String userid = (String)ses.getAttribute("userid");
 		
 		//TODO Retrieve real external service type
-		ExternalService extservice = new ExternalService("",description,uir,"");
+		ExternalService extservice = new ExternalService("",description,uri,"");
 		try{
 			proxy.createExternalService(extservice, userid);
 		}catch(RemoteException re){

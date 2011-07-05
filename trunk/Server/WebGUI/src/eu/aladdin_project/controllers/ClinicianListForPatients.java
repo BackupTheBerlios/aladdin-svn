@@ -9,7 +9,8 @@ import org.zkoss.zul.Window;
  * @author Xavi Sarda (Atos Origin)
  */
 public class ClinicianListForPatients extends Window {
-	
+	private static final long serialVersionUID = 3302302017314859171L;
+
 	public ClinicianListForPatients(){
 		
 	}

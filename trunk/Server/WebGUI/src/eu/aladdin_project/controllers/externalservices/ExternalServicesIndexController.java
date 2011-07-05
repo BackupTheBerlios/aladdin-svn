@@ -14,9 +14,8 @@ import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.ExternalService;
 import eu.aladdin_project.xsd.OperationResult;
 
-@SuppressWarnings("serial")
 public class ExternalServicesIndexController extends Window {
-	
+	private static final long serialVersionUID = -8597729277696823899L;
 	public Window servicePopup;
 	
 	public void createService() throws InterruptedException{

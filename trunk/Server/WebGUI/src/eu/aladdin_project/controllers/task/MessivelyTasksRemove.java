@@ -15,7 +15,8 @@ import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Patient;
 
 public class MessivelyTasksRemove extends Window{
-	
+	private static final long serialVersionUID = 350369571674329276L;
+
 	public void removeMassively(String patientid, Object tasktype, Date start, Date end) throws RemoteException{
 		String tasktypestr = (Integer)tasktype+"";
 		SystemDictionary.webguiLog("INFO", "TASK TYPE: "+tasktypestr);

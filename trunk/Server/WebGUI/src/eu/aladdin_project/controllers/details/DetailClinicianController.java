@@ -4,8 +4,8 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listitem;
 
-@SuppressWarnings("serial")
 public class DetailClinicianController extends DetailPersonController{
+	private static final long serialVersionUID = 491827285077682351L;
 
 	public Button[] createActionButtons() {
 		Button btn = new Button();

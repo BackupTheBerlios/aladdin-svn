@@ -11,7 +11,9 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 public class StorageComponent_ServiceLocator extends org.apache.axis.client.Service implements eu.aladdin_project.StorageComponent.StorageComponent_Service {
-	
+
+	private static final long serialVersionUID = -2610607424720693490L;
+
 	private void getSCAddress() throws Exception {
 		Configuration config = new PropertiesConfiguration("webgui.properties");
 		String URI = config.getString("storagecomponent.uri");

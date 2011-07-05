@@ -4,23 +4,19 @@ import java.util.ArrayList;
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import eu.aladdin_project.xsd.Address;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.Communication;
-import eu.aladdin_project.xsd.PatientCarer;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
 
-@SuppressWarnings("serial")
 public abstract class DetailPersonController extends Window {
-
+	private static final long serialVersionUID = -4506077343584761376L;
 	protected String currentid = null;
 	protected PersonData currentdata = null;
 	protected SocioDemographicData currentsd = null;

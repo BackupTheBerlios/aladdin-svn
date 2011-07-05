@@ -1,17 +1,9 @@
 package eu.aladdin_project.controllers.warnings;
 
-import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.zkoss.zk.ui.Session;
-import org.zkoss.zk.ui.Sessions;
-
 import eu.aladdin_project.SystemDictionary;
-import eu.aladdin_project.StorageComponent.StorageComponentProxy;
-import eu.aladdin_project.xsd.Patient;
-import eu.aladdin_project.xsd.PatientInfo;
-import eu.aladdin_project.xsd.SearchCriteria;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Warning;
 

@@ -4,8 +4,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import org.zkoss.zk.ui.ComponentNotFoundException;
@@ -26,14 +24,14 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.Questionnaire;
-import eu.aladdin_project.xsd.QuestionnaireInfo;
 import eu.aladdin_project.xsd.QuestionnaireQuestion;
 import eu.aladdin_project.xsd.QuestionnaireQuestionAnswer;
 import eu.aladdin_project.xsd.QuestionnaireQuestionList;
 import eu.aladdin_project.xsd.SystemParameter;
 
 public class QuestionnaireTranslateWindow extends Window{
-	
+
+	private static final long serialVersionUID = 8431219123393105081L;
 	private ArrayList<RelatedQuestion> questionlist = new ArrayList<RelatedQuestion>();
 	private ArrayList<RelatedQuestion> localeqlist =  new ArrayList<RelatedQuestion>();
 	private String currentquestionnaireid;
@@ -46,7 +44,6 @@ public class QuestionnaireTranslateWindow extends Window{
 	public void translateQuestionnaire(String qid){
 		this.currentquestionnaireid = qid;
 		try{
-			QuestionnaireInfo qinfo = null;
 			Questionnaire questions = null;
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
 			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
@@ -122,7 +119,6 @@ public class QuestionnaireTranslateWindow extends Window{
 			((Window)getFellow("trans_alert")).doModal();
 		}else{
 			String version = (String)((Textbox)getFellow("trans_version")).getValue();
-			String tqid = (String)((Textbox)getFellow("trans_qid")).getValue();
 			String ttitle = (String)((Textbox)getFellow("trans_title")).getValue();
 			
 			Rows allrows = (Rows)getFellow("rows_questions");

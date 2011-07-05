@@ -1,9 +1,7 @@
 package eu.aladdin_project.controllers;
 
 import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
@@ -24,13 +22,11 @@ import eu.aladdin_project.ErrorDictionary;
 import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.controllers.details.ChangePassword;
-import eu.aladdin_project.controllers.details.assessment.AssessmentPopupController;
 import eu.aladdin_project.controllers.details.assessment.CarerAssessmentInfo;
 import eu.aladdin_project.controllers.details.assessment.CarerAssessmentPopupController;
 import eu.aladdin_project.xsd.Carer;
 import eu.aladdin_project.xsd.CarerAssessment;
 import eu.aladdin_project.xsd.OperationResult;
-import eu.aladdin_project.xsd.PatientAssessment;
 import eu.aladdin_project.xsd.PersonData;
 import eu.aladdin_project.xsd.SocioDemographicData;
 import eu.aladdin_project.xsd.SystemParameter;

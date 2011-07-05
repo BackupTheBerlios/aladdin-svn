@@ -23,7 +23,7 @@ import eu.aladdin_project.xsd.SystemParameter;
  * @author Xavi Sarda (Atos Origin)
  */
 public class SDFormControllerWindow extends AladdinFormControllerWindow{
-
+	private static final long serialVersionUID = 3010045889522110745L;
 	protected SocioDemographicData currentsd = null;
 	
 	/**
@@ -75,7 +75,6 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 	 */
 	protected void addSocioDemographicDataFields(){
 		String personal = Labels.getLabel("patients.form.personal");
-		String age = Labels.getLabel("patients.form.sd.age");
 		String gender = Labels.getLabel("patients.form.sd.gender");
 		String marital = Labels.getLabel("patients.form.sd.marital");
 		String children = Labels.getLabel("patients.form.sd.children");

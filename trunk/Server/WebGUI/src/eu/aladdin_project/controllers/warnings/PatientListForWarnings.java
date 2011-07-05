@@ -5,11 +5,10 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Window;
 
-@SuppressWarnings("serial")
 public class PatientListForWarnings extends Window{
-	
+	private static final long serialVersionUID = -3537252407835100621L;
+
 	public PatientListForWarnings(){
-		
 	}
 	
 	public void setPatient(){

@@ -18,7 +18,8 @@ import eu.aladdin_project.xsd.OperationResult;
 import eu.aladdin_project.xsd.User;
 
 public class CarerAssessmentPopupController extends Window{
-	
+	private static final long serialVersionUID = -8244017099128943269L;
+
 	public void saveAssessment(){
 		CarerAssessment cass = new CarerAssessment();
 		String userid = (String)Sessions.getCurrent().getAttribute("userid");

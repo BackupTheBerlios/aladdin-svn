@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listbox;
@@ -24,9 +23,9 @@ import eu.aladdin_project.xsd.Questionnaire;
 import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.Task;
 
-@SuppressWarnings("serial")
 public class CalendarWindowControllerPatients extends Window {
-	
+	private static final long serialVersionUID = -5542409524567322844L;
+
 	public void changeTaskType(Object obj){
 		boolean urlrow = false;
 		boolean qsrow = false;

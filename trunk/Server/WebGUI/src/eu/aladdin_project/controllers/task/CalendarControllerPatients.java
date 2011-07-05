@@ -2,7 +2,6 @@ package eu.aladdin_project.controllers.task;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +40,7 @@ import eu.aladdin_project.xsd.SystemParameter;
 import eu.aladdin_project.xsd.User;
 
 public class CalendarControllerPatients extends GenericForwardComposer {
-
+	private static final long serialVersionUID = 992086726834807326L;
 	public Window bookEventWin;
 	public Calendars cal;
 	
@@ -83,6 +82,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		bookEventWin.doModal();
 	}
 	
+	@SuppressWarnings({ "unchecked" })
 	public void onEventEdit(CalendarsEvent event) throws InterruptedException, RemoteException{
 		try{
 			StorageComponentProxy proxy = SystemDictionary.getSCProxy();

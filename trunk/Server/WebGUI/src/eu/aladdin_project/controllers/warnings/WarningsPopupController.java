@@ -10,9 +10,8 @@ import eu.aladdin_project.SystemDictionary;
 import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 import eu.aladdin_project.xsd.OperationResult;
 
-@SuppressWarnings("serial")
 public class WarningsPopupController extends Window {
-	
+	private static final long serialVersionUID = -6712984876432126616L;
 	private String warningid;
 	
 	public void markWarningAsRead() throws RemoteException{

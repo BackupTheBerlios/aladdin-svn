@@ -1,6 +1,5 @@
 package eu.aladdin_project.exceptions;
 
-@SuppressWarnings("serial")
 public class ServerErrorException extends Exception {
-
+	private static final long serialVersionUID = -135631558615358274L;
 }
