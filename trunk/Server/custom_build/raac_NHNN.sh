@@ -1,7 +1,7 @@
 #!/bin/sh
 
 rm -rf raac
-svn export svn://svn.berlios.de/aladdin/trunk/Server/raac raac
+svn export https://svn.berlios.de/svnroot/repos/aladdin/trunk/Server/raac raac
 cd raac
 
 cat ./src/com/aladdin/sc/StorageComponentStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/StorageComponent\//http:\/\/127.0.0.1:8080\/axis2\/services\/SCNHNN\//'>tmp

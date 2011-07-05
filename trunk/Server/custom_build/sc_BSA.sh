@@ -1,7 +1,7 @@
 #!/bin/sh
 
 rm -rf StorageComponent
-svn export svn://svn.berlios.de/aladdin/trunk/Server/StorageComponent StorageComponent
+svn export https://svn.berlios.de/svnroot/repos/aladdin/trunk/Server/StorageComponent StorageComponent
 rm -f StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "package com.aladdin.sc.config;" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 echo "public class Configuration {" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
