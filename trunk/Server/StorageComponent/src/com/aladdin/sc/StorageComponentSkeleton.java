@@ -3826,7 +3826,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			BigInteger typeOfTask = req.getRemoveTaskMassively().getTypeOfTask();
 			Integer patientId = new Integer (req.getRemoveTaskMassively().getPatientId());
 			
-			String sql = "DELETE FROM task WHERE datetimeassigned >= '" + startDate.toString() + "' AND datetimeassigned <= '" + endDate.toString() + "' AND tasktype = '" + typeOfTask.toString() + "' AND object = '" + patientId.toString() + "'";
+			String sql = "DELETE FROM task WHERE datetimeassigned >= '" + startDate.toString() + "' AND datetimeassigned <= '" + endDate.toString() + "' AND tasktype = '" + typeOfTask.toString() + "' AND object = '" + patientId.toString() + "' AND status != 3";
     		
 			session.beginTransaction();
 			session.createSQLQuery(sql).executeUpdate();
