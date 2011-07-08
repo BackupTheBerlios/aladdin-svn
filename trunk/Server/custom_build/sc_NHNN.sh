@@ -2,14 +2,18 @@
 
 rm -rf StorageComponent
 svn export https://svn.berlios.de/svnroot/repos/aladdin/trunk/Server/StorageComponent StorageComponent
-rm -f StorageComponent/src/com/aladdin/sc/config/Configuration.java
-echo "package com.aladdin.sc.config;" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
-echo "public class Configuration {" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
-echo "public String hibernateCfg = \"/hibernate-aladdin-sc-nhnn.cfg.xml\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
-echo "public String forumSC = \"http://dafnis.atosorigin.es/NHNN/Aladdin/includes/sc.php\";" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
-echo "public static String trustedIP[] = {\"193.174.152.114\", \"127.0.0.1\"};" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
-echo "}" >> StorageComponent/src/com/aladdin/sc/config/Configuration.java
 cd StorageComponent/
+
+rm -f src/com/aladdin/sc/config/Configuration.java
+echo "package com.aladdin.sc.config;" >> src/com/aladdin/sc/config/Configuration.java
+echo "public class Configuration {" >> src/com/aladdin/sc/config/Configuration.java
+echo "public static String hibernateCfg = \"/hibernate-aladdin-sc-nhnn.cfg.xml\";" >> src/com/aladdin/sc/config/Configuration.java
+echo "public static String forumSC = \"http://dafnis.atosorigin.es/NHNN/Aladdin/includes/sc.php\";" >> src/com/aladdin/sc/config/Configuration.java
+echo "public static String trustedIP[] = {\"193.174.152.114\", \"127.0.0.1\"};" >> src/com/aladdin/sc/config/Configuration.java
+echo "}" >> src/com/aladdin/sc/config/Configuration.java
+
+cat ./src/com/aladdin/raac/RaacStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/raac\//http:\/\/193.174.152.114:8080\/axis2\/services\/raacNHNN\//' > tmp
+mv tmp ./src/com/aladdin/raac/RaacStub.java
 
 cat build.xml |sed 's/<property name="name" value="StorageComponent"\/>/<property name="name" value="SCNHNN"\/>/' > tmp
 mv tmp build.xml
