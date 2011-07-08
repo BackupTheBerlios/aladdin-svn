@@ -198,7 +198,11 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			SystemDictionary.webguiLog("INFO", "SIZE after: "+qa.size());
 			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
 			String valuestring = proxy.getQuestionnaireAnswerValue(q[i].getId(), currentqa.getValue(), SystemDictionary.getLocale());
-			ret+=q[i].getTitle()+" "+ valuestring+" ("+ currentqa.getValue() + ")\n";
+			if (valuestring != null) {
+				ret += q[i].getTitle()+" "+ valuestring+" ("+ currentqa.getValue() + ")\n";
+			} else {
+				ret += q[i].getTitle()+" "+ currentqa.getValue() + "\n";
+			}
 			if(q[i].getQuestions() != null && q[i].getQuestions().getQuestion() != null && q[i].getQuestions().getQuestion().length>0){
 				for(int ii = 0 ; ii < q[i].getQuestions().getQuestion().length ; ii++){
 					SystemDictionary.webguiLog("TRACE", "CONDITION: "+q[i].getQuestions().getQuestion()[ii].getCondition() +":" +currentqa.getValue());
