@@ -2644,6 +2644,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				qa.setDateTime(datetime);
 				session.save(qa);
 				id = qa.getId();
+				System.out.println (rqal[i].getValue());
 			}
 			
 			String sql = "UPDATE task SET datetimefulfilled = '" + datetime.toString() + "' WHERE id = " + taskId.toString();
