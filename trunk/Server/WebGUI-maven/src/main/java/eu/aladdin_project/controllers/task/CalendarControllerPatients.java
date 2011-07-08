@@ -207,6 +207,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 				for(int ii = 0 ; ii < q[i].getQuestions().getQuestion().length ; ii++){
 					SystemDictionary.webguiLog("TRACE", "CONDITION: "+q[i].getQuestions().getQuestion()[ii].getCondition() +":" +currentqa.getValue());
 					if(q[i].getQuestions().getQuestion()[ii].getCondition().equals(new UnsignedByte(currentqa.getValue()))){
+						System.out.println ("qa.size" + qa.size());
 						ret = provideQuestionnaireResponse(new QuestionnaireQuestion[]{q[i].getQuestions().getQuestion()[ii]}, qa, ret);
 					}
 				}
