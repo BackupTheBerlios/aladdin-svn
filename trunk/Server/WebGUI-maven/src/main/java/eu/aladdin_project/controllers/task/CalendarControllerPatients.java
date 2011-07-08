@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.axis.types.UnsignedByte;
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
@@ -82,6 +81,17 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		bookEventWin.doModal();
 	}
 	
+	private List<QuestionnaireQuestion> toPlainList (QuestionnaireQuestion[] questions) {
+		List<QuestionnaireQuestion> res = new ArrayList<QuestionnaireQuestion>();
+		
+		if (questions != null && questions.length > 0) for (QuestionnaireQuestion question: questions) {
+			res.add(question);
+			res.addAll(toPlainList(question.getQuestions().getQuestion()));
+		}
+		
+		return res;
+	}
+	
 	@SuppressWarnings({ "unchecked" })
 	public void onEventEdit(CalendarsEvent event) throws InterruptedException, RemoteException{
 		try{
@@ -111,11 +121,13 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
 					QuestionnaireAnswers qa = proxy.getQuestionnaireAnswersByTask((String)scevent.getParams().get("task"), userid);
 					SystemDictionary.webguiLog("INFO", "ANSWERS LENGTH: "+ qa.getAnswer().length);
+					SystemDictionary.webguiLog("INFO", "getQuestion: "+ q.getQuestion().length);
 					ArrayList<QuestionnaireAnswer> qalist = new ArrayList<QuestionnaireAnswer>();
 					for(int i = 0 ; i < qa.getAnswer().length ; i++){
 						qalist.add(i, qa.getAnswer(i));						
 					}
-					String responses = provideQuestionnaireResponse(q.getQuestion(), qalist, "");
+					
+					String responses = provideQuestionnaireResponse(toPlainList(q.getQuestion()), qalist);
 					SystemDictionary.webguiLog("DEBUG", "RESPONSES: "+responses);
 					bookEventWin.getFellow("qsanswersrow").setVisible(true);
 					((Label)bookEventWin.getFellow("qsanswersfield")).setValue(responses);
@@ -127,10 +139,11 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					if(results.length <= 0){
 						resultfieldvalue = "No measurement could be retrieved";
 					}else{
-						SystemDictionary.webguiLog("DEBUG", "RESULTS LENGHT: "+results.length);
+						resultfieldvalue = "Use 'Monitor Measurements' button for viewing the measurements";
+						/*SystemDictionary.webguiLog("DEBUG", "RESULTS LENGHT: "+results.length);
 						for(int ii = 0 ; ii < results.length ; ii++){
 							resultfieldvalue += results[ii].getValue()+""+results[ii].getUnits()+"\n";
-						}
+						}*/
 					}
 					bookEventWin.getFellow("mresultrow").setVisible(true);
 					((Label)bookEventWin.getFellow("mresultrowfield")).setValue(resultfieldvalue);
@@ -190,28 +203,26 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		
 	}
 	
-	private String provideQuestionnaireResponse(QuestionnaireQuestion[] q, ArrayList<QuestionnaireAnswer> qa, String ret) throws RemoteException{
-		for(int i = 0; i < q.length ; i++){
-			QuestionnaireAnswer currentqa = qa.get(0);
-			SystemDictionary.webguiLog("INFO", "SIZE before: "+qa.size());
-			qa.remove(0);
-			SystemDictionary.webguiLog("INFO", "SIZE after: "+qa.size());
-			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
-			String valuestring = proxy.getQuestionnaireAnswerValue(q[i].getId(), currentqa.getValue(), SystemDictionary.getLocale());
-			if (valuestring != null) {
-				ret += q[i].getTitle()+" "+ valuestring+" ("+ currentqa.getValue() + ")\n";
-			} else {
-				ret += q[i].getTitle()+" "+ currentqa.getValue() + "\n";
-			}
-			if(q[i].getQuestions() != null && q[i].getQuestions().getQuestion() != null && q[i].getQuestions().getQuestion().length>0){
-				for(int ii = 0 ; ii < q[i].getQuestions().getQuestion().length ; ii++){
-					SystemDictionary.webguiLog("TRACE", "CONDITION: "+q[i].getQuestions().getQuestion()[ii].getCondition() +":" +currentqa.getValue());
-					if(q[i].getQuestions().getQuestion()[ii].getCondition().equals(new UnsignedByte(currentqa.getValue()))){
-						System.out.println ("qa.size" + qa.size());
-						ret = provideQuestionnaireResponse(new QuestionnaireQuestion[]{q[i].getQuestions().getQuestion()[ii]}, qa, ret);
-					}
+	private String provideQuestionnaireResponse(List<QuestionnaireQuestion> questions, ArrayList<QuestionnaireAnswer> answers) throws RemoteException{
+		String ret = "";
+		for(int i = 0; i < answers.size(); i++){
+			QuestionnaireAnswer currentAnswer = answers.get(i);
+			QuestionnaireQuestion currentQuestion = null;
+			for (QuestionnaireQuestion question: questions) {
+				if (question.getId().equals(currentAnswer.getQuestionID())) {
+					currentQuestion = question;
+					break;
 				}
-				
+			}
+			if (currentQuestion != null) {
+				StorageComponentProxy proxy = SystemDictionary.getSCProxy();
+				String valuestring = proxy.getQuestionnaireAnswerValue(currentQuestion.getId(), currentAnswer.getValue(), SystemDictionary.getLocale());
+				if (valuestring == null) {
+					valuestring = currentAnswer.getValue();
+				}
+				if (valuestring != null && !valuestring.isEmpty()) {
+					ret += currentQuestion.getTitle()+" "+ valuestring+"\n";
+				}
 			}
 		}
 		return ret;

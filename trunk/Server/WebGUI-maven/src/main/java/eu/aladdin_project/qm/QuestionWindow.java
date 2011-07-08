@@ -35,6 +35,7 @@ public class QuestionWindow extends Window{
 	private QuestionnaireFormWindow pform = null;
 	private String ID = null;
 	private int globalID;
+	@SuppressWarnings("unused")
 	private int position;
 	private String type = null;
 	private String parent = null;

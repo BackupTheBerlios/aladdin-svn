@@ -266,6 +266,7 @@ public class QuestionnaireFormWindow extends Window{
 		return row;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void removeQuestionRow(Component comp, boolean removechildren){
 		SystemDictionary.webguiLog("TRACE", comp.getId());
 		Rows rows = (Rows)getFellow("rows_questions");

@@ -65,7 +65,7 @@
 	</zscript>
 	<grid mold="paging" pageSize="15">
 		<columns>
-			<column label="${idstr }" width="35px" sortAscending="${asc }" sortDescending="${desc }" sort="des"/>
+			<column label="${idstr }" width="55px" sortAscending="${asc }" sortDescending="${desc }" sort="des"/>
 			<column label="${version }" sort="auto"/>
 			<column label="${qtitle }" sort="auto"/>
 			<column width="80px" align="center" if="${!isadmin }" />
