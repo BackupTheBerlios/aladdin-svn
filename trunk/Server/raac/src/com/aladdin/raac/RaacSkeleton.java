@@ -755,7 +755,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 	 * @throws Exception if access is denied
 	 */
 	private void checkIP () throws Exception {
-		String ip = (String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR);
+		/*String ip = (String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR);
 		List<String> lst = new ArrayList<String>();
 		String trustedIp[] = {"193.174.152.114", "127.0.0.1"}; 
 		Collections.addAll(lst, trustedIp);
@@ -763,7 +763,7 @@ public class RaacSkeleton implements RaacSkeletonInterface {
 		int idx = Collections.binarySearch(lst, ip);
 		if (idx < 0) {
 			throw new Exception("access denied");
-		}
+		}*/
 	}
 
 }
