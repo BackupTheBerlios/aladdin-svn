@@ -1,5 +1,6 @@
 package com.aladdin.sc;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -7,18 +8,26 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
-import java.rmi.RemoteException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.apache.axis2.AxisFault;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.helpers.DefaultValidationEventHandler;
+
 import org.apache.axis2.context.MessageContext;
+import org.example.rulemap.RuleMap;
+import org.example.rulemap.Ruleset;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -27,7 +36,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.TransactionException;
 import org.hibernate.cfg.Configuration;
 
-import com.aladdin.raac.RaacStub;
+import com.aladdin.sc.db.AladdinUser;
 
 import eu.aladdin_project.storagecomponent.*;
 import eu.aladdin_project.storagecomponent.AddMediaContentResponseDocument.AddMediaContentResponse;
@@ -68,6 +77,7 @@ import eu.aladdin_project.storagecomponent.GetPatientsForCaregiverResponseDocume
 import eu.aladdin_project.storagecomponent.GetQuestionDescriptionResponseDocument.GetQuestionDescriptionResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswerValueResponseDocument.GetQuestionnaireAnswerValueResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersByTaskResponseDocument.GetQuestionnaireAnswersByTaskResponse;
+import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersDocument.GetQuestionnaireAnswers;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireAnswersResponseDocument.GetQuestionnaireAnswersResponse;
 import eu.aladdin_project.storagecomponent.GetQuestionnaireResponseDocument.GetQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.GetSystemParameterListResponseDocument.GetSystemParameterListResponse;
@@ -100,9 +110,6 @@ import eu.aladdin_project.storagecomponent.UpdatePatientResponseDocument.UpdateP
 import eu.aladdin_project.storagecomponent.UpdateQuestionnaireResponseDocument.UpdateQuestionnaireResponse;
 import eu.aladdin_project.storagecomponent.UpdateSystemParameterResponseDocument.UpdateSystemParameterResponse;
 import eu.aladdin_project.storagecomponent.UpdateUserResponseDocument.UpdateUserResponse;
-import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument;
-import eu.aladdin_project.www.raac.AnalyzeMeasurementsDocument.AnalyzeMeasurements;
-import eu.aladdin_project.www.raac.AnalyzeQuestionnairesDocument;
 import eu.aladdin_project.xsd.Address;
 import eu.aladdin_project.xsd.AddressList;
 import eu.aladdin_project.xsd.Administrator;
@@ -1096,6 +1103,156 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		
 		return respdoc;
 	}
+	
+	static final int Weight = 2;
+	static final int SystolicBloodPressure = 11;
+	static final int DiastolicBloodPressure = 12;
+
+	static final int LessThanRuleType = 1;
+	static final int DoubleCompareRuleType = 2;
+	static final int GreaterThanRuleType = 3;
+	static final int CategoryChangeType = 4;
+
+	static final int MeasurementAnalysis = 1;
+	static final int QuestionnaireAnalysis = 2;
+	
+	@SuppressWarnings("unchecked")
+	private List<RuleMap> GetRules() {
+
+		List<RuleMap> DefinedRules = null;
+
+		try {
+			JAXBContext jc = JAXBContext
+					.newInstance(org.example.rulemap.ObjectFactory.class);
+			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			unmarshaller.setEventHandler(new DefaultValidationEventHandler());
+
+			DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>)
+			unmarshaller.unmarshal(new File("/var/lib/tomcat6/webapps/axis2/WEB-INF/rules.xml"))).getValue().getRule();
+			//DefinedRules = (List<RuleMap>) ((JAXBElement<Ruleset>) unmarshaller
+			//		.unmarshal(new File("rules.xml"))).getValue().getRule();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		return DefinedRules;
+	}
+	
+	// Create Comparator for Sorting dates
+	static final Comparator<com.aladdin.sc.db.Measurement> Date_Order = new Comparator<com.aladdin.sc.db.Measurement>() {
+		public int compare(com.aladdin.sc.db.Measurement a, com.aladdin.sc.db.Measurement b) {
+			return a.getDatetime().compareTo(b.getDatetime());
+		}
+
+	};
+	
+	// Generate Warning
+	static com.aladdin.sc.db.Warning GenerateWarning(Integer patientID, String description,
+			double RiskValue, double PreviousValue, int TypeOfAnalysis) {
+
+		com.aladdin.sc.db.Warning warning = new com.aladdin.sc.db.Warning();
+		warning.setPatient(patientID);
+		warning.setTypeOfWarning(2);
+		warning.setDateTimeOfWarning(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		warning.setDelivered(false);
+
+		if (TypeOfAnalysis == MeasurementAnalysis) {
+			warning.setJustificationText(String.format(
+					"Type {%s} Current value = %s, Previous value = %s",
+					description, RiskValue, PreviousValue));
+		} else if (TypeOfAnalysis == QuestionnaireAnalysis)
+			warning.setJustificationText(description);
+
+		return warning;
+
+	}
+	
+	// Rule 1 - Less Than rule
+	static com.aladdin.sc.db.Warning LessThanRule(Integer patientID, String description,
+			double Current, double Previous, double Threshold,
+			int TypeOfAnalysis) {
+		if (Current <= Previous - Threshold)
+			return GenerateWarning(patientID, description, Current,
+					Previous, TypeOfAnalysis);
+		return null;
+	}
+	
+	static com.aladdin.sc.db.Warning DoubleCompareRule(Integer patientID, String description,
+			double Current, double Upper, double Lower, int TypeOfAnalysis) {
+		if ((Current > Upper || Current < Lower))
+			return GenerateWarning(patientID, description, Current, 0.0,
+					TypeOfAnalysis);
+		return null;
+	}
+	
+	private void analyzeMeasurement (Integer measurementId, Integer patientId) {
+		System.out.println ("analyzeMeasurement");
+		com.aladdin.sc.db.Measurement measurement = (com.aladdin.sc.db.Measurement) session.load(com.aladdin.sc.db.Measurement.class, measurementId);
+		
+		List<RuleMap> DefinedRules = GetRules();
+		String measurementType = "";
+		String measurementDescription = "";
+		
+		if (measurement.getType().equals("2")) {
+			measurementDescription = "Weight";
+		} else if (measurement.getType().equals("11")) {
+			measurementDescription = "Systolic Blood Pressure";
+		} else if (measurement.getType().equals("12")) {
+			measurementDescription = "Diastolic Blood Pressure";
+		}
+		
+		RuleMap currentRule = null;
+		for (int count = 0; count < DefinedRules.size(); count++) {
+			measurementType = measurement.getType();
+			String ruleDataType = DefinedRules.get(count).getDataType();
+			if (measurementType.equals(ruleDataType)) {
+				currentRule = DefinedRules.get(count);
+				break;
+			}
+		}
+		
+		if (currentRule == null) // Rule not found
+			return;
+		
+		com.aladdin.sc.db.Warning generatedWarning = null;
+		
+		switch (currentRule.getCallerID()) {
+			case LessThanRuleType:
+				System.out.println ("LessThanRuleType");
+				Calendar currentDate = Calendar.getInstance();
+				currentDate.add(Calendar.DATE, -1);
+				Calendar oneWeekBefore = (Calendar) Calendar.getInstance();
+				oneWeekBefore.add(Calendar.DATE, -8);
+	
+				System.out.println ("_getPatientMeasurementX");
+				List<com.aladdin.sc.db.Measurement> measurements = _getPatientMeasurementX(patientId, oneWeekBefore, currentDate, measurement.getType());
+				System.out.println (measurements.size());
+	
+				if (measurements.size() < 1) {
+					return;
+				}
+	
+				Collections.sort(measurements, Date_Order);
+				
+				generatedWarning = LessThanRule(patientId,
+						measurementDescription, measurement.getValue().floatValue(),
+						measurements.get(measurements.size() - 1).getValue().floatValue(), currentRule.getUpperLimit(),
+						MeasurementAnalysis);
+				break;
+			case DoubleCompareRuleType:
+				System.out.println ("DoubleCompareRuleType");
+				generatedWarning = DoubleCompareRule(patientId,
+						measurementDescription, measurement.getValue().floatValue(),
+						currentRule.getUpperLimit(),
+						currentRule.getLowerLimit(), MeasurementAnalysis);
+				break;
+		}
+		
+		if (generatedWarning != null) {
+			System.out.println ("generated");
+			session.save(generatedWarning);
+		}
+		
+	}
 
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#storeMeasurements(eu.aladdin_project.storagecomponent.StoreMeasurementsDocument)
@@ -1133,50 +1290,21 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 				try {
 					session.beginTransaction();
 					id = importMeasurement(rm[i], null);
-					session.getTransaction().commit();
 					
-					RaacStub rs = new RaacStub();
-    				AnalyzeMeasurementsDocument amd = AnalyzeMeasurementsDocument.Factory.newInstance();
-    				AnalyzeMeasurements am = amd.addNewAnalyzeMeasurements();
-    				am.setIn(rm[i]);
-    				
-    				String patientID = "";
     				String sql = "select a.personid from aladdinuser a inner join task t on (t.object = a.id) where t.id = " + new Integer (rm[i].getTaskID()).toString();
 					List<?> data = session.createSQLQuery(sql).list();
     				if (data.size() > 0) {
-    					patientID = data.get(0).toString();
+    					analyzeMeasurement(id, (Integer) data.get(0));
     				}
     				
-    				am.setPatientID(patientID);
-    				rs.analyzeMeasurements(amd);
+    				session.getTransaction().commit();
 				} catch (HibernateException e) {
 					try {
 	    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
 	    			} catch (TransactionException e2) {
 					}
 	    			e.printStackTrace();
-				} catch (AxisFault e) {
-					try {
-	    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
-	    			} catch (TransactionException e2) {
-					}
-	    			e.printStackTrace();
-	    			res.setCode("-2");
-	    			res.setStatus((short) 0);
-	    			res.setDescription("Calling RAAC error " + e.toString());
-	    			return respdoc;
-				} catch (RemoteException e) {
-					try {
-	    				if (session.getTransaction().isActive()) session.getTransaction().rollback();
-	    			} catch (TransactionException e2) {
-					}
-	    			e.printStackTrace();
-	    			res.setCode("-2");
-	    			res.setStatus((short) 0);
-	    			res.setDescription("Calling RAAC error " + e.toString());
-	    			return respdoc;
 				}
-				
 			}
 			
 			res.setCode(id.toString());
@@ -1313,58 +1441,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		try {
-			Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
-			Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
-			Integer objectId  = new Integer (req.getGetQuestionnaireAnswers().getObjectId());
-			
-			String sql = "SELECT qa.timestamp, qq.quest, qa.objectid, qa.userid FROM questionnaireanswer qa inner join questionnairequestion qq on (qq.id = qa.question) WHERE qa.objectid = '" + objectId.toString() + "' AND qa.timestamp BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY qa.timestamp, qq.quest, qa.objectid, qa.userid";
-
-			Object[] questionids = session.createSQLQuery(sql).list().toArray();
-			
-			for (int i = 0; i < questionids.length; i++) {
-				Object[] q = (Object[]) questionids[i];
-				TimeZone zone = TimeZone.getDefault();
-				Calendar cal = Calendar.getInstance(zone);
-				Timestamp timestamp = (Timestamp)q[0];
-				cal.setTimeInMillis( timestamp.getTime() );
-				
-				// work around
-				Calendar before = Calendar.getInstance();
-				before.setTimeInMillis( timestamp.getTime() );
-				Calendar after = Calendar.getInstance();
-				after.setTimeInMillis( timestamp.getTime() + 1000 );
-				
-				Integer question = (Integer)q[1];
-				sql = "SELECT id FROM questionnaireanswer WHERE objectid = '" + objectId.toString();
-				sql += "' AND timestamp BETWEEN '" + before.getTime().toString();
-				sql += "' AND '" + after.getTime().toString();
-				sql += "' AND question in (select id from questionnairequestion where quest = " + question.toString() + ")";
-
-    			Object[] lqa = session.createSQLQuery(sql).list().toArray();
-    			QuestionnaireAnswers rqas = resp.addNewOut();
-    			rqas.setDateTime(cal);
-    			rqas.setObjectID(((Integer)q[2]).toString());
-    			rqas.setUserID(((Integer)q[3]).toString());
-    			
-    			String sqlTask = "SELECT id FROM task WHERE datetimefulfilled = '" + before.getTime().toString() + "'";
-    			Object[] lt = session.createSQLQuery(sqlTask).list().toArray();
-    			if (lt.length > 0) {
-    				rqas.setTaskID(((Integer)lt[0]).toString());
-    			}
-    			
-                for (int j = 0; j < lqa.length; j++) {
-    				QuestionnaireAnswer rqa = rqas.addNewAnswer();
-    				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
-    				rqa.setQuestionID(qa.getQuestion().toString());
-    				rqa.setValue(qa.getValue());
-    				
-    				rqas.setObjectID(qa.getObjectId().toString());
-    				rqas.setUserID(qa.getUserId().toString());
-    				
-    				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) session.load (com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
-    				rqa.setGlobalID(qq.getGlobalId().toString());
-    			}
-			}
+			_getQuestionnaireAnswers(req, resp);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -1372,6 +1449,62 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 
 		return respdoc;
+	}
+
+	private void _getQuestionnaireAnswers(GetQuestionnaireAnswersDocument req,
+			GetQuestionnaireAnswersResponse resp) {
+		Calendar fromDate = req.getGetQuestionnaireAnswers().getFromDate();
+		Calendar toDate   = req.getGetQuestionnaireAnswers().getToDate();
+		Integer objectId  = new Integer (req.getGetQuestionnaireAnswers().getObjectId());
+		
+		String sql = "SELECT qa.timestamp, qq.quest, qa.objectid, qa.userid FROM questionnaireanswer qa inner join questionnairequestion qq on (qq.id = qa.question) WHERE qa.objectid = '" + objectId.toString() + "' AND qa.timestamp BETWEEN '" + fromDate.toString() + "' AND '" + toDate.toString () + "' GROUP BY qa.timestamp, qq.quest, qa.objectid, qa.userid";
+
+		Object[] questionids = session.createSQLQuery(sql).list().toArray();
+		
+		for (int i = 0; i < questionids.length; i++) {
+			Object[] q = (Object[]) questionids[i];
+			TimeZone zone = TimeZone.getDefault();
+			Calendar cal = Calendar.getInstance(zone);
+			Timestamp timestamp = (Timestamp)q[0];
+			cal.setTimeInMillis( timestamp.getTime() );
+			
+			// work around
+			Calendar before = Calendar.getInstance();
+			before.setTimeInMillis( timestamp.getTime() );
+			Calendar after = Calendar.getInstance();
+			after.setTimeInMillis( timestamp.getTime() + 1000 );
+			
+			Integer question = (Integer)q[1];
+			sql = "SELECT id FROM questionnaireanswer WHERE objectid = '" + objectId.toString();
+			sql += "' AND timestamp BETWEEN '" + before.getTime().toString();
+			sql += "' AND '" + after.getTime().toString();
+			sql += "' AND question in (select id from questionnairequestion where quest = " + question.toString() + ")";
+
+			Object[] lqa = session.createSQLQuery(sql).list().toArray();
+			QuestionnaireAnswers rqas = resp.addNewOut();
+			rqas.setDateTime(cal);
+			rqas.setObjectID(((Integer)q[2]).toString());
+			rqas.setUserID(((Integer)q[3]).toString());
+			
+			String sqlTask = "SELECT id FROM task WHERE datetimefulfilled = '" + before.getTime().toString() + "'";
+			Object[] lt = session.createSQLQuery(sqlTask).list().toArray();
+			if (lt.length > 0) {
+				rqas.setTaskID(((Integer)lt[0]).toString());
+			}
+			
+		    for (int j = 0; j < lqa.length; j++) {
+				QuestionnaireAnswer rqa = rqas.addNewAnswer();
+				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
+				rqa.setQuestionID(qa.getQuestion().toString());
+				rqa.setValue(qa.getValue());
+				
+				rqas.setObjectID(qa.getObjectId().toString());
+				rqas.setUserID(qa.getUserId().toString());
+				
+				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) session.load (com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
+				rqa.setGlobalID(qq.getGlobalId().toString());
+			}
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -1647,7 +1780,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#getPatientMeasurement(eu.aladdin_project.storagecomponent.GetPatientMeasurementDocument)
 	 */
-	@SuppressWarnings("deprecation")
 	public GetPatientMeasurementResponseDocument getPatientMeasurement (GetPatientMeasurementDocument req) {
 		trace(Thread.currentThread().getStackTrace());
 		GetPatientMeasurementResponseDocument respdoc = GetPatientMeasurementResponseDocument.Factory.newInstance();
@@ -1674,44 +1806,12 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		try {
-			
 			Integer patientId = new Integer (req.getGetPatientMeasurement().getPatientId()); 
 			Integer measurementType = new Integer (req.getGetPatientMeasurement().getMeasurementType());
-			String fromDate = _fromDate.toString();
-			String toDate = _toDate.toString();
-			
-			if (fromDate.compareTo(toDate) == 0) {
-				Date time = _fromDate.getTime();
-				time.setHours(time.getHours() + 23);
-				time.setMinutes(time.getMinutes() + 59);
-				time.setSeconds(time.getSeconds() + 59);
-				toDate = time.toString();
-			}  else {
-				Date time1 = _toDate.getTime();
-				time1.setHours(23);
-				time1.setMinutes(59);
-				time1.setSeconds(59);
-				toDate = time1.toString();
-				
-				Date time2 = _fromDate.getTime();
-				time2.setHours(0);
-				time2.setMinutes(0);
-				time2.setSeconds(0);
-				fromDate = time2.toString();
-			}
-			
+
 			session.beginTransaction();
 			
-			String sql = "SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'";
-			Object[] ml = session.createSQLQuery(sql).list().toArray();
-			
-			ArrayList<Measurement> export = new ArrayList<Measurement>();
-			for (int i = 0; i < ml.length; i++) {
-				Integer id = (Integer)ml[i];
-				com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) session.load(com.aladdin.sc.db.Measurement.class, id);
-				export.add(exportMeasurement(m));
-			}
-			resp.setOutArray((Measurement[]) export.toArray(new Measurement[0]));
+			resp.setOutArray((Measurement[]) _getPatientMeasurement(patientId, _fromDate, _toDate, measurementType.toString()).toArray(new Measurement[0]));
 			
 			session.getTransaction().commit();
 			
@@ -1726,6 +1826,55 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		}
 		
 		return respdoc;
+	}
+	
+	private List<Measurement> _getPatientMeasurement (Integer patientId, Calendar _fromDate, Calendar _toDate, String measurementType) {
+		ArrayList<Measurement> export = new ArrayList<Measurement>();
+		
+		for (com.aladdin.sc.db.Measurement m: _getPatientMeasurementX(patientId, _fromDate, _toDate, measurementType)) {
+			export.add(exportMeasurement(m));
+		}
+		
+		return export;
+	}
+	
+	@SuppressWarnings("deprecation")
+	private List<com.aladdin.sc.db.Measurement> _getPatientMeasurementX (Integer patientId, Calendar _fromDate, Calendar _toDate, String measurementType) {
+		
+		String fromDate = _fromDate.toString();
+		String toDate = _toDate.toString();
+		
+		if (fromDate.compareTo(toDate) == 0) {
+			Date time = _fromDate.getTime();
+			time.setHours(time.getHours() + 23);
+			time.setMinutes(time.getMinutes() + 59);
+			time.setSeconds(time.getSeconds() + 59);
+			toDate = time.toString();
+		}  else {
+			Date time1 = _toDate.getTime();
+			time1.setHours(23);
+			time1.setMinutes(59);
+			time1.setSeconds(59);
+			toDate = time1.toString();
+			
+			Date time2 = _fromDate.getTime();
+			time2.setHours(0);
+			time2.setMinutes(0);
+			time2.setSeconds(0);
+			fromDate = time2.toString();
+		}
+		
+		String sql = "SELECT m.id FROM measurement as m inner join task as t on (t.id = m.task) inner join aladdinuser as u on (u.id = t.object) WHERE u.personid = '" + patientId.toString() + "' AND m.datetime BETWEEN '" + fromDate + "' AND '" + toDate + "' AND m.type = '" + measurementType.toString() + "'";
+		System.out.println (sql);
+		Object[] ml = session.createSQLQuery(sql).list().toArray();
+		
+		ArrayList<com.aladdin.sc.db.Measurement> export = new ArrayList<com.aladdin.sc.db.Measurement>();
+		for (int i = 0; i < ml.length; i++) {
+			Integer id = (Integer)ml[i];
+			com.aladdin.sc.db.Measurement m = (com.aladdin.sc.db.Measurement) session.load(com.aladdin.sc.db.Measurement.class, id);
+			export.add(m);
+		}
+		return export;
 	}
 
 	/* (non-Javadoc)
@@ -2596,6 +2745,307 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 		return respdoc;
 	}
 	
+	// Create Comparator for Sorting questionnaires
+	static final Comparator<QuestionnaireAnswers> QDate_Order = new Comparator<QuestionnaireAnswers>() {
+		public int compare(QuestionnaireAnswers a, QuestionnaireAnswers b) {
+			return a.getDateTime().compareTo(b.getDateTime());
+		}
+	};
+	
+	// returns the Global ID group (e.g. 1000, 2000, 3000 etc) based on GlobalID
+	String getglobalIDGroup(String globalID) {
+
+		try {
+			int globalIDInt = Integer.valueOf(globalID);
+			double res = java.lang.Math.floor(globalIDInt / 1000) * 1000;
+			return String.valueOf(res);
+		} catch (Exception ex) {
+			return null;
+		}
+
+	}
+	
+	private QuestionnaireAnswer[] previousAnswerArray;
+	
+	QuestionnaireAnswer getPreviousQuestionnaireAnswer(String QuestionID) {
+
+		for (int i = 0; i < previousAnswerArray.length; i++) {
+			if (previousAnswerArray[i].getQuestionID().equals(QuestionID))
+				return previousAnswerArray[i];
+		}
+		return null;
+	}
+	
+	private String GetAnswerDescription(double globalIDGroupAsDouble,
+			double value) {
+
+		if (globalIDGroupAsDouble == 1000 || globalIDGroupAsDouble == 3000) {
+			if (value == 0)
+				return "YES";
+			else if (value == 1)
+				return "NO";
+		}
+
+		if (globalIDGroupAsDouble == 2000) {
+
+			if (value == 0)
+				return "Never";
+			else if (value == 1)
+				return "Happened but not in the last week";
+			else if (value == 2)
+				return "1 or 2 times in the last week";
+			else if (value == 3)
+				return "From 3 to 6 times in the last week";
+			else if (value == 4)
+				return "Everyday";
+		}
+
+		return "";
+
+	}
+	
+	static com.aladdin.sc.db.Warning GreaterThanRule(Integer patientID, String description,
+			double Current, double Previous, double Threshold,
+			int TypeOfAnalysis) {
+		if (Current >= Previous + Threshold)
+			return GenerateWarning(patientID, description, Current,
+					Previous, TypeOfAnalysis);
+		return null;
+	}
+	
+	// Rule 4 - Category Change Rule
+	static com.aladdin.sc.db.Warning CategoryChangeRule(Integer patientID, String description,
+			double Current, double Previous, double LowerThreshold,
+			double UpperThreshold, int TypeOfAnalysis) {
+		if (Previous <= LowerThreshold && Current > UpperThreshold)
+			return GenerateWarning(patientID, description, Current,
+					Previous, TypeOfAnalysis);
+		return null;
+	}
+	
+	private void analyzeQuestionnaires (QuestionnaireAnswer[] currentAnswerArray, Integer ObjectUserID) {
+		
+		System.out.println ("analyzeQuestionnaires");
+		
+		com.aladdin.sc.db.Warning generatedWarning = null;
+		com.aladdin.sc.db.AladdinUser user = (AladdinUser) session.load(com.aladdin.sc.db.AladdinUser.class, ObjectUserID);
+		
+		// get all questionnaire answers
+		Calendar currentDate = Calendar.getInstance();
+		currentDate.add(Calendar.DATE, -1);
+		Calendar twoMonthsBefore = Calendar.getInstance();
+		twoMonthsBefore.add(Calendar.DATE, -60);
+		
+		GetQuestionnaireAnswersDocument qDocument = GetQuestionnaireAnswersDocument.Factory.newInstance();
+		GetQuestionnaireAnswers getQuestionnaireAnswers = GetQuestionnaireAnswers.Factory.newInstance();
+		getQuestionnaireAnswers.setFromDate(twoMonthsBefore);
+		getQuestionnaireAnswers.setToDate(currentDate);
+		getQuestionnaireAnswers.setObjectId(ObjectUserID.toString());
+		getQuestionnaireAnswers.setUserId(null);
+
+		qDocument.addNewGetQuestionnaireAnswers();
+		qDocument.setGetQuestionnaireAnswers(getQuestionnaireAnswers);
+
+		GetQuestionnaireAnswersResponseDocument qResponseDocument = GetQuestionnaireAnswersResponseDocument.Factory.newInstance();
+		GetQuestionnaireAnswersResponse gQuestAnsResp = qResponseDocument.addNewGetQuestionnaireAnswersResponse();
+		
+		_getQuestionnaireAnswers(qDocument, gQuestAnsResp);
+		//GetQuestionnaireAnswersResponse gQuestAnsResp = qResponseDocument.getGetQuestionnaireAnswersResponse();
+		QuestionnaireAnswers[] qanswers = gQuestAnsResp.getOutArray();
+		if (qanswers.length == 0) {
+			return;
+		}
+		
+		ArrayList<QuestionnaireAnswers> SortedAnswers = new ArrayList<QuestionnaireAnswers>(Arrays.asList(qanswers));
+		Collections.sort(SortedAnswers, QDate_Order);
+		QuestionnaireAnswers previousQuestionnaireAnswers = SortedAnswers.get(SortedAnswers.size() - 1);
+		previousAnswerArray = previousQuestionnaireAnswers.getAnswerArray();
+		List<RuleMap> DefinedRules = GetRules();
+		
+		RuleMap currentRule = null;
+
+		double previousScore = 0;
+		double currentScore = 0;
+		
+		for (int j = 0; j < previousAnswerArray.length; j++) {
+
+			String globalID = previousAnswerArray[j].getGlobalID();
+			System.out.println("AAA Reading previous answer GlobalID = "
+					+ globalID);
+			String globalIDGroup = getglobalIDGroup(globalID);
+			double globalIDGroupAsDouble = -1;
+
+			try {
+				globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (globalIDGroupAsDouble == -1)
+				continue;
+
+			if (globalIDGroupAsDouble == 4000) {
+				double previousScoreAsDouble = Double
+						.valueOf(previousAnswerArray[j].getValue());
+				previousScore += previousScoreAsDouble;
+			}
+		}
+		
+		for (int j = 0; j < currentAnswerArray.length; j++) {
+
+			String globalID = currentAnswerArray[j].getGlobalID();
+			System.out.println("AAA Reading current answer GlobalID = "
+					+ globalID);
+			String globalIDGroup = getglobalIDGroup(globalID);
+			double globalIDGroupAsDouble = -1;
+			try {
+				globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (globalIDGroupAsDouble == -1)
+				continue;
+
+			if (globalIDGroupAsDouble == 4000) {
+				double currentScoreAsDouble = Double
+						.valueOf(currentAnswerArray[j].getValue());
+				currentScore += currentScoreAsDouble;
+			}
+		}
+		
+		for (int k = 0; k < currentAnswerArray.length; k++) {
+
+			QuestionnaireAnswer currentAnswer = currentAnswerArray[k];
+			QuestionnaireAnswer previousAnswer = getPreviousQuestionnaireAnswer(currentAnswer
+					.getQuestionID());
+
+			// For non-existant answers, create a new answer with "Never"
+			if (previousAnswer == null) {
+				QuestionnaireAnswer neverAnswer = QuestionnaireAnswer.Factory
+						.newInstance();
+				neverAnswer.setQuestionID(currentAnswer.getQuestionID());
+				neverAnswer.setGlobalID(currentAnswer.getGlobalID());
+				neverAnswer.setValue("0");
+				previousAnswer = neverAnswer;
+			}
+
+			String currentValueStr = currentAnswer.getValue();
+			System.out
+					.println("AAA Reading current value = " + currentValueStr);
+			String previousValueStr = previousAnswer.getValue();
+			System.out.println("AAA Reading previous value = "
+					+ previousValueStr);
+
+			if ("9".equals(currentValueStr) || "9".equals(previousValueStr))
+				continue;
+
+			double currentValue;
+			double previousValue;
+
+			try {
+				currentValue = Double.valueOf(currentValueStr);
+				previousValue = Double.valueOf(previousValueStr);
+			} catch (Exception ex) {
+				continue;
+			}
+
+			String globaID = currentAnswer.getGlobalID();
+
+			if (globaID == null || "".equals(globaID))
+				continue;
+
+			int globalIDasInteger = Integer.valueOf(globaID);
+			if (globalIDasInteger < 1000)
+				continue;
+
+			String globalIDGroup = getglobalIDGroup(globaID);
+			if (globalIDGroup == null)
+				continue;
+
+			double globalIDGroupAsDouble = Double.valueOf(globalIDGroup);
+			if (globalIDGroupAsDouble == 4000)
+				continue;
+
+			for (int count = 0; count < DefinedRules.size(); count++) {
+
+				String ruleDataType = DefinedRules.get(count).getDataType();
+				double ruleDataTypeAsDouble = Double.valueOf(ruleDataType);
+				if (globalIDGroupAsDouble == ruleDataTypeAsDouble) {
+					currentRule = DefinedRules.get(count);
+					break;
+				}
+			}
+
+			if (currentRule == null) { // Rule not found
+				System.out.println ("rule not found");
+				return;
+			}
+
+			SystemParameter locale = SystemParameter.Factory.newInstance();
+			locale.setCode("en_UK");
+			
+			String questionDescription = getTranslate("questionnairequestion", new Integer (currentAnswer.getQuestionID()), locale, "");
+			
+			String description = String.format(
+					"Question '%s' changed from '%s' to '%s'",
+					questionDescription.replaceAll("\n",
+							""),
+					GetAnswerDescription(globalIDGroupAsDouble, previousValue),
+					GetAnswerDescription(globalIDGroupAsDouble, currentValue));
+
+			System.out.println ("currentRule.getCallerID() " + currentRule.getCallerID());
+			switch (currentRule.getCallerID()) {
+			case GreaterThanRuleType:
+				System.out.println ("GreaterThanRuleType");
+				generatedWarning = GreaterThanRule(user.getPersonId(), description,
+						currentValue, previousValue,
+						currentRule.getLowerLimit(), QuestionnaireAnalysis);
+				break;
+			case LessThanRuleType:
+				System.out.println ("LessThanRuleType");
+				generatedWarning = LessThanRule(user.getPersonId(), description,
+						currentValue, previousValue,
+						currentRule.getLowerLimit(), QuestionnaireAnalysis);
+				break;
+			}
+
+			if (generatedWarning != null) {
+				System.out.println ("generatedWarning");
+				session.save(generatedWarning);
+			}
+		}
+		
+		if (currentScore > 0) {
+			System.out.println ("currentScore > 0");
+
+			String description = String.format(
+					"Change in Zarit Burden Interview from '%s' to '%s'",
+					previousScore, currentScore);
+
+			for (int count = 0; count < DefinedRules.size(); count++) {
+
+				String ruleDataType = DefinedRules.get(count).getDataType();
+				double ruleDataTypeAsDouble = Double.valueOf(ruleDataType);
+				if (ruleDataTypeAsDouble == 4000) {
+					currentRule = DefinedRules.get(count);
+					break;
+				}
+			}
+
+			generatedWarning = CategoryChangeRule(user.getPersonId(), description,
+					currentScore, previousScore, currentRule.getLowerLimit(),
+					currentRule.getUpperLimit(), QuestionnaireAnalysis);
+
+			if (generatedWarning != null) {
+				System.out.println ("generatedWarning");
+				session.save(generatedWarning);
+			}
+		}
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.aladdin.sc.StorageComponentSkeletonInterface#storeQuestionnaireAnswers(eu.aladdin_project.storagecomponent.StoreQuestionnaireAnswersDocument)
 	 */
@@ -2650,14 +3100,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			String sql = "UPDATE task SET datetimefulfilled = '" + datetime.toString() + "' WHERE id = " + taskId.toString();
 			session.createSQLQuery(sql).executeUpdate();
 			
-			session.getTransaction().commit();
+			analyzeQuestionnaires(rqal, objectId);
 			
-			RaacStub rc = new RaacStub();
-			AnalyzeQuestionnairesDocument analyzeQuestionnaires = AnalyzeQuestionnairesDocument.Factory.newInstance ();
-			analyzeQuestionnaires.addNewAnalyzeQuestionnaires();
-			analyzeQuestionnaires.getAnalyzeQuestionnaires().setAnswersArray(rqal);
-			analyzeQuestionnaires.getAnalyzeQuestionnaires().setUserID(objectId.toString());
-			rc.analyzeQuestionnaires(analyzeQuestionnaires);
+			session.getTransaction().commit();
 			
 			res.setCode(id.toString());
     		res.setDescription("ok");
@@ -2672,16 +3117,6 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			
 			res.setCode("-2");
     		res.setDescription("database error " + e.toString());
-    		res.setStatus((short) 0);
-		} catch (AxisFault e) {
-			e.printStackTrace();
-			res.setCode("-2");
-    		res.setDescription("Calling of RAAC error " + e.toString());
-    		res.setStatus((short) 0);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			res.setCode("-2");
-    		res.setDescription("Calling of RAAC error " + e.toString());
     		res.setStatus((short) 0);
 		} finally {
 			_finally();
