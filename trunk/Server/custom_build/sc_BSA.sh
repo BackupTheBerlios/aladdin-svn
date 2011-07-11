@@ -12,9 +12,6 @@ echo "public static String forumSC = \"http://dafnis.atosorigin.es/BSA/Aladdin/i
 echo "public static String trustedIP[] = {\"193.174.152.114\", \"127.0.0.1\"};" >> src/com/aladdin/sc/config/Configuration.java
 echo "}" >> src/com/aladdin/sc/config/Configuration.java
 
-cat ./src/com/aladdin/raac/RaacStub.java|sed 's/http:\/\/193.174.152.114:8080\/axis2\/services\/raac\//http:\/\/193.174.152.114:8080\/axis2\/services\/raacBSA\//' > tmp
-mv tmp ./src/com/aladdin/raac/RaacStub.java
-
 cat build.xml |sed 's/<property name="name" value="StorageComponent"\/>/<property name="name" value="SCBSA"\/>/' > tmp
 mv tmp build.xml
 
