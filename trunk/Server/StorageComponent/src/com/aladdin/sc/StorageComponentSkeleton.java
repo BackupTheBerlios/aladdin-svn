@@ -3077,8 +3077,8 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			session.beginTransaction();
 			
 			QuestionnaireAnswers data = req.getStoreQuestionnaireAnswers().getData();
-			Timestamp datetime = new Timestamp(0);
-			if (data.getDateTime() != null) datetime = new Timestamp(data.getDateTime().getTimeInMillis());
+			Timestamp datetime = new Timestamp(Calendar.getInstance().getTimeInMillis());
+			//if (data.getDateTime() != null) datetime = new Timestamp(data.getDateTime().getTimeInMillis());
 			Integer objectId = new Integer (data.getObjectID());
 			Integer userId = new Integer (data.getUserID());
 			Integer taskId = new Integer (data.getTaskID());
@@ -4677,6 +4677,9 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			String sql = "SELECT id FROM questionnaireanswer WHERE ";
 			sql += "timestamp = '" + task.getDateTimeFulfilled().toString() + "' ";
 			sql += " AND question in (select id from questionnairequestion where quest = " + task.getQuestionnaire().toString() + ")";
+			sql += " AND objectId = (select objectId from task where id = '" + taskId.toString() + "')";
+			
+			System.out.println (sql);
 			
 			Object[] lqa = session.createSQLQuery(sql).list().toArray();
 			QuestionnaireAnswers rqas = resp.addNewOut();
