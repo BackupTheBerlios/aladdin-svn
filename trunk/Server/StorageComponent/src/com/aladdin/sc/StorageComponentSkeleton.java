@@ -4677,7 +4677,7 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			String sql = "SELECT id FROM questionnaireanswer WHERE ";
 			sql += "timestamp = '" + task.getDateTimeFulfilled().toString() + "' ";
 			sql += " AND question in (select id from questionnairequestion where quest = " + task.getQuestionnaire().toString() + ")";
-			sql += " AND objectId = (select objectId from task where id = '" + taskId.toString() + "')";
+			sql += " AND objectId = '" + task.getObject().toString() + "'";
 			
 			System.out.println (sql);
 			
@@ -4686,15 +4686,18 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 			rqas.setTaskID(taskId.toString());
 			
 			for (int j = 0; j < lqa.length; j++) {
-				QuestionnaireAnswer rqa = rqas.addNewAnswer();
-				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]); 
-				rqa.setQuestionID(qa.getQuestion().toString());
-				rqa.setValue(qa.getValue());
-				rqas.setObjectID(qa.getObjectId().toString());
-				rqas.setUserID(qa.getUserId().toString());
+				com.aladdin.sc.db.QuestionnaireAnswer qa = (com.aladdin.sc.db.QuestionnaireAnswer) session.load(com.aladdin.sc.db.QuestionnaireAnswer.class, (Integer)lqa[j]);
 				
-				com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) session.load(com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
-				rqa.setGlobalID(qq.getGlobalId().toString());
+				if (qa.getObjectId().equals(task.getObject())) {
+					QuestionnaireAnswer rqa = rqas.addNewAnswer();
+					rqa.setQuestionID(qa.getQuestion().toString());
+					rqa.setValue(qa.getValue());
+					rqas.setObjectID(qa.getObjectId().toString());
+					rqas.setUserID(qa.getUserId().toString());
+					
+					com.aladdin.sc.db.QuestionnaireQuestion qq = (com.aladdin.sc.db.QuestionnaireQuestion) session.load(com.aladdin.sc.db.QuestionnaireQuestion.class, qa.getQuestion());
+					rqa.setGlobalID(qq.getGlobalId().toString());
+				}
 			}
 			
 		} catch (Exception e) {
