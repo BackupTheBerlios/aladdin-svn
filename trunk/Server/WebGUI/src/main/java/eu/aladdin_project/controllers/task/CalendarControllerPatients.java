@@ -119,6 +119,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					//TODO retrieve Questionnaire answers and show in the task window
 					Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
 					QuestionnaireAnswers qa = proxy.getQuestionnaireAnswersByTask((String)scevent.getParams().get("task"), userid);
+					SystemDictionary.webguiLog("INFO", "task id: "+ (String)scevent.getParams().get("task"));
 					//SystemDictionary.webguiLog("INFO", "ANSWERS LENGTH: "+ qa.getAnswer().length);
 					//SystemDictionary.webguiLog("INFO", "getQuestion: "+ q.getQuestion().length);
 					ArrayList<QuestionnaireAnswer> qalist = new ArrayList<QuestionnaireAnswer>();
