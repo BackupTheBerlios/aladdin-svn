@@ -122,7 +122,7 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					//SystemDictionary.webguiLog("INFO", "ANSWERS LENGTH: "+ qa.getAnswer().length);
 					//SystemDictionary.webguiLog("INFO", "getQuestion: "+ q.getQuestion().length);
 					ArrayList<QuestionnaireAnswer> qalist = new ArrayList<QuestionnaireAnswer>();
-					for(int i = 0 ; i < qa.getAnswer().length ; i++){
+					if (qa.getAnswer() != null) for(int i = 0 ; i < qa.getAnswer().length ; i++){
 						qalist.add(i, qa.getAnswer(i));						
 					}
 					
