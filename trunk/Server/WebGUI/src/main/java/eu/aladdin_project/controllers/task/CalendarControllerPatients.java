@@ -92,7 +92,6 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		return res;
 	}
 	
-	@SuppressWarnings({ "unchecked" })
 	public void onEventEdit(CalendarsEvent event) throws InterruptedException, RemoteException{
 		try{
 			StorageComponentProxy proxy = SystemDictionary.getSCProxy();
@@ -120,8 +119,8 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 					//TODO retrieve Questionnaire answers and show in the task window
 					Questionnaire q = (Questionnaire)scevent.getParams().get("questionnaire");
 					QuestionnaireAnswers qa = proxy.getQuestionnaireAnswersByTask((String)scevent.getParams().get("task"), userid);
-					SystemDictionary.webguiLog("INFO", "ANSWERS LENGTH: "+ qa.getAnswer().length);
-					SystemDictionary.webguiLog("INFO", "getQuestion: "+ q.getQuestion().length);
+					//SystemDictionary.webguiLog("INFO", "ANSWERS LENGTH: "+ qa.getAnswer().length);
+					//SystemDictionary.webguiLog("INFO", "getQuestion: "+ q.getQuestion().length);
 					ArrayList<QuestionnaireAnswer> qalist = new ArrayList<QuestionnaireAnswer>();
 					for(int i = 0 ; i < qa.getAnswer().length ; i++){
 						qalist.add(i, qa.getAnswer(i));						
@@ -168,7 +167,9 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			int tasktype2 = Integer.parseInt((String)scevent.getParams().get("type"));
 			this.showCustomFields(tasktype2);
 			bookEventWin.getFellow("tasktypesel").setVisible(false);
+			@SuppressWarnings("rawtypes")
 			List items = ((Listbox)bookEventWin.getFellow("urlfield")).getItems();
+			@SuppressWarnings("rawtypes")
 			Iterator it = items.iterator();
 			while(it.hasNext()){
 				Listitem currentitem = (Listitem)it.next();
