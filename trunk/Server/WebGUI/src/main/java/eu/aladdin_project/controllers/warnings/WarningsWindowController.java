@@ -221,7 +221,7 @@ public class WarningsWindowController extends Window {
 					newrow.appendChild(datelabel);
 					newrow.appendChild(new Label(rowi.getPatientName()));
 					newrow.appendChild(new Label(rowi.getJustification()));
-					newrow.appendChild(new Label(rowi.getDelivered()));
+					newrow.appendChild(new Label(rowi.getDelivered().equals("true") ? org.zkoss.util.resource.Labels.getLabel("cwarn.Readed") : org.zkoss.util.resource.Labels.getLabel("cwarn.NotReaded")));
 					Label link = new Label("Details");
 					link.setSclass("link");
 					link.addEventListener("onClick", new ReadWarningListener(rowi.getID()));

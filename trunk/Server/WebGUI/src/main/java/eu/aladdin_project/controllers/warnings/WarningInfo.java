@@ -47,7 +47,7 @@ public class WarningInfo {
 		this.ID = input.getID();
 		this.type = SystemDictionary.getWarningTypeLabel(aux1.getCode());
 		Calendar cal = input.getDateTimeOfWarning();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		this.date = cal == null ? "not set" : sdf.format(cal.getTime());
 		this.effect = aux2 == null ? "not set" : SystemDictionary.getWarningEffectLabel(aux2.getCode());
 		this.indicator = aux3 == null ? "not set" : SystemDictionary.getWarningIndicatorLabel(aux3.getCode());
