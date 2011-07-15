@@ -18,15 +18,14 @@
 		String emerglbl = Labels.getLabel("cwarn.emergencylvl");
 		String patidlbl = Labels.getLabel("cwarn.patient");
 		String delivlbl = Labels.getLabel("cwarn.deliver");
-		String Justification = Labels.getLabel("cwarn.Justification");
-		String Readed = Labels.getLabel("cwarn.Readed");
 		String titlelbl = Labels.getLabel("menu.warnings");
+		
 	</zscript>
 	<window border="none" width="800px" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
 	<?component name="warningModal" macroURI="form.zul"?>
 	<warningModal id="warningModal" />
 	<vbox>
-	<label value="${titlelbl}" sclass="newitem"/>
+	<label value="${titlelbl }" sclass="newitem"/>
 	<hbox>
 		<label value="Show only unread"/>
 		<checkbox id="readall" onCheck="warningswin.refreshWarnings()" checked="true"/>
@@ -45,14 +44,16 @@
 	</hbox>
 	<grid id="warningsgrid">
 		<columns>
-			<column label="${typelbl}" width="80px" sort="auto"/>
-			<column label="${datelbl}" sort="auto" width="120px"/>
-			<column label="${indclbl}" sort="auto"/>
-			<column label="${risklbl}" sort="auto"/>
-			<column label="${emerglbl}" sort="auto"/> -->
-			<column label="${patidlbl}" sort="auto"/>
-			<column label="${Justification}"/>
-			<column label="${Readed}" sort="auto"/>
+			<!-- <column label="${idlbl }" width="35px" sort="auto"/> -->
+			<column label="${typelbl }" width="80px" sort="auto"/>
+			<column label="${datelbl }" sort="auto" width="120px"/>
+			<!-- <column label="${efectlbl }" sort="auto"/>
+			<column label="${indclbl }" sort="auto"/>
+			<column label="${risklbl }" sort="auto"/>
+			<column label="${emerglbl }" sort="auto"/> -->
+			<column label="${patidlbl }" sort="auto"/>
+			<column label="Justification"/>
+			<column label="Readed" sort="auto"/>
 			<column width="80px" align="center" />
 		</columns>
 		<rows id="filteredrows">
