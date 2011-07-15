@@ -27,7 +27,7 @@
 	<?component name="warningModal" macroURI="form.zul"?>
 	<warningModal id="warningModal" />
 	<vbox>
-	<label value="${titlelbl}" sclass="newitem"/>
+	<!-- label value="${titlelbl}" sclass="newitem"/ -->
 	<hbox>
 		<label value="Show only unread"/>
 		<checkbox id="readall" onCheck="warningswin.refreshWarnings()" checked="true"/>
