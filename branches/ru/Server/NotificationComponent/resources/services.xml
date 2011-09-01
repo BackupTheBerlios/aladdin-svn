@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT) -->
+<serviceGroup>
+    <service name="NotificationComponent">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.aladdin.nc.NotificationComponentMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">com.aladdin.nc.NotificationComponentSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">false</parameter>
+        <operation name="sendEvent" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://aladdin-project.eu/NotificationComponent/">
+            <actionMapping>http://aladdin-project.eu/NotificationComponent/sendEvent</actionMapping>
+            <outputActionMapping>http://aladdin-project.eu/NotificationComponent/NotificationComponent/sendEventResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

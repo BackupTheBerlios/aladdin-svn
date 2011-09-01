@@ -1,0 +1,78 @@
+<zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		
+		if(session.getAttribute("user")==null){
+			Executions.sendRedirect("/login.zul");
+		}
+		String user = (String)session.getAttribute("user");
+		
+		String home = Labels.getLabel("menu.home");
+		String patients = Labels.getLabel("menu.patients");
+		String carers = Labels.getLabel("menu.carers");
+		String clinicians = Labels.getLabel("menu.clinicians");
+		String calendar = Labels.getLabel("menu.calendar");
+		String extsrv = Labels.getLabel("menu.extsrv");
+		String warnings = Labels.getLabel("menu.warnings");
+		String qm = Labels.getLabel("qm.menu");
+		
+		
+		String hello = Labels.getLabel("menu.hello");
+		String lout = Labels.getLabel("menu.logout");
+		String contact = Labels.getLabel("menu.contact");
+		String close = Labels.getLabel("error.close");
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
+		public void aladdinLogout(){
+			session.removeAttribute("user");
+			Executions.getCurrent().sendRedirect("/login.zul");
+		}
+	</zscript>
+	<style src="/inc/style.css"/>
+	<window width="800px" sclass="headerwin">
+	
+	<image src="/inc/icons/logo-new.png" onClick='Executions.getCurrent().sendRedirect("/")' />
+	<vbox sclass="head-left">
+		<hbox>
+			<label value="${hello} ${user}, " />
+			<label value="${lout}" id="logout" sclass="link" onClick="aladdinLogout()"/>
+		</hbox>
+		<label value="Contact administrator"/>
+	</vbox>
+	</window>
+	<menubar id="menubar" width="100%" sclass="menubar">
+		<menuitem sclass="menubaritem" label="${home}" left="20" image="/inc/home2.png" height="32px" href="/"/>
+		<menuitem label="${patients}" href="/patients/"/>
+		<menuitem label="${carers}" href="/carers/"/>
+		<menuitem label="${clinicians}" href="/clinicians/"/>
+		<menuitem label="${qm}" href="/qm/"/>
+		<menuitem label="${extsrv }" href="/extsrv/"/>
+		<menuitem label="${warnings }" href="/warnings/">
+			<attribute name="onCreate">
+				if(isadmin){
+					self.setDisabled(true);
+				}
+			</attribute>
+		</menuitem>
+		<menuitem label="Content Management" href="/cms/"/>
+	</menubar>
+	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
+		<label id="errorlbl"/>
+		<label value="${close }" sclass="link" onClick="mainerror.setVisible(false)"/>
+	</window>
+	<zscript>
+		public void setErrorLabel(){
+			String error = Executions.getCurrent().getParameter("error");
+			if(error != null){
+				String showerror = (String)Sessions.getCurrent().getAttribute("showerror");
+				if("1".equals(showerror)){
+					int errorcode = Integer.parseInt(error);
+					Label errorlbl = (Label)mainerror.getFellow("errorlbl");
+					errorlbl.setValue(eu.aladdin_project.ErrorDictionary.getErrorLabel(errorcode));
+					mainerror.setVisible(true);
+					Sessions.getCurrent().setAttribute("showerror",null);
+				}
+			}
+		}
+	</zscript>
+	
+</zk>

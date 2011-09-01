@@ -1,0 +1,60 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<zk>
+	<include src="/inc/header.zul"/>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		import eu.aladdin_project.StorageComponent.StorageComponentProxy;
+		import eu.aladdin_project.xsd.PatientInfo;
+		import eu.aladdin_project.xsd.SearchCriteria;
+		
+		String title = Labels.getLabel("patients.title");
+		String newpat = Labels.getLabel("patients.new");
+		String idstr  = Labels.getLabel("common.id");
+		String surnlbl= Labels.getLabel("common.sname");
+		String namelbl= Labels.getLabel("common.name");
+		String updmsg = Labels.getLabel("common.update");
+		String delmsg = Labels.getLabel("common.delete");
+		String details = Labels.getLabel("common.details");
+		
+		page.setTitle(title);
+		StorageComponentProxy proxy = new StorageComponentProxy();
+		PatientInfo[] plist = null;
+		Session ses = Sessions.getCurrent();
+		String id = (String)ses.getAttribute("userid");
+		Boolean isntadmin = !(Boolean)ses.getAttribute("isadmin");
+		try{
+			plist = proxy.listOfPatients(new SearchCriteria[0],id);
+			//eu.aladdin_project.SystemDictionary.webguiLog("INFO", "List SIZE: "+plist.length);
+		}catch(java.rmi.RemoteException re){
+			re.printStackTrace();
+		}
+	</zscript>
+	<window id="patients" border="none" width="800px" sclass="centerwin" use="eu.aladdin_project.controllers.IndexPatientsWindow">
+	<vbox>
+	<button label="+ ${newpat}" href="/patients/form.zul" sclass="newitem" />
+	<grid>
+		<columns>
+			<!-- <column label="${idstr }" width="35px" sort="auto"/> -->
+			<column label="${surnlbl }" sort="auto"/>
+			<column label="${namelbl }" sort="auto"/>
+			<column width="80px" align="center" />
+			<column width="80px" align="center" if="${isntadmin }"/>
+			<column width="80px" align="center" if="${isntadmin }"/>
+		</columns>
+		<rows>
+			<row forEach="${plist }" id="${each.ID }">
+				<!-- <label value="${each.ID }"/> -->
+				<label value="${each.surname }"/>
+				<label value="${each.name }"/>
+				<label if="${isntadmin }" value="Tasks" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
+				<label if="${isntadmin }" value="${updmsg }" sclass="link" onClick="patients.updatePatient(self.getParent().getId())"/>
+				<label value="${delmsg }" sclass="link" onClick="patients.deletePatientMsg(self.getParent().getId())"/>
+			</row>
+		</rows>
+	</grid>
+	</vbox>
+	</window>
+	<include src="/inc/footer.zul"/>
+</zk>

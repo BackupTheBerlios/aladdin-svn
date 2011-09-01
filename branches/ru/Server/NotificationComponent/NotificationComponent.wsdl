@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:tns="http://aladdin-project.eu/NotificationComponent/"
+	targetNamespace="http://aladdin-project.eu/NotificationComponent/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="StorageComponent"
+	xmlns:aladdin="http://aladdin-project.eu/xsd"
+	>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://aladdin-project.eu/NotificationComponent/">
+      <xsd:import namespace="http://aladdin-project.eu/xsd" schemaLocation="../XSD/schemata.xsd"/>
+      <xsd:element name="sendEvent">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="event" type="aladdin:Event"></xsd:element>
+      			<xsd:element name="login" type="xsd:string"></xsd:element>
+      			<xsd:element name="password" type="xsd:string"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendEventResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element name="out" type="aladdin:OperationResult"></xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="sendEventRequest">
+  	<wsdl:part name="parameters" element="tns:sendEvent"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendEventResponse">
+  	<wsdl:part name="parameters" element="tns:sendEventResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="NotificationComponent">
+        <wsdl:operation name="sendEvent">
+        	<wsdl:input message="tns:sendEventRequest"></wsdl:input>
+        	<wsdl:output message="tns:sendEventResponse"></wsdl:output>
+        </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NotificationComponentSOAP"
+  	type="tns:NotificationComponent">
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="sendEvent">
+  		<soap:operation
+  			soapAction="http://aladdin-project.eu/NotificationComponent/sendEvent" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotificationComponent">
+    <wsdl:port binding="tns:NotificationComponentSOAP" name="NotificationComponentSOAP">
+      <soap:address location="http://193.174.152.114:28080/axis2/services/NotificationComponent"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
