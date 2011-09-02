@@ -31,6 +31,13 @@
 	String assensedef = Labels.getLabel("ass.sense.def");
 	String asptreat = Labels.getLabel("ass.pharma.treat");
 	String asclindata = Labels.getLabel("ass.clindata");
+
+	String alzheimer_ = Labels.getLabel("patients.ass.alzheimer");
+	String vascular_ = Labels.getLabel("patients.ass.vascular");
+	String mixed_ = Labels.getLabel("patients.ass.mixed");
+	String parkinson_ = Labels.getLabel("patients.ass.parkinson");
+	String ohteraet_ = Labels.getLabel("patients.ass.ohteraet");
+	String save = Labels.getLabel("patients.ass.save");
 	
 	String alzheimer = SystemDictionary.AETIOLOGY_ALZHEIMER;
 	String vascular = SystemDictionary.AETIOLOGY_VASCULAR;
@@ -57,11 +64,11 @@
 				<hbox>
 					<label id="field03"/>
 					<listbox id="field03_in" visible="false" mold="select">
-						<listitem value="${alzheimer }" label="Alzheimer" selected="true"/>
-						<listitem value="${vascular }" label="Vascular"/>
-						<listitem value="${mixed }" label="Mixed"/>
-						<listitem value="${parkinson }" label="Parkinson"/>
-						<listitem value="${ohteraet }" label="Others"/>
+						<listitem value="${alzheimer }" label="${alzheimer_}" selected="true"/>
+						<listitem value="${vascular }" label="${vascular_}"/>
+						<listitem value="${mixed }" label="${mixed_}"/>
+						<listitem value="${parkinson }" label="${parkinson_}"/>
+						<listitem value="${ohteraet }" label="${ohteraet_}"/>
 					</listbox>
 				</hbox>
 			</row>
@@ -114,7 +121,7 @@
 				<label value="${asclindata }"/><label id="field26"/>
 			</row>
 			<row spans="1,3" id="buttonrow" visible="false">
-				<label value=""/><button label="Save" onClick="assessmentwin.saveAssessment()"/>
+				<label value=""/><button label="${save}" onClick="assessmentwin.saveAssessment()"/>
 			</row>
 		</rows>
 	</grid>

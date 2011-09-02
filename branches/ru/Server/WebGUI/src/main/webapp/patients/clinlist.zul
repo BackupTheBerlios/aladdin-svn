@@ -1,9 +1,11 @@
 <zk>
-	<window title="Select Clinician" closable="true" border="normal" width="300px" id="rclinlistwin" use="eu.aladdin_project.controllers.ClinicianListForPatients">
 		<zscript>
 			import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 			import eu.aladdin_project.xsd.ClinicianInfo;
 			import eu.aladdin_project.xsd.SearchCriteria;
+			import org.zkoss.util.resource.Labels;
+
+			String title = Labels.getLabel("patients.clinlist.title");
 			
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
@@ -14,6 +16,8 @@
 				e.printStackTrace();
 			}
 		</zscript>
+
+	<window title="${title}" closable="true" border="normal" width="300px" id="rclinlistwin" use="eu.aladdin_project.controllers.ClinicianListForPatients">
 		<radiogroup id="respo_rgroup"><grid>
 			<columns>
 			</columns>
@@ -23,7 +27,7 @@
 				</row>
 			</rows>
 		</grid>
-		<button label="Select Clinician" onClick="rclinlistwin.setClinician()"/>
+		<button label="${title}" onClick="rclinlistwin.setClinician()"/>
 		</radiogroup>
 	</window>
 </zk>

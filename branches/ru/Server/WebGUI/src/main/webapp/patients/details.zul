@@ -28,6 +28,13 @@
 		String sever = Labels.getLabel("patients.ass.severity");
 		String assmnts = Labels.getLabel("patients.ass");
 		String weekfirstd = Labels.getLabel("common.firstday.week");
+
+		String more = Labels.getLabel("patients.details.more");
+		String remove = Labels.getLabel("patients.details.remove");
+		String monitor = Labels.getLabel("patients.details.monitor");
+		String changepass = Labels.getLabel("patients.details.changepass");
+		String newass = Labels.getLabel("patients.details.newass");
+
 		
 		String title = Labels.getLabel("patients.update.title");
 		page.setTitle(title);	
@@ -54,7 +61,7 @@
 	</zscript>
 	<include src="/inc/header.zul"/>
 	<window id="detailswin" sclass="centerwin" width="800px" use="eu.aladdin_project.controllers.details.DetailPatientController">
-	<label value="${data }: ${pataux } "/><a id="showa" visible="true" onClick="showAnchor()">more</a> <a id="hidea" visible="false" onClick="hideAnchor()">less</a>
+	<label value="${data }: ${pataux } "/><a id="showa" visible="true" onClick="showAnchor()">${more}</a> <a id="hidea" visible="false" onClick="hideAnchor()">${more}</a>
 	<zscript>
 		public void showAnchor(){
 			showa.setVisible(false);
@@ -129,9 +136,9 @@
 	<?component name="removemassively" macroURI="removetasks.zul"?>
 	<createDialog id="removemassively" />
 	<hbox>
-		<button label="Remove multiple tasks" onClick="detailswin.createRemoveMassivelyDialog()"/>
-		<button label="Monitor Measurements" onClick="detailswin.createWeightMeasurementDialog()"/>
-		<button label="Change password" onClick="detailswin.createPasswordDialog()"/>
+		<button label="${remove}" onClick="detailswin.createRemoveMassivelyDialog()"/>
+		<button label="${monitor}" onClick="detailswin.createWeightMeasurementDialog()"/>
+		<button label="${changepass}" onClick="detailswin.createPasswordDialog()"/>
 	</hbox>
 	<separator height="10px"/>
 	<label value="${assmnts }"/>
@@ -157,7 +164,7 @@
 			</row>
 		</rows>
 	</grid>
-	<button label="Create new assessment" onClick="detailswin.createAssessment()"/>
+	<button label="${newass}" onClick="detailswin.createAssessment()"/>
 	<separator height="20px"/>
 	</window>
 		<zscript>

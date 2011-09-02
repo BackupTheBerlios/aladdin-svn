@@ -32,7 +32,7 @@
 	</zscript>
 	<window border="none" width="800px" sclass="centerwin" id="clinics" use="eu.aladdin_project.controllers.IndexCliniciansWindow">
 	<vbox>
-	<button label="+ ${newprof}" href="/clinicians/form.zul" sclass="newitem">
+	<button label="${newprof}" href="/clinicians/form.zul" sclass="newitem">
 		<attribute name="onCreate">
 			if(!showif){
 				self.setDisabled(true);

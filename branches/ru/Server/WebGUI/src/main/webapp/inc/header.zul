@@ -15,6 +15,7 @@
 		String extsrv = Labels.getLabel("menu.extsrv");
 		String warnings = Labels.getLabel("menu.warnings");
 		String qm = Labels.getLabel("qm.menu");
+		String contentmanag = Labels.getLabel("menu.contentmanag");
 		
 		
 		String hello = Labels.getLabel("menu.hello");
@@ -33,10 +34,10 @@
 	<image src="/inc/icons/logo-new.png" onClick='Executions.getCurrent().sendRedirect("/")' />
 	<vbox sclass="head-left">
 		<hbox>
-			<label value="${hello} ${user}, " />
+			<label value="${hello}, ${user}! " />
 			<label value="${lout}" id="logout" sclass="link" onClick="aladdinLogout()"/>
 		</hbox>
-		<label value="Contact administrator"/>
+		<label value="${contact}"/>
 	</vbox>
 	</window>
 	<menubar id="menubar" width="100%" sclass="menubar">
@@ -53,7 +54,7 @@
 				}
 			</attribute>
 		</menuitem>
-		<menuitem label="Content Management" href="/cms/"/>
+		<menuitem label="${contentmanag}" href="/cms/"/>
 	</menubar>
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>

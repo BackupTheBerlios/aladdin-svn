@@ -17,6 +17,8 @@
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
 		String details = Labels.getLabel("common.details");
+		String tasks = Labels.getLabel("common.tasks");
+
 		
 		page.setTitle(title);
 		StorageComponentProxy proxy = new StorageComponentProxy();
@@ -33,7 +35,7 @@
 	</zscript>
 	<window id="patients" border="none" width="800px" sclass="centerwin" use="eu.aladdin_project.controllers.IndexPatientsWindow">
 	<vbox>
-	<button label="+ ${newpat}" href="/patients/form.zul" sclass="newitem" />
+	<button label="${newpat}" href="/patients/form.zul" sclass="newitem" />
 	<grid>
 		<columns>
 			<!-- <column label="${idstr }" width="35px" sort="auto"/> -->
@@ -48,7 +50,7 @@
 				<!-- <label value="${each.ID }"/> -->
 				<label value="${each.surname }"/>
 				<label value="${each.name }"/>
-				<label if="${isntadmin }" value="Tasks" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
+				<label if="${isntadmin }" value="${tasks}" sclass="link" onClick="patients.detailsPatient(self.getParent().getId())"/>
 				<label if="${isntadmin }" value="${updmsg }" sclass="link" onClick="patients.updatePatient(self.getParent().getId())"/>
 				<label value="${delmsg }" sclass="link" onClick="patients.deletePatientMsg(self.getParent().getId())"/>
 			</row>

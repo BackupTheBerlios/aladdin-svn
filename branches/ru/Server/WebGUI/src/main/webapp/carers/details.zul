@@ -18,6 +18,12 @@
 		String timesinced = Labels.getLabel("patients.ass.time.sinced");
 		String sever = Labels.getLabel("patients.ass.severity");
 		String assmnts = Labels.getLabel("patients.ass");
+		String ids = Labels.getLabel("common.id");
+		String burden = Labels.getLabel("carers.details.burden");
+		String quality = Labels.getLabel("carers.details.quality");
+		String datestr = Labels.getLabel("carers.detail.date");
+		String create = Labels.getLabel("carers.detail.create");
+		String details = Labels.getLabel("common.details");
 		
 		CarerAssessment[] assessmentlist = null;
 		CarerAssessmentInfo[] assinfo = new CarerAssessmentInfo[0];
@@ -46,8 +52,8 @@
 		<columns>
 			<column label="${ids }"/>
 			<column label="${datestr }"/>
-			<column label="Severity of Burden"/>
-			<column label="Life quality"/>
+			<column label="${burden}"/>
+			<column label="${quality}"/>
 			<column/>
 		</columns>
 		<rows>
@@ -56,12 +62,12 @@
 				<label value="${each.dateOfAssessment }"/>
 				<label value="${each.severityOfBurden }"/>
 				<label value="${each.qualityOfLife }"/>
-				<label value="Details" sclass="link" onClick="carerform.viewAssessmentDetail(((Label)self.getParent().getChildren().get(0)).getValue(), updid)"/>
+				<label value="${details}" sclass="link" onClick="carerform.viewAssessmentDetail(((Label)self.getParent().getChildren().get(0)).getValue(), updid)"/>
 			</row>
 		</rows>
 	</grid>
 	</vbox>
-	<button label="Create new assessment" onClick="carerform.createAssessment()"/>
+	<button label="${create}" onClick="carerform.createAssessment()"/>
 	<separator height="20px"/>
 	</window>
 	<zscript>

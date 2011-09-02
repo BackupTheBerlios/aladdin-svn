@@ -216,7 +216,7 @@ public class DetailPatientController extends DetailSDController{
 	
 	protected Listitem[] getCarerListAsListItems(){
 		Listitem[] ret = new Listitem[1];
-		String text = "Carer";
+		String text = Labels.getLabel("patients.carer.label");
 		Listitem careritem = new Listitem();
 		Listcell empty = new Listcell(text);
 		Listcell carername = new Listcell(this.currentcarers.getPersonData().getSurname()+", "+this.currentcarers.getPersonData().getName());
@@ -228,12 +228,14 @@ public class DetailPatientController extends DetailSDController{
 	
 	protected Listitem getSocialWorkerListitem(){
 		Listitem sw = new Listitem();
-		Listcell cell1 = new Listcell("Social worker");
+		String socwork = Labels.getLabel("patients.form.socworkinf");
+		Listcell cell1 = new Listcell(socwork);
 		Listcell cell2 = null;
 		if(this.currentsocialworker != null){
 			cell2 = new Listcell(this.currentsocialworker.getName() + " ("+this.currentsocialworker.getPhone()+"/"+this.currentsocialworker.getEmail()+")");
 		}else{
-			cell2 = new Listcell("Undefined");
+			String undef = Labels.getLabel("patients.details.undef");
+			cell2 = new Listcell(undef);
 		}
 		sw.appendChild(cell1);
 		sw.appendChild(cell2);
@@ -243,12 +245,14 @@ public class DetailPatientController extends DetailSDController{
 	
 	protected Listitem getConsulterListitem(){
 		Listitem sw = new Listitem();
-		Listcell cell1 = new Listcell("Consulter");
+		String consulter = Labels.getLabel("patients.form.consinf");
+		Listcell cell1 = new Listcell(consulter);
 		Listcell cell2 = null;
 		if(this.currentconsulter != null){
 			cell2 = new Listcell(this.currentconsulter.getName() + " ("+this.currentconsulter.getPhone()+"/"+this.currentconsulter.getEmail()+")");
 		}else{
-			cell2 = new Listcell("Undefined");
+			String undef = Labels.getLabel("patients.details.undef");
+			cell2 = new Listcell(undef);
 		}
 		sw.appendChild(cell1);
 		sw.appendChild(cell2);
@@ -258,12 +262,14 @@ public class DetailPatientController extends DetailSDController{
 	
 	protected Listitem getGeneralPracticionerListitem(){
 		Listitem sw = new Listitem();
-		Listcell cell1 = new Listcell("General Practicioner");
+		String genpract = Labels.getLabel("patients.form.genpractinf");
+		Listcell cell1 = new Listcell(genpract);
 		Listcell cell2 = null;
 		if(this.currentgralprac != null){
 			cell2 = new Listcell(this.currentgralprac.getName() + " ("+this.currentgralprac.getPhone()+"/"+this.currentgralprac.getEmail()+")");
 		}else{
-			cell2 = new Listcell("Undefined");
+			String undef = Labels.getLabel("patients.details.undef");
+			cell2 = new Listcell(undef);
 		}
 		sw.appendChild(cell1);
 		sw.appendChild(cell2);
@@ -363,7 +369,8 @@ public class DetailPatientController extends DetailSDController{
 	
 	public void createRemoveMassivelyDialog() throws SuspendNotAllowedException, InterruptedException{
 		removeMassivelyDialog = (Window)Executions.createComponents("removetasks.zul", this, null);
-		removeMassivelyDialog.setTitle("New Task");
+		String title = Labels.getLabel("tasks.title");
+		removeMassivelyDialog.setTitle(title);
 		removeMassivelyDialog.setVisible(true);
 		removeMassivelyDialog.doModal();
 		((Textbox)removeMassivelyDialog.getFellow("removepatientid")).setValue(this.currentid);

@@ -342,25 +342,32 @@ public class PattientControllerWindow extends SDFormControllerWindow{
 		Rows rows1 = new Rows();
 		Rows rows2 = new Rows();
 		Rows rows3 = new Rows();
+		
+		String socworkinf = Labels.getLabel("patients.form.socworkinf");
+		String consinf = Labels.getLabel("patients.form.consinf");
+		String genpractinf = Labels.getLabel("patients.form.genpractinf");
+		String name = Labels.getLabel("patients.form.name");
+		String email = Labels.getLabel("patients.form.email");
+		String phone = Labels.getLabel("patients.form.phone");
 
-		this.appendSubFormTitleRow("Social Workrer Info", rows1);
-		this.appendSubFormTitleRow("Consulter Info", rows2);
-		this.appendSubFormTitleRow("General Practicioner Info", rows3);
+		this.appendSubFormTitleRow(socworkinf, rows1);
+		this.appendSubFormTitleRow(consinf, rows2);
+		this.appendSubFormTitleRow(genpractinf, rows3);
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
-		rowsA.add(new SimpleFieldData("Name", "pat_swname"));
-		rowsA.add(new SimpleFieldData("E-mail", "pat_swmail"));
-		rowsA.add(new SimpleFieldData("Phone", "pat_swphone"));
+		rowsA.add(new SimpleFieldData(name, "pat_swname"));
+		rowsA.add(new SimpleFieldData(email, "pat_swmail"));
+		rowsA.add(new SimpleFieldData(phone, "pat_swphone"));
 		
 		ArrayList<SimpleFieldData> rowsB = new ArrayList<SimpleFieldData>();
-		rowsB.add(new SimpleFieldData("Name", "pat_consname"));
-		rowsB.add(new SimpleFieldData("E-mail", "pat_consmail"));
-		rowsB.add(new SimpleFieldData("Phone", "pat_consphone"));
+		rowsB.add(new SimpleFieldData(name, "pat_consname"));
+		rowsB.add(new SimpleFieldData(email, "pat_consmail"));
+		rowsB.add(new SimpleFieldData(phone, "pat_consphone"));
 		
 		ArrayList<SimpleFieldData> rowsC = new ArrayList<SimpleFieldData>();
-		rowsC.add(new SimpleFieldData("Name", "pat_gpname"));
-		rowsC.add(new SimpleFieldData("E-mail", "pat_gpmail"));
-		rowsC.add(new SimpleFieldData("Phone", "pat_gpphone"));
+		rowsC.add(new SimpleFieldData(name, "pat_gpname"));
+		rowsC.add(new SimpleFieldData(email, "pat_gpmail"));
+		rowsC.add(new SimpleFieldData(phone, "pat_gpphone"));
 		
 		this.appendTextboxFields(rowsA, rows1);
 		this.appendTextboxFields(rowsB, rows2);

@@ -10,12 +10,21 @@
 		import eu.aladdin_project.xsd.SearchCriteria;
 		import eu.aladdin_project.SystemDictionary;
 		
+		String title = Labels.getLabel("cms.title");
 		String updmsg = Labels.getLabel("common.update");
 		String delmsg = Labels.getLabel("common.delete");
 		String idlbl = Labels.getLabel("common.id");
 		String desc = Labels.getLabel("common.description");
 		String urilbl = Labels.getLabel("common.URI");
 		String newextrsrv = Labels.getLabel("extsrv.new");
+		String addcon = Labels.getLabel("cms.add");
+		String contitle = Labels.getLabel("cms.contitle");
+		String category = Labels.getLabel("cms.category");
+		String enabled = Labels.getLabel("cms.enabled");
+
+
+
+		page.setTitle(title);
 
 		MediaContent[] plist = null;
 		StorageComponentProxy proxy = SystemDictionary.getSCProxy();
@@ -37,15 +46,15 @@
 	<?component name="contentModal" macroURI="form.zul"?>
 	<contentModal id="contentModal" />
 	<vbox>
-	<button label="Add content" onClick="mediamanager.createContent()" sclass="newitem" />
+	<button label="${addcon}" onClick="mediamanager.createContent()" sclass="newitem" />
 	<grid>
 		<columns>
 			<column label="${idlbl }" width="35px" sort="auto"/>
-			<column label="Title"/>
+			<column label="${contitle }"/>
 			<column label="${urilbl }" sort="auto"/>
 			<!-- <column label="Type"/>  -->
-			<column label="Category"/>
-			<column label="Enabled"/>
+			<column label="${category}"/>
+			<column label="${enabled}"/>
 			<column width="80px" align="center" />
 			<column width="80px" align="center" />
 		</columns>
@@ -58,8 +67,8 @@
 				<label value="${each.category }"/>
 				<label value="${each.enabled }"/>
 				<label value="${updmsg }" sclass="link" onClick="mediamanager.modifyContent(self.getParent().getId())"/>
-				<label if="${each.enabled }" value="Disable" sclass="link" onClick="mediamanager.disableContent(self.getParent().getId())"/>
-				<label if="${!each.enabled }" value="Enable" sclass="link" onClick="mediamanager.enableContent(self.getParent().getId())"/>
+				<label if="${each.enabled }" value="Отключить" sclass="link" onClick="mediamanager.disableContent(self.getParent().getId())"/>
+				<label if="${!each.enabled }" value="Включить" sclass="link" onClick="mediamanager.enableContent(self.getParent().getId())"/>
 			</row>
 		</rows>
 	</grid>

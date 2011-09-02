@@ -26,6 +26,10 @@
 	String tassigner = Labels.getLabel("tasks.assigner");
 	String tassigntt = Labels.getLabel("tasks.asign");
 	String tcancelt = Labels.getLabel("tasks.cancel");
+	String q1 = Labels.getLabel("patients.removetasks.question1");
+	String q2 = Labels.getLabel("patients.removetasks.question2");
+	String q3 = Labels.getLabel("patients.removetasks.question3");
+	String remove = Labels.getLabel("patients.details.remove");
 	
 	int ttcarerqsi = SystemDictionary.TASK_TYPE_PATIENTQS_INT;
 	int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
@@ -48,7 +52,7 @@
 				<textbox id="removepatientid"/>
 			</row>
 			<row>
-				<label value="What kind of task do you want to remove massively?"/>
+				<label value="${q1}"/>
 				<listbox mold="select" id="removetasktype">
 					<listitem label="${ttcarerqs }" value="${ttcarerqsi }" selected="true"/>
 					<listitem label="${ttblood }" value="${ttbloodi }"/>
@@ -60,16 +64,16 @@
 				</listbox>
 			</row>
 			<row>
-				<label value="Which day we must start removing tasks?"/>
+				<label value="${q2}"/>
 				<datebox format="dd/MM/yyyy" value="${date }" id="removestart"/>
 			</row>
 			<row>
-				<label value="Which day we must stop (!) removing tasks?"/>
+				<label value="${q3}"/>
 				<datebox format="dd/MM/yyyy" value="${date }" id="removeend"/>
 			</row>
 			<row>
 				<label id=""/>
-				<button id="deletemassive" label="Delete tasks" onClick="removemassive_win.removeMassively(removepatientid.getValue(), removetasktype.getSelectedItem().getValue(), removestart.getValue(), removeend.getValue())"/>
+				<button id="deletemassive" label="${remove}" onClick="removemassive_win.removeMassively(removepatientid.getValue(), removetasktype.getSelectedItem().getValue(), removestart.getValue(), removeend.getValue())"/>
 			</row>
 		</rows>
 	</grid>
