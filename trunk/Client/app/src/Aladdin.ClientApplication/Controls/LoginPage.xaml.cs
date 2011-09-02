@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Aladdin.ClientApplication.ViewModels;
 using System.ComponentModel;
+using System.IO;
 
 namespace Aladdin.ClientApplication.Controls
 {
@@ -107,6 +108,19 @@ namespace Aladdin.ClientApplication.Controls
             this.txtPassword.Password = "";
         }
 
+        private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+            string tabTipPath = "C:\\Program files (x86)\\Common files\\Microsoft Shared\\Ink\\TabTip.exe";
+
+            if (!File.Exists(tabTipPath))
+            {
+                tabTipPath = "C:\\Program files\\Common files\\Microsoft Shared\\Ink\\TabTip.exe";
+                if (File.Exists(tabTipPath))
+                {
+                    System.Diagnostics.Process myProcess = System.Diagnostics.Process.Start(tabTipPath);
+                }
+            }
+        }
 
     }
 }

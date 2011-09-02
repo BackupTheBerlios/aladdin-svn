@@ -115,9 +115,10 @@ namespace Aladdin.ClientApplication.ViewModels
                 string date;
 
                 // Load the history
-                if (File.Exists("activity.log"))
+                string logFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\activity.log";
+                if (File.Exists(logFile))
                 {
-                    StreamReader r = new StreamReader("activity.log");
+                    StreamReader r = new StreamReader(logFile);
                     while ((date = r.ReadLine()) != null)
                         dateLog.Add(date);
                     r.Close();
@@ -178,7 +179,7 @@ namespace Aladdin.ClientApplication.ViewModels
 
                     // Update the history
                     StreamWriter sw;
-                    sw = File.AppendText("activity.log");
+                    sw = File.AppendText(logFile);
                     foreach (string s in dateLogNew)
                         sw.WriteLine(s);
                     sw.Close();

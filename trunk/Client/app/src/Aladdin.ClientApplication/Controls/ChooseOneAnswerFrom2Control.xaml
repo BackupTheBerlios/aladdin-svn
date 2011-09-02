@@ -11,7 +11,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Margin="30" Style="{StaticResource LargeYesButton}" Content="{Binding Answer1Title}" Click="Answer1Button_Click" />
-        <Button Grid.Column="1" Margin="30" Style="{StaticResource LargeNoButton}" Content="{Binding Answer2Title}" Click="Answer2Button_Click" />
+        <Button Grid.Column="0" Margin="20 20 20 0" Style="{StaticResource LargeYesButton}" Content="{Binding Answer1Title}" Click="Answer1Button_Click" />
+        <Button Grid.Column="1" Margin="20 20 20 0" Style="{StaticResource LargeNoButton}" Content="{Binding Answer2Title}" Click="Answer2Button_Click" />
     </Grid>
 </UserControl>

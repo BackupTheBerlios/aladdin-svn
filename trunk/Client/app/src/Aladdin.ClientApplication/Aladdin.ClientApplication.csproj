@@ -411,9 +411,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\aladdinService\StorageComponent.wsdl" />
-    <None Include="Web References\aladdinService\StorageComponent.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Web References\aladdinService\StorageComponent.xsd" />
     <None Include="Web References\aladdinService\SystemParameter.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -501,10 +499,10 @@
     <Resource Include="Resources\Images\Users.png" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://193.174.152.114:8080/axis2/services/StorageComponent%3fwsdl">
+    <WebReferenceUrl Include="https://193.174.152.114/axis2/services/StorageComponent%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\aladdinService\</RelPath>
-      <UpdateFromURL>http://193.174.152.114:8080/axis2/services/StorageComponent%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>https://193.174.152.114/axis2/services/StorageComponent%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
