@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.zkoss.util.resource.Labels;
 import org.apache.axis.types.UnsignedByte;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -242,8 +243,10 @@ public class QuestionWindow extends Window{
 				row000.appendChild(lab000);
 				
 				Hbox errmsg = new Hbox();
-				Label lab001 = new Label("You must enter some answers to save the question ");
-				Label lab002 = new Label("close");
+				String alerttext = Labels.getLabel("qm.new.allerttext");
+				Label lab001 = new Label(alerttext);
+				String close = Labels.getLabel("qm.new.close");
+				Label lab002 = new Label(close);
 				lab002.setSclass("link");
 				lab002.addEventListener("onClick", new EventListener() {
 					public void onEvent(Event arg0) throws Exception {
@@ -260,13 +263,17 @@ public class QuestionWindow extends Window{
 				lab00.setValue(Labels.getLabel("qm.ans.fields.type"));
 				row00.appendChild(lab00);
 	
+				String oneansw = Labels.getLabel("qm.new.oneansw");
+				String mult = Labels.getLabel("qm.new.mult");
+				String text = Labels.getLabel("qm.new.text");
+						
 				Listbox lbox00 = new Listbox();
 				lbox00.setId("question_typesel");
 				lbox00.setMold("select");
 				lbox00.setRows(1);
-					lbox00.appendItem("One answer", "1");
-					lbox00.appendItem("Multiple answers", "2");
-					lbox00.appendItem("Free text", "3");
+					lbox00.appendItem(oneansw, "1");
+					lbox00.appendItem(mult, "2");
+					lbox00.appendItem(text, "3");
 					lbox00.setSelectedIndex(0);
 					lbox00.addEventListener("onSelect", new EventListener() {
 						
@@ -291,7 +298,8 @@ public class QuestionWindow extends Window{
 			
 			Row row011 = new Row();
 				Label lab011 = new Label();
-				lab011.setValue("Position");
+				String position = Labels.getLabel("qm.position");
+				lab011.setValue(position);
 				row011.appendChild(lab011);
 	
 				Intbox tbox011 = new Intbox();

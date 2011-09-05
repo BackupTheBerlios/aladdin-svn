@@ -21,6 +21,13 @@
 		String titlelbl = Labels.getLabel("menu.warnings");
 		String Justification = Labels.getLabel("cwarn.Justification");
 		String Readed = Labels.getLabel("cwarn.Readed");
+		String showonlyunread = Labels.getLabel("cwarn.showonlyunread");
+		String onlypat = Labels.getLabel("cwarn.onlypat"); 
+		String showall = Labels.getLabel("cwarn.showall");
+		String from = Labels.getLabel("cwarn.from");
+		String to = Labels.getLabel("cwarn.to");
+		String applyfil = Labels.getLabel("cwarn.applyfil");
+		String clearfil = Labels.getLabel("cwarn.clearfil");
 		
 	</zscript>
 	<window border="none" width="800px" sclass="centerwin" id="warningswin" use="eu.aladdin_project.controllers.warnings.WarningsWindowController" >
@@ -29,20 +36,20 @@
 	<vbox>
 	<!-- label value="${titlelbl}" sclass="newitem"/ -->
 	<hbox>
-		<label value="Show only unread"/>
+		<label value="${showonlyunread}"/>
 		<checkbox id="readall" onCheck="warningswin.refreshWarnings()" checked="true"/>
-		<label value="Only patient"/>
+		<label value="${onlypat}"/>
 		<textbox id="filterpatient" visible="false" readonly="true"/>
 		<textbox id="filterpatienttrigger" readonly="true" onClick="warningswin.createPatientsDialog()"/>
-		<button label="Show for all patients" onClick="warningswin.showForAllPatients()"/>
+		<button label="${showall}" onClick="warningswin.showForAllPatients()"/>
 	</hbox>
 	<hbox>
-		<label value="From"/>
+		<label value="${from}"/>
 		<datebox id="datefromfilter" format="dd/MM/yyyy" readonly="true"/>
-		<label value="to"/>
+		<label value="${to}"/>
 		<datebox id="datetofilter" format="dd/MM/yyyy" readonly="true"/>
-		<button label="Apply date filter" onClick="warningswin.refreshWarnings()"/>
-		<button label="Clear date filters" onClick="warningswin.clearDateFilters()"/>
+		<button label="${applyfil}" onClick="warningswin.refreshWarnings()"/>
+		<button label="${clearfil}" onClick="warningswin.clearDateFilters()"/>
 	</hbox>
 	<grid id="warningsgrid">
 		<columns>

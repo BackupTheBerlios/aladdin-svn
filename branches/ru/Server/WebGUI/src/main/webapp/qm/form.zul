@@ -19,6 +19,11 @@
 		String textl = Labels.getLabel("qm.new.questions.text");
 		String ansl = Labels.getLabel("qm.new.questions.answers");
 		String errorno = Labels.getLabel("error.no.empty");
+		String position = Labels.getLabel("qm.position");
+		String parentq = Labels.getLabel("qm.parentq");
+		String addchild = Labels.getLabel("qm.addchild");
+		String addq = Labels.getLabel("qm.new");
+		String save = Labels.getLabel("qm.save");
 		
 		page.setTitle(title);
 	</zscript>
@@ -44,12 +49,12 @@
 					<grid>
 						<columns>
 							<column label="${idl}" width="40px" sort="auto"/>
-							<column label="Position"/>
+							<column label="${position}"/>
 							<column label="${typel}" width="80px"/>
 							<column label="${textl}"/>
-							<column label="#${ansl}" width="80px"/>
-							<column label="Parent Q." width="80px"/>
-							<column label="Add child" width="80px"/>
+							<column label="${ansl}" width="80px"/>
+							<column label="${parentq}" width="80px"/>
+							<column label="${addchild}" width="80px"/>
 							<column  width="30px"/>
 						</columns>
 						<rows id="rows_questions">
@@ -59,12 +64,12 @@
 				<row>
 					<label value=""/>
 					<hbox>
-						<button label="Add question" onClick="qm_sketch.showAnswerWindow()"/>
+						<button label="${addq}" onClick="qm_sketch.showAnswerWindow()"/>
 					</hbox>
 				</row>
 			</rows>
 		</grid>
-		<button label="Save Questionnaire" onClick="qm_sketch.saveQuestionnaire()"/>
+		<button label="${save}" onClick="qm_sketch.saveQuestionnaire()"/>
 		</vbox>
 	</window>
 	<zscript>

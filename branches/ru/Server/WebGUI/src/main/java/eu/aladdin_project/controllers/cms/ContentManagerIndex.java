@@ -1,5 +1,6 @@
 package eu.aladdin_project.controllers.cms;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
@@ -25,7 +26,8 @@ public class ContentManagerIndex extends Window{
 	public void createContent() throws SuspendNotAllowedException, InterruptedException{
 		contentpopup = (Window)Executions.createComponents("form.zul", this, null);
 		contentpopup.getFellow("savebutton").setVisible(true);
-		contentpopup.setTitle("New media content");
+		String text = Labels.getLabel("cms.new");
+		contentpopup.setTitle(text);
 		contentpopup.setVisible(true);
 		contentpopup.doModal();
 	}
@@ -40,6 +42,9 @@ public class ContentManagerIndex extends Window{
 		((Textbox)contentpopup.getFellow("content_text")).setValue(mcontent.getText());
 		String category = mcontent.getCategory();
 		int selectedindex = 0;
+		//String edu = Labels.getLabel("cms.category.education");
+		//String games = Labels.getLabel("cms.category.games");
+		//String entert = Labels.getLabel("cms.category.entertainment");
 		if(category.equals("education")){
 			selectedindex = 0;
 		}else if(category.equals("games")){
@@ -49,7 +54,8 @@ public class ContentManagerIndex extends Window{
 		}
 		((Listbox)contentpopup.getFellow("content_cat")).setSelectedIndex(selectedindex);
 		((Checkbox)contentpopup.getFellow("content_enabled")).setChecked(mcontent.isEnabled());
-		contentpopup.setTitle("Modify media content");
+		String text = Labels.getLabel("cms.modify");
+		contentpopup.setTitle(text);
 		contentpopup.setVisible(true);
 		contentpopup.doModal();
 	}

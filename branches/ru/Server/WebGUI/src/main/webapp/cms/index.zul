@@ -22,8 +22,6 @@
 		String category = Labels.getLabel("cms.category");
 		String enabled = Labels.getLabel("cms.enabled");
 
-
-
 		page.setTitle(title);
 
 		MediaContent[] plist = null;

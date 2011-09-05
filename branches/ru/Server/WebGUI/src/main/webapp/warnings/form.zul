@@ -1,4 +1,19 @@
 <zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+
+		String id = Labels.getLabel("cwarn.id");
+		String type = Labels.getLabel("cwarn.type");
+		String datetime = Labels.getLabel("cwarn.datetime");
+		String effect = Labels.getLabel("cwarn.effect");
+		String indicator = Labels.getLabel("cwarn.ind");
+		String risklvl = Labels.getLabel("cwarn.risklvl");
+		String emergencylvl = Labels.getLabel("cwarn.emergencylvl");
+		String patient = Labels.getLabel("cwarn.patient");
+		String justification = Labels.getLabel("cwarn.Justification");
+		String deliver = Labels.getLabel("cwarn.deliver");
+		String mark = Labels.getLabel("cwarn.mark");
+	</zscript>
 	<window id="warning_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.warnings.WarningsPopupController">
 		<grid>
 			<columns>
@@ -7,49 +22,49 @@
 			</columns>
 			<rows>
 				<row id="warningid">
-					<label value="Warning ID"/>
+					<label value="${id}"/>
 					<textbox id="wid" value="" readonly="true"/>
 				</row>
 				<row>
-					<label value="Type"/>
+					<label value="${type}"/>
 					<textbox id="typefield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Date/Time"/>
+					<label value="${datetime}"/>
 					<textbox id="datefield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Effect"/>
+					<label value="${effect}"/>
 					<textbox id="effectfield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Indicator"/>
+					<label value="${indicator}"/>
 					<textbox id="indfield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Risk Level"/>
+					<label value="${risklvl}"/>
 					<textbox id="riskfield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Justification"/>
+					<label value="${justification}"/>
 					<textbox id="justfield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Emergency Level"/>
+					<label value="${emergencylvl}"/>
 					<textbox id="emergencyfield" readonly="true"/>
 				</row>
 				<row>
-					<label value="Patient"/>
+					<label value="${patient}"/>
 					<hbox><textbox id="patientfield" readonly="true"/><textbox id="patientnamefield" readonly="true"/></hbox>
 				</row>
 				<row>
-					<label value="Delivered"/>
+					<label value="${deliver}"/>
 					<textbox id="delivfield" readonly="true"/>
 				</row>
 				<row id="buttonrow">
 					<label value=""/>
 					<hbox>
-						<button id="readbutton" label="Mark Warning as Read" onClick="warning_form.markWarningAsRead()" />
+						<button id="readbutton" label="${mark}" onClick="warning_form.markWarningAsRead()" />
 					</hbox>
 				</row>
 			</rows>

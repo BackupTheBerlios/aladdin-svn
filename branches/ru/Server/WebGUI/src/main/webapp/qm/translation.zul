@@ -19,7 +19,13 @@
 		String textl = Labels.getLabel("qm.new.questions.text");
 		String ansl = Labels.getLabel("qm.new.questions.answers");
 		String errorno = Labels.getLabel("error.no.empty");
-		
+		String language = Labels.getLabel("qm.translate.language");
+		String save = Labels.getLabel("qm.translate.save");
+		String notdetected = Labels.getLabel("qm.translate.notdetected");
+		String alerttext1 = Labels.getLabel("qm.translate.alerttext1");
+		String alerttext2 = Labels.getLabel("qm.translate.alerttext2");
+		String close = Labels.getLabel("qm.translate.close");		
+
 		page.setTitle(title);
 	</zscript>
 	<window id="qm_sketch" sclass="centerwin" width="800px" use="eu.aladdin_project.qm.QuestionnaireTranslateWindow">
@@ -32,7 +38,7 @@
 			</columns>
 			<rows id="rows_questions">
 				<row>
-					<label value="Language"/>
+					<label value="${language}"/>
 					<listbox mold="select" id="trans_locale" onSelect="qm_sketch.changeSelectedLocale()">
 						<listitem value="none" label="Select one" selected="true"/>
 					</listbox>
@@ -54,14 +60,14 @@
 				</row>
 			</rows>
 		</grid>
-		<button label="Save Translation" onClick="qm_sketch.saveTranslation()"/>
+		<button label="${save}" onClick="qm_sketch.saveTranslation()"/>
 		</vbox>
-		<window id="trans_alert" closable="false" visible="false" title="No language detected" border="normal" position="center">
+		<window id="trans_alert" closable="false" visible="false" title="${notdetected}" border="normal" position="center">
 			<vbox align="center">
-				<label value="You must select a valid locale before trying to save the translation!"/>
+				<label value="${alerttext1}"/>
 				<separator height="3px"/>
-				<label value="Otherwise you could lost all your work"/>
-				<button label="Close" onClick="trans_alert.setVisible(false)"/>
+				<label value="${alerttext2}"/>
+				<button label="${close}" onClick="trans_alert.setVisible(false)"/>
 			</vbox>
 		</window>
 	</window>

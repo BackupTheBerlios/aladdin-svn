@@ -1,5 +1,4 @@
-<zk>
-	<window title="Select Patient" closable="true" border="normal" width="300px" id="patientlistwin" use="eu.aladdin_project.controllers.warnings.PatientListForWarnings">
+<zk>	
 		<zscript>
 			import eu.aladdin_project.StorageComponent.StorageComponentProxy;
 			import eu.aladdin_project.xsd.SearchCriteria;
@@ -7,6 +6,8 @@
 			import eu.aladdin_project.xsd.User;
 			import eu.aladdin_project.xsd.SystemParameter;
 			import eu.aladdin_project.SystemDictionary;
+
+			String selectpat = Labels.getLabel("cwarn.selectpat");
 			
 			StorageComponentProxy proxy = new StorageComponentProxy();
 			String userid = (String)Sessions.getCurrent().getAttribute("userid");
@@ -25,6 +26,7 @@
 				e.printStackTrace();
 			}
 		</zscript>
+<window title="${selectpat}" closable="true" border="normal" width="300px" id="patientlistwin" use="eu.aladdin_project.controllers.warnings.PatientListForWarnings">
 		<radiogroup id="respo_rgroup"><grid>
 			<rows>
 				<row forEach="${palist}">
@@ -32,7 +34,7 @@
 				</row>
 			</rows>
 		</grid>
-		<button label="Select Patient" onClick="patientlistwin.setPatient()"/>
+		<button label="${selectpat}" onClick="patientlistwin.setPatient()"/>
 		</radiogroup>
 	</window>
 </zk>

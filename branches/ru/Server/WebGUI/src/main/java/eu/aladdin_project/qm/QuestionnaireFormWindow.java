@@ -3,6 +3,7 @@ package eu.aladdin_project.qm;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -245,7 +246,8 @@ public class QuestionnaireFormWindow extends Window{
 		
 		
 		Button addchild = new Button();
-		addchild.setLabel("+child");
+		String text = Labels.getLabel("qm.addchildbut");
+		addchild.setLabel(text);
 		addchild.setId(question.getId()+"-childbtn");
 		addchild.addEventListener("onClick", new AddChildListener(question.getId()));
 		row.appendChild(addchild);

@@ -126,7 +126,8 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 				if(result.getCode().equals("-2")){
 					SystemDictionary.webguiLog("TRACE", "Error creating user");
 					Window win = (Window)getFellow("internalformerror");
-					((Label)win.getFellow("errorlbl")).setValue("Username not valid");
+					String notvalid = Labels.getLabel("carers.form.notvalid");
+					((Label)win.getFellow("errorlbl")).setValue(notvalid);
 					getFellow("internalformerror").setVisible(true);
 					SystemDictionary.webguiLog("TRACE", "Deleting Carer...");
 					OperationResult newresult = proxy.deleteCarer(user.getPersonID(), id);
@@ -207,7 +208,8 @@ public class CarerControllerWindow extends SDFormControllerWindow{
 	}
 	
 	public Button createPasswordButton(){
-		Button btn = new Button("Change Password");
+		String text = Labels.getLabel("carers.password.title");
+		Button btn = new Button(text);
 		btn.addEventListener("onClick", new EventListener() {
 			
 			public void onEvent(Event arg0) throws Exception {

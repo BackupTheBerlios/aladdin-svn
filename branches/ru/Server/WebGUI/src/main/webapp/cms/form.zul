@@ -13,6 +13,10 @@
 		String text = Labels.getLabel("cms.new.text");
 		String enabled = Labels.getLabel("cms.enabled");
 		String add = Labels.getLabel("cms.add");
+		String education = Labels.getLabel("cms.category.education");
+		String games = Labels.getLabel("cms.category.games");
+		String entertainment = Labels.getLabel("cms.category.entertainment");
+		String update = Labels.getLabel("cms.update");
 
 	</zscript>
 	<window id="content_form" border="normal" visible="false" width="70%" closable="true" position="center,center" use="eu.aladdin_project.controllers.cms.ContentManagerPopup">
@@ -43,9 +47,9 @@
 				<row>
 					<label value="${category}"/>
 					<listbox id="content_cat" mold="select">
-						<listitem value="education" label="education" selected="true"/>
-						<listitem value="games" label="games"/>
-						<listitem value="entertainment" label="entertainment"/>
+						<listitem value="education" label="${education}" selected="true"/>
+						<listitem value="games" label="${games}"/>
+						<listitem value="entertainment" label="${entertainment}"/>
 					</listbox>
 				</row>
 				<row>
@@ -60,7 +64,7 @@
 					<label value=""/>
 					<hbox>
 						<button id="savebutton" label="${add}" onClick="content_form.saveContent()" visible="false"/>
-						<button id="updatebutton" label="Update content" onClick="content_form.updateContent()" visible="false"/>
+						<button id="updatebutton" label="${update}" onClick="content_form.updateContent()" visible="false"/>
 					</hbox>
 				</row>
 			</rows>

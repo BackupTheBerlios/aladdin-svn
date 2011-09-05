@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.calendar.Calendars;
 import org.zkoss.calendar.event.CalendarsEvent;
 import org.zkoss.calendar.impl.SimpleCalendarEvent;
@@ -76,7 +77,8 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 		//bookEventWin.getFellow("assignerrow").setVisible(false);
 		bookEventWin.getFellow("massivequestionrow").setVisible(true);
 		bookEventWin.getFellow("massivecheckrow").setVisible(true);
-		bookEventWin.setTitle("New Task");
+		String text = Labels.getLabel("tasks.title");
+		bookEventWin.setTitle(text);
 		bookEventWin.setVisible(true);
 		bookEventWin.doModal();
 	}
@@ -195,7 +197,8 @@ public class CalendarControllerPatients extends GenericForwardComposer {
 			//((Textbox)bookEventWin.getFellow("urlfield")).setValue((String)scevent.getParams().get("url"));
 			((Textbox)bookEventWin.getFellow("textfield")).setValue((String)scevent.getParams().get("text"));
 			
-			bookEventWin.setTitle("View Task");
+			String text = Labels.getLabel("tasks.view");
+			bookEventWin.setTitle(text);
 			bookEventWin.setVisible(true);
 			bookEventWin.doModal();
 		}catch(Exception e){

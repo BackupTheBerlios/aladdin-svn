@@ -85,6 +85,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		String divorced = Labels.getLabel("patients.form.sd.marital.divorced");
 		String male = Labels.getLabel("patients.form.male");
 		String female = Labels.getLabel("patients.form.female");
+		String birthday = Labels.getLabel("common.birthdate");
 		
 		String alone = SystemDictionary.LIVING_ALONE_LBL; 
 		String sons = SystemDictionary.LIVING_SONDAUGHTER_LBL;
@@ -94,7 +95,7 @@ public class SDFormControllerWindow extends AladdinFormControllerWindow{
 		String health = SystemDictionary.LIVING_PARTER_SONDAUGHTER_SDLAW_GRANDSON_LBL;
 		
 		ArrayList<SimpleFieldData> rowsD = new ArrayList<SimpleFieldData>();
-		rowsD.add(new SimpleFieldData("Birthday (dd/MM/yyyy)", "pat_birthday", "no empty"));
+		rowsD.add(new SimpleFieldData(birthday, "pat_birthday", "no empty"));
 		
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
 		rowsA.add(new SimpleFieldData(children, "pat_children", "no empty"));

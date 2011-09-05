@@ -34,8 +34,21 @@
 		String texecut = Labels.getLabel("tasks.executor");
 		String tassigner = Labels.getLabel("tasks.assigner");
 		String tassigntt = Labels.getLabel("tasks.asign");
-		String tcancelt = Labels.getLabel("tasks.cancel");
-		
+		String tcancelt = Labels.getLabel("tasks.canceltask");
+		String text = Labels.getLabel("dic.task.type.text");
+		String questionassigne = Labels.getLabel("tasks.questionassigne");
+		String day = Labels.getLabel("tasks.day");
+		String twodays = Labels.getLabel("tasks.twodays");
+		String threedays = Labels.getLabel("tasks.threedays");
+		String fivedays = Labels.getLabel("tasks.fivedays");
+		String week = Labels.getLabel("tasks.week");
+		String twoweeks = Labels.getLabel("tasks.twoweeks");
+		String cancel = Labels.getLabel("tasks.cancel");
+		String close = Labels.getLabel("dic.task.close");
+		String yes = Labels.getLabel("common.yes");
+		String onceeach = Labels.getLabel("task.onceeach");
+		String till = Labels.getLabel("tasks.till");
+			
 		int ttpatqsi = SystemDictionary.TASK_TYPE_PATIENTQS_INT;
 		int ttcarerqsi = SystemDictionary.TASK_TYPE_CARERQS_INT;
 		int ttbloodi = SystemDictionary.TASK_TYPE_BLOODPRESSURE_MEASUREMENT_INT;
@@ -120,7 +133,7 @@
 					</listbox>
 				</row>
 				<row id="textrow" visible="false">
-					<label value="Text"/>
+					<label value="${text}"/>
 					<textbox id="textfield" multiline="true" rows="4" width="350px"/>
 				</row>
 				<row>
@@ -154,30 +167,30 @@
 				</row>
 				<row id="massivequestionrow" visible="false">
 					<label value=""/>
-					<label value="Do you want this task to be assigned for a period of time?"/>
+					<label value="${questionassigne}"/>
 				</row>
 				<row id="massivecheckrow" visible="false">
 					<label value=""/>
-					<checkbox id="massivecheck" checked="false" label="Yes" onCheck="create_my_entry.showHidePeriodicFields(self.isChecked())"/>
+					<checkbox id="massivecheck" checked="false" label="${yes}" onCheck="create_my_entry.showHidePeriodicFields(self.isChecked())"/>
 				</row>
 				<row id="freq1row" visible="false">
 					<label value=""/>
 					<hbox>
-						<label value="Once each"/>
+						<label value="${onceeach}"/>
 						<listbox id="massivelist" mold="select">
-							<listitem value="1" label="day" selected="true"/>
-							<listitem value="2" label="two days"/>
-							<listitem value="3" label="three days"/>
-							<listitem value="5" label="five days"/>
-							<listitem value="7" label="week"/>
-							<listitem value="14" label="two weeks"/>
+							<listitem value="1" label="${day}" selected="true"/>
+							<listitem value="2" label="${twodays}"/>
+							<listitem value="3" label="${threedays}"/>
+							<listitem value="5" label="${fivedays}"/>
+							<listitem value="7" label="${week}"/>
+							<listitem value="14" label="${twoweeks}"/>
 						</listbox>
 					</hbox>
 				</row>
 				<row id="till1row" visible="false">
 					<label value=""/>
 					<hbox>
-						<label value="Till day"/>
+						<label value="${till}"/>
 						<datebox id="massivecal" format="dd/MM/yyyy" value="${date }"/>
 					</hbox>
 					
@@ -186,9 +199,9 @@
 					<label id="usertype" value="${usertype }" visible="false"/>
 					<hbox>
 						<button id="savebutton" label="${tassigntt }" onClick="create_my_entry.saveTask()" visible="false"/>
-						<button id="cancelbutton" label="Cancel task" onClick="create_my_entry.cancelTask()" visible="false"/>
+						<button id="cancelbutton" label="${cancel}" onClick="create_my_entry.cancelTask()" visible="false"/>
 						<separator orient="horizontal" width="40px;"/>
-						<button id="closebutton" label="Close the window" onClick="create_my_entry.closeTheWindow()" visible="true"/>
+						<button id="closebutton" label="${close}" onClick="create_my_entry.closeTheWindow()" visible="true"/>
 					</hbox>
 				</row>
 			</rows>

@@ -34,6 +34,7 @@
 		String monitor = Labels.getLabel("patients.details.monitor");
 		String changepass = Labels.getLabel("patients.details.changepass");
 		String newass = Labels.getLabel("patients.details.newass");
+		String details = Labels.getLabel("common.details");
 
 		
 		String title = Labels.getLabel("patients.update.title");
@@ -160,7 +161,7 @@
 				<label value="${each.aetology }"/>
 				<label value="${each.timeEllapsedSinceDiagnosed }"/>
 				<label value="${each.severity }"/>
-				<label value="Details" sclass="link" onClick="detailswin.viewAssessmentDetail(((Label)self.getParent().getChildren().get(0)).getValue(), objid)"/>
+				<label value="${details}" sclass="link" onClick="detailswin.viewAssessmentDetail(((Label)self.getParent().getChildren().get(0)).getValue(), objid)"/>
 			</row>
 		</rows>
 	</grid>

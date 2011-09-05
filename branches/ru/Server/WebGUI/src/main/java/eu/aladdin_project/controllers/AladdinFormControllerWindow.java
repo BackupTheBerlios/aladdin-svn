@@ -345,8 +345,9 @@ public class AladdinFormControllerWindow extends Window{
 	 * add Person objects
 	 */
 	protected void addBirthdayField(){
+		String birthdate = Labels.getLabel("common.birthdate");
 		ArrayList<SimpleFieldData> rowsA = new ArrayList<SimpleFieldData>();
-		rowsA.add(new SimpleFieldData("Birthdate (dd/MM/yyyy)", "pat_age", "no empty"));
+		rowsA.add(new SimpleFieldData(birthdate, "pat_age", "no empty"));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");
@@ -418,6 +419,7 @@ public class AladdinFormControllerWindow extends Window{
 		String zipcode = Labels.getLabel("patients.form.zip");
 		String notes = Labels.getLabel("patients.form.notes");
 		String addresssave = Labels.getLabel("common.address.save");
+		String primary = Labels.getLabel("common.primary");
 		
 		this.popupaddresses = new Window();
 		this.popupaddresses.setTitle(address);
@@ -439,7 +441,7 @@ public class AladdinFormControllerWindow extends Window{
 		
 		ArrayList<SimpleFieldData> rowsB = new ArrayList<SimpleFieldData>();
 		//rowsB.add(new SimpleFieldData(prim, "pat_primadd"));
-		rowsB.add(new SimpleFieldData("use this as the primary means of contact", "pat_primadd"));
+		rowsB.add(new SimpleFieldData(primary, "pat_primadd"));
 		
 		Grid pgrid = new Grid();
 		pgrid.setSclass("grid");

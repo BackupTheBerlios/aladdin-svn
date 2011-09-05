@@ -8,6 +8,13 @@
 		String title = Labels.getLabel("home.title");
 		page.setTitle(title);
 		String newprof = Labels.getLabel("home.newprofile");
+		String patients = Labels.getLabel("menu.patients");
+		String carers = Labels.getLabel("menu.carers");
+		String clinicians = Labels.getLabel("menu.clinicians");
+		String qm = Labels.getLabel("qm.menu");
+		String extsrv = Labels.getLabel("menu.extsrv");
+		String warnings = Labels.getLabel("menu.warnings");
+
 		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
 	</zscript>
 	<style dynamic="true">
@@ -31,14 +38,14 @@
 			</columns>
 			<rows>
 				<row height="200px">
-					<button href="/patients/" label="Go to Patients" height="180px" width="80%" image="/inc/icons/patient-icon2.png"/>
-					<button href="/carers/" label="Go to Carers" height="180px" width="80%" image="/inc/icons/carer.png"/>
-					<button href="/clinicians/" label="Go to Clinicians" height="180px" width="80%" image="/inc/icons/clinician.png"/>
+					<button href="/patients/" label="${patients}" height="180px" width="80%" image="/inc/icons/patient-icon2.png"/>
+					<button href="/carers/" label="${carers}" height="180px" width="80%" image="/inc/icons/carer.png"/>
+					<button href="/clinicians/" label="${clinicians}" height="180px" width="80%" image="/inc/icons/clinician.png"/>
 				</row>
 				<row height="200px">
-					<button href="/qm/" label="Open question manager" height="180px" width="80%" image="/inc/icons/qm.png"/>
-					<button href="/extsrv/" label="Manage external services" height="180px" width="80%" image="/inc/icons/services.png"/>
-					<button  href="/warnings/" label="View clinical warnings" height="180px" width="80%" image="/inc/icons/warning.png">
+					<button href="/qm/" label="${qm}" height="180px" width="80%" image="/inc/icons/qm.png"/>
+					<button href="/extsrv/" label="${extsrv}" height="180px" width="80%" image="/inc/icons/services.png"/>
+					<button  href="/warnings/" label="${warnings}" height="180px" width="80%" image="/inc/icons/warning.png">
 						<attribute name="onCreate">
 							if(isadmin){
 								self.setDisabled(true);

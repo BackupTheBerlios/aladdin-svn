@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.ComponentNotFoundException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -268,11 +269,13 @@ public class QuestionnaireTranslateWindow extends Window{
 		row.setId(question.getId()+"-rowqstn");
 		
 		Vbox vbox = new Vbox();
-		Label lab1 =  !question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)? new Label("Question"):new Label("Free text Question");
+		String text = Labels.getLabel("qm.translate.question");
+		Label lab1 =  !question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)? new Label(text):new Label("Free text Question");
 		vbox.appendChild(lab1);
 		
 		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){
-			Label lab2 = new Label("Answers");
+			String text_ = Labels.getLabel("qm.translate.answers");
+			Label lab2 = new Label(text_);
 			vbox.appendChild(lab2);
 		}
 		
