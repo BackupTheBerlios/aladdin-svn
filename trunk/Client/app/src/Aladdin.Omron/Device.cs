@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
+using System.Threading;
 
 namespace Hid
 {
@@ -45,6 +46,7 @@ namespace Hid
             }
             SafeFileHandle handle = new SafeFileHandle(this.Handle, true);
             this.DataStream = new FileStream(handle, FileAccess.ReadWrite, this.Capabilities.InputReportByteLength, true);
+            timeout = 3000;
         }
 
         public void Dispose()
@@ -83,13 +85,42 @@ namespace Hid
             return Hid.HidD_SetFeature(Handle, ref lpReportBuffer, ReportBufferLength);
         }
 
+        private int timeout;
+
+        public int TimeOut
+        {
+            get
+            {
+                return timeout;
+            }
+            set
+            {
+                timeout = value;
+            }
+        }
+
         public int Read(byte[] buffer)
         {
             if (buffer.Length != this.Capabilities.InputReportByteLength)
             {
                 throw new Exception(string.Format("Buffer length must be {0} bytes.", this.Capabilities.InputReportByteLength));
             }
-            return this.DataStream.Read(buffer, 0, buffer.Length);
+
+            ManualResetEvent ev = new ManualResetEvent(false);
+
+            IAsyncResult asyncResult = DataStream.BeginRead(buffer, 0, buffer.Length, new AsyncCallback(OnReadCompletion), ev);
+            ev.WaitOne(timeout, false);
+            if (asyncResult.IsCompleted)
+            {
+                return DataStream.EndRead(asyncResult);
+            }
+
+            throw new Exception("Can't read data from device");
+        }
+
+        static void OnReadCompletion(IAsyncResult asyncResult)
+        {
+            (asyncResult.AsyncState as ManualResetEvent).Set();
         }
 
         private static string TruncateZeroTerminatedString(string input)
