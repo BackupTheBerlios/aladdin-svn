@@ -270,7 +270,8 @@ public class QuestionnaireTranslateWindow extends Window{
 		
 		Vbox vbox = new Vbox();
 		String text = Labels.getLabel("qm.translate.question");
-		Label lab1 =  !question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)? new Label(text):new Label("Free text Question");
+		String freetext = Labels.getLabel("qm.translate.freetext");
+		Label lab1 =  !question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)? new Label(text):new Label(freetext);
 		vbox.appendChild(lab1);
 		
 		if(!question.getType().equals(SystemDictionary.QUESTION_TYPE_FREE_TEXT)){

@@ -84,7 +84,8 @@ public class CarerListWindowController extends Window{
 				this.appendChild(ton);
 			}else{
 				Row rowno = new Row();
-				Label nocarers = new Label("No available carers");
+				String noavailable = Labels.getLabel("patients.carer.noavailable");
+				Label nocarers = new Label(noavailable);
 				rowno.appendChild(nocarers);
 				rows.appendChild(rowno);
 				grid.appendChild(rows);

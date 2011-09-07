@@ -24,7 +24,8 @@
 		String notdetected = Labels.getLabel("qm.translate.notdetected");
 		String alerttext1 = Labels.getLabel("qm.translate.alerttext1");
 		String alerttext2 = Labels.getLabel("qm.translate.alerttext2");
-		String close = Labels.getLabel("qm.translate.close");		
+		String close = Labels.getLabel("qm.translate.close");
+		String select = Labels.getLabel("qm.translate.select");		
 
 		page.setTitle(title);
 	</zscript>
@@ -40,7 +41,7 @@
 				<row>
 					<label value="${language}"/>
 					<listbox mold="select" id="trans_locale" onSelect="qm_sketch.changeSelectedLocale()">
-						<listitem value="none" label="Select one" selected="true"/>
+						<listitem value="none" label="${select}" selected="true"/>
 					</listbox>
 				</row>
 				<row>
