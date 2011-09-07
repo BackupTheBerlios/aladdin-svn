@@ -110,7 +110,7 @@
 				<span id="FDOW">
 				<label value="${weekfirstd }:"/>
 				<listbox mold="select" onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());" onCreate="self.setSelectedIndex(0)">
-					<listitem forEach="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" label="${each}" />
+					<listitem forEach="Понедельника, Вторника, Среды, Четверга, Пятницы, Субботы, Воскресения" label="${each}" />
 			    </listbox>
 			    </span>
 				</div>

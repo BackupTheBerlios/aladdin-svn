@@ -334,7 +334,8 @@ public class QuestionWindow extends Window{
 				
 			Row row02 = new Row();
 				Label lab02 = new Label();
-				lab02.setValue("Condition (numeric)");
+				String text_ = Labels.getLabel("qm.position");
+				lab02.setValue(text_);
 				row02.appendChild(lab02);
 	
 				Intbox tbox02 = new Intbox();
@@ -413,7 +414,8 @@ public class QuestionWindow extends Window{
 		Column cola3 = new Column();
 		cola3.setWidth("45px");
 		Column cola4 = new Column();
-		cola4.setLabel("Position");
+		String text = Labels.getLabel("qm.position");
+		cola4.setLabel(text);
 		
 		columns2.appendChild(cola4);
 		columns2.appendChild(cola1);
