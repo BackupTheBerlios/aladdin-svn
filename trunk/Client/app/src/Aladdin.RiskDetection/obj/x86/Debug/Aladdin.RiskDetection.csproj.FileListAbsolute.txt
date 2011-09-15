@@ -1,0 +1,9 @@
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\bin\Debug\Aladdin.RiskDetection.exe.config
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\bin\Debug\Aladdin.RiskDetection.exe
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\bin\Debug\Aladdin.RiskDetection.pdb
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\obj\x86\Debug\Aladdin.RiskDetection.Properties.Resources.resources
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\obj\x86\Debug\Aladdin.RiskDetection.exe
+C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.RiskDetection\obj\x86\Debug\Aladdin.RiskDetection.pdb
