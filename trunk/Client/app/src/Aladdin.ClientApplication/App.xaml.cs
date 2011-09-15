@@ -7,6 +7,7 @@ using System.Windows;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Aladdin.ClientApplication.Properties;
+using System.Diagnostics;
 
 
 namespace Aladdin.ClientApplication
@@ -97,10 +98,9 @@ namespace Aladdin.ClientApplication
             {
                 AutoUpdater.CheckForUpdates();
             }
-            catch (Exception) // ex)
+            catch (Exception ex)
             {
                 //MessageBox.Show("Please check Internet connection!", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
-                MessageBox.Show("Can't download updates! Let work with current version.", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
                 //return;
             }
 
@@ -110,9 +110,8 @@ namespace Aladdin.ClientApplication
             }
             catch (Exception)
             {
-                //MessageBox.Show("No connection to server", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
-                MessageBox.Show("No connection to server, please choose another", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
-                //return;
+                MessageBox.Show("No connection to server", "ALADDIN", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
         }
@@ -171,6 +170,22 @@ namespace Aladdin.ClientApplication
                 if (window.ShowDialog() == false)
                     return;
             }
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // Get Reference to the current Process
+            Process thisProc = Process.GetCurrentProcess();
+            // Check how many total processes have the same name as the current one
+            if (Process.GetProcessesByName(thisProc.ProcessName).Length > 1)
+            {
+                // If ther is more than one, than it is already running.
+                MessageBox.Show("ALADDIN Application is already running.");
+                Application.Current.Shutdown();
+                return;
+            }
+
+            base.OnStartup(e);
         }
 
     }
