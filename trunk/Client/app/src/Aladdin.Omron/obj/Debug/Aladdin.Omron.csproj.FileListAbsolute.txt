@@ -1,5 +1,0 @@
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.Omron\bin\Debug\OmronAladdin.dll
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.Omron\bin\Debug\OmronAladdin.pdb
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.Omron\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.Omron\obj\Debug\OmronAladdin.dll
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.Omron\obj\Debug\OmronAladdin.pdb

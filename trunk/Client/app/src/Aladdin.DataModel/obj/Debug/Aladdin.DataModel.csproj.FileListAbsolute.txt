@@ -1,5 +1,0 @@
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.DataModel\bin\Debug\Aladdin.DataModel.dll
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.DataModel\bin\Debug\Aladdin.DataModel.pdb
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.DataModel\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.DataModel\obj\Debug\Aladdin.DataModel.dll
-C:\Users\Aethia\Desktop\ALADDIN\app\src\Aladdin.DataModel\obj\Debug\Aladdin.DataModel.pdb
