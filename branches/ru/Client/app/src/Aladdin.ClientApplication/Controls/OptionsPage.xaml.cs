@@ -92,6 +92,12 @@ namespace Aladdin.ClientApplication.Controls
             p6.Description = "Catalan";
             Languages.Add(p6);
 
+            aladdinService.SystemParameter p7 = new aladdinService.SystemParameter();
+
+            p7.Code = "ru_RU";
+            p7.Description = "Русский";
+            Languages.Add(p7);
+
             this.serverAddress.Text = App.ServerAddress;
             this.updatesAddress.Text = App.UpdatesAddress;
             this.forumAddress.Text = App.ForumPage;

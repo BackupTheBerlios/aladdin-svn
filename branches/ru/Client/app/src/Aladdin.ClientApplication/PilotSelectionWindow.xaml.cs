@@ -31,7 +31,7 @@ namespace Aladdin.ClientApplication
             Settings.Default.ForumPage = "http://dafnis.atosorigin.es/BSA/Aladdin/home.php";
             Settings.Default.FirstInstallation = false;
             Settings.Default.Save();
-            this.DialogResult = true;           
+            this.DialogResult = true;
         }
 
         private void DAFNI_Click(object sender, RoutedEventArgs e)
@@ -48,6 +48,16 @@ namespace Aladdin.ClientApplication
         {
             Settings.Default.Aladdin_ClientApplication_aladdinService_StorageComponent = "https://193.174.152.114/axis2/services/SCNHNN?wsdl";
             Settings.Default.DefaultLanguage = "en_UK";
+            Settings.Default.ForumPage = "http://dafnis.atosorigin.es/NHNN/Aladdin/home.php";
+            Settings.Default.FirstInstallation = false;
+            Settings.Default.Save();
+            this.DialogResult = true;
+        }
+
+        private void RU_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.Aladdin_ClientApplication_aladdinService_StorageComponent = "https://193.174.152.114/axis2/services/StorageComponent?wsdl";
+            Settings.Default.DefaultLanguage = "ru_RU";
             Settings.Default.ForumPage = "http://dafnis.atosorigin.es/NHNN/Aladdin/home.php";
             Settings.Default.FirstInstallation = false;
             Settings.Default.Save();
