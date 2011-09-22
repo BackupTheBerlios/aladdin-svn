@@ -93,6 +93,10 @@ namespace Aladdin.ClientApplication.Windows
                     dict.Source = new Uri("..\\Resources\\StringResources.ca-ES.xaml", UriKind.Relative);
                     locale.Code = "ca_ES";
                     break;
+                case "ru_RU":
+                    dict.Source = new Uri("..\\Resources\\StringResources.ru-RU.xaml", UriKind.Relative);
+                    locale.Code = "ru_RU";
+                    break;
                 default:
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
                     locale.Code = "en_UK";
