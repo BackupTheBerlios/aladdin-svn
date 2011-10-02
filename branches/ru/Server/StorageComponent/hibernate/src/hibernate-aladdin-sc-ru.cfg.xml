@@ -6,7 +6,7 @@
     <session-factory name="SC">
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.password">12345678</property>
-        <property name="hibernate.connection.url">jdbc:postgresql:sc</property>
+        <property name="hibernate.connection.url">jdbc:postgresql:ru</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.default_schema">public</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -24,7 +24,6 @@
 
 
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-<!--
 
 <mapping resource="EntertainmentContent.hbm.xml"/>
 <mapping resource="Address.hbm.xml"/>
@@ -52,6 +51,5 @@
 <mapping resource="Translate.hbm.xml"/>
 <mapping resource="Dict.hbm.xml"/>
 
--->
     </session-factory>
 </hibernate-configuration>
