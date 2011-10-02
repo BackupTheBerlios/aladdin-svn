@@ -5675,14 +5675,14 @@ public class StorageComponentSkeleton implements StorageComponentSkeletonInterfa
 	 * @throws Exception if access is denied
 	 */
 	private void checkIP () throws Exception {
-		String ip = (String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR);
+/*		String ip = (String) MessageContext.getCurrentMessageContext().getProperty(MessageContext.REMOTE_ADDR);
 		List<String> lst = new ArrayList<String>();
 		Collections.addAll(lst, com.aladdin.sc.config.Configuration.trustedIP);
 		Collections.sort(lst);
 		int idx = Collections.binarySearch(lst, ip);
 		if (idx < 0) {
 			throw new Exception("access denied");
-		}
+			}*/
 	}
 
 }
