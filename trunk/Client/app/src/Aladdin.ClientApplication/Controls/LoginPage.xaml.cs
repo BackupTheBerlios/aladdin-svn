@@ -108,6 +108,7 @@ namespace Aladdin.ClientApplication.Controls
             this.txtPassword.Password = "";
         }
 
+        /*
         private void txtPassword_GotFocus(object sender, RoutedEventArgs e)
         {
             string tabTipPath = "C:\\Program files (x86)\\Common files\\Microsoft Shared\\Ink\\TabTip.exe";
@@ -121,6 +122,6 @@ namespace Aladdin.ClientApplication.Controls
                 }
             }
         }
-
+        */
     }
 }

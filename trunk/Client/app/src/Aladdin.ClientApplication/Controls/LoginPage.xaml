@@ -25,7 +25,7 @@
         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Style="{StaticResource NormalText}" Margin="20,15,20,10" Text="{DynamicResource UserName}"></TextBlock>
         <TextBox Name="txtUsername" Grid.Row="2" Grid.Column="1" MinWidth="350" Margin="20,10,20,10" Width="300" HorizontalAlignment="Left" />
         <TextBlock Grid.Row="3" Style="{StaticResource NormalText}" HorizontalAlignment="Right"  Margin="20,10,20,10" Text="{DynamicResource Password}"></TextBlock>
-        <PasswordBox Name="txtPassword" Grid.Row="3" Grid.Column="1" MinWidth="350" PasswordChar="*" Margin="20,10,20,10" Width="300" HorizontalAlignment="Left" Visibility="Visible" GotFocus="txtPassword_GotFocus" />
+        <PasswordBox Name="txtPassword" Grid.Row="3" Grid.Column="1" MinWidth="350" PasswordChar="*" Margin="20,10,20,10" Width="300" HorizontalAlignment="Left" Visibility="Visible" />
         <TextBlock Name="txtMessage" Foreground="Red" Grid.Row="4" Style="{StaticResource NormalText}" HorizontalAlignment="Center" Grid.ColumnSpan="2" MinWidth="350" Margin="20,10,20,10" />
         <Image Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,10" Name="image1" Stretch="Uniform" VerticalAlignment="Center" Source="/Aladdin.ClientApplication;component/Resources/Images/logo%20aladdin%20800x217%20white.png" Grid.ColumnSpan="2" Width="700" />
         <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" IsDefault="True" Command="local:AppCommands.LoginCommand" Margin="20 0 20 20" Style="{StaticResource LoginButton}">
