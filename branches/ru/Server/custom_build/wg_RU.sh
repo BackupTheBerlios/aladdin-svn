@@ -9,4 +9,4 @@ cat pom.xml|sed 's/<finalName>WebGUI<\/finalName>/<finalName>WebGUIRU<\/finalNam
 mv tmp pom.xml
 mvn package
 cd ..
-cp WebGUI/target/WebGUIBSA.war .
+cp WebGUI/target/WebGUIRU.war .
