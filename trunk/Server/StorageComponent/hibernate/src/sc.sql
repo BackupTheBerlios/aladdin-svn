@@ -1482,5 +1482,5 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 INSERT INTO persondata (id, surname, name) VALUES (1000041, 'Admin', 'Mr.');
 INSERT INTO administrator (id, persondata) VALUES (1000010, 1000041);
-INSERT INTO aladdinuser (id, username, password, TYPE, personid) VALUES (1000036, 'nhnn', 'nhnn', 1, 1000010);
+INSERT INTO aladdinuser (id, username, password, TYPE, personid) VALUES (1000036, 'admin', 'admin', 1, 1000010);
   
